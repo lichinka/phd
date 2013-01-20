@@ -1,0 +1,159 @@
+
+\chapter{Introduction}
+
+% First paragraph has no indentation.
+
+\noindent Many researchers believe the computer has become the third
+method to do research, behind theory and experimentation, for both
+science and engineering. Although there is no complete agreement on
+the position intended for scientific computing with respect to the
+other two methods, it is undeniable that computational methods are
+an essential tool in most disciplines.
+
+Scientific computing, by means of computer-science methodology, makes
+possible the study of problems that are too complex to be treated
+analytically, or those that are very expensive or dangerous to be
+studied by direct experimentation. Real-world problems are typically
+very complex systems to be directly assessed by analytical models,
+and require a numerical simulation for their study. Computer simulations
+provide a resource to mimic the behavior of complex systems, by numerically
+evaluating a model and gathering its data to estimate their true characteristics
+\cite{law2007simulation}.
+
+A model is a simple representation of a studied problem, and one of
+its purposes is to predict the effects of variations within the system.
+A good model is a balance between realism and simplicity. The system
+simulation, on the other hand, is the operation of the model. Its
+configuration can also be changed, allowing multiple experimental
+executions, something that might not be possible with the real system
+it represents \cite{maria1997introduction}.
+
+Problems that are categorized as of large size and of considerable
+complexity represent a challenge because of the different involved
+disciplines and the degree of difficulty of their modeling. The optimization
+of 3G radio networks falls under this characterization.
+
+A quick review of the state-of-the-art in 3G network optimization
+indicates that software, providing good computational models, is a
+very expensive tool for science. Moreover, since the vast majority
+of this software is proprietary, it relies on closed source, formats
+and protocols, which disclosure is explicitly forbidden by their licenses.
+This fact creates a big hurdle to one of the key phases of scientific
+methodology \cite{gauch2002scientific}: experimental reproducibility.
+
+There is a constant growing demand for hardware resources, longer-processing
+times and more memory to follow the evolution of 3G radio networks
+\cite{maple2004parallel,crainic2006tackling,soldani2007autonomic}.
+Fortunately, high-performance computer systems are increasingly accessible;
+something made possible because of the emergence of computer clusters
+and commodity hardware, capable of true parallel processing, e.g.
+multi-core CPUs \cite{gorder2007multicore} and GPUs \cite{wen2011gpu}.
+Moreover, the highly parallel structure present on GPUs makes them
+more effective than CPUs for execution of algorithms where large blocks
+of data need to be processed in parallel. Commodity GPUs have evolved
+from being a graphic accelerator into a general-purpose processor.
+They can achieve higher performance at lower power consumption and
+lower costs when compared to conventional CPUs.
+
+It is important to understand that the models used in scientific simulations
+and engineering never offer a perfect model of the system they represent,
+but only a subset of its composition and dynamics. Experimentation
+and expert observation will always be essential as reference points
+for understanding the studied phenomena.
+
+
+\section{Radio-network optimization}
+
+Mobile radio communications represent one of the most fast-growing
+technology markets since the introduction of the second generation
+(2G) mobile networks. One of the most popular implementations from
+this generation is the Global System for Mobile communications (GSM)
+\cite{3GPP_TR_50.099}. Its successor, the Universal Mobile Telecommunications
+System (UMTS) \cite{3GPP_TR_23.101}, marks an evolution from 2G,
+representing a milestone for the third generation of mobile radio
+networks (3G). Since then, the increasing demand for more bandwidth
+has pushed the availability of high-speed data services in order to
+improve the user's experience. Once a mobile network is launched,
+an important part of its operation and maintenance is monitoring the
+quality characteristics and changing parameter values in order to
+improve its performance.
+
+The evolution from 2G to 3G has introduced not only the technology
+needed to increase both data and voice capacity, but also a greater
+complexity in terms of network planning, deployment, and configuration,
+which have rendered most of the traditionally used methods to be ineffective.
+In a traditional approach (i.e. manual), during the network planning
+and maintenance processes, a network planning software tool would
+execute the analysis, while the human would make the change decisions.
+Therefore, a radio planning engineer configures network parameters
+manually and the network planning tool analyzes the given configuration.
+If the obtained results are not acceptable, the analysis process has
+to be repeated several times, until the goal is achieved.
+
+Modern 3G radio networks are large and many of their key parameters
+are interdependent. Since an engineer is not able to cope with the
+level of complexity present in such systems, the computer, along with
+specialized software, guides the engineer to the most appropriate
+configuration for the network. In the context of this work, we will
+refer to this process as optimization.
+
+A common limitation of the implementations of such optimization methods,
+generally targeting traditional computer architectures of sequential
+execution, is their inability to meet the requirements needed by real-world
+mobile networks, since their computational-time complexity make them
+unfeasible for practical use. When analyzing big real-world networks
+with thousands of users it is necessary to reduce the execution time
+of the optimization processes as much as possible, so that they are
+useful for practical use.
+
+Despite the considerable number of publications in the field of 3G
+radio network optimization, of which we cite just a few for reference
+purposes \cite{amaldi2007radio_planning,siomina2007minimum_pilot_power,chen2008automated,chen2009fast,gordejuela2009two,siomina2008enhancing},
+most of them base their simulations on platforms for which it is not
+possible to reproduce the experiments, either because the software
+used is proprietary or the data is not available. We believe that
+the creation of an open and standardized framework would be a great
+benefit for the field of radio networks, as it would allow researchers
+to compare different methods and results in an easy, fast, and objective
+manner. An interesting effort in this direction is the MOMENTUM project
+\cite{momentum2010}. It was created with the objective of setting
+up a standardized experimental environment that would facilitate research
+cooperation and ultimately improve collaboration in the field of 3G
+radio networks. Unfortunately, there is no radio network simulator
+included and there have been no updates in the project since 2005,
+when the last data corrections were released. This situation represents
+a deficit for the engineering and scientific community, since an open
+simulation framework will ease the use, reproduction, and sharing
+of data, related to maintenance and optimization of 3G radio networks.
+
+Additionally, the implementation of the framework will benefit from
+valuable advances in computer science and High Performance Computing
+(HPC), in order to perform faster and more reliable simulations \cite{gorder2007multicore,wen2011gpu}.
+
+
+\section{Organization}
+
+The introduction provided in this chapter pretends to delimiter the
+context within which the dissertation will address.
+
+The rest if this dissertation is organized as follows.
+
+Chapter \ref{chap:Background-and-motivation} present an overview
+of some well-known optimization problems that occur during deployment
+and configuration of mobile networks. A description of each optimization
+problem is given, followed by a short survey of recently proposed
+optimization methods. It closes by giving a conclusion regarding mobile
+networks and why they are a rich source of optimization problems.
+
+In Chapter \ref{chap:Experimental-evaluation-the-SHO-alignment-problem},
+a static network simulator is used to find downlink and uplink SHO
+areas. By introducing a penalty-based objective function and some
+hard constraints, we formally define the problem of balancing SHO
+areas in UMTS networks. The state-of-the-art mathematical model used
+and the penalty scores of the objective function are set according
+to the configuration and layout of a real mobile network, deployed
+in Slovenia by Telekom Slovenije, d.d.. The balancing problem is then
+tackled by three optimization algorithms, each of them belonging to
+a different category of metaheuristics. We report and analyze the
+optimization results, as well as the performance of each of the optimization
+algorithms used.

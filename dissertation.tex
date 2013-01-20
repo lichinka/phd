@@ -1,0 +1,439 @@
+%% LyX 2.0.5 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,final,openany]{book}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2.2cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+\usepackage{color}
+\usepackage{prettyref}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
+ {hyperref}
+\hypersetup{
+ dvipdfm,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+\usepackage{breakurl}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%
+% IPS PhD thesis template for LyX
+%	by Lucas Benedicic
+%
+% based on IPS PhD thesis template for LaTex by Erik Zupanic, Andreja Er?te
+%
+
+%
+% margin shift for odd-numbered pages
+%
+%\usepackage[BCOR=0.3cm]{typearea}
+
+% fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
+\usepackage[slovene,english]{babel}
+% Uses font family: Times Roman
+\usepackage{aecompl}
+\usepackage{mathrsfs}% for \mathscr
+%\setlength{\mathindent}{1cm}    % sets indentation of equations
+\usepackage{url}
+\usepackage{psfrag}
+\usepackage{units}
+\usepackage{fancyhdr}
+\usepackage[small]{caption}
+\usepackage{cite}
+\usepackage{subfigure}
+\usepackage{fixltx2e}% Enables commands \textsuperscript and \textsubscript
+\usepackage[nottoc,numbib]{tocbibind}% bibliography numbered
+
+%% Tables
+\usepackage[table]{xcolor}% enables color cellc in tables
+\usepackage{hhline}% makes black lines when color cells are used (because \hline does not work)
+
+%% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
+% In this case, program package is selected and program environment is used for algorithms as subfloat in myalgortihm floats
+\usepackage{program}
+
+\usepackage{titlesec}
+\usepackage{chngcntr}
+\usepackage{titletoc}
+\usepackage[subfigure]{tocloft}%manipulates contents lists
+\usepackage{appendix}
+\usepackage{float}
+
+%package for inputing urls and other links
+
+
+%% Chapter titles and fonts
+    %\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing{\chapter}{0pt}{0pt}{35mm}
+\addto\captionsenglish{\renewcommand{\chaptername}{}}   %remove chapter X
+    %\usepackage{chngcntr}
+\counterwithout{figure}{chapter}    %correct counting of figures - ips template style
+\counterwithout{table}{chapter}     %correct counting of tables - ips template style
+\counterwithout{equation}{chapter}  %correct counting of equations - ips template style
+
+    %\usepackage{titletoc}
+\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing{\chapter}{0pt}{0pt}{35mm}
+    %\usepackage[subfigure]{tocloft} %manipulates contents lists
+\renewcommand{\cfttoctitlefont}{\LARGE\bfseries}
+\setlength{\cftaftertoctitleskip}{35mm}
+\renewcommand{\cftlottitlefont}{\LARGE\bfseries}
+\setlength{\cftafterlottitleskip}{35mm}
+\renewcommand{\cftloftitlefont}{\LARGE\bfseries}
+\setlength{\cftafterloftitleskip}{35mm}
+\renewcommand{\cfttabpresnum}{\tablename\ } %put the name before the number in the listoftables (lot)
+\renewcommand{\cftfigpresnum}{\figurename\ } %put the name before the number in the listoffigures (lof)
+\renewcommand{\cftfigaftersnum}{:} %put : after the number in the listoffigures
+\renewcommand{\cfttabaftersnum}{:} %put : after the number in the listoftables
+\setlength{\cfttabnumwidth}{5em} %space for the name before number in the listoftables
+\setlength{\cftfignumwidth}{5em} %space for the name before number in the listoffigures
+\setlength{\cftbeforefigskip}{0em} %changing the space between entries in the lof
+\setlength{\cftbeforetabskip}{0em} %changing the space between entries in the lot
+
+    % shows numbers of subsections in toc
+ % numbers all sub(-sub)sections
+
+%%
+\renewcommand{\citeleft}{[}
+\renewcommand{\citeright}{]}
+
+\graphicspath{{images/}}
+
+
+
+%% myalgorithm float (used for writing algorithms) - definitions
+%\usepackage{float}
+
+%%
+\newcommand{\floatc@simplerule}[2]{{\@fs@cfont #1 #2}\par}
+\newcommand{\fs@simplerule}{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@simplerule
+  \def\@fs@pre{\hrule height0pt depth0pt \kern4pt}%
+  \def\@fs@post{\kern4pt\hrule height0.1mm depth0pt \kern4pt \relax}%
+  \def\@fs@mid{\kern8pt}%
+  \let\@fs@iftopcapt\iftrue}
+
+\floatstyle{simplerule}
+\newfloat{myalgorithm}{thp}{lob}[chapter]
+\floatname{myalgorithm}{Algorithm}
+%\listof{myalgorithm}{Index of algorithms}
+\counterwithout{myalgorithm}{chapter} %correct counting of algorithms - ips template style
+%%
+\newcommand{\listmyalgorithmname}{Index of Algorithms} %define the name for the list of algorithms (loa)
+\newlistof{myalgorithms}{loa}{\listmyalgorithmname} %make newlistof
+%\renewcommand{\cftmyalgorithmtitlefont}{\Large\bfseries}
+%\setlength{\cftaftermyalgorithmtitleskip}{35mm}
+%\setlength{\cftmyalgorithmsnumwidth}{5em} %space for the name before number in the listofalgorithms (loa)
+%\setlength{\cftmybeforealgorithmsskip}{0em} %changing the space between entries in the loa
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}} % defines line used in the example
+
+\makeatother
+
+\begin{document}
+% *******************************************
+%           First page (title page)
+% *******************************************
+% This page uses modified margins
+
+
+\newgeometry{margin=2cm, bindingoffset=0.7cm}
+
+\thispagestyle{empty} 
+
+\noindent \begin{flushright}
+{\huge {}\textbf{\huge OPTIMIZATION AND PARALLELIZATION}\\
+\textbf{\huge METHODS FOR THE DESIGN}\\
+\textbf{\huge OF NEXT-GENERATION}\\
+\textbf{\huge RADIO NETWORKS}\\
+{\huge }} % Insert: title of dissertation
+
+\par\end{flushright}
+
+\begin{flushright}
+\vspace{3cm}
+
+\par\end{flushright}
+
+\noindent \begin{flushright}
+{\LARGE {Lucas Benedi\v{c}i\v{c}}} % Insert: name and surname of the author
+
+\par\end{flushright}
+
+\clearpage{}
+
+% *******************************************
+% *******************************************
+%        Second page - information
+% *******************************************
+% This page uses modified margins
+
+
+\newgeometry{margin=2cm, bindingoffset=1.2cm}
+
+\thispagestyle{empty}
+
+\textnormal{ } \\ % empty line
+\textnormal{ } \\ % empty line
+
+\vspace{2.1cm}
+
+
+\noindent \textbf{Doctoral Dissertation}
+
+\noindent \textbf{Jo¸ef Stefan International Postgraduate School}
+
+\noindent \textbf{Ljubljana, Slovenia, May 2013} % Insert: month and year
+
+
+\vspace{1.6cm}
+
+
+\noindent \textbf{Evaluation Board:}\\
+ % Insert data about board members into lines below
+\vspace{-2mm}
+ 
+
+\begin{spacing}{1.3500000000000001}
+\noindent {\textit{Name and surname of board member with the title,
+Chairman, institution and address}}\\
+ {\textit{Name and surname of board member with the title, Member,
+institution and address}}\\
+ {\textit{Name and surname of board member with the title, Member,
+institution and address}} 
+\end{spacing}
+
+\noindent \clearpage{}
+
+% Third page - title page
+% This page uses modified margins
+
+\newgeometry{margin=2cm, bindingoffset=1.2cm}
+
+\thispagestyle{empty}
+
+\begin{minipage}[t]{1\textwidth}%
+\vspace{-10cm}
+
+
+\hspace{-0.5cm}\includegraphics[width=16cm]{img/header}
+
+\vspace{-8cm}
+
+
+\noindent{\LARGE{Lucas Benedi\v{c}i\v{c}}}\\
+
+
+\vspace{1.4cm}
+
+
+\begin{doublespace}
+\noindent {\huge {}\textbf{\huge OPTIMIZATION AND PARALLELIZATION}\\
+\textbf{\huge METHODS FOR THE DESIGN}\\
+\textbf{\huge OF NEXT-GENERATION}\\
+\textbf{\huge RADIO NETWORKS}{\huge }}\\
+ 
+\end{doublespace}
+
+\vspace{0.5cm}
+
+
+\noindent {\LARGE {}\textbf{\LARGE Doctoral Dissertation}{\LARGE }}\\
+
+
+\vspace{1.5cm}
+
+
+\begin{doublespace}
+\noindent {\huge {}\textbf{\huge OPTIMIZACIJSKE IN VZPOREDNE}\\
+\textbf{\huge METODE ZA NA\v{C}RTOVANJE}\\
+\textbf{\huge RADIJSKIH OMRE´IJ}\\
+\textbf{\huge NASLEDNJE GENERA\-{CI}\-{JE}}{\huge }}\\
+ 
+\end{doublespace}
+
+\vspace{0.5cm}
+
+
+\noindent {\LARGE {}\textbf{\LARGE Doktorska disertacija}{\LARGE }}\\
+
+
+\vspace{1.5cm}
+
+
+\noindent \textit{\large Supervisor}{\large : Assist. Prof. Peter
+Koro\v{s}ec}\\
+\\
+\textit{\large Co-supervisor}{\large : Assist. Prof. Toma\v{z} Javornik}\\
+\\
+\\
+{Ljubljana, Slovenia, May 2013}%
+\end{minipage}
+
+\cleardoublepage{}
+
+\thispagestyle{empty}
+
+\vfill{}
+
+
+Dedicatoria de la thesis. Dedicatoria de la thesis. Dedicatoria de
+la thesis. Dedicatoria de la thesis. Dedicatoria de la thesis. Dedicatoria
+de la thesis. Dedicatoria de la thesis. Dedicatoria de la thesis.
+Dedicatoria de la thesis. 
+
+\clearpage{}
+
+% *******************************************
+
+
+%               Dissertation
+% *******************************************
+% From now on, document uses margins specified in the preamble
+
+\restoregeometry
+
+\thispagestyle{empty}
+
+\global\long\def\listfigurename{Index of Figures}
+
+
+\global\long\def\listtablename{Index of Tables}
+
+
+\global\long\def\contentsname{Contents}
+
+
+\global\long\def\bibname{References}
+
+
+\global\long\def\supers#1{\ensuremath{^{\textrm{#1}}}}
+ \global\long\def\subs#1{\ensuremath{_{\textrm{#1}}}}
+
+
+\pagestyle{fancy} \global\long\def\chaptermark#1{\markboth{\thechapter.\ #1}{}}
+ %\renewcommand{\sectionmark}[1]{\markright {\thechapter.\ #1}}
+
+
+\global\long\def\headrulewidth{0pt}
+ \global\long\def\footrulewidth{0pt}
+ \global\long\def\tim{\fontfamily{tm}\fontseries{a}\fontsize{10}{12}\selectfont}
+
+
+\fancyhf{} \fancyhead[LE,RO]{\tim \thepage} \fancyhead[LO,RE]{\tim \leftmark}
+
+\fancypagestyle{plain}{ \fancyhf{} \fancyhead[LE,RO]{\tim \thepage}
+\global\long\def\headrulewidth{0pt}
+ \global\long\def\footrulewidth{0pt}
+}
+
+\cleardoublepage{}\newpage{}
+
+\pagenumbering{Roman} 
+
+\pagestyle{fancy}
+
+\setcounter{page}{7}
+
+\tableofcontents{}
+
+\cleardoublepage{}\newpage{}
+
+\addcontentsline{toc}{chapter}{Abstract} \include{00a-abstract}
+\thispagestyle{plain} \clearpage{}\newpage{}
+
+\addcontentsline{toc}{chapter}{Povzetek} \include{00b-Povzetek}
+\thispagestyle{plain} \clearpage{}\newpage{}
+
+\addcontentsline{toc}{chapter}{Abbreviations} \include{00c-Abbrevations}
+\thispagestyle{fancy} \markboth{Abbreviations}{} \cleardoublepage{}\newpage{}
+
+\pagenumbering{arabic}
+
+\pagestyle{fancy}
+
+\global\long\def\chaptermark#1{\markboth{#1}{}}
+ % shows only chapter name in headder
+%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\setcounter{page}{1}
+
+\setlength{\subfigtopskip}{6mm} %vertical space between subfigures when \\ is used
+
+
+\include{01-introduction/01-introduction} 
+
+\cleardoublepage{}
+
+\include{02-background_and_motivation/02-background_and_motivation}
+\cleardoublepage{}
+
+\include{03-Materials-and-Methods} \cleardoublepage{}
+
+\include{04-framework_design_and_implementation/04-framework_design_and_implementation}
+
+\cleardoublepage{}
+
+\include{05-framework_parameter_tuning/05-framework_parameter_tuning}\cleardoublepage{}
+
+\include{07-experimental_evaluation/07-02-service_coverage_problem}
+\cleardoublepage{}
+
+\include{07-experimental_evaluation/07-01-soft_handover_alignment}
+\cleardoublepage{}
+
+\include{06-Conclusions} \cleardoublepage{}
+
+\include{00-acknowledgments/00-acknowledgments} \cleardoublepage{}
+
+\thispagestyle{plain}
+
+\bibliographystyle{nature}
+\bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,05-framework_parameter_tuning/05-framework_parameter_tuning,07-experimental_evaluation/07-01-soft_handover_alignment,07-experimental_evaluation/07-02-service_coverage_problem}
+
+
+\cleardoublepage{}\global\long\def\listfigurename{Index of Figures}
+ \listoffigures
+\newpage{}
+
+\cleardoublepage{}\global\long\def\listtablename{Index of Tables}
+ \listoftables
+\newpage{}
+
+\cleardoublepage{}\addcontentsline{toc}{chapter}{Index of Algorithms} 
+
+\listof{myalgorithm}{Index of Algorithms} \newpage{}
+
+\newpage{}\cleardoublepage{}
+
+\appendix
+%dummy comment inserted by tex2lyx to ensure that this paragraph is not empty
+%%
+%To not show sections in TOC use new command \tocless (uncomment next two lines)
+%\newcommand{\nocontentsline}[3]{}
+%\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+%% Example:
+%\tocless\section{hide}
+%\tocless\subsection{subhide}
+%%
+
+
+\renewcommand*{\thechapter}{ } \renewcommand*{\thesection}{\Alph{section}}
+\include{00e-Appendix1} \cleardoublepage{}
+
+\include{00e-Appendix2}
+\end{document}

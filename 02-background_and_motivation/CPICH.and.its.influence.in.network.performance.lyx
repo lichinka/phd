@@ -1,0 +1,173 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Section
+The common pilot channel and its influence in network performance
+\end_layout
+
+\begin_layout Standard
+The Common Pilot Channel (CPICH) is used as reference for handover 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "umts_world:handover"
+
+\end_inset
+
+, cell selection 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "3glteinfo:cellSelection"
+
+\end_inset
+
+ and cell reselection 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "flore2005:cell_reselection"
+
+\end_inset
+
+.
+ It also defines the effective coverage area of the cell.
+ Whenever a mobile phone is switched on, it measures the received level
+ of chip energy to interference plus noise density ratio (
+\begin_inset Formula $E_{c}/I_{0}$
+\end_inset
+
+) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+ on the CPICH and tries to register with the cell providing the highest
+ received CPICH level.
+ This cell is then referred to as 
+\emph on
+serving cell
+\emph default
+.
+ While in connected mode (i.e.
+ during a call or data session), the mobile measures and reports the level
+ and quality of CPICH to the base station for handover procedures.
+ The transmission power of the CPICH can be read from the system information,
+ and may be used to estimate the path loss from the base station to the
+ mobile phone.
+\end_layout
+
+\begin_layout Standard
+By adjusting the CPICH power levels, the cell load can be balanced between
+ neighboring cells.
+ Reducing the CPICH power of one cell causes part of the terminal to be
+ served by adjacent cells, while increasing it invites more terminals to
+ handover to the own cell.
+ Moreover, inter-cell interference is reduced improving network operation
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Vejlgaard:PhD"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As a rule of thumb, the CPICH transmit power of the base stations should
+ be set as low as possible, while ensuring that the serving cells and neighborin
+g cells can be measured and thus providing coverage.
+ Additionally, the CPICH power is part of the total transmitted power of
+ the base station, which is generally limited.
+ Thus, less CPICH power provides more power for traffic channels, increasing
+ capacity.
+ However, setting the CPICH power too low will cause uncovered areas between
+ the cells, where CPICH power is too weak for the mobile to decode the signal.
+ On the other hand, too high values of CPICH power will cause the cells
+ to overlap too much and therefore create high levels of the aforementioned
+ inter-cell interference, which will decrease network capacity.
+ Nevertheless, a certain amount of overlapping is necessary for mobiles
+ near the cell border to perform soft handover (SHO).
+ SHO enables the mobile phone to be connected to more than one cell, thus
+ improving throughput if the level of interference is not excessive.
+ These SHO areas can be controlled by the strength of the CPICH power and
+ are also used to counteract variations of received signal power.
+\end_layout
+
+\begin_layout Standard
+According to 3GPP, the mobile phone must be able to decode the pilot from
+ a signal with 
+\begin_inset Formula $E_{c}/I_{0}$
+\end_inset
+
+ of -20 dB 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "3GPP_TS_25.133"
+
+\end_inset
+
+.
+ The service performance is limited by values from -15 to -16 dB.
+ These limitations leave enough room for optimization changes to CPICH power
+ as low as 0.5 dB, which may influence network performance in urban areas
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nawrocki2006understanding"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Although there are two types of CPICH, only the primary (P-CPICH) is mainly
+ the focus for coverage and capacity optimization.
+ The optional secondary (S-CPICH) channel is of no interest in this study,
+ since it is usually set relative to the P-CPICH level.
+ Because this work focuses on the optimization of the P-CPICH power, the
+ term CPICH will be used for P-CPICH in the rest of the text.
+\end_layout
+
+\end_body
+\end_document

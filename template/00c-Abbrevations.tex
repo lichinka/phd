@@ -1,0 +1,50 @@
+\chapter*{Abbreviations}
+
+% Abbreviations as a simple table
+%%
+\noindent
+\begin{tabular}{ l p{3mm} p{1mm} l }
+abbreviation one        & = & &     interpretation one      \\
+abbreviation two        & = & &     interpretation two      \\
+abbreviation three      & = & &     interpretation three    \\
+abbreviation four       & = & &     interpretation four     \\
+\end{tabular}
+%%
+
+
+%
+% *************************************************************
+%          LaTeX: Abbreviations as Nomenclature
+% *************************************************************
+%
+% Add the next 4 lines somewhere in the preamble:
+%
+% \usepackage{nomencl}
+% \setlength{\nomitemsep}{-\parsep}
+% \makenomenclature
+% \renewcommand{\nomname}{Abbrevations}
+%
+% Uncomment between %% for template:
+
+%%
+% \nomenclature{abbreviation1}{interpretation1}
+% \nomenclature{abbreviation2}{interpretation2}
+% \nomenclature{abbreviation3}{interpretation3}
+% \nomenclature{abbreviation4}{interpretation4}
+%
+%\vspace{2cm}
+%
+%\printnomenclature[1.9cm]
+%%
+
+% IMPORTANT!
+% For LaTeX a .nls file is needed:
+% First, save this file, then LaTeX 00-disertation.tex two times.
+% Use MakeIndex to create .nls file:
+    % makeindex 00-disertation.nlo -s nomencl.ist -o 00-disertation.nls
+% add manually in .nls  =\hspace{1.4cm} to make space between abbreviation and interpretation
+%
+% *************************************************************
+%
+
+

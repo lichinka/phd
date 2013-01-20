@@ -1,0 +1,395 @@
+% IPS PhD thesis template for LaTeX
+% Erik Zupaniè, Andreja Eršte
+
+\documentclass[a4paper,11pt,twoside,final,openany]{book}  % fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
+\usepackage[slovene,english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} % Uses font family: Times Roman
+\usepackage{ae,aecompl}
+\usepackage[latin2]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb,mathrsfs}   % for \mathscr
+%\setlength{\mathindent}{1cm}    % sets indentation of equations
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{psfrag}
+\usepackage{units}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage[small]{caption}
+\usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm, bindingoffset=0.7cm]{geometry}
+\usepackage{cite}
+\usepackage{subfigure}
+\usepackage{fixltx2e}   % Enables commands \textsuperscript and \textsubscript
+\usepackage[nottoc,numbib]{tocbibind} % bibliography numbered
+
+%% Tables
+\usepackage[table]{xcolor}  % enables color cellc in tables
+\usepackage{hhline}         % makes black lines when color cells are used (because \hline does not work)
+
+%% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
+% In this case, program package is selected and program environment is used for algorithms as subfloat in myalgortihm floats
+\usepackage{program}
+
+\usepackage{titlesec}
+\usepackage{chngcntr}
+\usepackage{titletoc}
+\usepackage[subfigure]{tocloft} %manipulates contents lists
+\usepackage{appendix}
+\usepackage{float}
+
+\usepackage[dvipdfm,colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links
+    citecolor=black,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=black           % color of external links
+]{hyperref} %package for inputing urls and other links
+
+
+%% Chapter titles and fonts
+    %\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing{\chapter}{0pt}{0pt}{35mm}
+\addto\captionsenglish{\renewcommand\chaptername{}}   %remove chapter X
+    %\usepackage{chngcntr}
+\counterwithout{figure}{chapter}    %correct counting of figures - ips template style
+\counterwithout{table}{chapter}     %correct counting of tables - ips template style
+\counterwithout{equation}{chapter}  %correct counting of equations - ips template style
+
+    %\usepackage{titletoc}
+\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing{\chapter}{0pt}{0pt}{35mm}
+    %\usepackage[subfigure]{tocloft} %manipulates contents lists
+\renewcommand{\cfttoctitlefont}{\LARGE\bfseries}
+\setlength{\cftaftertoctitleskip}{35mm}
+\renewcommand{\cftlottitlefont}{\LARGE\bfseries}
+\setlength{\cftafterlottitleskip}{35mm}
+\renewcommand{\cftloftitlefont}{\LARGE\bfseries}
+\setlength{\cftafterloftitleskip}{35mm}
+\renewcommand{\cfttabpresnum}{\tablename\ } %put the name before the number in the listoftables (lot)
+\renewcommand{\cftfigpresnum}{\figurename\ } %put the name before the number in the listoffigures (lof)
+\renewcommand{\cftfigaftersnum}{:} %put : after the number in the listoffigures
+\renewcommand{\cfttabaftersnum}{:} %put : after the number in the listoftables
+\setlength{\cfttabnumwidth}{5em} %space for the name before number in the listoftables
+\setlength{\cftfignumwidth}{5em} %space for the name before number in the listoffigures
+\setlength{\cftbeforefigskip}{0em} %changing the space between entries in the lof
+\setlength{\cftbeforetabskip}{0em} %changing the space between entries in the lot
+
+\setcounter{tocdepth}{9}    % shows numbers of subsections in toc
+\setcounter{secnumdepth}{9} % numbers all sub(-sub)sections
+
+%%
+\renewcommand\citeleft{[}
+\renewcommand\citeright{]}
+
+\graphicspath{{images/}}
+
+\makeatletter
+
+%% myalgorithm float (used for writing algorithms) - definitions
+%\usepackage{float}
+
+%%
+\newcommand\floatc@simplerule[2]{{\@fs@cfont #1 #2}\par}
+\newcommand\fs@simplerule{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@simplerule
+  \def\@fs@pre{\hrule height0pt depth0pt \kern4pt}%
+  \def\@fs@post{\kern4pt\hrule height0.1mm depth0pt \kern4pt \relax}%
+  \def\@fs@mid{\kern8pt}%
+  \let\@fs@iftopcapt\iftrue}
+
+\floatstyle{simplerule}
+\newfloat{myalgorithm}{thp}{lob}[chapter]
+\floatname{myalgorithm}{Algorithm}
+%\listof{myalgorithm}{Index of algorithms}
+\counterwithout{myalgorithm}{chapter} %correct counting of algorithms - ips template style
+%%
+\newcommand{\listmyalgorithmname}{Index of Algorithms} %define the name for the list of algorithms (loa)
+\newlistof{myalgorithms}{loa}{\listmyalgorithmname} %make newlistof
+%\renewcommand{\cftmyalgorithmtitlefont}{\Large\bfseries}
+%\setlength{\cftaftermyalgorithmtitleskip}{35mm}
+%\setlength{\cftmyalgorithmsnumwidth}{5em} %space for the name before number in the listofalgorithms (loa)
+%\setlength{\cftmybeforealgorithmsskip}{0em} %changing the space between entries in the loa
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}} % defines line used in the example
+
+\begin{document}
+
+% *******************************************
+%           First page (title page)
+% *******************************************
+%
+% This page uses modified margins
+
+\newgeometry{margin=2cm, bindingoffset=0.7cm}
+
+\thispagestyle{empty}
+\begin{flushright}
+\noindent{\huge{\textbf{TITLE OF DISSERTATION}}}   % Insert: title of dissertation
+
+    \vspace{3cm}
+
+\noindent{\LARGE{Name and Surname of the Author}}  % Insert: name and surname of the author
+\end{flushright}
+\clearpage
+
+%
+% *******************************************
+%
+
+% *******************************************
+%        Second page - information
+% *******************************************
+%
+% This page uses modified margins
+
+\newgeometry{margin=2cm, bindingoffset=1.2cm}
+
+\thispagestyle{empty}
+
+    \textnormal{ }\\ % empty line
+    \textnormal{ }\\ % empty line
+\vspace{2.1cm}
+
+\noindent\textbf{Doctoral Dissertation}
+
+\noindent\textbf{Jo\v{z}ef Stefan International Postgraduate School}
+
+\noindent\textbf{Ljubljana, Slovenia, Month Year}   % Insert: month and year
+
+\vspace{1.6cm}
+
+\noindent\textbf{Evaluation Board:}\\   % Insert data about board members into lines below
+\vspace{-2mm}
+\begin{spacing}{1.35}
+\noindent{\textit{Name and  surname of board member with the title, Chairman, institution and address}}\\
+\noindent{\textit{Name and  surname of board member with the title, Member, institution and address}}\\
+\noindent{\textit{Name and  surname of board member with the title, Member, institution and address}}
+\end{spacing}
+
+\clearpage
+
+%
+% *******************************************
+%
+
+% *******************************************
+%        Third page - title page
+% *******************************************
+%
+% This page uses modified margins
+
+\newgeometry{margin=2cm, bindingoffset=1.2cm}
+
+\thispagestyle{empty}
+
+% IPS symbol (inserted as figure)
+%
+\vspace{-.5cm}
+\begin{figure}[t]
+\includegraphics[width=16cm]{header.eps}
+\end{figure}
+
+\vspace{4.2cm}
+\textnormal{ }\\ % empty line
+
+\noindent{\LARGE{Name and Surname of the Author}}\\ % Insert: name and surname of the author
+
+\vspace{1.4cm}
+
+\noindent{\huge{\textbf{TITLE OF DISSERTATION}}}\\   % Insert: title of dissertation in English
+
+\vfill
+
+\noindent{\LARGE{\textbf{Doctoral Dissertation}}}\\
+
+\vfill
+
+\noindent{\huge{\textbf{NASLOV DOKTORSKE DISERTA\-{CI}\-{JE}}}}\\   % Insert: title of dissertation in Slovene
+
+\vfill
+
+\noindent{\LARGE{\textbf{Doktorska disertacija}}}\\
+
+\vfill
+
+\noindent{\large{\textit{Supervisor}: Name and Surname with the title}}\\     % Insert: name and surname of supervisor with the title
+    \textnormal{ }\\ % empty line
+\noindent{\large{\textit{Co-Supervisor}: Name and Surname with the title}}\\     % Insert: name and surname of co-supervisor with the title
+    \textnormal{ }\\ % empty line
+    \textnormal{ }\\ % empty line
+\noindent{\normalsize{Ljubljana, Slovenia, Month Year}}     % Insert: month and year
+
+\vspace{1.4cm}
+
+\clearpage
+
+%
+%
+% *******************************************
+% *******************************************
+%
+% *******************************************
+%               Dissertation
+% *******************************************
+%
+% From now on, document uses margins specified in the preamble
+%
+\restoregeometry
+
+\thispagestyle{empty}
+
+\renewcommand{\listfigurename}{Index of Figures}
+\renewcommand{\listtablename}{Index of Tables}
+\renewcommand{\contentsname}{Index}
+\renewcommand{\bibname}{References}
+
+\newcommand{\supers}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\subs}[1]{\ensuremath{_{\textrm{#1}}}}
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+%\renewcommand{\sectionmark}[1]{\markright {\thechapter.\ #1}}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\tim}{\fontfamily{tm}\fontseries{a}\fontsize{10}{12}\selectfont}
+
+\fancyhf{}
+\fancyhead[LE,RO]{\tim \thepage}
+\fancyhead[LO,RE]{\tim \leftmark}
+
+\fancypagestyle{plain}{
+\fancyhf{}
+\fancyhead[LE,RO]{\tim \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+\cleardoublepage
+\newpage
+
+\pagenumbering{Roman}
+\pagestyle{fancy}
+\setcounter{page}{5}
+
+\tableofcontents
+
+\cleardoublepage
+\newpage
+
+\addcontentsline{toc}{chapter}{Abstract} \include{00a-Abstract}
+\thispagestyle{plain}
+\clearpage
+\newpage
+
+\addcontentsline{toc}{chapter}{Povzetek} \include{00b-Povzetek}
+\thispagestyle{plain}
+\clearpage
+\newpage
+
+\addcontentsline{toc}{chapter}{Abbreviations} \include{00c-Abbrevations}
+\thispagestyle{fancy}
+\markboth{Abbreviations}{}
+\cleardoublepage
+\newpage
+
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} % shows only chapter name in headder
+%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\setcounter{page}{1}
+
+\setlength{\subfigtopskip}{6mm} %vertical space between subfigures when \\ is used
+
+\include{01-Introduction}
+\cleardoublepage
+
+\include{02-Aims-and-Hypotehesis}
+\cleardoublepage
+
+\include{03-Materials-and-Methods}
+\cleardoublepage
+
+\include{04-Results}
+\cleardoublepage
+
+\include{05-Discussion}
+\cleardoublepage
+
+\include{06-Conclusions}
+\cleardoublepage
+
+\include{00d-Acknowledgements}
+\cleardoublepage
+
+\thispagestyle{plain}
+
+% *********************************************
+%               The Bibliography
+% *********************************************
+%
+% For BibTex, style ''nature'' has been created (it is located in the root file directory).
+% Uncomment between %% and comment between %%% to use BibTex for references.
+
+%%
+%\bibliographystyle{nature}
+%\cleardoublepage
+%\renewcommand{\bibname}{References}
+%   \nocite{*}
+%\bibliography{ref/references}
+%%
+
+% *********************************************
+%
+% For manual insert of references, write them in 00bib-References.tex file
+
+%%%
+\cleardoublepage
+\renewcommand{\bibname}{References}
+  \nocite{*}
+\include{00bib-References}
+%%%
+
+
+% *********************************************
+%
+
+\newpage
+\cleardoublepage
+\renewcommand{\listfigurename}{Index of Figures} \listoffigures
+\newpage
+
+\cleardoublepage
+\renewcommand{\listtablename}{Index of Tables} \listoftables
+\newpage
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index of Algorithms}
+\listof{myalgorithm}{Index of Algorithms}
+\newpage
+
+\newpage
+\cleardoublepage
+
+
+\appendix
+
+%%
+%To not show sections in TOC use new command \tocless (uncomment next two lines)
+%\newcommand{\nocontentsline}[3]{}
+%\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+%
+%% Example:
+%\tocless\section{hide}
+%\tocless\subsection{subhide}
+%%
+
+\renewcommand*{\thechapter}{ }
+\renewcommand*{\thesection}{\Alph{section}}
+\include{00e-Appendix1}
+\cleardoublepage
+
+\include{00e-Appendix2}
+
+
+\end{document}

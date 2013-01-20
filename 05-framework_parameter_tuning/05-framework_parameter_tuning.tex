@@ -1,0 +1,553 @@
+
+\chapter{Framework parameter tuning \label{chap:Framework-parameter-tuning}}
+
+% First paragraph has no indentation.
+
+\noindent This chapter \ref{chap:Framework-parameter-tuning} deals
+with the automatic tuning of parameters of the mathematical models,
+used for radio propagation predictions. Namely, based on field measurements,
+the configurable parameters of the mathematical models used by the
+framework may be automatically tuned to minize the deviation from
+the prediction to the actual state of the network.
+
+
+\section{Introduction???}
+
+Even after almost 10 years after the launch of the first commercial
+UMTS network, service coverage planning remains a key problem that
+all mobile operators have to deal with. Its intricacy arises from
+the wide range of different combinations of hardware, configuration
+parameters and their evaluation-time complexity. 
+
+Although different mathematical models have been proposed for radio
+propragation modelling, none of them excels in a network-wide scenario.
+A combination of different models and parameters is generally needed
+in order to calculate radio-propagation predictions within a bearable
+error range. Of course, the number of possible combinations of models
+and parameters grows exponentially if we also take into account various
+environmental characteristics, such as population density, terrain
+relief, land use, and a continously growing number of network cells,
+that are indeed compulsory for keeping the error low.
+
+Some of them are more suitable for free space propagation. Others
+are better for urban environments, a third groups is even better only
+at suburban or rural enviroments. Specifically, when talking about
+radio propagation models, threre are manly three clearly distinguishable
+groups, namely: statistical models, deterministic models, and combinatorial
+models.
+
+Statistical models ... ???
+
+Deterministic ???
+
+Combinatorial ???
+
+Despite an interesting pallete of options of commercial tools, available
+for radio propagation modelling, the common thread among all of the
+them is the restricted nature of its usage and the lack of adaptation
+with cumbersume user interfaces.
+
+In this work, we present a self-adaptive radio propagation tool. The
+tool can fine-tune itself before-hand with field measurements in order
+to maximize the precision of the radio propagation prediction in the
+target area.
+
+
+
+
+\section{Related work???}
+
+In \cite{Ozimek_Open.source.radio.coverage.prediction:2010}, Hrovat
+et al. developed a radio planning tool for the GRASS GIS system. Their
+work was based on well-known radio propagation models (e.g. Okumura-Hata
+and COST 231), and a reverse-engineered one, based on a commercial
+tool by Ericsson. The results reported show that the open source radio
+planning tool shields comparable results to those of the commercial
+tools. Moreover, both tools have similar stddev from field measurements.
+
+
+\section{Problem description}
+
+Our main objective is improve the quality performance of a given mathematical
+model, used for radio-propagation calculations, by fine-tuning its
+configurable parameters as per-cell basis. In order to do this, we
+will combine field measurements in a feedback loop with an optimization
+algorithm over the parameters of the mathematical model.
+
+The idea is to automatically adapt the parameters of the mathematical
+model for each of the cells targeted by the optimization. That is,
+starting from an a-priori best-known set of parameters, manually calculated
+by the radio engineers at Telekom Slovenije, d.d., the algorithm should
+optimize the model parameters so that an error measurement of the
+radio-propagation prediction to a given set of field measurements
+is minimized.
+
+By fine-tuning the model parameters per cell, we achieve region independence
+since the field measurements are used as reference. Moreover, we aim
+at lowering the error of the model that is tuned for different types
+of regions, e.g. urban, suburban and rural. The use of an automated
+system, backed by a database, effectively facilitates the daily tasks
+of calculating radio-propagation predictions, since the optimized
+parameters for a specific cell are directly read from a database.
+Therefore, it is feasible for the radio engineer to manage many independent
+sets of optimized parameters for numerous cells. Moreover, the user
+would decide whether to re-run the parameter optimization, or just
+read the already optimized parameters directly from the database.
+Additionally, the level of accuracy for the radio-propagation prediction
+may be limited, by either setting an optimization-time limit or an
+minimum error limit, during which the system fine-tunes the parameters
+of the mathematical model.
+
+???
+
+Indeed, based on experimental results showed in \cite{Ozimek_Open.source.radio.coverage.prediction:2010},
+we are already confident that well-known models, like Okumura-Hata
+and COST 231, provide good results in a feasible amount of time. This
+means that with no ``evolved'' mathematical models whatsoever, the
+results should be satisfactory for the average case, having the extra
+value of the calculation speed gained on GPUs. Moreover, the good
+results showed by these well-known models provide a favorable starting
+point for the evolution of potential better models.
+
+???
+
+
+\section{Problem elements}
+
+In this section we introduce all the elements taking part of the self-adaptive
+radio propagation tool.
+
+
+\subsection{Ericsson 9999 model \label{sub:Ericsson-9999-model}}
+
+This radio-propagation model was introduced by Ericsson in 2006, as
+an extension of the well-known Hata model {[}ref!Comparison\_2\_11{]},
+designed for frequencies up to 2000~MHz. The suitability of this
+model comes from the fact that it contains a number of adjustable
+parameters, which adapt the model according to a given scenario. Equation
+(\ref{eq:ericsson9999}) describes the path loss as evaluated by this
+model.
+
+\begin{multline}
+pl(d,\beta)=a_{0}+a_{1}\log(d)+a_{2}\log(H_{A})+\\
+a_{3}\log(d)\log(H_{A})-3.2\left[\log(11.75\cdot H_{R})\right]^{2}+\\
+44.49\log(F)-4.78\left[\log(F)\right]^{2},\label{eq:ericsson9999}
+\end{multline}
+
+
+where $\beta=(a_{0},a_{1},a_{2},a_{3})$ is the vector containing
+the tuning parameters of the model, $d$ is the distance (in kilometers)
+from the transmitter to the topography point, $H_{A}$ is the effective
+antenna height (in meters) of the transmitter, $H_{R}$ is the antenna
+height (in meters) of the receiver, and $F$ is the frequency, expressed
+in MHz.
+
+
+\subsection{Differential ant-stigmergy algorithm}
+
+As the optimization algorithm we have chosen the differential ant-stigmergy
+algorithm (DASA).
+
+Based on the metaheuristic Ant-Colony Optimization (ACO) \cite{dorigo2006ant_colony_optimization},
+the DASA \cite{korosec2010_DASA} provides a framework to successfully
+cope with high-dimensional numerical optimization problems. It creates
+a fine-grained discrete form of the search space, representing it
+as a graph. This graph is then used as the walking paths for the ants,
+which iteratively improve the temporary best solution.
+
+The mapping between the balancing problem and DASA is similar to the
+one depicted in Equation (\ref{eq:DASA}):
+
+\begin{equation}
+X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:DASA}
+\end{equation}
+
+
+In this case, each ant, $a$, creates its own solution vector, $X_{a}$,
+during the minimization process. At the end of every iteration, and
+after all the ants have created solutions, they are evaluated to establish
+if any of them is better than the best solution found so far.
+
+There are six parameters that control the way DASA explores the search
+space: the number of ants, the discrete base, the pheromone dispersion
+factor, the global scale-increasing factor, the global scale-decreasing
+factor, and the maximum parameter precision.
+
+For a more in-depth explanation about these parameters and the DASA
+algorithm itself, we refer the reader to \cite{korosec2010_DASA}.
+
+
+\subsection{Field measurements}
+
+The field measurements were taken using a small truck equipped with
+the spectrum analyzer Rohde \& Schwarz {[}ref!{]}. The spectrum analyzer
+was connected to an external omni antenna mounted on the roof of the
+truck, at roughfly 2~meters above the ground, taking measurements
+at a rate of ??? per second, with the symbol rate set to ???~Mhz.
+To accurately establish the measurement location points, a GPS unit
+was used. The measurement locations covered all the streets within
+the target area, with over ??? field-measurement points taken at more
+than ??? locations. 
+
+To minimize the impact of different driving speed, traffic lights
+and other traffic condictions arising during the measurement round,
+all field measurements were post-processed so that a single value,
+the median, is calculated for each of the measured locations. The
+resulting received signal power was used to estimate the path-loss
+prediction corresponding to each of the measurements.
+
+
+\subsection{Optimization objective}
+
+The optimization objective consists of adjusting the parameters of
+the Ericsson 9999 model, i.e. $a_{0},a_{1},a_{2},a_{3}$ in Equation
+(\ref{eq:ericsson9999}), to best fit a given field-measurement set.
+Our data set consists of $N$ data pairs, $(pl_{i},m_{i})$, $i=1,\ldots,N$,
+where $N$ is the number of field measurements of the current cell,
+$pl(d_{i},\beta)$ represents the path-loss value at measurement point
+$i$, as defined in Equation (\ref{eq:ericsson9999}), and $m_{i}$
+is the field measurement at the point $i$. By applying the least
+squares method {[}ref!{]}, our goal is to minimize the sum, $S^{*}$,
+of squared residuals, i.e.
+
+\begin{equation}
+S^{*}=\min\sum_{i=1}^{N}r_{i}^{2},\label{eq:cost_function}
+\end{equation}
+
+
+where a residual is defined as the difference between a field measurement
+and a path-loss value predicted by the model, i.e.
+
+\begin{equation}
+r_{i}=m_{i}-\left[cell\, power-pl(d_{i},\beta)\right].\label{eq:residual}
+\end{equation}
+
+
+
+\section{Implementation}
+
+As the implementation platform for connecting the different system
+components together, we have chosen the open source Geographic Resources
+Analysis Support System (GRASS). This Geographic Information System
+(GIS) software is used for geospatial data management and analysis,
+spatial modeling, and visualization {[}ref!grass{]}. Being an open
+system, GRASS provided us with a great deal of essential built-in
+functionality, such as functions for displaying results of geographical
+maps, importing diffetrent raster and vector formats, database connections
+for external attributes, geographical coordinates convertion, etc.
+For additional information about the GRASS, we refer the reader to
+the numerous guides and tutorials available online.
+
+One of the main reasons for choosing GRASS as our implementation platform
+resides in its open nature. This fact helped us not only to achieve
+operating-system independence, but most importantly to implement our
+system as native GRASS modules. We achieved this by taking advantage
+of the very-well documented GRASS Application Programing Interface
+(API), which is available for languages such as C and Python. Therefore,
+following the modular composition of GRASS itself, we have implemented
+a separate GRASS module for each independent component of our system,
+namely:
+\begin{itemize}
+\item the evaluation component, which consists of the modules $r.eric9999$,
+$r.sector$ and $db.measurement$; and
+\item the optimization component, which consists of a single module called
+$dasa$.
+\end{itemize}
+Figure \ref{fig:system_architecture} depicts the different system
+components and the data flow among them.
+
+\begin{figure}
+\centering
+
+\includegraphics[width=1\columnwidth]{05-framework_parameter_tuning/img/architecture}
+
+\caption{\textit{System architecture and data flow.\label{fig:system_architecture}}}
+\end{figure}
+
+
+
+\subsection{Evaluation component}
+
+This section describes the different modules that contained in the
+evaluation component of the system. Their connections and data flow
+is depicted in Figure \ref{fig:evaluation_component}. This particular
+component follows a similar internal organization as the radio planning
+tool developed by Hrovat et al. \cite{Ozimek_Open.source.radio.coverage.prediction:2010}.
+
+\begin{figure}
+\centering
+
+\includegraphics[width=1\columnwidth]{05-framework_parameter_tuning/img/evaluation_component}
+
+\caption{\textit{Evaluation component structure and data flow.\label{fig:evaluation_component}}}
+\end{figure}
+
+
+
+\subsubsection{Path-loss model}
+
+The module $r.eric9999$ implements the Ericsson 9999 path-loss model,
+which was previously introduced in Section \ref{sub:Ericsson-9999-model}.
+
+
+\subsubsection{Antenna diagram influence}
+
+The module $r.sector$\emph{ }considers the antenna radiation diagram
+of the current cell and its influence over the path-loss calculation
+of the isotropic source for a specific region. The module uses the
+raster map containing the path-loss data for the isotropic source
+(i.e. the output of module \emph{$r.eric9999$}), and the radiation
+diagram of the antenna, including beam direction, electrical and mechanical
+tilt, and antenna gain, as the input data for calculating the actual
+path-loss for the currently analyzed cell. The output of this module
+is saved in a raster map for further processing. Figures \ref{fig:r_sector_example}
+shows an example of applying the $r.sector$ module to output, generated
+by the $r.eric9999$ module.
+
+\begin{figure}
+\centering
+
+\includegraphics[width=1\textwidth]{05-framework_parameter_tuning/img/pathloss_matrices}
+
+\caption{\textit{Example run of the $r.sector$ module.\label{fig:r_sector_example}}}
+\end{figure}
+
+
+
+\subsubsection{Received signal strength}
+
+The output of the module $r.sector$ is used as input for calculating
+the coverage prediction of the cell being analyzed. Each point within
+the raster contains the received signal streght or RSCP {[}ref!{]},
+resulting from the combination of the path-loss and the cell transmit
+power. The output of module in a raster map for further processing.
+
+
+\subsubsection{Least squares}
+
+Once the coverage prediction has been calculated and saved, this module
+continues the evaluation sequence by comparing each measurement of
+the current cell within the area, retrieved from the database with
+the module $db.measurement$, with the predicted received signal strength
+jus calculated. Consequently, the objective function defined in Equation
+(\ref{eq:cost_function}) is applied for each field measurement $i$
+to calculate the cost of the current solution $\beta=(a_{0},a_{1},a_{2},a_{3})$.
+
+
+\subsection{Optimization component}
+
+Because of the metaheuristic nature of the DASA algorithm, it does
+not need any problem-specific knowledge to be a good optimization
+tool. On the other hand, there are some parameters that influence
+the way DASA explores the search space. After some experimental simulations,
+we have set the configuration parameters to the following values:
+\begin{itemize}
+\item $m=10$, the number of ants;
+\item $b=10,$ the discrete base;
+\item $q=0.2$, the pheromone dispersion factor;
+\item $s_{+}=0.01$, the global scale-increasing factor;
+\item $s_{-}=0.01$, the global scale-decreasing factor; and 
+\item $e=1.0^{-2}$, the maximum parameter precision.
+\end{itemize}
+
+\section{Simulations???}
+
+
+\subsection{Test networks}
+
+All the test networks, $Net_{1}$, $Net_{2}$ and $Net_{3}$ are subsets
+of a real UMTS network deployed by Mobitel Telecommunication Services,
+Inc. in Slovenia. The path-loss predictions are calculated using the
+COST231 model \cite{Cichon_Propagation.prediction.models:1995}, using
+a digital evaluation model of 100 $m^{2}$ resolution as input data
+and a receiver height of $1.5\, m$ above ground. The requirements
+for $SIR$ coverage were provided by experts of the Radio Network
+Department at Mobitel Telecommunication Services, Inc.
+
+$Net_{1}$ is deployed over a densely populated urban area. For this
+reason, the $SIR$ coverage threshold is a lower, since network capacity
+is the dominating factor, whereas coverage is flexible because of
+a higher cell density, i.e. more base stations per surface unit. $Net_{2}$
+represents a network deployed over a dominant rural area, meaning
+that network capacity may be reduced at the cost of better coverage,
+since each cell must cover a greater area. The last network, $Net_{3}$,
+represents a suburban area with a highly-dense populated, but relatively
+small, downtown center, where a compromise between network capacity
+and coverage has to be achieved.
+
+Based on the data available, we have produced network configurations
+based on the attenuation-based approach. These configurations represent
+what could be an initial network setup by common planning standards
+\cite{Holma_WCDMA.for.UMTS:2005}. Moreover, such configurations are
+also very straightforward to calculate by a network planner. Table
+\ref{tab:network-statistics-1} shows some statistics of the test
+networks used. The parameter values used during experimentation are
+shown in Table \ref{tab:network-parameters-1}.
+
+\begin{table}
+\caption{\textit{Network statistics.\label{tab:network-statistics-1}}}
+
+
+\centering
+
+\begin{tabular}{ccc}
+\toprule 
+ & Cells $[m]$ & Area $[km^{2}]$\tabularnewline\addlinespace
+\midrule
+$Net_{1}$ & 77 & 100\tabularnewline
+$Net_{2}$ & 23 & 306.25\tabularnewline
+$Net_{3}$ & 129 & 405\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}
+\caption{\textit{Network parameters.\label{tab:network-parameters-1}}}
+
+
+\centering
+
+\begin{tabular}{clll}
+\hline 
+Parameter & $Net_{1}$ & $Net_{2}$ & $Net_{3}$\tabularnewline
+\hline 
+$p_{c}^{T}$ & 15.00 W & 19.95 W & 15.00 W\tabularnewline
+$\tau_{0}$ & 1.55$\cdot10^{-14}$ W & 1.55$\cdot10^{-14}$ W & 1.55$\cdot10^{-14}$ W\tabularnewline
+$\gamma_{c}$ & 0.01 & 0.02 & 0.015\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Algorithm parameter settings \label{sub:Algorithm-parameter-settings-1}}
+
+After short experimentation, we determined the parameter settings
+for the optimization algorithm. There was no fine tuning of parameters
+for each problem instance. Nevertheless, we gained valuable information
+regarding the agent's behavior that we used to set the following parameter
+values:
+\begin{itemize}
+\item $increase\, rate$ was set to 0.2 dB;
+\item $decrease\, rate$ was set to -0.1 dB;
+\item $number\, of\, agents$ was set to 16; and
+\item 10,000 $changes\, per\, agent$ were allowed.
+\end{itemize}
+
+\subsection{Experimental environment}
+
+All experiments were done on a 4-core, hyper-threading, Intel i7 2.67
+GHz desktop computer with 6 GB of RAM running a 64-bit Linux operating
+system. The GPU hardware was ATI HD5570, with 1 GB DDR3 RAM. The implementation
+language used was C, with OpenCL and OpenMPI extensions.
+
+
+\subsection{Optimization results}
+
+The results achieved by our optimization approach improved the objective
+significantly, as it is shown in Table \ref{tab:optimization-results-2}.
+Results show that we reduced pilot power usage in all networks and
+kept the service area under full coverage. Moreover, we may see the
+solution for $Net_{1}$ improved the attenuation-based setting by
+more than 300\%. For $Net_{2}$, the improvement observed is around
+232\%, with an improvement of more than 170\% for $Net_{3}$. These
+means that network capacity has been significantly increased in all
+three problem instances. Therefore, a greater number of users should
+be able to access services provided by the mobile network, since coverage
+is assured. Moreover, an increased speed in data services should be
+observed \cite{Holma_WCDMA.for.UMTS:2005}.
+
+\begin{table}
+\caption{\textit{Optimization results.\label{tab:optimization-results-2}}}
+
+
+\centering
+
+\begin{tabular}{cccccc}
+\toprule 
+ & \multicolumn{2}{c}{Attenuation-based} &  & \multicolumn{2}{c}{Parallel agents}\tabularnewline\addlinespace
+\cmidrule{2-3} \cmidrule{5-6} 
+ & Total power {[}W{]} & Average cell power {[}W{]} &  & Total power {[}W{]} & Average cell power {[}W{]}\tabularnewline\addlinespace
+\cmidrule{1-3} \cmidrule{5-6} 
+$Net_{1}$ & 419.292 & 5.445 &  & 137.064 & 1.780\tabularnewline
+$Net_{2}$ & 78.297 & 3.404 &  & 33.344 & 1.450\tabularnewline
+$Net_{3}$ & 1,014.113 & 7.861 &  & 582.954 & 4.519\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+After collecting data from ten independent runs, we generated convergence
+graphs, shown in Figures ???. The graphs contain feasible solutions
+only, i.e. solutions that meet the full-coverage constraint. Unfeasible
+solutions were marked with a value of inferior quality than the worst
+solution found by the algorithm in all ten runs. In case of $Net_{1}$,
+the value was set to 428, for $Net_{2}$ the value was set to 129
+and for $Net_{3}$ the value was set to 1,435. 
+
+The analysis of convergence graphs of $Net_{1}$ and $Net_{2}$ shows
+that the algorithm quickly converges at the beginning, followed by
+a steady improvement of intermediate solutions. In $Net_{1}$ we notice
+additional improvement of the solutions found even at towards the
+end. This fact suggests that longer runs would potentially find even
+better solutions in this case. For the instance $Net_{3}$, we observe
+a slower initial convergence, with steady improvement of intermediate
+solutions and no significant solution enhancement towards the end.
+This fact, together with the aforementioned results, suggest that
+this problem instance presents a more difficult optimization case
+than $Net_{1}$ and $Net_{2}$. Further investigation would be needed
+to determine the source of this behavior. Nevertheless, the improvement
+observed is, in average, around 100\%.
+
+
+\section{Conclusion???}
+
+In this paper, we have addressed the problem of providing full coverage
+to a service area of a UMTS network by using a minimum amount of pilot
+power. We have put emphasis on the confluence of a real-world problem,
+with live data from a deployed mobile network, with state-of-the-art
+parallel GPU hardware and implementations that, to the best of our
+knowledge, has never been dealt-with before.
+
+We have presented a parallel-agent approach, which is aimed at giving
+good solutions to big problem instances in an acceptable amount of
+time. The experimental results show that our approach is able to find
+competitive solutions, when compared to other common radio-planning
+methods \cite{Holma_WCDMA.for.UMTS:2005}. The presented results also
+demonstrate that our algorithm is able to find high quality solutions
+even for large networks, that contain many cells over a large service
+area. This fact indicates that our approach could be successfully
+applied to bigger problem instances.
+
+GPU architectures not only allow implementation of parallel heuristics
+in a natural way, they also substantially improve the performance
+of the optimization process. We reported and validated the great performance
+gain by experimentation on problem instances of different sizes.
+
+After successfully implementing the objective-function evaluation
+on GPU, we realized that the efficiency of this approach was limited
+by the CPU-to-GPU data transfers. Nevertheless, even with such implementation,
+we have already obtained substantial speed-up.
+
+To deal with the CPU-to-GPU data transfer issue, we implemented a
+fully-enabled GPU optimization system that achieved impressive speed-up.
+Still, we had to consider different data representation schemes for
+the problem elements, so to avoid memory limitations on the GPU device.
+Comparison of our experimental results with other algorithms dealing
+with the same and similar problems would be useful. However, this
+task is not straightforward, since the results of several works (e.g.
+\cite{Gerdenitsch_PhD:2004,Turke_Advanced.site.configuration.techniques:2005})
+depend on black-box evaluations, making experimental association very
+difficult, if possible at all. 
+
+All in all, we consider that the present work provides a robust foundation
+for future work on grid-based metaheuristics with expensive objective-function
+evaluation.
+
+In future work, we will consider further analysis of our parallel-agent
+approach, including experimentation with different parameters, in
+order to gain better understanding of the dynamics leading the metaheuristic
+during the search process. Multi-GPU environments present an interesting
+possibility, where evaluator(s) and worker agents are run on separate
+GPU devices.

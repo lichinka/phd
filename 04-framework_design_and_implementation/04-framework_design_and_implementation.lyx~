@@ -1,0 +1,5843 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Framework design and implementation 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Framework-design-and-implementation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% First paragraph has no indentation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+There is a constant growing demand for hardware resources, longer-processing
+ times and more memory to follow the evolution of 3G radio networks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
+
+\end_inset
+
+.
+ Fortunately, high-performance computer systems are increasingly accessible;
+ something made possible because of the emergence of computer clusters and
+ commodity hardware, capable of true parallel processing, e.g.
+ multi-core CPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore"
+
+\end_inset
+
+ and GPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wen2011gpu"
+
+\end_inset
+
+.
+ Moreover, the highly parallel structure present on GPUs makes them more
+ effective than CPUs for execution of algorithms where large blocks of data
+ need to be processed in parallel.
+ Commodity GPUs have evolved from being a graphic accelerator into a general-pur
+pose processor.
+ They can achieve higher performance at lower power consumption and lower
+ costs when compared to conventional CPUs.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 3cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+More than 20 years have passed since the world's first GSM mobile call was
+ made in Finland.
+ Still, the coverage planning of the radio network remains a key problem
+ that all mobile operators have to deal with.
+ Moreover, it has proven to be a fundamental issue not only in GSM networks,
+ but also in modern standards such as the third generation (3G) UMTS and
+ the fourth generation (4G) LTE Advanced 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010,Shabbir_Comparison_of_radio_propagation_models:2011,Siomina:Minimum.pilot.power.for.service.coverage,Valcarce_Applying.FDTD.to.the.coverage.prediction.of.WiMAX:2009"
+
+\end_inset
+
+.
+ In radio networks is generally the case that the radio stations are installed
+ at fixed locations.
+ For this reason, one of the primary objectives of mobile-network planning
+ is to efficiently use the allocated frequency band to assure that the whole
+ of the geographic area of interest can be satisfactorily reached with the
+ radio stations of the network.
+ To this end, radio-coverage prediction tools are of great importance as
+ it allows the network engineers to test different network configurations
+ before physically implementing the changes.
+ Nevertheless, radio-coverage prediction is a complex task due to the wide
+ range of various combinations of hardware and configuration parameters
+ which have to be analyzed in the context of different environments.
+ The complexity of the problem means that radio-coverage prediction can
+ be a computationally-intensive and time-consuming task, hence the importance
+ of fast and accurate prediction tools.
+\end_layout
+
+\begin_layout Standard
+Although different mathematical models have been proposed for radio propagation
+ modeling, none of them excels in a network-wide scenario 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Shabbir_Comparison_of_radio_propagation_models:2011"
+
+\end_inset
+
+.
+ A combination of different models and parameters is generally needed in
+ order to calculate radio-propagation predictions for particular environments.
+ Moreover, since the number of deployed cells (transmitters) keeps growing
+ with the adoption of modern standards 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010"
+
+\end_inset
+
+, there is a clear need for a radio propagation tool that is able to cope
+ with larger work loads in a feasible amount of time.
+\end_layout
+
+\begin_layout Standard
+Despite various options of commercial tools specialized in radio-propagation
+ modeling, the common thread among them is the restricted nature of its
+ usage, mostly dominated by black-box implementations.
+ This fact induces lack of adaptability, sometimes even combined with cumbersome
+ user interfaces that are not suitable for big batch jobs, involving thousands
+ of transmitters.
+ Moreover, the evolution of any commercial tool is strictly bounded to its
+ vendor, forcing the user to adapt its work-flow to it, when the opposite
+ situation should be preferred.
+\end_layout
+
+\begin_layout Standard
+To tackle the afore-mentioned issues, we present a high-performance parallel
+ radio-prediction tool for the open source Geographic Resources Analysis
+ Support System (GRASS).
+ For its design, we have focused on scalability, clean design and open nature
+ of the tool, inspired by the GRASS geographic information system (GIS).
+ These facts make it an ideal candidate for calculating radio-predictions
+ of big problem instances, i.e.
+ real mobile networks containing thousands of transmitters.
+ This is also true for the scientific research community, since our design
+ may be used as a template for parallelization of computationally-expensive
+ tasks within the GRASS environment.
+\end_layout
+
+\begin_layout Subsection
+Parallel computation on computer clusters
+\end_layout
+
+\begin_layout Standard
+In consideration of the high computational-intensity of predicting the radio-cov
+erage of a real mobile network, the use of a computer cluster is required,
+ i.e.
+ a group of interconnected computers that work together as a single system.
+ To reach high levels of parallel performance and scalability, this work
+ discusses in detail the key steps of parallel decomposition of the radio-covera
+ge prediction problem for real networks and the distribution of the computationa
+l load among the computing nodes that belong to the cluster.
+\end_layout
+
+\begin_layout Standard
+Such computer clusters typically consist of several commodity PCs connected
+ through a high-speed local network with a distributed file system, like
+ NFS 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Shepler_Network_file_system:2003"
+
+\end_inset
+
+.
+ One such system is the DEGIMA cluster 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Hamada_Cluster_of_GPUs:2010"
+
+\end_inset
+
+ at the Nagasaki Advanced Computing Center of the Nagasaki University.
+ This system ranked in the TOP 500 list of supercomputers until June 2012
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://www.top500.org
+\end_layout
+
+\end_inset
+
+, and in June 2011 held the third place of the Green 500 list
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://www.green500.org
+\end_layout
+
+\end_inset
+
+ as one of the most energy-efficient supercomputers in the world.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Some of them also feature GPU hardware in their computing nodes, since commodity
+ GPUs have evolved from being a graphic accelerator into a general-purpose
+ processor.
+ They can achieve higher performance at lower power consumption and lower
+ costs when compared to conventional CPUs.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Objectives
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Objectives"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The main goal of this work is to develop a radio prediction tool to be used
+ in large real-world network environments, such as the ones currently deployed
+ by several mobile operators around the world.
+ To achieve this, we have developed a high-performance parallel radio prediction
+ tool (PRATO) for radio networks.
+ Therefore, our focus is on the performance and scalability of PRATO, while
+ other more dynamic aspects of radio networks are not considered.
+ Among these aspects are code distributions, details of (soft) handover,
+ and dynamics related to radio resource management.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Despite the performance-oriented nature of PRATO, we will not neglect its
+ usability aspect, meaning this tool will be useful only if it contains
+ all the needed elements for having it up and running in a matter of minutes,
+ i.e.
+ software and data.
+ For this reason, we will be using the publicly-available data collection
+ for radio network planning published by the MOMENTUM project 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Eisenblatter_Momentum.data.scenarios:2004"
+
+\end_inset
+
+ as the basis.
+ Moreover, we aim at overcoming some of the shortcomings of this data collection
+, mostly related to the their format and distribution.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The performance evaluation of PRATO in a distributed computing environment
+ is a major objective of this work.
+ Furthermore, by presenting a detailed description of the design and implementat
+ion of the parallel version of PRATO, we intend to provide guidelines on
+ how to achieve high efficiency levels of task parallelization in GRASS
+ GIS.
+ Additionally, we introduce techniques to overcome several obstacles encountered
+ during our research as well as in related work, which significantly improve
+ the quality and performance of the presented implementation, e.g.
+ the inability to use GRASS in a threaded environment, lowering overhead
+ of I/O operations, saving simulation results asynchronously and independently
+ from GRASS, and improving load balancing with a new message-passing technique.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+We believe combining high-performance software and a wide scope of the data
+ collections shall allow its use beyond 3G radio networks, for optimization
+ and other research activities in the field of mobile communications.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The paper is organized as follows.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Description-of-the-radio-coverage-prediction-tool"
+
+\end_inset
+
+ gives a description of the radio prediction tool, including the propagation
+ model and GRASS GIS.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Design-and-implementation"
+
+\end_inset
+
+ concentrates on the design principles and implementation details of the
+ radio propagation tool, for the serial and parallel versions.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Simulations"
+
+\end_inset
+
+ discusses the experimental results and their analysis.
+ Finally, Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Related-work"
+
+\end_inset
+
+ gives an overview of relevant publications, describing how they relate
+ to our work, before drawing some conclusions.
+\end_layout
+
+\begin_layout Section
+Description of the radio coverage prediction tool 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Description-of-the-radio-coverage-prediction-tool"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+PRATO is a high-performance radio-prediction tool for GSM (2G), UMTS (3G)
+ and LTE (4G) radio networks.
+ It is implemented as a module for the GRASS Geographical Information System
+ (for details of GRASS see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:GRASS-GIS"
+
+\end_inset
+
+).
+ It can be used for planning the different phases of a new radio-network
+ installation, as well as a support tool for maintenance activities related
+ to network troubleshooting or upgrading.
+ 
+\end_layout
+
+\begin_layout Standard
+As a reference implementation, we have used the publicly available radio
+ coverage prediction tool, developed by Hrovat et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+.
+ The authors of this work have developed a modular radio coverage tool that
+ performs separate calculations for radio-signal path loss and antenna radiation
+ patterns, also taking into account different configuration parameters,
+ such as antenna tilting, azimuth and height.
+ The output result, saved as a raster map, is the maximum signal level over
+ the target area, in which each point represents the received signal from
+ the best serving cell (transmitter).
+ This work implements some well-known radio propagation models, e.g.
+ Okumura-Hata and COST 231, the later is explained in more detail in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:COST-231-model"
+
+\end_inset
+
+.
+ Regarding the accuracy of the predicted values, the authors report comparable
+ results to those of a state-of-the-art commercial tool.
+ Therefore, we use the implementation developed by 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+ as the reference implementation for PRATO.
+ Furthermore, to ensure that our implementation is completely compliant
+ with the afore-mentioned reference, we have designed a comparison test
+ that consists of running both the reference and PRATO with the same input
+ parameters.
+ The test results from PRATO and the reference implementation are identical.
+\end_layout
+
+\begin_layout Subsection
+Propagation modeling
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:COST-231-model"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The COST-231 Walfisch-Ikegami radio-propagation model was introduced as
+ an extension of the well-known COST Hata model 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shabbir_Comparison_of_radio_propagation_models:2011,Sarkar_Survey_of_radio_propagation_models:2003"
+
+\end_inset
+
+, designed for frequencies above 2000
+\begin_inset space ~
+\end_inset
+
+MHz.
+ The suitability of this model comes from the fact that it distinguishes
+ between line-of-sight (LOS) and non-line-of-sight (NLOS) conditions.
+ Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost231_LOS"
+
+\end_inset
+
+) describes the path loss when there is LOS between the transmitter and
+ the receiver.
+\begin_inset Formula 
+\begin{equation}
+PL_{\textrm{LOS}}(d)=42.64+26\log(d)+20\log(F),\label{eq:cost231_LOS}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $d$
+\end_inset
+
+ is the distance (in kilometers) from the transmitter to the receiver point,
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ is the frequency, expressed in MHz.
+\end_layout
+
+\begin_layout Standard
+On the other hand, in NLOS conditions, the path loss is calculated as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+PL_{\textrm{NLOS}}(d)=L_{0}+L_{\textrm{RTS}}+L_{\textrm{MSD}},\label{eq:cost231_NLOS}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $L_{0}$
+\end_inset
+
+ is the attenuation in free space, 
+\begin_inset Formula $L_{\textrm{RTS}}$
+\end_inset
+
+ represents the diffraction from roof top to street, and 
+\begin_inset Formula $L_{\textrm{MSD}}$
+\end_inset
+
+ represents the diffraction loss due to multiple obstacles.
+\end_layout
+
+\begin_layout Standard
+In this work, as well as in the reference implementation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+, the terrain profile is used for LOS determination.
+ The wave-guide effect in streets of big cities is not taken into account,
+ because the building data is not available.
+ In order to compensate the missing data, we include a correction factor,
+ based on the land usage (clutter data).
+ This technique is also adopted by other propagation models for radio networks,
+ like the artificial neural networks macro-cell model developed by Neskovic
+ et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Neskovic_Microcell_electric_field_strength_prediction_model:2010"
+
+\end_inset
+
+.
+ Consequently, both Equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost231_LOS"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost231_NLOS"
+
+\end_inset
+
+) have an extra term for signal loss due to clutter (
+\begin_inset Formula $L_{\textrm{CLUT}}$
+\end_inset
+
+), thus redefining the LOS and NLOS path losses as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+PL_{\textrm{LOS}}(d)=42.64+26\log(d)+20\log(F)+L_{\textrm{CLUT}}\label{eq:cost231_LOS-1}
+\end{equation}
+
+\end_inset
+
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+PL_{\textrm{NLOS}}(d)=L_{0}+L_{\textrm{RTS}}+L_{\textrm{MSD}}+L_{\textrm{CLUT}}.\label{eq:cost231_NLOS-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+GRASS Geographical Information System
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:GRASS-GIS"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As the software environment for PRATO we have chosen GRASS (Geographic Resources
+ Analysis Support System) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "neteler2002:GRASS_GIS"
+
+\end_inset
+
+, which is a free and open-source software project that implements a Geographica
+l Information System (GIS).
+ This GIS software was originally developed at the US Army Construction
+ Engineering Research Laboratories and is a full-featured system with a
+ wide range of analytical, data-management, and visualization capabilities.
+ Currently, the development of GRASS GIS is supported by a growing community
+ of volunteer developers.
+\end_layout
+
+\begin_layout Standard
+The use of GRASS GIS as an environment for PRATO presents many advantages.
+ First, the current development of GRASS is primarily Linux-based.
+ Since the field of high performance computing is dominated by Linux and
+ UNIX systems, an environment with Linux support is critical for this work.
+ Software licensing is another important consideration for choosing GRASS,
+ since it is licensed under the GNU Public License 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stallman_GNU_License:1991"
+
+\end_inset
+
+ and imposes the availability of the source code.
+ This allows us to make potential modifications to the system, thus adapting
+ it for the parallel computation environment.
+ Moreover, being an open system, GRASS provided us with a great deal of
+ useful built-in functionality, capable of operating with raster and vector
+ topological data that can be stored in an internal format or a relational
+ database.
+ For additional information about the GRASS, we refer the reader to the
+ numerous guides and tutorials available online.
+\end_layout
+
+\begin_layout Section
+Design and implementation 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Design-and-implementation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/serial_implementation_flow_diagram.eps
+	width 67col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Flow diagram of the serial version.
+\emph default
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:serial_version_flow_diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/isotrophic_calculation.eps
+	lyxscale 30
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Example of raster map, showing the result of a path-loss calculation from
+ an isotropic source.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:path_loss-example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/antenna_calculation.eps
+	lyxscale 30
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Example of raster map, showing the antenna influence over the isotropic
+ path-loss result.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:antenna-example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Design of the serial version
+\end_layout
+
+\begin_layout Standard
+This section describes the different functions contained in the serial version
+ of PRATO, which is implemented as a GRASS module.
+ Their connections and data flow are depicted in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+, where the parallelograms in the flow diagram represent input/output (I/O)
+ operations.
+ 
+\end_layout
+
+\begin_layout Standard
+Our design follows a similar internal organization as the radio planning
+ tool developed by Hrovat et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+, but with some essential differences.
+ Specifically, we have decided to avoid the modular design to prevent the
+ overhead of I/O operations for communicating data between the components
+ of the modular architecture.
+ Instead, we have chosen a monolithic design, in which all the steps for
+ generating the radio coverage prediction are calculated inside one GRASS
+ module.
+ Regarding the way results are saved, our approach employs a direct connection
+ to an external database server, instead of the slow built-in GRASS database
+ drivers.
+ To explicitly avoid tight coupling with a specific database vendor, the
+ generated output is formatted in plain text, which is then forwarded to
+ the database server.
+ Any further processing is achieved by issuing a query over the database
+ tables that contain the partial results for each of the processed transmitters.
+\end_layout
+
+\begin_layout Subsubsection
+Read input parameters
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Read-input-parameters"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All input data are read in the first step (see 
+\begin_inset Quotes eld
+\end_inset
+
+Read input data
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+), e.g.
+ digital elevation model, clutter data, transmitter configurations, and
+ other service-dependent settings.
+ Their format differs based on the data they contain, namely:
+\end_layout
+
+\begin_layout Itemize
+GRASS raster files are used for the digital elevation model and clutter
+ data, whereas
+\end_layout
+
+\begin_layout Itemize
+a text file is used for the transmitter configurations and other simulation-depe
+ndent options.
+\end_layout
+
+\begin_layout Standard
+Since the module accepts a considerable amount of input parameters, they
+ are read from a text-based initialization (INI) file.
+ This is far more practical than passing them as command-line parameters,
+ which would make them error-prune and difficult to read.
+ Besides, the INI file may contain configuration parameters for many transmitter
+s.
+ The user selects which one(s) to use at run-time by passing a command-line
+ option.
+\end_layout
+
+\begin_layout Subsubsection
+Isotropic path-loss calculation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Path-loss-for-isotrophic-source"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first step here is to calculate which receiver points, 
+\begin_inset Formula $r$
+\end_inset
+
+, are within the specified transmission radius (see 
+\begin_inset Quotes eld
+\end_inset
+
+transmission radius
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+).
+ For these points, the LOS and NLOS conditions are calculated, with respect
+ to the transmitter (see 
+\begin_inset Quotes eld
+\end_inset
+
+Calculate LOS/NLOS
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+).
+ The following step consists of calculating the path loss for an isotropic
+ source (or omni antenna).
+ This calculation is performed by applying the COST-231 path-loss model,
+ which was previously introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:COST-231-model"
+
+\end_inset
+
+, to each of the points within the transmission radius around the transmitter.
+ Depending on whether the receiver point 
+\begin_inset Formula $r$
+\end_inset
+
+ is in LOS or NLOS, either Equation
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost231_LOS-1"
+
+\end_inset
+
+) or Equation
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost231_NLOS-1"
+
+\end_inset
+
+) is respectively applied (see 
+\begin_inset Quotes eld
+\end_inset
+
+Apply COST-231, LOS
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+Apply COST-231, NLOS
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:path_loss-example"
+
+\end_inset
+
+ shows a portion of a raster map with an example result of the isotropic
+ path-loss calculation.
+ The color scale is given in dB, indicating the signal loss from the isotropic
+ source, located in the center.
+ Also, the hilly terrain is clearly distinguished due to LOS and NLOS conditions
+ from the signal source.
+\end_layout
+
+\begin_layout Subsubsection
+Antenna diagram influence
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Antenna-diagram-influence"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This step considers the antenna radiation diagram of the current transmitter
+ and its influence over the isotropic path-loss calculation (see 
+\begin_inset Quotes eld
+\end_inset
+
+Calculate antenna influence
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+).
+ Working on the in-memory results generated by the previous step, the radiation
+ diagram of the antenna is taken into account, including beam direction,
+ electrical and mechanical tilt.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:antenna-example"
+
+\end_inset
+
+ shows a portion of a raster map, where this calculation step has been applied
+ to the results from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:path_loss-example"
+
+\end_inset
+
+.
+ Notice the distortion of the signal propagation that the antenna has introduced.
+\end_layout
+
+\begin_layout Subsubsection
+Transmitter path-loss prediction
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Transmitter-path-loss-prediction"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this step, the coverage prediction of the transmitter is saved in its
+ own database table (see 
+\begin_inset Quotes eld
+\end_inset
+
+Save transmitter path-loss to DB
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+), thus considerably enhancing the write performance during the result-dumping
+ phase, which involves saving the path-loss results.
+ This is accomplished by connecting the standard output of the developed
+ module with the standard input of a database client.
+ Naturally, the generated plain text should be understood by the database
+ server itself.
+\end_layout
+
+\begin_layout Subsubsection
+Coverage prediction
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Final-coverage-prediction"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The final radio coverage prediction, containing an aggregation of the partial
+ path-loss predictions of the involved transmitters, is created in this
+ step (see 
+\begin_inset Quotes eld
+\end_inset
+
+Create final coverage prediction
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:serial_version_flow_diagram"
+
+\end_inset
+
+).
+ The received signal strength from each of the transmitters is calculated
+ as the difference between its transmit power and path loss for the receiver's
+ corresponding position.
+ This is done for each point in the target area by executing an SQL query
+ over the tables containing the path-loss predictions of each of the processed
+ transmitters.
+\end_layout
+
+\begin_layout Standard
+Finally, the output raster is generated, using the GRASS built-in modules
+ 
+\begin_inset Formula $v.in.ascii$
+\end_inset
+
+ and 
+\begin_inset Formula $v.to.rast$
+\end_inset
+
+, which create a raster map using the results of the above-mentioned query
+ as input.
+ The raster map contains the maximum received signal strength for each individua
+l point, as shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:output_raster_example"
+
+\end_inset
+
+.
+ In this case, the color scale is given in dBm, indicating the received
+ signal strength from the transmitters.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/final_coverage.eps
+	lyxscale 30
+	width 95col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Example of raster map, displaying the final coverage prediction of several
+ transmitters.
+ The color scale is given in dBm, indicating the received signal strength.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:output_raster_example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Multi-paradigm parallel programming
+\end_layout
+
+\begin_layout Standard
+The implementation methodology adopted for PRATO follows a multi-paradigm
+ parallel programming approach in order to fully use the resources of a
+ computing cluster.
+ To effectively use a shared memory multi-processor, PRATO uses POSIX threads
+ to implement parallelism 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Butenhof_Programming.with.POSIX.threads:1997"
+
+\end_inset
+
+.
+ In a nutshell, POSIX thread is a POSIX standard for creating and manipulating
+ light-weight processes or threads.
+ By using POSIX threads, multiple threads can exist within the same process
+ while sharing its resources.
+ For instance, an application using POSIX threads can execute multiple threads
+ in parallel by using the cores of a multi-core processor, or use the system
+ resources more effectively, thus avoiding process execution-halt due to
+ I/O latency by using one thread for computing while a second thread waits
+ for an I/O operation to complete.
+ 
+\end_layout
+
+\begin_layout Standard
+To use the computing resources of a distributed memory system, such as a
+ cluster of processors, PRATO uses the Message Passing Interface (MPI) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gropp_Using_MPI:1999"
+
+\end_inset
+
+.
+ MPI is a message-passing standard which defines syntax and semantics designed
+ to function on a wide variety of parallel computers.
+ MPI enables multiple processes running on different processors of a computer
+ cluster to communicate with each other.
+ MPI was designed for high performance on both massively parallel machines
+ and on workstation clusters.
+ It has been developed by a broadly based committee of vendors, developers,
+ and users.
+\end_layout
+
+\begin_layout Standard
+In order to make the text more clear and to differentiate between the programmin
+g paradigms used from here on, we will refer to a POSIX thread simply as
+ a `thread' and a MPI proccess as a `process'.
+\end_layout
+
+\begin_layout Subsection
+Design of the parallel version
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Design-parallel"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Keeping our focus on the performance of PRATO, we are introducing a new
+ distributed implementation to overcome computational-time constraints that
+ prevented the reference implementation from tackling big problem instances
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Some authors have already published their work on implementing parallel
+ versions of GRASS modules for solving different time-consuming tasks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Campos_Parallel_modelling_in_GIS:2012,Sorokine_Parallel_visualization_in_GRASS:2007"
+
+\end_inset
+
+.
+ However, one major drawback of GRASS as a parallelization environment is
+ that it is not thread-safe, meaning that concurrent changes to a data set
+ have undefined behavior.
+ To overcome this problem, we present a technique that saves the simulation
+ results asynchronously and independently from the GRASS environment, e.g.
+ into an external database system.
+ This database system works also as an input source, serving data to GRASS,
+ whether it is used to aggregate the partial results of the path-loss prediction
+ or to visualize them.
+ We also introduce a methodology that allows the parallel implementation
+ to be almost completely GRASS independent.
+ This means that a GRASS installation is needed on only one of the nodes,
+ i.e.
+ the master node of the target computer cluster.
+ Also, a message-passing technique is proposed to distribute the work-load
+ among nodes hosting the worker processes.
+ Using this technique, computing nodes featuring more capable hardware receive
+ more work than those with weaker configurations, thus ensuring a better
+ utilization of the available computing resources despite hardware diversity.
+\end_layout
+
+\begin_layout Subsubsection
+Master process
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Master-process"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As it has been suggested before, the parallel version of PRATO follows a
+ master-worker model.
+ The master process, for which the flow diagram is given in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+, is the only component that should be run from within the GRASS environment.
+ As soon as the master process starts, the input parameters are read.
+ This step corresponds to 
+\begin_inset Quotes eld
+\end_inset
+
+Read input data
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+, and it is done in a similar way as in the serial version.
+ In the next step, the master process dynamically initiates the worker processes
+ using the available computing nodes (see 
+\begin_inset Quotes eld
+\end_inset
+
+Dynamic worker-process spawning
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+), based on the amount of transmitters for which the coverage prediction
+ should be calculated.
+ In other words, this means that master process never starts more worker
+ processes than there are transmitters to be processed.
+ However, most often is the number of transmitters larger than the amount
+ of available computing nodes.
+ Therefore, the master process can assign several transmitters to each of
+ the worker processes.
+ For distributing the work among the worker processes, the master process
+ proceeds to decompose the loaded raster data into arrays of basic-data-type
+ elements, e.g.
+ floats or doubles, before dispatching them to the multiple worker processes
+ (see 
+\begin_inset Quotes eld
+\end_inset
+
+Input data broadcasting
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+).
+ The decomposition of the data applies to the digital-elevation and the
+ clutter data only.
+ In the next step, the master process starts a message-driven processing
+ loop (see 
+\begin_inset Quotes eld
+\end_inset
+
+Processing loop
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+), which main task is to assign and distribute the configuration data of
+ different transmitters among idle worker processes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/master_process_flow_diagram.eps
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Flow diagram of the master process.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:master_process"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The flow diagram shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+ depicts in more detail the steps inside the 
+\begin_inset Quotes eld
+\end_inset
+
+Processing loop
+\begin_inset Quotes erd
+\end_inset
+
+ step of the master process.
+ In the processing loop, the master process starts by checking the available
+ worker processes, which will calculate the radio coverage prediction for
+ the next transmitter.
+ It is worth pointing out that this step also serves as a stopping condition
+ for the processing loop itself (see 
+\begin_inset Quotes eld
+\end_inset
+
+Any worker still on?
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+).
+ The active worker processes inform the master process they are ready to
+ compute by sending an idle message (see 
+\begin_inset Quotes eld
+\end_inset
+
+Wait for idle worker
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+).
+ The master process then announces the idle worker process it is about to
+ receive new data for the next calculation, and it dispatches the complete
+ configuration of the transmitter to be processed (see 
+\begin_inset Quotes eld
+\end_inset
+
+Send keep-alive message
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Send transmitter data
+\begin_inset Quotes erd
+\end_inset
+
+ steps, respectively, in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+).
+ This is only done in case there are transmitters for which the coverage
+ prediction has yet to be calculated (see 
+\begin_inset Quotes eld
+\end_inset
+
+Any transmitters left?
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+).
+ The processing loop of the master process continues to distribute transmitter
+ data among worker processes, which asynchronously become idle as they finish
+ the coverage-prediction calculations for the transmitters they have been
+ assigned by the master process.
+ When there are no more transmitters left, all the worker processes announcing
+ they are idle will receive a shutdown message from the master process,
+ indicating them to stop running (see 
+\begin_inset Quotes eld
+\end_inset
+
+Send stop message
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+).
+ The master process will keep doing this until all worker processes have
+ finished (see 
+\begin_inset Quotes eld
+\end_inset
+
+Any worker still on?
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:processing_loop_in_master_process"
+
+\end_inset
+
+), thus fulfilling the stopping condition of the processing loop.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/master_processing_loop_flow_diagram.eps
+	width 85col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Flow diagram of the 
+\begin_inset Quotes eld
+\end_inset
+
+Processing loop
+\begin_inset Quotes erd
+\end_inset
+
+ step of the master process.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:processing_loop_in_master_process"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, the last step of the master process is devoted to creating the
+ final output of the calculation, e.g.
+ a raster map (see 
+\begin_inset Quotes eld
+\end_inset
+
+Create final coverage prediction
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+).
+ The final coverage prediction of all transmitters is an aggregation from
+ the individual path-loss results created by each of the worker processes
+ during the 
+\begin_inset Quotes eld
+\end_inset
+
+Processing loop
+\begin_inset Quotes erd
+\end_inset
+
+ phase in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+, which provides the source data for the final raster map.
+ The aggregation of the individual transmitter path-loss results is accomplished
+ in a similar way as in the serial version.
+\end_layout
+
+\begin_layout Subsubsection
+Worker processes
+\end_layout
+
+\begin_layout Standard
+An essential characteristic of the worker processes is that they are completely
+ independent from GRASS, i.e.
+ they do not have to run within the GRASS environment nor use any of the
+ GRASS libraries to work.
+ This aspect significantly simplifies the deployment phase to run PRATO
+ on a computer cluster, since no GRASS installation is needed on the computing
+ nodes hosting the worker processes.
+\end_layout
+
+\begin_layout Standard
+The computations of the worker processes, for which the flow diagram is
+ given in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+, are initialized by data that are received from the master process at initializ
+ation time (see 
+\begin_inset Quotes eld
+\end_inset
+
+Receive broadcasted data
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+).
+ It is important to note that the received data contain the transmitter
+ and terrain-profile information which is common to all the coverage-prediction
+ calculations, therefore making each worker process capable of processing
+ any given transmitter.
+\end_layout
+
+\begin_layout Standard
+The reason for the worker processes to be independent from GRASS arises
+ from the design of GRASS itself.
+ Specifically, the existing GRASS library, distributed with the GRASS GIS
+ package, is not thread-safe, because GRASS was designed as a system of
+ small stand-alone modules and not as a library for multi-threaded programs
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Blazek_GRASS_server:2004"
+
+\end_inset
+
+.
+ Because of this limitation, it is not an option for a parallel implementation
+ to create separate threads for each worker process, since this would mean
+ worker processes should wait for each other to finish, before accessing
+ the target data.
+ Consequently, the scalability of such implementation would be very limited.
+\end_layout
+
+\begin_layout Standard
+Because concurrent access to data within GRASS by multiple processes yields
+ undefined behavior, i.e.
+ it is not thread-safe, the results generated by the worker processes cannot
+ be directly saved into the GRASS data set.
+ One possible solution would be to save the transmitter path-loss prediction
+ result through the master process, thus avoiding concurrent access.
+ However, sending intermediate results back to the master process from the
+ workers would represent a major bottleneck for the scalability of the parallel
+ version, since the results generated by a parallel computation would have
+ to be serially processed by the master process alone.
+ Instead, our approach allows each of the worker processes to output its
+ results into an external database server, following an asynchronous and
+ decoupled design.
+ Each of the transmitter path-loss prediction results are saved in separate
+ tables, following a similar design as the serial version.
+ Moreover, worker processes do this from an independent thread, which runs
+ concurrently with the calculation of the next transmitter received from
+ the master process.
+ When compared to the serial version, the overlap between calculation and
+ communication achieved by the use of an auxiliary thread completely hides
+ the latency created by the result dumping task, and makes better use of
+ the system resources.
+\end_layout
+
+\begin_layout Standard
+After the broadcasted data are received by all the worker processes, each
+ worker process proceeds to inform the master process that it is ready (in
+ an idle state) to receive the transmitter-configuration data that defines
+ which transmitter path-loss prediction to perform (see 
+\begin_inset Quotes eld
+\end_inset
+
+Send idle message
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+).
+ If the master process does not instruct to stop processing (see 
+\begin_inset Quotes eld
+\end_inset
+
+Has stop message arrived?
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+), the worker process collects the transmitter configuration sent (see 
+\begin_inset Quotes eld
+\end_inset
+
+Receive transmitter data
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+).
+ However, in case a stop message is received, the worker process will wait
+ for result-dumping threads to finish (see 
+\begin_inset Quotes eld
+\end_inset
+
+Wait for result-dump threads
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+) before shutting down.
+ The coverage calculation itself follows a similar design as the serial
+ version (see 
+\begin_inset Quotes eld
+\end_inset
+
+Coverage calculation
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+) and it is executed for the received transmitter.
+\end_layout
+
+\begin_layout Standard
+As it was mentioned before, the worker process launches an independent thread
+ to save the path-loss prediction of the target transmitter to a database
+ table (see 
+\begin_inset Quotes eld
+\end_inset
+
+Threaded save path-loss to DB
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+).
+ It is important to note that there is no possibility of data inconsistency
+ due to the saving task being executed inside a thread, since path-loss
+ data from different workers belong to different transmitters and are mutually
+ exclusive.
+ For this reason, there is no need for any concurrent I/O overlapping 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Liao_Scalable_design_and_implementations_for_MPI_parallel_overlapping:2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/worker_process_flow_diagram.eps
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Flow diagram of a worker process.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:worker_process_flow_diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Master-worker communication
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Master-worker-communication"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The selected message-passing technique introduced in this work might seem
+ too elaborated, but important reasons lay behind each of the messages passed
+ between master and worker processes.
+ These decisions are supported by the experimental results, introduced in
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Simulations"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first reason to implement the message-passing technique is to support
+ heterogeneous computing environments.
+ In particular, our approach focuses on taking full advantage of the hardware
+ of each computing node, thus explicitly avoiding the possible bottlenecks
+ introduced by the slowest computing node in the cluster.
+ In other words, computing nodes that deliver better performance get more
+ calculations assigned to the worker processes they host.
+ The main advantages of this technique are simplicity and negligible overhead,
+ which contrast with more elaborated approaches for parallel-task allocation
+ in heterogenous clusters 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bosque_A_parallel_computational_model_for_heterogenous_clusters:2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A second reason for selecting a message-passing technique is related to
+ the flexibility for load balancing, which is of great importance on heterogeneo
+us cluster.
+ This can be seen in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:worker_process_flow_diagram"
+
+\end_inset
+
+ where the master process, before delivering the transmitter-configuration
+ data, sends a message to the worker process indicating that it is about
+ to receive more work.
+ This a priori meaningless message has a key role in correctly supporting
+ computer clusters.
+ In general, there are many different ways a parallel program can be executed,
+ because the steps from the different processes can be interleaved in various
+ ways and a process can make non-deterministic choices 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
+
+\end_inset
+
+, which may lead to situations such as race conditions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Clemencon_MPI_Race_detection:1995"
+
+\end_inset
+
+ and deadlocks.
+ A deadlock occurs whenever two or more running processes are waiting for
+ each other to finish, and thus neither ever does.
+ To prevent the parallel version of PRATO from deadlocking, message sending
+ and receiving should be paired, being equal number of send and receive
+ messages on the master and worker sides 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_worker_communication"
+
+\end_inset
+
+ depicts a diagram of the master-worker message passing, from which the
+ transmitter-data transmission has been excluded for clarity.
+ Note how each idle message sent from the worker process is paired with
+ an answer from the master process, whether it is a keep-alive or a stop
+ message.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/master_worker_communication_diagram.eps
+	width 85col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Communication diagram, showing message passing between master and one worker
+ process.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:master_worker_communication"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Simulations 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Simulations"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This section presents the simulations and analysis of the parallel version
+ of PRATO.
+ Our aim is to provide an exhaustive analysis of the performance and scalability
+ of the parallel implementation in order to determine if the objectives
+ of this work are fulfilled.
+ The most common usage case for PRATO is to perform a radio-coverage prediction
+ for multiple transmitters, therefore, a straight forward parallel decomposition
+ is to divide a given problem instance by transmitter, for which each coverage
+ prediction is calculated by a separate worker process.
+\end_layout
+
+\begin_layout Standard
+The following simulations were carried out on 34 computing nodes of the
+ DEGIMA cluster.
+ DEGIMA is a computer cluster located at the Nagasaki Advanced Computing
+ Center (NACC), in the University of Nagasaki, Japan.
+ The computing nodes are connected by a LAN, over a Gigabit Ethernet interconnec
+t, and share a NFS partition, from which all input and intermediate files
+ are accessed.
+ 
+\end_layout
+
+\begin_layout Standard
+Each computing node of DEGIMA features one of two possible configurations,
+ namely:
+\end_layout
+
+\begin_layout Itemize
+Intel Core i5-2500T quad-core processor CPU, clocked at 2.30 GHz, with 16
+ GB of RAM; and
+\end_layout
+
+\begin_layout Itemize
+Intel Core i7-2600K quad-core processor CPU, clocked at 3.40 GHz, also with
+ 16 GB of RAM.
+\end_layout
+
+\begin_layout Standard
+During the simulation runs, the nodes equipped with the Intel i5 CPU host
+ the worker processes, whereas the master process and the PostgreSQL database
+ server (version 9.1.4) run each on a different computing node, featuring
+ an Intel i7 CPU.
+ The database server is the only node not writing or reading data from the
+ common NFS partition.
+ Instead, all I/O is done on the local file system, which is mounted on
+ a 8
+\begin_inset space ~
+\end_inset
+
+GB RAM disk.
+\end_layout
+
+\begin_layout Standard
+All nodes are equipped with a Linux 64-bit operating system (Fedora distribution
+).
+ As the message passing implementation we use OpenMPI, version 1.6.1, which
+ has been manually compiled with the distribution-supplied gcc compiler,
+ version 4.4.4.
+\end_layout
+
+\begin_layout Subsection
+Test networks
+\end_layout
+
+\begin_layout Standard
+To test the parallel performance of PRATO, we have prepared different problem
+ instances that emulate real radio networks of different sizes.
+ In order to create synthetic test data-sets with an arbitrary number of
+ transmitters we use the data of a group of 10 transmitters, which we randomly
+ replicate and distribute over the whole target area.
+ The configuration parameters of these 10 transmitters were taken from the
+ UMTS network deployed in Slovenia by Telekom Slovenije, d.d.
+ The path-loss predictions are calculated using the COST-231.
+ The digital elevation model has an area of 20,270
+\begin_inset space ~
+\end_inset
+
+km
+\begin_inset Formula $^{2}$
+\end_inset
+
+, with a resolution of 25
+\begin_inset space ~
+\end_inset
+
+m
+\begin_inset Formula $^{2}$
+\end_inset
+
+, the same as the clutter data, which contains different levels of signal
+ loss based on the land usage.
+ For all the points within a transmission radius of 20
+\begin_inset space ~
+\end_inset
+
+km around each transmitter, we assume that the receiver is positioned 1.5
+\begin_inset space ~
+\end_inset
+
+m above the ground, and the frequency is set to 2040
+\begin_inset space ~
+\end_inset
+
+MHz.
+\end_layout
+
+\begin_layout Subsection
+Weak scalability
+\end_layout
+
+\begin_layout Standard
+This set of simulations is meant to analyze the scalability of the parallel
+ implementation in cases where the workload assigned to each process (one
+ MPI process per processor core) remains constant as we increase the number
+ of processor cores and the total size of the problem, i.e.
+ the number of transmitters deployed over the target area is directly proportion
+al to the number of processor cores and worker processes.
+ We do this by assigning a constant number of transmitters per core while
+ increasing the number of cores hosting the worker processes.
+ Consequently, we tackle larger radio-network instances as we increase the
+ number of cores.
+ Here we test for the following numbers of transmitters per worker/core:
+ 
+\begin_inset Formula $\{5,10,20,40,80\}$
+\end_inset
+
+, and increase the number of workers per core from 1 to 128 in powers of
+ 2.
+\end_layout
+
+\begin_layout Standard
+Problems particularly well-suited for parallel computing exhibit computational
+ costs that are linearly dependent on the problem size.
+ This property, also referred to as algorithmic scalability, means that
+ proportionally increasing both the problem size and the number of cores
+ results in a roughly constant time to solution.
+ Therefore, with this set of experiments, we would like to investigate how
+ well-suited the coverage-prediction problem is for parallel computing environme
+nts.
+\end_layout
+
+\begin_layout Subsubsection
+Results and discussion
+\end_layout
+
+\begin_layout Standard
+The results collected after the simulations for the weak-scalability experiments
+ are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results_weak_scaling"
+
+\end_inset
+
+.
+ All measurements express wall-clock times in seconds for each problem instance,
+ defined as number of transmitters per core (TX/core).
+ Wall-clock time represents real time that elapses from the start of the
+ master process to its end, including time that passes waiting for resources
+ to become available.
+ They are plotted in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:weak_scalability_time"
+
+\end_inset
+
+, 
+\shape italic
+\emph on
+where the wall-clock time axis is expressed in base-10 logarithmic scale,
+ whereas the axis representing the number of cores is expressed in base-2
+ logarithmic scale.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Wall-clock times (in seconds) of the simulation results for weak scalability.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:results_weak_scaling"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="9">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row bottomspace="default">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Number of cores
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+TX/core
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+128
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+118
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+122
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+123
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+124
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+125
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+126
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+140
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+152
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+171
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+175
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+177
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+179
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+180
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+182
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+244
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+260
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+278
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+282
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+284
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+285
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+287
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+290
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+451
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+470
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+491
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+497
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+502
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+504
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+509
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+865
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+892
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+920
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+925
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+928
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+931
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+937
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+948
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/weak_scaling-time_plot.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Measured wall-clock time for weak-scalability experiments as shown in Table
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results_weak_scaling"
+
+\end_inset
+
+.
+
+\emph default
+ 
+\emph on
+Experiments performed assigned one MPI worker process per available core.
+ The wall-clock time axis is expressed in base-10 logarithmic scale, whereas
+ the axis representing the number of cores is expressed in base-2 logarithmic
+ scale.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:weak_scalability_time"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The time measurements observed from the weak-scalability results show that
+ the wall-clock times do not grow rapidly, especially when the number of
+ cores is more than 8.
+ Moreover, these times are almost constant for bigger problem instances,
+ revealing that the achieved level of scalability gets close-to-linear as
+ the amount of transmitters-per-core increases.
+ Certainly, the parallel version of PRATO scales especially well when challenged
+ with a big number of transmitters (10240 for the biggest instance) over
+ 128 cores.
+ This fact shows PRATO would be able to calculate the radio coverage prediction
+ for real networks in a feasible amount of time, since many operational
+ radio networks have already deployed a comparable number of transmitters,
+ e.g.
+ the 3G network within the Greater London Authority area, in the UK 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Number_of_base_stations_in_England"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Not being able to achieve perfect weak scalability is due to a number of
+ factors.
+ Specifically, the overhead time of the serial sections of the master process
+ grow proportionally with the number of cores, although the total contribution
+ of this overhead remains low for large problem sizes.
+ Moreover, the communication overhead grows linearly with the number of
+ cores used.
+\end_layout
+
+\begin_layout Standard
+To confirm these arguments, we analyze the times of each of the steps taken
+ by the master process relative to the total processing time.
+ To this end, we have created plots for three problem instances 5, 20 and
+ 80 transmitters per core, which are shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:weak_scaling-relative_times"
+
+\end_inset
+
+.
+ The relative-processing-time plots follow the formula
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+RT=\frac{t_{\textrm{rd}}+t_{\textrm{ps}}+t_{\textrm{db}}+t_{\textrm{pl}}+t_{\textrm{cp}}}{t_{\textrm{total}}},\label{eq:relative_processing_time}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $t_{\textrm{rd}}$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+Read input data
+\begin_inset Quotes erd
+\end_inset
+
+ wall-clock time, 
+\begin_inset Formula $t_{\textrm{ps}}$
+\end_inset
+
+ is the wall-clock time of the 
+\begin_inset Quotes eld
+\end_inset
+
+Dynamic worker-process spawning
+\begin_inset Quotes erd
+\end_inset
+
+ step, 
+\begin_inset Formula $t_{\textrm{db}}$
+\end_inset
+
+ is the wall-clock time of the 
+\begin_inset Quotes eld
+\end_inset
+
+Input data broadcasting
+\begin_inset Quotes erd
+\end_inset
+
+ step, 
+\begin_inset Formula $t_{\textrm{pl}}$
+\end_inset
+
+ is the wall-clock time of the 
+\begin_inset Quotes eld
+\end_inset
+
+Processing loop
+\begin_inset Quotes erd
+\end_inset
+
+ step, 
+\begin_inset Formula $t_{\textrm{cp}}$
+\end_inset
+
+ is the wall-clock time of the 
+\begin_inset Quotes eld
+\end_inset
+
+Create final coverage prediction
+\begin_inset Quotes erd
+\end_inset
+
+ step, and 
+\begin_inset Formula $t_{\textrm{total}}$
+\end_inset
+
+ is the total wall-clock processing time.
+ For a reference of the different steps taking part of the master process,
+ see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "31text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/weak_scaling_relative_time_plot_5.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "31text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/weak_scaling_relative_time_plot_20.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "31text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/weak_scaling_relative_time_plot_80.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relative times for the weak-scalability experiments.
+
+\emph on
+ 
+\shape italic
+The relative-processing time axes are expressed in linear scale, whereas
+ the axes representing the number of cores are expressed in base-2 logarithmic
+ scale.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:weak_scaling-relative_times"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the relative-times plots, we see that, as we increase the number of
+ nodes, the largest fraction of the run-time is spent on the parallel processing
+ of transmitters, which scales notably well for larger problem instances.
+ The plotted relative times show that there is no dependency between the
+ relative processing times and the number of cores used, confirming the
+ good weak-scalability properties noted before.
+ Additionally, in all three plots we may observe a 
+\begin_inset Quotes eld
+\end_inset
+
+jump
+\begin_inset Quotes erd
+\end_inset
+
+ in the relative time for the 
+\begin_inset Quotes eld
+\end_inset
+
+Input data broadcasting
+\begin_inset Quotes erd
+\end_inset
+
+ step that takes place when comparing the result from 4 to 8 cores, i.e.
+ from one to two computing nodes, as each node hosts 
+\begin_inset Quotes eld
+\end_inset
+
+1 worker per core
+\begin_inset Quotes erd
+\end_inset
+
+ or a total of 
+\begin_inset Quotes eld
+\end_inset
+
+4 workers per node
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This 
+\begin_inset Quotes eld
+\end_inset
+
+jump
+\begin_inset Quotes erd
+\end_inset
+
+ is due to the use of network communication when more than one computing
+ node participates in the parallel processing.
+ In addition, we may also conclude that the network infrastructure has not
+ been saturated with the data-passing load, since the relative times for
+ input-data broadcasting do not grow exponentially from 8 cores onward.
+ Regarding the 
+\begin_inset Quotes eld
+\end_inset
+
+Create final coverage prediction
+\begin_inset Quotes erd
+\end_inset
+
+ step, we may see that as we increase the number of cores the relative times
+ grow proportionally for all three problem sizes.
+\end_layout
+
+\begin_layout Subsection
+Strong scalability
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Strong-scalability"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This set of simulations is meant to analyze the impact of increasing the
+ number of computing cores for a given problem size, i.e.
+ the number of transmitters deployed over the target area does not change,
+ while only the number of cores used is increased.
+ Here we test for the following number of transmitters: 
+\begin_inset Formula $\{64,128,256,512,1024,2048,4096\}$
+\end_inset
+
+, and increase the number of workers per core from 1 to 128 in powers of
+ 2 for each problem size.
+\end_layout
+
+\begin_layout Subsubsection
+Results and discussion
+\end_layout
+
+\begin_layout Standard
+The results of the time measurements collected after the simulations for
+ the strong-scalability experiments are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results_strong_scaling"
+
+\end_inset
+
+.
+ All times are expressed in seconds.
+ These wall-clock time measurements are plotted in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_time"
+
+\end_inset
+
+, 
+\shape italic
+\emph on
+where the time axis is expressed in base-10 logarithmic scale, whereas the
+ axis representing the number of cores is expressed in base-2 logarithmic
+ scale.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Wall-clock times (in seconds) of the simulation results for strong scalability.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:results_strong_scaling"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="8">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row bottomspace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Number of transmitters
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+No.
+ cores
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+128
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+256
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+512
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1024
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2048
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+4096
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+714
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1392
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2740
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+5437
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+10830
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+21562
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+43217
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+386
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+734
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1419
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2791
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+5535
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+10996
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+21987
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+232
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+408
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+751
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1432
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2811
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+5549
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+11042
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+155
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+242
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+409
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+754
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1441
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2817
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+5549
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+113
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+156
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+244
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+414
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+759
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1447
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+2821
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+114
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+159
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+245
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+414
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+760
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1449
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+82
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+115
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+159
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+245
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+420
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+764
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+128
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+83
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+116
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+159
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+248
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+423
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-time_plot.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Measured wall-clock time for strong-scalability experiments as shown in
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results_strong_scaling"
+
+\end_inset
+
+.
+ Experiments performed assigned one MPI worker process per available core.
+ The wall-clock time axis is expressed in base-10 logarithmic scale, whereas
+ the axis representing the number of cores is expressed in base-2 logarithmic
+ scale.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:strong_scalability_time"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The time measurements show that small problem sizes per core have a relatively
+ large proportion of serial work and communication overhead.
+ Therefore, the performance deteriorates as the number of transmitters per
+ core approaches one.
+ It can be observed in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_time"
+
+\end_inset
+
+ that as we increase the number of transmitters used to solve a given problem
+ size, the slope of the curve generated by the progression of wall-clock
+ times tends to a flat line, i.e.
+ as we increase the number of transmitters there is no reduction in compute
+ time.
+ This idea is more clearly noted in the test with smaller problem instances,
+ e.g.
+ 64, 128 and 256 transmitters.
+ In contrast, for the problems with a number of transmitters larger than
+ 512, the relative contribution of the non-parallel steps to the wall-clock
+ time is smaller, and a larger portion of the time is spent on computing
+ the transmitters coverage in parallel (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Design-parallel"
+
+\end_inset
+
+ for details on the steps of PRATO algorithm).
+ A more detailed discussion of the reasons for the loss of parallel efficiency
+ will be presented towards the end of this section.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-speedup_plot.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Measured speedup for strong-scalability experiments.
+
+\emph default
+ 
+\emph on
+The speedup axis is expressed in base-2 logarithmic scale, whereas the axis
+ representing the number of cores is expressed in base-2 logarithmic scale.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:strong_scalability_speedup"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-efficiency_plot.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Measured parallel efficiency for strong-scalability experiments.
+
+\emph default
+ 
+\emph on
+The parallel-efficiency axis is expressed in linear scale, whereas the axis
+ representing the number of cores is expressed in base-2 logarithmic scale.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:strong_scalability_efficiency"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to observe how well the application scales when compared against
+ a base case, we have also measured the performance of the parallel implementati
+on in terms of the speedup, which is defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+S(NP)=\frac{execution\, time\, for\, base\, case}{execution\, time\, for\, NP\, cores},\label{eq:speedup}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $NP$
+\end_inset
+
+ is the number of cores executing the worker processes.
+ As the base case for comparisons we have chosen the parallel implementation
+ running on only one core and decided against using the serial implementation.
+ We consider that the serial implementation is not a good base comparison
+ for the parallel results as it does not reuse resources between each transmitte
+r coverage calculation and it does not overlap I/O operations with transmitter
+ computations.
+ In practice, this means that several concatenated runs of the serial version
+ would be considerably slower than the parallel but single worker implementation
+, because the serial implementation is not able to use all of the memory
+ bandwidth and computing resources simultaneously.
+ Therefore such comparison would be entirely biased towards the parallel
+ implementation, showing super-linear scaling and speedups which would not
+ be real, as the parallel version is better equipped to make use of the
+ system resources by means of multiple threads.
+\end_layout
+
+\begin_layout Standard
+Using the speedup metric, linear scaling is achieved when the obtained speedup
+ is equal to the total number of processors used.
+ However, it should be noted that perfect speedup is almost never achieved,
+ due to the existence of serial stages within an algorithm and communication
+ overheads of the parallel implementation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Cruz_Particle.Flow.Simulation:2010"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_speedup"
+
+\end_inset
+
+ shows the speedup of the parallel implementation for up to 128 cores (running
+ one worker process per node), and compares seven different problem sizes
+ with 64, 128, 256, 512, 1024, 2048 and 4096 transmitters deployed over
+ the target area.
+ The number of transmitters used in these problem sizes are comparable to
+ several operational radio networks that have already been deployed in England,
+ e.g.
+ Bedfordshire County with 69 UMTS base stations, Cheshire County with 132
+ UMTS base stations, Hampshire County with 227 UMTS base stations, West
+ Midlands with 414 UMTS base stations, and Greater London Authority with
+ 1086 UMTS base stations 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Number_of_base_stations_in_England"
+
+\end_inset
+
+.
+ Moreover, consider that it is common for a single UMTS base station to
+ host multiple transmitters.
+ 
+\end_layout
+
+\begin_layout Standard
+We can see that the significant reductions in wall-clock time for large
+ problem sizes shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_time"
+
+\end_inset
+
+ are directly correlated with the speedup factors shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_speedup"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+However, good strong scaling results greatly depend on the non-parallel
+ overheads that are relative to the problem size and the number of cores
+ used.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "31text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-relative_time_plot_256.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "31text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-relative_time_plot_1024.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "31text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-relative_time_plot_4096.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relative times for the strong-scalability experiments.
+
+\emph on
+ 
+\shape italic
+The relative-processing time axes are expressed in linear scale, whereas
+ the axes representing the number of cores are expressed in base-2 logarithmic
+ scale.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:strong_scaling-relative_times"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To study how well PRATO utilizes the available computing resources we consider
+ the parallel efficiency of the implementation, i.e.
+ how well the parallel implementation makes use of the available processor
+ cores.
+ The definition of parallel efficiency is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E(NP)=\frac{S(NP)}{NP},
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $S(NP)$
+\end_inset
+
+ is the speedup as defined in Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:speedup"
+
+\end_inset
+
+), and 
+\begin_inset Formula $NP$
+\end_inset
+
+ is the number of cores executing worker processes.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_efficiency"
+
+\end_inset
+
+ shows the parallel efficiency of the parallel implementation for different
+ problem sizes as we increase the number of processing cores.
+ 
+\end_layout
+
+\begin_layout Standard
+The ideal case for a parallel application would be to utilize all available
+ resources, in which case the parallel efficiency would be constantly equal
+ to one as we increase the core count.
+ From the plot in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scalability_efficiency"
+
+\end_inset
+
+, we may observe that the efficiency is less than one, hence the computational
+ resources are under utilized.
+ In accordance to the previous analysis, the under utilization of the computing
+ resources is more significant for the smaller problem sizes, where number
+ of assigned transmitters per core approaches one.
+ This is due to the increased relative influence introduced by serial and
+ communication overheads, without which the parallel implementation would
+ not be feasible.
+ On the other hand, the relative time contribution of the serial and communicati
+on overheads is significantly reduced as the work-load per core increases.
+ Unsurprisingly, these results confirm what it has previously been suggested
+ during the weak-scaling analysis, i.e.
+ it is not worth parallelizing small problem instances over a large number
+ of nodes, since the time reduction due to computations that make use of
+ the extra parallel resources is surpassed by the extra parallel initialization
+ and communication overhead.
+\end_layout
+
+\begin_layout Standard
+Similarly as in the weak-scaling test, we study the relative contribution
+ of each of the steps of the master process as we increase the number of
+ cores used for a fixed problem size.
+ In this case, we have created plots for three problem instances, namely
+ 256, 1024 and 4096 transmitters, which are shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scaling-relative_times"
+
+\end_inset
+
+.
+ The relative times shown are calculated using the formula depicted in Equation
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:relative_processing_time"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+We may observe the non-parallel steps comprising 
+\begin_inset Quotes eld
+\end_inset
+
+Read input data
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Dynamic worker-process spawning
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Input data broadcasting
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Final coverage prediction
+\begin_inset Quotes erd
+\end_inset
+
+ contribute with a larger portion of time as we increase the number of cores,
+ because the total wall-clock processing time decreases.
+ Additionally, the low parallel efficiency for small problem sizes, particularly
+ for 256 transmitters (left-most plot in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:strong_scaling-relative_times"
+
+\end_inset
+
+), is validated as we see the relative small proportion of the radio-coverage
+ calculation (
+\begin_inset Quotes eld
+\end_inset
+
+Processing loop
+\begin_inset Quotes erd
+\end_inset
+
+) compared to the serial steps of the process.
+\end_layout
+
+\begin_layout Subsection
+Load balancing
+\end_layout
+
+\begin_layout Standard
+In this section, we analyze the level of utilization of the computing resources
+ available at the computing nodes hosting the worker processes.
+ Computing-resource utilization is achieved by partitioning the computational
+ workload and data across all processors.
+ Efficient workload distribution strategies should be based on the processor
+ speed, memory hierarchy and communication network 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Clarke_Dynamic_load_balancing:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The parallel implementation of PRATO performs load-balancing using point-to-poin
+t messages (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Master-worker-communication"
+
+\end_inset
+
+) between master and worker processes.
+ When a worker process issues an idle message (see 
+\begin_inset Quotes eld
+\end_inset
+
+Send idle message
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_worker_communication"
+
+\end_inset
+
+), the worker process will block until the message arrives to the master
+ process.
+ A similar situation occurs when the master process signals a worker back,
+ whether to indicate it to shutdown or to continue working.
+ Since the process-to-core mapping is one-to-one, blocking messages typically
+ waste processor cycles on a computing node 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bhandarkar_Adaptive_load_balancing_for_MPI:2001"
+
+\end_inset
+
+.
+ Specifically, we would like to verify the penalties that such synchronization
+ technique has on the scalability of the parallel implementation.
+\end_layout
+
+\begin_layout Standard
+We evaluate the load empirically 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Watts_A_practical_approach_to_dynamic_load_balancing:1998"
+
+\end_inset
+
+ by using the following metric as an indicator of the load balancing among
+ processes:
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset Formula 
+\begin{equation}
+LB(NP)=\frac{minimum\, execution\, time\, among\, NP\, cores}{processing\, loop\, time\, of\, master\, process},
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $NP$
+\end_inset
+
+ is the number of cores executing worker processes.
+ Taking the processing-loop time of the master process ensures we measure
+ the overhead of the message passing during the time while the coverage
+ prediction is being executed by the workers.
+ This means that the time measurement is performed excluding the serial
+ parts of the process, i.e.
+ after the common data have been broadcasted to all worker processes (
+\begin_inset Quotes eld
+\end_inset
+
+Input data broadcasting
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+), until the beginning of the last step (
+\begin_inset Quotes eld
+\end_inset
+
+Create final coverage prediction
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:master_process"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+High performance is achieved when all cores complete their work within the
+ same time, hence showing a load-balancing factor of one.
+ On the other hand, lower values indicate disparity between the run times
+ of the various worker processes sharing the parallel task, thus reflecting
+ load imbalance.
+\end_layout
+
+\begin_layout Subsubsection
+Results and discussion
+\end_layout
+
+\begin_layout Standard
+For this set of experiments, we have chosen the same problem sizes as for
+ strong scalability in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Strong-scalability"
+
+\end_inset
+
+, where the coverage predictions are calculated up-to 128 cores, running
+ on 32 computing nodes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/strong_scaling-load_balancing_plot.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+Load balancing among worker processes.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:load_balancing"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the plot shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:load_balancing"
+
+\end_inset
+
+, it is clear that the influence of the message-passing overhead over the
+ processing time is inversely proportional to the amount of work each worker
+ process receives.
+ Additionally, for the biggest problem instances (1024, 2048 and 4096 transmitte
+rs), parallel-process execution times are within 95% of a perfect load-balancing
+ factor, and within 90% for problem sizes with 256 and 512 transmitters,
+ showing a very good performance of the dynamic task assignment, driven
+ by our message-passing technique.
+ For problem instances of 64 and 128 transmitters, the parallel-process
+ times are within 80% of the perfect load balancing, showing that, as the
+ number of transmitters per core approaches to one, latencies introduced
+ by several hardware and OS-specific factors (e.g.
+ TurboBoost, process affinity, etc.) are influential over the total process
+ time.
+ Particularly, message-passing is not able to compensate these latencies
+ as it is executed only once per worker process.
+\end_layout
+
+\begin_layout Standard
+It is worth pointing out that the very good load-balancing factors shown
+ here are not only merit of the message-passing technique.
+ The result dumping of partial path-loss predictions, performed by the worker
+ processes in a separate thread into an external database server, prevents
+ data synchronization from occurring at each iteration of the parallel process,
+ consequently improving the load-balancing factors significantly.
+\end_layout
+
+\begin_layout Section
+Related work 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Related-work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As it has been mentioned before, the reference implementation for PRATO
+ is the work done by Hrovat et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+.
+ The reported results show a comparable quality to those of a professional
+ radio-planning tool.
+ Since the results of the conducted comparison tests showed identical results
+ between PRATO and this work, we may conclude that PRATO reaches solutions
+ of comparable quality to those of a professional tool.
+ However, a performance comparison with this work has not been performed,
+ because it only deals with serial implementations.
+ 
+\end_layout
+
+\begin_layout Standard
+A different example of a GIS-based open-source radio planning tool, called
+ Q-Rap, has been presented in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "QRap"
+
+\end_inset
+
+.
+ Developed by the University of Pretoria and the Meraka Institute of South
+ Africa, the software was made publicly available in May 2010.
+ Its design is geared towards an end-user tool with a graphical user interface,
+ not appropriate for big batch jobs involving thousands of transmitters,
+ or even parallel job execution.
+ It is implemented as a plug-in for the Quantum GIS (QGIS) open source system
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "QuantumGIS"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The task-parallelization problem within the GRASS environment has been addressed
+ by several authors in different works.
+ Campos et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Campos_Parallel_modelling_in_GIS:2012"
+
+\end_inset
+
+ present a collection of GRASS modules for watershed analysis.
+ Their work concentrates on different ways of slicing raster maps to take
+ advantage of a potential MPI implementation, but there are no guidelines
+ for work replication.
+ Moreover, the hardware specification, on which the experiments have been
+ run, is missing, making it very difficult to build upon this work.
+\end_layout
+
+\begin_layout Standard
+On the field of high-performance computing, Akhter et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007"
+
+\end_inset
+
+ have presented implementation examples of a GRASS raster module, used to
+ process vegetation indexes for satellite images, for MPI and Ninf-G environment
+s.
+ The main drawback with their methodology is the compulsory use of GRASS
+ libraries in all the computing nodes that take part in the parallel calculation
+, making them more difficult to setup.
+ Moreover, the authors explicitly acknowledge a limitation in the performance
+ of their MPI implementation for big processing jobs.
+ The restriction appears due to the computing nodes being fixed to a specific
+ range, since the input data are equally distributed among worker processes,
+ creating an obstacle for load balancing in heterogeneous environments.
+ It is worth pointing out that in the parallel implementation of PRATO we
+ specifically address this problem with our message-passing technique.
+\end_layout
+
+\begin_layout Standard
+Similarly, Huang et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Huang_Cluster_based_parallel_GIS:2011"
+
+\end_inset
+
+ use the parallel inverse distance weighting interpolation algorithm as
+ a parallel-pattern example.
+ Although it is not explicitly noted, it can be concluded that the computing
+ nodes make use of the GRASS environment, again making them more difficult
+ to setup.
+ Moreover, since the amount of work is evenly distributed among all processes
+ (including the master one), their approach would also show decreased efficiency
+ in heterogeneous environments.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+We have presented the design and implementation of PRATO, a parallel radio-cover
+age prediction tool for GRASS GIS.
+ Extensive simulations were performed in the DEGIMA computer cluster of
+ the Nagasaki Advanced Computing Center.
+ The results have been analyzed to determine the level of scalability of
+ the implementation, as well as the impact of the introduced patterns for
+ parallel algorithm design within GRASS GIS.
+\end_layout
+
+\begin_layout Standard
+The conducted analysis shows that PRATO is able to calculate the radio-coverage
+ prediction of real-world mobile networks in a reduced amount of time with
+ a high scalability level.
+ The promising results also show the great potential of our approach to
+ parallelize other time-consuming tasks for GRASS GIS, although this point
+ still has to be fully demonstrated.
+ Particularly, the gathered results suggest that our approach would be also
+ beneficial in the area of mobile network optimization, where thousands
+ of simulations take part of the evaluation step during an optimization
+ process.
+ Still, further research is needed on how this method may be fully exploited.
+\end_layout
+
+\begin_layout Standard
+Nevertheless, as PRATO is a free and open-source software project, it can
+ be readily modified and extended to support, for example, other propagation
+ models and post-processing algorithms.
+ This characteristic defines a clear advantage when compared to commercial
+ and closed-source tools.
+\end_layout
+
+\end_body
+\end_document

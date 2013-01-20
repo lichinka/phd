@@ -1,0 +1,1843 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Background 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Background-and-motivation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% First paragraph has no indentation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is important to understand that the models used in scientific simulations
+ and engineering never offer a perfect model of the system they represent,
+ but only a subset of its composition and dynamics.
+ Experimentation and expert observation will always be essential as reference
+ points for understanding the studied phenomena.
+\end_layout
+
+\begin_layout Section
+Radio-network optimization
+\end_layout
+
+\begin_layout Standard
+Once a mobile network is launched, an important part of its operation and
+ maintenance is monitoring the quality characteristics and changing parameter
+ values in order to improve its performance.
+\end_layout
+
+\begin_layout Standard
+The evolution from 2G to 3G has introduced not only the technology needed
+ to increase both data and voice capacity, but also a greater complexity
+ in terms of network planning, deployment, and configuration, which have
+ rendered most of the traditionally used methods to be ineffective.
+ In a traditional approach (i.e.
+ manual), during the network planning and maintenance processes, a network
+ planning software tool would execute the analysis, while the human would
+ make the change decisions.
+ Therefore, a radio planning engineer configures network parameters manually
+ and the network planning tool analyzes the given configuration.
+ If the obtained results are not acceptable, the analysis process has to
+ be repeated several times, until the goal is achieved.
+\end_layout
+
+\begin_layout Standard
+Modern 3G radio networks are large and many of their key parameters are
+ interdependent.
+ Since an engineer is not able to cope with the level of complexity present
+ in such systems, the computer, along with specialized software, guides
+ the engineer to the most appropriate configuration for the network.
+ In the context of this work, we will refer to this process as optimization.
+\end_layout
+
+\begin_layout Standard
+A common limitation of the implementations of such optimization methods,
+ generally targeting traditional computer architectures of sequential execution,
+ is their inability to meet the requirements needed by real-world mobile
+ networks, since their computational-time complexity make them unfeasible
+ for practical use.
+ When analyzing big real-world networks with thousands of users it is necessary
+ to reduce the execution time of the optimization processes as much as possible,
+ so that they are useful for practical use.
+\end_layout
+
+\begin_layout Standard
+Additionally, the implementation of the framework will benefit from valuable
+ advances in computer science and High Performance Computing (HPC), in order
+ to perform faster and more reliable simulations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore,wen2011gpu"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The complexity of these systems has grown even faster than their throughput
+ capacity, thus making it impossible to plan 3G mobile networks with traditional
+ methods.
+ In this sense, an examination of colored coverage maps in conjunction with
+ some statistical analysis are no longer appropriate tools for network examinati
+on.
+ Once a mobile network is launched, an important part of its operation and
+ maintenance is monitoring of quality characteristics and changing parameter
+ values in order to improve performance.
+ In this sense, we may divide these tasks in two phases: analysis and decision
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nawrocki2006understanding"
+
+\end_inset
+
+.
+ The analysis phase consists of network performance analysis, which mainly
+ focuses on definition and collection of Key Performance Indicators (KPIs).
+ KPIs are quantifiable measurements, agreed to beforehand, that reflect,
+ in this context, network quality factors.
+ The second phase deals with making decisions, based on analytical results
+ collected in the previous phase, about the configuration of particular
+ parameter settings.
+ This process (shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Optimization-cycle"
+
+\end_inset
+
+) is repeated until the achieved results are acceptable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/optimization_cycle.png
+	lyxscale 20
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Optimization cycle for 3G mobile networks.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Optimization-cycle"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In a traditional method approach (i.e.
+ manual), during network planning and optimization processes, a network
+ planning software tool would execute the analysis, while the human would
+ make the decisions.
+ Consequently, a radio planning engineer configures network parameters manually
+ and the network planning tool analyzes the given configuration.
+ If the obtained results are not acceptable, the analysis process has to
+ be repeated several times, until the goal is achieved.
+\end_layout
+
+\begin_layout Standard
+Modern 3G mobile networks are large and many of their key parameters are
+ interdependent.
+ Since an engineer is not able to cope with the level of complexity present
+ in such systems, the computer, along with specialized software, guides
+ the engineer to the most appropriate configuration for the network.
+ In the context of this work, we will refer to this process as 
+\emph on
+optimization
+\emph default
+.
+ The results of the optimization process are expected to provide advice
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Some works are already focusing on complete automation of these tasks (i.e.
+ without human intervention).
+\end_layout
+
+\end_inset
+
+ regarding deployment, extension or reconfiguration tasks of a 3G network.
+\end_layout
+
+\begin_layout Section
+Optimization of 3G mobile networks
+\end_layout
+
+\begin_layout Standard
+Although wireless networks are increasingly more sophisticated, the need
+ for optimization work is still far from declining.
+ It has been established that most 3G radio network optimization problems
+ are NP-hard, since computational time grows non-polynomially with the increase
+ of the problem size 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "amaldi:planning.umts.base.station.location"
+
+\end_inset
+
+.
+ Moreover, there are other reasons directly related with the evolution of
+ already deployed networks that greatly increase the need for optimization
+ methods, as described in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nawrocki2006understanding"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+Network performance improvement: more users covered with the same physical
+ infrastructure, leaving room for parameter optimization only.
+\end_layout
+
+\begin_layout Itemize
+Changes in users’ profile: the introduction of new services puts additional
+ stress on the infrastructure, requiring additional optimization efforts.
+\end_layout
+
+\begin_layout Itemize
+Changing propagation conditions: the allocation of a higher frequency band
+ for UMTS compared to GSM requires deployment of more 3G sites than in 2G
+ networks, mostly in urban areas, thus increasing inter-cell interference.
+\end_layout
+
+\begin_layout Standard
+In this sense, network operators have shown the need to define different
+ optimization targets.
+ These targets are formed by an objective function that maps possible values
+ of configuration parameters into a value.
+ Thus, each element (solution) of the solution space is assigned a comparable
+ value, i.e.
+ a real number.
+ This number represents a quality rating of the proposed solution and it
+ is used to compare different solutions among each other, and ultimately
+ select the best one.
+ Unfortunately, there is no definitive objective function in the field of
+ 3G network optimization 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nawrocki2006understanding"
+
+\end_inset
+
+.
+ However, it is possible to optimize for different targets such as coverage,
+ base station location, etc.
+\end_layout
+
+\begin_layout Standard
+In this work, we will address network optimization methods that are performed
+ 
+\begin_inset Quotes eld
+\end_inset
+
+off-line
+\begin_inset Quotes erd
+\end_inset
+
+, meaning that the optimization software is not an active functioning part
+ of the network in operation.
+ Statistical data about network operation is used as the input or feedback
+ information for different optimization targets.
+\end_layout
+
+\begin_layout Standard
+This paper gives an overview of well-known optimization problems in 3G mobile
+ networks.
+ At the beginning of each of the following sections, a description of an
+ optimization problem is given, followed by a short survey of recently proposed
+ optimization methods.
+ Finally, a discussion about the introduced methods is given, before closing
+ with some concluding remarks.
+\end_layout
+
+\begin_layout Section
+Optimizing base station locations
+\end_layout
+
+\begin_layout Subsection
+Problem formulation
+\end_layout
+
+\begin_layout Standard
+Some references 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "minimum.set.covering.problem:1997,minimum.set.covering.problem:1998,minimum.set.covering.problem:2000"
+
+\end_inset
+
+ formulate the base station location problem in terms of the minimum set
+ covering problem (shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-minimum-set"
+
+\end_inset
+
+).
+ The coverage problem is defined by considering the signal level in every
+ test point from all base stations and requiring that at least one level
+ is above a fixed threshold.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/set_cover_in.gif
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+(a)
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/set_cover_out.gif
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+(b)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The minimum set covering problem: (a) the problem input and (b) the solution.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-minimum-set"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A different formulation considers the site selection problem as a 
+\begin_inset Formula $p$
+\end_inset
+
+-median problem, in which base station location is the only decision variable
+ considered.
+ To each of the candidates solutions, an installation cost is also associated.
+ The 
+\begin_inset Formula $p$
+\end_inset
+
+-median problem constitutes seeking 
+\begin_inset Formula $p$
+\end_inset
+
+ different locations each time, regardless of how distant the sites are.
+ The problem is to select one candidate site from each region to install
+ a base station such that the traffic capacity and the size of the covered
+ area are maximized with the lowest installation cost.
+\end_layout
+
+\begin_layout Subsection
+Proposed solutions
+\end_layout
+
+\begin_layout Standard
+Aydin et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Aydin:Heuristic.Optimization.Of.WCDMA"
+
+\end_inset
+
+ propose a solution to the 
+\begin_inset Formula $p$
+\end_inset
+
+-median problem based on three meta-heuristic algorithms; a genetic algorithm,
+ simulated annealing, and tabu search.
+ Their experimental study focuses on performance comparison between the
+ three algorithms.
+\end_layout
+
+\begin_layout Standard
+A solution to the set covering problem is proposed by Hao et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "minimum.set.covering.problem:1997"
+
+\end_inset
+
+.
+ A simulated annealing implementation was developed to solve the formulated
+ combinatorial problem.
+ The results presented demonstrate the feasibility of the proposed approach.
+ Tutschku 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "minimum.set.covering.problem:1998"
+
+\end_inset
+
+ presents a specialized greedy algorithm to solve the same problem.
+ This work is part of the implementation of a planning tool prototype.
+ Mathar and Niessen 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "minimum.set.covering.problem:2000"
+
+\end_inset
+
+ propose a solution based on integer linear programming, which they claim
+ finds optimal solutions in most cases.
+ They also introduce simulated annealing as an approximate optimization
+ technique.
+ This approach substitutes linear programming whenever an exact solution
+ is out of reach because of the complexity of the problem.
+\end_layout
+
+\begin_layout Standard
+Amaldi et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "amaldi:planning.umts.base.station.location"
+
+\end_inset
+
+ offer a discussion about the computational results of two different heuristics:
+ greedy search and tabu search.
+ The problem formulation is based on a set of candidate sites where the
+ base stations can be installed, an estimation of the traffic distribution
+ and a propagation description of the area to be covered.
+ Some years later, the same authors 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Amaldi:Radio.planning.and.coveraga.optimization"
+
+\end_inset
+
+ extended the problem formulation by also considering base station configuration
+ and hardware characteristics.
+ In both works, they propose a mixed integer programming model with which
+ they aim to maximize the trade-off between total traffic covered and total
+ installation costs.
+ The only difference between the models is the constraint definition of
+ the linear program, where the constraints in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "amaldi:planning.umts.base.station.location"
+
+\end_inset
+
+ are a subset of the constraints in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Amaldi:Radio.planning.and.coveraga.optimization"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Finally, Whitaker et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GA.for.antenna.placement:2005"
+
+\end_inset
+
+ focus on providing the required service coverage at the lowest possible
+ financial cost.
+ Their framework supports the use of any multiple objective optimization
+ algorithm which seeks to approximate a Pareto front.
+ The performance of four different algorithms is explored, namely SEAMO,
+ SPEA2, NSGA-II and PESA.
+\end_layout
+
+\begin_layout Section
+Optimizing antenna parameters
+\end_layout
+
+\begin_layout Standard
+There are many antenna parameters that control the coverage and interference
+ in the network, since the antenna shapes the emitted energy.
+ Two important parameters are the azimuth angle and the elevation angle
+ (or tilt) of the antenna.
+ The antenna azimuth (shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Antenna-azimuth"
+
+\end_inset
+
+) is the direction in which the main beam of the horizontal pattern points
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+ The antenna tilt (shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Antenna-tilt"
+
+\end_inset
+
+) is defined as the angle of the main beam of the antenna relative to the
+ horizontal plane 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+ Both of these parameters have a great influence on network quality, although
+ antenna tilt requires less effort to implement, since most modern radio
+ networks already support remote electrical tilt.
+ The adjustment of these two parameters optimize some important aspects
+ of the network, namely:
+\end_layout
+
+\begin_layout Itemize
+path loss between the base station and the mobile phone, since less power
+ is required for a connection, hence more power is available for traffic;
+ and
+\end_layout
+
+\begin_layout Itemize
+interference between neighboring cells, which leads to an overall capacity
+ increase.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/azimuth.gif
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A typical antenna azimuth pattern.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Antenna-azimuth"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/tilt.jpg
+	lyxscale 40
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The antenna tilt angle with the horizontal plane.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Antenna-tilt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Proposed solutions
+\end_layout
+
+\begin_layout Standard
+Karner 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MSc.antenna.optimization:2003"
+
+\end_inset
+
+ proposes an 
+\begin_inset Quotes eld
+\end_inset
+
+ad-hoc
+\begin_inset Quotes erd
+\end_inset
+
+ strategy for adjusting antenna azimuth and downtilt by analyzing the structure
+ of the network.
+ The objective of this optimization is to improve the results presented
+ in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Antenna.tilt.and.CPICH:2003"
+
+\end_inset
+
+ by increasing the number of served users in the target area.
+ In a similar line of work, Jakl 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Jakl:PhD"
+
+\end_inset
+
+ included in his doctoral thesis an antenna azimuth optimization algorithm,
+ based on attempts of avoiding coverage holes by properly adjusting the
+ azimuth settings.
+\end_layout
+
+\begin_layout Standard
+Siomina and Yuan 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Antenna.Configuration:2008"
+
+\end_inset
+
+ propose a framework for automated optimization of antenna azimuth and tilt,
+ including both mechanical and electrical tilt.
+ The implementation introduces a simulated annealing algorithm that searches
+ the solution space of possible antenna configurations.
+ The goal of the optimization is targeted to address power sharing among
+ cell channels and ultimately improve High-Speed Downlink Packet Access
+ (HSDPA) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "wiki:hsdpa"
+
+\end_inset
+
+ throughput.
+\end_layout
+
+\begin_layout Standard
+Zhang et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Antenna.azimuth.tilt:2009"
+
+\end_inset
+
+ present a method which is composed of two optimization loops: the inner
+ one and the outer one.
+ The inner loop concentrates on frequency planning while the outer loop
+ focuses on finding the optimal setting of antenna azimuth and tilt for
+ the current solution delivered by the inner loop.
+ Although frequency planning is not directly related to 3G network optimization,
+ we found this approach interesting enough to make a reference to it.
+ The inner loop could be easily replaced with some other optimization target,
+ e.g.
+ common pilot channel power setting.
+\end_layout
+
+\begin_layout Section
+Optimizing common pilot channel power
+\end_layout
+
+\begin_layout Standard
+The Common Pilot Channel (CPICH) is used as reference for handover 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "umts_world:handover"
+
+\end_inset
+
+, cell selection 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "3glteinfo:cellSelection"
+
+\end_inset
+
+, and cell reselection 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "flore2005:cell_reselection"
+
+\end_inset
+
+.
+ Whenever a mobile phone is switched on, it tries to register with the cell
+ providing the highest received CPICH level.
+ It also defines the effective coverage area of the cell: according to the
+ the CPICH power level, the cell coverage area will enlarge or shrink.
+ Consequently, by appropriately adjusting the CPICH power at the base stations,
+ the number of served users per cell can be balanced among neighboring cells.
+ This procedure is called load balancing and it reduces interference, stabilizes
+ network operation, and facilitates radio resource management 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Proposed solutions
+\end_layout
+
+\begin_layout Standard
+Chen and Yuan 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CPICH.optimization:2008"
+
+\end_inset
+
+ optimize CPICH transmit power starting from a uniform allocation (i.e.
+ all cells are set with the same transmit power level).
+ Their objective is to enhance HSDPA performance at cell edges while preserving
+ control of R99 soft handover 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "wiki:soft_handover"
+
+\end_inset
+
+.
+ The solution approach is based on a linear-integer mathematical model.
+ A very similar problem and proposed solution is presented by Siomina and
+ Yuan 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CPICH.optimization:2007"
+
+\end_inset
+
+.
+ The problem definition slightly differs from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CPICH.optimization:2008"
+
+\end_inset
+
+ as there is no reference to soft handover control.
+ The solution is also implemented as a linear program.
+\end_layout
+
+\begin_layout Standard
+Olmos et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CPICH.optimization:2003"
+
+\end_inset
+
+ apply simulated annealing to the optimization of CPICH transmit powers
+ in order to force mobile phones to transmit to the best available cell
+ in a service area.
+ Their results show decreased cell load with a consequently increased network
+ capacity.
+\end_layout
+
+\begin_layout Standard
+Chen and Yuan 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CPICH.optimization:2009"
+
+\end_inset
+
+ present a two-phase optimization algorithm for large-scale mobile networks.
+ The algorithm uses the total CPICH power consumption as a minimization
+ objective.
+ The authors claim that the tabu-search-based algorithm can compute near
+ optimal solutions within a few seconds, even for large networks.
+\end_layout
+
+\begin_layout Section
+Optimizing CPICH and antenna parameters
+\end_layout
+
+\begin_layout Standard
+Both the antenna tilt and azimuth directly affect the direction and range
+ in which the cell broadcasts its CPICH.
+ Consequently, optimal CPICH power is highly dependent on how the antenna
+ tilt and azimuth are configured at base stations.
+ Ideal configuration of antenna tilt and azimuth network-wise, with the
+ objective of optimizing the CPICH power consumption, is a challenging task.
+ For this reason, many authors have considered optimization methods that
+ address all three parameters.
+\end_layout
+
+\begin_layout Subsection
+Proposed solutions
+\end_layout
+
+\begin_layout Standard
+Varbrand et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Coverage.optimization.on.CPICH.tilt.and.azimuth:2006"
+
+\end_inset
+
+ approach the optimization of service coverage (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Optimizing-coverage"
+
+\end_inset
+
+) by considering all three configuration parameters, namely: CPICH transmit
+ power, antenna tilt, and antenna azimuth.
+ Their simulated annealing algorithm searches the solution space of possible
+ configurations in order to find improvements in network performance and
+ total transmitted power.
+ Interestingly, the algorithm is efficient enough to optimize large networks
+ without using excessive computing resources.
+\end_layout
+
+\begin_layout Standard
+Siomina 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CPICH.and.antenna.tilt.optimization:2005"
+
+\end_inset
+
+ combines optimization of base station antenna tilts and CPICH power to
+ reduce the total interference level and to improve network capacity.
+ The introduced algorithm optimizes the antenna downtilt setting so that
+ the total CPICH power in the network is minimized.
+\end_layout
+
+\begin_layout Standard
+Neubauer et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Antenna.tilt.and.CPICH:2003"
+
+\end_inset
+
+ present two optimization algorithms for finding an optimal setting of antenna
+ tilt and CPICH power of the base stations.
+ The first algorithm builds on a rule-based approach, while the second one
+ extends it by incorporating simulated annealing.
+ An evaluation of both techniques shows that the second algorithm returns
+ better results.
+\end_layout
+
+\begin_layout Standard
+Jakl et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GA.for.tilt.and.CPICH:2004"
+
+\end_inset
+
+ proposed a problem-specific genetic algorithm to tackle the optimization
+ of antenna tilts and CPICH transmit powers.
+ The goal of the optimization is to increase network capacity.
+ The implementation involves a deterministic fitness selection scheme, a
+ problem specific recombination operator and an improved mutation operator.
+ After the initial identification of the best individuals, a local optimization
+ technique is used to improve their fitness.
+\end_layout
+
+\begin_layout Section
+Optimizing coverage 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Optimizing-coverage"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Coverage is maybe the most common optimization objective considered in 3G
+ network optimization.
+ The objective function for coverage optimization may be defined as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "Sf_cov"
+symbol "$f_{cov}$"
+description "Objective function for the coverage optimization problem."
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{cov}=\frac{A_{covered}}{A_{total}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $A_{covered}$
+\end_inset
+
+ represents the area covered by the network and 
+\begin_inset Formula $A_{total}$
+\end_inset
+
+ represents the total area under optimization.
+ Thus, the expression 
+\begin_inset Formula $f_{cov}$
+\end_inset
+
+ represents the portion of the total area that is actually under network
+ coverage.
+ This value ranges from 0 (no coverage) to 1 (total coverage).
+\end_layout
+
+\begin_layout Standard
+The area being optimized is usually divided in squares (or pixels) of a
+ certain size, which may vary from 10 to 100 meters, creating a grid of
+ a certain resolution.
+ A square is considered covered, if the signal to noise ratio is above a
+ given threshold 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "3GPP_TS_25.133"
+
+\end_inset
+
+.
+ It is also common to use a test function 
+\begin_inset Formula $cov(x,y)$
+\end_inset
+
+, which returns 1 if the square located at 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ is covered, and 0 otherwise.
+\end_layout
+
+\begin_layout Subsection
+Proposed solutions
+\end_layout
+
+\begin_layout Standard
+Siomina and Yuan 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+ consider the problem of minimizing pilot power subject to the coverage
+ constraint.
+ Their approach consists of mathematical programming models and methods,
+ based on a linear-integer mathematical formulation of the problem.
+ A special numerical analysis studies the trade-off between service coverage
+ and pilot power consumption for different test networks.
+\end_layout
+
+\begin_layout Standard
+Capone et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Amaldi:Radio.planning.and.coveraga.optimization"
+
+\end_inset
+
+ investigate mathematical programming models for supporting decisions on
+ where to install new base stations and how to select their configuration
+ (antenna height and tilt, sector orientations, maximum emission power,
+ pilot signal, etc.) so to find a trade-off between maximizing coverage and
+ minimizing costs.
+ The overall model takes into account signal-quality constraints in both
+ uplink and downlink directions, as well as the power control mechanism
+ and the CPICH signal.
+\end_layout
+
+\begin_layout Standard
+Valkealahti et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Coverage.balance:2002"
+
+\end_inset
+
+ propose a method for automatic setting of CPICH power.
+ The control algorithm applies total transmission power measurements from
+ the base station, neighboring cells and mobile terminals to determine the
+ pilot qualification.
+ The CPICH power is then periodically updated based on a group of heuristic
+ rules in order to improve coverage and load balance.
+ A similar approach is described by Parkinnen et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Coverage.optimization.with.cost.function:2002"
+
+\end_inset
+
+ where some network performance parameters are combined with service coverage
+ in a cost function.
+ The pilot power of a cell is periodically updated with a gradient descent
+ method that minimizes the afore mentioned function.
+\end_layout
+
+\begin_layout Section
+Discussion
+\end_layout
+
+\begin_layout Standard
+In the field of 3G network optimization, comparing the efficiency of different
+ optimization methods has proven to be a very difficult task.
+ There are several reasons for this, among which we have identified the
+ following:
+\end_layout
+
+\begin_layout Itemize
+The networks on which the experiments are carried out are not standardized.
+ Thus, it is problematic to set up an environment in which the presented
+ results may be reproduced.
+\end_layout
+
+\begin_layout Itemize
+There are no 
+\begin_inset Quotes eld
+\end_inset
+
+open
+\begin_inset Quotes erd
+\end_inset
+
+ implementations of 3G mobile network simulators.
+ On the contrary, there is a vast variety of proprietary (or 
+\begin_inset Quotes eld
+\end_inset
+
+closed
+\begin_inset Quotes erd
+\end_inset
+
+) network simulators that only increase the ambiguity regarding the experimental
+ environment used for a certain network layout and configuration.
+ Moreover, some of the 
+\begin_inset Quotes eld
+\end_inset
+
+closed
+\begin_inset Quotes erd
+\end_inset
+
+ network simulators do not even account on the built-in path loss estimation
+ methods used.
+\end_layout
+
+\begin_layout Itemize
+Only a small part of the referenced optimization methods perform their experimen
+ts on real-life networks, that have been already deployed and are currently
+ running.
+ This fact creates a gap between the research field and the industry (i.e.
+ the application area) and it is counterproductive for both the researchers
+ and the network operators, since they don't benefit from mutual collaboration.
+\end_layout
+
+\begin_layout Standard
+We believe that the creation of a standardized framework would be a great
+ benefit in the field of 3G network optimization, as it would allow researchers
+ to compare different methods, results and solutions in an easy, fast and
+ objective manner.
+ An effort in this direction is the MOMENTUM project 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Momentum.project"
+
+\end_inset
+
+.
+ It was created with the objective of setting up a standardized experimental
+ environment that would facilitate research cooperation and would ultimately
+ benefit from an improvement on the research field of 3G networks.
+ The project includes complete data about the terrain, properties of the
+ service area and hardware used in three different mobile networks.
+ It offers the researcher detailed information about real-life networks
+ based in Berlin, Lisbon and The Hague.
+ As part of the package, there is also a Java application programming interface
+ (API) that eases the implementation of some conventional tasks such as
+ data parsing.
+ The main focus of project is on data, thus there is no network simulator
+ included.
+ In any case, the researcher benefits from several included traffic snapshots
+ that help assessing different network configuration settings.
+ There have been no updates in the MOMENTUM project since 2005, when the
+ last data corrections were introduced 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Momentum.project"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the context of this survey and after reviewing many different papers
+ on 3G network optimization, we can say that the MOMENTUM project has not
+ been widely adopted by the scientific community.
+ Moreover, several of the reviewed works do not offer detailed instructions
+ on how to resemble the experimental environment.
+ Consequently, it is very complicated (if not even impossible) to reproduce
+ the presented results.
+ Therefore, the selection of optimization methods, based on the results
+ presented by their corresponding authors, is virtually meaningless, since
+ the results are not comparable with each other.
+ For this reason, we have decided to concentrate the following discussion
+ on the optimization methods used, leaving the results aside.
+\end_layout
+
+\begin_layout Subsection
+The reproducibility problem
+\end_layout
+
+\begin_layout Standard
+A quick review of the state-of-the-art in 3G network optimization indicates
+ that software, providing good computational models, is a very expensive
+ tool for science.
+ Moreover, since the vast majority of this software is proprietary, it relies
+ on closed source, formats and protocols, which disclosure is explicitly
+ forbidden by their licenses.
+ This fact creates a big hurdle to one of the key phases of scientific methodolo
+gy 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gauch2002scientific"
+
+\end_inset
+
+: experimental reproducibility.
+\end_layout
+
+\begin_layout Subsection
+Discussion about the presented methods
+\end_layout
+
+\begin_layout Standard
+Regarding the optimizations methods presented in previous chapters, three
+ distinctive groups emerge: genetic algorithms, linear programming and other
+ search methods.
+\end_layout
+
+\begin_layout Description
+Genetic
+\begin_inset space ~
+\end_inset
+
+algorithms These algorithms work on a population of solutions that allows
+ a more comprehensive search for optimal solutions.
+ As a direct consequence, an increase in running time is commonly observed.
+ The implementation effort of genetic algorithms is to some degree higher
+ than for simpler search methods (e.g.
+ local search), but their inherent structure greatly simplifies possible
+ parallel implementations and execution.
+\end_layout
+
+\begin_layout Description
+Linear
+\begin_inset space ~
+\end_inset
+
+programming Linear optimization problems are widely used in different optimizati
+on areas and there are many good software packages to solve such problems.
+ Consequently, if a problem can be modeled as a continuous linear problem,
+ there is usually no difficulty in finding optimality.
+ In the context of this survey, linear programming has proven useful for
+ coverage optimization in early network planning stages.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Other
+\begin_inset space ~
+\end_inset
+
+search
+\begin_inset space ~
+\end_inset
+
+methods Other search methods
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Namely, local search, simulated annealing and tabu search in the context
+ of this survey.
+\end_layout
+
+\end_inset
+
+ usually represent a compromise between running time and quality of results.
+ They rely on evaluating a great number of alternative configurations.
+ The number of parameters taken into account, as well as the evaluation
+ precision, directly influence their running time.
+ These methods don't excel in full simulation scenarios.
+ On the other hand, some search methods (e.g.
+ tabu search) have powerful mechanisms to escape local minima.
+\end_layout
+
+\begin_layout Standard
+A short comparison of the optimization methods presented in this survey
+ is shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Comparison-of-optimization-methods"
+
+\end_inset
+
+.
+ The comparison variables arise from the context in which the methods were
+ presented.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\size footnotesize
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A comparison among the presented optimization methods.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Comparison-of-optimization-methods"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Algorithm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Running time
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Typical application
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Local search
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Shorter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Solution quality improvement.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Tabu search
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Shorter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Solution quality improvement.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Simulated annealing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Longer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Initial search of the solution space.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Genetic algorithm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Longer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Initial search of the solution space and solution quality improvement.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Linear programming
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+(formulation dependent)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Coverage network planning.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+The variety of optimization problems that have been introduced in the previous
+ sections differ in many aspects like implementation, running time and solution
+ quality.
+ Picking the right method for a given situation depends on the optimization
+ task and the desired results.
+ Since computation time is usually an important restriction, simpler and
+ faster methods may be preferable.
+ 
+\end_layout
+
+\begin_layout Standard
+Beside the convenience of a survey such as the one presented in this work,
+ it is very important to develop a feeling for the properties, advantages
+ and drawbacks of the respective methods.
+ Moreover, radio expert's recommendations regarding solution interpretation
+ and feedback from everyday network operation, are an essential input for
+ creating quality optimization methods.
+ In this sense, and based on our own experience, the expert's advice is
+ irreplaceable and a most valuable contribution to the research work.
+\end_layout
+
+\begin_layout Standard
+Also, as it may be observed in some of the presented references, it is often
+ advisable to combine different methods.
+ Therefore, a simple optimization method may find a subset of reasonable
+ parameter configuration, whereas a more complex method could be applied
+ afterward, to refine the search.
+ Sometimes it may also be useful to apply a simple search method at the
+ end to find better solutions in the vicinity of a current promising one.
+\end_layout
+
+\end_body
+\end_document
