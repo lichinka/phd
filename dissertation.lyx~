@@ -8,13 +8,13 @@
 % IPS PhD thesis template for LyX
 %	by Lucas Benedicic
 %
-% based on IPS PhD thesis template for LaTex by Erik Zupanic, Andreja Er?te
+% based on IPS PhD thesis template for LaTex by Erik Zupanic, Andreja Erzte
 %
 
 %
-% margins for double-sided document
+% Page margins and binding offset
 %
-%\usepackage[DIV=14,BCOR=0.7cm]{typearea}
+\usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
 
 % fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
 \usepackage[slovene,english]{babel}
@@ -33,16 +33,15 @@
 \usepackage[nottoc,numbib]{tocbibind}% bibliography numbered
 
 %
-% Page margins and binding offset
+% Tables
 %
-\usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
-
-%% Tables
 \usepackage[table]{xcolor}% enables color cellc in tables
 \usepackage{hhline}% makes black lines when color cells are used (because \hline does not work)
 
-%% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
+%
+% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
 % In this case, program package is selected and program environment is used for algorithms as subfloat in myalgortihm floats
+%
 \usepackage{program}
 
 \usepackage{titlesec}
@@ -94,8 +93,6 @@
 
 \graphicspath{{images/}}
 
-
-
 %% myalgorithm float (used for writing algorithms) - definitions
 %\usepackage{float}
 
@@ -119,7 +116,6 @@
 %\setlength{\cftaftermyalgorithmtitleskip}{35mm}
 %\setlength{\cftmyalgorithmsnumwidth}{5em} %space for the name before number in the listofalgorithms (loa)
 %\setlength{\cftmybeforealgorithmsskip}{0em} %changing the space between entries in the loa
-
 
 \newcommand{\HRule}{\rule{\linewidth}{0.1mm}} % defines line used in the example
 \end_preamble
@@ -2028,6 +2024,42 @@ status open
 
 \begin_layout Plain Layout
 
+% Custom format for displaying nomenclature entries
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomlabel}[1]{%
+\end_layout
+
+\begin_layout Plain Layout
+
+	#1
+\backslash
+hfill=%
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
 % Fancy dividing line for nomenclature groups (A - abbreviations, S - symbols)
 \end_layout
 
@@ -2075,7 +2107,7 @@ hfill
 \backslash
 rule[2pt]{0.45
 \backslash
-linewidth}{1pt}
+linewidth}{1pt}%
 \end_layout
 
 \begin_layout Plain Layout
@@ -2089,7 +2121,7 @@ linewidth}{1pt}
 \begin_inset CommandInset nomencl_print
 LatexCommand printnomenclature
 set_width "custom"
-width "1.4cm"
+width "10em"
 
 \end_inset
 

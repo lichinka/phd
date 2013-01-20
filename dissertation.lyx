@@ -2024,6 +2024,42 @@ status open
 
 \begin_layout Plain Layout
 
+% Custom format for displaying nomenclature entries
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomlabel}[1]{%
+\end_layout
+
+\begin_layout Plain Layout
+
+	#1
+\backslash
+hfill=%
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
 % Fancy dividing line for nomenclature groups (A - abbreviations, S - symbols)
 \end_layout
 
@@ -2071,7 +2107,7 @@ hfill
 \backslash
 rule[2pt]{0.45
 \backslash
-linewidth}{1pt}
+linewidth}{1pt}%
 \end_layout
 
 \begin_layout Plain Layout
@@ -2085,7 +2121,7 @@ linewidth}{1pt}
 \begin_inset CommandInset nomencl_print
 LatexCommand printnomenclature
 set_width "custom"
-width "1.4cm"
+width "7em"
 
 \end_inset
 
