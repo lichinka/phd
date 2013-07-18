@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Background 
+Background and motivation 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Background-and-motivation"
@@ -86,105 +86,333 @@ status open
 \end_layout
 
 \begin_layout Standard
-It is important to understand that the models used in scientific simulations
- and engineering never offer a perfect model of the system they represent,
- but only a subset of its composition and dynamics.
- Experimentation and expert observation will always be essential as reference
- points for understanding the studied phenomena.
+\noindent
+Short introduction to the content of this chapter.
 \end_layout
 
 \begin_layout Section
-Radio-network optimization
+Optimization models
 \end_layout
 
 \begin_layout Standard
-Once a mobile network is launched, an important part of its operation and
- maintenance is monitoring the quality characteristics and changing parameter
- values in order to improve its performance.
+Optimization may be informally defined as the procedure of finding better
+ solutions to a given problem, which usually model some physical phenomenon.
+ In our every day life, we are constantly solving small optimization problems,
+ like choosing the shortest route to a friend's house, or organizing the
+ appointments in our agenda.
+ In general, these problems are small enough for us to find a good solution
+ without extra help, but as they become larger and more complex, the aid
+ of computers for their resolution is unavoidable.
 \end_layout
 
 \begin_layout Standard
-The evolution from 2G to 3G has introduced not only the technology needed
- to increase both data and voice capacity, but also a greater complexity
- in terms of network planning, deployment, and configuration, which have
- rendered most of the traditionally used methods to be ineffective.
- In a traditional approach (i.e.
- manual), during the network planning and maintenance processes, a network
- planning software tool would execute the analysis, while the human would
- make the change decisions.
- Therefore, a radio planning engineer configures network parameters manually
- and the network planning tool analyzes the given configuration.
- If the obtained results are not acceptable, the analysis process has to
- be repeated several times, until the goal is achieved.
+Complex multidimensional optimization problems are popular in engineering,
+ economics, physics and other scientific fields.
+ When solving an optimization problem, the objective is to find a 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ solution in a 
+\begin_inset Quotes eld
+\end_inset
+
+reasonable
+\begin_inset Quotes erd
+\end_inset
+
+ computational time.
+ In this respect, the field of mathematical optimization has received a
+ lot of attention by the scientific community during the last decades.
+ However, both 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+reasonable
+\begin_inset Quotes erd
+\end_inset
+
+ are problem, application and context-specific concepts, in which the biggest
+ challenge of selecting an appropiate optimization approach usually lays.
 \end_layout
 
 \begin_layout Standard
-Modern 3G radio networks are large and many of their key parameters are
- interdependent.
- Since an engineer is not able to cope with the level of complexity present
- in such systems, the computer, along with specialized software, guides
- the engineer to the most appropriate configuration for the network.
- In the context of this work, we will refer to this process as optimization.
+Mathematical optimization involves the process of finding solutions from
+ a group of possible decisions, which may be defined as:
 \end_layout
 
 \begin_layout Standard
-A common limitation of the implementations of such optimization methods,
- generally targeting traditional computer architectures of sequential execution,
- is their inability to meet the requirements needed by real-world mobile
- networks, since their computational-time complexity make them unfeasible
- for practical use.
- When analyzing big real-world networks with thousands of users it is necessary
- to reduce the execution time of the optimization processes as much as possible,
- so that they are useful for practical use.
+\begin_inset Formula 
+\begin{equation}
+\min f(\vec{x})\qquad\vec{x}\in\Omega\subseteq\mathbb{R}^{n},
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Additionally, the implementation of the framework will benefit from valuable
- advances in computer science and High Performance Computing (HPC), in order
- to perform faster and more reliable simulations 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore,wen2011gpu"
+\noindent
+where 
+\begin_inset Formula $\vec{x}=(x_{1},\dots,x_{n})$
+\end_inset
 
+ is a vector representing the decision variables, 
+\begin_inset Formula $f(\vec{x})$
+\end_inset
+
+ is the objective function measuring the quality of the decisions and 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is the set of feasible solutions of the problem, also known as search space.
+ Note that the objective function 
+\begin_inset Formula $f$
+\end_inset
+
+ makes it possible to define a total order relation between any pair of
+ solutions in the search space 
+\begin_inset Formula $\Omega$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-The complexity of these systems has grown even faster than their throughput
- capacity, thus making it impossible to plan 3G mobile networks with traditional
- methods.
- In this sense, an examination of colored coverage maps in conjunction with
- some statistical analysis are no longer appropriate tools for network examinati
-on.
- Once a mobile network is launched, an important part of its operation and
- maintenance is monitoring of quality characteristics and changing parameter
- values in order to improve performance.
- In this sense, we may divide these tasks in two phases: analysis and decision
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "nawrocki2006understanding"
+The search space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ may also be expressed as a solution to a system of equalities or inequialities,
+ e.g.:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+g(x_{1},\dots,x_{n}) & \leq & 0\nonumber \\
+h(x_{1},\dots,x_{n}) & = & 0
+\end{eqnarray}
 
 \end_inset
 
-.
- The analysis phase consists of network performance analysis, which mainly
- focuses on definition and collection of Key Performance Indicators (KPIs).
- KPIs are quantifiable measurements, agreed to beforehand, that reflect,
- in this context, network quality factors.
- The second phase deals with making decisions, based on analytical results
- collected in the previous phase, about the configuration of particular
- parameter settings.
- This process (shown in Figure 
+
+\end_layout
+
+\begin_layout Standard
+Optimization problems involving the maximization of the objective function
+ also fall into this category, since:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\max f(\vec{x})=-\min(-f(\vec{x}))\label{eq:02-maximization_minization_problem_relation}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A point 
+\begin_inset Formula $\vec{x}^{*}$
+\end_inset
+
+ is considered to be an unrestricted local minimum of a function 
+\begin_inset Formula $f$
+\end_inset
+
+ if it holds a better value than all its neightbours, i.e.
+ there exits 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ so that:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f(\vec{x}^{*})\le f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}\qquad\mid\vec{x}-\vec{x}^{*}\mid<\epsilon\label{eq:02-local_minimum}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Similarly, a point 
+\begin_inset Formula $\vec{x}^{*}$
+\end_inset
+
+ is considered to be an unrestricted global minimum of a function 
+\begin_inset Formula $f$
+\end_inset
+
+ if it holds a better value than all others, i.e.:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f(\vec{x}^{*})\leq f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}\label{eq:02-global_minimum}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The concepts of local and global minimum are considered strict if the inequaliti
+es of 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Optimization-cycle"
+reference "eq:02-local_minimum"
 
 \end_inset
 
-) is repeated until the achieved results are acceptable.
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:02-global_minimum"
+
+\end_inset
+
+ are strict.
+ Likewise, the definition of local and global maximum is given by the existing
+ relation between a minimization and a maximization problem, as specified
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:02-maximization_minization_problem_relation"
+
+\end_inset
+
+, i.e.
+ a point 
+\begin_inset Formula $\vec{x}^{*}$
+\end_inset
+
+ is a local or global maximum of a function 
+\begin_inset Formula $f$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\vec{x}^{*}$
+\end_inset
+
+ is a local or global minimum of function 
+\begin_inset Formula $-f$
+\end_inset
+
+, respectively.
+\end_layout
+
+\begin_layout Subsection
+Gradient-based methods
+\end_layout
+
+\begin_layout Standard
+Gradient-based methods are among the oldest and most studied optimization
+ approaches.
+ They are based on the derivative of the optimized function, using the first
+ and even the second derivate of a function 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ The name gradient follows from the derivative of multidimensional functions,
+ 
+\begin_inset Formula $\nabla f(\vec{x})$
+\end_inset
+
+, which is simply a vector where each element is the slope of 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ in that dimension, i.e.
+ 
+\begin_inset Formula $<\frac{\partial f}{\partial x_{1}},\dots,\frac{\partial f}{\partial x_{n}}>$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Luke-Essentials_of_metaheuristics:2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The principle behind gradient-based methods is rather simple.
+ Starting from an arbitrary value for 
+\begin_inset Formula $x$
+\end_inset
+
+, we iteratevily substract (or add) a small positive value to it, e.g.
+ for gradient descent:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+x\leftarrow x-\alpha f'(x),
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a small positive value.
+ Consequently, a positive slope will make 
+\begin_inset Formula $x$
+\end_inset
+
+ decrease, whereas a negative slope will make it increase.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-gradient_descent"
+
+\end_inset
+
+ shows an example of this behaviour.
+ Therefore, 
+\begin_inset Formula $x$
+\end_inset
+
+ will gradually move down the function until it finds its minimum, where
+ 
+\begin_inset Formula $f'(x)$
+\end_inset
+
+ is zero, causing it to stop.
 \end_layout
 
 \begin_layout Standard
@@ -211,8 +439,1735 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/optimization_cycle.png
+	filename img/gradient_descent.eps
+	width 75text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gradient descent with a negative slope, i.e.
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ is increasing.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:02-gradient_descent"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, gradient methods have certaing drawbacks that make them unsuitable
+ for tackling a wide range of optimization problems.
+ Take, for example, the time they take to converge.
+ As gradient descent approaches a function minimum, it will skip this point
+ and land on the other side.
+ In the next step, something similar will happen, but this time from the
+ other side of the minimum point, thus slowly approaching to the target
+ in a 
+\begin_inset Quotes eld
+\end_inset
+
+zig-zag
+\begin_inset Quotes erd
+\end_inset
+
+ way.
+ This behavior is directly related to the slope of the function at the given
+ point, i.e.
+ a steepest slope translates into a larger jump, and may be allivieatted
+ by adjusting the value of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ However, some functions (or regions of functions) may require smaller values,
+ while for others a bigger value would be more appropiate.
+ Newton's method improves this by taking the second derivative of the function
+ into account, i.e.:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+x\leftarrow x-\alpha\frac{f'(x)}{f''(x)},
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+thus adjusting the value of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ as it converges towards a point with zero slope 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Luke-Essentials_of_metaheuristics:2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Another issue is how other points are handled.
+ Beside maxima and minima points, some functions also contain saddle points
+ (known as inflection points in one-dimensional functions).
+ Clearly, the first derivative of a saddle point is zero, meaning gradient
+ descent will stop looking for the minimum, even though it hasn't found
+ it (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-gradient_descent_saddle_point"
+
+\end_inset
+
+).
+ Newton's method, on the other hand, does not help either.
+ Moreover, in this case, we would be even dividing by zero! These observations
+ clearly show how gradient methods get caught in local optima.
+ We define local optima of a function as the optima (or minima in our case)
+ of a local region.
+ Similarly, global optima are defined as the optima of the whole domain
+ of a function.
+ It follows that gradient methods, as gradient descent or Newton’s method,
+ are local optimization algorithms 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Luke-Essentials_of_metaheuristics:2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/gradient_descent_saddle_point.eps
+	width 75text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A saddle point or point of inflection, where the derivative is zero.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:02-gradient_descent_saddle_point"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+But maybe the biggest concern with gradient-based methods is they assume
+ the function under optimization is derivable.
+ This assumption holds only when optimizing a well-formed mathematical function.
+ Unfortunately, this is generally not the case, since in most cases the
+ gradient is not computable because the function is not known.
+ The only available approach in such situations is creating inputs to the
+ function in order to assess their quality.
+ Metaheuristics are good candidates for this class of problems to solve
+ moderate and large instances.
+\end_layout
+
+\begin_layout Subsection
+Linear and non-linear programming
+\end_layout
+
+\begin_layout Standard
+It was in the early 40s of the twentieth century, through the work of teams
+ formed by mathematicians, economists and physicists, that the basis were
+ established for the resolution of problems with a set of techniques known
+ as linear and non-linear programming.
+ Their initial goal was to solve different kinds of logistic problems during
+ the second world war.
+\end_layout
+
+\begin_layout Standard
+In a linear programming optimization problem, both the objective function
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ and a given set of constraints are linear functions.
+ The constraints impose restrictions over 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+, i.e.
+ they must meet certain requirements as, for example, fullfil a limited
+ availability of resources.
+ An problem may be formulated as follows, e.g.:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\min f(\vec{x})=c\cdot\vec{x}\label{eq:02-linear_programming_objective_function}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+subject to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+A\cdot\vec{x} & \le & b\label{eq:02-linear_programming_constraints}\\
+\vec{x} & \ge & \vec{0}\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+In the example above, the inequalities defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:02-linear_programming_constraints"
+
+\end_inset
+
+ are the constraints to the linear program defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:02-linear_programming_objective_function"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For solving continous linear optimization problems, efficient exact algorithms
+ exist, such as the simplex method 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dantzig-Maximization_of_a_linear_function_of_variables_subject_to_linear_inequalities:1951"
+
+\end_inset
+
+ or the interior-points method 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984"
+
+\end_inset
+
+.
+ Indeed, linear programming is one of the most satisfactory models of solving
+ optimization problems, since the feasible region of the problem is a convex
+ set and the objective function is a convex function.
+ It follows that the global optimum is a node of the polytope representing
+ the feasible region 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ See Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-linear_programming_example"
+
+\end_inset
+
+ for a linear-programming example with several constraints.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/linear_programming_example.png
 	lyxscale 20
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Graphical representation of a linear-programming example with several constraint
+s.
+ The greyed area is the polytope representing the region of feasible solutions.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:02-linear_programming_example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Non-linear programming models, on the other hand, consider problems where
+ the objective function 
+\begin_inset Formula $f$
+\end_inset
+
+ and/or the constraints are non-linear 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bazaraa-Nonlinear_programming:2006"
+
+\end_inset
+
+.
+ However, non-linear continuous problems are more difficult to solve.
+ Despite several existing technique to linearize such models, they often
+ not only introduce extra variables and constraints, but also some degree
+ of approximation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glover-Improved_linear_programming_formulations_for_nonlinear_problems:1975"
+
+\end_inset
+
+.
+ Moreover, some problem properties such as high dimensionality, parameter
+ interaction, and multi-modality make these approaches ineffective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Generally, when dealing with real-world problems, the availability of analytical
+ optimization models, such as required by gradient methods or (non-)linear
+ programming, is not guaranteed.
+ Indeed, for some applications, only simulations or physical models are
+ the available means for objective-function evaluation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fu-Optimization_for_simulation:2002"
+
+\end_inset
+
+.
+ Once again, metaheuristics appear as good candidates to solve different
+ instance sizes of this class of problems.
+ 
+\end_layout
+
+\begin_layout Subsection
+Metaheuristics
+\end_layout
+
+\begin_layout Standard
+Metaheuristics, a term proposed by Glover in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glover-Future_paths_for_integer_programming_and_links_to_artificial_intelligence:1986"
+
+\end_inset
+
+, represent a group of approximation algorithms designed to combine basic
+ heuristic principles with advanced high-level guidance methods, targeted
+ at improving the efficiency of a search process.
+ These techniques are meant to find good solutions to a given problem, for
+ which the mathematical function is not available or its search space is
+ big enough for an exhaustive search to be unfeasible 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kochenberger_Handbook_of_metaheuristics:2003"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+From the theorical point of view, metaheuristics represent a subset of stochasti
+c optimization, since they use some degree of randomness to find optimal
+ (or as optimal as possible) solutions to hard problems.
+ They are the most general of these kinds of algorithms, and are applied
+ to a wide range of problems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Luke-Essentials_of_metaheuristics:2009"
+
+\end_inset
+
+.
+ Unlike the exact optimization methods introduced in the previous sections,
+ metaheuristics do not guarantee the optimality of the obtained solutions
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ Moreover, they do not define how close the obtained solutions are from
+ the optimal ones, as approximation algorithms do.
+\end_layout
+
+\begin_layout Standard
+The characterization given by Blum and Roli 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003"
+
+\end_inset
+
+ provides a clear overview of the fundamental properties associated with
+ metaheuristics:
+\end_layout
+
+\begin_layout Itemize
+metaheuristics are strategies that “guide” the search process;
+\end_layout
+
+\begin_layout Itemize
+their goal is to efficiently explore the search space in order to find optimal
+ or near-optimal solutions;
+\end_layout
+
+\begin_layout Itemize
+they build upon techniques which range from simple local search procedures
+ to complex learning processes;
+\end_layout
+
+\begin_layout Itemize
+they are approximate and usually non-deterministic;
+\end_layout
+
+\begin_layout Itemize
+they may incorporate mechanisms to avoid getting trapped in confined areas
+ of the search space;
+\end_layout
+
+\begin_layout Itemize
+their basic concepts permit an abstract-level description, which is not
+ problem-specific;
+\end_layout
+
+\begin_layout Itemize
+they may make use of domain-specific knowledge in the form of heuristics
+ that are controlled by the upper level strategy;
+\end_layout
+
+\begin_layout Itemize
+advanced metaheuristics use search experience (implemented as some form
+ of memory) to guide the search process.
+\end_layout
+
+\begin_layout Standard
+The strategies used by metaheuristics should provide a dynamic balance between
+ the exploitation of the accumulated search experience (commonly called
+ intensification) and the exploration of the search space (commonly called
+ diversification) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003"
+
+\end_inset
+
+.
+ This balance provides the necessary means to quickly identify promising
+ regions, and early discarding those which have already been explored or
+ don't provide solutions of better quality.
+ Promising regions within the search space, which are identified by the
+ obtained 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ solutions, are thoughfully explored during the intensification phase, hoping
+ to find better solutions.
+ On the other hand, during the diversification phase, not yet visited regions
+ are explored, making sure the search space as a whole is evenly explored,
+ thus avoid confining the search to a reduced number of regions.
+ In this context, the ultimate search algorithm in terms of diversification
+ is random search.
+ Random search generates a random solution in the search space at each iteration
+, without using memory 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ In terms of intensification, iterative local search is a representative
+ algorithm.
+ The steepest local search algorithm selects, at each iteration, the best
+ neighboring solution that improves the current one 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Metaheuristics are applicable where state-of-the-art exact algorithms cannot
+ tackle the given instances within the required time, either because of
+ the size or the structure of the given problem instances.
+ The meaning of 
+\begin_inset Quotes eld
+\end_inset
+
+required time
+\begin_inset Quotes erd
+\end_inset
+
+ within this context directly depends on the target optimization problem
+ itself.
+ A feasible or acceptable time may vary from some seconds to several months,
+ again, depending on the target optimization problem, e.g.
+ real-time decisions against structural-design problems.
+\end_layout
+
+\begin_layout Standard
+Based on the characterization given by Talbi 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+, let us summarize the essential properties of optimization problems that
+ justify the use of metaheuristics:
+\end_layout
+
+\begin_layout Itemize
+Very large problem instances.
+ Even though exact polynomial-time algorithms might be known for solving
+ the target problem, they are too expensive due to the size of instances.
+\end_layout
+
+\begin_layout Itemize
+Problems with hard real-time constraints, where a 
+\begin_inset Quotes eld
+\end_inset
+
+good solution
+\begin_inset Quotes erd
+\end_inset
+
+ has to be found online.
+ Metaheuristics appear as an alternative to exact algorithms in order to
+ reduce the search time.
+\end_layout
+
+\begin_layout Itemize
+A difficult problem of moderate size, which input instances have an intrincate
+ structure.
+\end_layout
+
+\begin_layout Itemize
+Optimization problems with time-consuming objective function(s) and/or constrain
+ts.
+ Indeed, various real-world optimization problems are characterized by the
+ huge computational cost of the objective functions.
+ Several radio-network design problems fall into this category.
+\end_layout
+
+\begin_layout Itemize
+Problems that cannot be solved with exhaustive search due to the non-analytical
+ models on which they are based.
+ These problems are defined by a black-box evaluation of the objective function
+ (see next section).
+\end_layout
+
+\begin_layout Standard
+The influence of these conditions may increase in the presence of non-determinis
+tic optimization models, e.g.
+ problems with complex Monte Carlo simulations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Creutz-Microcanonincal_monte_carlo_simulation:1983"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Undoubtedly, metaheuristics are rapidly gaining popularity as optimization
+ problems are increasing in both size and complexity.
+ Indeed, as the computing power of commodity hardware increases, the possibility
+ of building models of greater complexity is available for developing more
+ accurate models of real-world problems in engineering and science.
+\end_layout
+
+\begin_layout Subsection
+Black-box optimization
+\end_layout
+
+\begin_layout Standard
+A problem complexity is equivalent to the complexity of the best algorithm
+ solving that problem 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+.
+ If there exists a polynomial-time algorithm to solve a problem, we say
+ the problem is easy or tractable.
+ Similarly, if a problem is difficult or intractable, there is no known
+ polynomial-time algorithm to solve it.
+ 
+\end_layout
+
+\begin_layout Standard
+Many optimization problems cannot be formulated with a clear analytical
+ mathematical notation.
+ In such cases, the objective function may become a black box 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kargupta-Search_blackbox_optimization_and_sample_complexity:1996"
+
+\end_inset
+
+.
+ This is one of the main advantages when using metaheuristics, i.e.
+ there is no need of a complete knowledge of the targeted model.
+ Indeed, in a black box optimization, no analytical formulation of the objective
+ exists 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+, as Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-black_box_optimization"
+
+\end_inset
+
+ shows.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/black_box_optimization.png
+	lyxscale 20
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A metaheuristic optimization process using a black box for objective-function
+ evaluation.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:02-black_box_optimization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+More specifically, we say a function 
+\begin_inset Formula $f(\vec{x})$
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{n}$
+\end_inset
+
+,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is a black-box function if and only if 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+the domain 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ is known,
+\end_layout
+
+\begin_layout Itemize
+it is possible to get the value of 
+\begin_inset Formula $f$
+\end_inset
+
+ for each 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ based on simulation, and
+\end_layout
+
+\begin_layout Itemize
+there is no other information available for function 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Typically, the experiments associated with these kind of problems are very
+ expensive in terms of time and cost, since a simulation must be forced
+ to evaluate the solution.
+ Generally speaking, the most time-consuming part of a metaheuristic optimizatio
+n process is the evaluation of the objective function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ This is especially true when dealing with real-world problems of areas
+ such as structural design 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barthelemy-Approximation_concepts_for_optimum_structural_design:1993"
+
+\end_inset
+
+, molecular docking 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction:2007"
+
+\end_inset
+
+ and, the field on which this thesis focuses, radio-network design 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Pilot.power.optimization:2010"
+
+\end_inset
+
+.
+ A possible subtitution for lenghty evaluations is to reduce their complexity
+ by approximating the objective function, thus replacing the it with an
+ approximation during the optimization process.
+ This approach is known as meta-modeling 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ However, when dealing with approximations, some degree of solution quality
+ is inevitably sacrified.
+ As we will show in the following chapters, there is a very fine balance
+ between the number of evaluations and the quality of the achieved solutions.
+ Consequently, reducing the time spent in objective-function evaluation
+ should favorably influence the solution quality achieved by a preferred
+ metaheuristic algorithm.
+ A major portion of this thesis is dedicated to improve this specific aspect
+ on the area of radio-network optimization.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In practice, black-box evaluation of the objective function presents an
+ inherent problem.
+ In the context of research works related to radio-network optimization,
+ there is an increasingly habit of not providing the black-box used to evaluate
+ a given approach, and that leads to the results provided.
+ A quick review of the state-of-the-art in radio-network optimization indicates
+ that this fact has become increasingly regular in several published works
+ [refs???].
+ This fact creates a barrier to one of the most important phases of scientific
+ methodology: experimental reproducibility 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gauch2002scientific"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+There are several reasons why the situation has reached this point.
+ It is a known fact that proprierary software, providing good computational
+ models for radio-network simulation, is a very expensive tool for science.
+ Even neglecting the economical aspect, but considering the great variety
+ of software packages and license combinations, it is practically impossible
+ for a research laboratory to have at its disposal the whole pallete of
+ commercially-available solutions.
+ Moreover, genuine users of these applications are generally not allowed
+ to mention the formats, protocols, or algorithms used by the proprietary
+ software, since their disclosure is explicitly forbidden by the commercial
+ licenses.
+\end_layout
+
+\begin_layout Standard
+If we turn our attention to non-commercial and open-source packages for
+ radio-network simulation [refs!???], we would quickly run into mainly two
+ difficulties: poor documentation and low scalability.
+ The scalability issues shown by some projects [refs!???] retrain the packages
+ to be used in real-world environments, where big problem instances are
+ the rule.
+ Despite this, it is a huge merit and acknowledgement to the authors of
+ this packages, not only for providing it to the scientific community, including
+ their source code, but fundamentaly because providing an environment in
+ which different kinds of simulations are completely reproducible.
+ Regarding the lack of documentation, it represents a big hurdle when extending
+ the base code, which becomes a difficult taskj without the help of the
+ original authors of the package, who have a deep knowlegge of the code-base.
+ This knowledge is required in order to effectivelly expand the functionality
+ of the open-source tool in question.
+ This is especially true when dealing with complex simulation frameworks,
+ as the ones used for radio networks.
+\end_layout
+
+\begin_layout Subsection
+Metaheuristic algorithms
+\end_layout
+
+\begin_layout Standard
+Related literature groups metaheuristic algorithms due to their behaviour.
+ For example, the following is a list of fundamentally different optimization
+ algorithms, namely:
+\end_layout
+
+\begin_layout Itemize
+differential evolution, from the family of evolutionary algorithms;
+\end_layout
+
+\begin_layout Itemize
+differential ant-stigmergy algorithm, from the family of swarm-intelligence
+ algorithms; and
+\end_layout
+
+\begin_layout Itemize
+simulated annealing, from the group of classic metaheuristic algorithms,
+ targeted at combinatorial optimization problems.
+\end_layout
+
+\begin_layout Standard
+Each of these algorithms shall minimize an objective-function value by adopting
+ essentially disparate approaches, hence the diversity of applying algorithms
+ belonging to different families to solve the same optimization problem.
+ In this way we want to find out whether any of the presented approaches
+ is better suited for solving our problem.
+\end_layout
+
+\begin_layout Standard
+In the following sections we give a short introduction about their functioning
+ and controlling parameters.
+\end_layout
+
+\begin_layout Subsection
+Differential evolution
+\end_layout
+
+\begin_layout Standard
+Differential evolution (DE) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "storn1997_Differential_evolution"
+
+\end_inset
+
+ is a simple and powerful evolutionary algorithm proposed for global optimizatio
+n.
+ A wide range of optimization problems have been solved by applying DE 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "das2010_differential_evolution_state_of_the_art"
+
+\end_inset
+
+.
+ The algorithm exhibits a parallel direct search method, which utilizes
+ 
+\begin_inset Formula $D$
+\end_inset
+
+-dimensional parameter vectors.
+ The balancing problem is expressed in each component of a vector 
+\begin_inset Formula $X$
+\end_inset
+
+ of the population, which maps to the CPICH power of one cell under optimization
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+X_{aG}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} ,\label{eq:DE_mapping-1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $x_{i}\in P_{i}$
+\end_inset
+
+ represents a candidate CPICH power setting of cell 
+\begin_inset Formula $i$
+\end_inset
+
+, and 
+\begin_inset Formula $G$
+\end_inset
+
+ indicates the generation of an individual 
+\begin_inset Formula $a$
+\end_inset
+
+ in the population.
+ Since there are 
+\begin_inset Formula $|N|$
+\end_inset
+
+ cells in the mobile network, it follows that 
+\begin_inset Formula $D=|N|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In each generation, DE produces new parameter vectors by adding the weighted
+ difference between two population vectors to a third one 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "storn1997_Differential_evolution"
+
+\end_inset
+
+.
+ The resulting vector is retained if it yields a lower objective function
+ value than a predetermined population member; otherwise, the old vector
+ is kept.
+\end_layout
+
+\begin_layout Standard
+There are different variants of DE.
+ We have chosen the most popular one to solve our optimization problem,
+ called 
+\emph on
+DE/rand/1/bin
+\emph default
+.
+ The nomenclature used to name this variant indicates the way the algorithm
+ works:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+DE 
+\emph default
+denotes the differential evolution algorithm,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+rand 
+\emph default
+indicates that the individuals selected to compute the mutation values are
+ randomly chosen,
+\end_layout
+
+\begin_layout Itemize
+1
+\emph on
+ 
+\emph default
+specifies the number of pairs of selected solutions used to calculate the
+ weighted difference vector, and
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+bin 
+\emph default
+means that a binomial recombination operator is used.
+\end_layout
+
+\begin_layout Standard
+We considered four parameters to control the search process of DE: the populatio
+n size, the maximum number of generations for the algorithm to run, the
+ crossover constant, and the mutation scaling factor.
+\end_layout
+
+\begin_layout Standard
+An extensive description of DE and its variants may be found in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "price2005differential_evolution"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Differential ant-stigmergy algorithm
+\end_layout
+
+\begin_layout Standard
+Based on the metaheuristic Ant-Colony Optimization (ACO) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "dorigo2006ant_colony_optimization"
+
+\end_inset
+
+, the differential ant-stigmergy algorithm (DASA) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "korosec2010_DASA"
+
+\end_inset
+
+ provides a framework to successfully cope with high-dimensional numerical
+ optimization problems.
+ It creates a fine-grained discrete form of the search space, representing
+ it as a graph.
+ This graph is then used as the walking paths for the ants, which iteratively
+ improve the temporary best solution.
+\end_layout
+
+\begin_layout Standard
+The mapping between the balancing problem and DASA is similar to the one
+ depicted in Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DE_mapping-1"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:DASA_mapping-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, each ant, 
+\begin_inset Formula $a$
+\end_inset
+
+, creates its own solution vector, 
+\begin_inset Formula $X_{a}$
+\end_inset
+
+, during the minimization process.
+ At the end of every iteration, and after all the ants have created solutions,
+ they are evaluated to establish if any of them is better than the best
+ solution found so far.
+\end_layout
+
+\begin_layout Standard
+There are six parameters that control the way DASA explores the search space:
+ the number of ants, the discrete base, the pheromone dispersion factor,
+ the global scale-increasing factor, the global scale-decreasing factor,
+ and the maximum parameter precision.
+\end_layout
+
+\begin_layout Standard
+For a more in-depth explanation about these parameters and the DASA algorithm
+ itself, we refer the reader to 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "korosec2010_DASA"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Simulated annealing
+\end_layout
+
+\begin_layout Standard
+As the third optimization algorithm to tackle the balancing problem we have
+ chosen simulated annealing (SA) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kirkpatrick_OptimizationBySimulatesAnnealing"
+
+\end_inset
+
+, a classic metaheuristic algorithm often used when the search space is
+ discrete.
+ SA has proved to be a solid optimization algorithm, capable of giving high-qual
+ity solutions to a wide scope of optimization problems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Suman_SurveyOfSimulatedAnnealing"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+At each time step during the process, the system under optimization is in
+ a given 
+\emph on
+state
+\emph default
+.
+ The objective function maps a system state to a value known as the 
+\emph on
+energy
+\emph default
+ of the system in that state.
+ A 
+\emph on
+move
+\emph default
+ in the search space represents a change in the state of the system.
+ After making a move, the system may exhibit lower or higher energy, depending
+ on the results of the objective function.
+ When dealing with minimization problems, a better state always describes
+ lower energy than the previous one.
+\end_layout
+
+\begin_layout Standard
+SA incorporates the notion of 
+\emph on
+temperature
+\emph default
+, by which the probability of moving the current state of the system into
+ a worst one is lowered as the temperature decreases.
+ Exploration of the search space is thus induced at higher temperature,
+ whereas exploitation appears at lower temperature, when only improving
+ moves are accepted.
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:SA_move-1"
+
+\end_inset
+
+ shows the pseudo-code of a move in the search space of possible CPICH power
+ settings, resulting in a new state of the system.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Pseudo-code: a move in the search space of SA.
+\shape italic
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:SA_move-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row bottomspace="default">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Step
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i'=random\, cell(N)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{do}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,\,\, if\, rand()<0.5\, then\, p_{i'}^{\mathrm{NEW}}=p_{i'}+0.01$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,\,\, else\, p_{i'}^{\mathrm{NEW}}=p_{i'}-0.01$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{while}\, p_{i'}^{\mathrm{NEW}}\notin P_{i'}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula $p_{i'}=p_{i'}^{\mathrm{NEW}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At the first step, a cell, 
+\begin_inset Formula $i'$
+\end_inset
+
+, is randomly selected from the set of all cells in the network, 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In step 2, a change of +0.01
+\begin_inset space ~
+\end_inset
+
+dB or -0.01
+\begin_inset space ~
+\end_inset
+
+dB is applied with 50% probability to 
+\begin_inset Formula $p_{i'}$
+\end_inset
+
+.
+ The current CPICH power of cell 
+\begin_inset Formula $i'$
+\end_inset
+
+ is expressed in dBm.
+ The randomly generated CPICH power setting, 
+\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
+\end_inset
+
+, is checked for validity in step 3, i.e.
+ it must be an element of the set 
+\begin_inset Formula $P_{i'}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
+\end_inset
+
+ is not a valid CPICH power, step 2 is executed again, generating another
+ random CPICH power.
+ Finally, in step 4, the CPICH power of cell 
+\begin_inset Formula $i$
+\end_inset
+
+ is replaced by 
+\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is important to note that, as long as 
+\begin_inset Formula $|P_{i'}|>1$
+\end_inset
+
+, the algorithm shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:SA_move-1"
+
+\end_inset
+
+ shall never be trapped in an endless loop.
+ On the other hand, if 
+\begin_inset Formula $|P_{i'}|<2$
+\end_inset
+
+, there are no candidate CPICH powers for cell 
+\begin_inset Formula $i'$
+\end_inset
+
+ and thus no possibility of optimization by means of CPICH power adjustment.
+\end_layout
+
+\begin_layout Standard
+Notice also that the acceptance of a move in the search space is left to
+ SA and its stochastic components.
+\end_layout
+
+\begin_layout Section
+Optimization of radio networks
+\end_layout
+
+\begin_layout Standard
+Once a radio network is launched, an important part of its operation and
+ maintenance deals with monitoring its quality characteristics and making
+ changes in the configuration of the deployed equipment and parameter values
+ in order to improve its overall performance.
+\end_layout
+
+\begin_layout Standard
+The evolution from 3G to 4G has introduced not only the technology needed
+ to increase data capacity and voice quality, but also a greater complexity
+ in terms of network planning, deployment, and configuration, which have
+ rendered some of the traditionally used methods to be ineffective.
+ In a traditional approach (i.e.
+ manual), during the network planning and maintenance processes, a radio-network
+ simulation software executes the analysis, while an engineer makes the
+ change decisions.
+ Therefore, a radio-planning engineer adapts the network parameters manually
+ and the network-planning tool analyzes the given configuration.
+ If the obtained results are not acceptable, the analysis process has to
+ be repeated several times, until a given goal is achieved.
+\end_layout
+
+\begin_layout Standard
+The complexity of radio-network has grown even faster than their throughput
+ capacity, thus making it impossible to plan 4G radio networks with traditional
+ methods.
+ In this sense, an examination of colored coverage maps in conjunction with
+ some statistical analysis are no longer appropriate tools for troubleshooting
+ a network.
+ Moreover, since real-world 4G radio networks are large and many of their
+ configuration parameters are interdependent, an engineer is not able to
+ cope with the level of complexity present in such systems.
+ For that reason, the computer, along with specialized software, guides
+ the engineer to the most appropriate configuration for the network.
+ In the context of this work, we will refer to this process as radio-network
+ optimization.
+\end_layout
+
+\begin_layout Standard
+Radio-network optimization may be divided into two fundamental phases: analysis
+ and decision 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
+
+\end_inset
+
+.
+ The analysis phase consists on the examination of network performance,
+ which mainly focuses on the definition and collection of several Key Performanc
+e Indicators (KPIs).
+ KPIs are quantifiable measurements, agreed to beforehand, that reflect
+ network quality factors.
+ The second phase deals with the decision making, based on the analytical
+ results collected in the previous phase, about the configuration of a particula
+r configuration or parameter setting.
+ This process, depicted in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Optimization-cycle"
+
+\end_inset
+
+, is repeated until the achieved results are acceptable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/optimization_cycle.eps
 	width 40text%
 
 \end_inset
@@ -224,7 +2179,9 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Optimization cycle for 3G mobile networks.
+Typical optimization cycle for radio networks.
+ This sequence is repeated until the achieved results are acceptable.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Optimization-cycle"
@@ -245,54 +2202,30 @@ name "fig:Optimization-cycle"
 \end_layout
 
 \begin_layout Standard
-In a traditional method approach (i.e.
- manual), during network planning and optimization processes, a network
- planning software tool would execute the analysis, while the human would
- make the decisions.
- Consequently, a radio planning engineer configures network parameters manually
- and the network planning tool analyzes the given configuration.
- If the obtained results are not acceptable, the analysis process has to
- be repeated several times, until the goal is achieved.
-\end_layout
-
-\begin_layout Standard
-Modern 3G mobile networks are large and many of their key parameters are
- interdependent.
- Since an engineer is not able to cope with the level of complexity present
- in such systems, the computer, along with specialized software, guides
- the engineer to the most appropriate configuration for the network.
- In the context of this work, we will refer to this process as 
-\emph on
-optimization
-\emph default
-.
- The results of the optimization process are expected to provide advice
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Some works are already focusing on complete automation of these tasks (i.e.
- without human intervention).
-\end_layout
-
-\end_inset
-
- regarding deployment, extension or reconfiguration tasks of a 3G network.
+A common limitation of several optimization methods appearing in the literature
+ [ref!???] is their inability to meet the requirements needed by real-world
+ radio networks, since their computational-time complexity make them unfeasible
+ for practical use in industrial-sized scenarios.
+ Particularly, this limitation is more common in implementations targeting
+ traditional computer architectures of sequential execution [ref!???].
+ When analyzing real-world radio networks with thousands of transmitters
+ it is necessary to reduce the execution time of the optimization processes,
+ so that they are useful for practical use.
 \end_layout
 
 \begin_layout Section
-Optimization of 3G mobile networks
+Survey of optimization problems for radio networks
 \end_layout
 
 \begin_layout Standard
-Although wireless networks are increasingly more sophisticated, the need
- for optimization work is still far from declining.
- It has been established that most 3G radio network optimization problems
- are NP-hard, since computational time grows non-polynomially with the increase
- of the problem size 
+Since radio networks are increasingly more sophisticated, the need for optimizat
+ion methods, capable of copeing with greater complexity, is far from declining.
+ It has been established that most radio-network optimization problems are
+ NP-hard, since the computational time grows non-polynomially as the problem
+ size increases 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "amaldi:planning.umts.base.station.location"
+LatexCommand cite
+key "Amaldi-Planning_UMTS_base_station_locations:2003,Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Gordejuela-LTE_access_network_planning_and_optimization:2009,Han-Optimizing_cell_size_for_energy_saving_in_cellular_networks:2012,Lee-Proportional_fair_frequency_domain_packet_scheduling_for_LTE_uplink:2009,Razavi-Performance_improvement_of_LTE_tracking_area_design:2008,Siomina-Minimum_pilot_power_for_service_coverage:2007"
 
 \end_inset
 
@@ -301,52 +2234,86 @@ key "amaldi:planning.umts.base.station.location"
  already deployed networks that greatly increase the need for optimization
  methods, as described in 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "nawrocki2006understanding"
+LatexCommand cite
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
 :
 \end_layout
 
-\begin_layout Itemize
-Network performance improvement: more users covered with the same physical
- infrastructure, leaving room for parameter optimization only.
+\begin_layout Description
+Network
+\begin_inset space ~
+\end_inset
+
+performance
+\begin_inset space ~
+\end_inset
+
+improvement more users receive service coverage with the same physical infrastru
+cture, making parameter optimization the less expensive and only viable
+ short-term approach.
 \end_layout
 
-\begin_layout Itemize
-Changes in users’ profile: the introduction of new services puts additional
- stress on the infrastructure, requiring additional optimization efforts.
+\begin_layout Description
+Changes
+\begin_inset space ~
+\end_inset
+
+in
+\begin_inset space ~
+\end_inset
+
+users’
+\begin_inset space ~
+\end_inset
+
+profile the introduction of new and faster services puts additional stress
+ on the infrastructure, requiring additional optimization efforts.
 \end_layout
 
-\begin_layout Itemize
-Changing propagation conditions: the allocation of a higher frequency band
- for UMTS compared to GSM requires deployment of more 3G sites than in 2G
- networks, mostly in urban areas, thus increasing inter-cell interference.
+\begin_layout Description
+Changes
+\begin_inset space ~
+\end_inset
+
+in
+\begin_inset space ~
+\end_inset
+
+the
+\begin_inset space ~
+\end_inset
+
+propagation
+\begin_inset space ~
+\end_inset
+
+conditions the allocation of a different frequency band for LTE compared
+ to UMTS requires deployment of 4G sites, which radio propagation behaves
+ differently than in 3G networks, mostly in urban areas.
 \end_layout
 
 \begin_layout Standard
-In this sense, network operators have shown the need to define different
- optimization targets.
- These targets are formed by an objective function that maps possible values
- of configuration parameters into a value.
- Thus, each element (solution) of the solution space is assigned a comparable
- value, i.e.
- a real number.
+In this context, network operators define different optimization targets,
+ depending on the addressed optimization problem.
+ These targets are formed by an objective function that maps possible configurat
+ions into a real value.
  This number represents a quality rating of the proposed solution and it
  is used to compare different solutions among each other, and ultimately
  select the best one.
  Unfortunately, there is no definitive objective function in the field of
- 3G network optimization 
+ radio-network optimization 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "nawrocki2006understanding"
+LatexCommand cite
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
 .
- However, it is possible to optimize for different targets such as coverage,
- base station location, etc.
+ However, it is possible to optimize for different targets such as service
+ coverage, base station locations, interference levels, etc.
 \end_layout
 
 \begin_layout Standard
@@ -360,7 +2327,7 @@ off-line
 \end_inset
 
 , meaning that the optimization software is not an active functioning part
- of the network in operation.
+ of the radio network in operation.
  Statistical data about network operation is used as the input or feedback
  information for different optimization targets.
 \end_layout
@@ -375,11 +2342,11 @@ This paper gives an overview of well-known optimization problems in 3G mobile
  with some concluding remarks.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Optimizing base station locations
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Problem formulation
 \end_layout
 
@@ -572,7 +2539,7 @@ A different formulation considers the site selection problem as a
  area are maximized with the lowest installation cost.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Proposed solutions
 \end_layout
 
@@ -693,7 +2660,7 @@ key "GA.for.antenna.placement:2005"
  SPEA2, NSGA-II and PESA.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Optimizing antenna parameters
 \end_layout
 
@@ -867,7 +2834,7 @@ name "fig:Antenna-tilt"
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Proposed solutions
 \end_layout
 
@@ -955,7 +2922,7 @@ key "Antenna.azimuth.tilt:2009"
  common pilot channel power setting.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Optimizing common pilot channel power
 \end_layout
 
@@ -999,7 +2966,7 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Proposed solutions
 \end_layout
 
@@ -1074,7 +3041,7 @@ key "CPICH.optimization:2009"
  optimal solutions within a few seconds, even for large networks.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Optimizing CPICH and antenna parameters
 \end_layout
 
@@ -1089,7 +3056,7 @@ Both the antenna tilt and azimuth directly affect the direction and range
  address all three parameters.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Proposed solutions
 \end_layout
 
@@ -1167,7 +3134,7 @@ key "GA.for.tilt.and.CPICH:2004"
  technique is used to improve their fitness.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Optimizing coverage 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1185,18 +3152,9 @@ Coverage is maybe the most common optimization objective considered in 3G
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "Sf_cov"
-symbol "$f_{cov}$"
-description "Objective function for the coverage optimization problem."
-
-\end_inset
-
-
 \begin_inset Formula 
 \[
-f_{cov}=\frac{A_{covered}}{A_{total}}
+f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}}
 \]
 
 \end_inset
@@ -1205,17 +3163,49 @@ f_{cov}=\frac{A_{covered}}{A_{total}}
 \end_layout
 
 \begin_layout Standard
+\noindent
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$f_{\\mathrm{cov}}$"
+description "Objective function for the service-coverage optimization problem."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$A_{\\mathrm{covered}}$"
+description "Area under service coverage of the mobile network."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$A_{\\mathrm{total}}$"
+description "Complete geographical area under optimization."
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
 where 
-\begin_inset Formula $A_{covered}$
+\begin_inset Formula $A_{\mathrm{covered}}$
 \end_inset
 
  represents the area covered by the network and 
-\begin_inset Formula $A_{total}$
+\begin_inset Formula $A_{\mathrm{total}}$
 \end_inset
 
  represents the total area under optimization.
  Thus, the expression 
-\begin_inset Formula $f_{cov}$
+\begin_inset Formula $f_{\mathrm{cov}}$
 \end_inset
 
  represents the portion of the total area that is actually under network
@@ -1225,10 +3215,18 @@ where
 
 \begin_layout Standard
 The area being optimized is usually divided in squares (or pixels) of a
- certain size, which may vary from 10 to 100 meters, creating a grid of
- a certain resolution.
- A square is considered covered, if the signal to noise ratio is above a
- given threshold 
+ certain size, creating a regular square grid (RSG
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "RSG"
+description "Regular square grid."
+
+\end_inset
+
+) of a certain resolution.
+ A pixel is considered covered if the signal to noise ratio is above a given
+ threshold 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "3GPP_TS_25.133"
@@ -1240,14 +3238,23 @@ key "3GPP_TS_25.133"
 \begin_inset Formula $cov(x,y)$
 \end_inset
 
-, which returns 1 if the square located at 
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$cov(x,y)$"
+description "Returns 1 if the coordinate $(x,y)$ is under mobile-network coverage."
+
+\end_inset
+
+, which returns 1 if the pixel located at 
 \begin_inset Formula $(x,y)$
 \end_inset
 
  is covered, and 0 otherwise.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Proposed solutions
 \end_layout
 
@@ -1315,7 +3322,16 @@ key "Coverage.optimization.with.cost.function:2002"
  method that minimizes the afore mentioned function.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
+Optimizing alignment of soft-handover areas
+\end_layout
+
+\begin_layout Standard
+We have defined this new problem.
+ About the connecting of this 3G-specific problem with LTE ...???
+\end_layout
+
+\begin_layout Subsection
 Discussion
 \end_layout
 
@@ -1424,28 +3440,6 @@ In the context of this survey and after reviewing many different papers
  the results are not comparable with each other.
  For this reason, we have decided to concentrate the following discussion
  on the optimization methods used, leaving the results aside.
-\end_layout
-
-\begin_layout Subsection
-The reproducibility problem
-\end_layout
-
-\begin_layout Standard
-A quick review of the state-of-the-art in 3G network optimization indicates
- that software, providing good computational models, is a very expensive
- tool for science.
- Moreover, since the vast majority of this software is proprietary, it relies
- on closed source, formats and protocols, which disclosure is explicitly
- forbidden by their licenses.
- This fact creates a big hurdle to one of the key phases of scientific methodolo
-gy 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gauch2002scientific"
-
-\end_inset
-
-: experimental reproducibility.
 \end_layout
 
 \begin_layout Subsection
@@ -1803,7 +3797,7 @@ Coverage network planning.
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Section*
 Summary
 \end_layout
 
@@ -1837,6 +3831,213 @@ Also, as it may be observed in some of the presented references, it is often
  afterward, to refine the search.
  Sometimes it may also be useful to apply a simple search method at the
  end to find better solutions in the vicinity of a current promising one.
+\end_layout
+
+\begin_layout Section
+Principles of mobile radio networks
+\end_layout
+
+\begin_layout Subsection
+Quality of service 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Quality-of-service"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+QoS...???
+\end_layout
+
+\begin_layout Subsection
+Handover and soft-handover 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Handover-and-soft-handover"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In mobile networks, handover is one of the main features that allows user's
+ mobility 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+ The concept behind the handover operation is simple: when a user moves
+ from the coverage area of a cell to the coverage area of a neighboring
+ cell, the system creates a new connection with the latter cell and disconnects
+ the user from the former one, while keeping the current connection active.
+ Soft-handover (SHO
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SHO"
+description "Soft handover."
+
+\end_inset
+
+), on the other hand, is a possibility available in mobile networks using
+ the Wideband Code Division Multiple Access (WCDMA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "WCDMA"
+description "Wideband Code Division Multiple Access."
+
+\end_inset
+
+) technology, which the UMTS employs.
+ SHO enhances handover functionality by allowing a user to potentially operate
+ on multiple radio links in parallel.
+ Since different users are separated by unique spreading codes, the detection
+ of single user's signal is implemented by despreading with the same code
+ sequence used in the transmitter 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Every mobile terminal constantly monitors the common pilot power channel
+ (CPICH
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "CPICH"
+description "Common Pilot power Channel."
+
+\end_inset
+
+) of the connected cell and its neighbors.
+ The information about these measurements is sent to the network by the
+ user terminal (i.e.
+ mobile).
+ The SHO condition depends on the relative received signal quality from
+ different cells and the SHO window, which triggers the addition of a cell
+ to the user's active set.
+ Depending on radio propagation characteristics and different transceiver
+ capabilities, the radio transmission can gain more than 3 dB out of a SHO
+ situation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+ From this point of view, SHO is a method to reduce interference and improve
+ radio quality, particularly at the cell border where radio coverage is
+ of inferior quality.
+ In UMTS Release 99 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "3GPP_R99"
+
+\end_inset
+
+, SHO is specified to work from the network towards the user (i.e.
+ downlink), and from the user towards the network (i.e.
+ uplink).
+\end_layout
+
+\begin_layout Standard
+With the introduction of High Speed Packet Access (HSPA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HSPA"
+description "High Speed Packet Access."
+
+\end_inset
+
+) as an improvement of the performance existing in WCDMA protocols, the
+ role SHO plays in mobile network configuration and functioning slightly
+ changed.
+ The key difference is that High Speed Downlink Packet Access (HSDPA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HSDPA"
+description "High Speed Downlink Packet Access."
+
+\end_inset
+
+) does not support SHO, whereas the High Speed Uplink Packet Access (HSUPA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HSUPA"
+description "High Speed Uplink Packet Access."
+
+\end_inset
+
+) does.
+ This particular distinction is discussed in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
+
+\end_inset
+
+, since it has some key implications in the balanced distribution of SHO
+ areas, and thus in the quality of HSPA services 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "holma2006hsdpa"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Add a Figure to better explain SHO and SHO areas.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Pilot signal and power 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Pilot-signal-and-power"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The CPICH transmit power is typically between 5% to 10% of the total downlink
+ transmit power of the base station 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RadioNetworkPlanningAndOptimisationForUMTS"
+
+\end_inset
+
+, but there is no standardized method to ﬁnd a CPICH power setting.
 \end_layout
 
 \end_body

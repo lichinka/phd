@@ -84,7 +84,189 @@ Many researchers believe the computer has become the third method to do
  research, behind theory and experimentation, for both science and engineering.
  Although there is no complete agreement on the position intended for scientific
  computing with respect to the other two methods, it is undeniable that
- computational methods are an essential tool in most disciplines.
+ computational methods are an essential tool in most disciplines, particularly
+ in those related to decision making.
+\end_layout
+
+\begin_layout Standard
+Nowadays, decision making is present practially everywhere.
+ As scientistis, engineers and managers have to make decisions in more complex
+ and competitive circumnstances every day, decision making involves dealing
+ with rational and optimal approaches.
+ According to Talbi 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+, decision making consists in the following steps:
+\end_layout
+
+\begin_layout Itemize
+formulate the problem,
+\end_layout
+
+\begin_layout Itemize
+model the problem, 
+\end_layout
+
+\begin_layout Itemize
+optimize the problem, and
+\end_layout
+
+\begin_layout Itemize
+implement a solution.
+\end_layout
+
+\begin_layout Standard
+Formulating a decision problem means making an initial statement about it.
+ Despite this first formulation may be imprecise, the objectives of the
+ problem are outlined, together with internal and external factors that
+ have some degree of influence over it.
+ During the modelling of the problem, an abstract mathematical model is
+ built for it.
+ Sometimes this model is inspired by similar models in the literature, making
+ it possible to tackle the problem with well-studied methods.
+ After a model of the problem is available, the optimization step, i.e.
+ generating 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ solutions for the problem, may begin.
+ It is worth pointing out that the resulting solutions are given for the
+ abstract model, and not for the original problem itself.
+ Therefore, the performance of the obtained solution is indicative when
+ the model is an accurate one 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ In the last step, the obtained solution is practically tested by the decision
+ maker and implemented if it is an 
+\begin_inset Quotes eld
+\end_inset
+
+acceptable
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ one.
+ In case of 
+\begin_inset Quotes eld
+\end_inset
+
+bad
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+unacceptable
+\begin_inset Quotes erd
+\end_inset
+
+ solutions, the decision-making process is repeated, possibly improving
+ the model and/or the optimization algorithm.
+ The process, as described here, is depicted in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:01-decision_making_process"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../02-background_and_motivation/img/optimization_cycle.png
+	lyxscale 20
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The classical decision-making process, as presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ Multiple iterations of this process improve the optimization algorithm
+ and/or model until an acceptable solution is found.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:01-decision_making_process"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -107,8 +289,8 @@ key "law2007simulation"
 \end_layout
 
 \begin_layout Standard
-A model is a simple representation of a studied problem, and one of its
- purposes is to predict the effects of variations within the system.
+A model is a simplified representation of a studied problem, and one of
+ its purposes is to predict the effects of variations within the system.
  A good model is a balance between realism and simplicity.
  The system simulation, on the other hand, is the operation of the model.
  Its configuration can also be changed, allowing multiple experimental execution
@@ -121,27 +303,21 @@ key "maria1997introduction"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Problems that are categorized as of large size and of considerable complexity
- represent a challenge because of the different involved disciplines and
- the degree of difficulty of their modeling.
+ However, it is important to understand that the models used in scientific
+ simulations and engineering never offer a perfect model of the system they
+ represent, but only a subset of its composition and dynamics.
+ For this reason, experimentation and expert observation will always be
+ essential as reference points for understanding the studied phenomena.
+ Consequently, problems categorized as of large size and of considerable
+ complexity represent a challenge, because of the different involved disciplines
+ and the degree of difficulty of their modeling.
  Radio networks, in particular those of the third and fourth generations,
  fall under this characterization.
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace medskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Mobile radio networks represent one of the most fast-growing technology
- markets since the introduction of the Global System for Mobile communications
- (GSM
+Radio networks represent one of the most fast-growing technology markets
+ since the introduction of the Global System for Mobile communications (GSM
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -184,10 +360,36 @@ key "3GPP_TR_23.101"
 \end_inset
 
  marks an evolution from 2G, representing a milestone for the third generation
- of mobile radio networks (3G).
+ of mobile radio networks (3G
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "3G"
+description "Third Generation of mobile networks."
+
+\end_inset
+
+).
  In recent years, the first commercial networks implementing the Long Term
- Evolution (LTE), also known as fourth generation (4G) LTE, have also appeared
- [ref???].
+ Evolution (LTE
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "LTE"
+description "Long Term Evolution."
+
+\end_inset
+
+), also known as fourth generation (4G
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "4G"
+description "Fourth Generation of mobile networks."
+
+\end_inset
+
+) LTE, have also appeared [ref???].
  The always increasing demand for more bandwidth has been one of the main
  forces behind the standardization and later implementation of systems deliverin
 g higher speed data services in order to improve the user's experience.
@@ -296,7 +498,7 @@ This thesis focuses on providing methods and tools to ??? the pointed drawbacks.
 \end_layout
 
 \begin_layout Section
-Motivation
+Scope
 \end_layout
 
 \begin_layout Standard

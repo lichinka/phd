@@ -1,0 +1,123 @@
+\BOOKMARK [0][]{Doc-Start}{List of Figures}{}% 1
+\BOOKMARK [0][]{Doc-Start}{List of Tables}{}% 2
+\BOOKMARK [0][]{Doc-Start}{List of Algorithms}{}% 3
+\BOOKMARK [0][]{chapter*.1}{Abbreviations}{}% 4
+\BOOKMARK [0][]{chapter*.1}{Symbols}{}% 5
+\BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 6
+\BOOKMARK [1][]{section.1.1}{1.1 Problem Formulation}{chapter.1}% 7
+\BOOKMARK [1][]{section.1.2}{1.2 Challenges}{chapter.1}% 8
+\BOOKMARK [1][]{section.1.3}{1.3 Approach and Hypothesis}{chapter.1}% 9
+\BOOKMARK [1][]{section.1.4}{1.4 Scientific Contributions}{chapter.1}% 10
+\BOOKMARK [1][]{section.1.5}{1.5 Overview of the Thesis Structure}{chapter.1}% 11
+\BOOKMARK [1][]{section.1.6}{1.6 Publications}{chapter.1}% 12
+\BOOKMARK [0][]{chapter.2}{2 Related Work}{}% 13
+\BOOKMARK [1][]{section.2.1}{2.1 Activity Recognition}{chapter.2}% 14
+\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Vision-Based Activity Recognition}{section.2.1}% 15
+\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Sensor-Based Activity Recognition}{section.2.1}% 16
+\BOOKMARK [1][]{section.2.2}{2.2 Anomalous and Suspicious Behavior Detection}{chapter.2}% 17
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Pattern Analysis}{section.2.2}% 18
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Transaction Analysis}{section.2.2}% 19
+\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Plan Recognition}{section.2.2}% 20
+\BOOKMARK [-1][]{part.1}{I Deviant Behavior Detection}{}% 21
+\BOOKMARK [0][]{chapter.3}{3 Activity Recognition}{part.1}% 22
+\BOOKMARK [1][]{section.3.1}{3.1 Problem Statement and Basic Ideas}{chapter.3}% 23
+\BOOKMARK [1][]{section.3.2}{3.2 Dealing with Noise}{chapter.3}% 24
+\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Dealing with Outliers}{section.3.2}% 25
+\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Missing Values and Velocity Estimation}{section.3.2}% 26
+\BOOKMARK [2][]{subsection.3.2.3}{3.2.3 Spatio-Temporal Body Constraints}{section.3.2}% 27
+\BOOKMARK [1][]{section.3.3}{3.3 Feature Vector}{chapter.3}% 28
+\BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Features}{section.3.3}% 29
+\BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Canonical Representation}{section.3.3}% 30
+\BOOKMARK [2][]{subsection.3.3.3}{3.3.3 Activity Recognition Model}{section.3.3}% 31
+\BOOKMARK [1][]{section.3.4}{3.4 Reducing Spurious Activity Transitions}{chapter.3}% 32
+\BOOKMARK [2][]{subsection.3.4.1}{3.4.1 Sequential Grammar-Based Classifier}{section.3.4}% 33
+\BOOKMARK [2][]{subsection.3.4.2}{3.4.2 Hidden Markov Models}{section.3.4}% 34
+\BOOKMARK [1][]{section.3.5}{3.5 Compound-Activity Recognition}{chapter.3}% 35
+\BOOKMARK [1][]{section.3.6}{3.6 Recognition of Agent-Agent Interactions}{chapter.3}% 36
+\BOOKMARK [1][]{section.3.7}{3.7 Summary and Discussion}{chapter.3}% 37
+\BOOKMARK [0][]{chapter.4}{4 Behavior Signatures}{part.1}% 38
+\BOOKMARK [1][]{section.4.1}{4.1 Definitions}{chapter.4}% 39
+\BOOKMARK [1][]{section.4.2}{4.2 Spatio-Activity Matrix}{chapter.4}% 40
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Time Complexity Analysis}{section.4.2}% 41
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Visualizations}{section.4.2}% 42
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Feature Extraction}{section.4.2}% 43
+\BOOKMARK [1][]{section.4.3}{4.3 Summary and Discussion}{chapter.4}% 44
+\BOOKMARK [0][]{chapter.5}{5 Anomalous and Suspicious Behavior Detection}{part.1}% 45
+\BOOKMARK [1][]{section.5.1}{5.1 Detection Objectives}{chapter.5}% 46
+\BOOKMARK [1][]{section.5.2}{5.2 Detection Performance}{chapter.5}% 47
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Performance Measures}{section.5.2}% 48
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 False Positive Paradox}{section.5.2}% 49
+\BOOKMARK [1][]{section.5.3}{5.3 Detectors}{chapter.5}% 50
+\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Frequentist Estimator}{section.5.3}% 51
+\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Density Estimator}{section.5.3}% 52
+\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Machine Learning Approaches}{section.5.3}% 53
+\BOOKMARK [1][]{section.5.4}{5.4 Combining Multiple Detectors}{chapter.5}% 54
+\BOOKMARK [1][]{section.5.5}{5.5 Summary and Discussion}{chapter.5}% 55
+\BOOKMARK [0][]{chapter.6}{6 Accumulating Behavior Evaluations Over Time}{part.1}% 56
+\BOOKMARK [1][]{section.6.1}{6.1 Problem Statement}{chapter.6}% 57
+\BOOKMARK [1][]{section.6.2}{6.2 Detection Scheme}{chapter.6}% 58
+\BOOKMARK [1][]{section.6.3}{6.3 Detectors}{chapter.6}% 59
+\BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Na\357ve Bayes Detector}{section.6.3}% 60
+\BOOKMARK [2][]{subsection.6.3.2}{6.3.2 Hidden Markov Models}{section.6.3}% 61
+\BOOKMARK [2][]{subsection.6.3.3}{6.3.3 Utility-Based Plan Recognition}{section.6.3}% 62
+\BOOKMARK [1][]{section.6.4}{6.4 Utilities as Potential Functions}{chapter.6}% 63
+\BOOKMARK [2][]{subsection.6.4.1}{6.4.1 Exponential Observation Utility}{section.6.4}% 64
+\BOOKMARK [1][]{section.6.5}{6.5 Summary and Discussion}{chapter.6}% 65
+\BOOKMARK [0][]{chapter.7}{7 A Unified Detection Framework}{part.1}% 66
+\BOOKMARK [1][]{section.7.1}{7.1 Framework Components}{chapter.7}% 67
+\BOOKMARK [2][]{subsection.7.1.1}{7.1.1 Framework Levels}{section.7.1}% 68
+\BOOKMARK [2][]{subsection.7.1.2}{7.1.2 Processing Steps}{section.7.1}% 69
+\BOOKMARK [1][]{section.7.2}{7.2 Framework Instantiation}{chapter.7}% 70
+\BOOKMARK [2][]{subsection.7.2.1}{7.2.1 Learning and Detection}{section.7.2}% 71
+\BOOKMARK [1][]{section.7.3}{7.3 Summary}{chapter.7}% 72
+\BOOKMARK [-1][]{part.2}{II Empirical Studies}{}% 73
+\BOOKMARK [0][]{chapter.8}{8 Ambient Assisted Living Domain}{part.2}% 74
+\BOOKMARK [1][]{section.8.1}{8.1 Introduction and Background}{chapter.8}% 75
+\BOOKMARK [1][]{section.8.2}{8.2 System Architecture}{chapter.8}% 76
+\BOOKMARK [2][]{subsection.8.2.1}{8.2.1 Sensors and Observations}{section.8.2}% 77
+\BOOKMARK [2][]{subsection.8.2.2}{8.2.2 Activity Recognition Pipeline}{section.8.2}% 78
+\BOOKMARK [2][]{subsection.8.2.3}{8.2.3 Behavior Analysis}{section.8.2}% 79
+\BOOKMARK [1][]{section.8.3}{8.3 Experimental Evaluation}{chapter.8}% 80
+\BOOKMARK [2][]{subsection.8.3.1}{8.3.1 Activity Recognition}{section.8.3}% 81
+\BOOKMARK [2][]{subsection.8.3.2}{8.3.2 Anomalous Behavior Detection}{section.8.3}% 82
+\BOOKMARK [1][]{section.8.4}{8.4 Discussion}{chapter.8}% 83
+\BOOKMARK [1][]{section.8.5}{8.5 Conclusion}{chapter.8}% 84
+\BOOKMARK [0][]{chapter.9}{9 Surveillance Domain}{part.2}% 85
+\BOOKMARK [1][]{section.9.1}{9.1 Introduction and Background}{chapter.9}% 86
+\BOOKMARK [1][]{section.9.2}{9.2 System Architecture}{chapter.9}% 87
+\BOOKMARK [2][]{subsection.9.2.1}{9.2.1 Sensors and Observations}{section.9.2}% 88
+\BOOKMARK [2][]{subsection.9.2.2}{9.2.2 Atomic Activities}{section.9.2}% 89
+\BOOKMARK [2][]{subsection.9.2.3}{9.2.3 Compound Activities and Agent-Agent Interactions}{section.9.2}% 90
+\BOOKMARK [2][]{subsection.9.2.4}{9.2.4 Suspicious Behavior Evaluation}{section.9.2}% 91
+\BOOKMARK [1][]{section.9.3}{9.3 Experimental Evaluation}{chapter.9}% 92
+\BOOKMARK [2][]{subsection.9.3.1}{9.3.1 Detection Based on the Action Sequence}{section.9.3}% 93
+\BOOKMARK [1][]{section.9.4}{9.4 Identifying a Dangerous Driver}{chapter.9}% 94
+\BOOKMARK [1][]{section.9.5}{9.5 Conclusion}{chapter.9}% 95
+\BOOKMARK [0][]{chapter.10}{10 Security Domain}{part.2}% 96
+\BOOKMARK [1][]{section.10.1}{10.1 Introduction and Background}{chapter.10}% 97
+\BOOKMARK [1][]{section.10.2}{10.2 Hierarchal Multimodal Framework}{chapter.10}% 98
+\BOOKMARK [2][]{subsection.10.2.1}{10.2.1 Functional Description}{section.10.2}% 99
+\BOOKMARK [2][]{subsection.10.2.2}{10.2.2 Architecture}{section.10.2}% 100
+\BOOKMARK [2][]{subsection.10.2.3}{10.2.3 Observing the User's Behavior}{section.10.2}% 101
+\BOOKMARK [2][]{subsection.10.2.4}{10.2.4 Experimental Environment}{section.10.2}% 102
+\BOOKMARK [2][]{subsection.10.2.5}{10.2.5 Ontology}{section.10.2}% 103
+\BOOKMARK [1][]{section.10.3}{10.3 Detectors}{chapter.10}% 104
+\BOOKMARK [2][]{subsection.10.3.1}{10.3.1 Expert Rules Detector}{section.10.3}% 105
+\BOOKMARK [2][]{subsection.10.3.2}{10.3.2 Micro-Movement Detector}{section.10.3}% 106
+\BOOKMARK [2][]{subsection.10.3.3}{10.3.3 Macro-Movement and Meta-Detector}{section.10.3}% 107
+\BOOKMARK [2][]{subsection.10.3.4}{10.3.4 Visual Detector}{section.10.3}% 108
+\BOOKMARK [2][]{subsection.10.3.5}{10.3.5 Multimodal Detector Integration}{section.10.3}% 109
+\BOOKMARK [1][]{section.10.4}{10.4 Experimental Results}{chapter.10}% 110
+\BOOKMARK [2][]{subsection.10.4.1}{10.4.1 Learning Phase}{section.10.4}% 111
+\BOOKMARK [2][]{subsection.10.4.2}{10.4.2 Evaluation Phase}{section.10.4}% 112
+\BOOKMARK [1][]{section.10.5}{10.5 Discussion}{chapter.10}% 113
+\BOOKMARK [0][]{chapter.11}{11 Conclusions}{part.2}% 114
+\BOOKMARK [1][]{section.11.1}{11.1 Summary and Discussion}{chapter.11}% 115
+\BOOKMARK [1][]{section.11.2}{11.2 Scientific Contributions}{chapter.11}% 116
+\BOOKMARK [1][]{section.11.3}{11.3 Future Work}{chapter.11}% 117
+\BOOKMARK [0][]{chapter.12}{12 References}{part.2}% 118
+\BOOKMARK [0][]{chapter*.54}{Appendix A: Generating Suspicious Behavior}{part.2}% 119
+\BOOKMARK [0][]{chapter*.57}{Appendix B: Bibliography}{part.2}% 120
+\BOOKMARK [0][]{chapter*.66}{Appendix C: Biography}{part.2}% 121
+\BOOKMARK [0][]{chapter*.67}{Appendix D: Acknowledgments}{part.2}% 122
+\BOOKMARK [0][]{chapter*.67}{Index}{part.2}% 123

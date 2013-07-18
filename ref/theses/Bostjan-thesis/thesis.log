@@ -1,0 +1,2305 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.3.27)  5 MAY 2013 10:09
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**thesis.tex
+(./thesis.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, et
+hiopic, farsi, arabic, pinyin, croatian, bulgarian, ukrainian, russian, slovak,
+ czech, danish, dutch, usenglishmax, ukenglish, finnish, french, basque, ngerma
+n, german, swissgerman, ngerman-x-2012-05-30, german-x-2012-05-30, monogreek, g
+reek, ibycus, ancientgreek, hungarian, bengali, tamil, hindi, telugu, gujarati,
+ sanskrit, malayalam, kannada, assamese, marathi, oriya, panjabi, italian, lati
+n, latvian, lithuanian, mongolian, mongolianlmc, nynorsk, bokmal, indonesian, e
+speranto, coptic, welsh, irish, interlingua, serbian, serbianc, slovenian, friu
+lan, romansh, estonian, romanian, armenian, uppersorbian, turkish, afrikaans, i
+celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, th
+ai, loaded.
+(./MPSthesis.cls
+Document Class: MPSthesis 2009/01/15 v1.0 MPS thesis class
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk11.clo
+File: bk11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty
+Package: tocloft 2010/10/13 v2.3e parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 43.
+\cftparskip=\skip43
+\cftbeforetoctitleskip=\skip44
+\cftaftertoctitleskip=\skip45
+\cftbeforepartskip=\skip46
+\cftpartnumwidth=\skip47
+\cftpartindent=\skip48
+\cftbeforechapskip=\skip49
+\cftchapindent=\skip50
+\cftchapnumwidth=\skip51
+\cftbeforesecskip=\skip52
+\cftsecindent=\skip53
+\cftsecnumwidth=\skip54
+\cftbeforesubsecskip=\skip55
+\cftsubsecindent=\skip56
+\cftsubsecnumwidth=\skip57
+\cftbeforesubsubsecskip=\skip58
+\cftsubsubsecindent=\skip59
+\cftsubsubsecnumwidth=\skip60
+\cftbeforeparaskip=\skip61
+\cftparaindent=\skip62
+\cftparanumwidth=\skip63
+\cftbeforesubparaskip=\skip64
+\cftsubparaindent=\skip65
+\cftsubparanumwidth=\skip66
+\cftbeforeloftitleskip=\skip67
+\cftafterloftitleskip=\skip68
+\cftbeforefigskip=\skip69
+\cftfigindent=\skip70
+\cftfignumwidth=\skip71
+\c@lofdepth=\count88
+\c@lotdepth=\count89
+\cftbeforelottitleskip=\skip72
+\cftafterlottitleskip=\skip73
+\cftbeforetabskip=\skip74
+\cfttabindent=\skip75
+\cfttabnumwidth=\skip76
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip77
+\f@ncyO@elh=\skip78
+\f@ncyO@erh=\skip79
+\f@ncyO@olh=\skip80
+\f@ncyO@orh=\skip81
+\f@ncyO@elf=\skip82
+\f@ncyO@erf=\skip83
+\f@ncyO@olf=\skip84
+\f@ncyO@orf=\skip85
+)
+(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks15
+\footnotemargin=\dimen103
+\c@pp@next@reset=\count90
+\c@@fnserial=\count91
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip86
+\bibsep=\skip87
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count92
+)
+(/var/lib/texmf/tex/generic/babel/babel.sty
+Package: babel 2008/07/08 v3.8m The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/english.ldf
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count93
+\U@D=\dimen104
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count94
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/supertabular/supertabular.sty
+Package: supertabular 2004/02/20 v4.1e the supertabular environment
+\c@tracingst=\count95
+\ST@wd=\dimen105
+\ST@rightskip=\skip88
+\ST@leftskip=\skip89
+\ST@parfillskip=\skip90
+\ST@pageleft=\dimen106
+\ST@headht=\dimen107
+\ST@tailht=\dimen108
+\ST@pagesofar=\dimen109
+\ST@pboxht=\dimen110
+\ST@lineht=\dimen111
+\ST@stretchht=\dimen112
+\ST@prevht=\dimen113
+\ST@toadd=\dimen114
+\ST@dimen=\dimen115
+\ST@pbox=\box26
+)
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2012/02/19 v3.2f Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2012/01/12 v1.4b caption3 kernel (AR)
+\captionmargin=\dimen116
+\captionmargin@=\dimen117
+\captionwidth=\dimen118
+\caption@indent=\dimen119
+\caption@parindent=\dimen120
+\caption@hangindent=\dimen121
+)
+\c@ContinuedFloat=\count96
+Package caption Info: supertabular package is loaded.
+)
+\c@KVtest=\count97
+\sf@farskip=\skip91
+\sf@captopadj=\dimen122
+\sf@capskip=\skip92
+\sf@nearskip=\skip93
+\c@subfigure=\count98
+\c@subfigure@save=\count99
+\c@subtable=\count100
+\c@subtable@save=\count101
+\sf@top=\skip94
+\sf@bottom=\skip95
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen123
+\lightrulewidth=\dimen124
+\cmidrulewidth=\dimen125
+\belowrulesep=\dimen126
+\belowbottomsep=\dimen127
+\aboverulesep=\dimen128
+\abovetopsep=\dimen129
+\cmidrulesep=\dimen130
+\cmidrulekern=\dimen131
+\defaultaddspace=\dimen132
+\@cmidla=\count102
+\@cmidlb=\count103
+\@aboverulesep=\dimen133
+\@belowrulesep=\dimen134
+\@thisruleclass=\count104
+\@lastruleclass=\count105
+\@thisrulewidth=\dimen135
+)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen136
+)
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen137
+\extrarowheight=\dimen138
+\NC@list=\toks17
+\extratabsurround=\skip96
+\backup@length=\skip97
+)
+\everycr=\toks18
+\minrowclearance=\skip98
+)
+\rownum=\count106
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count107
+\float@exts=\toks19
+\float@box=\box27
+\@float@everytoks=\toks20
+\@floatcapt=\box28
+)
+\@float@every@algorithm=\toks21
+\c@algorithm=\count108
+)
+(/usr/share/texlive/texmf-dist/tex/latex/nomencl/nomencl.sty
+Package: nomencl 2005/09/22 v4.2 Nomenclature package (LN)
+\nomlabelwidth=\dimen139
+\nom@tempdim=\dimen140
+\nomitemsep=\skip99
+)
+\@glossaryfile=\write3
+\openout3 = `thesis.glo'.
+
+
+Writing glossary file thesis.glo 
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen141
+\Hy@linkcounter=\count109
+\Hy@pagecounter=\count110
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count111
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `plainpages' set `false' on input line 3941.
+Package hyperref Info: Option `pdfpagelabels' set `true' on input line 3941.
+
+
+Package hyperref Warning: Values of option `pdfpagelayout':
+(hyperref)                * `SinglePage'
+(hyperref)                * `OneColumn'
+(hyperref)                * `TwoColumnLeft'
+(hyperref)                * `TwoColumnRight'
+(hyperref)                * `TwoPageLeft' (PDF 1.5)
+(hyperref)                * `TwoPageRight' (PDF 1.5)
+(hyperref)                * An empty value disables the option.
+(hyperref)                Unknown value `useoutlines' on input line 3941.
+
+Package hyperref Info: Option `bookmarks' set `true' on input line 3941.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 3941.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 3941
+.
+Package hyperref Info: Option `breaklinks' set `true' on input line 3941.
+Package hyperref Info: Option `linktocpage' set `true' on input line 3941.
+Package hyperref Info: Option `colorlinks' set `false' on input line 3941.
+Package hyperref Info: Option `hyperindex' set `true' on input line 3941.
+Package hyperref Info: Option `hyperfigures' set `true' on input line 3941.
+Package hyperref Info: Hyper figures ON on input line 4060.
+Package hyperref Info: Link nesting OFF on input line 4067.
+Package hyperref Info: Hyper index ON on input line 4070.
+Package hyperref Info: Plain pages OFF on input line 4077.
+Package hyperref Info: Backreferencing OFF on input line 4082.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4300.
+\c@Hy@tempcnt=\count112
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4653.
+\Fld@menulength=\count113
+\Field@Width=\dimen142
+\Fld@charsize=\dimen143
+Package hyperref Info: Hyper figures ON on input line 5771.
+Package hyperref Info: Link nesting OFF on input line 5778.
+Package hyperref Info: Hyper index ON on input line 5781.
+Package hyperref Info: backreferencing OFF on input line 5788.
+Package hyperref Info: Link coloring OFF on input line 5793.
+Package hyperref Info: Link coloring with OCG OFF on input line 5798.
+Package hyperref Info: PDF/A mode OFF on input line 5803.
+LaTeX Info: Redefining \ref on input line 5843.
+LaTeX Info: Redefining \pageref on input line 5847.
+\Hy@abspage=\count114
+\c@Item=\count115
+\c@Hfootnote=\count116
+)
+
+Package hyperref Message: Driver: hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
+\Fld@listcount=\count117
+\c@bookmark@seq@number=\count118
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip100
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+\Gin@req@height=\dimen144
+\Gin@req@width=\dimen145
+)
+\@float@every@myalgorithm=\toks22
+\c@myalgorithm=\count119
+
+(/usr/share/texlive/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+\c@r@tfl@t=\count120
+\rotFPtop=\skip101
+\rotFPbot=\skip102
+\rot@float@box=\box29
+\rot@mess@toks=\toks23
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2012/04/03 v0.4s Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count121
+\calc@Bcount=\count122
+\calc@Adimen=\dimen146
+\calc@Bdimen=\dimen147
+\calc@Askip=\skip103
+\calc@Bskip=\skip104
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count123
+\calc@Cskip=\skip105
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2010/10/06 v2.0c eso-pic (RN)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2012/04/03 v0.4s Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box30
+\AM@toc@title=\toks24
+\c@AM@survey=\count124
+\AM@templatesizebox=\box31
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
+Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
+)
+\@indexfile=\write4
+\openout4 = `thesis.idx'.
+
+
+Writing index file thesis.idx
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip106
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks25
+\ex@=\dimen148
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen149
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count125
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count126
+\leftroot@=\count127
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count128
+\DOTSCASE@=\count129
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box32
+\strutbox@=\box33
+\big@size=\dimen150
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count130
+\c@MaxMatrixCols=\count131
+\dotsspace@=\muskip11
+\c@parentequation=\count132
+\dspbrk@lvl=\count133
+\tag@help=\toks26
+\row@=\count134
+\column@=\count135
+\maxfields@=\count136
+\andhelp@=\toks27
+\eqnshift@=\dimen151
+\alignsep@=\dimen152
+\tagshift@=\dimen153
+\tagwidth@=\dimen154
+\totwidth@=\dimen155
+\lineht@=\dimen156
+\@envbody=\toks28
+\multlinegap=\skip107
+\multlinetaggap=\skip108
+\mathdisplay@stack=\toks29
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2009/07/02 v2.20.1
+\thm@style=\toks30
+\thm@bodyfont=\toks31
+\thm@headfont=\toks32
+\thm@notefont=\toks33
+\thm@headpunct=\toks34
+\thm@preskip=\skip109
+\thm@postskip=\skip110
+\thm@headsep=\skip111
+\dth@everypar=\toks35
+)
+\c@definition=\count137
+\c@lemma=\count138
+\c@theorem=\count139
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/bibentry.sty
+Package: bibentry 2007/10/30 1.5 (PWD)
+) (./thesis.bbl)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count141
+\c@ALC@line=\count142
+\c@ALC@rem=\count143
+\c@ALC@depth=\count144
+\ALC@tlm=\skip112
+\algorithmicindent=\skip113
+)
+(./thesis.aux (./0_1_dedication.aux) (./00_2_abstract.aux) (./00_3_povzetek.aux
+) (./00_4_abbreviations.aux) (./00_5_symbols.aux) (./01_introduction.aux)
+(./02_related_work.aux) (./03_activity_recognition.aux
+
+LaTeX Warning: Label `eq:sgbc' multiply defined.
+
+
+LaTeX Warning: Label `eq:sgbc' multiply defined.
+
+
+LaTeX Warning: Label `sec:ar:interactions' multiply defined.
+
+
+LaTeX Warning: Label `def:observation_vector' multiply defined.
+
+) (./04_behavior_signatures.aux) (./05_detection.aux
+
+LaTeX Warning: Label `eq:paradox-example1' multiply defined.
+
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+) (./07_accumulating.aux) (./08_framework.aux) (./09_aal.aux
+
+LaTeX Warning: Label `alg:LOF' multiply defined.
+
+) (./10_surveillance.aux
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+
+LaTeX Warning: Label `eq:freq-n' multiply defined.
+
+) (./11_secuirity.aux
+
+LaTeX Warning: Label `sec:conclusion' multiply defined.
+
+) (./12_conclusions.aux) (./14_references.aux) (./appx_susp.aux)
+(./appx_publications.aux
+
+LaTeX Warning: Label `chap:pub' multiply defined.
+
+) (./appx_biography.aux) (./13_acknowledgments.aux))
+\openout1 = `thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count145
+\scratchdimen=\dimen157
+\scratchbox=\box34
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen158
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks37
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: rotating package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\AtBeginShipoutBox=\box35
+Package hyperref Info: Link coloring OFF on input line 97.
+LaTeX Info: Redefining \ref on input line 97.
+LaTeX Info: Redefining \pageref on input line 97.
+LaTeX Info: Redefining \nameref on input line 97.
+
+(./thesis.out) (./thesis.out)
+\@outlinefile=\write5
+\openout5 = `thesis.out'.
+
+ [1
+
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for U+msa on input line 102.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 102.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+) [2]
+
+Package pdftex.def Warning: Option `bb' does not make sense,
+(pdftex.def)                using `viewport' instead on input line 103.
+
+<Images/MPSlogo.pdf, id=505, 1507.34383pt x 273.14546pt>
+File: Images/MPSlogo.pdf Graphic file (type pdf)
+
+<use Images/MPSlogo.pdf>
+Package pdftex.def Info: Images/MPSlogo.pdf used on input line 103.
+(pdftex.def)             Requested size: 435.32724pt x 85.70538pt.
+
+Underfull \vbox (badness 10000) detected at line 103
+ []
+
+[3
+
+ <./Images/MPSlogo.pdf>] [4
+
+]
+\openout2 = `0_1_dedication.aux'.
+
+
+No file 0_1_dedication.tex.
+\openout2 = `00_2_abstract.aux'.
+
+(./00_2_abstract.tex) [5
+
+
+
+
+
+
+] [6
+
+
+]
+\openout2 = `00_3_povzetek.aux'.
+
+ (./00_3_povzetek.tex) [7
+
+
+] [8
+
+
+] (./thesis.toc
+Overfull \hbox (0.16711pt too wide) detected at line 2
+ []\OT1/cmr/bx/n/10.95 xiii[]
+ []
+
+
+Overfull \hbox (3.31522pt too wide) detected at line 4
+ []\OT1/cmr/bx/n/10.95 xvii[]
+ []
+
+[9] [10]
+Overfull \hbox (1.91605pt too wide) detected at line 120
+ []\OT1/cmr/bx/n/10.95 101[]
+ []
+
+
+Overfull \hbox (1.91605pt too wide) detected at line 124
+ []\OT1/cmr/bx/n/10.95 103[]
+ []
+
+
+Overfull \hbox (1.91605pt too wide) detected at line 125
+ []\OT1/cmr/bx/n/10.95 119[]
+ []
+
+
+Overfull \hbox (1.91605pt too wide) detected at line 126
+ []\OT1/cmr/bx/n/10.95 121[]
+ []
+
+
+Overfull \hbox (1.91605pt too wide) detected at line 127
+ []\OT1/cmr/bx/n/10.95 125[]
+ []
+
+
+Overfull \hbox (1.91605pt too wide) detected at line 128
+ []\OT1/cmr/bx/n/10.95 127[]
+ []
+
+
+Overfull \hbox (1.91605pt too wide) detected at line 129
+ []\OT1/cmr/bx/n/10.95 129[]
+ []
+
+)
+\tf@toc=\write6
+\openout6 = `thesis.toc'.
+
+ [11] [12] (./thesis.lof [13
+
+])
+\tf@lof=\write7
+\openout7 = `thesis.lof'.
+
+ [14] (./thesis.lot)
+\tf@lot=\write8
+\openout8 = `thesis.lot'.
+
+ [15
+
+] [16
+
+] (./thesis.loa)
+\tf@loa=\write9
+\openout9 = `thesis.loa'.
+
+
+[17
+
+
+] [18
+
+]
+\openout2 = `00_4_abbreviations.aux'.
+
+ (./00_4_abbreviations.tex) [19
+
+
+] [20
+
+
+]
+\openout2 = `00_5_symbols.aux'.
+
+ (./00_5_symbols.tex
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 28.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 32.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 63.
+
+[21
+
+
+]) [22]
+\openout2 = `01_introduction.aux'.
+
+ (./01_introduction.tex
+Chhh 1.
+
+Overfull \hbox (2.09537pt too wide) in paragraph at lines 73--84
+\OT1/cmr/m/n/10.95 The gen-eral prob-lem of de-viant be-hav-ior de-tec-tion fro
+m an agent's se-quen-tial spatio-temporal
+ []
+
+[1
+
+
+
+
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 100.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
+ [2] [3]
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 234--235
+ [][] 
+ []
+
+[4]) [5]
+\openout2 = `02_related_work.aux'.
+
+ (./02_related_work.tex [6
+
+
+
+]
+Chhh 2.
+[7
+
+]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
+Underfull \vbox (badness 2809) has occurred while \output is active []
+
+ [8]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
+[10] [11]) [12] [13
+
+
+] [14]
+\openout2 = `03_activity_recognition.aux'.
+
+ (./03_activity_recognition.tex
+Chhh 3.
+[15
+
+
+
+]
+Overfull \hbox (0.3282pt too wide) in paragraph at lines 60--62
+[]\OT1/cmr/m/n/10.95 To deal with the above-mentioned chal-lenges, we pro-pose 
+an activity-recognition pipeline,
+ []
+
+<Images/chap_AR/ARPIPE.pdf, id=1150, 557.08125pt x 95.35625pt>
+File: Images/chap_AR/ARPIPE.pdf Graphic file (type pdf)
+
+<use Images/chap_AR/ARPIPE.pdf>
+Package pdftex.def Info: Images/chap_AR/ARPIPE.pdf used on input line 65.
+(pdftex.def)             Requested size: 391.79185pt x 67.06464pt.
+
+Underfull \vbox (badness 3746) has occurred while \output is active []
+
+ [16 <./Images/chap_AR/ARPIPE.pdf>] [17] [18]
+<Images/img/box.pdf, id=1193, 272.01625pt x 159.59625pt>
+File: Images/img/box.pdf Graphic file (type pdf)
+
+<use Images/img/box.pdf>
+Package pdftex.def Info: Images/img/box.pdf used on input line 210.
+(pdftex.def)             Requested size: 174.12823pt x 102.16801pt.
+
+<Images/img/tags1.pdf, id=1195, 819.06pt x 744.7825pt>
+File: Images/img/tags1.pdf Graphic file (type pdf)
+
+<use Images/img/tags1.pdf>
+Package pdftex.def Info: Images/img/tags1.pdf used on input line 221.
+(pdftex.def)             Requested size: 142.26378pt x 129.36154pt.
+ [19 <./Images/img/box.pdf> <./Images/img/tags1.pdf>] <Images/img/sphere-sphere
+.pdf, id=1221, 361.35pt x 240.9pt>
+File: Images/img/sphere-sphere.pdf Graphic file (type pdf)
+
+<use Images/img/sphere-sphere.pdf>
+Package pdftex.def Info: Images/img/sphere-sphere.pdf used on input line 244.
+(pdftex.def)             Requested size: 217.66362pt x 145.11086pt.
+
+<Images/img/distance-fix.pdf, id=1226, 391.4625pt x 208.78pt>
+File: Images/img/distance-fix.pdf Graphic file (type pdf)
+
+<use Images/img/distance-fix.pdf>
+Package pdftex.def Info: Images/img/distance-fix.pdf used on input line 266.
+(pdftex.def)             Requested size: 217.66362pt x 116.08769pt.
+ [20 <./Images/img/sphere-sphere.pdf> <./Images/img/distance-fix.pdf>]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 295.
+
+<Images/chap_AR/cld-belt.pdf, id=1250, 517.49335pt x 480.50516pt>
+File: Images/chap_AR/cld-belt.pdf Graphic file (type pdf)
+
+<use Images/chap_AR/cld-belt.pdf>
+Package pdftex.def Info: Images/chap_AR/cld-belt.pdf used on input line 321.
+(pdftex.def)             Requested size: 370.0308pt x 343.59525pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[21] <Images/chap_AR/kinematic_model.jpg, id=1273, 712.16063pt x 671.50874pt>
+File: Images/chap_AR/kinematic_model.jpg Graphic file (type jpg)
+
+<use Images/chap_AR/kinematic_model.jpg>
+Package pdftex.def Info: Images/chap_AR/kinematic_model.jpg used on input line 
+363.
+(pdftex.def)             Requested size: 304.72774pt x 287.32913pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[22 <./Images/chap_AR/cld-belt.pdf>]
+<Images/chap_AR/body_coordinates.png, id=1287, 941.5175pt x 1194.4625pt>
+File: Images/chap_AR/body_coordinates.png Graphic file (type png)
+
+<use Images/chap_AR/body_coordinates.png>
+Package pdftex.def Info: Images/chap_AR/body_coordinates.png used on input line
+ 380.
+(pdftex.def)             Requested size: 217.66362pt x 276.14223pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[23 <./Images/chap_AR/kinematic_model.jpg>] [24 <./Images/chap_AR/body_coordina
+tes.png (PNG copy)>]
+<Images/chap_AR/features.pdf, id=1315, 722.7pt x 542.025pt>
+File: Images/chap_AR/features.pdf Graphic file (type pdf)
+
+<use Images/chap_AR/features.pdf>
+Package pdftex.def Info: Images/chap_AR/features.pdf used on input line 469.
+(pdftex.def)             Requested size: 435.32724pt x 326.49945pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[25] [26 <./Images/chap_AR/features.pdf>]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 506.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 506.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 520.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 520.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 520.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 534.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 534.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 534.
+
+
+[27]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 540.
+
+
+
+Overfull \hbox (10.31793pt too wide) in paragraph at lines 561--562
+[]$\U/msb/m/n/10.95 H \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/1
+0.95 h[]\OMS/cmsy/m/n/10.95 g$ \OT1/cmr/m/n/10.95 is a set of $\OML/cmm/m/it/10
+.95 N$ \OT1/cmr/m/n/10.95 hid-den states, in-di-vid-ual states are de-noted as 
+$\U/msb/m/n/10.95 H \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.
+95 h[]; h[]; :::; h[]\OMS/cmsy/m/n/10.95 g$\OT1/cmr/m/n/10.95 ,
+ []
+
+<Images/chap_AR/hmm.pdf, id=1361, 722.7pt x 542.025pt>
+File: Images/chap_AR/hmm.pdf Graphic file (type pdf)
+
+<use Images/chap_AR/hmm.pdf>
+Package pdftex.def Info: Images/chap_AR/hmm.pdf used on input line 583.
+(pdftex.def)             Requested size: 435.32724pt x 326.49945pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29 <./Images/chap_AR/hmm.pdf>]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 611.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 614.
+
+
+[30] <Images/chap_AR/chmm.pdf, id=1508, 845.1575pt x 597.23125pt>
+File: Images/chap_AR/chmm.pdf Graphic file (type pdf)
+
+<use Images/chap_AR/chmm.pdf>
+Package pdftex.def Info: Images/chap_AR/chmm.pdf used on input line 650.
+(pdftex.def)             Requested size: 217.66362pt x 153.80927pt.
+) [31 <./Images/chap_AR/chmm.pdf, page is rotated 90 degrees>] [32]
+\openout2 = `04_behavior_signatures.aux'.
+
+ (./04_behavior_signatures.tex
+Chhh 4.
+[33
+
+
+
+
+] <Images/chap_BS/matrix.pdf, id=1546, 845.1575pt x 597.23125pt>
+File: Images/chap_BS/matrix.pdf Graphic file (type pdf)
+
+<use Images/chap_BS/matrix.pdf>
+Package pdftex.def Info: Images/chap_BS/matrix.pdf used on input line 101.
+(pdftex.def)             Requested size: 435.32724pt x 307.62764pt.
+ [34]
+<Images/chap_BS/spatial-activity-matrix.pdf, id=1560, 331.2375pt x 172.645pt>
+File: Images/chap_BS/spatial-activity-matrix.pdf Graphic file (type pdf)
+
+<use Images/chap_BS/spatial-activity-matrix.pdf>
+Package pdftex.def Info: Images/chap_BS/spatial-activity-matrix.pdf used on inp
+ut line 146.
+(pdftex.def)             Requested size: 391.79185pt x 204.21721pt.
+ [35 <./Images/chap_BS/matrix.pdf, page is rotated 90 degrees>] [36 <./Images/c
+hap_BS/spatial-activity-matrix.pdf>]
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 186.
+
+[37]) [38]
+\openout2 = `05_detection.aux'.
+
+ (./05_detection.tex
+Chhh 5.
+[39
+
+
+
+
+] [40] <Images/chap_DET/error.pdf, id=1647, 635.94926pt x 357.2134pt>
+File: Images/chap_DET/error.pdf Graphic file (type pdf)
+
+<use Images/chap_DET/error.pdf>
+Package pdftex.def Info: Images/chap_DET/error.pdf used on input line 181.
+(pdftex.def)             Requested size: 391.79185pt x 220.0692pt.
+ [41] [42 <./Images/chap_DET/error.pdf>]
+[43] [44]
+Overfull \hbox (15.10854pt too wide) in paragraph at lines 339--340
+[]\OT1/cmr/m/n/10.95 The in-de-pen-dence model gives us $[](\OMS/cmsy/m/n/10.95
+ h\OML/cmm/m/it/10.95 kitchen; standing\OMS/cmsy/m/n/10.95 i\OT1/cmr/m/n/10.95 
+) = 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 011$ and $[](\OMS/cmsy/m/n/10.95 h
+\OML/cmm/m/it/10.95 kitchen; lying\OMS/cmsy/m/n/10.95 i\OT1/cmr/m/n/10.95 ) =
+ []
+
+[45] [46]) [47]
+\openout2 = `07_accumulating.aux'.
+
+ (./07_accumulating.tex [48
+
+
+
+]
+Chhh 6.
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 94.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 94.
+
+
+Package pdftex.def Warning: Option `bb' does not make sense,
+(pdftex.def)                using `viewport' instead on input line 108.
+
+<Images/graphs/flowchart.pdf, id=1756, 722.7pt x 542.025pt>
+File: Images/graphs/flowchart.pdf Graphic file (type pdf)
+
+<use Images/graphs/flowchart.pdf>
+Package pdftex.def Info: Images/graphs/flowchart.pdf used on input line 108.
+(pdftex.def)             Requested size: 261.19899pt x 277.7638pt.
+ [49
+
+] [50 <./Images/graphs/flowchart.pdf>]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 147.
+
+
+
+Overfull \hbox (12.1971pt too wide) in paragraph at lines 147--148
+[]\OT1/cmr/m/n/10.95 The ob-jec-tive of sus-pi-cious be-hav-ior de-tec-tion is 
+to iden-tify those traces $\OT1/cmr/bx/n/10.95 e[] \OT1/cmr/m/n/10.95 = (\OML/c
+mm/m/it/10.95 e[]; e[]; :::; e[]\OT1/cmr/m/n/10.95 )$
+ []
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 167.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 167.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 167.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 171.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 171.
+
+
+[51]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 205.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 205.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 205.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 207.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 209.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 215.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 230.
+
+
+
+Overfull \hbox (7.60004pt too wide) in paragraph at lines 230--231
+[]\OT1/cmr/bx/n/10.95 Definition 19. []\OT1/cmr/m/it/10.95 A class of \OT1/cmr/
+m/n/10.95 well-behaved \OT1/cmr/m/it/10.95 func-tions con-sist of scor-ing func
+-tions s.t. $\OMS/cmsy/m/n/10.95 8\OT1/cmr/bx/n/10.95 e[]\OML/cmm/m/it/10.95 ; 
+e[] \OT1/cmr/m/n/10.95 :$ 
+ []
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 232.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 232.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 233.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 233.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 236.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 238.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 238.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 239.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 239.
+
+
+[52]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 294.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 294.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 294.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 294.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 297.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 297.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 297.
+
+
+[53]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 342.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 344.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 351.
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [54]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 377.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 379.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 385.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 385.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 389.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 389.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 396.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 427.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 427.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 429.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 432.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 432.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 434.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 438.
+
+
+[55]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 441.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 441.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 441.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 441.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 442.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 443.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 443.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 444.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 444.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 444.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 449.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 451.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 460.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 460.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 462.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 462.
+
+
+) [56]
+\openout2 = `08_framework.aux'.
+
+ (./08_framework.tex
+Chhh 7.
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 23.
+
+<Images/chap_FMW/stack.pdf, id=1862, 506.84982pt x 456.18869pt>
+File: Images/chap_FMW/stack.pdf Graphic file (type pdf)
+
+<use Images/chap_FMW/stack.pdf>
+Package pdftex.def Info: Images/chap_FMW/stack.pdf used on input line 32.
+(pdftex.def)             Requested size: 435.32724pt x 391.81343pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[57
+
+
+
+
+] [58 <./Images/chap_FMW/stack.pdf>]
+<Images/chap_FMW/flowchart.pdf, id=1891, 388.45125pt x 531.9875pt>
+File: Images/chap_FMW/flowchart.pdf Graphic file (type pdf)
+
+<use Images/chap_FMW/flowchart.pdf>
+Package pdftex.def Info: Images/chap_FMW/flowchart.pdf used on input line 47.
+(pdftex.def)             Requested size: 348.2631pt x 476.9579pt.
+
+Underfull \vbox (badness 3229) has occurred while \output is active []
+
+ [59 <./Images/chap_FMW/flowchart.pdf>]
+<Images/chap_FMW/learning-detection.pdf, id=1911, 484.81125pt x 446.66875pt>
+File: Images/chap_FMW/learning-detection.pdf Graphic file (type pdf)
+
+<use Images/chap_FMW/learning-detection.pdf>
+Package pdftex.def Info: Images/chap_FMW/learning-detection.pdf used on input l
+ine 67.
+(pdftex.def)             Requested size: 435.32724pt x 401.0985pt.
+ [60 <./Images/chap_FMW/learning-detection.pdf>]) [61] [62
+
+
+] [63] [64]
+\openout2 = `09_aal.aux'.
+
+ (./09_aal.tex
+Chhh 8.
+[65
+
+
+
+] <Images/chap_AAL/stack-AAL.pdf, id=1990, 387.99643pt x 530.28424pt>
+File: Images/chap_AAL/stack-AAL.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/stack-AAL.pdf>
+Package pdftex.def Info: Images/chap_AAL/stack-AAL.pdf used on input line 73.
+(pdftex.def)             Requested size: 348.2631pt x 476.00533pt.
+
+
+Package pdftex.def Warning: Option `bb' does not make sense,
+(pdftex.def)                using `viewport' instead on input line 87.
+
+<Images/chap_AAL/tags.jpg, id=1994, 427.5975pt x 463.7325pt>
+File: Images/chap_AAL/tags.jpg Graphic file (type jpg)
+
+<use Images/chap_AAL/tags.jpg>
+Package pdftex.def Info: Images/chap_AAL/tags.jpg used on input line 87.
+(pdftex.def)             Requested size: 130.59949pt x 148.24855pt.
+ [66] [67 <./Images/chap_AAL/stack-AAL.pdf>]
+[68 <./Images/chap_AAL/tags.jpg>]
+<Images/chap_AAL/matrix-b-3.pdf, id=2043, 349.305pt x 196.735pt>
+File: Images/chap_AAL/matrix-b-3.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/matrix-b-3.pdf>
+Package pdftex.def Info: Images/chap_AAL/matrix-b-3.pdf used on input line 196.
+
+(pdftex.def)             Requested size: 217.66362pt x 122.59282pt.
+
+<Images/chap_AAL/matrix-b-4.pdf, id=2044, 349.305pt x 196.735pt>
+File: Images/chap_AAL/matrix-b-4.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/matrix-b-4.pdf>
+Package pdftex.def Info: Images/chap_AAL/matrix-b-4.pdf used on input line 198.
+
+(pdftex.def)             Requested size: 217.66362pt x 122.59282pt.
+
+Overfull \hbox (7.29999pt too wide) in paragraph at lines 196--199
+ [][][][] 
+ []
+
+<Images/chap_AAL/matrix-b-5.pdf, id=2045, 349.305pt x 196.735pt>
+File: Images/chap_AAL/matrix-b-5.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/matrix-b-5.pdf>
+Package pdftex.def Info: Images/chap_AAL/matrix-b-5.pdf used on input line 201.
+
+(pdftex.def)             Requested size: 217.66362pt x 122.59282pt.
+
+<Images/chap_AAL/matrix-b-6.pdf, id=2046, 349.305pt x 196.735pt>
+File: Images/chap_AAL/matrix-b-6.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/matrix-b-6.pdf>
+Package pdftex.def Info: Images/chap_AAL/matrix-b-6.pdf used on input line 203.
+
+(pdftex.def)             Requested size: 217.66362pt x 122.59282pt.
+
+Overfull \hbox (7.29999pt too wide) in paragraph at lines 201--204
+ [][][][] 
+ []
+
+<Images/chap_AAL/matrix-b-c-1.pdf, id=2047, 349.305pt x 196.735pt>
+File: Images/chap_AAL/matrix-b-c-1.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/matrix-b-c-1.pdf>
+Package pdftex.def Info: Images/chap_AAL/matrix-b-c-1.pdf used on input line 20
+6.
+(pdftex.def)             Requested size: 217.66362pt x 122.59282pt.
+
+<Images/chap_AAL/matrix-b-c-2.pdf, id=2048, 349.305pt x 196.735pt>
+File: Images/chap_AAL/matrix-b-c-2.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/matrix-b-c-2.pdf>
+Package pdftex.def Info: Images/chap_AAL/matrix-b-c-2.pdf used on input line 20
+8.
+(pdftex.def)             Requested size: 217.66362pt x 122.59282pt.
+
+Overfull \hbox (7.29999pt too wide) in paragraph at lines 206--209
+ [][][][] 
+ []
+
+[69]
+Underfull \vbox (badness 1107) has occurred while \output is active []
+
+ [70 <./Images/chap_AAL/matrix-b-3.pdf> <./Images/chap_AAL/matrix-b-4.pdf> <./I
+mages/chap_AAL/matrix-b-5.pdf> <./Images/chap_AAL/matrix-b-6.pdf> <./Images/cha
+p_AAL/matrix-b-c-1.pdf> <./Images/chap_AAL/matrix-b-c-2.pdf>]
+<Images/chap_AAL/PCA-plot-big.pdf, id=2134, 314.17375pt x 204.765pt>
+File: Images/chap_AAL/PCA-plot-big.pdf Graphic file (type pdf)
+
+<use Images/chap_AAL/PCA-plot-big.pdf>
+Package pdftex.def Info: Images/chap_AAL/PCA-plot-big.pdf used on input line 22
+4.
+(pdftex.def)             Requested size: 348.2631pt x 226.995pt.
+
+Underfull \vbox (badness 1515) has occurred while \output is active []
+
+ [71 <./Images/chap_AAL/PCA-plot-big.pdf>]
+Underfull \vbox (badness 4832) has occurred while \output is active []
+
+ [72])
+[73]
+\openout2 = `10_surveillance.aux'.
+
+ (./10_surveillance.tex [74
+
+
+
+]
+Chhh 9.
+[75
+
+]
+<Images/chap_surveillance/stack-SURV.pdf, id=2204, 387.99643pt x 530.28424pt>
+File: Images/chap_surveillance/stack-SURV.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/stack-SURV.pdf>
+Package pdftex.def Info: Images/chap_surveillance/stack-SURV.pdf used on input 
+line 637.
+(pdftex.def)             Requested size: 348.2631pt x 476.00533pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76 <./Images/chap_surveillance/stack-SURV.pdf>]
+<Images/chap_surveillance/airport.pdf, id=2233, 849.1725pt x 596.2275pt>
+File: Images/chap_surveillance/airport.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/airport.pdf>
+Package pdftex.def Info: Images/chap_surveillance/airport.pdf used on input lin
+e 652.
+(pdftex.def)             Requested size: 413.55954pt x 290.37088pt.
+
+Underfull \vbox (badness 2941) has occurred while \output is active []
+
+ [77 <./Images/chap_surveillance/airport.pdf>] [78] [79]
+<Images/chap_surveillance/k-rule.pdf, id=2266, 521.01653pt x 407.40205pt>
+File: Images/chap_surveillance/k-rule.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/k-rule.pdf>
+Package pdftex.def Info: Images/chap_surveillance/k-rule.pdf used on input line
+ 808.
+(pdftex.def)             Requested size: 195.89592pt x 153.17946pt.
+
+<Images/chap_surveillance/bayes.pdf, id=2267, 521.01653pt x 407.40205pt>
+File: Images/chap_surveillance/bayes.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/bayes.pdf>
+Package pdftex.def Info: Images/chap_surveillance/bayes.pdf used on input line 
+810.
+(pdftex.def)             Requested size: 195.89592pt x 153.17946pt.
+
+<Images/chap_surveillance/hmm.pdf, id=2268, 521.01653pt x 407.40205pt>
+File: Images/chap_surveillance/hmm.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/hmm.pdf>
+Package pdftex.def Info: Images/chap_surveillance/hmm.pdf used on input line 81
+3.
+(pdftex.def)             Requested size: 195.89592pt x 153.17946pt.
+
+<Images/chap_surveillance/upr.pdf, id=2269, 521.01653pt x 407.40205pt>
+File: Images/chap_surveillance/upr.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/upr.pdf>
+Package pdftex.def Info: Images/chap_surveillance/upr.pdf used on input line 81
+5.
+(pdftex.def)             Requested size: 195.89592pt x 153.17946pt.
+
+<Images/chap_surveillance/espy.pdf, id=2270, 521.01653pt x 407.40205pt>
+File: Images/chap_surveillance/espy.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/espy.pdf>
+Package pdftex.def Info: Images/chap_surveillance/espy.pdf used on input line 8
+18.
+(pdftex.def)             Requested size: 195.89592pt x 153.17946pt.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 851.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 851.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 851.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 854.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 854.
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [80 <./Images/chap_surveillance/k-rule.pdf> <./Images/chap_surveillance/bayes.
+pdf> <./Images/chap_surveillance/hmm.pdf> <./Images/chap_surveillance/upr.pdf> 
+<./Images/chap_surveillance/espy.pdf>]
+<Images/chap_surveillance/ROC.pdf, id=2321, 492.89142pt x 392.72723pt>
+File: Images/chap_surveillance/ROC.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/ROC.pdf>
+Package pdftex.def Info: Images/chap_surveillance/ROC.pdf used on input line 86
+4.
+(pdftex.def)             Requested size: 348.2631pt x 277.49594pt.
+
+<Images/chap_surveillance/authvar-fm.pdf, id=2322, 502.93898pt x 389.39478pt>
+File: Images/chap_surveillance/authvar-fm.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/authvar-fm.pdf>
+Package pdftex.def Info: Images/chap_surveillance/authvar-fm.pdf used on input 
+line 913.
+(pdftex.def)             Requested size: 261.19899pt x 202.225pt.
+
+<Images/chap_surveillance/authvar-pr.pdf, id=2323, 502.93898pt x 389.39478pt>
+File: Images/chap_surveillance/authvar-pr.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/authvar-pr.pdf>
+Package pdftex.def Info: Images/chap_surveillance/authvar-pr.pdf used on input 
+line 918.
+(pdftex.def)             Requested size: 261.19899pt x 202.225pt.
+
+Underfull \vbox (badness 1226) has occurred while \output is active []
+
+ [81]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 933.
+
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 933.
+
+
+[82 <./Images/chap_surveillance/ROC.pdf>] [83 <./Images/chap_surveillance/authv
+ar-fm.pdf> <./Images/chap_surveillance/authvar-pr.pdf
+
+pdfTeX warning: pdflatex (file ./Images/chap_surveillance/authvar-pr.pdf): PDF 
+inclusion: multiple pdfs with page group included in a single page
+>]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 984.
+
+) [84]
+\openout2 = `11_secuirity.aux'.
+
+ (./11_secuirity.tex
+Chhh 10.
+[85
+
+
+
+
+] <Images/chap_security/entry.pdf, id=2571, 265.99374pt x 367.3725pt>
+File: Images/chap_security/entry.pdf Graphic file (type pdf)
+
+<use Images/chap_security/entry.pdf>
+Package pdftex.def Info: Images/chap_security/entry.pdf used on input line 87.
+(pdftex.def)             Requested size: 261.19899pt x 360.77934pt.
+
+<Images/chap_security/stack-SEC.pdf, id=2573, 553.04431pt x 530.28424pt>
+File: Images/chap_security/stack-SEC.pdf Graphic file (type pdf)
+
+<use Images/chap_security/stack-SEC.pdf>
+Package pdftex.def Info: Images/chap_security/stack-SEC.pdf used on input line 
+105.
+(pdftex.def)             Requested size: 435.32724pt x 417.41495pt.
+
+Underfull \vbox (badness 7576) has occurred while \output is active []
+
+ [86]
+Underfull \vbox (badness 7433) has occurred while \output is active []
+
+ [87 <./Images/chap_security/entry.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [88 <./Images/chap_security/stack-SEC.pdf>]
+<Images/chap_security/soba.pdf, id=2619, 639.0575pt x 482.80376pt>
+File: Images/chap_security/soba.pdf Graphic file (type pdf)
+
+<use Images/chap_security/soba.pdf>
+Package pdftex.def Info: Images/chap_security/soba.pdf used on input line 148.
+(pdftex.def)             Requested size: 348.2631pt x 263.11916pt.
+ [89 <./Images/chap_security/soba.pdf>]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 164.
+
+<Images/chap_security/shema.pdf, id=2631, 500.51494pt x 240.94893pt>
+File: Images/chap_security/shema.pdf Graphic file (type pdf)
+
+<use Images/chap_security/shema.pdf>
+Package pdftex.def Info: Images/chap_security/shema.pdf used on input line 167.
+
+(pdftex.def)             Requested size: 648.72073pt x 312.30339pt.
+ [90] [91 <./Images/chap_security/shema.pdf>]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 220.
+
+
+Overfull \hbox (1.57303pt too wide) in paragraph at lines 234--234
+[]\OT1/cmtt/m/n/10.95 swrlb:equal(?event_swrl, false) & card_time(?event_object
+, ?time_of_event) &[] 
+ []
+
+[92]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 275.
+
+<Images/chap_security/mikro1.pdf, id=2686, 361.35pt x 252.945pt>
+File: Images/chap_security/mikro1.pdf Graphic file (type pdf)
+
+<use Images/chap_security/mikro1.pdf>
+Package pdftex.def Info: Images/chap_security/mikro1.pdf used on input line 279
+.
+(pdftex.def)             Requested size: 391.79185pt x 274.25722pt.
+ [93 <./Images/chap_security/mikro1.pdf>]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 298.
+
+<Images/chap_security/makro-lof.pdf, id=2708, 288.07625pt x 231.86626pt>
+File: Images/chap_security/makro-lof.pdf Graphic file (type pdf)
+
+<use Images/chap_security/makro-lof.pdf>
+Package pdftex.def Info: Images/chap_security/makro-lof.pdf used on input line 
+302.
+(pdftex.def)             Requested size: 304.72774pt x 245.27818pt.
+ [94]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 326.
+
+<Images/chap_security/BayesNetwork2.pdf, id=2718, 417.56pt x 250.9375pt>
+File: Images/chap_security/BayesNetwork2.pdf Graphic file (type pdf)
+
+<use Images/chap_security/BayesNetwork2.pdf>
+Package pdftex.def Info: Images/chap_security/BayesNetwork2.pdf used on input l
+ine 328.
+(pdftex.def)             Requested size: 348.2631pt x 209.30423pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [95 <./Images/chap_security/makro-lof.pdf>] [96 <./Images/chap_security/BayesN
+etwork2.pdf>] [97] [98]) [99]
+\openout2 = `12_conclusions.aux'.
+
+ (./12_conclusions.tex [100
+
+
+
+]
+Chhh 11.
+[101
+
+]
+Overfull \hbox (2.79512pt too wide) in paragraph at lines 33--35
+\OT1/cmr/m/n/10.95 that in-cludes fil-ter-ing, at-tribute con-struc-tion, ac-ti
+v-ity recog-ni-tion, and ac-tiv-ity smooth-
+ []
+
+) [102]
+\openout2 = `14_references.aux'.
+
+ (./14_references.tex (./thesis.bbl
+Chhh 12.
+[103
+
+
+
+
+] [104] [105] [106]
+Underfull \hbox (badness 1824) in paragraph at lines 461--465
+[]\OT1/cmr/m/n/10.95 Horrocks, I.; Patel-Schneider, P. F.; Bo-ley, H.; Tabet, S
+.; Grosof, B.; Dean,
+ []
+
+
+Underfull \hbox (badness 4913) in paragraph at lines 461--465
+\OT1/cmr/m/n/10.95 M.  SWRL: A se-man-tic web rule lan-guage com-bin-ing OWL an
+d RuleML.
+ []
+
+[107] [108] [109] [110] [111]
+Underfull \hbox (badness 10000) in paragraph at lines 940--943
+[]\OT1/cmr/m/n/10.95 OpenSteer.  Steer-ing be-hav-iors for au-tonomous char-ac-
+ters.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 970--973
+[]\OT1/cmr/m/n/10.95 Prot^^Seg^^Se.  Open source on-tol-ogy ed-i-tor and knowle
+dge-base frame-work.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1007--1012
+[]\OT1/cmr/m/n/10.95 Sanquist, T.; Sheri-dan, T.; Lee, J.; Cooke, N.  Hu-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1007--1012
+\OT1/cmr/m/n/10.95 man fac-tors as-pects of anomaly de-tec-tion sys-tems.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1007--1012
+\OT1/cmr/m/n/10.95 http://www.sis.pitt.edu/$\OMS/cmsy/m/n/10.95 ^^X$\OT1/cmr/m/
+n/10.95 mlewis/surveillance/robocup10/COHSI[]Anomaly[]Dection.pdf
+ []
+
+[112] [113] [114])) [115] [116
+
+
+] [117] [118]
+\openout2 = `appx_susp.aux'.
+
+ (./appx_susp.tex
+<Images/chap_surveillance/authority.pdf, id=2939, 791.95876pt x 612.2875pt>
+File: Images/chap_surveillance/authority.pdf Graphic file (type pdf)
+
+<use Images/chap_surveillance/authority.pdf>
+Package pdftex.def Info: Images/chap_surveillance/authority.pdf used on input l
+ine 16.
+(pdftex.def)             Requested size: 435.32724pt x 336.57231pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [119
+
+
+
+ <./Images/chap_surveillance/authority.pdf>]
+<Images/chap_surveillance/airport2.png, id=2971, 793.96625pt x 577.15625pt>
+File: Images/chap_surveillance/airport2.png Graphic file (type png)
+
+<use Images/chap_surveillance/airport2.png>
+Package pdftex.def Info: Images/chap_surveillance/airport2.png used on input li
+ne 42.
+(pdftex.def)             Requested size: 435.32724pt x 316.45937pt.
+) [120 <./Images/chap_surveillance/airport2.png>]
+\openout2 = `appx_publications.aux'.
+
+ (./appx_publications.texpdfTeX warning (ext4): destination with the same ident
+ifier (name{cite.Kaluza2013:IJAIT}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.21 \item \bibentry{Kaluza2013:IJAIT}
+                                      , \textbf{JCR: 0.22}
+Overfull \hbox (2.42166pt too wide) in paragraph at lines 21--22
+[]\OT1/cmr/m/n/10.95 Kalu^^Tza, B.; Cvetkovi^^Sc, B.; Dov-gan, E.; Gjoreski, H.
+; Mirchevska, V.; Gams, M.; Lu^^Tstrek,
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{cite.Kaluza20
+12:JAISE}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.22 \item \bibentry{Kaluza2012:JAISE}
+                                      , \textbf{JCR: 0.63}pdfTeX warning (ext4)
+: destination with the same identifier (name{cite.Kaluza2010:ESWA}) has been al
+ready used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.23 \item \bibentry{Kaluza2010:ESWA}
+                                     , \textbf{JCR: 2.203}pdfTeX warning (ext4)
+: destination with the same identifier (name{cite.Dovgan2010jami}) has been alr
+eady used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.24 \item \bibentry{Dovgan2010jami}
+                                    , \textbf{JCR: 1.5}pdfTeX warning (ext4): d
+estination with the same identifier (name{cite.Lustrek2009Fall}) has been alrea
+dy used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.25 \item \bibentry{Lustrek2009Fall}
+                                     pdfTeX warning (ext4): destination with th
+e same identifier (name{cite.Lustrek2012:ECAI}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.34 \item \bibentry{Lustrek2012:ECAI}
+                                      .pdfTeX warning (ext4): destination with 
+the same identifier (name{cite.Kaluza2012:AAMAS}) has been already used, duplic
+ate ignored
+<to be read again> 
+                   \relax 
+l.35 \item \bibentry{Kaluza2012:AAMAS}
+                                      .pdfTeX warning (ext4): destination with 
+the same identifier (name{cite.Kaluza2012:AAMASdemo}) has been already used, du
+plicate ignored
+<to be read again> 
+                   \relax 
+l.36 \item \bibentry{Kaluza2012:AAMASdemo}
+                                          .pdfTeX warning (ext4): destination w
+ith the same identifier (name{cite.Dovgan2010Improving}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.38 \item \bibentry{Dovgan2010Improving}
+                                         .pdfTeX warning (ext4): destination wi
+th the same identifier (name{cite.Kaluza2010Agentbased}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.39 \item \bibentry{Kaluza2010Agentbased}
+                                          .pdfTeX warning (ext4): destination w
+ith the same identifier (name{cite.Kaluza2010ADL}) has been already used, dupli
+cate ignored
+<to be read again> 
+                   \relax 
+l.40 \item \bibentry{Kaluza2010ADL}
+                                   . [121
+
+
+
+
+]pdfTeX warning (ext4): destination with the same identifier (name{cite.Lustrek
+2009Behavior}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.42 \item \bibentry{Lustrek2009Behavior}
+                                         .pdfTeX warning (ext4): destination wi
+th the same identifier (name{cite.Kaluza2009Glajenje}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.43 \item \bibentry{Kaluza2009Glajenje}
+                                        .pdfTeX warning (ext4): destination wit
+h the same identifier (name{cite.Dovgan2009Agent}) has been already used, dupli
+cate ignored
+<to be read again> 
+                   \relax 
+l.44 \item \bibentry{Dovgan2009Agent}
+                                     .pdfTeX warning (ext4): destination with t
+he same identifier (name{cite.Kaluza09Reducing}) has been already used, duplica
+te ignored
+<to be read again> 
+                   \relax 
+l.45 \item \bibentry{Kaluza09Reducing}
+                                      .pdfTeX warning (ext4): destination with 
+the same identifier (name{cite.Kaluza2008fall}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.46 \item \bibentry{Kaluza2008fall}
+                                    .pdfTeX warning (ext4): destination with th
+e same identifier (name{cite.Kaluza08Odkrivanje}) has been already used, duplic
+ate ignored
+<to be read again> 
+                   \relax 
+l.47 \item \bibentry{Kaluza08Odkrivanje}
+                                        .pdfTeX warning (ext4): destination wit
+h the same identifier (name{cite.Kaluza08Intelligent}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.48 \item \bibentry{Kaluza08Intelligent}
+                                         .pdfTeX warning (ext4): destination wi
+th the same identifier (name{cite.Kaluza2012:AAAI}) has been already used, dupl
+icate ignored
+<to be read again> 
+                   \relax 
+l.58 \item \bibentry{Kaluza2012:AAAI}
+                                     .pdfTeX warning (ext4): destination with t
+he same identifier (name{cite.Kaluza2011:PAIR}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.60 \item \bibentry{Kaluza2011:PAIR}
+                                     .pdfTeX warning (ext4): destination with t
+he same identifier (name{cite.Kaluza2011:IPSSC}) has been already used, duplica
+te ignored
+<to be read again> 
+                   \relax 
+l.61 \item \bibentry{Kaluza2011:IPSSC}
+                                      .pdfTeX warning (ext4): destination with 
+the same identifier (name{cite.Kaluza2011:AAL}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.62 \item \bibentry{Kaluza2011:AAL}
+                                    .pdfTeX warning (ext4): destination with th
+e same identifier (name{cite.Kaluza2011:AIHC}) has been already used, duplicate
+ ignored
+<to be read again> 
+                   \relax 
+l.63 \item \bibentry{Kaluza2011:AIHC}
+                                     . [122]pdfTeX warning (ext4): destination 
+with the same identifier (name{cite.Kaluza2010MAS}) has been already used, dupl
+icate ignored
+<to be read again> 
+                   \relax 
+l.65 \item \bibentry{Kaluza2010MAS}
+                                   .pdfTeX warning (ext4): destination with the
+ same identifier (name{cite.Kaluza09Ubiquitous}) has been already used, duplica
+te ignored
+<to be read again> 
+                   \relax 
+l.67 \item \bibentry{Kaluza09Ubiquitous}
+                                        .pdfTeX warning (ext4): destination wit
+h the same identifier (name{cite.Kaluza2009Intelligent}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.68 \item \bibentry{Kaluza2009Intelligent}
+                                           .pdfTeX warning (ext4): destination 
+with the same identifier (name{cite.Mircevska2009Towards}) has been already use
+d, duplicate ignored
+<to be read again> 
+                   \relax 
+l.69 \item \bibentry{Mircevska2009Towards}
+                                          .pdfTeX warning (ext4): destination w
+ith the same identifier (name{cite.Gams2009Varnostni}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.78 \item \bibentry{Gams2009Varnostni}
+                                       .pdfTeX warning (ext4): destination with
+ the same identifier (name{cite.Kaluza2008ZIT}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.79 \item \bibentry{Kaluza2008ZIT}
+                                   .pdfTeX warning (ext4): destination with the
+ same identifier (name{cite.Cvetkovic2012:AmI}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.101 \item \bibentry{Cvetkovic2012:AmI}
+                                        .pdfTeX warning (ext4): destination wit
+h the same identifier (name{cite.Gimon2010acc}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.105 \item \bibentry{Gimon2010acc}
+                                   .pdfTeX warning (ext4): destination with the
+ same identifier (name{cite.Cvetkovic2010prilagajanje}) has been already used, 
+duplicate ignored
+<to be read again> 
+                   \relax 
+l.106 \item \bibentry{Cvetkovic2010prilagajanje}
+                                                .pdfTeX warning (ext4): destina
+tion with the same identifier (name{cite.Gams2008patologija}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.110 \item \bibentry{Gams2008patologija}
+                                         .pdfTeX warning (ext4): destination wi
+th the same identifier (name{cite.Kaluza08Razpoznavanje}) has been already used
+, duplicate ignored
+<to be read again> 
+                   \relax 
+l.112 \item \bibentry{Kaluza08Razpoznavanje}
+                                            . [123]pdfTeX warning (ext4): desti
+nation with the same identifier (name{cite.Kaluza07Pearl}) has been already use
+d, duplicate ignored
+<to be read again> 
+                   \relax 
+l.114 \item \bibentry{Kaluza07Pearl}
+                                    .pdfTeX warning (ext4): destination with th
+e same identifier (name{cite.Kaluza07Pathology}) has been already used, duplica
+te ignored
+<to be read again> 
+                   \relax 
+l.115 \item \bibentry{Kaluza07Pathology}
+                                        .pdfTeX warning (ext4): destination wit
+h the same identifier (name{cite.Gorup07Eavesdroping}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.116 \item \bibentry{Gorup07Eavesdroping}
+                                          .pdfTeX warning (ext4): destination w
+ith the same identifier (name{cite.Cvetkovic2011:STAMI}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.124 \item \bibentry{Cvetkovic2011:STAMI}
+                                          .pdfTeX warning (ext4): destination w
+ith the same identifier (name{cite.Mirchevska2010learning}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.126 \item \bibentry{Mirchevska2010learning}
+                                             .pdfTeX warning (ext4): destinatio
+n with the same identifier (name{cite.Mirchevska2010feedback}) has been already
+ used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.127 \item \bibentry{Mirchevska2010feedback}
+                                             .) [124]
+\openout2 = `appx_biography.aux'.
+
+ (./appx_biography.tex)
+[125
+
+
+
+
+]
+\openout2 = `13_acknowledgments.aux'.
+
+ (./13_acknowledgments.tex [126
+
+
+
+]) [127
+
+] [128
+
+
+] (./thesis.ind [129
+
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 281.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 281.
+
+(./thesis.aux (./0_1_dedication.aux) (./00_2_abstract.aux) (./00_3_povzetek.aux
+) (./00_4_abbreviations.aux) (./00_5_symbols.aux) (./01_introduction.aux)
+(./02_related_work.aux) (./03_activity_recognition.aux)
+(./04_behavior_signatures.aux) (./05_detection.aux) (./07_accumulating.aux)
+(./08_framework.aux) (./09_aal.aux) (./10_surveillance.aux) (./11_secuirity.aux
+) (./12_conclusions.aux) (./14_references.aux) (./appx_susp.aux)
+(./appx_publications.aux) (./appx_biography.aux) (./13_acknowledgments.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 281.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 281.
+Package rerunfilecheck Info: File `thesis.out' has not changed.
+(rerunfilecheck)             Checksum: D536A1323F8DD10E09FC78CBFA37B77B;9134.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 281.
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 859 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 12202 strings out of 493485
+ 182947 string characters out of 3143526
+ 343645 words of memory out of 3000000
+ 14400 multiletter control sequences out of 15000+200000
+ 19244 words of font info for 71 fonts, out of 3000000 for 9000
+ 960 hyphenation exceptions out of 8191
+ 51i,15n,48p,2351b,904s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{cite.*} has been referenced but doe
+s not exist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on thesis.pdf (151 pages, 3716885 bytes).
+PDF statistics:
+ 3372 PDF objects out of 3580 (max. 8388607)
+ 2928 compressed objects within 30 object streams
+ 691 named destinations out of 1000 (max. 500000)
+ 1220 words of extra memory for PDF output out of 10000 (max. 10000000)
+

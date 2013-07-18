@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: 0_1_dedication.aux
+A level-1 auxiliary file: 00_2_abstract.aux
+A level-1 auxiliary file: 00_3_povzetek.aux
+A level-1 auxiliary file: 00_4_abbreviations.aux
+A level-1 auxiliary file: 00_5_symbols.aux
+A level-1 auxiliary file: 01_introduction.aux
+A level-1 auxiliary file: 02_related_work.aux
+A level-1 auxiliary file: 03_activity_recognition.aux
+A level-1 auxiliary file: 04_behavior_signatures.aux
+A level-1 auxiliary file: 05_detection.aux
+A level-1 auxiliary file: 07_accumulating.aux
+A level-1 auxiliary file: 08_framework.aux
+A level-1 auxiliary file: 09_aal.aux
+A level-1 auxiliary file: 10_surveillance.aux
+A level-1 auxiliary file: 11_secuirity.aux
+A level-1 auxiliary file: 12_conclusions.aux
+A level-1 auxiliary file: 14_references.aux
+The style file: MPSPhDBib.bst
+A level-1 auxiliary file: appx_susp.aux
+A level-1 auxiliary file: appx_publications.aux
+A level-1 auxiliary file: appx_biography.aux
+A level-1 auxiliary file: 13_acknowledgments.aux
+Database file #1: suspicious.bib
+Database file #2: bostjan-papers.bib
+Reallocated field_info (elt_size=4) to 10010 items from 5000.
+Database file #3: noise.bib
+Database file #4: ijcai09.bib
+Database file #5: aal.bib
+You've used 180 entries,
+            2962 wiz_defined-function locations,
+            1987 strings with 47202 characters,
+and the built_in function-call counts, 121979 in all, are:
+= -- 10278
+> -- 4966
+< -- 101
++ -- 1928
+- -- 1670
+* -- 9120
+:= -- 17972
+add.period$ -- 607
+call.type$ -- 180
+change.case$ -- 1611
+chr.to.int$ -- 168
+cite$ -- 180
+duplicate$ -- 9137
+empty$ -- 9316
+format.name$ -- 2253
+if$ -- 24915
+int.to.chr$ -- 13
+int.to.str$ -- 1
+missing$ -- 1843
+newline$ -- 890
+num.names$ -- 723
+pop$ -- 3934
+preamble$ -- 1
+purify$ -- 1275
+quote$ -- 0
+skip$ -- 3388
+stack$ -- 0
+substring$ -- 5933
+swap$ -- 4767
+text.length$ -- 18
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 1581
+warning$ -- 0
+while$ -- 909
+width$ -- 0
+write$ -- 2301

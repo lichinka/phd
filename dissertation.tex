@@ -1,13 +1,13 @@
-%% LyX 2.0.5 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[11pt,final,openany]{book}
+\documentclass[12pt,a4paper,english,final,openany]{book}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
-\usepackage[a4paper]{geometry}
-\geometry{verbose,tmargin=2.2cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
 \usepackage{color}
+\usepackage{babel}
+\usepackage{array}
 \usepackage{prettyref}
 \usepackage{float}
 \usepackage{booktabs}
@@ -15,35 +15,45 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{setspace}
+\usepackage{nomencl}
+% the following is useful when we have the old nomencl.sty package
+\providecommand{\printnomenclature}{\printglossary}
+\providecommand{\makenomenclature}{\makeglossary}
+\makenomenclature
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
  {hyperref}
 \hypersetup{
  dvipdfm,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
-\usepackage{breakurl}
 
 \makeatletter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
 %% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 %
 % IPS PhD thesis template for LyX
 %	by Lucas Benedicic
 %
-% based on IPS PhD thesis template for LaTex by Erik Zupanic, Andreja Er?te
+% based on IPS PhD thesis template for LaTex by Erik Zupanic, Andreja Erzte
 %
 
 %
-% margin shift for odd-numbered pages
+% Page margins and binding offset
 %
-%\usepackage[BCOR=0.3cm]{typearea}
+\usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
 
 % fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
-\usepackage[slovene,english]{babel}
+%\usepackage[slovene,english]{babel}
 % Uses font family: Times Roman
 \usepackage{aecompl}
 \usepackage{mathrsfs}% for \mathscr
@@ -58,12 +68,16 @@
 \usepackage{fixltx2e}% Enables commands \textsuperscript and \textsubscript
 \usepackage[nottoc,numbib]{tocbibind}% bibliography numbered
 
-%% Tables
+%
+% Tables
+%
 \usepackage[table]{xcolor}% enables color cellc in tables
 \usepackage{hhline}% makes black lines when color cells are used (because \hline does not work)
 
-%% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
+%
+% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
 % In this case, program package is selected and program environment is used for algorithms as subfloat in myalgortihm floats
+%
 \usepackage{program}
 
 \usepackage{titlesec}
@@ -105,16 +119,15 @@
 \setlength{\cftbeforefigskip}{0em} %changing the space between entries in the lof
 \setlength{\cftbeforetabskip}{0em} %changing the space between entries in the lot
 
-    % shows numbers of subsections in toc
- % numbers all sub(-sub)sections
+% shows numbers of subsections in toc
+% numbers all sub(-sub)sections
+%
 
 %%
 \renewcommand{\citeleft}{[}
 \renewcommand{\citeright}{]}
 
 \graphicspath{{images/}}
-
-
 
 %% myalgorithm float (used for writing algorithms) - definitions
 %\usepackage{float}
@@ -140,7 +153,6 @@
 %\setlength{\cftmyalgorithmsnumwidth}{5em} %space for the name before number in the listofalgorithms (loa)
 %\setlength{\cftmybeforealgorithmsskip}{0em} %changing the space between entries in the loa
 
-
 \newcommand{\HRule}{\rule{\linewidth}{0.1mm}} % defines line used in the example
 
 \makeatother
@@ -157,12 +169,11 @@
 \thispagestyle{empty} 
 
 \noindent \begin{flushright}
-{\huge {}\textbf{\huge OPTIMIZATION AND PARALLELIZATION}\\
-\textbf{\huge METHODS FOR THE DESIGN}\\
-\textbf{\huge OF NEXT-GENERATION}\\
-\textbf{\huge RADIO NETWORKS}\\
-{\huge }} % Insert: title of dissertation
-
+{\huge {}\textbf{\LARGE OPTIMIZATION AND PARALLELIZATION}\\
+\textbf{\LARGE METHODS FOR THE DESIGN}\\
+\textbf{\LARGE OF NEXT-GENERATION}\\
+\textbf{\LARGE RADIO NETWORKS}{\huge }\\
+{\huge }} 
 \par\end{flushright}
 
 \begin{flushright}
@@ -171,8 +182,7 @@
 \par\end{flushright}
 
 \noindent \begin{flushright}
-{\LARGE {Lucas Benedi\v{c}i\v{c}}} % Insert: name and surname of the author
-
+{\LARGE {Lucas Benedi\v{c}i\v{c}}} 
 \par\end{flushright}
 
 \clearpage{}
@@ -198,7 +208,7 @@
 
 \noindent \textbf{Jo¸ef Stefan International Postgraduate School}
 
-\noindent \textbf{Ljubljana, Slovenia, May 2013} % Insert: month and year
+\noindent \textbf{Ljubljana, Slovenia, September 2013} % Insert: month and year
 
 
 \vspace{1.6cm}
@@ -210,12 +220,12 @@
  
 
 \begin{spacing}{1.3500000000000001}
-\noindent {\textit{Name and surname of board member with the title,
-Chairman, institution and address}}\\
- {\textit{Name and surname of board member with the title, Member,
-institution and address}}\\
- {\textit{Name and surname of board member with the title, Member,
-institution and address}} 
+\noindent {\textit{Assist. Prof. Dr. Jurij \v{S}ilc, Chairman, Jo\v{z}ef
+Stefan Institute, Ljubljana, Slovenia}.}\\
+{\textit{Assist. Prof. Dr. Ale\v{s} \v{S}viglej, Jo\v{z}ef Stefan
+Institute, Ljubljana, Slovenia}.}\\
+{\textit{Prof. Dr. Marian Vajter\v{s}ic, Department of Computer
+Science, University of Salzburg, Austria}.} 
 \end{spacing}
 
 \noindent \clearpage{}
@@ -236,41 +246,41 @@ institution and address}}
 \vspace{-8cm}
 
 
-\noindent{\LARGE{Lucas Benedi\v{c}i\v{c}}}\\
+{\Large \noindent{Lucas Benedi\v{c}i\v{c}}}\\
 
 
 \vspace{1.4cm}
 
 
 \begin{doublespace}
-\noindent {\huge {}\textbf{\huge OPTIMIZATION AND PARALLELIZATION}\\
-\textbf{\huge METHODS FOR THE DESIGN}\\
-\textbf{\huge OF NEXT-GENERATION}\\
-\textbf{\huge RADIO NETWORKS}{\huge }}\\
+\noindent {\huge {}\textbf{\LARGE OPTIMIZATION AND PARALLELIZATION}\\
+\textbf{\LARGE METHODS FOR THE DESIGN}\\
+\textbf{\LARGE OF NEXT-GENERATION}\\
+\textbf{\LARGE RADIO NETWORKS}{\huge }}\\
  
 \end{doublespace}
 
 \vspace{0.5cm}
 
 
-\noindent {\LARGE {}\textbf{\LARGE Doctoral Dissertation}{\LARGE }}\\
+\noindent {\Large {}\textbf{\Large Doctoral Dissertation}{\Large }}\\
 
 
 \vspace{1.5cm}
 
 
 \begin{doublespace}
-\noindent {\huge {}\textbf{\huge OPTIMIZACIJSKE IN VZPOREDNE}\\
-\textbf{\huge METODE ZA NA\v{C}RTOVANJE}\\
-\textbf{\huge RADIJSKIH OMRE´IJ}\\
-\textbf{\huge NASLEDNJE GENERA\-{CI}\-{JE}}{\huge }}\\
+\noindent {\huge {}\textbf{\LARGE OPTIMIZACIJSKE IN VZPOREDNE}\\
+\textbf{\LARGE METODE ZA NA\v{C}RTOVANJE}\\
+\textbf{\LARGE RADIJSKIH OMRE´IJ}\\
+\textbf{\LARGE NASLEDNJE GENERA\-{CI}\-{JE}}{\huge }}\\
  
 \end{doublespace}
 
 \vspace{0.5cm}
 
 
-\noindent {\LARGE {}\textbf{\LARGE Doktorska disertacija}{\LARGE }}\\
+\noindent {\Large {}\textbf{\Large Doktorska disertacija}{\Large }}\\
 
 
 \vspace{1.5cm}
@@ -282,8 +292,12 @@ Koro\v{s}ec}\\
 \textit{\large Co-supervisor}{\large : Assist. Prof. Toma\v{z} Javornik}\\
 \\
 \\
-{Ljubljana, Slovenia, May 2013}%
+{Ljubljana, Slovenia, September 2013}%
 \end{minipage}
+
+\clearpage{}
+
+\thispagestyle{empty}
 
 \cleardoublepage{}
 
@@ -310,10 +324,10 @@ Dedicatoria de la thesis.
 
 \thispagestyle{empty}
 
-\global\long\def\listfigurename{Index of Figures}
+\global\long\def\listfigurename{List of Figures}
 
 
-\global\long\def\listtablename{Index of Tables}
+\global\long\def\listtablename{List of Tables}
 
 
 \global\long\def\contentsname{Contents}
@@ -326,9 +340,12 @@ Dedicatoria de la thesis.
  \global\long\def\subs#1{\ensuremath{_{\textrm{#1}}}}
 
 
-\pagestyle{fancy} \global\long\def\chaptermark#1{\markboth{\thechapter.\ #1}{}}
- %\renewcommand{\sectionmark}[1]{\markright {\thechapter.\ #1}}
+\global\long\def\chaptermark#1{\markboth{\thechapter.\ #1}{}}
 
+
+\pagestyle{fancy}
+
+%\renewcommand{\sectionmark}[1]{\markright {\thechapter.\ #1}}
 
 \global\long\def\headrulewidth{0pt}
  \global\long\def\footrulewidth{0pt}
@@ -342,7 +359,7 @@ Dedicatoria de la thesis.
  \global\long\def\footrulewidth{0pt}
 }
 
-\cleardoublepage{}\newpage{}
+\cleardoublepage{}
 
 \pagenumbering{Roman} 
 
@@ -352,73 +369,91 @@ Dedicatoria de la thesis.
 
 \tableofcontents{}
 
-\cleardoublepage{}\newpage{}
+\cleardoublepage{}
 
-\addcontentsline{toc}{chapter}{Abstract} \include{00a-abstract}
-\thispagestyle{plain} \clearpage{}\newpage{}
+\addcontentsline{toc}{chapter}{Abstract}
 
-\addcontentsline{toc}{chapter}{Povzetek} \include{00b-Povzetek}
-\thispagestyle{plain} \clearpage{}\newpage{}
+\thispagestyle{plain}\include{00a-abstract}\cleardoublepage{}
 
-\addcontentsline{toc}{chapter}{Abbreviations} \include{00c-Abbrevations}
-\thispagestyle{fancy} \markboth{Abbreviations}{} \cleardoublepage{}\newpage{}
+\addcontentsline{toc}{chapter}{Povzetek}
+
+\thispagestyle{plain}
+
+\include{00b-povzetek}\cleardoublepage{}
+
+\addcontentsline{toc}{chapter}{Abbreviations}
+
+\renewcommand{\nomname}{Abbreviations}
+
+\thispagestyle{fancy}
+
+%
+% Custom format for displaying nomenclature entries
+%
+\renewcommand{\nomlabel}[1]{%
+	#1\hfill=%
+}
+%
+% Fancy dividing line for nomenclature groups (A - abbreviations, S - symbols)
+%
+\renewcommand{\nomgroup}[1]{%
+	\item[]\hspace*{-\leftmargin}%
+	\rule[2pt]{0.45\linewidth}{1pt}%
+	\hfill #1\hfill \rule[2pt]{0.45\linewidth}{1pt}%
+}\printnomenclature[7em]{}
+
+\cleardoublepage{}
 
 \pagenumbering{arabic}
 
 \pagestyle{fancy}
 
 \global\long\def\chaptermark#1{\markboth{#1}{}}
- % shows only chapter name in headder
+ % shows only chapter name in header
 %\renewcommand{\sectionmark}[1]{\markright{#1}{}}
 \setcounter{page}{1}
 
 \setlength{\subfigtopskip}{6mm} %vertical space between subfigures when \\ is used
 
 
-\include{01-introduction/01-introduction} 
+\include{01-introduction/01-introduction}\cleardoublepage{}
 
-\cleardoublepage{}
-
-\include{02-background_and_motivation/02-background_and_motivation}
-\cleardoublepage{}
-
-\include{03-Materials-and-Methods} \cleardoublepage{}
+\include{02-background_and_motivation/02-background_and_motivation}\cleardoublepage{}
 
 \include{04-framework_design_and_implementation/04-framework_design_and_implementation}
 
 \cleardoublepage{}
 
+\include{06-experimental_evaluation-service_coverage/06-service_coverage_problem}
+\cleardoublepage{}
+
+\include{07-experimental_evaluation-sho_balancing/07-soft_handover_alignment} 
+
+\cleardoublepage{}
+
 \include{05-framework_parameter_tuning/05-framework_parameter_tuning}\cleardoublepage{}
 
-\include{07-experimental_evaluation/07-02-service_coverage_problem}
-\cleardoublepage{}
+\include{08-real_network_planning/08-real_network_planning}\cleardoublepage{}
 
-\include{07-experimental_evaluation/07-01-soft_handover_alignment}
-\cleardoublepage{}
+\include{09-conclusion/09-conclusion} \cleardoublepage{}
 
-\include{06-Conclusions} \cleardoublepage{}
+\include{10-acknowledgments/10-acknowledgments} \cleardoublepage{}
 
-\include{00-acknowledgments/00-acknowledgments} \cleardoublepage{}
-
-\thispagestyle{plain}
+%\thispagestyle{plain}
 
 \bibliographystyle{nature}
 \bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,05-framework_parameter_tuning/05-framework_parameter_tuning,07-experimental_evaluation/07-01-soft_handover_alignment,07-experimental_evaluation/07-02-service_coverage_problem}
 
 
-\cleardoublepage{}\global\long\def\listfigurename{Index of Figures}
- \listoffigures
-\newpage{}
+\cleardoublepage{} \listoffigures
 
-\cleardoublepage{}\global\long\def\listtablename{Index of Tables}
- \listoftables
-\newpage{}
+
+\cleardoublepage{} \listoftables
+
 
 \cleardoublepage{}\addcontentsline{toc}{chapter}{Index of Algorithms} 
 
-\listof{myalgorithm}{Index of Algorithms} \newpage{}
-
-\newpage{}\cleardoublepage{}
+\listof{myalgorithm}{Index of Algorithms} 
 
 \appendix
 %dummy comment inserted by tex2lyx to ensure that this paragraph is not empty

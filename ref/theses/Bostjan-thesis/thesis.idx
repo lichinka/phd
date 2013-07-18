@@ -1,0 +1,110 @@
+\indexentry{agent|hyperpage}{1}
+\indexentry{plan recognition|hyperpage}{1}
+\indexentry{plan recognition!keyhole|hyperpage}{1}
+\indexentry{plan recognition!intended|hyperpage}{1}
+\indexentry{plan recognition!obstructed|hyperpage}{1}
+\indexentry{trace!spatio-temporal trace|hyperpage}{1}
+\indexentry{behavior!agent's behavior|hyperpage}{2}
+\indexentry{action|hyperpage}{2}
+\indexentry{activity|hyperpage}{2}
+\indexentry{activity!atomic activity|hyperpage}{2}
+\indexentry{activity!complex activity|hyperpage}{2}
+\indexentry{action|hyperpage}{2}
+\indexentry{activity|hyperpage}{2}
+\indexentry{behavior signature|hyperpage}{2}
+\indexentry{behavior!deviant behavior|hyperpage}{2}
+\indexentry{behavior!suspicious behavior|hyperpage}{2}
+\indexentry{behavior!anomalous behavior|hyperpage}{2}
+\indexentry{activity recognition|hyperpage}{7}
+\indexentry{sensors|hyperpage}{7}
+\indexentry{sensors!wearable|hyperpage}{8}
+\indexentry{sensors!embedded|hyperpage}{9}
+\indexentry{sensors!dense|hyperpage}{9}
+\indexentry{ambient assisted living, AAL|hyperpage}{9}
+\indexentry{activities of daily living, ADL|hyperpage}{9}
+\indexentry{intrusion detection|hyperpage}{10}
+\indexentry{frequentist estimator|hyperpage}{10}
+\indexentry{ambient assisted living, AAL|hyperpage}{11}
+\indexentry{hidden Markov models|hyperpage}{11}
+\indexentry{plan recognition|hyperpage}{11}
+\indexentry{utility-based plan recognition!UPR|hyperpage}{12}
+\indexentry{activity recognition|hyperpage}{15}
+\indexentry{observation|hyperpage}{15}
+\indexentry{observation!observation sequence|hyperpage}{15}
+\indexentry{activity|hyperpage}{15}
+\indexentry{action!atomic action|hyperpage}{15}
+\indexentry{activity recognition pipeline|hyperpage}{16}
+\indexentry{activity recognition!activity recognition pipeline|hyperpage}{16}
+\indexentry{noise removal|hyperpage}{17}
+\indexentry{feature extraction|hyperpage}{22}
+\indexentry{canonical representation|hyperpage}{25}
+\indexentry{spurious activity transitions|hyperpage}{26}
+\indexentry{noise removal|hyperpage}{26}
+\indexentry{action!action sequence|hyperpage}{27}
+\indexentry{sequential grammar-based classifier|hyperpage}{27}
+\indexentry{hidden Markov models|hyperpage}{28}
+\indexentry{activity!compound activity|hyperpage}{30}
+\indexentry{interaction|hyperpage}{30}
+\indexentry{activity!compound activity|hyperpage}{30}
+\indexentry{interaction|hyperpage}{30}
+\indexentry{hidden Markov models!coupled hidden Markov models|hyperpage}{30}
+\indexentry{behavior signature|hyperpage}{33}
+\indexentry{static landmark|hyperpage}{33}
+\indexentry{behavior trace|hyperpage}{33}
+\indexentry{feature extraction|hyperpage}{33}
+\indexentry{spatio-activity matrix|hyperpage}{33}
+\indexentry{principal component analysis|hyperpage}{37}
+\indexentry{feature extraction|hyperpage}{39}
+\indexentry{behavior pattern|hyperpage}{39}
+\indexentry{behavior!deviant behavior|hyperpage}{39}
+\indexentry{detector|hyperpage}{41}
+\indexentry{detection performance|hyperpage}{41}
+\indexentry{detector!graded detector|hyperpage}{41}
+\indexentry{detector!binary detector|hyperpage}{41}
+\indexentry{detection performance!true positive|hyperpage}{41}
+\indexentry{detection performance!false positive|hyperpage}{41}
+\indexentry{detection performance!true negative|hyperpage}{41}
+\indexentry{detection performance!false negative|hyperpage}{41}
+\indexentry{detection performance!type II error|hyperpage}{41}
+\indexentry{detection performance!type I error|hyperpage}{41}
+\indexentry{detection performance!sensitivity|hyperpage}{43}
+\indexentry{detection performance!specificity|hyperpage}{43}
+\indexentry{detection performance!precision|hyperpage}{43}
+\indexentry{detection performance!F-measure|hyperpage}{43}
+\indexentry{false positive paradox|hyperpage}{43}
+\indexentry{detector|hyperpage}{44}
+\indexentry{frequentist estimator|hyperpage}{44}
+\indexentry{behavior!suspicious behavior|hyperpage}{45}
+\indexentry{behavior!anomalous behavior|hyperpage}{45}
+\indexentry{local outlier factor, LOF|hyperpage}{46}
+\indexentry{feature extraction|hyperpage}{46}
+\indexentry{event!trigger event|hyperpage}{49}
+\indexentry{event!event trace|hyperpage}{49}
+\indexentry{detector|hyperpage}{52}
+\indexentry{hidden Markov models|hyperpage}{53}
+\indexentry{utility-based plan recognition!UPR|hyperpage}{54}
+\indexentry{plan recognition|hyperpage}{54}
+\indexentry{utility-based plan recognition!F-UPR|hyperpage}{55}
+\indexentry{unified framework|hyperpage}{57}
+\indexentry{activity recognition pipeline|hyperpage}{57}
+\indexentry{activities of daily living, ADL|hyperpage}{65}
+\indexentry{ambient intelligence, AmI|hyperpage}{65}
+\indexentry{daily-living dynamics|hyperpage}{65}
+\indexentry{ambient assisted living, AAL|hyperpage}{65}
+\indexentry{ambient intelligence, AmI|hyperpage}{65}
+\indexentry{activity recognition pipeline|hyperpage}{66}
+\indexentry{activity recognition|hyperpage}{66}
+\indexentry{unified framework|hyperpage}{66}
+\indexentry{activity recognition pipeline|hyperpage}{66}
+\indexentry{canonical representation|hyperpage}{66}
+\indexentry{spurious activity transitions|hyperpage}{67}
+\indexentry{local outlier factor, LOF|hyperpage}{68}
+\indexentry{detector|hyperpage}{68}
+\indexentry{local outlier factor, LOF|hyperpage}{68}
+\indexentry{unified framework|hyperpage}{76}
+\indexentry{activity recognition|hyperpage}{78}
+\indexentry{detector|hyperpage}{79}
+\indexentry{unified framework|hyperpage}{87}
+\indexentry{activity recognition|hyperpage}{87}
+\indexentry{detector|hyperpage}{90}
+\indexentry{local outlier factor, LOF|hyperpage}{94}

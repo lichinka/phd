@@ -1,0 +1,57 @@
+%!TEX root = thesis.tex
+
+%\begin{preliminary}{Abstract} 
+
+  \cleardoublepage
+  \thispagestyle{fancy}
+  \fancyhead{}
+  \fancyfoot{}
+  \fancyhead[RO]{\thepage}
+  \fancyhead[LO]{}
+  \fancyhead[LE]{\thepage}
+  \fancyhead[RE]{\footnotesize Abstract}
+  \vspace{-2.4cm} 
+  {\noindent \Large \bfseries Abstract}
+  \vspace{1.5cm}
+
+\vspace{-1mm}
+
+% Motivation
+% - what is the domain
+% - why is it interesting
+% - why is it hard
+\noindent
+Many applications, including smart environments, surveillance, human-robot interaction, and ambient assisted living, involve the problem of learning patterns of agent behavior from sensor data. Deviant behavior is a pattern in the data that either does not conform to the expected behavior, that is, anomalous behavior, or matches previously defined unwanted behavior, that is, suspicious behavior. The present thesis focuses on the detection of behavior patterns representing a security risk, health problem, or  other abnormal behavior contingency. 
+%Examples include a suspicious passenger who appears to turn away at the presence of the police officer, and an attacker who tries to access a high-security access point using a stolen identity.
+
+% Problem statement
+% - what are the concrete problems
+% - what are the challenges
+% - how were addressed
+%
+Real-life applications for deviant behavior detection present several challenges. First, plan recognition research has assumed that atomic actions are either given or can be trivially obtained, while real-life applications require activity recognition from raw sensor readings. The second challenge is how to flexibly encode complex, unstructured, daily-living behavior patterns that do not follow predefined scenarios. Thirdly, deviant behavior may be reflected on different time scales and different modalities, which raises the question of how to combine different time scales and modalities into a single evaluation. Finally, many domains include behavior in which no single event is sufficient to decide whether the behavior is deviant; therefore, an advanced approach is required to 
+%combine and 
+accumulate deviation over time. 
+%Real-life applications for deviant behavior detection raise several challenges. The first challenge is how to recognize atomic activities that comprise behavior patterns. Previous work in plan recognition assumes that atomic actions are either given or trivially obtained, while real-life applications require recognition from raw sensor readings. The second challenge is how to present complex real-life behavior patterns that do not follow predefined scenarios. Presentation must be robust and flexible to describe unstructured real-life behavior patterns. Third, deviant behavior may reflect on different time scales and different modalities, hence the question is how to combine different time scales and modalities to a single evaluation. Finally, many domains include behavior where no single event is sufficient to decide whether behavior is deviant or not, hence an advanced approach is required to combine and accumulate deviation over time. 
+
+% Our solution
+% - what we propose
+% - main contributions
+%This dissertation proposes a framework for analyzing agent's activities from prior knowledge and external observations to detect deviant behavior patterns, regardless of whether the observed entities are software agents, humans, or even robots. Specifically, the framework includes an algorithm for recognition of atomic activities, a novel presentation for complex real-life behavior patterns, an approach that combines different time scales and modalities, and a novel algorithm for accumulating deviation over time.
+%
+%This thesis addresses the problem of analyzing agent's activities from prior knowledge and external observations to detect deviant behavior patterns. We propose a general framework for anomalous and suspicious behavior detection that accommodates the above-mentioned challenges. The main contributions are listed as follows:
+%
+This thesis proposes a unified framework to analyze agent behavior from prior knowledge and external observations in order to detect deviant behavior patterns, regardless of whether the observed entities are humans, software agents, or even robots. To address the problem of activity recognition from sensor data, the thesis introduces an activity recognition pipeline that includes filtering, attribute construction, activity identification, and activity smoothing. %Within the pipeline, several novel algorithms are introduced including body filter, which applies human-body constraints to location-based sensors attached to body, and two approaches for reducing spurious activity transitions that cannot occur in reality are demonstrated.
+%
+From the behavior analysis perspective, we propose a novel, efficient encoding that we refer to as a spatio-activity matrix. This matrix is able to capture behavior dynamics in a specific time period using spatio-temporal features, whereas its visualization allows visual comparison of different  behavior patterns. The thesis also provides a feature extraction technique, based on principal component analysis, in order to reduce the dimensionality of the spatio-activity matrix. We then introduce a clear problem definition that helps establish a theoretical framework for detecting anomalous and suspicious behavior from agent traces in order to show how to optimally perform detection. We discuss why detection error is often inevitable and prove the lower error bound, and provide several heuristic approaches that either estimate the distributions required to perform detection or to directly rank the behavior signatures using machine learning approaches. The established theoretical framework is extended to show how to perform detection when the agent is observed over longer periods of time and no significant event is sufficient to reach a decision. We specify conditions that any reasonable detector should satisfy, analyze several detectors, and propose a novel approach, referred to as a F-UPR detector, that generalizes utility-based plan recognition with arbitrary utility functions.
+%
+%\textbf{Empirical studies}: We tested our framework in several real world domains and show that it generally outperforms the competing baselines. In ambient assisted living domain we demonstrate how to apply the framework to monitor an elderly person in home environment to detect anomalies in daily living. In surveillance domain, we address the issue of repeated behavior detection and apply the framework to detect suspicious passengers at the airport. The novel F-UPR detector significantly outperformed competing approaches. Finally,  
+%
+% Results
+%  - experiments on domains
+The unified framework is demonstrated empirically in three studies. %, in which it generally outperforms the competing baselines. 
+The first study addresses detection of decreased behavior that indicates disease or deterioration in the health of elderly persons, while the second study deals with the detection of suspicious passengers in the airport simulation. Finally, the third study concerns the verification of persons at an access control point in high-security application.
+
+
+%\end{preliminary} 
+

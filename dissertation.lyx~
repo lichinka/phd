@@ -17,11 +17,17 @@
 \usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
 
 % fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
-\usepackage[slovene,english]{babel}
+%\usepackage[slovene,english]{babel}
 % Uses font family: Times Roman
 \usepackage{aecompl}
-\usepackage{mathrsfs}% for \mathscr
+
+%
+% Math environment
+%
+\usepackage{amsmath}
+\usepackage{amssymb,mathrsfs}   % for \mathscr
 %\setlength{\mathindent}{1cm}    % sets indentation of equations
+
 \usepackage{url}
 \usepackage{psfrag}
 \usepackage{units}
@@ -60,9 +66,9 @@
 \titlespacing{\chapter}{0pt}{0pt}{35mm}
 \addto\captionsenglish{\renewcommand{\chaptername}{}}   %remove chapter X
     %\usepackage{chngcntr}
-\counterwithout{figure}{chapter}    %correct counting of figures - ips template style
-\counterwithout{table}{chapter}     %correct counting of tables - ips template style
-\counterwithout{equation}{chapter}  %correct counting of equations - ips template style
+%\counterwithout{figure}{chapter}    %correct counting of figures - ips template style
+%\counterwithout{table}{chapter}     %correct counting of tables - ips template style
+%\counterwithout{equation}{chapter}  %correct counting of equations - ips template style
 
     %\usepackage{titletoc}
 \titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
@@ -156,11 +162,11 @@
 \pdf_quoted_options "dvipdfm,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black"
 \papersize a4paper
 \use_geometry false
-\use_amsmath 2
-\use_esint 1
+\use_amsmath 1
+\use_esint 0
 \use_mhchem 0
 \use_mathdots 0
-\cite_engine basic
+\cite_engine natbib_authoryear
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -621,7 +627,7 @@ Jožef Stefan International Postgraduate School
 \noindent
 
 \series bold
-Ljubljana, Slovenia, May 2013
+Ljubljana, Slovenia, September 2013
 \series default
  
 \begin_inset ERT
@@ -695,10 +701,38 @@ status collapsed
 
 
 \shape italic
-Name and surname of board member with the title, Chairman, institution and
- address
-\shape default
+Assist.
+ Prof.
+ Dr.
+ Jurij 
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+
+\backslash
+v{S}
+\end_layout
+
+\end_inset
+
+ilc, Chairman, Jo
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{z}
+\end_layout
+
+\end_inset
+
+ef Stefan Institute, Ljubljana, Slovenia
+\shape default
+.
 \begin_inset ERT
 status collapsed
 
@@ -713,7 +747,7 @@ status collapsed
 \begin_inset Newline newline
 \end_inset
 
- 
+
 \begin_inset ERT
 status collapsed
 
@@ -726,10 +760,51 @@ status collapsed
 
 
 \shape italic
-Name and surname of board member with the title, Member, institution and
- address
-\shape default
+Assist.
+ Prof.
+ Dr.
+ Ale
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+
+\backslash
+v{s}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{S}
+\end_layout
+
+\end_inset
+
+viglej, Jo
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{z}
+\end_layout
+
+\end_inset
+
+ef Stefan Institute, Ljubljana, Slovenia
+\shape default
+.
 \begin_inset ERT
 status collapsed
 
@@ -744,7 +819,7 @@ status collapsed
 \begin_inset Newline newline
 \end_inset
 
- 
+
 \begin_inset ERT
 status collapsed
 
@@ -757,10 +832,24 @@ status collapsed
 
 
 \shape italic
-Name and surname of board member with the title, Member, institution and
- address
-\shape default
+Prof.
+ Dr.
+ Marian Vajter
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+
+\backslash
+v{s}
+\end_layout
+
+\end_inset
+
+ic, Department of Computer Science, University of Salzburg, Austria
+\shape default
+.
 \begin_inset ERT
 status collapsed
 
@@ -1301,7 +1390,7 @@ status collapsed
 
 \end_inset
 
-Ljubljana, Slovenia, May 2013
+Ljubljana, Slovenia, September 2013
 \begin_inset ERT
 status collapsed
 
@@ -2121,7 +2210,7 @@ linewidth}{1pt}%
 \begin_inset CommandInset nomencl_print
 LatexCommand printnomenclature
 set_width "custom"
-width "10em"
+width "7em"
 
 \end_inset
 
@@ -2268,10 +2357,7 @@ filename "01-introduction/01-introduction.lyx"
 
 \end_inset
 
- 
-\end_layout
 
-\begin_layout Standard
 \begin_inset Newpage cleardoublepage
 \end_inset
 
@@ -2285,21 +2371,7 @@ filename "02-background_and_motivation/02-background_and_motivation.lyx"
 
 \end_inset
 
- 
-\begin_inset Newpage cleardoublepage
-\end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "03-Materials-and-Methods"
-
-\end_inset
-
- 
 \begin_inset Newpage cleardoublepage
 \end_inset
 
@@ -2310,6 +2382,37 @@ filename "03-Materials-and-Methods"
 \begin_inset CommandInset include
 LatexCommand include
 filename "04-framework_design_and_implementation/04-framework_design_and_implementation.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "06-experimental_evaluation-service_coverage/06-service_coverage_problem.lyx"
+
+\end_inset
+
+
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "07-experimental_evaluation-sho_balancing/07-soft_handover_alignment.lyx"
 
 \end_inset
 
@@ -2340,11 +2443,11 @@ filename "05-framework_parameter_tuning/05-framework_parameter_tuning.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "07-experimental_evaluation/07-02-service_coverage_problem.lyx"
+filename "08-real_network_planning/08-real_network_planning.lyx"
 
 \end_inset
 
- 
+
 \begin_inset Newpage cleardoublepage
 \end_inset
 
@@ -2354,11 +2457,11 @@ filename "07-experimental_evaluation/07-02-service_coverage_problem.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "07-experimental_evaluation/07-01-soft_handover_alignment.lyx"
+filename "09-conclusion/09-conclusion.lyx"
 
 \end_inset
 
- 
+
 \begin_inset Newpage cleardoublepage
 \end_inset
 
@@ -2368,25 +2471,11 @@ filename "07-experimental_evaluation/07-01-soft_handover_alignment.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "06-Conclusions"
+filename "10-acknowledgments/10-acknowledgments.lyx"
 
 \end_inset
 
- 
-\begin_inset Newpage cleardoublepage
-\end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "00-acknowledgments/00-acknowledgments.lyx"
-
-\end_inset
-
- 
 \begin_inset Newpage cleardoublepage
 \end_inset
 
@@ -2399,7 +2488,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 thispagestyle{plain}
 \end_layout
@@ -2412,7 +2501,7 @@ thispagestyle{plain}
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,05-framework_parameter_tuning/05-framework_parameter_tuning,07-experimental_evaluation/07-01-soft_handover_alignment,07-experimental_evaluation/07-02-service_coverage_problem"
+bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
 options "nature"
 
 \end_inset

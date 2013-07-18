@@ -84,7 +84,63 @@ Many researchers believe the computer has become the third method to do
  research, behind theory and experimentation, for both science and engineering.
  Although there is no complete agreement on the position intended for scientific
  computing with respect to the other two methods, it is undeniable that
- computational methods are an essential tool in most disciplines.
+ computational methods are an essential tool in most disciplines, particularly
+ those related to decision making.
+\end_layout
+
+\begin_layout Standard
+Nowadays, decision making is present practially everywhere.
+ As scientistis, engineers and managers have to make decisions in more complex
+ and competitive circumnstances every day, decision making involves dealing
+ with rational and optimal approaches.
+ According to Talbi
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+, decision making consists in the following steps:
+\end_layout
+
+\begin_layout Itemize
+formulate the problem,
+\end_layout
+
+\begin_layout Itemize
+model the problem, 
+\end_layout
+
+\begin_layout Itemize
+optimize the problem, and
+\end_layout
+
+\begin_layout Itemize
+implement a solution.
+\end_layout
+
+\begin_layout Standard
+Formulating a decision problem means making an initial statement about it.
+ Despite this first formulation may be imprecise, the objectives of the
+ problem are outlined, together with internal and external factors that
+ have some degree of influence over it.
+ During the modelling of the problem, an abstract mathematical model is
+ built for it.
+ Sometimes this model is inspired by similar models in the literature, making
+ it possible to tackle the problem with well-studied methods.
+ After a model of the problem is available, the optimization step, i.e.
+ generating 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ solutions for the problem, may begin.
+ It is worth pointing out that the resulting solution shall be given for
+ the abstract model, and not for the original problem itself.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -107,8 +163,8 @@ key "law2007simulation"
 \end_layout
 
 \begin_layout Standard
-A model is a simple representation of a studied problem, and one of its
- purposes is to predict the effects of variations within the system.
+A model is a simplified representation of a studied problem, and one of
+ its purposes is to predict the effects of variations within the system.
  A good model is a balance between realism and simplicity.
  The system simulation, on the other hand, is the operation of the model.
  Its configuration can also be changed, allowing multiple experimental execution
@@ -121,35 +177,56 @@ key "maria1997introduction"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Problems that are categorized as of large size and of considerable complexity
- represent a challenge because of the different involved disciplines and
- the degree of difficulty of their modeling.
+ However, it is important to understand that the models used in scientific
+ simulations and engineering never offer a perfect model of the system they
+ represent, but only a subset of its composition and dynamics.
+ For this reason, experimentation and expert observation will always be
+ essential as reference points for understanding the studied phenomena.
+ Consequently, problems categorized as of large size and of considerable
+ complexity represent a challenge, because of the different involved disciplines
+ and the degree of difficulty of their modeling.
  Radio networks, in particular those of the third and fourth generations,
  fall under this characterization.
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace bigskip
+Radio networks represent one of the most fast-growing technology markets
+ since the introduction of the Global System for Mobile communications (GSM
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GSM"
+description "Global System for Mobile communications."
+
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Mobile radio networks represent one of the most fast-growing technology
- markets since the introduction of the Global System for Mobile communications
- (GSM) 
+) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "3GPP_TR_50.099"
 
 \end_inset
 
- as the second generation (2G) mobile networks more than twenty years ago.
- Its successor, the Universal Mobile Telecommunications System (UMTS) 
+ as the second generation (2G
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "2G"
+description "Second Generation of mobile networks."
+
+\end_inset
+
+) mobile networks more than twenty years ago.
+ Its successor, the Universal Mobile Telecommunications System (UMTS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "UMTS"
+description "Universal Mobitel Telecommunications System."
+
+\end_inset
+
+) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "3GPP_TR_23.101"
@@ -254,37 +331,39 @@ Particularly for path-loss predictions, created with empirical mathematical
  own deviations, the calculated coverage may be considered as not more than
  an approximation.
  Therefore, there is a need for a method to adapt state-of-the-art mathematical
- models for radio propagations so that the calculated coverage is as accurate
- as possible, despite the various sources of error noted before.
+ models for radio propagations so that the calculated path-loss predictions
+ are as accurate as possible, despite the various sources of error noted
+ before.
 \end_layout
 
 \begin_layout Standard
 This thesis focuses on providing methods and tools to ??? the pointed drawbacks.
  Short summary of the introduced novelties??? It is important to note that
  some methods proposed in this thesis have been particularly designed for
- tackling problems in radio planning of 3G networks.
+ problems emerging in radio planning of 3G networks.
  Despite this, they may be adapted to other standards, e.g.
  GSM or LTE, without lose of generality.
 \end_layout
 
 \begin_layout Section
-Motivation
+Scope
 \end_layout
 
 \begin_layout Standard
-In this thesis, we will target the drawbacks pointed in the previous section,
- intend to contribute both methodology and tools that will provide a correlation
- between simulation and optimization of 3G radio networks.
+In this thesis, we intend to contribute methods and tools that will provide
+ solutions to the disadvantages pointed out in the previous section.
+ The introduced methods and tools have a close correlation with the simulation
+ and optimization of radio networks, especially those of the 3G and 4G.
  We will introduce the steps necessary to mitigate the problem of experimental
  reproducibility found in most published works, by simplifying setup, execution,
  and sharing of experimental results.
  With the development of the framework, we will evaluate and assess the
  possibilities it offers as a support system for simulation and optimization
- problems of 3G radio networks.
+ problems of radio networks.
  By including parallel programming techniques for computer clusters and
- GPUs, we intend to go some steps beyond the classical methodology provided
- by previous works, taking advantage of the inherent parallelism of some
- optimization techniques.
+ GPUs, we intend to go beyond the classical methodology provided by previous
+ works, taking advantage of the inherent parallelism of some optimization
+ techniques.
  We will also be looking into the application of many advances in HPC that
  should provide the framework with the computing power needed to improve
  the simulation process, thus enhancing its scalability to support real-world
@@ -297,127 +376,6 @@ In this thesis, we will target the drawbacks pointed in the previous section,
  own needs.
  Encouraging cooperation and sharing of experimentation-related tools and
  data should be a common goal from which everyone will benefit.
-\end_layout
-
-\begin_layout Standard
-A quick review of the state-of-the-art in 3G network optimization indicates
- that software, providing good computational models, is a very expensive
- tool for science.
- Moreover, since the vast majority of this software is proprietary, it relies
- on closed source, formats and protocols, which disclosure is explicitly
- forbidden by their licenses.
- This fact creates a big hurdle to one of the key phases of scientific methodolo
-gy 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gauch2002scientific"
-
-\end_inset
-
-: experimental reproducibility.
-\end_layout
-
-\begin_layout Standard
-There is a constant growing demand for hardware resources, longer-processing
- times and more memory to follow the evolution of 3G radio networks 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
-
-\end_inset
-
-.
- Fortunately, high-performance computer systems are increasingly accessible;
- something made possible because of the emergence of computer clusters and
- commodity hardware, capable of true parallel processing, e.g.
- multi-core CPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore"
-
-\end_inset
-
- and GPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wen2011gpu"
-
-\end_inset
-
-.
- Moreover, the highly parallel structure present on GPUs makes them more
- effective than CPUs for execution of algorithms where large blocks of data
- need to be processed in parallel.
- Commodity GPUs have evolved from being a graphic accelerator into a general-pur
-pose processor.
- They can achieve higher performance at lower power consumption and lower
- costs when compared to conventional CPUs.
-\end_layout
-
-\begin_layout Standard
-It is important to understand that the models used in scientific simulations
- and engineering never offer a perfect model of the system they represent,
- but only a subset of its composition and dynamics.
- Experimentation and expert observation will always be essential as reference
- points for understanding the studied phenomena.
-\end_layout
-
-\begin_layout Subsection
-Radio-network optimization
-\end_layout
-
-\begin_layout Standard
-Once a mobile network is launched, an important part of its operation and
- maintenance is monitoring the quality characteristics and changing parameter
- values in order to improve its performance.
-\end_layout
-
-\begin_layout Standard
-The evolution from 2G to 3G has introduced not only the technology needed
- to increase both data and voice capacity, but also a greater complexity
- in terms of network planning, deployment, and configuration, which have
- rendered most of the traditionally used methods to be ineffective.
- In a traditional approach (i.e.
- manual), during the network planning and maintenance processes, a network
- planning software tool would execute the analysis, while the human would
- make the change decisions.
- Therefore, a radio planning engineer configures network parameters manually
- and the network planning tool analyzes the given configuration.
- If the obtained results are not acceptable, the analysis process has to
- be repeated several times, until the goal is achieved.
-\end_layout
-
-\begin_layout Standard
-Modern 3G radio networks are large and many of their key parameters are
- interdependent.
- Since an engineer is not able to cope with the level of complexity present
- in such systems, the computer, along with specialized software, guides
- the engineer to the most appropriate configuration for the network.
- In the context of this work, we will refer to this process as optimization.
-\end_layout
-
-\begin_layout Standard
-A common limitation of the implementations of such optimization methods,
- generally targeting traditional computer architectures of sequential execution,
- is their inability to meet the requirements needed by real-world mobile
- networks, since their computational-time complexity make them unfeasible
- for practical use.
- When analyzing big real-world networks with thousands of users it is necessary
- to reduce the execution time of the optimization processes as much as possible,
- so that they are useful for practical use.
-\end_layout
-
-\begin_layout Standard
-Additionally, the implementation of the framework will benefit from valuable
- advances in computer science and High Performance Computing (HPC), in order
- to perform faster and more reliable simulations 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore,wen2011gpu"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Section

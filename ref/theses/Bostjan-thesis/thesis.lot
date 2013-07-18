@@ -1,0 +1,23 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Detection outcomes.\relax }}{42}{table.caption.21}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Example: Observed frequencies of four possible behavior signatures.\relax }}{45}{table.caption.23}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces Confusion matrix for activity recognition. The overall accuracy is $87.52$\%.\relax }}{69}{table.caption.30}
+\contentsline {table}{\numberline {8.2}{\ignorespaces LOF values of the behavior traces. A higher value represents a higher outlierness of a behavior trace.\relax }}{71}{table.caption.33}
+\contentsline {table}{\numberline {8.3}{\ignorespaces LOF values of the long-term test. A higher value represents a higher outlierness of a behavior trace.\relax }}{72}{table.caption.34}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces Evaluation results when the F-measure is maximized (columns 2--4) and all the suspicious cases are discovered (the last two columns).\relax }}{81}{table.caption.39}
+\contentsline {table}{\numberline {9.2}{\ignorespaces Evaluation results at the peak F-measure in the dangerous driver domain.\relax }}{84}{table.caption.41}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {10.1}{\ignorespaces System and module performance in the offline \textit {swapped identity} experiment with four employees only.\relax }}{97}{table.caption.50}
+\contentsline {table}{\numberline {10.2}{\ignorespaces System and module performance in the offline \textit {stolen identity} experiment with four employees and three intruders.\relax }}{97}{table.caption.51}
+\contentsline {table}{\numberline {10.3}{\ignorespaces System and module performance in the experiments with four employees and four security experts in a role of intruder.\relax }}{98}{table.caption.52}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

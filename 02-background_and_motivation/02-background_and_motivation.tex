@@ -1,16 +1,261 @@
 
-\chapter{Background \label{chap:Background-and-motivation}}
+\chapter{Background and motivation \label{chap:Background-and-motivation}}
 
 % First paragraph has no indentation.
 
-It is important to understand that the models used in scientific simulations
-and engineering never offer a perfect model of the system they represent,
-but only a subset of its composition and dynamics. Experimentation
-and expert observation will always be essential as reference points
-for understanding the studied phenomena.
+\noindent Short introduction to the content of this chapter.
 
 
-\section{Radio-network optimization}
+\section{Optimization models}
+
+Optimization may be informally defined as the procedure of finding
+better solutions to a given problem, which usually model some physical
+phenomenon. In our every day life, we are constantly solving small
+optimization problems, like choosing the shortest route to a friend's
+house, or organizing the appointments in our agenda. In general, these
+problems are small enough for us to find a good solution without extra
+help, but as they become larger and more complex, the aid of computers
+for their resolution is unavoidable.
+
+Complex multidimensional optimization problems are popular in engineering,
+economics, physics and other scientific fields. When solving an optimization
+problem, the objective is to find a ``good'' solution in a ``reasonable''
+computational time. In this respect, the field of mathematical optimization
+has received a lot of attention by the scientific community during
+the last decades. However, both ``good'' and ``reasonable'' are
+problem, application and context-specific concepts, in which the biggest
+challenge of selecting an appropiate optimization approach usually
+lays.
+
+Mathematical optimization involves the process of finding solutions
+from a group of possible decisions, which may be defined as:
+
+\begin{equation}
+\min f(\vec{x})\vec{x}\in\Omega\subseteq\mathbb{R}^{n},
+\end{equation}
+
+
+\noindent where $\vec{x}=(x_{1},\dots,x_{n})$ is a vector representing
+the decision variables, $f(\vec{x})$ is the objective function measuring
+the quality of the decisions and $\Omega$ is the set of feasible
+solutions of the problem, also known as search space. Note that the
+objective function $f$ makes it possible to define a total order
+relation between any pair of solutions in the search space $\Omega$.
+
+The search space $\Omega$ may also be expressed as a solution to
+a system of equalities or inequialities, e.g.:
+
+\begin{eqnarray}
+g(x_{1},\dots,x_{n}) & \leq & 0\nonumber \\
+h(x_{1},\dots,x_{n}) & = & 0
+\end{eqnarray}
+
+
+Optimization problems involving the maximization of the objective
+function also fall into this category, since:
+
+\begin{equation}
+\max f(\vec{x})=-\min(-f(\vec{x}))\label{eq:02-maximization_minization_problem_relation}
+\end{equation}
+
+
+A point $\vec{x}^{*}$ is considered to be an unrestricted local minimum
+of a function $f$ if it holds a better value than all its neightbours,
+i.e. there exits $\epsilon>0$ so that:
+
+\begin{equation}
+f(\vec{x}^{*})\leq f(\vec{x})\forall\vec{x}|\vec{x}-\vec{x}^{*}|<\epsilon\label{eq:02-local_minimum}
+\end{equation}
+
+
+Similarly, a point $\vec{x}^{*}$ is considered to be an unrestricted
+global minimum of a function $f$ if it holds a better value than
+all others, i.e.:
+
+\begin{equation}
+f(\vec{x}^{*})\leq f(\vec{x})\forall\vec{x}\in\mathbb{R}^{n}\label{eq:02-global_minimum}
+\end{equation}
+
+
+The concepts of local and global minimum are considered strict if
+the inequalities of Equations \ref{eq:02-local_minimum} and \ref{eq:02-global_minimum}
+are strict. 
+
+Likewise, the definition of local and global maximum is given by the
+existing relation between a minimization and a maximization problem,
+as specified in Equation \ref{eq:02-maximization_minization_problem_relation},
+i.e. a point $\vec{x}^{*}$ is a local or global maximum of a function
+$f$ if and only if $\vec{x}^{*}$ is a local or global minimum of
+function $-f$, respectively.
+
+
+\subsection{Gradient-based optimization}
+
+Gradient-descent methods are among the oldest and most studied optimization
+approaches. They are based on the derivative of the optimized function,
+using the first and even the second derivate of a function $f$. The
+name gradient follows from the derivative of multidimensional functions,
+$\nabla f(\vec{x})$, which is simply a vector where each element
+is the slope of $\vec{x}$ in that dimension, i.e. $<\frac{\partial f}{\partial x_{1}},\dots,\frac{\partial f}{\partial x_{n}}>$
+\cite{Luke-Essentials_of_metaheuristics:2009}.
+
+The principle behind gradient-descent methods is rather simple. Starting
+from an arbitrary value for $x$, we iteratevily add a small positive
+value to it, i.e.:
+
+\begin{equation}
+x\leftarrow x-\alpha f'(x),
+\end{equation}
+
+
+\noindent where $\alpha$ is a small positive value. Consequently,
+a positive slope will make $x$ decrease, whereas a negative slope
+will make it increase. Figure \ref{fig:02-gradient_descent} shows
+an example of this behaviour. Therefore, $x$ will gradually move
+down the function until it finds its minimum, where $f'(x)$ is zero,
+causing it to stop.
+
+\begin{figure}
+\centering
+
+\includegraphics[width=0.4\textwidth]{02-background_and_motivation/img/optimization_cycle}
+
+\caption{Gradient descent with a negative slope, i.e. $x$ is increasing \cite{Luke-Essentials_of_metaheuristics:2009}.
+\label{fig:02-gradient_descent}}
+\end{figure}
+
+
+However, gradient methods have certaing drawbacks that make them unsuitable
+for tackling a wide range of optimization problems. Take, for example,
+the time they take to converge. As gradient descent approaches a function
+minimum, it will skip this point and land on the other side. In the
+next step, something similar will happen, but this time from the other
+side of the minimum point, thus slowly approaching to the target in
+a ``zig-zag'' way. This behavior is directly related to the slope
+of the function at the given point, i.e. a steepest slope translates
+into a larger jump, and may be allivieatted by adjusting the value
+of $\alpha$. However, some functions (or regions of functions) may
+require smaller values, while for others a bigger value would be more
+appropiate. Newton's method improves this by taking the second derivative
+of the function into account, i.e.:
+
+\begin{equation}
+x\leftarrow x-\alpha\frac{f'(x)}{f''(x)},
+\end{equation}
+
+
+\noindent thus adjusting the value of $\alpha$ as it converges towards
+a point with zero slope \cite{Luke-Essentials_of_metaheuristics:2009}.
+
+Another issue is how other points are handled. Beside maxima and minima
+points, some functions also contain saddle points (known as inflection
+points in one-dimensional functions). Clearly, the first derivative
+of a saddle point is zero, meaning gradient descent will stop looking
+for the minimum, even though it hasn't found it (see Figure ???).
+Newton's method, on the other hand, does not help either. Moreover,
+in this case, we would be even dividing by zero! These observations
+clearly show how gradient methods get caught in local optima. We define
+local optima of a function as the optima (or minima in our case) of
+a local region. Similarly, global optima are defined as the optima
+of the whole domain of a function. It follows that gradient methods,
+as gradient descent or Newton\textquoteright{}s method, are local
+optimization algorithms \cite{Luke-Essentials_of_metaheuristics:2009}.
+
+But maybe the biggest concern with gradient-based methods is they
+assume the function under optimization is derivable. This assumption
+holds only when optimizing a well-formed mathematical function. Unfortunately,
+this is generally not the case, since in most cases the gradient is
+not computable because the function is not known. The only available
+approach in such situations is creating inputs to the function in
+order to assess their quality.
+
+
+\subsection{Linear programming???}
+
+\{Hace falta escribir algo sobre linear programming???\}
+
+Generally, when dealing with real-world problems, the availability
+of analytical optimization models is not guaranteed. Indeed, for some
+applications, simulations or physical models are the only available
+techniques to evaluate the objective function. \{Mathematical programming
+and constraint programming approaches require an explicit mathematical
+formulation that is impossible to derive in problems where simulation
+is relevant {[}288{]} - from Talbi\}???
+
+
+\subsection{Metaheuristics}
+
+Metaheuristics, a term proposed by Glover in \cite{Glover-Future_paths_for_integer_programming_and_links_to_artificial_intelligence:1986},
+represent a group of approximation algorithms designed to combine
+basic heuristic principles with advanced high-level guidance methods,
+targeted at improving the efficiency of a search process. These techniques
+are meant to finding good solutions to a given problem, for which
+the mathematical function is not available or its search space is
+big enough for an exahaustive search to be unfeasible \cite{Kochenberger_Handbook_of_metaheuristics:2003}.
+
+From the theorical point of view, metaheuristics represent a subset
+of stochastic optimization, since they use some degree of randomness
+to find optimal (or as optimal as possible) solutions to hard problems.
+They are the most general of these kinds of algorithms, and are applied
+to a wide range of problems \cite{Luke-Essentials_of_metaheuristics:2009}.
+
+The characterization given by Blum and Roli \cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}
+provides clear overview of the fundamental properties associated with
+metaheuristics:
+\begin{itemize}
+\item metaheuristics are strategies that \textquotedblleft{}guide\textquotedblright{}
+the search process;
+\item their goal is to efficiently explore the search space in order to
+find optimal or near-optimal solutions;
+\item they build upon techniques which range from simple local search procedures
+to complex learning processes;
+\item they are approximate and usually non-deterministic;
+\item they may incorporate mechanisms to avoid getting trapped in confined
+areas of the search space;
+\item their basic concepts permit an abstract-level description, which is
+not problem-specific;
+\item they may make use of domain-specific knowledge in the form of heuristics
+that are controlled by the upper level strategy;
+\item advanced metaheuristics use search experience (implemented as some
+form of memory) to guide the search process.
+\end{itemize}
+The strategies used by metaheuristics should provide a dynamic balance
+between the exploitation of the accumulated search experience (which
+is commonly called intensification) and the exploration of the search
+space (which is commonly called diversification) \cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}.
+This balance provides the necessary means to quickly identify promising
+regions, and early discarding those which have already been explored
+or don't provide solutions of better quality. Promising regions within
+the search space, which are identified by the obtained ``good''
+solutions, are thoughfully explored during the intensification phase,
+hoping to find better solutions. On the other hand, during the diversification
+phase, not yet visited regions are explored, making sure the search
+space as a whole is evenly explored, thus avoid confining the search
+to a reduced number of regions. In this context, the ultimate search
+algorithm in terms of diversification is random search. Random search
+generates a random solution in the search space at each iteration,
+without using memory \cite{Talbi_Metaheuristics:2009}. In terms of
+intensification, iterative local search is the extreme algorithm.
+The vase steepest local search algorithm selects, at each iteration,
+the best neighboring solution that improves the current one \cite{Talbi_Metaheuristics:2009}.
+
+
+\subsection{The feasibility problem, i.e. why fast evaluation methods are key
+for successful optimization}
+
+
+\subsection{The reproducibility problem}
+
+A quick review of the state-of-the-art in 3G network optimization
+indicates that software, providing good computational models, is a
+very expensive tool for science. Moreover, since the vast majority
+of this software is proprietary, it relies on closed source, formats
+and protocols, which disclosure is explicitly forbidden by their licenses.
+This fact creates a big hurdle to one of the key phases of scientific
+methodology \cite{gauch2002scientific}: experimental reproducibility.
+
+
+\section{Optimization of radio networks}
 
 Once a mobile network is launched, an important part of its operation
 and maintenance is monitoring the quality characteristics and changing
@@ -96,7 +341,7 @@ process are expected to provide advice%
 network.
 
 
-\section{Optimization of 3G mobile networks}
+\section{Overview of optimization problems for radio networks}
 
 Although wireless networks are increasingly more sophisticated, the
 need for optimization work is still far from declining. It has been
@@ -143,10 +388,10 @@ about the introduced methods is given, before closing with some concluding
 remarks.
 
 
-\section{Optimizing base station locations}
+\subsection{Optimizing base station locations}
 
 
-\subsection{Problem formulation}
+\subsubsection{Problem formulation}
 
 Some references \cite{minimum.set.covering.problem:1997,minimum.set.covering.problem:1998,minimum.set.covering.problem:2000}
 formulate the base station location problem in terms of the minimum
@@ -186,7 +431,7 @@ to install a base station such that the traffic capacity and the size
 of the covered area are maximized with the lowest installation cost.
 
 
-\subsection{Proposed solutions}
+\subsubsection{Proposed solutions}
 
 Aydin et al. \cite{Aydin:Heuristic.Optimization.Of.WCDMA} propose
 a solution to the $p$-median problem based on three meta-heuristic
@@ -229,7 +474,7 @@ The performance of four different algorithms is explored, namely SEAMO,
 SPEA2, NSGA-II and PESA.
 
 
-\section{Optimizing antenna parameters}
+\subsection{Optimizing antenna parameters}
 
 There are many antenna parameters that control the coverage and interference
 in the network, since the antenna shapes the emitted energy. Two important
@@ -271,7 +516,7 @@ capacity increase.
 
 
 
-\subsection{Proposed solutions}
+\subsubsection{Proposed solutions}
 
 Karner \cite{MSc.antenna.optimization:2003} proposes an ``ad-hoc''
 strategy for adjusting antenna azimuth and downtilt by analyzing the
@@ -301,7 +546,7 @@ The inner loop could be easily replaced with some other optimization
 target, e.g. common pilot channel power setting.
 
 
-\section{Optimizing common pilot channel power}
+\subsection{Optimizing common pilot channel power}
 
 The Common Pilot Channel (CPICH) is used as reference for handover
 \cite{umts_world:handover}, cell selection \cite{3glteinfo:cellSelection},
@@ -316,7 +561,7 @@ is called load balancing and it reduces interference, stabilizes network
 operation, and facilitates radio resource management \cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
 
 
-\subsection{Proposed solutions}
+\subsubsection{Proposed solutions}
 
 Chen and Yuan \cite{CPICH.optimization:2008} optimize CPICH transmit
 power starting from a uniform allocation (i.e. all cells are set with
@@ -342,7 +587,7 @@ The authors claim that the tabu-search-based algorithm can compute
 near optimal solutions within a few seconds, even for large networks.
 
 
-\section{Optimizing CPICH and antenna parameters}
+\subsection{Optimizing CPICH and antenna parameters}
 
 Both the antenna tilt and azimuth directly affect the direction and
 range in which the cell broadcasts its CPICH. Consequently, optimal
@@ -353,7 +598,7 @@ power consumption, is a challenging task. For this reason, many authors
 have considered optimization methods that address all three parameters.
 
 
-\subsection{Proposed solutions}
+\subsubsection{Proposed solutions}
 
 Varbrand et al. \cite{Coverage.optimization.on.CPICH.tilt.and.azimuth:2006}
 approach the optimization of service coverage (see section \ref{sec:Optimizing-coverage})
@@ -387,7 +632,7 @@ best individuals, a local optimization technique is used to improve
 their fitness.
 
 
-\section{Optimizing coverage \label{sec:Optimizing-coverage}}
+\subsection{Optimizing coverage \label{sec:Optimizing-coverage}}
 
 Coverage is maybe the most common optimization objective considered
 in 3G network optimization. The objective function for coverage optimization
@@ -397,6 +642,8 @@ may be defined as follows:
 f_{cov}=\frac{A_{covered}}{A_{total}}
 \]
 
+
+\nomenclature[S]{$f_{cov}$}{Objective function for the coverage optimization problem.}\nomenclature[S]{$A_{covered}$}{Area, covered by the mobile network.}\nomenclature[S]{$A_{total}$}{Total area under optimization of mobile-network coverage.}
 
 where $A_{covered}$ represents the area covered by the network and
 $A_{total}$ represents the total area under optimization. Thus, the
@@ -408,11 +655,12 @@ The area being optimized is usually divided in squares (or pixels)
 of a certain size, which may vary from 10 to 100 meters, creating
 a grid of a certain resolution. A square is considered covered, if
 the signal to noise ratio is above a given threshold \cite{3GPP_TS_25.133}.
-It is also common to use a test function $cov(x,y)$, which returns
-1 if the square located at $(x,y)$ is covered, and 0 otherwise.
+It is also common to use a test function $cov(x,y)$\nomenclature[S]{$cov(x,y)$}{Returns 1 if the coordinate $(x,y)$ is under mobile-network coverage.},
+which returns 1 if the square located at $(x,y)$ is covered, and
+0 otherwise.
 
 
-\subsection{Proposed solutions}
+\subsubsection{Proposed solutions}
 
 Siomina and Yuan \cite{Siomina:Minimum.pilot.power.for.service.coverage}
 consider the problem of minimizing pilot power subject to the coverage
@@ -443,7 +691,13 @@ updated with a gradient descent method that minimizes the afore mentioned
 function.
 
 
-\section{Discussion}
+\subsection{Optimizing alignment of soft-handover areas}
+
+We have defined this new problem. About the connecting of this 3G-specific
+problem with LTE ...???
+
+
+\subsection{Discussion}
 
 In the field of 3G network optimization, comparing the efficiency
 of different optimization methods has proven to be a very difficult
@@ -497,17 +751,6 @@ by their corresponding authors, is virtually meaningless, since the
 results are not comparable with each other. For this reason, we have
 decided to concentrate the following discussion on the optimization
 methods used, leaving the results aside.
-
-
-\subsection{The reproducibility problem}
-
-A quick review of the state-of-the-art in 3G network optimization
-indicates that software, providing good computational models, is a
-very expensive tool for science. Moreover, since the vast majority
-of this software is proprietary, it relies on closed source, formats
-and protocols, which disclosure is explicitly forbidden by their licenses.
-This fact creates a big hurdle to one of the key phases of scientific
-methodology \cite{gauch2002scientific}: experimental reproducibility.
 
 
 \subsection{Discussion about the presented methods}
@@ -573,7 +816,7 @@ improvement.}\tabularnewline
 
 
 
-\section{Summary}
+\section*{Summary}
 
 The variety of optimization problems that have been introduced in
 the previous sections differ in many aspects like implementation,
