@@ -121,6 +121,16 @@ key "wen2011gpu"
 pose processor.
  They can achieve higher performance at lower power consumption and lower
  costs when compared to conventional CPUs.
+ Additionally, the implementation of the framework will benefit from valuable
+ advances in computer science and High Performance Computing (HPC), in order
+ to perform faster and more reliable simulations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore,wen2011gpu"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

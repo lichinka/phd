@@ -14,7 +14,7 @@
 %
 % Page margins and binding offset
 %
-\usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
+\usepackage[top=2.7cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
 
 % fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
 %\usepackage[slovene,english]{babel}
@@ -36,7 +36,12 @@
 \usepackage{cite}
 \usepackage{subfigure}
 \usepackage{fixltx2e}% Enables commands \textsuperscript and \textsubscript
-\usepackage[nottoc,numbib]{tocbibind}% bibliography numbered
+
+%
+% Bibliography
+%
+%\usepackage{bibentry}
+%\nobibliography*
 
 %
 % Tables
@@ -45,10 +50,9 @@
 \usepackage{hhline}% makes black lines when color cells are used (because \hline does not work)
 
 %
-% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
-% In this case, program package is selected and program environment is used for algorithms as subfloat in myalgortihm floats
+% Algorithms
 %
-\usepackage{program}
+\usepackage{algorithmic}
 
 \usepackage{titlesec}
 \usepackage{chngcntr}
@@ -97,8 +101,6 @@
 \renewcommand{\citeleft}{[}
 \renewcommand{\citeright}{]}
 
-\graphicspath{{images/}}
-
 %% myalgorithm float (used for writing algorithms) - definitions
 %\usepackage{float}
 
@@ -111,17 +113,8 @@
   \let\@fs@iftopcapt\iftrue}
 
 \floatstyle{simplerule}
-\newfloat{myalgorithm}{thp}{lob}[chapter]
-\floatname{myalgorithm}{Algorithm}
-%\listof{myalgorithm}{Index of algorithms}
-\counterwithout{myalgorithm}{chapter} %correct counting of algorithms - ips template style
-%%
 \newcommand{\listmyalgorithmname}{Index of Algorithms} %define the name for the list of algorithms (loa)
 \newlistof{myalgorithms}{loa}{\listmyalgorithmname} %make newlistof
-%\renewcommand{\cftmyalgorithmtitlefont}{\Large\bfseries}
-%\setlength{\cftaftermyalgorithmtitleskip}{35mm}
-%\setlength{\cftmyalgorithmsnumwidth}{5em} %space for the name before number in the listofalgorithms (loa)
-%\setlength{\cftmybeforealgorithmsskip}{0em} %changing the space between entries in the loa
 
 \newcommand{\HRule}{\rule{\linewidth}{0.1mm}} % defines line used in the example
 \end_preamble
@@ -145,7 +138,7 @@
 \graphics default
 \default_output_format default
 \output_sync 0
-\bibtex_command default
+\bibtex_command bibtex8
 \index_command default
 \paperfontsize 12
 \spacing single
@@ -166,8 +159,8 @@
 \use_esint 0
 \use_mhchem 0
 \use_mathdots 0
-\cite_engine natbib_authoryear
-\use_bibtopic false
+\cite_engine basic
+\use_bibtopic true
 \use_indices false
 \paperorientation portrait
 \suppress_date false
@@ -177,7 +170,7 @@
 \color #008000
 \end_index
 \leftmargin 2.5cm
-\topmargin 2.2cm
+\topmargin 1.5cm
 \rightmargin 2.5cm
 \bottommargin 2.5cm
 \secnumdepth 5
@@ -2538,30 +2531,6 @@ options "nature"
 \end_inset
 
 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{
-\end_layout
-
-\end_inset
-
-Index of Algorithms
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard
@@ -2572,34 +2541,27 @@ status open
 
 
 \backslash
-listof{myalgorithm}
+addcontentsline{toc}{chapter}{List of Algorithms}
 \end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
-{
+%%
+\backslash
+renewcommand
+\backslash
+listalgorithmname{
+\backslash
+vspace{-2.4cm} 
+\backslash
+Large List of Algorithms 
+\backslash
+vspace{1.5cm}} 
 \end_layout
 
 \end_inset
 
-Index of Algorithms
-\begin_inset ERT
-status open
 
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard

@@ -65,40 +65,13 @@ Conclusion and further work
 \end_layout
 
 \begin_layout Standard
-\noindent
-First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
-\end_layout
-
-\begin_layout Standard
-Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
-\end_layout
-
-\begin_layout Standard
-Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
+To further improve the presented results, dynamic effects, such as fast
+ power control, should be included in the simulations, particularly for
+ recognizing dynamic functionality like SHO in a WCDMA mobile system.
+ Another extension of the current work is to incorporate antenna tilt as
+ an additional objective of the optimization process.
+ This should certainly include experimentation with models and algorithms
+ that support multiobjective optimization.
 \end_layout
 
 \end_body

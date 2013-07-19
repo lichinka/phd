@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Experimental evaluation: the SHO alignment problem 
+Experimental evaluation: the SHO-balancing problem 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Experimental-evaluation-the-SHO-alignment-problem"
@@ -86,20 +86,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-{Primer uporabe za LTE: kako je z dodeljevanjem podnosilcev v LTE omrezju
- ob drzavni meji??? Se bomo pozanimali v firmi glede tega ...}???
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+\noindent
 In Chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -186,7 +173,7 @@ reference "sec:07-Radio_network_model"
  In Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Optimization-algorithms"
+reference "sec:07-Optimization_algorithms"
 
 \end_inset
 
@@ -223,8 +210,7 @@ name "sec:07-Motivation"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement tp
-wide true
+wide false
 sideways false
 status open
 
@@ -248,15 +234,7 @@ centering
 \begin_inset Graphics
 	filename img/network_normal.eps
 	lyxscale 50
-	width 3.5in
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename img/network_problem.eps
-	lyxscale 50
-	width 3.7in
+	width 100text%
 
 \end_inset
 
@@ -273,8 +251,34 @@ status open
 
 \backslash
 vskip -0.3in(a)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/network_problem.eps
+	lyxscale 50
+	width 100text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
 \backslash
-hspace*{3.6in}(b)
+
+\backslash
+
+\backslash
+vskip -0.3in(b)
 \end_layout
 
 \end_inset
@@ -397,7 +401,7 @@ reference "fig:07-Problem_illustration"
 PRATO is used as the evaluation framework, as defined in Chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Framework-design-and-implementation"
+reference "chap:03-Framework-design-and-implementation"
 
 \end_inset
 
@@ -509,7 +513,7 @@ V obmocčju SHO v DL , medtem ko je usr povezan na HSDPA, sosedne celice
 \end_layout
 
 \begin_layout Plain Layout
-Bistvo je, da odkrivamo SHO areas v UL zato ki niso v pravih območjih.
+Bistvo je, da odkrivamo SHO areas v UL zato ker niso v pravih območjih.
  Da niso v pravih območjih pa pomeni, da ustvarjajo interferenco v UL in
  s tem nam poslabšajo link budget HSPA-ja (Figure 8.3 HSDPA).
 \end_layout
@@ -668,7 +672,7 @@ key "nawrocki2006understanding"
 status open
 
 \begin_layout Plain Layout
-Un poco mas sobre los ventajas y desventajas de los static network models
+Un poco mas sobre las ventajas y desventajas de los static network models
  y por que nos decidimos por uno asi.
 \end_layout
 
@@ -1091,7 +1095,7 @@ Additionally, in the uplink, the set of cells to which a mobile can potentially
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-SHO_{m}^{\uparrow}=\left\{ c\vert L_{mc}^{\uparrow}P_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
+SHO_{m}^{\uparrow}=\left\{ c\vert L_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
 \end{equation}
 
 \end_inset
@@ -1126,14 +1130,14 @@ where
 \end_inset
 
 , and 
-\begin_inset Formula $P_{m}^{\uparrow}$
+\begin_inset Formula $p_{m}^{\uparrow}$
 \end_inset
 
 
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "S"
-symbol "$P_{m}^{\\uparrow}$"
+symbol "$p_{m}^{\\uparrow}$"
 description "Uplink transmit power of mobile $m\\in M$."
 
 \end_inset
@@ -1293,7 +1297,7 @@ and
 Optimization algorithms 
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Optimization-algorithms"
+name "sec:07-Optimization_algorithms"
 
 \end_inset
 
@@ -1349,8 +1353,9 @@ s is better suited for solving the SHO-balancing problem.
 \end_layout
 
 \begin_layout Standard
-In the following sections we give a short introduction about their functioning
- and controlling parameters.
+The following sections describe how the SHO-balancing problem is represented
+ (or mapped) by the internal structure of each of the selected algorithms
+ and their controlling parameters.
 \end_layout
 
 \begin_layout Subsection
@@ -1358,69 +1363,34 @@ DE mapping
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
------------------------------- SEGUI DESDE ACA ---------------------------------
---
-\end_layout
-
-\begin_layout Plain Layout
-Uplink transmit power del mobile tiene que ser minusculas!
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Differential evolution (DE) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "storn1997_Differential_evolution"
-
-\end_inset
-
- is a simple and powerful evolutionary algorithm proposed for global optimizatio
-n.
- A wide range of optimization problems have been solved by applying DE 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "das2010_differential_evolution_state_of_the_art"
-
-\end_inset
-
-.
- The algorithm exhibits a parallel direct search method, which utilizes
- 
+The DE algorithm features a parallel direct search method, which utilizes
+ a population of 
 \begin_inset Formula $D$
 \end_inset
 
 -dimensional parameter vectors.
- The SHO balancing problem is expressed in each component of a vector 
+ The SHO-balancing problem is expressed in each component of a vector 
 \begin_inset Formula $X$
 \end_inset
 
  of the population, which maps to the CPICH power of one cell under optimization
-:
+, i.e.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-X_{aG}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} ,\label{eq:DE_mapping}
+X_{aG}=\left\{ x_{1},x_{2},\ldots x_{c},\ldots,x_{D}\right\} ,\label{eq:07-DE_mapping}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $x_{i}\in P_{i}$
+\begin_inset Formula $x_{c}\in P_{c}$
 \end_inset
 
  represents a candidate CPICH power setting of cell 
-\begin_inset Formula $i$
+\begin_inset Formula $c$
 \end_inset
 
 , and 
@@ -1433,35 +1403,19 @@ where
 
  in the population.
  Since there are 
-\begin_inset Formula $|N|$
+\begin_inset Formula $|C|$
 \end_inset
 
  cells in the mobile network, it follows that 
-\begin_inset Formula $D=|N|$
+\begin_inset Formula $D=|C|$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-In each generation, DE produces new parameter vectors by adding the weighted
- difference between two population vectors to a third one 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "storn1997_Differential_evolution"
-
-\end_inset
-
-.
- The resulting vector is retained if it yields a lower objective function
- value than a predetermined population member; otherwise, the old vector
- is kept.
-\end_layout
-
-\begin_layout Standard
-There are different variants of DE.
- We have chosen the most popular one to solve our optimization problem,
- called 
+From the different variants of DE, the most popular one is used here, called
+ 
 \emph on
 DE/rand/1/bin
 \emph default
@@ -1505,55 +1459,36 @@ means that a binomial recombination operator is used.
 \end_layout
 
 \begin_layout Standard
-We considered four parameters to control the search process of DE: the populatio
-n size, the maximum number of generations for the algorithm to run, the
- crossover constant, and the mutation scaling factor.
-\end_layout
-
-\begin_layout Standard
-An extensive description of DE and its variants may be found in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "price2005differential_evolution"
-
+Four control parameters of the search process for DE were considered: the
+ population size (
+\begin_inset Formula $NP$
 \end_inset
 
-.
+), the number of generations for the algorithm to run (
+\begin_inset Formula $G_{max}$
+\end_inset
+
+), the crossover constant (
+\begin_inset Formula $CR$
+\end_inset
+
+), and the mutation scaling factor (
+\begin_inset Formula $F$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsection
-Differential ant-stigmergy algorithm
-\end_layout
-
-\begin_layout Standard
-Based on the metaheuristic Ant-Colony Optimization (ACO) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "dorigo2006ant_colony_optimization"
-
-\end_inset
-
-, the differential ant-stigmergy algorithm (DASA) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "korosec2010_DASA"
-
-\end_inset
-
- provides a framework to successfully cope with high-dimensional numerical
- optimization problems.
- It creates a fine-grained discrete form of the search space, representing
- it as a graph.
- This graph is then used as the walking paths for the ants, which iteratively
- improve the temporary best solution.
+DASA mapping
 \end_layout
 
 \begin_layout Standard
 The mapping between the balancing problem and DASA is similar to the one
- depicted in Equation (
+ for DE, depicted in Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:DE_mapping"
+reference "eq:07-DE_mapping"
 
 \end_inset
 
@@ -1563,7 +1498,7 @@ reference "eq:DE_mapping"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:DASA_mapping}
+X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:07-DASA_mapping}
 \end{equation}
 
 \end_inset
@@ -1588,56 +1523,43 @@ In this case, each ant,
 
 \begin_layout Standard
 There are six parameters that control the way DASA explores the search space:
- the number of ants, the discrete base, the pheromone dispersion factor,
- the global scale-increasing factor, the global scale-decreasing factor,
- and the maximum parameter precision.
-\end_layout
-
-\begin_layout Standard
-For a more in-depth explanation about these parameters and the DASA algorithm
- itself, we refer the reader to 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "korosec2010_DASA"
-
+ the number of ants (
+\begin_inset Formula $m$
 \end_inset
 
-.
+), the discrete base (
+\begin_inset Formula $b$
+\end_inset
+
+), the pheromone dispersion factor (
+\begin_inset Formula $q$
+\end_inset
+
+), the global scale-increasing factor (
+\begin_inset Formula $s_{+}$
+\end_inset
+
+), the global scale-decreasing factor (
+\begin_inset Formula $s_{-}$
+\end_inset
+
+), and the maximum parameter precision (
+\begin_inset Formula $e$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsection
-Simulated annealing
+SA mapping
 \end_layout
 
 \begin_layout Standard
-As the third optimization algorithm to tackle the balancing problem we have
- chosen simulated annealing (SA) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kirkpatrick_OptimizationBySimulatesAnnealing"
-
-\end_inset
-
-, a classic metaheuristic algorithm often used when the search space is
- discrete.
- SA has proved to be a solid optimization algorithm, capable of giving high-qual
-ity solutions to a wide scope of optimization problems 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Suman_SurveyOfSimulatedAnnealing"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-At each time step during the process, the system under optimization is in
- a given 
+From the SA perspective, the system under optimization is in a given 
 \emph on
 state
 \emph default
-.
+ at each time step during the process.
  The objective function maps a system state to a value known as the 
 \emph on
 energy
@@ -1650,27 +1572,17 @@ move
  in the search space represents a change in the state of the system.
  After making a move, the system may exhibit lower or higher energy, depending
  on the results of the objective function.
- When dealing with minimization problems, a better state always describes
- lower energy than the previous one.
 \end_layout
 
 \begin_layout Standard
-SA incorporates the notion of 
-\emph on
-temperature
-\emph default
-, by which the probability of moving the current state of the system into
- a worst one is lowered as the temperature decreases.
- Exploration of the search space is thus induced at higher temperature,
- whereas exploitation appears at lower temperature, when only improving
- moves are accepted.
-\end_layout
+Algorithm
+\begin_inset space ~
+\end_inset
 
-\begin_layout Standard
-Table 
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:SA_move"
+reference "alg:07-SA_move"
 
 \end_inset
 
@@ -1679,7 +1591,7 @@ reference "tab:SA_move"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
+\begin_inset Float algorithm
 wide false
 sideways false
 status open
@@ -1704,12 +1616,10 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Pseudo-code: a move in the search space of SA.
-\shape italic
-
+A move in the search space of SA.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:SA_move"
+name "alg:07-SA_move"
 
 \end_inset
 
@@ -1722,179 +1632,109 @@ name "tab:SA_move"
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Step
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
+
+\backslash
+begin{algorithmic}
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i'=random\, cell(N)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
+
+\backslash
+STATE $
+\backslash
+mathbf{c'} 
+\backslash
+gets pick
+\backslash
+_random
+\backslash
+_cell(C)$
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{do}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\, if\, rand()<0.5\, then\, p_{i'}^{\mathrm{NEW}}=p_{i'}+0.01$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
+
+\backslash
+REPEAT
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\, else\, p_{i'}^{\mathrm{NEW}}=p_{i'}-0.01$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{while}\, p_{i'}^{\mathrm{NEW}}\notin P_{i'}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\noun off
-\color none
-\begin_inset Formula $p_{i'}=p_{i'}^{\mathrm{NEW}}$
-\end_inset
-
-
+	
+\backslash
+IF{$rand()<0.5$}
 \end_layout
 
-\end_inset
-</cell>
-</row>
-</lyxtabular>
+\begin_layout Plain Layout
+
+		
+\backslash
+STATE $p_{c'}^{
+\backslash
+mathrm{new}} 
+\backslash
+gets p_{c'}+0.01$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+ELSE
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+STATE $p_{c'}^{
+\backslash
+mathrm{new}} 
+\backslash
+gets p_{c'}-0.01$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+ENDIF
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+UNTIL{$p_{c'}^{
+\backslash
+mathrm{new}}
+\backslash
+in P_{c'}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE $p_{c'} 
+\backslash
+gets p_{c'}^{
+\backslash
+mathrm{new}}$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
 
 \end_inset
 
@@ -1908,11 +1748,11 @@ Step
 
 \begin_layout Standard
 At the first step, a cell, 
-\begin_inset Formula $i'$
+\begin_inset Formula $c'$
 \end_inset
 
 , is randomly selected from the set of all cells in the network, 
-\begin_inset Formula $N$
+\begin_inset Formula $C$
 \end_inset
 
 .
@@ -1925,37 +1765,37 @@ dB or -0.01
 \end_inset
 
 dB is applied with 50% probability to 
-\begin_inset Formula $p_{i'}$
+\begin_inset Formula $p_{c'}$
 \end_inset
 
 .
- The current CPICH power of cell 
-\begin_inset Formula $i'$
+ The CPICH power of cell 
+\begin_inset Formula $c'$
 \end_inset
 
  is expressed in dBm.
  The randomly generated CPICH power setting, 
-\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
+\begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
 , is checked for validity in step 3, i.e.
  it must be an element of the set 
-\begin_inset Formula $P_{i'}$
+\begin_inset Formula $P_{c'}$
 \end_inset
 
 .
  If 
-\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
+\begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
  is not a valid CPICH power, step 2 is executed again, generating another
  random CPICH power.
  Finally, in step 4, the CPICH power of cell 
-\begin_inset Formula $i$
+\begin_inset Formula $c$
 \end_inset
 
  is replaced by 
-\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
+\begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
 .
@@ -1963,31 +1803,45 @@ dB is applied with 50% probability to
 
 \begin_layout Standard
 It is important to note that, as long as 
-\begin_inset Formula $|P_{i'}|>1$
+\begin_inset Formula $|P_{c'}|>1$
 \end_inset
 
-, the algorithm shown in Table 
+, the pseudo-code shown in Algorithm
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:SA_move"
+reference "alg:07-SA_move"
 
 \end_inset
 
  shall never be trapped in an endless loop.
  On the other hand, if 
-\begin_inset Formula $|P_{i'}|<2$
+\begin_inset Formula $|P_{c'}|<2$
 \end_inset
 
 , there are no candidate CPICH powers for cell 
-\begin_inset Formula $i'$
+\begin_inset Formula $c'$
 \end_inset
 
  and thus no possibility of optimization by means of CPICH power adjustment.
+ Notice also that the acceptance of a move in the search space is left to
+ SA and its stochastic components.
 \end_layout
 
 \begin_layout Standard
-Notice also that the acceptance of a move in the search space is left to
- SA and its stochastic components.
+SA has two parameters to control the search process: the initial temperature
+ (
+\begin_inset Formula $t_{initial}$
+\end_inset
+
+) and the total number of iterations or evaluations (
+\begin_inset Formula $it$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Section
@@ -2004,19 +1858,6 @@ name "sec:Simulations-1"
 \begin_layout Standard
 The simulations are performed using a standard Monte-Carlo method, assuming
  the mobile users are uniformly distributed.
- The path-loss data were calculated in advance, using the commercial radio
- planning tool TEMS
-\begin_inset Formula $^{TM}$
-\end_inset
-
- CellPlanner 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "tems"
-
-\end_inset
-
-.
  The SHO conditions of different users depend on the relative received signal
  quality from different cells and the SHO window, which triggers the addition
  of a cell to the user's active set 
@@ -2042,35 +1883,49 @@ name "sub:Test-network"
 
 \begin_layout Standard
 The test network used for the simulations is a subset of the real UMTS network
- deployed in Slovenia by Telekom Slovenije, d.d..
+ deployed in Slovenia by Telekom Slovenije, d.d.
  It represents a network extending over a hilly terrain, combining both
  rural and middle-dense suburban areas, which contains 25 cells within an
- area of more than 150 
-\begin_inset Formula $km^{2}$
+ area of more than 150
+\begin_inset space ~
+\end_inset
+
+km
+\begin_inset Formula $^{2}$
 \end_inset
 
 .
- Table 
+ Table
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Test-network-properties."
 
 \end_inset
 
- shows some properties of the test network used.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Figure about coverage diagram removed because of lack of space.
-\end_layout
-
+ shows some characteristics of the test network used, and Figure
+\begin_inset space ~
 \end_inset
 
 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Coverage_areas"
+
+\end_inset
+
+ shows the area under radio coverage, 
+\begin_inset Formula $A_{\mathrm{covered}}$
+\end_inset
+
+, within 
+\begin_inset Formula $A_{\mathrm{total}}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2083,7 +1938,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Test network properties.
+Technical characteristics of the test network used.
  
 \begin_inset CommandInset label
 LatexCommand label
@@ -2122,7 +1977,7 @@ centering
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2145,7 +2000,7 @@ Number of cells
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2158,22 +2013,26 @@ Coverage threshold (RSCP)
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $-115\, dBm$
+\begin_inset Formula $-115$
 \end_inset
 
 
+\begin_inset space ~
+\end_inset
+
+dBm
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 SHO window (
-\begin_inset Formula $\gamma^{\mathrm{SHO}}$
+\begin_inset Formula $\gamma^{\mathrm{sho}}$
 \end_inset
 
 )
@@ -2185,22 +2044,26 @@ SHO window (
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $2\, dB$
+\begin_inset Formula $2$
 \end_inset
 
 
+\begin_inset space ~
+\end_inset
+
+dB
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 User equipment (
-\begin_inset Formula $P_{m}^{\uparrow}$
+\begin_inset Formula $p_{m}^{\uparrow}$
 \end_inset
 
 )
@@ -2212,17 +2075,21 @@ User equipment (
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $21\, dBm$
+\begin_inset Formula $21$
 \end_inset
 
-, power class 4
+
+\begin_inset space ~
+\end_inset
+
+dBm, power class 4
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2235,7 +2102,15 @@ Pixel resolution
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $25\, m^{2}$
+\begin_inset Formula $25$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+m
+\begin_inset Formula $^{2}$
 \end_inset
 
 
@@ -2245,7 +2120,7 @@ Pixel resolution
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2258,7 +2133,11 @@ Population density
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $398/km^{2}$
+\begin_inset Formula $398$
+\end_inset
+
+/km
+\begin_inset Formula $^{2}$
 \end_inset
 
 
@@ -2279,6 +2158,76 @@ Population density
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/coverage_area.pdf
+	lyxscale 30
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Area under radio coverage, 
+\begin_inset Formula $A_{\mathrm{covered}}$
+\end_inset
+
+, and without radio coverage, 
+\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
+\end_inset
+
+, within the complete geographical area, 
+\begin_inset Formula $A_{\mathrm{total}}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:07-Coverage_areas"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Penalty factors
 \end_layout
@@ -2286,7 +2235,11 @@ Penalty factors
 \begin_layout Standard
 After extensive experimentation, and working in cooperation with the radio
  engineers from the Radio Network Department at Telekom Slovenije, d.d., the
- penalty factors from Equation (
+ penalty factors from Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:07-objective_function"
@@ -2297,21 +2250,21 @@ reference "eq:07-objective_function"
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $pf_{\mathrm{COV}}=15$
+\begin_inset Formula $pf_{\mathrm{cov}}=15$
 \end_inset
 
 ,
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $pf_{\mathrm{SHO}}^{\uparrow}=13$
+\begin_inset Formula $pf_{\mathrm{sho}}^{\uparrow}=13$
 \end_inset
 
 , and
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $pf_{\mathrm{SHO}}^{\downarrow}=3$
+\begin_inset Formula $pf_{\mathrm{sho}}^{\downarrow}=3$
 \end_inset
 
 .
@@ -2320,7 +2273,7 @@ reference "eq:07-objective_function"
 \begin_layout Standard
 It is clear that coverage is the most important quality aspect from the
  network point of view (penalty factor 
-\begin_inset Formula $pf_{\mathrm{COV}}$
+\begin_inset Formula $pf_{\mathrm{cov}}$
 \end_inset
 
 ).
@@ -2329,19 +2282,27 @@ It is clear that coverage is the most important quality aspect from the
  Another important characteristic that emerges from these values is the
  preference for minimizing areas where SHO capability is available in the
  uplink, but not in the downlink (penalty factor 
-\begin_inset Formula $pf_{\mathrm{SHO}}^{\uparrow}$
+\begin_inset Formula $pf_{\mathrm{sho}}^{\uparrow}$
 \end_inset
 
 ).
- As it has been described in Section 
+ As it has been described in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:07-Motivation"
 
 \end_inset
 
-, one of the consequences of such SHO arrangement produces serious interference
- rise in neighboring cells (Figure 
+, consequences of such SHO arrangement produce serious interference rise
+ in neighboring cells (Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:07-Problem_illustration"
@@ -2362,12 +2323,12 @@ reference "fig:07-Problem_illustration"
 \noun off
 \color none
 
-\begin_inset Formula $pf_{\mathrm{SHO}}^{\downarrow}$
+\begin_inset Formula $pf_{\mathrm{sho}}^{\downarrow}$
 \end_inset
 
  imposes a penalty value over areas where SHO capability is available in
  the downlink, but not in the uplink.
- Remember that when accessing HSPA services, SHO is available only in the
+ Recall that when accessing HSPA services, SHO is available only in the
  uplink.
  For this reason, the link throughput may benefit from SHO in the uplink
  if it is available.
@@ -2390,13 +2351,17 @@ Algorithm parameters
 \end_layout
 
 \begin_layout Standard
-In this section we enumerate the parameters and their values used during
- the optimization process.
- In all three cases we have followed the naming conventions as they appear
- in the original publications 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kirkpatrick_OptimizationBySimulatesAnnealing,korosec2010_DASA,storn1997_Differential_evolution"
+In this section the algorithm parameter setup, as used during the simulations,
+ is given.
+ In all three cases we have followed the naming conventions as they have
+ been previously introduced in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:07-Optimization_algorithms"
 
 \end_inset
 
@@ -2495,28 +2460,27 @@ SA
 \end_layout
 
 \begin_layout Standard
-There are only two parameters controlling SA, the initial temperature and
- the total number of iterations or evaluations:
+There are only two parameters controlling SA:
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $t_{initial}=125$
 \end_inset
 
-,
+, the initial temperature; and
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $it=100,000$
 \end_inset
 
-.
+, the total number of iterations.
 \end_layout
 
 \begin_layout Standard
 SA also allows to define the way the temperature is lowered during the annealing
  process.
- In this case, we have used the exponential-lowering schema.
+ In this case, the exponential-lowering schema has been used.
 \end_layout
 
 \begin_layout Subsection
@@ -2537,7 +2501,7 @@ GB of RAM running a 64-bit Linux operating system.
  used as ‘glue’ to hold the different implementation parts together, as
  well as for I/O operations.
  To lower the time needed to run one optimization round, we have implemented
- the entire objective function evaluation using OpenCL and executed it on
+ the entire objective-function evaluation using OpenCL and executed it on
  a nVidia GeForce GTX 260.
  This individual improvement exhibited more than 15x execution time speed-up
  when compared to the original CPU-only version.
@@ -2559,8 +2523,9 @@ Algorithm performance
 \end_layout
 
 \begin_layout Standard
-In this section we examine the performance of the three selected algorithms
- in terms of solution quality and convergence speed.
+In this section the performance of the selected algorithms is presented.
+ The analysis includes aspects related to solution quality and convergence
+ speed.
  All experimental results were obtained after 30 independent runs, each
  of them limited to a maximum of 100,000 evaluations.
  The gathered results are shown in Table
@@ -2570,7 +2535,7 @@ In this section we examine the performance of the three selected algorithms
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:algorithm_performance"
+reference "tab:07-Algorithm_performance"
 
 \end_inset
 
@@ -2603,7 +2568,8 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Algorithm performance after 30 runs
+Solution-quality performance of the three algorithms, after 30 independent
+ runs
 \shape italic
 \emph on
 .
@@ -2611,7 +2577,7 @@ Algorithm performance after 30 runs
 
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:algorithm_performance"
+name "tab:07-Algorithm_performance"
 
 \end_inset
 
@@ -2834,30 +2800,16 @@ SA
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-tabela z BEST,WORST,MEAN,STD.DEV; convergence graphs (AVG in BEST);komentarji
- o tabelah in grafih.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As we may observe, DE reaches the lowest objective function value, closely
- followed by DASA.
+It may be observed that DE reaches the lowest objective function value,
+ closely followed by DASA.
  Likewise, both algorithms reach very similar results for the worst, mean
  and standard deviation values.
- SA, on the other hand, did not achieve similar values, since its results
+ SA, on the other hand, did not achieve comparable values, since its results
  are behind those of DE and DASA.
  Notice that even the best SA solution is no better than the worst solution
  of DASA.
  Moreover, the standard deviation exhibited by SA is many times bigger to
- those of DASA and DE, inducing the greater level of variance of its results.
+ those of DASA and DE, induced by the greater level of variance of its results.
 \end_layout
 
 \begin_layout Standard
@@ -2884,26 +2836,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/convergence.eps
+	filename img/algorithm_convergence.eps
 	lyxscale 70
-	width 100col%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-vskip -0.3in
-\end_layout
+	width 95text%
 
 \end_inset
 
@@ -2914,10 +2849,10 @@ vskip -0.3in
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Algorithm convergence for the best obtained results.
+Convergence analysis for each algorithm, showing the best results obtained.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:algorithm_convergence"
+name "fig:07-Algorithm_convergence"
 
 \end_inset
 
@@ -2935,8 +2870,87 @@ name "fig:algorithm_convergence"
 \end_layout
 
 \begin_layout Standard
+The convergence of the best-recorded run of each of the three algorithms
+ is shown in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence"
+
+\end_inset
+
+.
+ It is worth mentioning that every optimization run starts from a different
+ solution, randomly constructed by picking a CPICH power setting, 
+\begin_inset Formula $p_{c}^{k}$
+\end_inset
+
+, from every 
+\begin_inset Formula $P_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $1\le k\le|P_{c}|$
+\end_inset
+
+, 
+\begin_inset Formula $\forall c\in C$
+\end_inset
+
+.
+ Notice how fast DASA converges to a good solution.
+ After a number of evaluations without improvement, DASA resets itself and
+ continues searching from a new random point within the search space 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "korosec2010_DASA"
+
+\end_inset
+
+.
+ Similarly, DE converges considerably fast, although not as fast as DASA
+ does.
+ It this case, DE does not reset itself if the current solution cannot be
+ improved.
+ Despite this, and based on the flat profile the graph exhibits towards
+ the end of the optimization run, we are confident that 100,000 evaluations
+ is an adequate stopping criterion for this algorithm.
+ The third algorithm, SA, slowly converges towards the best solution found,
+ even though it is not as good as the solutions found by DE and DASA.
+ 
+\end_layout
+
+\begin_layout Standard
+The three convergence profiles shown in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence"
+
+\end_inset
+
+ give a clearer notion about the way these algorithms explore the search
+ space of the SHO-balancing problem.
+\end_layout
+
+\begin_layout Standard
+The simulation running times have been intentionally omitted, since the
+ implementations used are fundamentally different and therefore not comparable.
+\end_layout
+
+\begin_layout Subsection
+Interpretation
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
-wide true
+wide false
 sideways false
 status open
 
@@ -2960,12 +2974,12 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Optimization results.
+Improvement analysis for each of the achieved best solutions.
 \shape italic
 
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:optimization-results"
+name "tab:07-Optimization_result_analysis"
 
 \end_inset
 
@@ -2978,6 +2992,8 @@ name "tab:optimization-results"
 \end_layout
 
 \begin_layout Plain Layout
+
+\size scriptsize
 \begin_inset Tabular
 <lyxtabular version="3" rows="9" columns="7">
 <features booktabs="true" tabularvalignment="middle">
@@ -3002,25 +3018,9 @@ name "tab:optimization-results"
 \begin_inset Text
 
 \begin_layout Plain Layout
-Uncovered area
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Covered area, no SHO
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Normal SHO area
+\size scriptsize
+Uncovered
 \end_layout
 
 \end_inset
@@ -3030,17 +3030,29 @@ Normal SHO area
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\size scriptsize
+Covered, no SHO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+SHO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
 no SHO
 \begin_inset Formula $^{\downarrow}$
 \end_inset
@@ -3059,6 +3071,709 @@ no SHO
 
 \begin_layout Plain Layout
 
+\size scriptsize
+SHO
+\begin_inset Formula $^{\downarrow}$
+\end_inset
+
+, no SHO
+\begin_inset Formula $^{\uparrow}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Total
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Before opt.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+63.00 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.11 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.73 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.80 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+4.36 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00 %
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+DE sol.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+60.23 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.13 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.09 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.47 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+6.08 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00 %
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+DASA sol.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+60.24 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.16 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.90 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.46 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+5.24 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00 %
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+SA sol.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+60.42 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.55 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.97 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.56 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+5.50 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00 %
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+DE impr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++4.40 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++6.75 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++2.29 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++18.33 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-39.45 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+---
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+DASA impr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++4.38 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++6.95 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++7.44 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++18.88 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-20.18 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+---
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+SA impr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++4.09 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++9.53 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++1.52 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++13.33 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-26.15 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+---
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Avg.
+ impr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++4.29 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++7.74 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++3.75 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
++16.85 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-28.59 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+---
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Optimization_result_analysis"
+
+\end_inset
+
+ presents the analysis of the obtained results from the network point of
+ view.
+ After 30 independent runs of each of the three algorithms, the best results
+ obtained where evaluated for improvement and decline of each of the measured
+ network aspects.
+ The results are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Optimization_result_analysis"
+
+\end_inset
+
+, where '+' indicates improvement and '-' indicates decline of a given criteria.
+ Overall, it may be observed that the measured criteria have been significantly
+ improved.
+ The only exception is the measure labeled as `
 \family roman
 \series medium
 \shape up
@@ -3079,556 +3794,36 @@ SHO
 \end_inset
 
 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+', which shows an expected decline, since it is the optimization aspect
+ with the lowest penalty factor value.
 \end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Total
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Before optimization
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-63.00 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15.11 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15.73 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.80 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.36 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100.00 %
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-DE solution
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-60.23 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16.13 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16.09 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.47 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.08 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100.00 %
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-DASA solution
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-60.24 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16.16 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16.90 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.46 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.24 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100.00 %
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-SA solution
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-60.42 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16.55 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15.97 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.56 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.50 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100.00 %
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-DE improvement
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+4.40 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+6.75 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+2.29 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+18.33 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--39.45 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
----
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-DASA improvement
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+4.38 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+6.95 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+7.44 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+18.88 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--20.18 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
----
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-SA improvement
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+4.09 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+9.53 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+1.52 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+13.33 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--26.15 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
----
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Avg.
- improvement
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+4.29 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+7.74 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+3.75 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-+16.85 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--28.59 %
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
----
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+\begin_layout Standard
+Coverage has been improved with an average of 4.29%, whereas the coverage
+ area where there is no SHO capability has been increased 7.74% in average.
+ Areas where SHO is available in both downlink and uplink have also been
+ improved, 3.75% in average.
+ This particular improvement is interesting from the optimization point
+ of view, because it had no explicit penalty factor set.
+ Therefore, it may be understood as a consequence of the criteria completeness
+ the objective function has taken into account.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
-wide true
+placement H
+wide false
 sideways false
 status open
 
@@ -3649,17 +3844,45 @@ centering
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Box Frameless
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "50text%"
-special "none"
-height "1in"
-height_special "totalheight"
+\begin_inset Graphics
+	filename img/sho_areas_initial.pdf
+	lyxscale 30
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Spatial distribution of SHO areas before the optimization.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:07-SHO_areas_initial"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
@@ -3680,22 +3903,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/sho_areas_initial.png
+	filename img/sho_areas_final.pdf
 	lyxscale 30
 	width 100text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vskip -0.3in
-\end_layout
 
 \end_inset
 
@@ -3706,94 +3916,10 @@ vskip -0.3in
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Spatial distribution of SHO areas, before optimization.
+Spatial distribution of SHO areas after the optimization.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:sho_areas_initial"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hfill{}
-\end_inset
-
-
-\begin_inset Box Frameless
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "50text%"
-special "none"
-height "1in"
-height_special "totalheight"
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/sho_areas_final.png
-	lyxscale 30
-	width 100text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vskip -0.3in
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Spatial distribution of SHO areas, after optimization.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:sho_areas_final"
-
-\end_inset
-
-
-\end_layout
+name "fig:07-SHO_areas_final"
 
 \end_inset
 
@@ -3811,150 +3937,9 @@ name "fig:sho_areas_final"
 \end_layout
 
 \begin_layout Standard
-The convergence of the best-recorded run of each of the three algorithms
- is shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:algorithm_convergence"
-
-\end_inset
-
-.
- It is worth mentioning that every optimization run starts from a different
- solution, randomly constructed by picking a CPICH power setting, 
-\begin_inset Formula $p_{i}^{k}$
-\end_inset
-
-, from every 
-\begin_inset Formula $P_{i}=\{p_{i}^{1},p_{i}^{2},...,p_{i}^{K}\}$
-\end_inset
-
-, 
-\begin_inset Formula $1\le k\le|P_{i}|$
-\end_inset
-
-, 
-\begin_inset Formula $\forall i\in N$
-\end_inset
-
-.
- Notice how fast DASA converges to a good solution.
- After a number of evaluations without improvement, DASA resets itself and
- continues searching from a new random point within the search space 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "korosec2010_DASA"
-
-\end_inset
-
-, hence the jagged profile on the graph.
- Similarly, DE converges considerably fast, although not as fast as DASA
- does.
- It this case, DE does not reset itself if the current solution cannot be
- improved.
- Despite this, and based on the flat profile the graph exhibits towards
- the end of the optimization run, we are confident that 100,000 evaluations
- is an adequate stopping criterion for this algorithm.
- The last algorithm, SA, slowly converges towards the best solution found,
- even though it is not as good as the solutions found by DE and DASA.
- 
-\end_layout
-
-\begin_layout Standard
-The three convergence profiles shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:algorithm_convergence"
-
-\end_inset
-
- give a clearer notion about the way these algorithms explore the search
- space of the balancing problem.
-\end_layout
-
-\begin_layout Standard
-Running times of the algorithms are intentionally omitted, since the implementat
-ions used are fundamentally different and therefore not comparable.
-\end_layout
-
-\begin_layout Subsection
-Interpretation
-\end_layout
-
-\begin_layout Standard
-Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:optimization-results"
-
-\end_inset
-
- presents the analysis of the obtained results from the network point of
- view.
- After 30 independent runs of each of the three algorithms, the best results
- obtained where evaluated for improvement and decline of each of the measured
- network aspects.
- The results are shown in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:optimization-results"
-
-\end_inset
-
-, where '+' indicates improvement and '-' indicates decline of the given
- criteria.
- We may observe that the measured criteria have been significantly improved.
- The only exception is the measure labeled as ‘
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-SHO
-\begin_inset Formula $^{\downarrow}$
-\end_inset
-
-, no SHO
-\begin_inset Formula $^{\uparrow}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-‘, which shows an expected change, since it is the optimization aspect with
- the lowest penalty factor value.
-\end_layout
-
-\begin_layout Standard
-Coverage has been improved with an average of 4.29%, whereas the coverage
- area where there is no SHO capability has been increased 7.74% in average.
- The SHO areas, where this facility is available in both the downlink and
- uplink, has also been improved 3.75% in average.
- This particular improvement is interesting from the optimization point
- of view, because it had no explicit penalty factor set.
- Therefore we understand this enhancement as a consequence of the completeness
- of criteria, taken into account in the objective function.
-\end_layout
-
-\begin_layout Standard
-The second most important optimized aspect in the balancing problem is the
- proportion of areas with uplink SHO and no SHO in the downlink (labeled
- as ‘
+The second most important optimized aspect in the SHO-balancing problem
+ is the proportion of areas with uplink SHO and no SHO in the downlink (labeled
+ as `
 \family roman
 \series medium
 \shape up
@@ -3986,10 +3971,14 @@ no SHO
 \uwave default
 \noun default
 \color inherit
-‘ in Table 
+' in Table
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:optimization-results"
+reference "tab:07-Optimization_result_analysis"
 
 \end_inset
 
@@ -3998,7 +3987,7 @@ reference "tab:optimization-results"
  reducing the possibility of interference in neighboring cells when serving
  HSPA traffic.
  The last measured aspect takes into account areas with downlink SHO and
- no SHO in the uplink (labeled as ‘
+ no SHO in the uplink (labeled as 
 \family roman
 \series medium
 \shape up
@@ -4010,7 +3999,7 @@ reference "tab:optimization-results"
 \uwave off
 \noun off
 \color none
-SHO
+`SHO
 \begin_inset Formula $^{\downarrow}$
 \end_inset
 
@@ -4030,10 +4019,14 @@ SHO
 \uwave default
 \noun default
 \color inherit
-‘ in Table 
+' in Table
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:optimization-results"
+reference "tab:07-Optimization_result_analysis"
 
 \end_inset
 
@@ -4043,53 +4036,53 @@ reference "tab:optimization-results"
  areas.
  However, the reduced throughput is relative, since there are many cells
  capable of serving HSDPA data access, as the downlink SHO condition confirms.
- For this reason, the serving cell should not only deliver HSDPA, but should
- also take care of the user signaling and power control, received in the
- uplink.
+ For this reason, the serving cell should not only deliver HSDPA, but also
+ take care of the user signaling and power control, received in the uplink.
  Obviously, this is only feasible in areas where uplink coverage is guaranteed.
 \end_layout
 
 \begin_layout Standard
-It is worth mentioning that these results were obtained for a working mobile
- network with live data.
+It is worth mentioning that the simulation results were obtained for a real
+ mobile network with actual configuration data.
  Moreover, the hard constraints imposed to the optimization process (CPICH
  power limited within the 
 \begin_inset Formula $\pm$
 \end_inset
 
-2 dB interval) ensure that the resulting configuration may be immediately
+2
+\begin_inset space ~
+\end_inset
+
+dB interval) ensure that the resulting configuration may be immediately
  applied to the mobile network.
  This fact can be contrasted with the spatial distribution of each of the
  optimized aspects, before and after applying the optimization results,
  as it is shown in Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:sho_areas_initial"
+reference "fig:07-SHO_areas_initial"
 
 \end_inset
 
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:sho_areas_final"
+reference "fig:07-SHO_areas_final"
 
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The lack of any prominent visual change in Figures 
+ The lack of any prominent visual change in Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:sho_areas_initial"
+reference "fig:07-SHO_areas_initial"
 
 \end_inset
 
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:sho_areas_final"
+reference "fig:07-SHO_areas_final"
 
 \end_inset
 
@@ -4112,58 +4105,69 @@ name "sec:Conclusion"
 \end_layout
 
 \begin_layout Standard
-We have presented the problem of balancing SHO areas in UMTS networks and
- characterized some of the consequences unbalanced SHO areas have on the
- quality of HSPA services.
- By using a static network simulator, based on a state-of-the-art mathematical
- model, we have located downlink and uplink SHO areas.
- Both the mathematical model and the penalty scores of the objective function
- have been set according to the configuration and layout of a real mobile
- network, deployed in Slovenia by Telekom Slovenije, d.d..
- The balancing problem has been tackled by three optimization algorithms,
- namely DE, DASA and SA.
- To the best of our knowledge, there is no reference in the literature to
- a simulation-based approach to find active SHO areas in the downlink and
- uplink.
- Additionally, as far as we know, the SHO balancing problem, as described
- in this paper, has not yet been tackled by any formal optimization method.
+This chapter formally introduced a new optimization problem for 3G networks:
+ the SHO-balancing problem.
+ A characterization of the consequences unbalanced SHO areas have on the
+ quality of HSPA services has also been given.
+ Particularly, tackling the SHO-balancing problem was possible due to the
+ improved performance delivered by the evaluation framework PRATO (see Chapter
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:03-Framework-design-and-implementation"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
-All three algorithms were able to improve the given network configuration,
- being DE the most successful one.
- Based on this fact, we may say that DE was the best suited algorithm for
- solving our problem.
- The presented results confirm that a great proportion of the non-aligned
- SHO areas, that were present before the optimization, were corrected, therefore
- significantly reducing the possibility of HSPA-service failures within
- these areas.
- Additionally, network coverage has been improved, while all other essential
- network services were not altered.
+\noindent
+Using a extension of the state-of-the-art radio-network model introduced
+ in ...???, the penalty scores of the objective function were set according
+ to the configuration and layout of a real mobile network, deployed in Slovenia
+ by Telekom Slovenije, d.d.
  
 \end_layout
 
 \begin_layout Standard
-One of the key advantages of the presented method is that it targets the
- optimization of a deployed network, for which the focus is put on fine-tuning
- an existing configuration instead of creating complete new solutions.
- Furthermore, a deployed network has a great number of hard-constraints
- that should be taken into account at the optimization stage, yet our approach
- is simple and versatile enough for it to be used in practically any working
- UMTS network.
- Moreover, our model is applicable for mobile networks in heterogeneous
- environments, because it imposes no restrictions regarding cell layout
- or radio propagation characteristics.
+The balancing problem has been tackled by three optimization algorithms,
+ namely DE, DASA and SA.
+ All three algorithms were able to improve the given network configuration,
+ being DE the most successful one.
+ The presented results confirm that a great proportion of the SHO areas,
+ that were not aligned before the optimization, has been correctly balanced,
+ therefore significantly reducing the possibility of HSPA-service failures.
+ Additionally, radio coverage has been improved, while all other essential
+ network services were not altered.
 \end_layout
 
 \begin_layout Standard
-To further improve the presented results, dynamic effects, such as fast
- power control, should be included in the simulations, since it is a valuable
- element of a WCDMA mobile system.
- Another extension of the current work is to incorporate antenna tilt as
- an additional objective of the optimization process.
- This should certainly include experimentation with models and algorithms
- that support multiobjective optimization.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+{Primer uporabe za LTE: kako je z dodeljevanjem podnosilcev v LTE omrezju
+ ob drzavni meji??? Se bomo pozanimali v firmi glede tega ...}???
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One of the key advantages of the presented method is that it targets the
+ optimization of a deployed network, for which the focus is to fine-tune
+ the existing configuration instead of creating complete new solutions.
+ Furthermore, a deployed network has a great number of hard-constraints
+ that should be taken into account at the optimization stage, yet the presented
+ approach is simple and versatile enough to be used in practically any working
+ UMTS network.
+ Moreover, the introduced model is applicable for mobile networks in heterogeneo
+us environments, because it imposes no restrictions regarding cell layout
+ or radio-propagation characteristics, which are completely adaptable through
+ PRATO.
 \end_layout
 
 \end_body
