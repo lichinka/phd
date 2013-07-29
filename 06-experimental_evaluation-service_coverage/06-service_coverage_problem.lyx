@@ -61,10 +61,10 @@
 \begin_body
 
 \begin_layout Chapter
-Experimental evaluation: the service coverage problem 
+Experimental evaluation: the service-coverage problem 
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Experimental-evaluation-the-service-coverage-problem"
+name "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \end_inset
 
@@ -86,44 +86,146 @@ status open
 \end_layout
 
 \begin_layout Standard
-In the context of coverage planning and control, the power of the CPICH
- signal determines the coverage area of the cell.
- It also impacts the network capacity, and thus the quality of service.
- Pilot power is the parameter that allows us to control the strength of
- the CPICH signal.
- A higher power for pilot signals means better coverage.
- On the other hand, more pilot power translates in decreased network capacity.
+\noindent
+The high-performance of PRATO, the radio-coverage simulation framework presented
+ in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, allows dealing with big problem instances in a reduced amount of time.
+ Additionally, it enables tackling optimization problems that, because of
+ their size, are out-of-reach of traditional approaches, mainly due to the
+ computational-time complexity of their objective-function evaluation.
 \end_layout
 
 \begin_layout Standard
-We consider the problem of minimizing the total amount of pilot power subject
- to a full coverage constraint.
- Our optimization approach, based on parallel autonomous agents, gives very
- good solutions to the problem within an acceptable amount of time.
+In this chapter, the challenge is to exploit PRATO for solving one the of
+ classic optimization problems of radio networks: the service-coverage problem.
+ Considering the minimization of the total amount of pilot power subject
+ to a full coverage constraint, a novel optimization approach is introduced.
+ The presented method, based on parallel autonomous agents, gives very good
+ solutions to the problem in an acceptable amount of time.
  The parallel implementation takes full advantage of GPU hardware in order
- to achieve impressive speed-up.
- We report the results of our experiments for three UMTS networks of different
- sizes based on a real network currently deployed in Slovenia.
+ to achieve considerable speed-up.
+ The interpretation of the experimental results, considering six real-world,
+ radio networks of different sizes, analyzes solution-quality and performance
+ aspects.
+\end_layout
+
+\begin_layout Standard
+The content of this chapter extends the research work published by the author
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Pilot.power.optimization:2010"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013"
+
+\end_inset
+
+.
+ The rest of this chapter is organized as follows.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Motivation"
+
+\end_inset
+
+ gives a description of the coverage problem and its motivation from the
+ mobile operator's perspective.
+ In Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Related-work"
+
+\end_inset
+
+, a short overview of related research works is given, before formally introduci
+ng the key elements of the service-coverage problem in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Problem-description"
+
+\end_inset
+
+.
+ The parallel-agent approach, as well as the strategies used for result
+ comparison, are presented in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Optimization-approaches"
+
+\end_inset
+
+.
+ A detailed description of the tested implementations is given in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Implementation"
+
+\end_inset
+
+, followed by the simulations and their analyses in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Simulations"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
-Introduction
+Motivation 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:06-Motivation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The coverage problem in third-generation (3G) mobile networks has received
- a great deal of attention in the last years.
+Solving the service-coverage problem for radio networks has received a great
+ deal of attention in the past years.
  Its complexity demands the confluence of different skills in areas such
  as propagation of radio signals, telecommunications and information systems,
  among others.
 \end_layout
 
 \begin_layout Standard
-The problem becomes even more complex as conflicting measures to compare
- different proposed solutions are taken into account.
- These aspects include network capacity, quality of service, service coverage,
- and, recently, issues related with human exposure to electromagnetic fields
- generated by base station antennas 
+Even several decades after the launch of the first commercial GSM network,
+ service-coverage planning remains a key problem that all mobile operators
+ have to deal with.
+ Its intricacy arises from the wide range of different combinations of configura
+tion parameters and their evaluation-time complexity.
+ One crucial parameter, which is mainly subject of adjustment, is the transmit
+ power of the pilot signal (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-Pilot-signal-and-power"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Regardless of the mobile technology used, e.g., GSM, UMTS or LTE, reducing
+ pilot-power usage is related to issues regarding human exposure to the
+ electromagnetic fields generated by base-station antennas 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Esposito_Genetic.optimization.for.optimum.3G.network.planning:2010"
@@ -131,49 +233,14 @@ key "Esposito_Genetic.optimization.for.optimum.3G.network.planning:2010"
 \end_inset
 
 .
- Public opinion has been extremely sensitive regarding this issue, and thus
- many countries have already imposed safety standards to limit the electromagnet
-ic field levels.
+ During the past few years, public opinion has been extremely sensitive
+ regarding this issue, and thus many countries have already imposed safety
+ standards to limit the electromagnetic field levels produced by antennas
+ in a given range.
 \end_layout
 
 \begin_layout Standard
-It is clear that even after almost 10 years after the launch of the first
- commercial UMTS network, service coverage planning remains a key problem
- that all mobile operators have to deal with.
- Its intricacy arises from the wide range of different combinations of configura
-tion parameters and their evaluation-time complexity.
- One crucial parameter, which is mainly subject of adjustment, is the transmit
- power of the common pilot channel (CPICH).
- The CPICH transmit power is common to many different planning and optimization
- problems in UMTS networks 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Nawrocki_Understanding:2006"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The CPICH transmits in the downlink of a UMTS cell system.
- The transmit power is usually between 5% and 10% of the total power available
- at the base station 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
-
-\end_inset
-
-.
- The capacity of a cell is limited by the amount of available power at the
- base station and the interference level at the mobile terminal.
- The coverage area of any cell is controlled by changing its pilot power,
- which consequently modifies the service area of the network.
-\end_layout
-
-\begin_layout Standard
-From the network perspective, minimizing pilot power usage leaves more power
+From the UMTS perspective, minimizing pilot-power usage leaves more power
  available for increased network capacity.
  This is especially important if the traffic and other channels are configured
  relative to CPICH 
@@ -184,8 +251,8 @@ key "Holma_WCDMA.for.UMTS:2005"
 \end_inset
 
 .
- Moreover, as applications demand for mobile internet access and data services
- increases 
+ Moreover, as the users' demand for internet access and data services increases
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Cunningham_Network.growth.theory.and.evidence:2010"
@@ -193,7 +260,7 @@ key "Cunningham_Network.growth.theory.and.evidence:2010"
 \end_inset
 
 , so does the pressure on existing network infrastructure, making parameter
- optimization the only viable short-term solution 
+ optimization the only viable solution in the short-term 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Nawrocki_Understanding:2006"
@@ -204,25 +271,16 @@ key "Nawrocki_Understanding:2006"
 \end_layout
 
 \begin_layout Standard
-There are different approaches in the literature that are able to solve
- the coverage problem 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Nawrocki_Understanding:2006,Siomina_Pilot.power.optimization:2004"
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+and LTE??? Fijate la diploma que mando Vili!
+\end_layout
 
 \end_inset
 
-.
- Some of them even claim to achieve near-optimal solutions 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Siomina:Minimum.pilot.power.for.service.coverage"
 
-\end_inset
-
-.
- As a matter of fact, such formulations have proven useful only for small
- network instances and often fail when challenged with real-world networks.
 \end_layout
 
 \begin_layout Standard
@@ -266,40 +324,70 @@ key "Chen-Yuan_CPICH.optimization:2008"
 \end_inset
 
 .
- We tackle the problem of computational-time complexity when dealing with
- big problem instances by implementing a parallel version of our agent-based
- algorithm entirely on GPU.
- This minimizes overhead when deploying a larger number of agents working
- in parallel over the service area, limited only by the amount of memory
+ The large computational-time complexity when dealing with big problem instances
+ is tackled using a parallel implementation of the agent-based algorithm
+ for on GPU.
+ This minimizes the overhead when deploying a larger number of agents working
+ in parallel over the service area, only limited by the amount of memory
  available.
  
 \end_layout
 
 \begin_layout Standard
-We tested our algorithm on subsets of a real UMTS network deployed in Slovenia.
- All network-related data were provided by the mobile operator Mobitel Telecommu
-nication Services, Inc.
- The results show that the solutions found, and more importantly their quality,
- are greatly improved when compared to other common planning techniques.
-\end_layout
-
-\begin_layout Standard
-We begin our discussion by introducing previous work and a description of
- the coverage problem, where we formally introduce some of its key elements.
- We then discuss our parallel-agent approach in detail, as well as the strategie
-s used for result comparison.
- Having introduced the parallel-agent approach, we move on to describe the
- GPU implementations of its two key elements: the objective-function evaluator
- and the agents.
- Simulations and experimentation, performed on three sub-networks of a real
- mobile network deployed in Slovenia, follow.
- We conclude with an overview of the achieved results, from the optimization
- as well as the implementation points of view, and discuss future research
- directions.
+The algorithm on subsets of a real radio network deployed in Slovenia.
+ All network-related data were provided by the engineers of the Radio Network
+ department at Telekom Slovenije, d.d.
+ The results show that the solution quality is greatly improved, compared
+ to classic coverage-planning techniques.
 \end_layout
 
 \begin_layout Section
-Previous work
+Related work 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:06-Related-work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are several approaches in the literature that address solving the
+ service-coverage problem in radio networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Nawrocki_Understanding:2006,Siomina_Pilot.power.optimization:2004"
+
+\end_inset
+
+.
+ Some of them even claim to achieve near-optimal solutions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+.
+ As a matter of fact, most formulations are only useful for small network
+ instances and often fail when challenged with larger and real-world networks.
+\end_layout
+
+\begin_layout Standard
+A genetic-algorithm approach for solving the service-coverage problem for
+ GSM networks is presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lieska-Radion_coverage_optimization_with_genetic_algorithms:1998"
+
+\end_inset
+
+.
+ The proposed solution is based on the physical distribution of base-station
+ antennas in order to maximize coverage.
+ The simulations were performed on a test network with 40 candidate sites
+ for base-station antennas.
 \end_layout
 
 \begin_layout Standard
@@ -311,87 +399,87 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 \end_inset
 
 , Siomina and Yuan considered the problem of minimizing the total amount
- of pilot power subject to a full coverage constraint.
- They tackled the problem with an iterative linear programming approach,
- reporting very good results for some small-sized test networks.
- The authors also noted that bigger problem instances could not be solved
- because of hardware constraints on the target platform.
+ of pilot power for UMTS networks subject to a full coverage constraint.
+ They tackled the problem with an iterative linear-programming approach,
+ reporting very good results for some test networks, containing from 15
+ to 65 base stations.
+ The authors noted that bigger problem instances could not be solved because
+ of hardware constraints on the target platform.
 \end_layout
 
 \begin_layout Standard
-In a different work 
+As for LTE networks, the service-coverage problem is presented in 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Benedicic_Pilot.power.optimization:2010"
+LatexCommand cite
+key "Thampi-A_sparse_sampling_algorithm_for_self_optimisation_of_coverage_in_LTE_networks:2012"
 
 \end_inset
 
-, we tackled the full-coverage problem of the service area under optimization.
- Reported experimentation on the same problem instances as in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Siomina:Minimum.pilot.power.for.service.coverage"
-
-\end_inset
-
- showed improved quality at the cost of longer running time.
- Moreover, our approach was not limited by any hardware restrictions, since
- it successfully tackled bigger problem instances, finding high quality
- solutions even for large networks.
- Such solutions were found in a reduced amount of time by increasing the
- number of agents deployed during optimization without compromising solution
- quality.
-\end_layout
-
-\begin_layout Standard
-The algorithm in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Benedicic_Pilot.power.optimization:2010"
-
-\end_inset
-
- is the basis for the optimization algorithm presented in this paper, with
- some essential improvements, namely:
-\end_layout
-
-\begin_layout Itemize
-the original implementation was completely CPU-based and used a black-box
- coverage evaluator;
-\end_layout
-
-\begin_layout Itemize
-the algorithm presented here contains improvements in the agent's behavior
- during optimization, including the introduction of the so-called 
-\begin_inset Quotes eld
-\end_inset
-
-special
-\begin_inset Quotes erd
-\end_inset
-
- agents and some fine-tuning of their step sets.
+.
+ The authors presented an algorithm, based on reinforcement learning, to
+ tackle three aspects of the coverage problem, i.e., coverage holes, weak
+ coverage and pilot pollution.
+ The experimental simulations, performed on 3 base stations, used different
+ antenna-tilt configurations as the proposed solutions.
+ The service-coverage problem as presented in this chapter corresponds to
+ achieving full coverage of the target area, i.e., without coverage holes.
 \end_layout
 
 \begin_layout Section
-Problem description
+Radio-network model 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:06-Radio_network_model"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-In the problem of optimization of pilot powers for service coverage, the
- objective is to find a set of pilot power settings for all cells in the
- network, such that the total pilot power used is minimized, and a given
- service coverage criteria is fulfilled.
- We consider the pilot power minimization problem subject to a full coverage
- constraint of the service area.
+Extending the representation of a radio-network model from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "nawrocki2006understanding"
+
+\end_inset
+
+, this section addresses the definitions of all the elements included in
+ the mathematical model used for the simulations.
 \end_layout
 
 \begin_layout Standard
-Because the mathematical model of the problem is not of primary interest
- here, we will just outline it, so that all problem elements are formally
- defined and represented.
- For additional information regarding mathematical models of comparable
- problems, see 
+Our goal here is to analyze the state of the network in a given situation,
+ e.g.
+ a ‘snapshot’ at an arbitrary instance.
+ A snapshot consists of a set of mobiles (or users) having individual properties
+, such as location, and equipment type.
+ The static approach inherently ignores dynamic effects that influence the
+ system, like fast power control 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "nawrocki2006understanding"
+
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Un poco mas sobre las ventajas y desventajas de los static network models
+ y por que nos decidimos por uno asi.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For additional information regarding mathematical models of comparable problems,
+ see 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Nawrocki_Understanding:2006"
@@ -402,146 +490,226 @@ key "Nawrocki_Understanding:2006"
 \end_layout
 
 \begin_layout Subsection
-Problem elements
+Basic elements
 \end_layout
 
 \begin_layout Standard
-We start by considering a UMTS network of 
-\begin_inset Formula $m$
-\end_inset
-
- cells and use 
+Consider a UMTS network with a set of antenna installations (cells), 
 \begin_inset Formula $C$
 \end_inset
 
- to denote the set of cells, i.e.
- 
-\begin_inset Formula $C=\{1,...,m\}$
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$C$"
+description "Set of antenna installations (cells) in a mobile network."
+
 \end_inset
 
 .
- A pixel grid of a given resolution represents the service area for which
- the signal propagation predictions are known.
- Let 
-\begin_inset Formula $n$
+ A RSG of a given resolution represents a geographical area, 
+\begin_inset Formula $A_{\mathrm{total}}$
 \end_inset
 
- denote the total number of pixels in the service area and let 
-\begin_inset Formula $S$
+, within which a set of mobiles, 
+\begin_inset Formula $M$
 \end_inset
 
- denote the pixel set, i.e.
- 
-\begin_inset Formula $S=\{1,...,n\}$
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$M$"
+description "Set of mobile devices or users of a mobile network."
+
+\end_inset
+
+, is spatially distributed over the pixels of 
+\begin_inset Formula $A_{\mathrm{total}}$
 \end_inset
 
 .
- We also denote 
-\begin_inset Formula $att_{cs}$
+ Further, 
+\begin_inset Formula $L_{cm}^{\downarrow}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$L_{cm}^{\\downarrow}$"
+description "Downlink attenuation factor between cell $c\\in C$ and mobile $m\\in M$."
+
+\end_inset
+
+ is defined as the downlink attenuation factor between cell 
+\begin_inset Formula $c\in C$
+\end_inset
+
+ and mobile 
+\begin_inset Formula $m\in M$
+\end_inset
+
+.
+ Similarly, 
+\begin_inset Formula $L_{mc}^{\uparrow}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$L_{mc}^{\\uparrow}$"
+description "Uplink attenuation factor between mobile $m\\in M$ and cell $c\\in C$."
+
+\end_inset
+
+ represents the uplink attenuation factor between mobile 
+\begin_inset Formula $m$
+\end_inset
+
+ and cell 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ The attenuation factor values are calculated by performing signal propagation
+ predictions for every pair 
+\begin_inset Formula $(c,m)$
 \end_inset
 
 , 
-\begin_inset Formula $0\le att_{cs}\le1$
-\end_inset
-
-, as the attenuation factor between a cell 
-\begin_inset Formula $c$
-\end_inset
-
- and a pixel 
-\begin_inset Formula $s$
-\end_inset
-
-, which is calculated by performing signal propagation predictions for every
- pair of 
 \begin_inset Formula $c\in C$
 \end_inset
 
- and 
-\begin_inset Formula $s\in S$
+, 
+\begin_inset Formula $m\in M$
 \end_inset
 
-.
+, using the radio-propagation model introduced in ...???.
+ These predictions already include losses and gains from cabling, hardware,
+ and user equipment.
 \end_layout
 
 \begin_layout Standard
-For every 
-\begin_inset Formula $c\in C$
-\end_inset
-
-, we define 
-\begin_inset Formula $p_{c}^{T}$
-\end_inset
-
- as the total transmission power available in cell 
+The amount of power allocated to the pilot signal of cell 
 \begin_inset Formula $c$
 \end_inset
 
-.
- This power is shared among all channels in the cell (i.e.
- CPICH, other common channels, and dedicated traffic channels).
- We define 
+ is denoted as 
 \begin_inset Formula $p_{c}$
 \end_inset
 
- as the amount of power allocated to the pilot signal of cell 
-\begin_inset Formula $c$
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$p_{c}$"
+description "Pilot-power setting of cell $c\\in C$."
+
+\end_inset
+
+, and it can adopt any value from the sorted set of available pilot power
+ levels, 
+\begin_inset Formula $P_{c}=\{p_{c}^{1},p_{c}^{2},...,p_{c}^{k}\}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$P_{c}$"
+description "Set of candidate CPICH power settings for cell $c\\in C$."
+
 \end_inset
 
 , where 
-\begin_inset Formula $p_{c}$
+\begin_inset Formula $p_{c}^{k}$
 \end_inset
 
- may adopt any value from a finite set of possible pilot power levels, 
-\begin_inset Formula $P_{c}=\{p_{c}^{1},p_{c}^{2},...,p_{c}^{T}\}$
-\end_inset
+ is the maximum power.
+\end_layout
 
-.
- Consequently, the received pilot power of cell 
+\begin_layout Standard
+Based on the introduced elements, the received pilot power from cell 
 \begin_inset Formula $c$
 \end_inset
 
- in pixel 
-\begin_inset Formula $s$
+ to mobile 
+\begin_inset Formula $m$
 \end_inset
 
  is 
-\begin_inset Formula $att_{cs}p_{c}$
+\begin_inset Formula $L_{cm}^{\downarrow}p_{c}$
 \end_inset
 
 .
 \end_layout
 
+\begin_layout Subsection
+Coverage
+\end_layout
+
 \begin_layout Standard
-Considering the full coverage constraint, each pixel in the service area
- should have at least one cell covering it.
- We assume that a pixel 
-\begin_inset Formula $s$
+A mobile 
+\begin_inset Formula $m$
 \end_inset
 
- is under coverage of a cell 
+ within the area 
+\begin_inset Formula $A_{\mathrm{covered}}$
+\end_inset
+
+ is under service coverage, meaning that, at least, one cell 
+\begin_inset Formula $c$
+\end_inset
+
+ covers it.
+ Cell coverage is provided to a mobile 
+\begin_inset Formula $m$
+\end_inset
+
+ from a cell 
 \begin_inset Formula $c$
 \end_inset
 
  if its signal-to-interference ratio, 
-\begin_inset Formula $SIR$
+\begin_inset Formula $sir(c,m)$
 \end_inset
 
-, at pixel 
-\begin_inset Formula $s$
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$sir(c,m)$"
+description "Signal-to-interference ratio (SIR) from cell $c\\in C$ to mobile $m\\in M$."
+
 \end_inset
 
- is not lower than a given threshold, 
-\begin_inset Formula $\gamma_{c}$
+, at the RSG pixel where 
+\begin_inset Formula $m$
 \end_inset
 
-, i.e.
+ is located, is not lower than a given threshold, 
+\begin_inset Formula $\gamma^{\mathrm{cov}}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\gamma^{\\mathrm{cov}}$"
+description "Signal-to-interference ratio (SIR) coverage threshold."
+
+\end_inset
+
+, i.e.,
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-SIR(c,s)=\frac{p_{c}att_{cs}}{\sum_{i\in C}p_{i}^{T}att_{is}+\tau_{0}}\ge\gamma_{c}\label{eq:sir}
+sir(c,m)=\frac{L_{cm}^{\downarrow}p_{c}}{\tau_{0}+\sum_{i\in C}L_{im}^{\downarrow}p_{i}}\ge\gamma^{\mathrm{cov}}\label{eq:06-Signal_to_interference_ratio}
 \end{equation}
 
 \end_inset
@@ -550,33 +718,110 @@ SIR(c,s)=\frac{p_{c}att_{cs}}{\sum_{i\in C}p_{i}^{T}att_{is}+\tau_{0}}\ge\gamma_
 \end_layout
 
 \begin_layout Standard
+\noindent
 where 
 \begin_inset Formula $\tau_{0}$
 \end_inset
 
  is the thermal noise.
- In (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:sir"
-
+ For convenience, a binary function is defined to determine the coverage
+ of a mobile 
+\begin_inset Formula $m$
 \end_inset
 
-), we are assuming that all cells in the network operate at full power,
- which is the worst case scenario.
- This ensures that even under heavy user traffic, full coverage of the service
- area is maintained, because of the cell-breathing principle 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
-
+ by a cell 
+\begin_inset Formula $c$
 \end_inset
 
 .
- The same assumption has also been used in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Siomina:Minimum.pilot.power.for.service.coverage,Chen-Yuan_CPICH.optimization:2008"
+ So, for any pair 
+\begin_inset Formula $(c,m)$
+\end_inset
+
+, 
+\begin_inset Formula $c\in C$
+\end_inset
+
+, 
+\begin_inset Formula $m\in M$
+\end_inset
+
+, the coverage of mobile 
+\begin_inset Formula $m$
+\end_inset
+
+ by cell 
+\begin_inset Formula $c$
+\end_inset
+
+ is defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+cov(c,m)=\begin{cases}
+1 & if\, sir(c,m)\ge\gamma^{\mathrm{cov}}\\
+0 & otherwise
+\end{cases}.
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$cov(c,m)$"
+description "Binary function to assert the coverage of a  mobile $m\\in M$ by from a cell $c\\in C$."
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+A set, denoted as 
+\begin_inset Formula $C_{m}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$C_{m}$"
+description "Subset of cells, $C_m\\subset C$, that cover a mobile $m\\in M$."
+
+\end_inset
+
+, 
+\begin_inset Formula $C_{m}\subset C$
+\end_inset
+
+, contains all the cells covering a mobile 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ From this set, the cell with the highest 
+\begin_inset Formula $sir(c,m)$
+\end_inset
+
+ is refered to as the best server, and denoted as 
+\begin_inset Formula $c_{m}^{*}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$c_{m}^*$"
+description "Best-serving cell of mobile $m\\in M$."
 
 \end_inset
 
@@ -584,21 +829,33 @@ key "Siomina:Minimum.pilot.power.for.service.coverage,Chen-Yuan_CPICH.optimizati
 \end_layout
 
 \begin_layout Standard
-The optimization problem corresponds to finding the pilot power levels 
-\begin_inset Formula $p_{c}$
+\noindent
+Notice that the described radio-network model is easily adaptable for different
+ mobile technologies, e.g., GSM, UMTS and LTE.
+ For example, if solving the service-coverage problem for UMTS, it would
+ be reasonable to assume that all cells in the network operate at maximum
+ power, and adapt Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:06-Signal_to_interference_ratio"
+
 \end_inset
 
-, for all cells 
-\begin_inset Formula $c\in C$
+) accordingly.
+ This is, from the interference point of view, the worst-case scenario 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage,Chen-Yuan_CPICH.optimization:2008"
+
 \end_inset
 
-, such that coverage of at least 
-\begin_inset Formula $b$
-\end_inset
+.
+ This assumption guarantees, that even under heavy user traffic, full coverage
+ of the service area is maintained due to the cell-breathing principle 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Holma_WCDMA.for.UMTS:2005"
 
- pixels is guaranteed, while the total amount of pilot power used is minimized.
- Since we are considering full coverage, we denote 
-\begin_inset Formula $b=n$
 \end_inset
 
 .
@@ -621,7 +878,7 @@ It has been proved that the problem of pilot power optimization for full
 \begin_inset Formula $NP$
 \end_inset
 
--hard, since it can be reduced to the set covering problem 
+-hard, since it can be reduced to the set-covering problem 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Varbrand_Mathematical.programming.approach:2003"
@@ -642,13 +899,36 @@ Optimization objective and constraints
 \end_layout
 
 \begin_layout Standard
-The optimization objective is defined as follows
+In the problem of optimization of pilot powers for service coverage, the
+ objective is to find a set of pilot power settings for all cells in the
+ network, such that the total pilot power used is minimized, and a given
+ service coverage criteria is fulfilled.
+ In other words, solving the service-coverage problem corresponds to finding
+ the pilot power levels 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+, for all cells 
+\begin_inset Formula $c\in C$
+\end_inset
+
+, such that coverage of at least 
+\begin_inset Formula $b$
+\end_inset
+
+ mobiles is guaranteed, while the total amount of pilot power used is minimized.
+ Since we are considering full coverage, we denote 
+\begin_inset Formula $b=\vert M\vert$
+\end_inset
+
+.
+ Consequently, the optimization objective is defined as follows
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-P^{*}=\min\sum_{c\in C}p_{c};\label{eq:objective_function-1}
+P^{*}=\min\sum_{c\in C}p_{c},\label{eq:06-Objective_function}
 \end{equation}
 
 \end_inset
@@ -657,83 +937,26 @@ P^{*}=\min\sum_{c\in C}p_{c};\label{eq:objective_function-1}
 \end_layout
 
 \begin_layout Standard
+\noindent
 subject to
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\frac{\sum_{s\in S}cov(s)}{b}=1,\label{eq:coverage_constraint}
+\frac{\sum_{m\in M}cov(c_{m}^{*},m)}{b}=1.\label{eq:06-Coverage_constraint}
 \end{equation}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-where
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-cov(s)=1\,\,\, if\, and\, only\, if\,\,\,\exists c\vert SIR(c,s)\ge\gamma_{c}\label{eq:coverage}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-cov(s)=0\,\,\, otherwise
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The definition of (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:coverage"
-
-\end_inset
-
-) provides us a simple way of asserting the coverage of a given pixel, 
-\begin_inset Formula $s$
-\end_inset
-
-.
- It follows that if the pilot signal of at least one cell 
-\begin_inset Formula $c$
-\end_inset
-
- satisfies the imposed 
-\begin_inset Formula $SIR$
-\end_inset
-
- threshold, 
-\begin_inset Formula $\gamma_{c}$
-\end_inset
-
-, the pixel is covered and hence 
-\begin_inset Formula $cov(s)=1$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Section
 Optimization approaches 
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Solution-approaches"
+name "sec:06-Optimization-approaches"
 
 \end_inset
 
@@ -747,7 +970,7 @@ Since the problem instances we will be analyzing are part of a real mobile
  dealing with exactly the same data set.
  For this reason, we will introduce two different strategies for setting
  the pilot power, that shall enable us to compare the experimentation results.
- The first strategy is attenuation-based pilot power, presented in 
+ The first strategy is the attenuation-based pilot power, presented in 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Siomina_Pilot.power.optimization:2004"
@@ -755,7 +978,7 @@ key "Siomina_Pilot.power.optimization:2004"
 \end_inset
 
 , in which a pixel of the service area is always covered by the cell with
- the highest attenuation-factor value.
+ the maximum attenuation-factor value, i.e., the minimum path loss.
  The second strategy is our parallel-agent approach, based on ideas inspired
  by two-dimensional cellular automata 
 \begin_inset CommandInset citation
@@ -772,10 +995,10 @@ key "Talbi_Metaheuristics:2009"
 \end_inset
 
 .
- A detailed description is given in section 
+ A detailed description is given in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Parallel-multi-agent-approach"
+reference "sub:06-Parallel_agent_approach"
 
 \end_inset
 
@@ -794,33 +1017,30 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 \end_layout
 
 \begin_layout Subsection
-Attenuation-based pilot power
+Attenuation-based approach
 \end_layout
 
 \begin_layout Standard
 The first heuristic for setting the pilot power of all cells in the network
- is known as attenuation-based, since it relies on the attenuation factor,
- 
-\begin_inset Formula $att_{cs}$
+ is known as attenuation-based, since it relies on the downlink-attenuation
+ factor, 
+\begin_inset Formula $L_{cm}^{\downarrow}$
 \end_inset
 
 .
- A pixel of the service area, 
-\begin_inset Formula $s$
-\end_inset
-
-, is always covered by the cell exhibiting the maximum 
-\begin_inset Formula $att_{cs}$
+ A mobile located on some pixel of the service area is always covered by
+ the cell with the maximum 
+\begin_inset Formula $L_{cm}^{\downarrow}$
 \end_inset
 
 .
  Whenever the maximum available power, 
-\begin_inset Formula $p_{c}^{T}$
+\begin_inset Formula $p_{c}^{k}$
 \end_inset
 
 , is the same for all the cells in the network, this is equivalent to selecting
- the cell with the minimum required pilot power to cover pixel 
-\begin_inset Formula $s$
+ the cell with the minimum required pilot power to cover a mobile 
+\begin_inset Formula $m$
 \end_inset
 
 .
@@ -828,8 +1048,8 @@ The first heuristic for setting the pilot power of all cells in the network
 \begin_inset Formula $c$
 \end_inset
 
- covering pixel 
-\begin_inset Formula $s$
+ covering mobile 
+\begin_inset Formula $m$
 \end_inset
 
  as
@@ -838,7 +1058,7 @@ The first heuristic for setting the pilot power of all cells in the network
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-p_{c(s)}=\min_{c\in C}p_{cs}\label{eq:attenuation_based-power}
+p_{cm}^{\mathrm{att}}=\min p_{c}\forall c\in C\iff cov(c,m)=1\label{eq:06-Attenuation_based-power}
 \end{equation}
 
 \end_inset
@@ -847,10 +1067,10 @@ p_{c(s)}=\min_{c\in C}p_{cs}\label{eq:attenuation_based-power}
 \end_layout
 
 \begin_layout Standard
-Picking the cells conforming to (
+Picking the cells conforming to Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:attenuation_based-power"
+reference "eq:06-Attenuation_based-power"
 
 \end_inset
 
@@ -861,7 +1081,7 @@ reference "eq:attenuation_based-power"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-P^{Att}=\sum_{c\in C}\max p_{c(s)}
+P^{\mathrm{att}}=\sum_{c\in C}\max p_{cm}^{\mathrm{att}}
 \end{equation}
 
 \end_inset
@@ -871,17 +1091,16 @@ P^{Att}=\sum_{c\in C}\max p_{c(s)}
 
 \begin_layout Standard
 The procedure to find a cell 
-\begin_inset Formula $c(s)$
+\begin_inset Formula $c$
 \end_inset
 
- for every pixel in the service area consists in sorting, in descending
- order, all pixels by the maximum attenuation factor value, 
-\begin_inset Formula $att_{cs}$
+ for every mobile 
+\begin_inset Formula $m$
 \end_inset
 
-, among all cells, i.e.
- 
-\begin_inset Formula $att_{c(s),s}$
+ in the service area consists in sorting, in descending order, all mobiles
+ by their attenuation-factor values, 
+\begin_inset Formula $L_{cm}^{\downarrow}$
 \end_inset
 
 .
@@ -889,10 +1108,9 @@ The procedure to find a cell
 \begin_inset Formula $b$
 \end_inset
 
- pixels of the sorted sequence, taking the maximum pilot power setting for
- a cell into account, i.e.
- 
-\begin_inset Formula $p_{c(s)}$
+ mobiles of the sorted sequence, taking the maximum pilot-power setting
+ for a cell into account, i.e., 
+\begin_inset Formula $p_{cm}^{\mathrm{att}}$
 \end_inset
 
 .
@@ -902,7 +1120,7 @@ The procedure to find a cell
 Parallel-agent approach 
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Parallel-multi-agent-approach"
+name "sub:06-Parallel_agent_approach"
 
 \end_inset
 
@@ -911,18 +1129,31 @@ name "sub:Parallel-multi-agent-approach"
 
 \begin_layout Standard
 In the parallel-agent approach, a set of autonomous worker agents explore
- the geographic area, targeted to be under mobile network coverage, in order
- to optimize the pilot power consumption of the network.
- Each agent randomly moves over the service area as it dictates different
- changes to the pilot power of the cells.
- An objective-function evaluator performs radio propagation predictions
- based on each agent's proposed change.
+ the target geographical area, 
+\begin_inset Formula $A_{\mathrm{total}}$
+\end_inset
+
+, in order to optimize the pilot-power consumption.
+ Each agent randomly moves over the 
+\begin_inset Formula $A_{\mathrm{total}}$
+\end_inset
+
+ as it dictates different changes to the pilot power of the cells.
+ PRATO, the radio-coverage framework presented in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, performs the objective-function evaluations and radio-propagation predictions
+ based on the proposed changes of each agent.
 \end_layout
 
 \begin_layout Standard
-The search process during optimization is strictly random.
- However, several physical properties that are exclusive to the problem
- being solved are being exploited during exploration of the search space.
+The moving process during the optimization is strictly random.
+ However, several physical properties that are exclusive to the service-coverage
+ problem are being exploited during the exploration of the search space.
  Additionally, whenever the current solution breaks any of the given constraints
 , the optimization process is guided back to the space of valid solutions,
  providing a mechanism for improving exploration and escaping from local
@@ -930,22 +1161,22 @@ The search process during optimization is strictly random.
 \end_layout
 
 \begin_layout Standard
-Because of the independent nature in agent's behavior, a parallel implementation
- is fairly straightforward to achieve.
- The first hardware restriction we have to overcome is the amount of memory
- on the GPU device.
- Consequently, careful memory utilization and organization are critical
- to successfully accommodate all involved problem elements on the GPU.
- Figure 
+Because the behaviour of the agents is independent between each other, a
+ parallel implementation is fairly straight-forward to achieve.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Architecture"
+reference "fig:06-Architecture_of_the_system_on_GPU"
 
 \end_inset
 
- gives an overview of the optimization system architecture.
- Within this GPU-only architecture, agents work in a parallel and autonomous
- manner, while the evaluator reacts to agents' changes.
+ shows the architecture of the agent-optimization system.
+ In this GPU-only architecture, agents work in a parallel and autonomous
+ manner, while the evaluator reacts to their changes.
 \end_layout
 
 \begin_layout Standard
@@ -973,7 +1204,7 @@ centering
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename img/architecture.eps
-	lyxscale 30
+	lyxscale 50
 	width 100text%
 
 \end_inset
@@ -985,12 +1216,12 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-
-\shape italic
 Architecture of the optimization system on GPU.
+\emph on
+
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Architecture"
+name "fig:06-Architecture_of_the_system_on_GPU"
 
 \end_inset
 
@@ -1012,457 +1243,57 @@ The agents
 \end_layout
 
 \begin_layout Standard
-The agents apply the pilot power changes based exclusively on local information.
+The agents apply the pilot-power changes only considering local information.
  Each of them encapsulates a set of steps that is consistently applied as
  it randomly moves through the service area of the network.
- Whenever an agent arrives at a pixel 
-\begin_inset Formula $s$
+ Whenever an agent arrives at a new location, the set of cells covering
+ it is calculated, e.g., 
+\begin_inset Formula $C_{m}$
 \end_inset
 
-, it identifies the set of cells covering the current pixel, namely 
+.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-B(s)=\{c\in C\mid SIR(c,s)\ge\gamma_{c}\}
-\end{equation}
-
+The step set an agent applies following this point is directly related to
+ 
+\begin_inset Formula $\vert C_{m}\vert$
 \end_inset
 
+, whereas its movement is determined by 
+\begin_inset Formula $\vert\overline{A_{\mathrm{covered}}}\vert$
+\end_inset
 
+, i.e., the cardinality of 
+\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
+\end_inset
+
+, denoting the locations without service coverage.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-
-\shape italic
-Pseudo-code of the agent's behavior.
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Agent-behavior"
-
+The behavior of an agent is dictated by the pseudo-code shown in Algorithm
+\begin_inset space ~
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="14" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Step
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{repeat}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\mathbf{if}\, Special\, agent\,(\,)\,\mathbf{and}\,|U|>0\,\mathbf{then}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\,\,\,\, s=random\, element\, from\, U$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\mathbf{else}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\,\,\,\, s=random\, element\, from\, S$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\mathbf{end\, if}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\, move\, to\, s$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\mathbf{if}\,|B(s)|=0\,\mathbf{then}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\,\,\,\, apply\, SS_{0}\,\,\,\,//increase\, power$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-7
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\mathbf{else\,}\mathbf{if}\,|B(s)|\ge1\,\mathbf{then}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\,\,\,\, apply\, SS_{1}\,\,\,\,//decrease\, power$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\,\mathbf{end\, if}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{while\,}\mathbf{not}\,(stopping\, criteria)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The step set applied from this point on directly depends on the cardinality
- of 
-\begin_inset Formula $B(s)$
-\end_inset
-
-, while the agent's movement over the service area is determined by the
- cardinality of set 
-\begin_inset Formula $U$
-\end_inset
-
-, 
-\begin_inset Formula $U\subset S$
-\end_inset
-
-, which is defined as
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-U=\{s\in S\mid\forall c\in C:SIR(c,s)<\gamma_{c}\}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The agent's behavior is dictated by the pseudo-code shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:Agent-behavior"
+reference "alg:07-Agent-behavior"
 
 \end_inset
 
 .
- Steps 1 to 4 are responsible for guiding the agent's movement.
- The coordinates are selected randomly from two sets.
- The first, 
-\begin_inset Formula $S$
+ The first four steps are responsible for guiding its movements.
+ The coordinates are randomly selected from two sets, 
+\begin_inset Formula $A_{\mathrm{total}}$
 \end_inset
 
-, is the set of all pixels in the service area.
- The other one, 
-\begin_inset Formula $U$
+ and 
+\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
 \end_inset
 
-, is the set of pixels that are currently not being covered by the network.
+.
  Only 
 \begin_inset Quotes eld
 \end_inset
@@ -1471,21 +1302,34 @@ special
 \begin_inset Quotes erd
 \end_inset
 
- agents may select pixel coordinates of the set 
-\begin_inset Formula $U$
+ agents may move to a location without service coverage, and they apply
+ the step set 
+\begin_inset Formula $SS_{0}$
 \end_inset
 
-.
- It follows, that an agent's movement depends on its 
+ for as long as the solution is not valid.
+ The portion of 
 \begin_inset Quotes eld
 \end_inset
 
-specialty
+special
 \begin_inset Quotes erd
 \end_inset
 
- and the number of pixels not covered by the current solution.
- During steps 5 to 8, the agent applies step sets 
+ agents used for correcting a solution is a parameter of the optimization
+ process.
+ During the following steps of Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:07-Agent-behavior"
+
+\end_inset
+
+, the agent applies step sets 
 \begin_inset Formula $SS_{0}$
 \end_inset
 
@@ -1494,32 +1338,44 @@ specialty
 \end_inset
 
  based on the number of cells in 
-\begin_inset Formula $B(s)$
+\begin_inset Formula $C_{m}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
+\begin_inset Float algorithm
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
-\shape italic
-Pseudo-code of step set 
-\begin_inset Formula $SS_{0}$
+
+\backslash
+centering
+\end_layout
+
 \end_inset
 
-.
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Pseudo-code representing the behaviour of an agent.
+\shape italic
+
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:Rule-set-0"
+name "alg:07-Agent-behavior"
 
 \end_inset
 
@@ -1539,133 +1395,160 @@ status open
 
 
 \backslash
-centering
-\end_layout
-
-\end_inset
-
-
+begin{algorithmic}
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-Step
+
+\backslash
+REPEAT
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
+	
+\backslash
+IF{$is
+\backslash
+_special
+\backslash
+_agent()$ $
+\backslash
+mathbf{and}$ $
+\backslash
+overline{A_{
+\backslash
+mathrm{covered}}}>0$}
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
+		
+\backslash
+STATE $l 
+\backslash
+gets pick
+\backslash
+_random
+\backslash
+_location(
+\backslash
+overline{A_{
+\backslash
+mathrm{covered}}})$
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{repeat}$
-\end_inset
 
-
+	
+\backslash
+ELSE
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
-1
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
+		
+\backslash
+STATE $l 
+\backslash
+gets pick
+\backslash
+_random
+\backslash
+_location(A_{
+\backslash
+mathrm{total}})$
+\end_layout
 
 \begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\, c'=next\, cell\, with\, maximum\, att(s)$
-\end_inset
 
-
+	
+\backslash
+ENDIF
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
-2
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
+	
+\backslash
+STATE $move(l)$
+\end_layout
 
 \begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\, p_{c'}=Adjust\, pilot(c',increase\, rate)$
-\end_inset
 
-
+	
+\backslash
+IF{$
+\backslash
+vert C_{m}
+\backslash
+vert=0$}
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
-3
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
+		
+\backslash
+STATE $apply(SS_{0})$
+\end_layout
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{while}\,(p_{c'}\notin P_{c'})$
-\end_inset
 
-
+	
+\backslash
+ELSE
 \end_layout
 
-\end_inset
-</cell>
-</row>
-</lyxtabular>
+\begin_layout Plain Layout
+
+		
+\backslash
+IF{$
+\backslash
+vert C_{m}
+\backslash
+vert
+\backslash
+ge 1$}
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+STATE $apply(SS_{1})$
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+ENDIF
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+ENDIF
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+UNTIL{$stopping
+\backslash
+_criterion()$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
 
 \end_inset
 
@@ -1678,77 +1561,88 @@ Step
 \end_layout
 
 \begin_layout Standard
-If the agent's current location, at pixel 
-\begin_inset Formula $s$
+If the current location of the agent is not covered by any cell, i.e., 
+\begin_inset Formula $\vert C_{m}\vert=0$
 \end_inset
 
-, is not covered by any cell (i.e.
- 
-\begin_inset Formula $|B(s)|=0$
-\end_inset
-
-), the step set 
+, the step set 
 \begin_inset Formula $SS_{0}$
 \end_inset
 
- (shown in Table 
+ is applied (see Algorithm
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:Rule-set-0"
+reference "alg:07-Agent_step_set_0"
 
 \end_inset
 
-) is applied.
- It starts by selecting the cell with the maximum attenuation factor at
- pixel 
-\begin_inset Formula $s$
+).
+ At the beggining, the cell with the highest attenuation factor that may
+ cover a mobile at this location, 
+\begin_inset Formula $c'$
 \end_inset
 
- (step 1).
- If many cells have the same value, one is randomly picked out of them.
+, is selected.
+ If several cells have the same 
+\begin_inset Formula $L_{cm}^{\downarrow}$
+\end_inset
+
+ value, one of them is randomly chosen.
  Once 
 \begin_inset Formula $c'$
 \end_inset
 
  is uniquely identified, the agent changes its pilot power by 
-\begin_inset Formula $increase\, rate$
+\begin_inset Formula $inc\, rate$
 \end_inset
 
- dB (step 2).
- By using a higher 
-\begin_inset Formula $increase\, rate$
+
+\begin_inset space ~
 \end_inset
 
-, the network shall potentially cover 
-\begin_inset Formula $s$
-\end_inset
-
-, as well as some neighboring pixels.
- Areas without coverage usually contain many uncovered pixels grouped together,
- forming irregular uncovered islands.
- 
+dB.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
+\begin_inset Float algorithm
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
-\shape italic
-Pseudo-code of step set 
-\begin_inset Formula $SS_{1}$
+
+\backslash
+centering
+\end_layout
+
 \end_inset
 
-.
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Pseudo-code representing step set 
+\begin_inset Formula $SS_{0}$
+\end_inset
+
+, which is applied by the agents in areas with no service coverage.
+\shape italic
+
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:Rule-set-1"
+name "alg:07-Agent_step_set_0"
 
 \end_inset
 
@@ -1768,6 +1662,86 @@ status open
 
 
 \backslash
+begin{algorithmic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+REPEAT
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+STATE $c'
+\backslash
+gets next
+\backslash
+_cell
+\backslash
+_with
+\backslash
+_max
+\backslash
+_att(m)$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+STATE $p_{c'}
+\backslash
+gets adjust
+\backslash
+_power(c',inc
+\backslash
+_rate)$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+UNTIL{$p_{c'}
+\backslash
+in P_{c'}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 centering
 \end_layout
 
@@ -1777,124 +1751,87 @@ centering
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
+\begin_inset Caption
 
 \begin_layout Plain Layout
-Step
-\end_layout
-
+Pseudo-code representing step set 
+\begin_inset Formula $SS_{1}$
 \end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
+, which is applied by the agents in areas with service coverage.
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:07-Agent_step_set_1"
 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{repeat}$
 \end_inset
 
 
 \end_layout
 
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\, c'=next\, random\, cell(B(s))$
-\end_inset
 
 
 \end_layout
 
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
-2
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
+
+\backslash
+begin{algorithmic}
+\end_layout
 
 \begin_layout Plain Layout
-\begin_inset Formula $\,\,\,\, p_{c'}=Adjust\, pilot(c',decrease\, rate)$
-\end_inset
 
 
+\backslash
+REPEAT
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
-3
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
+	
+\backslash
+STATE $c'
+\backslash
+gets pick
+\backslash
+_random
+\backslash
+_cell(C_{m})$
+\end_layout
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{while}\,(p_{c'}\notin P_{c'})$
-\end_inset
 
-
+	
+\backslash
+STATE $p_{c'}
+\backslash
+gets adjust
+\backslash
+_power(c',dec
+\backslash
+_rate)$
 \end_layout
 
-\end_inset
-</cell>
-</row>
-</lyxtabular>
+\begin_layout Plain Layout
+
+
+\backslash
+UNTIL{$p_{c'}
+\backslash
+in P_{c'}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
 
 \end_inset
 
@@ -1911,41 +1848,40 @@ The step set
 \begin_inset Formula $SS_{1}$
 \end_inset
 
- in Table 
+ listed in Algorithm
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:Rule-set-1"
+reference "alg:07-Agent_step_set_1"
 
 \end_inset
 
- is applied whenever the agent's current location, at pixel 
-\begin_inset Formula $s$
-\end_inset
-
-, is covered by one or more cells (i.e.
- 
-\begin_inset Formula $|B(s)|\ge1$
-\end_inset
-
-).
- The first step randomly selects a cell from 
-\begin_inset Formula $B(s)$
+ is applied if the location of the agent is under the coverage of one or
+ more cells, i.e., 
+\begin_inset Formula $\vert C_{m}\vert\ge1$
 \end_inset
 
 .
- The agent shall decrease the pilot power of 
+ The first step randomly selects a cell from the set 
+\begin_inset Formula $C_{m}$
+\end_inset
+
+, followed by a decrease of the pilot power of cell 
 \begin_inset Formula $c'$
 \end_inset
 
- in step 2.
+.
  This practice keeps the coverage constraint valid over 
-\begin_inset Formula $s$
+\begin_inset Formula $A_{\mathrm{total}}$
 \end_inset
 
-, although it might potentially break it on other pixels.
- Ideally, every pixel would be covered by exactly one network cell, although
- this is just a representation of a perfect solution that is almost entirely
- unreachable, because of the irregularity in network topology and terrain.
+, although it might potentially break it on other areas.
+ Ideally, every pixel of the geographical area has to be covered by exactly
+ one network cell, although this is just a representation of a perfect solution
+ that is unreachable because of irregularities in network topology and terrain.
 \end_layout
 
 \begin_layout Standard
@@ -1957,8 +1893,11 @@ In both step sets,
 \begin_inset Formula $SS_{1}$
 \end_inset
 
-, the agent makes sure that the new pilot power setting, i.e.
- after applying the change, is an element of 
+, the agent makes sure that the new pilot power setting, 
+\begin_inset Formula $p_{c'}$
+\end_inset
+
+, is an element of 
 \begin_inset Formula $P_{c'}$
 \end_inset
 
@@ -1967,61 +1906,46 @@ In both step sets,
 \begin_inset Formula $c'$
 \end_inset
 
- is discarded and another cell is selected at the first step of 
-\begin_inset Formula $SS_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $SS_{1}$
-\end_inset
-
-, adjusting its pilot power accordingly.
- 
+ is discarded and another cell is repeatedly selected at the beggining of
+ both step sets, until this condition is satisfied.
 \end_layout
 
 \begin_layout Standard
 The values 
-\begin_inset Formula $increase\, rate$
+\begin_inset Formula $inc\, rate$
 \end_inset
 
  and 
-\begin_inset Formula $decrease\, rate$
+\begin_inset Formula $dec\, rate$
 \end_inset
 
  are configurable parameters that should be set before starting the optimization
  process.
- They indicate the dB adjustment proposed to the pilot power of cell 
+ They indicate the relative adjustment (expressed in dB) of the pilot power
+ of cell 
 \begin_inset Formula $c'$
-\end_inset
-
- and are based on the physical properties of the problem being solved.
- Namely, lowering the pilot power of a cell decreases the interference at
- pixel 
-\begin_inset Formula $s$
 \end_inset
 
 .
- Moreover, the target 
-\begin_inset Formula $SIR$
+ On the one hand, lowering the pilot power of a cell decreases the interference
+ it creates within its coverage area and those of their neighbours.
+ Since the 
+\begin_inset Formula $sir(c,m)$
 \end_inset
 
- value at pixel 
-\begin_inset Formula $s$
+ value increases with lower interference, the coverage of 
+\begin_inset Formula $m$
 \end_inset
 
- is reduced under lower interference; thus coverage of this pixel may be
- achieved with lower pilot power.
- On the other hand, by increasing the pilot power of a cell with the maximum
- 
-\begin_inset Formula $att_{s}$
+ may be achieved by a neighbor cell with the same or lower pilot power.
+ On the other hand, increasing the pilot power of the cell with the maximum
+ attenuation factor improves coverage by evenly distributing the power among
+ different network cells.
+ This cell is, on average, the nearest one to the location of a mobile 
+\begin_inset Formula $m$
 \end_inset
 
-, we improve coverage by evenly distributing the power among different network
- cells, since the selected cell, 
-\begin_inset Formula $c'$
-\end_inset
-
-, is, on average, the nearest to the present location.
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2029,38 +1953,56 @@ The evaluator
 \end_layout
 
 \begin_layout Standard
-The evaluator represents a central component of the optimization system,
- since it reacts to agents' changes by recalculating the value of the objective
- function, i.e.
- coverage of the service area and the total pilot power used by all the
- cells in the network being optimized.
+The evaluator represents a central component of the optimization system.
+ It reacts to the pilot-power changes by recalculating the objective-function
+ value.
+ Recall that the objective-function evaluation involves the radio-coverage
+ prediction of the service area and the calculation of the total pilot power
+ used by the cells in the target network.
 \end_layout
 
 \begin_layout Standard
-After a short initialization, during which the path-loss matrices for all
- the cells and the interference matrix for the whole area are calculated,
- the evaluator computes the service area coverage, based on the pilot powers
- supplied as the initial solution from which the search process begins.
- Initial solutions are randomly generated sets, containing valid pilot power
- settings that fulfill the coverage constraint.
- The evaluator then waits for agents' changes to arrive and calculate subsequent
- objective function values accordingly.
+After a short initialization, during which the attenuation-factor matrices
+ of all the cells and the interference matrix are calculated, the evaluator
+ computes the coverage of the service area based on the pilot powers supplied
+ as the initial solution.
+ Initial solutions are randomly generated from valid pilot-power settings
+ that conform to the full coverage constraint.
 \end_layout
 
 \begin_layout Standard
-It is responsibility of the evaluator to maintain a special part of memory,
- intended for keeping track of the uncovered pixels in the service area,
- constantly updated.
- Whenever the current solution is not valid because of uncovered pixels,
- i.e.
- (
+The evaluator also maintains a special part of the memory (see 
+\begin_inset Quotes eld
+\end_inset
+
+Coordinates of uncovered cells
+\begin_inset Quotes erd
+\end_inset
+
+ in Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:coverage_constraint"
+reference "fig:06-Architecture_of_the_system_on_GPU"
 
 \end_inset
 
-) does not hold, some 
+) that is intended for registering uncovered areas, i.e., 
+\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
+\end_inset
+
+.
+ If Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:06-Coverage_constraint"
+
+\end_inset
+
+) does not hold, the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2068,465 +2010,24 @@ special
 \begin_inset Quotes erd
 \end_inset
 
- agents randomly select an uncovered pixel coordinate from this portion
- of memory so that a valid solution may be reached again.
- It should be noted that these 
-\begin_inset Quotes eld
-\end_inset
-
-special
-\begin_inset Quotes erd
-\end_inset
-
- agents shall only apply step set 
-\begin_inset Formula $SS_{0}$
-\end_inset
-
- for as long as the solution is not valid.
- The portion of 
-\begin_inset Quotes eld
-\end_inset
-
-special
-\begin_inset Quotes erd
-\end_inset
-
- agents that may work in correcting the current solution is an optimization
- parameter.
-\end_layout
-
-\begin_layout Standard
-As it has been mentioned before, this constraint-repairing strategy enhances
- certain properties of the search process performed, namely:
-\end_layout
-
-\begin_layout Itemize
-increased exploration of the search space, as different regions are also
- being inspected, and
-\end_layout
-
-\begin_layout Itemize
-to enable the algorithm to escape from local optima, leading the search
- to other areas containing potentially good solutions.
+ agents randomly select a location from this portion of memory so that a
+ valid solution may be reached again.
 \end_layout
 
 \begin_layout Standard
 It is worth mentioning that the evaluator itself has no influence in the
- optimization process from a theoretical point-of-view.
- Its task is to provide feedback and updated information to the agents exploring
- the service area.
+ optimization process from a quality point-of-view.
+ Its task is to provide feedback and updated information to the agents that
+ move through the service area.
  From a performance point-of-view, the importance of the evaluator is significan
-t, as it will be shown in the next sections.
+t, as it will be shown in the following sections.
 \end_layout
 
 \begin_layout Section
-Implementation
-\end_layout
-
-\begin_layout Standard
-We have chosen the Open Computing Language (OpenCL) 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Stone_OpenCL.A.parallel.programming.standard:2010"
-
-\end_inset
-
- as the implementation platform of our optimization system on GPU.
-\end_layout
-
-\begin_layout Standard
-OpenCL is an open parallel computing API designed to enable GPUs and other
- co-processors to work together with the CPU, providing additional computing
- power.
- As a standard, OpenCL 1.0 was released in 2008, by The Khronos Group, an
- independent standards consortium 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Munshi_The.OpenCL.specification:2009"
-
-\end_inset
-
-.
- For additional information about the OpenCL standard and API, we refer
- the reader to the numerous guides available online.
-\end_layout
-
-\begin_layout Standard
-Our choice in using OpenCL was greatly influenced by the fact that its bitcode
- runs on a variety of hardware, including multicore CPUs and GPUs from different
- vendors.
- This provides a complete framework capable of comparing execution speed-up
- on different hardware without the need of changing the implementation.
- 
-\end_layout
-
-\begin_layout Standard
-One unfortunate consequence of the vendor variety is that NVIDIA's CUDA
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "NVIDIA_Compute.Unified.Device.Architecture:2007"
-
-\end_inset
-
- and OpenCL documentation present disparate naming conventions for some
- key components.
- For the sake of consistency, in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:CUDA-OpenCL-translation"
-
-\end_inset
-
-, we present a short 
-\begin_inset Quotes eld
-\end_inset
-
-translation dictionary
-\begin_inset Quotes erd
-\end_inset
-
- between them.
- In the remaining of this work, we will stick to the naming convention used
- in the CUDA documentation.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-
-\shape italic
-Terminology translation between OpenCL and CUDA 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Kloeckner_CUDA.OpenCL.dictionary:2011"
-
-\end_inset
-
-.
+Implementation 
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:CUDA-OpenCL-translation"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="13" columns="2">
-<features tabularvalignment="middle">
-<column alignment="right" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row bottomspace="default">
-<cell alignment="right" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-OpenCL
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-CUDA
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grid
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grid
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Work group
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Block
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Work item
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Thread
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__kernel
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__global__
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__global
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__device__
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__local
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__shared__
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__private
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__local__
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-image
-\emph on
-n
-\emph default
-d_t
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-texture<type,
-\emph on
-n
-\emph default
-,...>
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-barrier(L|M|F)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-__syncthreads( )
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-get_local_id(0|1|2)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-threadIdx.x|y|z
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-get_group_id(0|1|2)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-blockIdx.x|y|z
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-get_global_id(0|1|2)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\emph on
-(not implemented)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
+name "sec:06-Implementation"
 
 \end_inset
 
@@ -2534,23 +2035,38 @@ get_global_id(0|1|2)
 \end_layout
 
 \begin_layout Standard
-Despite the use of OpenCL as the target platform for our implementation,
- the details described in the next sections may be equally applied on CUDA.
-\end_layout
+The evaluation of the objective function was completely implemented on the
+ GPU using OpenCL (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-OpenCL"
 
-\begin_layout Standard
-The evaluator was completely implemented on the GPU, because its performance
- has a great impact on the speed of the optimization system as a whole.
+\end_inset
+
+).
+ The reason behind this decision is the impact objective-function evaluation
+ has on the performance of the optimization system as a whole, as discussed
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-Black_box_optimization"
+
+\end_inset
+
+.
  Agents' implementation is also based on the GPU, which drastically reduces
  the number of data transfers between CPU and GPU, since all problem elements
  are available on the GPU during the optimization process.
- Therefore, it is a challenging task to accommodate all the needed elements
- on GPU memory, which is notably smaller than the RAM memory usually available
- on modern desktop computers.
+ In this sense, the first hardware restriction we have to overcome is the
+ amount of memory on the GPU device.
+ Consequently, careful memory utilization and organization are critical
+ to successfully accommodate all involved problem elements on the GPU, the
+ memory of which is significantly smaller than the RAM memory available
+ in desktop computers.
 \end_layout
 
 \begin_layout Subsection
-Objective function evaluation on GPU 
+Objective-function evaluation on GPU 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Objective-function-evaluation"
@@ -2561,14 +2077,20 @@ name "sub:Objective-function-evaluation"
 \end_layout
 
 \begin_layout Standard
-As it was mentioned before, the crucial importance of the evaluator as an
- element of the optimization system made it the first component to be implemente
-d on the GPU and, thus, have a greater gain on the performance speed-up
- of the system.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Esta seccion tiene que ir al capitulo anterior (sobre PRATO on GPU)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The GPU implementation of the objective function evaluator is based on work
+The GPU implementation of the objective-function evaluator is based on work
  done by Hrovat et al.
  
 \begin_inset CommandInset citation
@@ -2594,10 +2116,15 @@ one interference matrix for the whole service area.
 \end_layout
 
 \begin_layout Standard
+Still, we had to consider different data representation schemes for the
+ problem elements, so to avoid memory limitations on the GPU device.
+\end_layout
+
+\begin_layout Standard
 The path-loss matrices are potentially as big as the underlying data used
  to calculate the radio propagation predictions over the service area of
  the network.
- In our case, we are dealing with an area of more than 78000 
+ In our case, we are dealing with an area of more than 78,000 
 \begin_inset Formula $km^{2}$
 \end_inset
 
@@ -2703,8 +2230,6 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-
-\shape italic
 Memory organization of the path-loss matrices for network cells.
 \begin_inset CommandInset label
 LatexCommand label
@@ -2740,119 +2265,69 @@ Parallel agents on GPU
 \end_layout
 
 \begin_layout Standard
-The autonomous and programmable nature of the agents make them ideal for
- parallel and GPU-based implementations.
- By lowering the complexity of the step sets applied at each time, we were
- able to tackle a large optimization problem with outstanding results in
- very short time.
+With the objective-function evaluation running on the GPU, a new performance
+ bottleneck appeared.
+ The limitation factor in this case was the CPU-to-GPU data transfers in
+ each iteration of the optimization process.
 \end_layout
 
 \begin_layout Standard
-For the agents' kernel, only one thread block is launched.
- It contains as many threads as there are agents deployed during the optimizatio
-n, organized in a 1D grid.
- Each thread randomly generates a coordinate within the service area, using
- the system time in milliseconds as a random seed.
- Because OpenCL lacks functions for random-number generation, we implemented
- a simplified version of Marsaglia's generator 
+The GPU kernel of the agents is launched as one thread block that contains
+ one thread per deployed agent.
+ The thread block is organized in a one-dimensional grid.
+ The initial location of each agent is randomly generated using the current
+ system time as a random seed.
+ Since OpenCL provides no function for random-number generation, a simplified
+ version of Marsaglia's generator 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Marsaglia_Seeds.for.random.number.generator:2003"
 
 \end_inset
 
-.
- Afterwards, each thread analyzes the received signals at the current coordinate
- by applying step sets 
-\shape italic
-
-\begin_inset Formula $SS_{0}$
-\end_inset
-
-
-\shape default
- or 
-\shape italic
-
-\begin_inset Formula $SS_{1}$
-\end_inset
-
-
-\shape default
-, as it has been explained in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Parallel-multi-agent-approach"
-
-\end_inset
-
-.
- Each thread saves in shared memory the outcome of its analysis, containing
- the 
-\emph on
-id
-\emph default
- of the network cell (at position 
-\begin_inset Formula $2\times threadIdx$
-\end_inset
-
-), and the pilot power setting (at position 
-\begin_inset Formula $2\times threadIdx+1$
-\end_inset
-
-).
- The new pilot power is calculated as the dB difference from the previous
- one, based on the values of 
-\begin_inset Formula $increase\, rate$
-\end_inset
-
- and 
-\begin_inset Formula $decrease\, rate$
-\end_inset
-
-.
- Since both numbers, i.e.
- the cell 
-\emph on
-id
-\emph default
- and the pilot power, are of type 
-\emph on
-unsigned short
-\emph default
-, there is enough room in a 16 Kb shared memory block to allocate up to
- 4,096 independent agents.
- Therefore, this number is not bounded by shared-memory size, since most
- GPUs have a limit in the number of threads per block of 256, 512, etc.
- The last step involves saving the new pilot powers back to their containing
- vector in global memory.
- This is done by only one of the threads within the block, to avoid memory-acces
-s conflicts.
- At this moment, the sign of updated pilot powers is changed to indicate
- that coverage re-calculation is needed.
- Clearly, the vector containing pilot powers in global memory is of type
- 
-\emph on
-int
-\emph default
-, as it must allow signed values.
- Nevertheless, a single pilot power setting never exceeds 65,535 in milliwatt
- units.
- In case there is more than a new setting for a specific network cell, the
- median is calculated and applied as the new pilot power for that cell.
+ was implemented.
 \end_layout
 
 \begin_layout Standard
-Even though coalesced access is not achieved by the agents' kernel, its
- sole implementation provided enhanced performance, since the compulsory
- data transfers between the CPU and the GPU at each time step during optimizatio
-n are minimized.
- It also produces truly parallel behavior of the agents, as they apply pilot
- power changes at the same time.
+The analysis each agent does about the received signals at the current location
+ is saved into shared memory of the thread block.
+ It contains the network cell and its pilot-power setting.
+ Since both numbers are of type 
+\emph on
+short
+\emph default
+, there is enough space in a 16
+\begin_inset space ~
+\end_inset
+
+KB shared-memory block to allocate 4,096 agents.
+ The last step involves saving the new pilot powers into global memory.
+ This step is performed by only one of the threads within the thread block
+ in order to avoid memory-access conflicts.
+ Updated pilot powers are saved in negative form to indicate that coverage
+ re-calculation is needed for these cells.
+ In case there are several updated pilot powers for one network cell, the
+ median is calculated and applied as the new pilot power.
+\end_layout
+
+\begin_layout Standard
+Even though coalesced access is not achieved by the GPU kernel of the agents,
+ its sole implementation provided enhanced performance.
+ This performance gain appears because of the lower number of data transfers
+ between the CPU and the GPU, since most data is available in global memory.
+ Moreover, the GPU kernel also produces the truly parallel behavior of the
+ agents, as they all apply the pilot-power changes at the same time.
 \end_layout
 
 \begin_layout Section
-Simulations
+Simulations 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:06-Simulations"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2860,100 +2335,141 @@ Test networks
 \end_layout
 
 \begin_layout Standard
-All the test networks, 
-\begin_inset Formula $Net_{1}$
+The test networks, Net
+\begin_inset Formula $_{1}$
 \end_inset
 
-, 
-\begin_inset Formula $Net_{2}$
+, Net
+\begin_inset Formula $_{2}$
 \end_inset
 
- and 
-\begin_inset Formula $Net_{3}$
+ and Net
+\begin_inset Formula $_{3}$
 \end_inset
 
- are subsets of a real UMTS network deployed by Mobitel Telecommunication
- Services, Inc.
- in Slovenia.
- The path-loss predictions are calculated using the COST231 model 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Cichon_Propagation.prediction.models:1995"
-
+ are subsets of the real UMTS network deployed by Telekom Slovenije, d.d.
+ The path-loss predictions were calculated using the ...??? model presented
+ in Section ...???.
+ A DEM of 100
+\begin_inset space ~
 \end_inset
 
-, using a digital evaluation model of 100 
-\begin_inset Formula $m^{2}$
+m
+\begin_inset Formula $^{2}$
 \end_inset
 
- resolution as input data and a receiver height of 
-\begin_inset Formula $1.5\, m$
+ resolution was used as the terrain-profile data.
+ The requirements for the coverage threshold, 
+\begin_inset Formula $\gamma^{\mathrm{cov}}$
 \end_inset
 
- above ground.
- The requirements for 
-\begin_inset Formula $SIR$
-\end_inset
-
- coverage were provided by experts of the Radio Network Department at Mobitel
- Telecommunication Services, Inc.
+, were provided by experts of the Radio Network department of Telekom Slovenije,
+ d.d.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $Net_{1}$
+Net
+\begin_inset Formula $_{1}$
 \end_inset
 
  is deployed over a densely populated urban area.
- For this reason, the 
-\begin_inset Formula $SIR$
+ For this reason, the value of 
+\begin_inset Formula $\gamma^{\mathrm{cov}}$
 \end_inset
 
- coverage threshold is a lower, since network capacity is the dominating
- factor, whereas coverage is flexible because of a higher cell density,
- i.e.
- more base stations per surface unit.
- 
-\begin_inset Formula $Net_{2}$
+ is lower here, since network capacity is the dominating factor, whereas
+ coverage is flexible because of a larger cell density, i.e., more base stations
+ per surface unit.
+ Net
+\begin_inset Formula $_{2}$
 \end_inset
 
- represents a network deployed over a dominant rural area, meaning that
- network capacity may be reduced at the cost of better coverage, since each
- cell must cover a greater area.
- The last network, 
-\begin_inset Formula $Net_{3}$
+ represents a network deployed over a rural area, meaning that network capacity
+ can be reduced at the cost of better coverage, since user density is lower.
+ The last network, Net
+\begin_inset Formula $_{3}$
 \end_inset
 
-, represents a suburban area with a highly-dense populated, but relatively
- small, downtown center, where a compromise between network capacity and
- coverage has to be achieved.
+, represents a suburban area with a densely populated, but relatively small,
+ downtown center, where a compromise between network capacity and coverage
+ has to be achieved.
 \end_layout
 
 \begin_layout Standard
-Based on the data available, we have produced network configurations based
- on the attenuation-based approach.
- These configurations represent what could be an initial network setup by
- common planning standards 
+The second group of test networks, including Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{5}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{6}$
+\end_inset
+
+, is part of the publicly available MOMENTUM project 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Momentum.project"
+
+\end_inset
+
+.
+ Test network Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+ represents the city of Berlin (Germany), Net
+\begin_inset Formula $_{5}$
+\end_inset
+
+ represents the city of The Hague (Netherlands), and Net
+\begin_inset Formula $_{6}$
+\end_inset
+
+ is one of the networks optimized in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+, representing a reduced version of Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+.
+ All networks include information about site locations, path-loss predictions
+ and realistic antennas, which are part of the scenarios provided by the
+ MOMENTUM project.
+\end_layout
+
+\begin_layout Standard
+Network configurations, that represent what could be an initial-network
+ setup by common planning standards 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Holma_WCDMA.for.UMTS:2005"
 
 \end_inset
 
-.
- Moreover, such configurations are also very straightforward to calculate
- by a network planner.
+, were produced using the attenuation-based approach.
+ Such configurations can be easily calculated by a network planner.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:network-statistics"
+reference "tab:06-Test_network_sizes"
 
 \end_inset
 
- shows some statistics of the test networks used.
- The parameter values used during experimentation are shown in Table 
+ lists the number of base stations and cells per test network, as well as
+ the size of the geographical area.
+ Different network-parameter values used during the simulations are shown
+ in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:network-parameters"
+reference "tab:06-Test_network_parameters"
 
 \end_inset
 
@@ -2970,12 +2486,13 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
+Sizes of the test networks used, in terms of equipment and geographical
+ area.
+\emph on
 
-\shape italic
-Network statistics.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:network-statistics"
+name "tab:06-Test_network_sizes"
 
 \end_inset
 
@@ -3004,9 +2521,13 @@ centering
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
+<lyxtabular version="3" rows="7" columns="5">
 <features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
@@ -3020,15 +2541,13 @@ centering
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Cells 
-\begin_inset Formula $[m]$
-\end_inset
 
-
+\size small
+Number of base stations
 \end_layout
 
 \end_inset
@@ -3037,11 +2556,39 @@ Cells
 \begin_inset Text
 
 \begin_layout Plain Layout
-Area 
-\begin_inset Formula $[km^{2}]$
+
+\size small
+Number of cells
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Surface (km
+\begin_inset Formula $^{2}$
 \end_inset
 
+)
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Resolution (m
+\begin_inset Formula $^{2}$
+\end_inset
+
+)
 \end_layout
 
 \end_inset
@@ -3052,10 +2599,24 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{1}$
+
+\size small
+Net
+\begin_inset Formula $_{1}$
 \end_inset
 
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+26
 \end_layout
 
 \end_inset
@@ -3064,6 +2625,8 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 77
 \end_layout
 
@@ -3073,7 +2636,20 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
-100
+
+\size small
+100.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+25
 \end_layout
 
 \end_inset
@@ -3084,7 +2660,10 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{2}$
+
+\size small
+Net
+\begin_inset Formula $_{2}$
 \end_inset
 
 
@@ -3096,6 +2675,19 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
 23
 \end_layout
 
@@ -3105,18 +2697,34 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 306.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+25
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{3}$
+
+\size small
+Net
+\begin_inset Formula $_{3}$
 \end_inset
 
 
@@ -3124,20 +2732,229 @@ Area
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
+45
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
 129
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-405
+
+\size small
+405.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+25
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+65
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+193
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+56.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Net
+\begin_inset Formula $_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+16.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Net
+\begin_inset Formula $_{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+148
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+56.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+50
 \end_layout
 
 \end_inset
@@ -3165,12 +2982,12 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
+Network parameters of the test networks used.
+\emph on
 
-\shape italic
-Network parameters.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:network-parameters"
+name "tab:06-Test_network_parameters"
 
 \end_inset
 
@@ -3200,29 +3017,17 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="4">
+<lyxtabular version="3" rows="7" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
 <row>
 <cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Parameter
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $Net_{1}$
-\end_inset
-
 
 \end_layout
 
@@ -3232,7 +3037,7 @@ Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{2}$
+\begin_inset Formula $p_{c}^{k}$
 \end_inset
 
 
@@ -3241,61 +3046,6 @@ Parameter
 \end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $Net_{3}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $p_{c}^{T}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15.00 W
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-19.95 W
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15.00 W
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3307,7 +3057,43 @@ Parameter
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\gamma^{\mathrm{cov}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.00 W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3316,6 +3102,39 @@ Parameter
 \end_inset
 
  W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.010
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.95 W
 \end_layout
 
 \end_inset
@@ -3337,11 +3156,145 @@ Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
+0.020
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.00 W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 1.55
 \begin_inset Formula $\cdot10^{-14}$
 \end_inset
 
  W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.015
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.95 W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.55
+\begin_inset Formula $\cdot10^{-14}$
+\end_inset
+
+ W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.010
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.95 W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.55
+\begin_inset Formula $\cdot10^{-14}$
+\end_inset
+
+ W
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.010
 \end_layout
 
 \end_inset
@@ -3352,7 +3305,8 @@ Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\gamma_{c}$
+Net
+\begin_inset Formula $_{6}$
 \end_inset
 
 
@@ -3364,7 +3318,7 @@ Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.01
+19.95 W
 \end_layout
 
 \end_inset
@@ -3373,7 +3327,11 @@ Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.02
+1.55
+\begin_inset Formula $\cdot10^{-14}$
+\end_inset
+
+ W
 \end_layout
 
 \end_inset
@@ -3382,7 +3340,7 @@ Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.015
+0.010
 \end_layout
 
 \end_inset
@@ -3401,10 +3359,10 @@ Parameter
 \end_layout
 
 \begin_layout Subsection
-Algorithm parameter settings 
+Parameter settings of the parallel-agent approach 
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Algorithm-parameter-settings"
+name "sub:06-Algorithm_parameter_settings"
 
 \end_inset
 
@@ -3412,92 +3370,16 @@ name "sub:Algorithm-parameter-settings"
 \end_layout
 
 \begin_layout Standard
-After short experimentation, we determined the parameter settings for the
- optimization algorithm.
- There was no fine tuning of parameters for each problem instance.
- Nevertheless, we gained valuable information regarding the agent's behavior
- that we used to set the following parameter values:
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $increase\, rate$
+The parameter settings for the optimization algorithm were determined after
+ some experimentation with the test networks.
+ The parameter settings for each test networks are listed in Table
+\begin_inset space ~
 \end_inset
 
- was set to 0.2 dB;
-\end_layout
 
-\begin_layout Itemize
-\begin_inset Formula $decrease\, rate$
-\end_inset
-
- was set to -0.1 dB;
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $number\, of\, agents$
-\end_inset
-
- was set to 16; and
-\end_layout
-
-\begin_layout Itemize
-10,000 
-\begin_inset Formula $changes\, per\, agent$
-\end_inset
-
- were allowed.
-\end_layout
-
-\begin_layout Subsection
-Experimental environment
-\end_layout
-
-\begin_layout Standard
-All experiments were done on a 4-core, hyper-threading, Intel i7 2.67 GHz
- desktop computer with 6 GB of RAM running a 64-bit Linux operating system.
- The GPU hardware was ATI HD5570, with 1 GB DDR3 RAM.
- The implementation language used was C, with OpenCL and OpenMPI extensions.
-\end_layout
-
-\begin_layout Subsection
-Optimization results
-\end_layout
-
-\begin_layout Standard
-The results achieved by our optimization approach improved the objective
- significantly, as it is shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:optimization-results-1"
-
-\end_inset
-
-.
- Results show that we reduced pilot power usage in all networks and kept
- the service area under full coverage.
- Moreover, we may see the solution for 
-\begin_inset Formula $Net_{1}$
-\end_inset
-
- improved the attenuation-based setting by more than 300%.
- For 
-\begin_inset Formula $Net_{2}$
-\end_inset
-
-, the improvement observed is around 232%, with an improvement of more than
- 170% for 
-\begin_inset Formula $Net_{3}$
-\end_inset
-
-.
- These means that network capacity has been significantly increased in all
- three problem instances.
- Therefore, a greater number of users should be able to access services
- provided by the mobile network, since coverage is assured.
- Moreover, an increased speed in data services should be observed 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
+reference "tab:06-Parameter_settings"
 
 \end_inset
 
@@ -3514,12 +3396,12 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
+Parameter settings of the parallel-agent approach for each test network.
+\emph on
 
-\shape italic
-Optimization results.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:optimization-results-1"
+name "tab:06-Parameter_settings"
 
 \end_inset
 
@@ -3549,13 +3431,565 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="6">
+<lyxtabular version="3" rows="7" columns="5">
 <features booktabs="true" tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
+<row bottomspace="default">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Agents
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $inc\_rate$
+\end_inset
+
+ (dB)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dec\_rate$
+\end_inset
+
+ (dB)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pilot-power changes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using a higher 
+\begin_inset Formula $inc\_rate$
+\end_inset
+
+ than 
+\begin_inset Formula $dec\_rate$
+\end_inset
+
+ reflects the behavior of the agents when full coverage of the service area
+ is not guaranteed.
+ In practice, areas without service coverage usually appear as irregular
+ islands.
+ The stopping criteria were set by limiting the total number of pilot-power
+ changes an agent is allowed to make.
+ The value was set to 10,000 even though for some of the test networks the
+ best solutions were found in the first quarter of the experiment.
+\end_layout
+
+\begin_layout Subsection
+Experimental environment
+\end_layout
+
+\begin_layout Standard
+All experiments were performed on a multi-core Intel i7 2.67
+\begin_inset space ~
+\end_inset
+
+GHz desktop computer with 6
+\begin_inset space ~
+\end_inset
+
+GB of RAM running a 64-bit Linux operating system.
+ The GPU hardware used was an ATI HD5570 with 1
+\begin_inset space ~
+\end_inset
+
+GB of DDR3 RAM.
+ The implementation language used was C, combined with OpenCL and OpenMPI
+ extensions.
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+The results achieved by the parallel-agent approach, listed in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:06-Optimization_results"
+
+\end_inset
+
+, improved the optimization objective significantly.
+ They show that the pilot-power usage was reduced in all networks while
+ the service area was kept under full coverage.
+ Moreover, the parallel-agent solution for Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+ improved the attenuation-based setting by more than 300%.
+ As for Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+, the observed improvement is around 232%, while the improvement for Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+ is more than 170%.
+ 
+\end_layout
+
+\begin_layout Standard
+As mentioned in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Motivation"
+
+\end_inset
+
+, the interpretation of these results depends on the mobile technology used.
+ For GSM, ...???.
+ As for UMTS, the capacity of the network has been significantly increased
+ in all three problem instances.
+ Therefore, a greater number of users should be able to access services
+ provided by the mobile network, since coverage is assured.
+ Moreover, an increased speed in data services should be observed 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Holma_WCDMA.for.UMTS:2005"
+
+\end_inset
+
+.
+ Regarding LTE, ...???
+\end_layout
+
+\begin_layout Standard
+The last test network, Net
+\begin_inset Formula $_{6}$
+\end_inset
+
+, is the same as in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+.
+ When comparing these results to those of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+, an improvement of almost 3% can be observed in the solution provided by
+ the parallel-agent approach.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Optimization results of all test networks after applying different approaches
+ for solving the service-coverage problem.
+ All values are expressed in Watts.
+\emph on
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:06-Optimization_results"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="6">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="right" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="right" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row bottomspace="default">
 <cell alignment="center" valignment="top" topline="true" usebox="none">
@@ -3623,11 +4057,11 @@ Parallel agents
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Total power [W]
+Total power
 \end_layout
 
 \end_inset
@@ -3636,7 +4070,7 @@ Total power [W]
 \begin_inset Text
 
 \begin_layout Plain Layout
-Average cell power [W]
+Average pilot power
 \end_layout
 
 \end_inset
@@ -3650,11 +4084,11 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Total power [W]
+Total power
 \end_layout
 
 \end_inset
@@ -3663,7 +4097,7 @@ Total power [W]
 \begin_inset Text
 
 \begin_layout Plain Layout
-Average cell power [W]
+Average pilot power
 \end_layout
 
 \end_inset
@@ -3674,7 +4108,8 @@ Average cell power [W]
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{1}$
+Net
+\begin_inset Formula $_{1}$
 \end_inset
 
 
@@ -3682,7 +4117,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3709,7 +4144,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3733,7 +4168,8 @@ Average cell power [W]
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{2}$
+Net
+\begin_inset Formula $_{2}$
 \end_inset
 
 
@@ -3741,7 +4177,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3768,7 +4204,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3788,11 +4224,12 @@ Average cell power [W]
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $Net_{3}$
+Net
+\begin_inset Formula $_{3}$
 \end_inset
 
 
@@ -3800,7 +4237,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3809,7 +4246,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3818,7 +4255,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3827,7 +4264,7 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3836,11 +4273,191 @@ Average cell power [W]
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 4.519
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+179.876
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.932
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+145.715
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.755
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+73.872
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.052
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.884
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.969
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+147.014
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.993
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+112.332
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.759
 \end_layout
 
 \end_inset
@@ -3858,150 +4475,147 @@ Average cell power [W]
 
 \end_layout
 
+\begin_layout Subsection
+Convergence analysis
+\end_layout
+
 \begin_layout Standard
-After collecting data from ten independent runs, we generated convergence
- graphs, shown in Figures 
+The graphs shown in Figures
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:convergence_net1"
+reference "fig:06-Convergence_Net1"
 
 \end_inset
 
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:convergence_net2"
+reference "fig:06-Convergence_Net2"
 
 \end_inset
 
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:convergence_net3"
+reference "fig:06-Convergence_Net3"
 
 \end_inset
 
-.
- The graphs contain feasible solutions only, i.e.
- solutions that meet the full-coverage constraint.
+ depict the convergence of the parallel-agent approach after ten independent
+ runs for test networks Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+, respectively.
+ Only feasible solutions were plotted, i.e., solutions that meet the full-coverage
+ constraint.
  Unfeasible solutions were marked with a value of inferior quality than
- the worst solution found by the algorithm in all ten runs.
- In case of 
-\begin_inset Formula $Net_{1}$
+ the worst solution found: 428 for Net
+\begin_inset Formula $_{1}$
 \end_inset
 
-, the value was set to 428, for 
-\begin_inset Formula $Net_{2}$
+, 129 for Net
+\begin_inset Formula $_{2}$
 \end_inset
 
- the value was set to 129 and for 
-\begin_inset Formula $Net_{3}$
-\end_inset
-
- the value was set to 1,435.
- 
-\end_layout
-
-\begin_layout Standard
-The analysis of convergence graphs of 
-\begin_inset Formula $Net_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $Net_{2}$
-\end_inset
-
- shows that the algorithm quickly converges at the beginning, followed by
- a steady improvement of intermediate solutions.
- In 
-\begin_inset Formula $Net_{1}$
-\end_inset
-
- we notice additional improvement of the solutions found even at towards
- the end.
- This fact suggests that longer runs would potentially find even better
- solutions in this case.
- For the instance 
-\begin_inset Formula $Net_{3}$
-\end_inset
-
-, we observe a slower initial convergence, with steady improvement of intermedia
-te solutions and no significant solution enhancement towards the end.
- This fact, together with the aforementioned results, suggest that this
- problem instance presents a more difficult optimization case than 
-\begin_inset Formula $Net_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $Net_{2}$
+, and 1,435 for Net
+\begin_inset Formula $_{3}$
 \end_inset
 
 .
- Further investigation would be needed to determine the source of this behavior.
- Nevertheless, the improvement observed is, in average, around 100%.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
+From the graphs of Net
+\begin_inset Formula $_{1}$
+\end_inset
 
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
+ (see Figure
+\begin_inset space ~
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/convergence_1.eps
-	lyxscale 30
-	width 100text%
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:06-Convergence_Net1"
 
 \end_inset
 
+) and Net
+\begin_inset Formula $_{2}$
+\end_inset
 
-\end_layout
+ (see Figure
+\begin_inset space ~
+\end_inset
 
-\begin_layout Plain Layout
-\begin_inset Caption
 
-\begin_layout Plain Layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:06-Convergence_Net2"
 
-\shape italic
-Convergence results for network 
-\begin_inset Formula $Net_{1}$
+\end_inset
+
+) a good initial convergence can be observed.
+ This is followed by a steady improvement of the intermediate solutions.
+ In Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+, an additional solution improvement is noticed towards the end of the optimizat
+ion process.
+ This fact suggests that longer runs would potentially find better solutions
+ in this case.
+ In contrast, the solution improvement of Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+ shows a flat profile towards the end, suggesting that the stopping criterion
+ is appropiate for this instance.
+ From the graph of Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+ (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:06-Convergence_Net3"
+
+\end_inset
+
+), a slower initial convergence, followed by a steady improvement of intermediat
+e solutions and no significant solution enhancement towards the end, can
+ be observed.
+ This convergence profile suggests that this problem instance presents a
+ more difficult optimization case than for Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{2}$
 \end_inset
 
 .
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:convergence_net1"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ Indeed, this is the largest test network in terms of surface area.
+ However, further investigation is needed to confirm this hypothesis.
+ Nevertheless, the parallel-agent approach improved the pilot-power usage
+ of this test network by almost 75%.
 \end_layout
 
 \begin_layout Standard
@@ -4028,9 +4642,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/convergence_2.eps
+	filename img/convergence_first.eps
 	lyxscale 30
-	width 100text%
+	width 90text%
 
 \end_inset
 
@@ -4041,16 +4655,17 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-
-\shape italic
-Convergence results for network 
-\begin_inset Formula $Net_{2}$
+Convergence profile of the parallel-agent approach for the test network
+ Net
+\begin_inset Formula $_{1}$
 \end_inset
 
 .
+\emph on
+
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:convergence_net2"
+name "fig:06-Convergence_Net1"
 
 \end_inset
 
@@ -4091,9 +4706,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/convergence_3.eps
+	filename img/convergence_second.eps
 	lyxscale 30
-	width 100text%
+	width 90text%
 
 \end_inset
 
@@ -4104,16 +4719,81 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-
-\shape italic
-Convergence results for network 
-\begin_inset Formula $Net_{3}$
+Convergence profile of the parallel-agent approach for the test network
+ Net
+\begin_inset Formula $_{2}$
 \end_inset
 
 .
+\emph on
+
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:convergence_net3"
+name "fig:06-Convergence_Net2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/convergence_third.eps
+	lyxscale 30
+	width 90text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Convergence profile of the parallel-agent approach for the test network
+ Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+.
+\emph on
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:06-Convergence_Net3"
 
 \end_inset
 
@@ -4131,22 +4811,37 @@ name "fig:convergence_net3"
 \end_layout
 
 \begin_layout Subsection
-Implementation results
+Performance analysis
 \end_layout
 
 \begin_layout Standard
-After measuring the quality of the solutions given by our parallel-agent
- approach, we present the experimental results regarding efficiency of different
- implementations.
- For this purpose only execution times and speed-up factors are presented.
- The running time was measured for ten independent runs on each platform.
- The resulting average times are given.
- The number of changes per agent was limited to 100, while all other algorithm
- parameters were kept at the same values as previously stated in section
- 
+In this section, the performance analysis of the experimental results is
+ presented.
+ This analysis covers the running times during the optimization of the first
+ three test networks, i.e., Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+.
+ The running times were measured for each implementation, and the average
+ times, calculated after ten independent runs, are given.
+ The number of pilot-power changes per agent was limited to 100, while all
+ other algorithm parameters were kept at the same values as in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Algorithm-parameter-settings"
+reference "sub:06-Algorithm_parameter_settings"
 
 \end_inset
 
@@ -4154,35 +4849,41 @@ reference "sub:Algorithm-parameter-settings"
 \end_layout
 
 \begin_layout Standard
-The results, shown in Table 
+Table
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:speedup-results"
+reference "tab:06-Performance_analysis"
 
 \end_inset
 
-, are reported for different sizes of problem instances, i.e.
- 
-\begin_inset Formula $Net_{1}$
+ lists the average wall-clock times in seconds for the different implementations
+ and test networks.
+ The implementations include: the CPU-MPI implementation that consists of
+ objective-function evaluation on CPU and parallel agents over MPI, the
+ GPU-MPI implementation that consists of objective-function evaluation on
+ GPU and parallel agents over MPI, and the GPU-GPU implementation that consists
+ of objective-function evaluation and parallel agents on the same GPU.
+ The CPU-MPI implementation is the basis for the speed-up calculation of
+ the other implementations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A partir de aca hay que medir de nuevo con PRATO y corregir los numeros
+ en la tabla in el texto siguiente.
+ Versiones CPU y GPU
+\end_layout
+
 \end_inset
 
-, 
-\begin_inset Formula $Net_{2}$
-\end_inset
 
- and 
-\begin_inset Formula $Net_{3}$
-\end_inset
-
-.
- These networks provide different combinations of network cells and service
- area size.
- Results are presented for a CPU-only implementation, including objective-functi
-on evaluation on CPU and MPI-based agents, GPU objective-function evaluation
- and MPI-based agents, and GPU objective-function evaluation including agents
- on the same GPU.
- The implementation combining CPU-based evaluator and MPI-based agents is
- the basis for the speed-up calculation on the other platforms.
 \end_layout
 
 \begin_layout Standard
@@ -4195,12 +4896,11 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-
-\shape italic
-Implementation-efficiency measures.
+Wall-clock times (in seconds) and speed-up factors for different implementations
+ of the objective-function evaluation and the parallel agents.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:speedup-results"
+name "tab:06-Performance_analysis"
 
 \end_inset
 
@@ -4254,7 +4954,7 @@ centering
 \begin_inset Text
 
 \begin_layout Plain Layout
-CPU evaluator + MPI agents
+CPU-MPI
 \end_layout
 
 \end_inset
@@ -4272,7 +4972,7 @@ CPU evaluator + MPI agents
 \begin_inset Text
 
 \begin_layout Plain Layout
-GPU evaluator + MPI agents
+GPU-MPI
 \end_layout
 
 \end_inset
@@ -4299,7 +4999,7 @@ GPU evaluator + MPI agents
 \begin_inset Text
 
 \begin_layout Plain Layout
-GPU evaluator + GPU agents
+GPU-GPU
 \end_layout
 
 \end_inset
@@ -4329,7 +5029,7 @@ GPU evaluator + GPU agents
 
 \begin_layout Plain Layout
 Avg.
- time [sec]
+ time
 \end_layout
 
 \end_inset
@@ -4348,7 +5048,7 @@ Avg.
 
 \begin_layout Plain Layout
 Avg.
- time [sec]
+ time
 \end_layout
 
 \end_inset
@@ -4376,7 +5076,7 @@ Speed-up
 
 \begin_layout Plain Layout
 Avg.
- time [sec]
+ time
 \end_layout
 
 \end_inset
@@ -4635,19 +5335,11 @@ Speed-up
 \end_layout
 
 \begin_layout Standard
-It should be noted that the MPI implementation of the agents, used for the
- first and second measured setups, is not fully parallel, since internal
- synchronizations at network level are performed, so agents' changes arrive
- in a serial fashion to the evaluator, before being analyzed.
- 
-\end_layout
-
-\begin_layout Standard
 Function evaluation on the GPU communicating with agents over MPI provides
  the second measured setup.
  The evaluator implementation takes advantage of shared memory for thread
- collaboration within a block and texture memory for constant elements,
- as is has been explained in section 
+ collaboration within a thread block and texture memory for constant elements,
+ as is has been explained in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Objective-function-evaluation"
@@ -4674,20 +5366,14 @@ Summary
 \end_layout
 
 \begin_layout Standard
-In this paper, we have addressed the problem of providing full coverage
- to a service area of a UMTS network by using a minimum amount of pilot
- power.
- We have put emphasis on the confluence of a real-world problem, with live
- data from a deployed mobile network, with state-of-the-art parallel GPU
- hardware and implementations that, to the best of our knowledge, has never
- been dealt-with before.
-\end_layout
-
-\begin_layout Standard
-We have presented a parallel-agent approach, which is aimed at giving good
- solutions to big problem instances in an acceptable amount of time.
- The experimental results show that our approach is able to find competitive
- solutions, when compared to other common radio-planning methods 
+This chapter presented a novel optimization approach for solving the well-known
+ service-coverage problem in radio networks.
+ The problem addressed the full coverage of a geographical area using a
+ minimum amount of pilot power.
+ The newly introduced parallel-agent approach was successfully tested in
+ six networks that represent real-world scenarios of deployed radio networks.
+ The experimental results show that the parallel-agent approach is able
+ to find better solutions than other common radio-planning methods 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Holma_WCDMA.for.UMTS:2005"
@@ -4695,63 +5381,63 @@ key "Holma_WCDMA.for.UMTS:2005"
 \end_inset
 
 .
- The presented results also demonstrate that our algorithm is able to find
- high quality solutions even for large networks, that contain many cells
- over a large service area.
- This fact indicates that our approach could be successfully applied to
- bigger problem instances.
-\end_layout
-
-\begin_layout Standard
-GPU architectures not only allow implementation of parallel heuristics in
- a natural way, they also substantially improve the performance of the optimizat
-ion process.
- We reported and validated the great performance gain by experimentation
- on problem instances of different sizes.
-\end_layout
-
-\begin_layout Standard
-After successfully implementing the objective-function evaluation on GPU,
- we realized that the efficiency of this approach was limited by the CPU-to-GPU
- data transfers.
- Nevertheless, even with such implementation, we have already obtained substanti
-al speed-up.
-\end_layout
-
-\begin_layout Standard
-To deal with the CPU-to-GPU data transfer issue, we implemented a fully-enabled
- GPU optimization system that achieved impressive speed-up.
- Still, we had to consider different data representation schemes for the
- problem elements, so to avoid memory limitations on the GPU device.
- Comparison of our experimental results with other algorithms dealing with
- the same and similar problems would be useful.
- However, this task is not straightforward, since the results of several
- works (e.g.
- 
+ Moreover, the algorithm successfully tackled larger networks, thus overcoming
+ the obstacles of other state-of-the-art optimization methods regarding
+ problem-instance size 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Gerdenitsch_PhD:2004,Turke_Advanced.site.configuration.techniques:2005"
+key "Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 
-) depend on black-box evaluations, making experimental association very
- difficult, if possible at all.
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Un poco sobre las ventajas de usar menos power en GSM,UMTS y LTE ...???
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compared to a different optimization approach in the literature 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Siomina-Minimum_pilot_power_for_service_coverage:2007"
+
+\end_inset
+
+, the solution-quality of the parallel-agent approach showed an improvement.
+ The proposed solutions, calculated for the same problem instance as in
  
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+, were improved at the cost of longer running time.
+ It worth mentioning that it is feasible for the optimization algorithm
+ to take a longer time to reach the solution, since design problems, as
+ the service-coverage one, are usually solved offline.
 \end_layout
 
 \begin_layout Standard
-All in all, we consider that the present work provides a robust foundation
- for future work on grid-based metaheuristics with expensive objective-function
- evaluation.
-\end_layout
-
-\begin_layout Standard
-In future work, we will consider further analysis of our parallel-agent
- approach, including experimentation with different parameters, in order
- to gain better understanding of the dynamics leading the metaheuristic
- during the search process.
- Multi-GPU environments present an interesting possibility, where evaluator(s)
- and worker agents are run on separate GPU devices.
+Different implementations of the parallel-agent approach, combining a serial
+ version on CPU, parallel processes over MPI and GPU kernels, were presented.
+ In particular, GPU architectures enable the implementation of parallel
+ heuristics in a natural way while substantially improving the computational-tim
+e performance.
+ To the best of the author's knowledge, the GPU implementation of the parallel-a
+gent approach as presented in this chapter, has not yet been described in
+ the related literature.
 \end_layout
 
 \end_body

@@ -1455,7 +1455,14 @@ In the following sections we give a short introduction about their functioning
 \end_layout
 
 \begin_layout Subsection
-Differential evolution
+Differential evolution 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-DE"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1605,7 +1612,14 @@ key "price2005differential_evolution"
 \end_layout
 
 \begin_layout Subsection
-Differential ant-stigmergy algorithm
+Differential ant-stigmergy algorithm 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-DASA"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1689,7 +1703,14 @@ key "korosec2010_DASA"
 \end_layout
 
 \begin_layout Subsection
-Simulated annealing
+Simulated annealing 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-SA"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4029,6 +4050,19 @@ name "sub:02-Pilot-signal-and-power"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Explicar como funciona esto en GSM,UMTS y LTE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The CPICH transmit power is typically between 5% to 10% of the total downlink
  transmit power of the base station 
 \begin_inset CommandInset citation
@@ -4038,6 +4072,465 @@ key "RadioNetworkPlanningAndOptimisationForUMTS"
 \end_inset
 
 , but there is no standardized method to ﬁnd a CPICH power setting.
+\end_layout
+
+\begin_layout Standard
+The CPICH transmits in the downlink of a UMTS cell system.
+ The transmit power is usually between 5% and 10% of the total power available
+ at the base station 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Holma_WCDMA.for.UMTS:2005"
+
+\end_inset
+
+.
+ The capacity of a cell is limited by the amount of available power at the
+ base station and the interference level at the mobile terminal.
+ The coverage area of any cell is controlled by changing its pilot power,
+ which consequently modifies the service area of the network.
+\end_layout
+
+\begin_layout Standard
+The CPICH transmit power is common to many different planning and optimization
+ problems in UMTS networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Nawrocki_Understanding:2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Principles of parallel systems/implementations
+\end_layout
+
+\begin_layout Subsection
+OpenCL 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-OpenCL"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have chosen the Open Computing Language (OpenCL) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stone_OpenCL.A.parallel.programming.standard:2010"
+
+\end_inset
+
+ as the implementation platform of our optimization system on GPU.
+\end_layout
+
+\begin_layout Standard
+OpenCL is an open parallel computing API designed to enable GPUs and other
+ co-processors to work together with the CPU, providing additional computing
+ power.
+ As a standard, OpenCL 1.0 was released in 2008, by The Khronos Group, an
+ independent standards consortium 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Munshi_The.OpenCL.specification:2009"
+
+\end_inset
+
+.
+ For additional information about the OpenCL standard and API, we refer
+ the reader to the numerous guides available online.
+\end_layout
+
+\begin_layout Standard
+Our choice in using OpenCL was greatly influenced by the fact that its bitcode
+ runs on a variety of hardware, including multicore CPUs and GPUs from different
+ vendors.
+ This provides a complete framework capable of comparing execution speed-up
+ on different hardware without the need of changing the implementation.
+ 
+\end_layout
+
+\begin_layout Standard
+One unfortunate consequence of the vendor variety is that NVIDIA's CUDA
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "NVIDIA_Compute.Unified.Device.Architecture:2007"
+
+\end_inset
+
+ and OpenCL documentation present disparate naming conventions for some
+ key components.
+ For the sake of consistency, in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CUDA-OpenCL-translation"
+
+\end_inset
+
+, we present a short 
+\begin_inset Quotes eld
+\end_inset
+
+translation dictionary
+\begin_inset Quotes erd
+\end_inset
+
+ between them.
+ In the remaining of this work, we will stick to the naming convention used
+ in the CUDA documentation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+Terminology translation between OpenCL and CUDA 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kloeckner_CUDA.OpenCL.dictionary:2011"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:CUDA-OpenCL-translation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="2">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row bottomspace="default">
+<cell alignment="right" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+OpenCL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+CUDA
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grid
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Work group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Block
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Work item
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Thread
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__kernel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__global__
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__global
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__device__
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__local
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__shared__
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__private
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__local__
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+image
+\emph on
+n
+\emph default
+d_t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+texture<type,
+\emph on
+n
+\emph default
+,...>
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+barrier(L|M|F)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+__syncthreads( )
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+get_local_id(0|1|2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+threadIdx.x|y|z
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+get_group_id(0|1|2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+blockIdx.x|y|z
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+get_global_id(0|1|2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+(not implemented)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Despite the use of OpenCL as the target platform for our implementation,
+ the details described in the next sections may be equally applied on CUDA.
 \end_layout
 
 \end_body

@@ -90,7 +90,7 @@ status open
 In Chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Experimental-evaluation-the-service-coverage-problem"
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \end_inset
 
@@ -234,7 +234,7 @@ centering
 \begin_inset Graphics
 	filename img/network_normal.eps
 	lyxscale 50
-	width 100text%
+	width 90text%
 
 \end_inset
 
@@ -262,7 +262,7 @@ vskip -0.3in(a)
 \begin_inset Graphics
 	filename img/network_problem.eps
 	lyxscale 50
-	width 100text%
+	width 90text%
 
 \end_inset
 
@@ -401,7 +401,7 @@ reference "fig:07-Problem_illustration"
 PRATO is used as the evaluation framework, as defined in Chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:03-Framework-design-and-implementation"
+reference "chap:04-Framework-design-and-implementation"
 
 \end_inset
 
@@ -686,6 +686,18 @@ The mathematical model links the SHO settings with CPICH power settings
  for each cell, the best-server pattern, and the network coverage.
 \end_layout
 
+\begin_layout Standard
+For additional information regarding mathematical models of comparable problems,
+ see 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Nawrocki_Understanding:2006"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Basic elements
 \end_layout
@@ -790,6 +802,140 @@ description "Uplink attenuation factor between mobile $m\\in M$ and cell $c\\in 
 \end_layout
 
 \begin_layout Standard
+The amount of power allocated to the pilot signal of cell 
+\begin_inset Formula $c$
+\end_inset
+
+ is denoted as 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$p_{c}$"
+description "Pilot-power setting of cell $c\\in C$."
+
+\end_inset
+
+, where 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+ may adopt any value from a finite set of possible pilot power levels, 
+\begin_inset Formula $P_{c}=\{p_{c}^{1},p_{c}^{2},...,p_{c}^{K}\}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$P_{c}$"
+description "Set of candidate CPICH power settings for cell $c\\in C$."
+
+\end_inset
+
+.
+ Consequently, the received pilot power from cell 
+\begin_inset Formula $c$
+\end_inset
+
+ to mobile 
+\begin_inset Formula $m$
+\end_inset
+
+ is 
+\begin_inset Formula $L_{cm}^{\downarrow}p_{c}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Service coverage is guaranteed when a mobile has, at least, one cell covering
+ it.
+ Cell coverage is provided to a mobile 
+\begin_inset Formula $m$
+\end_inset
+
+ from a cell 
+\begin_inset Formula $c$
+\end_inset
+
+ if its signal-to-interference ratio, 
+\begin_inset Formula $sir(c,m)$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$sir(c,m)$"
+description "Signal-to-interference ratio (SIR) from cell $c\\in C$ to mobile $m\\in M$."
+
+\end_inset
+
+, at the RSG pixel where 
+\begin_inset Formula $m$
+\end_inset
+
+ is located, is not lower than a given threshold, 
+\begin_inset Formula $\gamma^{\mathrm{cov}}$
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\gamma^{\\mathrm{cov}}$"
+description "Signal-to-interference ratio (SIR) coverage threshold."
+
+\end_inset
+
+, i.e.,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+sir(c,m)=\frac{L_{cm}^{\downarrow}p_{c}}{\tau_{0}+\sum_{i\in C}L_{im}^{\downarrow}p_{i}}\ge\gamma^{\mathrm{cov}}\label{eq:sir}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $\tau_{0}$
+\end_inset
+
+ is the thermal noise.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+---- SHO only follows ----
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The mathematical model links the SHO settings with CPICH power settings
+ for each cell, the best-server pattern, and the network coverage.
+\end_layout
+
+\begin_layout Standard
 By introducing a change step of 0.01
 \begin_inset space ~
 \end_inset
@@ -807,26 +953,12 @@ dB and bounding the CPICH power of a cell
 \end_inset
 
 dB, relative to the CPICH power setting the cell had before optimization,
- a finite set of candidate CPICH power settings for cell 
-\begin_inset Formula $c$
+ the number of elements in the set 
+\begin_inset Formula $P_{c}$
 \end_inset
 
- is defined as 
-\begin_inset Formula $P_{c}=\{p_{c}^{1},p_{c}^{2},...,p_{c}^{K}\}$
-\end_inset
-
-
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "S"
-symbol "$P_{c}$"
-description "Set of candidate CPICH power settings for cell $c\\in C$."
-
-\end_inset
-
-.
- The purpose of limiting the possible CPICH power settings a cell may have
- is twofold.
+ is reduced.
+ The purpose of this reduction is twofold.
  First, since the optimization targets a live network, there is no need
  for the algorithms to create complete new configurations, but just to fine-tune
  existing ones.
@@ -2201,7 +2333,7 @@ Area under radio coverage,
 \end_inset
 
 , and without radio coverage, 
-\begin_inset Formula $A_{\mathrm{covered}}^{\complement}$
+\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
 \end_inset
 
 , within the complete geographical area, 
@@ -2838,7 +2970,7 @@ centering
 \begin_inset Graphics
 	filename img/algorithm_convergence.eps
 	lyxscale 70
-	width 95text%
+	width 90text%
 
 \end_inset
 
@@ -4107,14 +4239,14 @@ name "sec:Conclusion"
 \begin_layout Standard
 This chapter formally introduced a new optimization problem for 3G networks:
  the SHO-balancing problem.
- A characterization of the consequences unbalanced SHO areas have on the
- quality of HSPA services has also been given.
+ A characterization of the consequences that unbalanced SHO areas have on
+ the quality of HSPA services was also given.
  Particularly, tackling the SHO-balancing problem was possible due to the
  improved performance delivered by the evaluation framework PRATO (see Chapter
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:03-Framework-design-and-implementation"
+reference "chap:04-Framework-design-and-implementation"
 
 \end_inset
 
@@ -4123,7 +4255,7 @@ reference "chap:03-Framework-design-and-implementation"
 
 \begin_layout Standard
 \noindent
-Using a extension of the state-of-the-art radio-network model introduced
+Using a extension of the state-of-the-art radio-network model presented
  in ...???, the penalty scores of the objective function were set according
  to the configuration and layout of a real mobile network, deployed in Slovenia
  by Telekom Slovenije, d.d.
@@ -4136,10 +4268,10 @@ The balancing problem has been tackled by three optimization algorithms,
  All three algorithms were able to improve the given network configuration,
  being DE the most successful one.
  The presented results confirm that a great proportion of the SHO areas,
- that were not aligned before the optimization, has been correctly balanced,
+ that were not balanced before the optimization, were correctly balanced,
  therefore significantly reducing the possibility of HSPA-service failures.
- Additionally, radio coverage has been improved, while all other essential
- network services were not altered.
+ Additionally, radio coverage was improved, while all other essential network
+ services were not altered.
 \end_layout
 
 \begin_layout Standard
@@ -4161,9 +4293,9 @@ One of the key advantages of the presented method is that it targets the
  optimization of a deployed network, for which the focus is to fine-tune
  the existing configuration instead of creating complete new solutions.
  Furthermore, a deployed network has a great number of hard-constraints
- that should be taken into account at the optimization stage, yet the presented
- approach is simple and versatile enough to be used in practically any working
- UMTS network.
+ that should be taken into account at the optimization stage.
+ Yet the presented approach is simple and versatile enough to be used in
+ practically any working UMTS network.
  Moreover, the introduced model is applicable for mobile networks in heterogeneo
 us environments, because it imposes no restrictions regarding cell layout
  or radio-propagation characteristics, which are completely adaptable through

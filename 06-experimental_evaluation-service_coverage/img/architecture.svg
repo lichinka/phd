@@ -13,8 +13,8 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
-   sodipodi:docname="architecture.svg"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="architecture.eps"
    inkscape:export-filename="/home/luka/etc/dr/individual_research_work_2/doc/paper/img/architecture.png"
    inkscape:export-xdpi="149.96895"
    inkscape:export-ydpi="149.96895">
@@ -570,15 +570,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.2448821"
-     inkscape:cx="960.91023"
-     inkscape:cy="889.10856"
+     inkscape:cx="274.77781"
+     inkscape:cy="746.30526"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1436"
-     inkscape:window-height="865"
+     inkscape:window-width="1276"
+     inkscape:window-height="985"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="18"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -721,104 +721,97 @@
        height="44.180893"
        x="781.40747"
        y="83.595726" />
-    <g
-       id="g5865"
-       transform="translate(-767.14094,-396.82474)">
-      <rect
-         y="409.89752"
-         x="766.31445"
-         height="359.26147"
-         width="227.13857"
-         id="rect2816-9"
-         style="fill:none;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-      <text
-         id="text4703-5-6"
-         y="440.94598"
-         x="769.78967"
-         style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans Bold"
-           y="440.94598"
-           x="769.78967"
-           id="tspan4705-4-0"
-           sodipodi:role="line">Texture memory</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="text3174-2"
-         y="503.8028"
-         x="804.77539"
-         style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-         xml:space="preserve"><tspan
-           id="tspan3178-7"
-           y="503.8028"
-           x="804.77539"
-           sodipodi:role="line">Interference</tspan><tspan
-           id="tspan4167"
-           y="533.8028"
-           x="804.77539"
-           sodipodi:role="line">    matrix</tspan></text>
-      <rect
-         y="475.03632"
-         x="781.07916"
-         height="72.032448"
-         width="197.60909"
-         id="rect4105-9"
-         style="fill:none;stroke:#000000;stroke-width:1.59608805;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-      <g
-         id="g5068">
-        <text
-           xml:space="preserve"
-           style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-           x="787.08667"
-           y="649.83698"
-           id="text3174-2-1"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             x="787.08667"
-             y="649.83698"
-             id="tspan4167-7">    Path loss</tspan><tspan
-             sodipodi:role="line"
-             x="787.08667"
-             y="679.83698"
-             id="tspan4198">matrices for all</tspan><tspan
-             sodipodi:role="line"
-             x="787.08667"
-             y="709.83698"
-             id="tspan4200"> network cells</tspan></text>
-        <rect
-           style="fill:none;stroke:#000000;stroke-width:1.89600003;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-           id="rect4105-9-5"
-           width="197.60909"
-           height="101.61781"
-           x="774.66937"
-           y="621.0705" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           d="m 773.89061,621.21717 9.55748,-9.95912"
-           id="path4210"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           d="m 782.48347,611.6187 198.40771,0"
-           id="path4212"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           d="m 972.3201,621.34205 9.0341,-10.09273"
-           id="path4210-8"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           d="m 972.86446,723.07504 8.43453,-9.63947"
-           id="path4210-8-7"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           d="m 980.89733,713.83489 0,-102.15677"
-           id="path4212-0"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2816-9"
+       width="227.13857"
+       height="359.26147"
+       x="-0.82648689"
+       y="13.072782" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="2.6487329"
+       y="44.121243"
+       id="text4703-5-6"><tspan
+         sodipodi:role="line"
+         id="tspan4705-4-0"
+         x="2.6487329"
+         y="44.121243"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans Bold">Texture memory</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="37.634449"
+       y="106.97806"
+       id="text3174-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="37.634449"
+         y="106.97806"
+         id="tspan3178-7">Interference</tspan><tspan
+         sodipodi:role="line"
+         x="37.634449"
+         y="136.97806"
+         id="tspan4167">    matrix</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.59608805;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4105-9"
+       width="197.60909"
+       height="72.032448"
+       x="13.938223"
+       y="78.211578" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="11.94573"
+       y="255.01224"
+       id="text3174-2-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="11.94573"
+         y="255.01224"
+         id="tspan4167-7">  Attenuation-</tspan><tspan
+         sodipodi:role="line"
+         x="11.94573"
+         y="285.01224"
+         id="tspan4198">factor matrices </tspan><tspan
+         sodipodi:role="line"
+         x="11.94573"
+         y="315.01224"
+         id="tspan4200">of network cells</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.89600003;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4105-9-5"
+       width="197.60909"
+       height="101.61781"
+       x="7.5284324"
+       y="224.24576" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 6.74967,224.39243 9.55748,-9.95912"
+       id="path4210"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 15.34253,214.79396 198.40771,0"
+       id="path4212"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 205.17916,224.51731 9.0341,-10.09273"
+       id="path4210-8"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 205.72352,326.2503 8.43453,-9.63947"
+       id="path4210-8-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 213.75639,317.01015 0,-102.15677"
+       id="path4212-0"
+       inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:10,10;stroke-dashoffset:0;marker-start:none;marker-end:url(#Arrow1Mend)"
        d="M 773.38976,188.97004 541.15916,146.03153"

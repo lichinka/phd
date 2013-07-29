@@ -2494,8 +2494,8 @@ thispagestyle{plain}
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
-options "nature"
+bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
+options "ama"
 
 \end_inset
 

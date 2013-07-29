@@ -138,7 +138,7 @@
 \graphics default
 \default_output_format default
 \output_sync 0
-\bibtex_command bibtex8
+\bibtex_command default
 \index_command default
 \paperfontsize 12
 \spacing single
@@ -160,7 +160,7 @@
 \use_mhchem 0
 \use_mathdots 0
 \cite_engine basic
-\use_bibtopic true
+\use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
@@ -2494,7 +2494,7 @@ thispagestyle{plain}
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
+bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
 options "nature"
 
 \end_inset

@@ -65,6 +65,38 @@ Conclusion and further work
 \end_layout
 
 \begin_layout Standard
+Comparison of our experimental results with other algorithms dealing with
+ the same and similar problems would be useful.
+ However, this task is not straightforward, since the results of several
+ works (e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gerdenitsch_PhD:2004,Turke_Advanced.site.configuration.techniques:2005"
+
+\end_inset
+
+) depend on black-box evaluations, making experimental association very
+ difficult, if possible at all.
+ 
+\end_layout
+
+\begin_layout Standard
+All in all, we consider that the present work provides a robust foundation
+ for future work on grid-based metaheuristics with expensive objective-function
+ evaluation.
+\end_layout
+
+\begin_layout Standard
+In future work, we will consider further analysis of our parallel-agent
+ approach, including experimentation with different parameters, in order
+ to gain better understanding of the dynamics leading the metaheuristic
+ during the search process.
+ Multi-GPU environments present an interesting possibility, where evaluator(s)
+ and worker agents are run on separate GPU devices.
+\end_layout
+
+\begin_layout Standard
 To further improve the presented results, dynamic effects, such as fast
  power control, should be included in the simulations, particularly for
  recognizing dynamic functionality like SHO in a WCDMA mobile system.
