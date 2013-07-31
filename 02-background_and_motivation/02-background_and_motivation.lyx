@@ -96,7 +96,7 @@ Optimization models
 
 \begin_layout Standard
 Optimization may be informally defined as the procedure of finding better
- solutions to a given problem, which usually model some physical phenomenon.
+ solutions to a given problem that usually models some physical phenomenon.
  In our every day life, we are constantly solving small optimization problems,
  like choosing the shortest route to a friend's house, or organizing the
  appointments in our agenda.
@@ -776,9 +776,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/linear_programming_example.png
-	lyxscale 20
-	width 60text%
+	filename img/linear_programming.eps
+	lyxscale 80
+	width 75text%
 
 \end_inset
 
@@ -789,8 +789,16 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Graphical representation of a linear-programming example with several constraint
-s.
+Graphical representation of a linear-programming example with two constraints,
+ 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+.
  The greyed area is the polytope representing the region of feasible solutions.
  
 \begin_inset CommandInset label
@@ -1198,9 +1206,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/black_box_optimization.png
-	lyxscale 20
-	width 60text%
+	filename img/blackbox_optimization.eps
+	lyxscale 90
+	width 80text%
 
 \end_inset
 
@@ -1211,8 +1219,16 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-A metaheuristic optimization process using a black box for objective-function
- evaluation.
+A metaheuristic algorithm process using a black box for the objective-function
+ evaluation, 
+\begin_inset Formula $f(x)$
+\end_inset
+
+, of a solution, 
+\begin_inset Formula $x$
+\end_inset
+
+.
  
 \begin_inset CommandInset label
 LatexCommand label
