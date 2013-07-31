@@ -247,7 +247,7 @@ Precise and efficient planning of the wireless telecommunication systems
 s to improve the existing models based on measurements, or to develop entirely
  new path loss prediction models.
  This paper presented a radio signal coverage prediction software tool developed
- for the opensource GRASS system.
+ for the open-source GRASS system.
  After a short introduction of the GRASS GIS system, a detailed description
  of the coverage prediction software was given.
  The tool enables a high level of flexibility and adaptability.

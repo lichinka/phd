@@ -1207,8 +1207,8 @@ centering
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename img/blackbox_optimization.eps
-	lyxscale 70
-	width 90text%
+	lyxscale 90
+	width 80text%
 
 \end_inset
 

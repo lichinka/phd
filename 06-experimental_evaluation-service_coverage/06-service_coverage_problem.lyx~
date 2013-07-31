@@ -5391,7 +5391,19 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Un poco sobre las ventajas de usar menos power en GSM,UMTS y LTE ...???
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

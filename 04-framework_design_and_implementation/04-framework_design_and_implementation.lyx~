@@ -64,7 +64,7 @@
 Framework design and implementation 
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:03-Framework-design-and-implementation"
+name "chap:04-Framework-design-and-implementation"
 
 \end_inset
 
@@ -155,14 +155,14 @@ key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010,Shabbir_Comparison_of_
 \end_inset
 
 .
- In radio networks is generally the case that the radio stations are installed
- at fixed locations.
- For this reason, one of the primary objectives of mobile-network planning
+ In radio networks it is generally the case that the radio stations are
+ installed at fixed locations.
+ For this reason, one of the primary objectives of coverage-network planning
  is to efficiently use the allocated frequency band to assure that the whole
  of the geographic area of interest can be satisfactorily reached with the
  radio stations of the network.
  To this end, radio-coverage prediction tools are of great importance as
- it allows the network engineers to test different network configurations
+ they allows the network engineers to test different network configurations
  before physically implementing the changes.
  Nevertheless, radio-coverage prediction is a complex task due to the wide
  range of various combinations of hardware and configuration parameters

@@ -4294,7 +4294,7 @@ One of the key advantages of the presented method is that it targets the
  the existing configuration instead of creating complete new solutions.
  Furthermore, a deployed network has a great number of hard-constraints
  that should be taken into account at the optimization stage.
- Yet the presented approach is simple and versatile enough to be used in
+ Yet, the presented approach is simple and versatile enough to be used in
  practically any working UMTS network.
  Moreover, the introduced model is applicable for mobile networks in heterogeneo
 us environments, because it imposes no restrictions regarding cell layout

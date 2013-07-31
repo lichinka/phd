@@ -65,11 +65,7 @@ Conclusion and further work
 \end_layout
 
 \begin_layout Standard
-To deal with the CPU-to-GPU data transfer issue, we implemented a fully-enabled
- GPU optimization system that achieved impressive speed-up.
- Still, we had to consider different data representation schemes for the
- problem elements, so to avoid memory limitations on the GPU device.
- Comparison of our experimental results with other algorithms dealing with
+Comparison of our experimental results with other algorithms dealing with
  the same and similar problems would be useful.
  However, this task is not straightforward, since the results of several
  works (e.g.
