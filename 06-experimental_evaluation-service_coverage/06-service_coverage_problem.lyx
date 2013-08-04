@@ -60,8 +60,19 @@
 
 \begin_body
 
+\begin_layout Part
+Experimental evaluation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
-Experimental evaluation: the service-coverage problem 
+The service-coverage problem 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:06-Experimental-evaluation-the-service-coverage-problem"
@@ -153,7 +164,7 @@ reference "sec:06-Related-work"
 ng the key elements of the service-coverage problem in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:06-Problem-description"
+reference "sec:06-Radio_network_model"
 
 \end_inset
 
@@ -1402,14 +1413,14 @@ begin{algorithmic}
 
 
 \backslash
-REPEAT
+Repeat
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-IF{$is
+If{$is
 \backslash
 _special
 \backslash
@@ -1426,7 +1437,7 @@ mathrm{covered}}}>0$}
 
 		
 \backslash
-STATE $l 
+State $l 
 \backslash
 gets pick
 \backslash
@@ -1443,14 +1454,14 @@ mathrm{covered}}})$
 
 	
 \backslash
-ELSE
+Else
 \end_layout
 
 \begin_layout Plain Layout
 
 		
 \backslash
-STATE $l 
+State $l 
 \backslash
 gets pick
 \backslash
@@ -1465,21 +1476,21 @@ mathrm{total}})$
 
 	
 \backslash
-ENDIF
+EndIf
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-STATE $move(l)$
+State $move(l)$
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-IF{$
+If{$
 \backslash
 vert C_{m}
 \backslash
@@ -1490,21 +1501,21 @@ vert=0$}
 
 		
 \backslash
-STATE $apply(SS_{0})$
+State $apply(SS_{0})$
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-ELSE
+Else
 \end_layout
 
 \begin_layout Plain Layout
 
 		
 \backslash
-IF{$
+If{$
 \backslash
 vert C_{m}
 \backslash
@@ -1517,28 +1528,28 @@ ge 1$}
 
 			
 \backslash
-STATE $apply(SS_{1})$
+State $apply(SS_{1})$
 \end_layout
 
 \begin_layout Plain Layout
 
 		
 \backslash
-ENDIF
+EndIf
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-ENDIF
+EndIf
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-UNTIL{$stopping
+Until{$stopping
 \backslash
 _criterion()$}
 \end_layout
@@ -1669,14 +1680,14 @@ begin{algorithmic}
 
 
 \backslash
-REPEAT
+Repeat
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-STATE $c'
+State $c'
 \backslash
 gets next
 \backslash
@@ -1693,7 +1704,7 @@ _att(m)$
 
 	
 \backslash
-STATE $p_{c'}
+State $p_{c'}
 \backslash
 gets adjust
 \backslash
@@ -1706,7 +1717,7 @@ _rate)$
 
 
 \backslash
-UNTIL{$p_{c'}
+Until{$p_{c'}
 \backslash
 in P_{c'}$}
 \end_layout
@@ -1788,14 +1799,14 @@ begin{algorithmic}
 
 
 \backslash
-REPEAT
+Repeat
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-STATE $c'
+State $c'
 \backslash
 gets pick
 \backslash
@@ -1808,7 +1819,7 @@ _cell(C_{m})$
 
 	
 \backslash
-STATE $p_{c'}
+State $p_{c'}
 \backslash
 gets adjust
 \backslash
@@ -1821,7 +1832,7 @@ _rate)$
 
 
 \backslash
-UNTIL{$p_{c'}
+Until{$p_{c'}
 \backslash
 in P_{c'}$}
 \end_layout
@@ -2063,201 +2074,6 @@ reference "sub:02-Black_box_optimization"
  to successfully accommodate all involved problem elements on the GPU, the
  memory of which is significantly smaller than the RAM memory available
  in desktop computers.
-\end_layout
-
-\begin_layout Subsection
-Objective-function evaluation on GPU 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Objective-function-evaluation"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Esta seccion tiene que ir al capitulo anterior (sobre PRATO on GPU)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The GPU implementation of the objective-function evaluator is based on work
- done by Hrovat et al.
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Ozimek_Open.source.radio.coverage.prediction:2010"
-
-\end_inset
-
-.
- The evaluator implementation is one of the biggest challenges we faced.
- The great amount of data needed to evaluate agents' changes of pilot power
- was the first restriction we run into, as there was not enough memory on
- the GPU for all of them.
- The solution is to change their internal representation, namely:
-\end_layout
-
-\begin_layout Itemize
-one path-loss matrix for each of the cells of the network being optimized,
-\end_layout
-
-\begin_layout Itemize
-one interference matrix for the whole service area.
-\end_layout
-
-\begin_layout Standard
-Still, we had to consider different data representation schemes for the
- problem elements, so to avoid memory limitations on the GPU device.
-\end_layout
-
-\begin_layout Standard
-The path-loss matrices are potentially as big as the underlying data used
- to calculate the radio propagation predictions over the service area of
- the network.
- In our case, we are dealing with an area of more than 78,000 
-\begin_inset Formula $km^{2}$
-\end_inset
-
-, including a digital elevation model of 100 
-\begin_inset Formula $m^{2}$
-\end_inset
-
- resolution.
- This grid includes the whole country and some of the neighboring ones,
- ensuring data availability even at the country borders.
- Having more than 100 transmitters containing real numbers as matrix elements,
- requires more memory than is currently available on most modern GPU hardware.
- For this reason, we decided to change the path-loss matrix elements unit
- from the linear scale to decibels (dB), coding them as 
-\emph on
-unsigned char
-\emph default
-.
- After consultation with experts on the radio-telecommunications field,
- the decision was that the additional error introduced by using integer
- decibels instead of real numbers is negligible, since the digital elevation
- model, which has a resolution of 100 
-\begin_inset Formula $m2$
-\end_inset
-
- per pixel, presents a bigger rounding problem.
- The path-loss between a network cell and any point on the service area
- should, consequently, never exceed -255 dB.
- This scale is large enough for problem representation, since service discovery
- by the mobile terminal is still successful with a RSCP of around -115 dB
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
-
-\end_inset
-
-.
- We also include a calculation radius around each network cell to reduce
- the amount of memory needed even more.
- For example, take a 60 
-\begin_inset Formula $km$
-\end_inset
-
- calculation radius around each cell, which is enough for the coverage calculati
-on purposes over the 2 GHz spectrum of UMTS 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
-
-\end_inset
-
-, yet it drastically lowers the memory requirement on the GPU.
- To correctly locate the path-loss matrices within the service area, we
- supply the offset of the upper-left corner of each of them.
- The memory layout for the path-loss matrices is shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:path-loss_matrices_memory_organization"
-
-\end_inset
-
-.
- Because their content is constant throughout the optimization process,
- they are kept in read-only texture memory to take advantage of the fast
- access time.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/pathloss_matrices.eps
-	lyxscale 30
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Memory organization of the path-loss matrices for network cells.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:path-loss_matrices_memory_organization"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Additional speed-up is achieved by incrementally recalculating the service
- area coverage as the agents' changes arrive.
- Specifically, the network cells containing new settings that have not yet
- been evaluated, have their pilot powers saved in negative form, serving
- as a flag to indicate that coverage re-evaluation is needed.
- Since pilot powers are, by definition, positive numbers, there is no possibilit
-y for confusion.
 \end_layout
 
 \begin_layout Subsection

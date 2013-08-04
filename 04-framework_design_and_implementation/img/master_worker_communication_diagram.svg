@@ -13,7 +13,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="master_worker_communication_diagram.eps">
   <sodipodi:namedview
      id="base"
@@ -23,12 +23,12 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1269613"
-     inkscape:cx="363.92676"
-     inkscape:cy="551.91852"
+     inkscape:cx="392.74173"
+     inkscape:cy="658.32653"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2558"
+     inkscape:window-width="1278"
      inkscape:window-height="1003"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -339,26 +339,26 @@
        sodipodi:linespacing="125%"
        id="text3755-9-1"
        y="151.12648"
-       x="180.98831"
+       x="172.668"
        style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"><tspan
          style="font-size:16px;font-weight:bold;-inkscape-font-specification:Sans Bold"
          y="151.12648"
-         x="180.98831"
+         x="172.668"
          sodipodi:role="line"
          id="tspan5080-6">Master process</tspan></text>
     <rect
        y="130.48039"
-       x="155.21158"
+       x="167.80647"
        height="32.956226"
-       width="190.28783"
+       width="148.45744"
        id="rect4457-5-1-8"
        style="fill:none;stroke:#000000;stroke-width:1.54255557;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        y="615.37531"
-       x="146.89127"
+       x="187.38875"
        height="16.478113"
-       width="190.28783"
+       width="109.29289"
        id="rect4457-5-1-8-9"
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.70710677;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path
@@ -380,16 +380,16 @@
          id="tspan5080-6-1">Worker process</tspan></text>
     <rect
        y="130.59644"
-       x="414.50171"
+       x="435.41693"
        height="32.956226"
-       width="190.28783"
+       width="148.45744"
        id="rect4457-5-1-8-1"
-       style="fill:none;stroke:#000000;stroke-width:1.54255557;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:none;stroke:#000000;stroke-width:1.54255545;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        y="615.37531"
-       x="414.50171"
+       x="454.99921"
        height="16.478113"
-       width="190.28783"
+       width="109.29289"
        id="rect4457-5-1-8-9-5"
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.70710677;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path
@@ -517,15 +517,20 @@
     <text
        sodipodi:linespacing="100%"
        id="text3755-9-1-6-4"
-       y="428.87512"
-       x="55.689228"
+       y="420.87512"
+       x="95.689224"
        style="font-size:16px;font-style:normal;font-weight:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"><tspan
          style="font-size:16px;line-height:100%;writing-mode:lr-tb"
-         y="428.87512"
-         x="55.689228"
+         y="420.87512"
+         x="95.689224"
          sodipodi:role="line"
-         id="tspan5253">Processing loop</tspan></text>
+         id="tspan5253">Processing</tspan><tspan
+         style="font-size:16px;line-height:100%;writing-mode:lr-tb"
+         y="436.87512"
+         x="95.689224"
+         sodipodi:role="line"
+         id="tspan4283">     loop</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.11398244;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.3419475, 3.3419475;stroke-dashoffset:0"
        id="rect5195"
@@ -537,6 +542,11 @@
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 3;stroke-dashoffset:0"
        d="m 184.87161,424.46107 c 32.97083,0 32.97083,0 32.97083,0"
        id="path5251"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.50917429"
+       d="m 244.90637,707.18618 258.2165,0"
+       id="path4406"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

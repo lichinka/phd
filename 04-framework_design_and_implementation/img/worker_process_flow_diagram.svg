@@ -13,7 +13,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="worker_process_flow_diagram.eps">
   <sodipodi:namedview
      id="base"
@@ -28,10 +28,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2558"
-     inkscape:window-height="1003"
+     inkscape:window-width="1436"
+     inkscape:window-height="861"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="18"
      inkscape:window-maximized="0" />
   <defs
      id="defs4">
@@ -450,7 +450,7 @@
          y="226.37172"
          x="79.277916"
          sodipodi:role="line"
-         id="tspan5020">             data</tspan></text>
+         id="tspan5020">         metadata</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path4224-9"
@@ -715,6 +715,6 @@
          y="497.45404"
          x="288.78436"
          sodipodi:role="line"
-         id="tspan5468">          threads</tspan></text>
+         id="tspan5468">          thread</tspan></text>
   </g>
 </svg>

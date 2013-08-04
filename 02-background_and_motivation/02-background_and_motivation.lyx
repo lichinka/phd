@@ -60,6 +60,17 @@
 
 \begin_body
 
+\begin_layout Part
+Background and motivation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Background and motivation 
 \begin_inset CommandInset label
@@ -4127,7 +4138,35 @@ key "Nawrocki_Understanding:2006"
 \end_layout
 
 \begin_layout Section
-Principles of parallel systems/implementations
+Principles of GPUs 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:02-About_GPUs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Hacer un lindo resumen de 
+\begin_inset Quotes eld
+\end_inset
+
+How to obtain efficient GPU kernels: An illustration using FMM & FGT algorithms
+\begin_inset Quotes erd
+\end_inset
+
+ y el libro de Whu.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection

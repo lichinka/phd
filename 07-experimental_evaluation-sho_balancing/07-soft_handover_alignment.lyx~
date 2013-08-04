@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass book
+\textclass MPSthesis
 \use_default_options false
 \maintain_unincluded_children false
 \language english
@@ -1778,7 +1778,7 @@ begin{algorithmic}
 
 
 \backslash
-STATE $
+State $
 \backslash
 mathbf{c'} 
 \backslash
@@ -1793,21 +1793,21 @@ _cell(C)$
 
 
 \backslash
-REPEAT
+Repeat
 \end_layout
 
 \begin_layout Plain Layout
 
 	
 \backslash
-IF{$rand()<0.5$}
+If{$rand()<0.5$}
 \end_layout
 
 \begin_layout Plain Layout
 
 		
 \backslash
-STATE $p_{c'}^{
+State $p_{c'}^{
 \backslash
 mathrm{new}} 
 \backslash
@@ -1818,14 +1818,14 @@ gets p_{c'}+0.01$
 
 	
 \backslash
-ELSE
+Else
 \end_layout
 
 \begin_layout Plain Layout
 
 		
 \backslash
-STATE $p_{c'}^{
+State $p_{c'}^{
 \backslash
 mathrm{new}} 
 \backslash
@@ -1836,14 +1836,14 @@ gets p_{c'}-0.01$
 
 	
 \backslash
-ENDIF
+EndIf
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-UNTIL{$p_{c'}^{
+Until{$p_{c'}^{
 \backslash
 mathrm{new}}
 \backslash
@@ -1854,7 +1854,7 @@ in P_{c'}$}
 
 
 \backslash
-STATE $p_{c'} 
+State $p_{c'} 
 \backslash
 gets p_{c'}^{
 \backslash

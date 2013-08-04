@@ -85,7 +85,8 @@ status open
 
 \end_layout
 
-\begin_layout Abstract
+\begin_layout Standard
+\noindent
 The assessment of the radio coverage is essential for network planning and
  optimization.
  Consequently, the planning tools used to gather this information play a
@@ -99,7 +100,7 @@ The assessment of the radio coverage is essential for network planning and
  importance of fast and accurate prediction tools.
 \end_layout
 
-\begin_layout Abstract
+\begin_layout Standard
 Within this context, we present an open-source simulation framework for
  planning and optimization of radio networks.
  We provide two use cases for the newly deployed LTE network in Slovenia.
@@ -110,7 +111,7 @@ Within this context, we present an open-source simulation framework for
  to the local conditions of each region.
 \end_layout
 
-\begin_layout Abstract
+\begin_layout Standard
 We report the results of our experimental simulations over three regions
  of the real LTE network, deployed by Telekom Slovenije, d.d., thus showing
  the suitability of the parallel framework for tackling real-world planning

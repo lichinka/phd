@@ -6,7 +6,7 @@
 \begin_preamble
 \author{Lucas Benedi\v{c}i\v{c}}
 
-\title{OPTIMIZATION AND PARALLELLIZATION\\ METHODS FOR THE DESIGN\\ OF NEXT-GENERATION\\ RADIO NETWORKS}
+\title{OPTIMIZATION AND PARALLELIZATION\\ METHODS FOR THE DESIGN\\ OF NEXT-GENERATION\\ RADIO NETWORKS}
 
 \naslov{OPTIMIZACIJSKE IN VZPOREDNE METODE ZA NA\v{C}RTOVANJE RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
 
@@ -30,7 +30,8 @@
 %
 % Package for algorithms
 %
-\usepackage{algorithmic}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -184,7 +185,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 pagenumbering{Roman}
 \end_layout
@@ -200,7 +201,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 pagestyle{fancy}
 \end_layout
@@ -216,7 +217,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 setcounter{page}{7}
 \end_layout
@@ -709,7 +710,7 @@ status collapsed
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
+bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment"
 options "plain"
 
 \end_inset
