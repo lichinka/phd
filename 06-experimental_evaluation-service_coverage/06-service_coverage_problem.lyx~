@@ -72,7 +72,7 @@ Experimental evaluation
 \end_layout
 
 \begin_layout Chapter
-Experimental evaluation: the service-coverage problem 
+The service-coverage problem 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:06-Experimental-evaluation-the-service-coverage-problem"
@@ -194,7 +194,13 @@ reference "sec:06-Simulations"
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -312,44 +318,12 @@ key "Vasile_Hybrid.multiagent.approach.for.optimization:2009,Valcarce_Applying.F
 \end_inset
 
 .
- Nevertheless, we have not observed any similar optimization method for
- solving the service coverage problem in mobile networks 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Benedicic_Pilot.power.optimization:2010"
-
-\end_inset
-
-.
- Moreover, this is, to the best of our knowledge, the first work to experiment
- with optimization of a real UMTS network on a fully-enabled GPU environment.
-\end_layout
-
-\begin_layout Standard
-Our optimization approach is based on a state-of-the-art mathematical model,
- that has been previously used to solve a comparable problem 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Chen-Yuan_CPICH.optimization:2008"
-
-\end_inset
-
-.
  The large computational-time complexity when dealing with big problem instances
  is tackled using a parallel implementation of the agent-based algorithm
  for on GPU.
  This minimizes the overhead when deploying a larger number of agents working
  in parallel over the service area, only limited by the amount of memory
  available.
- 
-\end_layout
-
-\begin_layout Standard
-The algorithm on subsets of a real radio network deployed in Slovenia.
- All network-related data were provided by the engineers of the Radio Network
- department at Telekom Slovenije, d.d.
- The results show that the solution quality is greatly improved, compared
- to classic coverage-planning techniques.
 \end_layout
 
 \begin_layout Section
@@ -460,7 +434,7 @@ key "nawrocki2006understanding"
 \end_layout
 
 \begin_layout Standard
-Our goal here is to analyze the state of the network in a given situation,
+The goal here is to analyze the state of the network in a given situation,
  e.g.
  a ‘snapshot’ at an arbitrary instance.
  A snapshot consists of a set of mobiles (or users) having individual properties
@@ -598,7 +572,29 @@ description "Uplink attenuation factor between mobile $m\\in M$ and cell $c\\in 
 \begin_inset Formula $m\in M$
 \end_inset
 
-, using the radio-propagation model introduced in ...???.
+, using the radio-propagation model introduced in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-Radio_propagation_modeling"
+
+\end_inset
+
+.
  These predictions already include losses and gains from cabling, hardware,
  and user equipment.
 \end_layout
@@ -884,7 +880,7 @@ name "sub:Problem-complexity"
 \end_layout
 
 \begin_layout Standard
-It has been proved that the problem of pilot power optimization for full
+It has been proved that the problem of pilot-power optimization for full
  coverage of the service area is 
 \begin_inset Formula $NP$
 \end_inset
@@ -928,7 +924,7 @@ In the problem of optimization of pilot powers for service coverage, the
 \end_inset
 
  mobiles is guaranteed, while the total amount of pilot power used is minimized.
- Since we are considering full coverage, we denote 
+ Here, full coverage of the service area is being considered, thus 
 \begin_inset Formula $b=\vert M\vert$
 \end_inset
 
@@ -975,12 +971,13 @@ name "sec:06-Optimization-approaches"
 \end_layout
 
 \begin_layout Standard
-Since the problem instances we will be analyzing are part of a real mobile
- network deployed in Slovenia by Mobitel Telecommunication Services, Inc.,
- there are no references in the literature of other optimization techniques
- dealing with exactly the same data set.
- For this reason, we will introduce two different strategies for setting
- the pilot power, that shall enable us to compare the experimentation results.
+Since some of the analyzed problem instances are part of a real mobile network
+ deployed in Slovenia by Telekom Slovenije, d.d., there are no references
+ in the literature of other optimization techniques dealing with exactly
+ the same data set.
+ For this reason, two different strategies for setting the pilot power are
+ being presented.
+ They should provide a basis for the comparisson of the experimental results.
  The first strategy is the attenuation-based pilot power, presented in 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1006,7 +1003,11 @@ key "Talbi_Metaheuristics:2009"
 \end_inset
 
 .
- A detailed description is given in Section 
+ A detailed description is given in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:06-Parallel_agent_approach"
@@ -1055,7 +1056,7 @@ The first heuristic for setting the pilot power of all cells in the network
 \end_inset
 
 .
- Hence, under this assumption, we identify the cell 
+ Hence, under this assumption, the cell 
 \begin_inset Formula $c$
 \end_inset
 
@@ -1063,7 +1064,7 @@ The first heuristic for setting the pilot power of all cells in the network
 \begin_inset Formula $m$
 \end_inset
 
- as
+ is identified as
 \end_layout
 
 \begin_layout Standard
@@ -1078,15 +1079,20 @@ p_{cm}^{\mathrm{att}}=\min p_{c}\forall c\in C\iff cov(c,m)=1\label{eq:06-Attenu
 \end_layout
 
 \begin_layout Standard
-Picking the cells conforming to Equation (
+Picking the cells conforming to Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:06-Attenuation_based-power"
 
 \end_inset
 
-) and setting the pilot powers accordingly, we achieve full coverage of
- the service area with a solution exhibiting a total pilot power of
+) and setting the pilot powers accordingly, full coverage of the service
+ area is achieved.
+ The solution exhibits a total pilot power defined as
 \end_layout
 
 \begin_layout Standard
@@ -2065,11 +2071,9 @@ reference "sub:02-Black_box_optimization"
 \end_inset
 
 .
- Agents' implementation is also based on the GPU, which drastically reduces
- the number of data transfers between CPU and GPU, since all problem elements
- are available on the GPU during the optimization process.
- In this sense, the first hardware restriction we have to overcome is the
- amount of memory on the GPU device.
+ The implementation of the agents is also based on the GPU, which drastically
+ reduces the number of data transfers between CPU and GPU, since all problem
+ elements are available on the GPU during the optimization process.
  Consequently, careful memory utilization and organization are critical
  to successfully accommodate all involved problem elements on the GPU, the
  memory of which is significantly smaller than the RAM memory available
@@ -2164,8 +2168,30 @@ The test networks, Net
 \end_inset
 
  are subsets of the real UMTS network deployed by Telekom Slovenije, d.d.
- The path-loss predictions were calculated using the ...??? model presented
- in Section ...???.
+ The path-loss predictions were calculated using the radio-propagation model
+ presented in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+,Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-Radio_propagation_modeling"
+
+\end_inset
+
+.
  A DEM of 100
 \begin_inset space ~
 \end_inset
@@ -5155,10 +5181,25 @@ Function evaluation on the GPU communicating with agents over MPI provides
  the second measured setup.
  The evaluator implementation takes advantage of shared memory for thread
  collaboration within a thread block and texture memory for constant elements,
- as is has been explained in Section 
+ as is has been previously explained in Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Objective-function-evaluation"
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-GPU_worker_implementation"
 
 \end_inset
 
@@ -5175,6 +5216,13 @@ The last result set presents measurements for complete GPU implementation,
  impact that CPU-to-GPU memory transfers have on overall system performance.
  This fact is supported by the speed-up between the second and third measured
  setups, which exhibit, on average, an improvement of more than 400%.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -5243,6 +5291,19 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
  It worth mentioning that it is feasible for the optimization algorithm
  to take a longer time to reach the solution, since design problems, as
  the service-coverage one, are usually solved offline.
+ A comparison and analysis of the running times of the radio-coverage prediction
+ for real-world, radio-network planning is provided in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:08-Real-world_network_planning"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

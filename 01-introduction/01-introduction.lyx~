@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass book
+\textclass MPSthesis
 \use_default_options false
 \maintain_unincluded_children false
 \language english
@@ -756,7 +756,7 @@ reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
 Chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Experimental-evaluation-the-service-coverage-problem"
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \end_inset
 

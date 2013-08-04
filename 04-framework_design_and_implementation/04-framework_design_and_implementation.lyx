@@ -270,6 +270,13 @@ key "gorder2007multicore,wen2011gpu"
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Motivation
 \end_layout
@@ -839,7 +846,11 @@ key "Xia-Radio_propagation_characteristics_for_line_of_sight_microcellular_and_p
 \end_inset
 
 .
- Equation (
+ Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:04-Hata_LOS"
@@ -892,10 +903,14 @@ where
 
  is the frequency, expressed in MHz.
  On the other hand, in NLOS conditions, the path loss is calculated as in
- Equation (
+ Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "00000000"
+reference "eq:04-Hata_NLOS"
 
 \end_inset
 
@@ -5224,6 +5239,13 @@ status open
  en donde se muestra el speedup (23.2 Performance analysis) ----
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
