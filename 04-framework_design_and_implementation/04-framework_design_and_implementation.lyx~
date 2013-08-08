@@ -60,8 +60,19 @@
 
 \begin_body
 
+\begin_layout Part
+Methodology
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
-A parallel framework for radio-coverage planning and optimization 
+A parallel framework for radio-network planning and optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:04-Framework-design-and-implementation"
@@ -270,6 +281,13 @@ key "gorder2007multicore,wen2011gpu"
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Motivation
 \end_layout
@@ -362,6 +380,84 @@ key "Clematis_High_performance_computing_with_geographical_data:2003"
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the following, a high-performance radio-propagation prediction tool for
+ GSM (2G), UMTS (3G) and LTE (4G) radio networks is presented.
+ It can be used for planning the different phases of a new radio-network
+ installation, as well as a support tool for maintenance activities related
+ to network troubleshooting in general and optimization in particular.
+ Specifically, automatic radio-coverage optimization requires the evaluation
+ of millions of radio-propagation predictions in order to find a good solution
+ set, which is unfeasible using other serial implementations of academic
+ or commercial tools 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As a reference implementation, the publicly available radio-coverage prediction
+ tool, presented in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+, was used.
+ The authors developed a modular radio-coverage tool that performs separate
+ calculations for radio-signal path loss and antenna-radiation patterns,
+ also taking into account different configuration parameters, such as antenna
+ tilting, azimuth and height.
+ The output result, saved as a raster map, is the maximum signal level over
+ the target area, in which each point represents the received signal from
+ the best-serving transmitter (or cell).
+ This work implements some well-known radio-propagation models, e.g., Okumura-Hata
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980"
+
+\end_inset
+
+, the description of which is latter presented in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-Radio_propagation_modeling"
+
+\end_inset
+
+.
+ Regarding the accuracy of the predicted values, the authors 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010"
+
+\end_inset
+
+ report comparable results to those of an industrial tool.
+ To ensure that the presented implementation is completely compliant with
+ the previously mentioned reference, a comparison test that consists of
+ running both tools with the same set of input parameters was designed.
+ The test results from PRATO and the reference implementation were identical
+ in all the tested cases.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -421,48 +517,6 @@ Our work aims at shedding some light over this inherent complexity, by proposing
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-GRASS
-\end_layout
-
-\begin_layout Standard
-As the software environment for PRATO we have chosen GRASS 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Neteler_Open_source_GIS_a_GRASS_GIS_approach"
-
-\end_inset
-
-, which is a free and open-source software project that implements a Geographica
-l Information System (GIS).
- This GIS software was originally developed at the US Army Construction
- Engineering Research Laboratories and is a full-featured system with a
- wide range of analytical, data-management, and visualization capabilities.
- Currently, the development of GRASS GIS is supported by a growing community
- of volunteer developers.
-\end_layout
-
-\begin_layout Standard
-The use of GRASS GIS as an environment for PRATO presents many advantages.
- First, the current development of GRASS is primarily Linux-based.
- Since the field of HPC is dominated by Linux and UNIX systems, an environment
- with Linux support is critical for this work.
- Software licensing is another important consideration for choosing GRASS,
- since it is licensed under the GNU Public License 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Stallman_GNU_License:1991"
-
-\end_inset
-
- and imposes the availability of the source code.
- This allows us to make potential modifications to the system, thus adapting
- it for the parallel computation environment.
- Moreover, being an open system, GRASS provided us with a great deal of
- built-in functionality, capable of operating with raster and vector topological
- data that can be stored in an internal format or a DB.
 \end_layout
 
 \begin_layout Section
@@ -661,6 +715,32 @@ Background
 \end_layout
 
 \begin_layout Standard
+Radio communications in a mobile network take place between a fixed transmitter
+ or base station and a number of mobile receivers.
+ The effects of signal propagation limit the performance of a mobile-radio
+ system.
+ For this reason, the characterization and modeling of radio propagation
+ is considered a fundamental aspect in radio-network planning 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012"
+
+\end_inset
+
+.
+ Consequently, understanding the mathematical modeling of a frequency channel
+ is necessary to accurately predict the system performance and to provide
+ a mechanism to analyze the effects caused by signal propagation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ericsson-Long_term_evolution_an_introduction:2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The coverage planning of radio networks is a key problem that all mobile
  operators have to deal with.
  Moreover, it has proven to be a fundamental issue, not only in LTE networks,
@@ -711,90 +791,8 @@ reference "sub:04-Computational_complexity"
  for the running time of the serial version).
 \end_layout
 
-\begin_layout Standard
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the following, a high-performance radio-propagation prediction tool for
- GSM (2G), UMTS (3G) and LTE (4G) radio networks is presented.
- It can be used for planning the different phases of a new radio-network
- installation, as well as a support tool for maintenance activities related
- to network troubleshooting in general and optimization in particular.
- Specifically, automatic radio-coverage optimization requires the evaluation
- of millions of radio-propagation predictions in order to find a good solution
- set, which is unfeasible using other serial implementations of academic
- or commercial tools 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Ozimek_Open.source.radio.coverage.prediction:2010"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-As a reference implementation, the publicly available radio-coverage prediction
- tool, presented in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Ozimek_Open.source.radio.coverage.prediction:2010"
-
-\end_inset
-
-, was used.
- The authors developed a modular radio-coverage tool that performs separate
- calculations for radio-signal path loss and antenna-radiation patterns,
- also taking into account different configuration parameters, such as antenna
- tilting, azimuth and height.
- The output result, saved as a raster map, is the maximum signal level over
- the target area, in which each point represents the received signal from
- the best-serving transmitter (or cell).
- This work implements some well-known radio-propagation models, e.g., Okumura-Hata
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980"
-
-\end_inset
-
- and COST 231 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Cichon_Propagation.prediction.models:1995"
-
-\end_inset
-
-.
- The latter is explained in more detail in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
-
-\end_inset
-
-.
- Regarding the accuracy of the predicted values, the authors 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Ozimek_Open.source.radio.coverage.prediction:2010"
-
-\end_inset
-
- report comparable results to those of an industrial tool.
- To ensure that the presented implementation is completely compliant with
- the previously mentioned reference, a comparison test that consists of
- running both tools with the same set of input parameters was designed.
- The test results from PRATO and the reference implementation were identical
- in all the tested cases.
-\end_layout
-
 \begin_layout Subsection
-Radio-propagation modeling 
+Radio-propagation model 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:04-Radio_propagation_modeling"
@@ -814,8 +812,33 @@ key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1
 \end_inset
 
 .
- This model has been largely studied and shown to be suitable for predicting
- the radio propagation in LTE networks 
+ Other accurate methods exist, like the ones based on ray tracing 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Corre_Three_dimensional_urban_EM_wave_propagation_model_for_radio_network_planning_and_optimization_over_large_areas:2009,Vilhar-Efficient_open_source_ray_tracing_methods_for_rural_environment:efficient"
+
+\end_inset
+
+.
+ However, these methods are more sensible to deviations in input data, like
+ DEMs and buildings, and are still inefficient in terms of the computational
+ effort required to achieve satisfying results.
+ Empirical methods for radio-propagation predictions, on the other hand,
+ give acceptable results within a feasible amount of time.
+ For this reason, they have become the industry standard for non-deterministic
+ signal-propagation calculations 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Cichon_Propagation.prediction.models:1995,Hata-Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980,Shabbir_Comparison_of_radio_propagation_models:2011,Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Okumura-Hata model has been largely studied and shown to be suitable
+ for predicting the radio propagation in LTE networks 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012,Shabbir_Comparison_of_radio_propagation_models:2011"
@@ -873,7 +896,7 @@ where
 \begin_inset Formula $\beta=(a_{0},a_{1},a_{2},a_{3})$
 \end_inset
 
- is the vector containing the tuning parameters of the model, 
+ is the vector containing the adaptable parameters of the model, 
 \begin_inset Formula $d_{(x,y)}$
 \end_inset
 
@@ -1004,6 +1027,107 @@ name "sec:04-Design_and_implementation"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+GRASS
+\end_layout
+
+\begin_layout Standard
+As the software environment for PRATO we have chosen GRASS 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neteler_Open_source_GIS_a_GRASS_GIS_approach"
+
+\end_inset
+
+, which is a free and open-source software project that implements a Geographica
+l Information System (GIS).
+ This GIS software was originally developed at the US Army Construction
+ Engineering Research Laboratories and is a full-featured system with a
+ wide range of analytical, data-management, and visualization capabilities.
+ Currently, the development of GRASS GIS is supported by a growing community
+ of volunteer developers.
+\end_layout
+
+\begin_layout Standard
+The use of GRASS GIS as an environment for PRATO presents many advantages.
+ First, the current development of GRASS is primarily Linux-based.
+ Since the field of HPC is dominated by Linux and UNIX systems, an environment
+ with Linux support is critical for this work.
+ Software licensing is another important consideration for choosing GRASS,
+ since it is licensed under the GNU Public License 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stallman_GNU_License:1991"
+
+\end_inset
+
+ and imposes the availability of the source code.
+ This allows us to make potential modifications to the system, thus adapting
+ it for the parallel computation environment.
+ Moreover, being an open system, GRASS provided us with a great deal of
+ built-in functionality, capable of operating with raster and vector topological
+ data that can be stored in an internal format or a DB.
+\end_layout
+
+\begin_layout Subsection
+Multi-paradigm parallel programming
+\end_layout
+
+\begin_layout Standard
+The implementation methodology adopted for PRATO follows a multi-paradigm,
+ parallel programming approach in order to fully exploit the resources of
+ each of the nodes in a computing cluster.
+ This approach combines a master-worker paradigm with an external DB.
+ To efficiently use a shared memory multi-processor on the worker side,
+ and to effectively overlap the calculation and communication, PRATO uses
+ POSIX threads 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Butenhof_Programming.with.POSIX.threads:1997"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To use the computing resources of a distributed memory system, such as a
+ cluster of processors, PRATO uses the MPI 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gropp_Using_MPI:1999"
+
+\end_inset
+
+.
+ The MPI is a message-passing standard that defines the syntax and semantics
+ designed to function on a wide variety of parallel computers.
+ The MPI enables multiple processes, running on different processors of
+ a computer cluster, to communicate with each other.
+ It was designed for high performance on both massively parallel machines
+ and on workstation clusters.
+\end_layout
+
+\begin_layout Standard
+PRATO also supports the execution of the most computationally-intensive
+ parts of the radio-propagation algorithm on a GPU.
+ Moreover, the GPU hardware is used if available on the computing nodes
+ that host the worker processes (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-GPU_worker_implementation"
+
+\end_inset
+
+ later in this chapter).
+\end_layout
+
+\begin_layout Standard
+In order to make the text clearer and to differentiate between the programming
+ paradigms used from here on, a POSIX thread will be refered to simply as
+ a `thread' and a MPI process as a `process'.
 \end_layout
 
 \begin_layout Subsection
@@ -1650,7 +1774,7 @@ reference "fig:04-Raster_prediction_example"
 \end_layout
 
 \begin_layout Subsection
-Computational complexity of the radio-coverage algorithm 
+Computational complexity 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:04-Computational_complexity"
@@ -2091,65 +2215,6 @@ Although
 seconds using a serial implementation, the prediction for a mobile network
  comprising 10,240 transmitters would have an execution time of almost two
  days.
-\end_layout
-
-\begin_layout Subsection
-Multi-paradigm parallel programming
-\end_layout
-
-\begin_layout Standard
-The implementation methodology adopted for PRATO follows a multi-paradigm,
- parallel programming approach in order to fully exploit the resources of
- each of the nodes in a computing cluster.
- This approach combines a master-worker paradigm with an external DB.
- To efficiently use a shared memory multi-processor on the worker side,
- and to effectively overlap the calculation and communication, PRATO uses
- POSIX threads 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Butenhof_Programming.with.POSIX.threads:1997"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-To use the computing resources of a distributed memory system, such as a
- cluster of processors, PRATO uses the MPI 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Gropp_Using_MPI:1999"
-
-\end_inset
-
-.
- The MPI is a message-passing standard that defines the syntax and semantics
- designed to function on a wide variety of parallel computers.
- The MPI enables multiple processes, running on different processors of
- a computer cluster, to communicate with each other.
- It was designed for high performance on both massively parallel machines
- and on workstation clusters.
-\end_layout
-
-\begin_layout Standard
-PRATO also supports the execution of the most computationally-intensive
- parts of the radio-propagation algorithm on a GPU.
- Moreover, the GPU hardware is used if available on the computing nodes
- that host the worker processes (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:04-GPU_worker_implementation"
-
-\end_inset
-
- later in this chapter).
-\end_layout
-
-\begin_layout Standard
-In order to make the text clearer and to differentiate between the programming
- paradigms used from here on, a POSIX thread will be refered to simply as
- a `thread' and a MPI process as a `process'.
 \end_layout
 
 \begin_layout Subsection
@@ -2912,7 +2977,7 @@ reference "fig:04-Master_process_flow_diagram"
 \end_layout
 
 \begin_layout Subsubsection
-Worker processes
+Worker processes on CPU
 \end_layout
 
 \begin_layout Standard
@@ -3272,148 +3337,7 @@ name "fig:04-Master_worker_communication"
 \end_layout
 
 \begin_layout Subsubsection
-Master-worker communication
-\end_layout
-
-\begin_layout Standard
-Similar to 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
-
-\end_inset
-
-, the message-passing technique used in this work enables a better use of
- the available computing resources, both in terms of scalability and load
- balancing, while introducing a negligible overhead.
- This last point is supported by the experimental results, introduced in
- Section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:04-Strong_scalability"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The first reason to implement the message-passing technique is to support
- heterogeneous computing environments.
- In particular, our approach focuses on taking full advantage of the hardware
- of each computing node, thus explicitly avoiding the bottlenecks introduced
- by the slowest computing node in the cluster.
- This problem appears when evenly distributing the data among the worker
- processes on disparate hardware, e.g., as in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
-
-\end_inset
-
-, being more noticeable with a larger number of computing nodes and processes.
- In other words, computing nodes that deliver better performance have more
- calculations assigned to them.
- Moreover, in real-world scenarios, it is often the case that a large number
- of dedicated computing nodes featuring exactly the same configuration is
- difficult to find, i.e., not every organization owns a computer cluster.
-\end_layout
-
-\begin_layout Standard
-A second reason for selecting a message-passing technique is related to
- the flexibility it provides for load balancing, which is of greater importance
- when dealing with extra data or information besides spatial data 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Hawick_Distributed_frameworks_and_parallel_algorithms_for_processing_large_scala_geographic_data:2003"
-
-\end_inset
-
-.
- This can be seen in Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:04-Processing_loop_in_master_process"
-
-\end_inset
-
-, where the master process, before delivering the spatial subset and transmitter
--configuration data, sends a message to the worker process, indicating that
- it is about to receive more work.
- This a priori meaningless message plays a key role in correctly supporting
- the asynchronous process communication.
- Notice that the subset of spatial data that a worker process receives is
- directly related to the transmitter for which the prediction will be calculated.
- Similar to 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
-
-\end_inset
-
-, this problem-specific property enables the use of a data-decomposition
- technique based on a block partition of spatial data, e.g., the DEM and clutter
- data.
-\end_layout
-
-\begin_layout Standard
-In general, there are many different ways a parallel program can be executed,
- because the steps from the different processes can be interleaved in various
- ways and a process can make non-deterministic choices 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
-
-\end_inset
-
-, which may lead to situations such as race conditions 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Clemencon_MPI_Race_detection:1995"
-
-\end_inset
-
- and deadlocks.
- A deadlock occurs whenever two or more running processes are waiting for
- each other to finish, and thus neither ever does.
- To prevent PRATO from deadlocking, message sending and receiving should
- be paired, i.e., an equal number of send and receive messages on the master
- and worker sides 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
-
-\end_inset
-
-.
- Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:04-Master_worker_communication"
-
-\end_inset
-
- depicts the master-worker message passing, from which the transmitter-data
- transmission has been excluded for clarity.
- Notice how each idle message sent from the worker process is paired with
- an answer from the master process, whether it is a keep-alive or a stop
- message.
-\end_layout
-
-\begin_layout Subsubsection
-GPU-accellerated worker processes 
+Worker processes on GPU 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:04-GPU_worker_implementation"
@@ -3604,6 +3528,147 @@ reference "fig:04-Flow_diagram_serial_version"
  of extra memory or a data-transfer from/to the CPU.
 \end_layout
 
+\begin_layout Subsubsection
+Master-worker communication
+\end_layout
+
+\begin_layout Standard
+Similar to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
+
+\end_inset
+
+, the message-passing technique used in this work enables a better use of
+ the available computing resources, both in terms of scalability and load
+ balancing, while introducing a negligible overhead.
+ This last point is supported by the experimental results, introduced in
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-Strong_scalability"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first reason to implement the message-passing technique is to support
+ heterogeneous computing environments.
+ In particular, our approach focuses on taking full advantage of the hardware
+ of each computing node, thus explicitly avoiding the bottlenecks introduced
+ by the slowest computing node in the cluster.
+ This problem appears when evenly distributing the data among the worker
+ processes on disparate hardware, e.g., as in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
+
+\end_inset
+
+, being more noticeable with a larger number of computing nodes and processes.
+ In other words, computing nodes that deliver better performance have more
+ calculations assigned to them.
+ Moreover, in real-world scenarios, it is often the case that a large number
+ of dedicated computing nodes featuring exactly the same configuration is
+ difficult to find, i.e., not every organization owns a computer cluster.
+\end_layout
+
+\begin_layout Standard
+A second reason for selecting a message-passing technique is related to
+ the flexibility it provides for load balancing, which is of greater importance
+ when dealing with extra data or information besides spatial data 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Hawick_Distributed_frameworks_and_parallel_algorithms_for_processing_large_scala_geographic_data:2003"
+
+\end_inset
+
+.
+ This can be seen in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:04-Processing_loop_in_master_process"
+
+\end_inset
+
+, where the master process, before delivering the spatial subset and transmitter
+-configuration data, sends a message to the worker process, indicating that
+ it is about to receive more work.
+ This a priori meaningless message plays a key role in correctly supporting
+ the asynchronous process communication.
+ Notice that the subset of spatial data that a worker process receives is
+ directly related to the transmitter for which the prediction will be calculated.
+ Similar to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
+
+\end_inset
+
+, this problem-specific property enables the use of a data-decomposition
+ technique based on a block partition of spatial data, e.g., the DEM and clutter
+ data.
+\end_layout
+
+\begin_layout Standard
+In general, there are many different ways a parallel program can be executed,
+ because the steps from the different processes can be interleaved in various
+ ways and a process can make non-deterministic choices 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
+
+\end_inset
+
+, which may lead to situations such as race conditions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Clemencon_MPI_Race_detection:1995"
+
+\end_inset
+
+ and deadlocks.
+ A deadlock occurs whenever two or more running processes are waiting for
+ each other to finish, and thus neither ever does.
+ To prevent PRATO from deadlocking, message sending and receiving should
+ be paired, i.e., an equal number of send and receive messages on the master
+ and worker sides 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
+
+\end_inset
+
+.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:04-Master_worker_communication"
+
+\end_inset
+
+ depicts the master-worker message passing, from which the transmitter-data
+ transmission has been excluded for clarity.
+ Notice how each idle message sent from the worker process is paired with
+ an answer from the master process, whether it is a keep-alive or a stop
+ message.
+\end_layout
+
 \begin_layout Section
 Simulations 
 \begin_inset CommandInset label
@@ -3678,11 +3743,14 @@ The following simulations were carried out on 34 computing nodes of the
  The computing nodes are connected by a LAN, over a Gigabit Ethernet interconnec
 t.
  As mentioned before, the reason for using a high-end computer cluster such
- as DEGIMA is to explore by experimentation the advantages and drawbacks
+ as DEGIMA is to explore, by experimentation, the advantages and drawbacks
  of the considered methods.
  However, this does not imply any loss of generality if applying these principle
 s over a different group of networked computers that do not operate as a
  computer cluster.
+ Moreover, PRATO also supports parallel calculation of radio-propagation
+ predictions for several cells by distributing the processes among the individua
+l cores of a single CPU.
 \end_layout
 
 \begin_layout Standard

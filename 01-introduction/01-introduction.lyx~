@@ -498,7 +498,7 @@ This thesis focuses on providing methods and tools to ??? the pointed drawbacks.
 \end_layout
 
 \begin_layout Section
-Scope
+Scope (ali se temu tako rece???)
 \end_layout
 
 \begin_layout Standard
@@ -702,10 +702,14 @@ The rest if this dissertation is organized as follows.
 \end_layout
 
 \begin_layout Standard
-Chapter 
+Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Background-and-motivation"
+reference "chap:02-Optimization_models"
 
 \end_inset
 
@@ -718,7 +722,11 @@ reference "chap:Background-and-motivation"
 \end_layout
 
 \begin_layout Standard
-Chapter 
+Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Framework-parameter-tuning"
@@ -733,7 +741,11 @@ reference "chap:Framework-parameter-tuning"
 \end_layout
 
 \begin_layout Standard
-In Chapter 
+In Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
@@ -753,7 +765,11 @@ reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
 \end_layout
 
 \begin_layout Standard
-Chapter 
+Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:06-Experimental-evaluation-the-service-coverage-problem"

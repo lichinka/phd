@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Part
-Experimental evaluation
+Optimization
 \end_layout
 
 \begin_layout Standard
@@ -868,41 +868,8 @@ key "Holma_WCDMA.for.UMTS:2005"
 .
 \end_layout
 
-\begin_layout Subsection
-Problem complexity 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Problem-complexity"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-It has been proved that the problem of pilot-power optimization for full
- coverage of the service area is 
-\begin_inset Formula $NP$
-\end_inset
-
--hard, since it can be reduced to the set-covering problem 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Varbrand_Mathematical.programming.approach:2003"
-
-\end_inset
-
-.
- Consequently, as long as 
-\begin_inset Formula $P\neq NP$
-\end_inset
-
-, it is unfeasible that a polynomial-time algorithm exists, which is able
- to find an exact solution to this problem.
-\end_layout
-
-\begin_layout Subsection
-Optimization objective and constraints
+\begin_layout Section
+Problem definition
 \end_layout
 
 \begin_layout Standard
@@ -957,6 +924,35 @@ subject to
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It has been proved that the problem of pilot-power optimization for full
+ coverage of the service area is 
+\begin_inset Formula $NP$
+\end_inset
+
+-hard, since it can be reduced to the set-covering problem 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Varbrand_Mathematical.programming.approach:2003"
+
+\end_inset
+
+.
+ Consequently, as long as 
+\begin_inset Formula $P\neq NP$
+\end_inset
+
+, it is unfeasible that a polynomial-time algorithm exists, which is able
+ to find an exact solution to this problem.
 \end_layout
 
 \begin_layout Section
@@ -1256,7 +1252,126 @@ name "fig:06-Architecture_of_the_system_on_GPU"
 \end_layout
 
 \begin_layout Subsubsection
-The agents
+Objective-function evaluation
+\end_layout
+
+\begin_layout Standard
+The evaluator represents a central component of the optimization system.
+ It reacts to the pilot-power changes by recalculating the objective-function
+ value.
+ Recall that the objective-function evaluation involves the radio-coverage
+ prediction of the service area and the calculation of the total pilot power
+ used by the cells in the target network.
+\end_layout
+
+\begin_layout Standard
+After a short initialization, during which the attenuation-factor matrices
+ of all the cells and the interference matrix are calculated, the evaluator
+ computes the coverage of the service area based on the pilot powers supplied
+ as the initial solution.
+ Initial solutions are randomly generated from valid pilot-power settings
+ that conform to the full coverage constraint.
+\end_layout
+
+\begin_layout Standard
+The evaluator also maintains a special part of the memory (see 
+\begin_inset Quotes eld
+\end_inset
+
+Coordinates of uncovered cells
+\begin_inset Quotes erd
+\end_inset
+
+ in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:06-Architecture_of_the_system_on_GPU"
+
+\end_inset
+
+) that is intended for registering uncovered areas, i.e., 
+\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
+\end_inset
+
+.
+ If Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:06-Coverage_constraint"
+
+\end_inset
+
+) does not hold, the 
+\begin_inset Quotes eld
+\end_inset
+
+special
+\begin_inset Quotes erd
+\end_inset
+
+ agents randomly select a location from this portion of memory so that a
+ valid solution may be reached again.
+\end_layout
+
+\begin_layout Standard
+It is worth mentioning that the evaluator itself has no influence in the
+ optimization process from a quality point-of-view.
+ Its task is to provide feedback and updated information to the agents that
+ move through the service area.
+ From a performance point-of-view, the importance of the evaluator is significan
+t, as it will be shown in the following sections.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The evaluation of the objective function was completely implemented on the
+ GPU using OpenCL (see Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-OpenCL"
+
+\end_inset
+
+).
+ The reason behind this decision is the impact objective-function evaluation
+ has on the performance of the optimization system as a whole, as discussed
+ in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-Black_box_optimization"
+
+\end_inset
+
+.
+ The implementation of the agents is also based on the GPU, which drastically
+ reduces the number of data transfers between CPU and GPU, since all problem
+ elements are available on the GPU during the optimization process.
+ Consequently, careful memory utilization and organization are critical
+ to successfully accommodate all involved problem elements on the GPU, the
+ memory of which is significantly smaller than the RAM memory available
+ in desktop computers.
+\end_layout
+
+\begin_layout Subsubsection
+Autonomous agents
 \end_layout
 
 \begin_layout Standard
@@ -1965,123 +2080,11 @@ The values
 .
 \end_layout
 
-\begin_layout Subsubsection
-The evaluator
-\end_layout
-
 \begin_layout Standard
-The evaluator represents a central component of the optimization system.
- It reacts to the pilot-power changes by recalculating the objective-function
- value.
- Recall that the objective-function evaluation involves the radio-coverage
- prediction of the service area and the calculation of the total pilot power
- used by the cells in the target network.
-\end_layout
-
-\begin_layout Standard
-After a short initialization, during which the attenuation-factor matrices
- of all the cells and the interference matrix are calculated, the evaluator
- computes the coverage of the service area based on the pilot powers supplied
- as the initial solution.
- Initial solutions are randomly generated from valid pilot-power settings
- that conform to the full coverage constraint.
-\end_layout
-
-\begin_layout Standard
-The evaluator also maintains a special part of the memory (see 
-\begin_inset Quotes eld
-\end_inset
-
-Coordinates of uncovered cells
-\begin_inset Quotes erd
-\end_inset
-
- in Figure
-\begin_inset space ~
+\begin_inset VSpace bigskip
 \end_inset
 
 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:06-Architecture_of_the_system_on_GPU"
-
-\end_inset
-
-) that is intended for registering uncovered areas, i.e., 
-\begin_inset Formula $\overline{A_{\mathrm{covered}}}$
-\end_inset
-
-.
- If Equation (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:06-Coverage_constraint"
-
-\end_inset
-
-) does not hold, the 
-\begin_inset Quotes eld
-\end_inset
-
-special
-\begin_inset Quotes erd
-\end_inset
-
- agents randomly select a location from this portion of memory so that a
- valid solution may be reached again.
-\end_layout
-
-\begin_layout Standard
-It is worth mentioning that the evaluator itself has no influence in the
- optimization process from a quality point-of-view.
- Its task is to provide feedback and updated information to the agents that
- move through the service area.
- From a performance point-of-view, the importance of the evaluator is significan
-t, as it will be shown in the following sections.
-\end_layout
-
-\begin_layout Section
-Implementation 
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:06-Implementation"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The evaluation of the objective function was completely implemented on the
- GPU using OpenCL (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:02-OpenCL"
-
-\end_inset
-
-).
- The reason behind this decision is the impact objective-function evaluation
- has on the performance of the optimization system as a whole, as discussed
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:02-Black_box_optimization"
-
-\end_inset
-
-.
- The implementation of the agents is also based on the GPU, which drastically
- reduces the number of data transfers between CPU and GPU, since all problem
- elements are available on the GPU during the optimization process.
- Consequently, careful memory utilization and organization are critical
- to successfully accommodate all involved problem elements on the GPU, the
- memory of which is significantly smaller than the RAM memory available
- in desktop computers.
-\end_layout
-
-\begin_layout Subsection
-Parallel agents on GPU
 \end_layout
 
 \begin_layout Standard
@@ -3693,7 +3696,7 @@ GB of DDR3 RAM.
  extensions.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Results
 \end_layout
 
@@ -4317,8 +4320,8 @@ Net
 
 \end_layout
 
-\begin_layout Subsection
-Convergence analysis
+\begin_layout Subsubsection
+Performance analysis
 \end_layout
 
 \begin_layout Standard
@@ -4652,13 +4655,16 @@ name "fig:06-Convergence_Net3"
 
 \end_layout
 
-\begin_layout Subsection
-Performance analysis
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-In this section, the performance analysis of the experimental results is
- presented.
+In the following, the speed-performance analysis of the experimental simulations
+ is presented.
  This analysis covers the running times during the optimization of the first
  three test networks, i.e., Net
 \begin_inset Formula $_{1}$

@@ -241,6 +241,704 @@ ng all transmission locations (15 x 13km, resolution 25m) and a large one
  memory for large regions.
 \end_layout
 
+\begin_layout Subsubsection
+Performance analysis
+\end_layout
+
+\begin_layout Standard
+In the following, in order to confirm the benefits of PRATO as a parallel
+ simulation framework for radio networks, we contrast the running time of
+ a serial implementation deployed in one host against PRATO over multiple
+ processors.
+\end_layout
+
+\begin_layout Standard
+We have adapted the serial implementation for execution in a feedback loop
+ together with the DASA.
+ To this end, the implemented code dealing with input-data load and set
+ up has been moved outside the loop, so that the objective-function evaluations
+ alone, including the radio-propagation predictions, are executed in each
+ iteration of the optimization algorithm.
+ This way, only the running time is compared as a performance metric, excluding
+ load time from the analysis, since both implementations use the same input-data
+ sets.
+\end_layout
+
+\begin_layout Standard
+The running-time measurements for the adapted serial implementation were
+ collected on a host featuring an i7-2600K quad-core processor.
+ The measurements for PRATO were taken over multiple processors, with only
+ the master process running on an i7-2600K CPU.
+ Please refer to Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:05-Experimental_environment"
+
+\end_inset
+
+ for a reference of the hardware configuration and process layout used during
+ the experimental simulations.
+\end_layout
+
+\begin_layout Standard
+We have performed 300 independent time-measurements of the adapted serial
+ implementation.
+ From this set, we pick the minimum (fastest) running time of a single radio-pro
+pagation prediction (0.526333
+\begin_inset space ~
+\end_inset
+
+sec) in order to linearly estimate the running time of the complete optimization
+ process for each of the three test networks.
+ Time-measurement gathering for the running time of PRATO over multiple
+ processors has been performed during the simulation runs presented in the
+ previous section, from which the minimum time is used for comparison.
+ All gathered running-time measurements and estimations for the adapted
+ serial implementation are depicted in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Performance-analysis-serial"
+
+\end_inset
+
+.
+ We may observe that the estimated running times of the optimization process
+ using the adapted serial implementation are unfeasible for practical use.
+ Specifically, the smallest network, Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+, shows an estimated running time of over 42 hours, while the biggest network
+ instance, Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+, raises over 2,200 hours! 
+\end_layout
+
+\begin_layout Standard
+The best running times of the parallel implementation with multiple processes
+ deployed on the computer cluster are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Performance-analysis-parallel"
+
+\end_inset
+
+.
+ The speed-up factors for each test network, ranging from 4.50 to 119.58,
+ are also depicted in the third row.
+ These values are an estimation, since they are based on the estimated running
+ times of the adapted serial version.
+ Despite this, we may clearly notice how the estimated efficiency values,
+ calculated as the speed-up factor over the number of processes, increase
+ with the problem size, thus improving the exploitation of the computing
+ resources of the cluster.
+ This behavior corresponds with the speed-up measurements presented in Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:strong_scalability_speedup"
+
+\end_inset
+
+.
+ Nevertheless, the obtained speed-up factors are substantial, lowering the
+ running time of the optimization process from 84.2 to 8.7 hours for Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+, from 2,280.8 hours to 19.1 hours for the biggest instance, Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+, and from 42.1 to 9.3 hours for Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+, making the presented optimization approach feasible for practical use
+ in real-world radio networks.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Measured and estimated running times of the clutter-optimization process
+ using the adapted serial implementation.
+ Times are depicted in seconds for the three test networks.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Performance-analysis-serial"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2.5cm">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="1.5cm">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Fastest radio-coverage prediction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+0.526333
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+0.526333
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+0.526333
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Estimated objective-function evaluation time
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+6.315996
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+68.423290
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+3.157998
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Estimated optimization-process time
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+3.031678
+\begin_inset Formula $\cdot10^{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+8.210794
+\begin_inset Formula $\cdot10^{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+1.515839
+\begin_inset Formula $\cdot10^{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Measured running times (in seconds) of the clutter-optimization process
+ using PRATO over multiple processors.
+ The number of deployed worker processes and speed-up factors are also depicted
+ for the three test networks.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Performance-analysis-parallel"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2.5cm">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="1.5cm">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Fastest optimization-process time
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+3.154711
+\begin_inset Formula $\cdot10^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+6.866361
+\begin_inset Formula $\cdot10^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+3.368531
+\begin_inset Formula $\cdot10^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Number of worker processes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+130
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Estimated speed-up
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+9.61x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+119.58x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+4.50x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Estimated efficiency
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+0.80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+0.92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+0.75
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Summary
 \end_layout

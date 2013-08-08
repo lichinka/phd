@@ -65,6 +65,22 @@ Conclusion and further work
 \end_layout
 
 \begin_layout Standard
+We have presented an open-source simulation framework for coverage-planning
+ and optimization of radio networks (PRATO)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The source code is available for download from the corresponding author's
+ home page, http://csd.ijs.si/benedicic/
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Encouraged by the favorable results, further work will include abstracting
  the introduced MWD principle into a multi-purpose parallel framework such
  as Charm++ 
@@ -76,6 +92,23 @@ key "Kale-The_Charm_Approach:2013"
 
 , which provides a functionality for overlapping execution and communication,
  as well as fault tolerance.
+\end_layout
+
+\begin_layout Standard
+Encouraged by the favorable results, further work will include abstracting
+ some of the introduced principles and methodology into a multi-purpose
+ library for parallel simulation of radio-coverage predictions, which shall
+ be published as free and open source software.
+ The aim of such tool is to ultimately validate the suitability and usefulness
+ of the presented framework.
+\end_layout
+
+\begin_layout Standard
+Furthermore, in the context of radio-coverage planning activities carried
+ out at the Radio Network department of Telekom Slovenije, d.d., supplementary
+ testing of PRATO as a coverage-planning tool is currently being conducted.
+ So far, the performed predictions show evidence of faster and high-quality
+ results when compared with well-established industrial software tools.
 \end_layout
 
 \begin_layout Standard

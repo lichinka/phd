@@ -498,7 +498,7 @@ This thesis focuses on providing methods and tools to ??? the pointed drawbacks.
 \end_layout
 
 \begin_layout Section
-Scope
+Scope (ali se temu tako rece???)
 \end_layout
 
 \begin_layout Standard
@@ -635,7 +635,7 @@ Finally, we will evaluate the benefits of the above-mentioned framework
 \end_layout
 
 \begin_layout Section
-Contributions
+Contributions (na koncu, v Conclusion)???
 \end_layout
 
 \begin_layout Standard
@@ -709,7 +709,7 @@ Chapter
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Background-and-motivation"
+reference "chap:02-Optimization_models"
 
 \end_inset
 

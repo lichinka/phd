@@ -107,5 +107,19 @@ reference "chap:04-Framework-design-and-implementation"
  Innovative R&D on Science and Technology (First Program).
 \end_layout
 
+\begin_layout Standard
+The authors would like to especially thank the staff at the Nagasaki Advanced
+ Computing Center (NACC) of the Nagasaki University for their support while
+ making the computer cluster DEGIMA available for the experimental simulations.
+ We are also grateful with the radio engineers at Telekom Slovenije, d.d.,
+ for supplying the network data sets and sharing their professional expertise
+ throughout the creation of this work.
+\end_layout
+
+\begin_layout Standard
+This project was co-financed by the European Union, through the European
+ Social Fund.
+\end_layout
+
 \end_body
 \end_document

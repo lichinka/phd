@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Part
-Background and motivation
+Preliminaries
 \end_layout
 
 \begin_layout Standard
@@ -72,10 +72,10 @@ Background and motivation
 \end_layout
 
 \begin_layout Chapter
-Background and motivation 
+Optimization methods 
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Background-and-motivation"
+name "chap:02-Optimization_models"
 
 \end_inset
 
@@ -102,7 +102,7 @@ Short introduction to the content of this chapter.
 \end_layout
 
 \begin_layout Section
-Optimization models
+Introduction
 \end_layout
 
 \begin_layout Standard
@@ -336,7 +336,7 @@ reference "eq:02-maximization_minization_problem_relation"
 , respectively.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Gradient-based methods
 \end_layout
 
@@ -647,7 +647,7 @@ But maybe the biggest concern with gradient-based methods is they assume
  moderate and large instances.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Linear and non-linear programming
 \end_layout
 
@@ -885,7 +885,7 @@ key "Fu-Optimization_for_simulation:2002"
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Metaheuristics
 \end_layout
 
@@ -1135,324 +1135,7 @@ Undoubtedly, metaheuristics are rapidly gaining popularity as optimization
 \end_layout
 
 \begin_layout Subsection
-Black-box optimization 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:02-Black_box_optimization"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A problem complexity is equivalent to the complexity of the best algorithm
- solving that problem 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Talbi-Metaheuristics_from_design_to_implementation:2009"
-
-\end_inset
-
-.
- If there exists a polynomial-time algorithm to solve a problem, we say
- the problem is easy or tractable.
- Similarly, if a problem is difficult or intractable, there is no known
- polynomial-time algorithm to solve it.
- 
-\end_layout
-
-\begin_layout Standard
-Many optimization problems cannot be formulated with a clear analytical
- mathematical notation.
- In such cases, the objective function may become a black box 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kargupta-Search_blackbox_optimization_and_sample_complexity:1996"
-
-\end_inset
-
-.
- This is one of the main advantages when using metaheuristics, i.e.
- there is no need of a complete knowledge of the targeted model.
- Indeed, in a black box optimization, no analytical formulation of the objective
- exists 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Talbi-Metaheuristics_from_design_to_implementation:2009"
-
-\end_inset
-
-, as Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:02-black_box_optimization"
-
-\end_inset
-
- shows.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/blackbox_optimization.eps
-	lyxscale 90
-	width 80text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-A metaheuristic algorithm process using a black box for the objective-function
- evaluation, 
-\begin_inset Formula $f(x)$
-\end_inset
-
-, of a solution, 
-\begin_inset Formula $x$
-\end_inset
-
-.
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:02-black_box_optimization"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-More specifically, we say a function 
-\begin_inset Formula $f(\vec{x})$
-\end_inset
-
-, 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\vec{x}\in\mathbb{R}^{n}$
-\end_inset
-
-,
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- is a black-box function if and only if 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Talbi-Metaheuristics_from_design_to_implementation:2009"
-
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Itemize
-the domain 
-\begin_inset Formula $\vec{x}$
-\end_inset
-
- is known,
-\end_layout
-
-\begin_layout Itemize
-it is possible to get the value of 
-\begin_inset Formula $f$
-\end_inset
-
- for each 
-\begin_inset Formula $\vec{x}$
-\end_inset
-
- based on simulation, and
-\end_layout
-
-\begin_layout Itemize
-there is no other information available for function 
-\begin_inset Formula $f$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Typically, the experiments associated with these kind of problems are very
- expensive in terms of time and cost, since a simulation must be forced
- to evaluate the solution.
- Generally speaking, the most time-consuming part of a metaheuristic optimizatio
-n process is the evaluation of the objective function 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Talbi_Metaheuristics:2009"
-
-\end_inset
-
-.
- This is especially true when dealing with real-world problems of areas
- such as structural design 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Barthelemy-Approximation_concepts_for_optimum_structural_design:1993"
-
-\end_inset
-
-, molecular docking 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction:2007"
-
-\end_inset
-
- and, the field on which this thesis focuses, radio-network design 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Benedicic_Pilot.power.optimization:2010"
-
-\end_inset
-
-.
- A possible subtitution for lenghty evaluations is to reduce their complexity
- by approximating the objective function, thus replacing the it with an
- approximation during the optimization process.
- This approach is known as meta-modeling 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Talbi_Metaheuristics:2009"
-
-\end_inset
-
-.
- However, when dealing with approximations, some degree of solution quality
- is inevitably sacrified.
- As we will show in the following chapters, there is a very fine balance
- between the number of evaluations and the quality of the achieved solutions.
- Consequently, reducing the time spent in objective-function evaluation
- should favorably influence the solution quality achieved by a preferred
- metaheuristic algorithm.
- A major portion of this thesis is dedicated to improve this specific aspect
- on the area of radio-network optimization.
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In practice, black-box evaluation of the objective function presents an
- inherent problem.
- In the context of research works related to radio-network optimization,
- there is an increasingly habit of not providing the black-box used to evaluate
- a given approach, and that leads to the results provided.
- A quick review of the state-of-the-art in radio-network optimization indicates
- that this fact has become increasingly regular in several published works
- [refs???].
- This fact creates a barrier to one of the most important phases of scientific
- methodology: experimental reproducibility 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gauch2002scientific"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-There are several reasons why the situation has reached this point.
- It is a known fact that proprierary software, providing good computational
- models for radio-network simulation, is a very expensive tool for science.
- Even neglecting the economical aspect, but considering the great variety
- of software packages and license combinations, it is practically impossible
- for a research laboratory to have at its disposal the whole pallete of
- commercially-available solutions.
- Moreover, genuine users of these applications are generally not allowed
- to mention the formats, protocols, or algorithms used by the proprietary
- software, since their disclosure is explicitly forbidden by the commercial
- licenses.
-\end_layout
-
-\begin_layout Standard
-If we turn our attention to non-commercial and open-source packages for
- radio-network simulation [refs!???], we would quickly run into mainly two
- difficulties: poor documentation and low scalability.
- The scalability issues shown by some projects [refs!???] retrain the packages
- to be used in real-world environments, where big problem instances are
- the rule.
- Despite this, it is a huge merit and acknowledgement to the authors of
- this packages, not only for providing it to the scientific community, including
- their source code, but fundamentaly because providing an environment in
- which different kinds of simulations are completely reproducible.
- Regarding the lack of documentation, it represents a big hurdle when extending
- the base code, which becomes a difficult taskj without the help of the
- original authors of the package, who have a deep knowlegge of the code-base.
- This knowledge is required in order to effectivelly expand the functionality
- of the open-source tool in question.
- This is especially true when dealing with complex simulation frameworks,
- as the ones used for radio networks.
-\end_layout
-
-\begin_layout Subsection
-Metaheuristic algorithms
+Metaheuristic algorithms (zbrisi ta naslov???)
 \end_layout
 
 \begin_layout Standard
@@ -1488,7 +1171,7 @@ In the following sections we give a short introduction about their functioning
  and controlling parameters.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Differential evolution 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1645,7 +1328,7 @@ key "price2005differential_evolution"
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Differential ant-stigmergy algorithm 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1736,7 +1419,7 @@ key "korosec2010_DASA"
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Simulated annealing 
 \begin_inset CommandInset label
 LatexCommand label
@@ -2128,8 +1811,585 @@ Notice also that the acceptance of a move in the search space is left to
  SA and its stochastic components.
 \end_layout
 
+\begin_layout Subsection
+Black-box optimization 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Black_box_optimization"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A problem complexity is equivalent to the complexity of the best algorithm
+ solving that problem 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+.
+ If there exists a polynomial-time algorithm to solve a problem, we say
+ the problem is easy or tractable.
+ Similarly, if a problem is difficult or intractable, there is no known
+ polynomial-time algorithm to solve it.
+ 
+\end_layout
+
+\begin_layout Standard
+Many optimization problems cannot be formulated with a clear analytical
+ mathematical notation.
+ In such cases, the objective function may become a black box 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kargupta-Search_blackbox_optimization_and_sample_complexity:1996"
+
+\end_inset
+
+.
+ This is one of the main advantages when using metaheuristics, i.e.
+ there is no need of a complete knowledge of the targeted model.
+ Indeed, in a black box optimization, no analytical formulation of the objective
+ exists 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+, as Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-black_box_optimization"
+
+\end_inset
+
+ shows.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/blackbox_optimization.eps
+	lyxscale 90
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A metaheuristic algorithm process using a black box for the objective-function
+ evaluation, 
+\begin_inset Formula $f(x)$
+\end_inset
+
+, of a solution, 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:02-black_box_optimization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+More specifically, we say a function 
+\begin_inset Formula $f(\vec{x})$
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{n}$
+\end_inset
+
+,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is a black-box function if and only if 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi-Metaheuristics_from_design_to_implementation:2009"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+the domain 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ is known,
+\end_layout
+
+\begin_layout Itemize
+it is possible to get the value of 
+\begin_inset Formula $f$
+\end_inset
+
+ for each 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ based on simulation, and
+\end_layout
+
+\begin_layout Itemize
+there is no other information available for function 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Typically, the experiments associated with these kind of problems are very
+ expensive in terms of time and cost, since a simulation must be forced
+ to evaluate the solution.
+ Generally speaking, the most time-consuming part of a metaheuristic optimizatio
+n process is the evaluation of the objective function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ This is especially true when dealing with real-world problems of areas
+ such as structural design 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barthelemy-Approximation_concepts_for_optimum_structural_design:1993"
+
+\end_inset
+
+, molecular docking 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction:2007"
+
+\end_inset
+
+ and, the field on which this thesis focuses, radio-network design 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Pilot.power.optimization:2010"
+
+\end_inset
+
+.
+ A possible subtitution for lenghty evaluations is to reduce their complexity
+ by approximating the objective function, thus replacing the it with an
+ approximation during the optimization process.
+ This approach is known as meta-modeling 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Talbi_Metaheuristics:2009"
+
+\end_inset
+
+.
+ However, when dealing with approximations, some degree of solution quality
+ is inevitably sacrified.
+ As we will show in the following chapters, there is a very fine balance
+ between the number of evaluations and the quality of the achieved solutions.
+ Consequently, reducing the time spent in objective-function evaluation
+ should favorably influence the solution quality achieved by a preferred
+ metaheuristic algorithm.
+ A major portion of this thesis is dedicated to improve this specific aspect
+ on the area of radio-network optimization.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In practice, black-box evaluation of the objective function presents an
+ inherent problem.
+ In the context of research works related to radio-network optimization,
+ there is an increasingly habit of not providing the black-box used to evaluate
+ a given approach, and that leads to the results provided.
+ A quick review of the state-of-the-art in radio-network optimization indicates
+ that this fact has become increasingly regular in several published works
+ [refs???].
+ This fact creates a barrier to one of the most important phases of scientific
+ methodology: experimental reproducibility 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gauch2002scientific"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+There are several reasons why the situation has reached this point.
+ It is a known fact that proprierary software, providing good computational
+ models for radio-network simulation, is a very expensive tool for science.
+ Even neglecting the economical aspect, but considering the great variety
+ of software packages and license combinations, it is practically impossible
+ for a research laboratory to have at its disposal the whole pallete of
+ commercially-available solutions.
+ Moreover, genuine users of these applications are generally not allowed
+ to mention the formats, protocols, or algorithms used by the proprietary
+ software, since their disclosure is explicitly forbidden by the commercial
+ licenses.
+\end_layout
+
+\begin_layout Standard
+If we turn our attention to non-commercial and open-source packages for
+ radio-network simulation [refs!???], we would quickly run into mainly two
+ difficulties: poor documentation and low scalability.
+ The scalability issues shown by some projects [refs!???] retrain the packages
+ to be used in real-world environments, where big problem instances are
+ the rule.
+ Despite this, it is a huge merit and acknowledgement to the authors of
+ this packages, not only for providing it to the scientific community, including
+ their source code, but fundamentaly because providing an environment in
+ which different kinds of simulations are completely reproducible.
+ Regarding the lack of documentation, it represents a big hurdle when extending
+ the base code, which becomes a difficult taskj without the help of the
+ original authors of the package, who have a deep knowlegge of the code-base.
+ This knowledge is required in order to effectivelly expand the functionality
+ of the open-source tool in question.
+ This is especially true when dealing with complex simulation frameworks,
+ as the ones used for radio networks.
+\end_layout
+
+\begin_layout Chapter
+Principles of mobile radio networks
+\end_layout
+
 \begin_layout Section
-Optimization of radio networks
+Quality of service 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Quality-of-service"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+QoS...???
+\end_layout
+
+\begin_layout Section
+Handover and soft-handover 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Handover-and-soft-handover"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In mobile networks, handover is one of the main features that allows user's
+ mobility 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+ The concept behind the handover operation is simple: when a user moves
+ from the coverage area of a cell to the coverage area of a neighboring
+ cell, the system creates a new connection with the latter cell and disconnects
+ the user from the former one, while keeping the current connection active.
+ Soft-handover (SHO
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SHO"
+description "Soft handover."
+
+\end_inset
+
+), on the other hand, is a possibility available in mobile networks using
+ the Wideband Code Division Multiple Access (WCDMA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "WCDMA"
+description "Wideband Code Division Multiple Access."
+
+\end_inset
+
+) technology, which the UMTS employs.
+ SHO enhances handover functionality by allowing a user to potentially operate
+ on multiple radio links in parallel.
+ Since different users are separated by unique spreading codes, the detection
+ of single user's signal is implemented by despreading with the same code
+ sequence used in the transmitter 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Every mobile terminal constantly monitors the common pilot power channel
+ (CPICH
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "CPICH"
+description "Common Pilot power Channel."
+
+\end_inset
+
+) of the connected cell and its neighbors.
+ The information about these measurements is sent to the network by the
+ user terminal (i.e.
+ mobile).
+ The SHO condition depends on the relative received signal quality from
+ different cells and the SHO window, which triggers the addition of a cell
+ to the user's active set.
+ Depending on radio propagation characteristics and different transceiver
+ capabilities, the radio transmission can gain more than 3 dB out of a SHO
+ situation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
+ From this point of view, SHO is a method to reduce interference and improve
+ radio quality, particularly at the cell border where radio coverage is
+ of inferior quality.
+ In UMTS Release 99 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "3GPP_R99"
+
+\end_inset
+
+, SHO is specified to work from the network towards the user (i.e.
+ downlink), and from the user towards the network (i.e.
+ uplink).
+\end_layout
+
+\begin_layout Standard
+With the introduction of High Speed Packet Access (HSPA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HSPA"
+description "High Speed Packet Access."
+
+\end_inset
+
+) as an improvement of the performance existing in WCDMA protocols, the
+ role SHO plays in mobile network configuration and functioning slightly
+ changed.
+ The key difference is that High Speed Downlink Packet Access (HSDPA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HSDPA"
+description "High Speed Downlink Packet Access."
+
+\end_inset
+
+) does not support SHO, whereas the High Speed Uplink Packet Access (HSUPA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HSUPA"
+description "High Speed Uplink Packet Access."
+
+\end_inset
+
+) does.
+ This particular distinction is discussed in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
+
+\end_inset
+
+, since it has some key implications in the balanced distribution of SHO
+ areas, and thus in the quality of HSPA services 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "holma2006hsdpa"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Add a Figure to better explain SHO and SHO areas.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Pilot signal and power 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:02-Pilot-signal-and-power"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Explicar como funciona esto en GSM,UMTS y LTE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The CPICH transmit power is typically between 5% to 10% of the total downlink
+ transmit power of the base station 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RadioNetworkPlanningAndOptimisationForUMTS"
+
+\end_inset
+
+, but there is no standardized method to ﬁnd a CPICH power setting.
+\end_layout
+
+\begin_layout Standard
+The CPICH transmits in the downlink of a UMTS cell system.
+ The transmit power is usually between 5% and 10% of the total power available
+ at the base station 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Holma_WCDMA.for.UMTS:2005"
+
+\end_inset
+
+.
+ The capacity of a cell is limited by the amount of available power at the
+ base station and the interference level at the mobile terminal.
+ The coverage area of any cell is controlled by changing its pilot power,
+ which consequently modifies the service area of the network.
+\end_layout
+
+\begin_layout Standard
+The CPICH transmit power is common to many different planning and optimization
+ problems in UMTS networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Nawrocki_Understanding:2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Chapter
+Optimization of radio networks 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:02-Optimization_of_radio_networks"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
 \end_layout
 
 \begin_layout Standard
@@ -2268,8 +2528,11 @@ A common limitation of several optimization methods appearing in the literature
  so that they are useful for practical use.
 \end_layout
 
-\begin_layout Section
-Survey of optimization problems for radio networks
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3888,260 +4151,11 @@ Also, as it may be observed in some of the presented references, it is often
  end to find better solutions in the vicinity of a current promising one.
 \end_layout
 
-\begin_layout Section
-Principles of mobile radio networks
-\end_layout
-
-\begin_layout Subsection
-Quality of service 
+\begin_layout Chapter
+Principles of GPU programming 
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:02-Quality-of-service"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-QoS...???
-\end_layout
-
-\begin_layout Subsection
-Handover and soft-handover 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:02-Handover-and-soft-handover"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In mobile networks, handover is one of the main features that allows user's
- mobility 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
-
-\end_inset
-
-.
- The concept behind the handover operation is simple: when a user moves
- from the coverage area of a cell to the coverage area of a neighboring
- cell, the system creates a new connection with the latter cell and disconnects
- the user from the former one, while keeping the current connection active.
- Soft-handover (SHO
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "SHO"
-description "Soft handover."
-
-\end_inset
-
-), on the other hand, is a possibility available in mobile networks using
- the Wideband Code Division Multiple Access (WCDMA
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "WCDMA"
-description "Wideband Code Division Multiple Access."
-
-\end_inset
-
-) technology, which the UMTS employs.
- SHO enhances handover functionality by allowing a user to potentially operate
- on multiple radio links in parallel.
- Since different users are separated by unique spreading codes, the detection
- of single user's signal is implemented by despreading with the same code
- sequence used in the transmitter 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Every mobile terminal constantly monitors the common pilot power channel
- (CPICH
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "CPICH"
-description "Common Pilot power Channel."
-
-\end_inset
-
-) of the connected cell and its neighbors.
- The information about these measurements is sent to the network by the
- user terminal (i.e.
- mobile).
- The SHO condition depends on the relative received signal quality from
- different cells and the SHO window, which triggers the addition of a cell
- to the user's active set.
- Depending on radio propagation characteristics and different transceiver
- capabilities, the radio transmission can gain more than 3 dB out of a SHO
- situation 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
-
-\end_inset
-
-.
- From this point of view, SHO is a method to reduce interference and improve
- radio quality, particularly at the cell border where radio coverage is
- of inferior quality.
- In UMTS Release 99 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "3GPP_R99"
-
-\end_inset
-
-, SHO is specified to work from the network towards the user (i.e.
- downlink), and from the user towards the network (i.e.
- uplink).
-\end_layout
-
-\begin_layout Standard
-With the introduction of High Speed Packet Access (HSPA
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "HSPA"
-description "High Speed Packet Access."
-
-\end_inset
-
-) as an improvement of the performance existing in WCDMA protocols, the
- role SHO plays in mobile network configuration and functioning slightly
- changed.
- The key difference is that High Speed Downlink Packet Access (HSDPA
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "HSDPA"
-description "High Speed Downlink Packet Access."
-
-\end_inset
-
-) does not support SHO, whereas the High Speed Uplink Packet Access (HSUPA
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "HSUPA"
-description "High Speed Uplink Packet Access."
-
-\end_inset
-
-) does.
- This particular distinction is discussed in Chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
-
-\end_inset
-
-, since it has some key implications in the balanced distribution of SHO
- areas, and thus in the quality of HSPA services 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "holma2006hsdpa"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Add a Figure to better explain SHO and SHO areas.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Pilot signal and power 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:02-Pilot-signal-and-power"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Explicar como funciona esto en GSM,UMTS y LTE
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The CPICH transmit power is typically between 5% to 10% of the total downlink
- transmit power of the base station 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RadioNetworkPlanningAndOptimisationForUMTS"
-
-\end_inset
-
-, but there is no standardized method to ﬁnd a CPICH power setting.
-\end_layout
-
-\begin_layout Standard
-The CPICH transmits in the downlink of a UMTS cell system.
- The transmit power is usually between 5% and 10% of the total power available
- at the base station 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
-
-\end_inset
-
-.
- The capacity of a cell is limited by the amount of available power at the
- base station and the interference level at the mobile terminal.
- The coverage area of any cell is controlled by changing its pilot power,
- which consequently modifies the service area of the network.
-\end_layout
-
-\begin_layout Standard
-The CPICH transmit power is common to many different planning and optimization
- problems in UMTS networks 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Nawrocki_Understanding:2006"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Section
-Principles of GPUs 
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:02-About_GPUs"
+name "chap:02-Principles_of_GPU_programming"
 
 \end_inset
 
@@ -4169,7 +4183,7 @@ How to obtain efficient GPU kernels: An illustration using FMM & FGT algorithms
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 OpenCL 
 \begin_inset CommandInset label
 LatexCommand label
