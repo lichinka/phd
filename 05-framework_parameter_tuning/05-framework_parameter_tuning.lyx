@@ -151,7 +151,14 @@ ation predictions.
 
 \begin_layout Standard
 The content of this chapter extends the research work published by the author
- in ???.
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013"
+
+\end_inset
+
+.
  The rest of this chapter is organized as follows.
  Section 
 \begin_inset ERT
@@ -324,8 +331,8 @@ Related work
 \begin_layout Standard
 There are few examples of radio-network simulators in the literature 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Ozimek_Open.source.radio.coverage.prediction:2010,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Pillekeit-A_Hybrid_simulation_framework_for_the_evaluation_of_common_radio_resource_management_scenarios:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Sanchez_Performance_evaluation_of_OFDMA_wireless_systems_using_WM_SIM:2006,Yeung-Effects_of_detailed_OFDM_modeling_in_network_simulation:2005"
+LatexCommand cite
+key "Ozimek_Open.source.radio.coverage.prediction:2010,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Sanchez_Performance_evaluation_of_OFDMA_wireless_systems_using_WM_SIM:2006,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004"
 
 \end_inset
 
@@ -462,7 +469,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
+reference "sub:04-Radio_propagation_model"
 
 \end_inset
 
@@ -883,11 +890,25 @@ description "User equipment or mobile device."
 \begin_inset space ~
 \end_inset
 
-???, Section
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Principles_of_mobile_radio_networks"
+
+\end_inset
+
+, Section
 \begin_inset space ~
 \end_inset
 
-???) in order to keep the best possible connection to the network.
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-Handover-and-soft-handover"
+
+\end_inset
+
+) in order to keep the best possible connection to the network.
  Within this context, the best connection is selected by measuring the signal
  strength or quality of the neighboring cells.
  In LTE networks, the UE measures two parameters from the reference signal
@@ -3076,11 +3097,25 @@ reference "sec:05-Parameter_tuning_radio-propagation_model"
 \begin_inset space ~
 \end_inset
 
-???, Section
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_models"
+
+\end_inset
+
+, Section
 \begin_inset space ~
 \end_inset
 
-???) is the tool of choice for optimizing the signal losses due to clutter.
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-DASA"
+
+\end_inset
+
+) is the tool of choice for optimizing the signal losses due to clutter.
 \end_layout
 
 \begin_layout Standard
@@ -3095,11 +3130,32 @@ key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:20
 
 \end_inset
 
- in general, and in this thesis in particular (see Chapter
+ in general, and in this thesis in particular (see Chapters
 \begin_inset space ~
 \end_inset
 
-??? and ???).
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_of_radio_networks"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
+
+\end_inset
+
+).
  Second, in 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -3128,16 +3184,41 @@ The optimization objective consists of adjusting the loss values of the
 \begin_inset Formula $pl_{\mathrm{CLUT}}(d_{(x,y)})$
 \end_inset
 
- from Equation
+ in Equation
 \begin_inset space ~
 \end_inset
 
-(???) in Section
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:04-Hata_pathloss"
+
+\end_inset
+
+) of Chapter
 \begin_inset space ~
 \end_inset
 
-???, according to a set of field measurements of multiple cells covering
- a given geographical region.
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-Radio_propagation_model"
+
+\end_inset
+
+, according to a set of field measurements of multiple cells covering a
+ given geographical region.
  The same three data sets used in Section
 \begin_inset space ~
 \end_inset
@@ -3286,11 +3367,25 @@ As it has been mentioned before, the optimization algorithm we have chosen
 \begin_inset space ~
 \end_inset
 
-???, Section
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_models"
+
+\end_inset
+
+, Section
 \begin_inset space ~
 \end_inset
 
-???).
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-DASA"
+
+\end_inset
+
+).
  The mapping between the clutter-optimization problem and DASA is as follows
 \end_layout
 
@@ -3348,7 +3443,7 @@ In this case, one simulation round consists of multiple iterations of several
 (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:mean_squared_error"
+reference "eq:05-Mean-squared_error"
 
 \end_inset
 

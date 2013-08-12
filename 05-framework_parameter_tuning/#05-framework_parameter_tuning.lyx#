@@ -1,0 +1,7705 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass MPSthesis
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part
+Radio-network planning
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Framework automated tuning 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:05-Framework_parameter_tuning"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% First paragraph has no indentation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The models and algorithms from Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+ form the basis for the radio-coverage framework used throughout this thesis.
+ Until here, the framework has been studied in the context of optimization-probl
+em solving for radio networks.
+\end_layout
+
+\begin_layout Standard
+In this chapter, the focus is shifted towards radio-network planning activities,
+ and how the framework can aid a network-planning engineer in his or her
+ everyday tasks.
+ The objective is to facilitate refined network planning, the complexity
+ of which is generally beyond the scope of any manual approach.
+\end_layout
+
+\begin_layout Standard
+A central part of a radio-planning tool is its radio-propagation model.
+ But the calculated signal-propagation predictions will be as good as the
+ input data used for their estimation.
+ Moreover, acquiring the necessary information to support the decision making
+ in this context is a challenging task.
+ In practical situations, an emitted signal propagates by interacting with
+ the surrounding environments.
+ Consequently, the ability of a propagation model to adapt to the environment
+ where it is used improves the accuracy of the calculated signal-propagation
+ predictions.
+\end_layout
+
+\begin_layout Standard
+Within this context, this chapter presents two automated-tuning capabilities
+ for PRATO.
+ The first one involves the parameter tuning of the empirical radio-propagation
+ model using a snapshot of field measurements.
+ The second one involves the optimization of clutter losses over different
+ regions of the country, therefore adapting the losses due to land usage
+ to the local conditions of each region.
+ The results of the experimental simulations, performed over three regions
+ of the real LTE network deployed by Telekom Slovenije, d.d., show the suitability
+ of the presented methods to improve the accuracy of the calculated radio-propag
+ation predictions.
+\end_layout
+
+\begin_layout Standard
+The content of this chapter extends the research work published by the author
+ in ???.
+ The rest of this chapter is organized as follows.
+ Section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{sec:Radio-propagation-prediction}
+\end_layout
+
+\end_inset
+
+ introduces principles of radio-propagation prediction, and the mathematical
+ model used.
+ The parameter-tuning problem and the analytical approach for tackling it
+ are presented in Section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{sec:Parameter-tuning}
+\end_layout
+
+\end_inset
+
+, including the simulations performed on the framework and their results.
+ Section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{sec:Clutter-optimization}
+\end_layout
+
+\end_inset
+
+ concentrates on describing the optimization problem involving the regional
+ adaptation of signal losses due to clutter, including the performed simulations
+ the achieved results.
+ Finally, Section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{sec:Related-work}
+\end_layout
+
+\end_inset
+
+ gives an overview of relevant publications, describing how they relate
+ to our work, before drawing some conclusions.
+\end_layout
+
+\begin_layout Section
+Motivation
+\end_layout
+
+\begin_layout Standard
+With the advent of long-term evolution (LTE) as the fourth generation (4G)
+ in cellular technology, mobile operators are facing the challenges of deploying
+ a new network.
+ LTE follows the well established universal mobile telecommunication system/high
+-speed packet access (UMTS/HSPA) combo, targeting higher peak data rates,
+ higher spectral efficiency and lower latency 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The deployment of a new mobile network is always a challenge for mobile
+ operators, who constantly struggle to find the optimal investment in order
+ to provide a competitive network in terms of coverage and quality of service.
+ Indeed, coverage planning remains a key problem that all operators have
+ to deal with.
+ It has proven to be a fundamental issue since the deployment of the first
+ GSM networks, more than 20 year ago.
+\end_layout
+
+\begin_layout Standard
+One of the primary objectives of radio-coverage planning is to efficiently
+ use the allocated frequency band for a geographic area to be satisfactorily
+ reached with the radio stations of the network.
+ To this end, radio-coverage prediction tools are of great importance as
+ they allow network engineers to test different configurations before physically
+ implementing the changes.
+ However, to accurately predict the radio coverage of a mobile network is
+ a very complex task, mainly due to the wide range of various combinations
+ of hardware and configuration parameters which have to be analyzed in the
+ context of different environments.
+ The complexity of the problem means that radio-coverage prediction is generally
+ a computationally-intensive and time-consuming task, hence the importance
+ of fast and accurate prediction tools.
+\end_layout
+
+\begin_layout Standard
+Although different mathematical models have been proposed for radio-propagation
+ modeling, none of them excels in a network-wide scenario 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Shabbir_Comparison_of_radio_propagation_models:2011"
+
+\end_inset
+
+.
+ Empirical propagation models usually give good results with a limited computati
+onal effort.
+ However, for improved accuracy, the model parameters have to be adapted
+ to better fit a specific network or region within it, mainly because of
+ inaccuracies in input data and environmental changes in the network region,
+ e.g.
+ foliage of trees or snow.
+ Consequently, a combination of different parameters is generally needed
+ in order to reliably calculate radio-propagation predictions for particular
+ environments.
+ Moreover, since the number of deployed cells (transmitters) keeps growing
+ with the adoption of modern standards 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010"
+
+\end_inset
+
+, there is a clear need for a radio propagation tool that is able to cope
+ with larger work loads in a feasible amount of time.
+\end_layout
+
+\begin_layout Standard
+To address the afore-mentioned issues, we adapt the parameters of an empirical
+ propagation model to a set of field measurements.
+ The parameter tuning is analytically calculated per cell, in order to increase
+ the accuracy of the calculated predictions.
+ Moreover, we fine tune the signal losses due to land usage (clutter) in
+ a regional basis, using an optimization approach.
+ As a working framework to tackle the presented problems, we use a parallel
+ radio-prediction tool 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013"
+
+\end_inset
+
+, thus showing the suitability of the presented framework for real-world
+ planning and optimization of LTE radio networks.
+ Particularly, we show the tool capabilities to handle several parallel
+ radio-prediction runs using a metaheuristic algorithm and distributed objective
+-function evaluation, while resolving the clutter optimization problem.
+\end_layout
+
+\begin_layout Section
+Related work
+\end_layout
+
+\begin_layout Standard
+There are few examples of radio-network simulators in the literature 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ozimek_Open.source.radio.coverage.prediction:2010,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Pillekeit-A_Hybrid_simulation_framework_for_the_evaluation_of_common_radio_resource_management_scenarios:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Sanchez_Performance_evaluation_of_OFDMA_wireless_systems_using_WM_SIM:2006,Yeung-Effects_of_detailed_OFDM_modeling_in_network_simulation:2005"
+
+\end_inset
+
+.
+ Most of these tools were developed for academic research, thus not targeting
+ industrial-sized environments.
+ 
+\end_layout
+
+\begin_layout Standard
+A Matlab-based LTE simulator was proposed in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011"
+
+\end_inset
+
+.
+ It implements a standard LTE downlink physical layer, including Adaptive
+ Modulation and Coding (AMC), multiple users, MIMO transmission and scheduler.
+ Despite being open source and freely available, the fact of being implemented
+ in Matlab makes it restrictive in terms of tackling big problem instances
+ of real networks.
+\end_layout
+
+\begin_layout Standard
+A promising tool from the performance point of view was presented in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011"
+
+\end_inset
+
+, where the authors implemented a full-stack LTE system in C++.
+ Although the tool has no graphical capabilities for displaying the simulation
+ progress or outcome, they might be included, since the source code is available.
+ In our opinion, the main drawback of this tool is the lack of documentation,
+ which makes it very difficult to continue extending this work without the
+ direct help of some of the original authors.
+\end_layout
+
+\begin_layout Standard
+As an extension to the well-known NS-2 network simulator, Filiposka and
+ Trajanov 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011"
+
+\end_inset
+
+ introduced a module for radio-propagation predictions, which takes the
+ terrain profile into account.
+ In this case, the authors focus on the relief, leaving out signal loss
+ due to land-usage, which is an important factor when targeting realistic
+ radio-propagation scenarios.
+\end_layout
+
+\begin_layout Standard
+Following an optimization-oriented approach, the authors of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004"
+
+\end_inset
+
+ study the effects on location accuracy while performing semi-automated
+ optimization of the parameters of a radio-propagation model.
+ While their optimization component improves the accuracy of the radio predictio
+ns, it does so requiring human intervention, hence the term semi-automated
+ optimization.
+ In terms of the effects of location accuracy, they conclude that locations
+ with a median accuracy of around 60
+\begin_inset space ~
+\end_inset
+
+m may be used for parameter tuning.
+ Also, they notice that although the model accuracy improved after the parameter
+ tuning, it gives inadequate results when used for predicting radio propagation
+ over distant areas.
+\end_layout
+
+\begin_layout Section
+Parameter tuning of the radio-propagation model 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:05-Parameter_tuning_radio-propagation_model"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The effectiveness of the decision-making process during radio-network planning
+ is tightly coupled with the precision achieved by the propagation model
+ used.
+ In order to obtain a radio-propagation model that most accurately reflects
+ the propagation characteristics of the area covered by each radio cell
+ in the network, the parameters of the mathematical model should be adapted
+ to the environment into which it is to be used.
+ The current state-of-the-art method for such parameter tuning depends on
+ existing field-measurement data 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008"
+
+\end_inset
+
+, which are collected in advance for the area covered by the target network
+ cells.
+ Starting from an a-priori best-known set of parameters, empirically calculated
+ by the radio engineers at Telekom Slovenije, d.d., this approach adapts the
+ model parameters so that the deviation of the radio-propagation prediction
+ to a given set of field measurements is minimized.
+\end_layout
+
+\begin_layout Standard
+To calculate the radio-propagation predictions, the empirical radio-propagation
+ model, previously introduced in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-Radio_propagation_modeling"
+
+\end_inset
+
+, is used.
+ Recall that the model contains a vector of adaptable parameters, 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ For this reason, this mathematical model is especially appropriate for
+ tuning, since it can be adapted to a given scenario and its local conditions
+ by adjusting the values of the vector 
+\begin_inset Formula $\beta=(a_{0},a_{1},a_{2},a_{3})$
+\end_inset
+
+, the elements of which represent
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ the reference loss or offset;
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ the loss slope due to distance of the receiver from the transmitter;
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ the loss slope due to height of the transmitter antenna;
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $a_{3}$
+\end_inset
+
+ the loss slope due to the combined effect of the distance and height of
+ the antenna.
+\end_layout
+
+\begin_layout Standard
+The parameter tuning is performed per cell to improve local fitting of the
+ radio predictions, being its resulting solution a vector 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+ for the target cell 
+\begin_inset Formula $c\in C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Also, recall that the model includes an extra term in order to adequately
+ predict signal-loss effects due to foliage, buildings and other fabricated
+ structures.
+ These loss factors are based on the land usage, i.e., clutter data.
+ Here, twelve different clutter categories are recognized.
+ Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Clutter_categories"
+
+\end_inset
+
+ lists these categories, including their label numbers and descriptions.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Clutter-category label numbers and descriptions for the signal-loss due
+ to clutter of the radio-propagation model.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:05-Clutter_categories"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Clutter category
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Urban area without buildings, mostly roads
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Suburban area 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Urban area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dense urban area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Agricultural area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Forestall area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Swamp area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dry open land area with special vegetation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dry open land area without special vegetation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Water area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Industrial area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Park area
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Field measurements
+\end_layout
+
+\begin_layout Standard
+In mobile networks, a moving mobile device (or user equipment, UE
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "UE"
+description "User equipment or mobile device."
+
+\end_inset
+
+) constantly performs cell selection/reselection and handover (see Chapter
+\begin_inset space ~
+\end_inset
+
+???, Section
+\begin_inset space ~
+\end_inset
+
+???) in order to keep the best possible connection to the network.
+ Within this context, the best connection is selected by measuring the signal
+ strength or quality of the neighboring cells.
+ In LTE networks, the UE measures two parameters from the reference signal
+ of the network, namely the Reference Signal Received Power (RSRP) and the
+ Reference Signal Received Quality (RSRQ).
+\end_layout
+
+\begin_layout Standard
+For a certain frequency bandwidth, RSRP measures the average received power
+ over the resource elements that carry cell-specific reference signals.
+ RSRP is applicable in both idle mode (e.g., waiting for a call) and connected
+ mode (e.g., during a call).
+ During the procedure of cell selection/reselection in idle mode, RSRP is
+ used.
+ On the other hand, RSRQ is only applicable when the UE is in connected
+ mode.
+ 
+\end_layout
+
+\begin_layout Standard
+The radio-propagation prediction involves calculating the network coverage
+ over a certain region, and thus to the UEs within it.
+ Hence, in the first place, the focus is on accurately predicting the best
+ connection the UE would select in idle mode and the RSRP measurements it
+ uses.
+\end_layout
+
+\begin_layout Standard
+Here, the field measurements representing the RSRP at a given location were
+ collected using a small truck equipped with a spectrum analyzer.
+ The spectrum analyzer is connected to an external omni antenna mounted
+ on the roof of the truck, at roughly 2
+\begin_inset space ~
+\end_inset
+
+m above the ground, taking measurements at a rate of 2
+\begin_inset space ~
+\end_inset
+
+Hz.
+ To accurately establish their location points, a GPS unit was used.
+ These GPS-informed locations have been tested to be compliant with the
+ 60
+\begin_inset space ~
+\end_inset
+
+m limit mentioned in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004"
+
+\end_inset
+
+.
+ The measurements cover most of the streets within the target area, with
+ over 300,000 individual points, collected for more than 140 network cells.
+\end_layout
+
+\begin_layout Standard
+To minimize the error impact in measured RSRP, all field measurements are
+ processed so that a single value, the median, is calculated for each of
+ the measured locations.
+ This processing step improves measured-data quality in terms of possible
+ deviations due to external factors, e.g., driving speed.
+ The resulting RSRP is then used to estimate the path-loss prediction at
+ the corresponding location, the resolution of which matches that of the
+ DEM and clutter data.
+\end_layout
+
+\begin_layout Subsection
+Linear least squares 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:05-Linear_least_squares"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The approach for tuning of the radio-prediction model is to correlate the
+ field measurements with the predicted received-signal values, i.e., RSRP.
+ The new parameter set originates from the minimization of an error criterion.
+ Similar to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012,Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008"
+
+\end_inset
+
+, the minimization criterion is the squared-sum difference between the predicted
+ and the observed RSRP levels, i.e.,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E(\beta_{c})=\sum_{i=1}^{m_{c}}(p_{c}-pl_{c}(i,\beta_{c})-fm_{i})^{2},\label{eq:05-Least_squares_error}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $E(\beta_{c})$
+\end_inset
+
+ is the observed error for cell 
+\begin_inset Formula $c$
+\end_inset
+
+ given the parameters 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+ is the transmit power of cell 
+\begin_inset Formula $c$
+\end_inset
+
+, and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $pl_{c}(i,\beta_{c})$
+\end_inset
+
+ is the path loss of cell 
+\begin_inset Formula $c$
+\end_inset
+
+ at the same geographical point of 
+\begin_inset Formula $fm_{i}$
+\end_inset
+
+, i.e.,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ the 
+\begin_inset Formula $i$
+\end_inset
+
+-th field measurement out of a set of measurements for cell 
+\begin_inset Formula $c$
+\end_inset
+
+, with cardinality 
+\begin_inset Formula $m_{c}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A necessary condition for the linear least-squares method to find the global
+ minimum is the linear relationship between the predicted path loss, 
+\begin_inset Formula $pl_{c}(i,\beta)$
+\end_inset
+
+, and the vector 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008"
+
+\end_inset
+
+.
+ This condition can be verified by calculating the first derivative of 
+\begin_inset Formula $E(\beta_{c})$
+\end_inset
+
+ in terms of the of components of vector 
+\begin_inset Formula $\beta_{c}=<a_{0c},a_{1c},a_{2c},a_{3c}>$
+\end_inset
+
+, i.e., 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{0c}}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{1c}}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{2c}}=0$
+\end_inset
+
+, and 
+\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{3c}}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Simulations 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:05-Simulations"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The simulations carried out for this part of our work consist of building
+ the matrices of observed-error values, 
+\begin_inset Formula $E(\beta_{c})$
+\end_inset
+
+, for each cell 
+\begin_inset Formula $c$
+\end_inset
+
+ in the target network.
+ The linear systems of equations are then individually solved by applying
+ the linear least squares method presented in the previous section, which
+ involves the evaluation of one radio-coverage prediction per cell.
+ Each solved system holds a unique solution for a cell 
+\begin_inset Formula $c$
+\end_inset
+
+, 
+\begin_inset Formula $c\in C$
+\end_inset
+
+, denoted by the vector 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Test networks 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:05-Test_networks"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The test networks, Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+, and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, are subsets of a real LTE network deployed in Slovenia by Telekom Slovenije,
+ d.d.
+ The path-loss predictions are calculated using PRATO, with a DEM and clutter
+ map of 25
+\begin_inset space ~
+\end_inset
+
+m
+\begin_inset Formula $^{2}$
+\end_inset
+
+ resolution, and a receiver height of 2
+\begin_inset space ~
+\end_inset
+
+m above ground level.
+ A transmission radius of 16
+\begin_inset space ~
+\end_inset
+
+km defines the coverage prediction area around each network transmitter,
+ thus limiting the path-loss prediction to a distance where it is feasible
+ for a UE to connect to a cell, with a RSRP greater or equal to -124
+\begin_inset space ~
+\end_inset
+
+dBm 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011"
+
+\end_inset
+
+.
+ At the same time, the selected transmission radius provides enough overlap
+ among neighboring cells to calculate the network coverage over the whole
+ region.
+ Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Test_network_properties"
+
+\end_inset
+
+ provides more information about the test networks used, showing the number
+ of network cells, the area surface, and the covering proportion of the
+ collected field measurements in terms of the total area of each test network.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Several properties of Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, the test networks used for the experimental simulation of the framework
+ automated tuning.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:05-Test_network_properties"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0pt">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of cells 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Area (km
+\begin_inset Formula $^{2}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Field-measurement proportion (%)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+103.74
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.41
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+130 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1298.02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.02
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+386.38
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.30
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ represents a network deployed over a dominant agricultural area with almost
+ flat terrain, some forests and waters streams.
+ Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ is deployed over a densely populated urban area, containing high buildings,
+ parks and avenues.
+ The last one, Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, represents a network deployed over hilly terrain, including some smaller
+ villages and vast forests.
+ It is important to note that the number of deployed cells is directly related
+ to the population density within the region of each test network.
+ This relationship can be derived from the information listed in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Test_network_properties"
+
+\end_inset
+
+, where the number of cells is shown along the area of every test network.
+ For a clearer characterization of the test networks in terms of terrain
+ types and their extent, the proportion of each clutter category with respect
+ to the total area of every test network is shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Proportion_of_clutter_for_test_networks"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Clutter-category proportions, expressed in percent, in terms of the surface
+ area of each of the test networks.
+ The category legend is given in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Clutter_categories"
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:05-Proportion_of_clutter_for_test_networks"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="14">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+ 11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Total
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+4.53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.45
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+71.89
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+2.21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.91
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+5.53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+9.48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+3.84
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+29.73
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+48.57
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.76
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.86
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+3.99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+26.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+67.13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+100.00
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The terrain profiles are most relevant for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, since none of them contains densely populated urban areas.
+ Note that the terrain shown in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Terrain_profile_for_Net8"
+
+\end_inset
+
+ is mostly flat, since the agricultural area prevails in Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+.
+ In contrast, the terrain for Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ is dominated by hills, which are mostly covered by dense forests, including
+ some small villages in the valleys (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Terrain_profile_for_Net10"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/terrain_MS.png
+	lyxscale 10
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Terrain profile of test network Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, dominated by a flat agricultural area.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Terrain_profile_for_Net8"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/terrain_HI.png
+	lyxscale 10
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Terrain profile of test network Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, dominated by forested hills.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Terrain_profile_for_Net10"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the following, the default parameters of the radio-propagation model
+ correspond to the values provided by the engineers of the Radio Network
+ department at Telekom Slovenije, d.d.
+\end_layout
+
+\begin_layout Subsubsection
+Experimental environment 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:05-Experimental_environment"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The simulations were carried out on several computing nodes of the previously
+ presented DEGIMA cluster 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Hamada_Cluster_of_GPUs:2010"
+
+\end_inset
+
+ at the NACC of the Nagasaki University in Japan (see Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+, Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:04-Simulations"
+
+\end_inset
+
+).
+ Groups of 3, 4, and 34 nodes were used for executing the simulations of
+ the different problem instances, i.e., Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, respectively.
+\end_layout
+
+\begin_layout Subsection
+Results 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:05-Least_squares_results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The results of applying the linear least squares method to fit the parameters
+ of the radio-propagation model to a set of field measurements are presented
+ in this section.
+ Bar charts were prepared to show the cumulative distribution of the absolute
+ error between the radio-propagation prediction and the field measurements
+ (see Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net8"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net9"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net10"
+
+\end_inset
+
+).
+ Each bar represents an open interval, expressed in dB, denoting the proportion
+ of points that deviate from the prediction in the given number of dB.
+ For example, in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net8"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(a), it can be observed that the proportion of predicted points differing
+ from the field measurements in 35 dB or more is around 16%, whereas the
+ proportion differing in less than 5 dB is 10%.
+ These values correspond to the test network Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ before applying the model-parameter fitting.
+ For comparison, in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net8"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(b), the absolute-error distribution for the same test network is given,
+ but with the model parameters fitted to the available field measurements.
+ Notice how the proportions describing the biggest deviation have dropped
+ to under 5% (35 dB and more) and to less than 6% (30 dB to 35 dB), respectively.
+ Moreover, it is clear how all proportions improved, raising the bars towards
+ the left-hand side of the chart and lowering them on the right-hand side.
+\end_layout
+
+\begin_layout Standard
+The error distributions of the radio-propagation prediction for test network
+ Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ using the default parameters and the fitted ones are given in Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net9"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(a) and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net9"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(b), respectively.
+ In this case, the improvement is even more significant than for the previous
+ test network, clearly showing that the tuned propagation model represents
+ the local radio propagation conditions more accurately.
+\end_layout
+
+\begin_layout Standard
+For the last test network, Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, the error distributions are depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net10"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(a) using the default parameters, and Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Error_distribution_for_Net10"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(b) for the tuned ones.
+ Similar to the first test network, Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, it can be clearly seen how the proportions of highest error deviations
+ have been lowered with respect to those with lower deviation values.
+ 
+\end_layout
+
+\begin_layout Standard
+The overall results confirm that fitting the parameters of the radio-propagation
+ model to the field measurements of each network cell significantly improves
+ the quality of the calculated radio-propagation predictions.
+ Indeed, since the default parameters were provided by the radio engineers
+ after following a traditional configuration approach for the whole network,
+ we may conclude that our automated fitting method is not only simpler,
+ but also superior in terms of solution quality.
+\end_layout
+
+\begin_layout Standard
+However, it is worth pointing out the particular reasons behind the considerable
+ better results for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+, when compared to those of Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+.
+ Clearly, the relative quantity of available field measurements directly
+ affects the quality of the calculated results, making the least squares
+ approximation rougher and thus less precise for the networks where the
+ field-measurement proportion is lower.
+ See Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Test_network_properties"
+
+\end_inset
+
+ in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:05-Test_networks"
+
+\end_inset
+
+ for a reference of the field-measurement proportions with respect to the
+ area surface of each test network.
+ Similar findings were confirmed by other authors, who worked on the adjustment
+ of radio-propagation models to different environments 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012"
+
+\end_inset
+
+.
+ For the sake of completeness, it is worth pointing out that some researchers
+ have already started working on different ways on how to improve this aspect
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011,Neuland_Influence_of_positioning_error_on_X_Map_estimation_in_LTE:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-MS-def_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-MS-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\backslash
+hspace*{3.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+: (a) with default parameter values, and (b) with fitted parameter values.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Error_distribution_for_Net8"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-LJ-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-LJ-def_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\backslash
+hspace*{3.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+: (a) with default parameter values, and (b) with fitted parameter values.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Error_distribution_for_Net9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-HI-def_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-HI-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\backslash
+hspace*{3.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+: (a) with default parameter values, and (b) with fitted parameter values.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Error_distribution_for_Net10"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Clutter optimization
+\end_layout
+
+\begin_layout Standard
+In order to further improve the accuracy of the radio-prediction calculation
+ over a given regional environment, the signal losses due to clutter have
+ to be optimized.
+ As it was mentioned before, there are several reasons for the predicted
+ signal-loss values to be inaccurate.
+ Seasonal changes are also among them, like tree foliage or snow, demolition
+ or construction of buildings and parks, different kinds of forests or agricultu
+ral areas, etc.
+ These changes are only noticeable through regular updates of accurate land-usag
+e data.
+ However, in the short term, updates are only available in the form of feedback
+ by means of field-measurement campaigns.
+\end_layout
+
+\begin_layout Standard
+In the following, a metaheuristic algorithm is used to optimize the clutter
+ losses of several regions within a target radio network.
+ This is done over groups of network cells within different regions of the
+ target network, e.g.
+ agricultural, urban or hilly.
+ In terms of coverage planning, a regional classification of signal losses
+ due to clutter improves the accuracy of the radio-coverage prediction.
+\end_layout
+
+\begin_layout Standard
+In contrast to the parameter tuning of the mathematical model presented
+ in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:05-Parameter_tuning_radio-propagation_model"
+
+\end_inset
+
+, an analytical approach is not used for tackling this problem.
+ Instead, the DASA metaheuristic algorithm (see Chapter
+\begin_inset space ~
+\end_inset
+
+???, Section
+\begin_inset space ~
+\end_inset
+
+???) is the tool of choice for optimizing the signal losses due to clutter.
+\end_layout
+
+\begin_layout Standard
+There are several reasons for choosing the DASA as the optimization algorithm
+ in the context of this problem.
+ First, the benefits of metaheuristic algorithms for solving optimization
+ problems, particularly in the context of radio networks, has been demonstrated
+ by several authors 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Garcia-Lozano_Metaheuristic_procedure_to_optimize_transmission_delays_in_DVB-T_single_frequency_networks:2011,Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012,Malla_Energy_efficient_resource_allocation_in_OFDMA_networks_using_ant_colony_optimization:2012"
+
+\end_inset
+
+ in general, and in this thesis in particular (see Chapter
+\begin_inset space ~
+\end_inset
+
+??? and ???).
+ Second, in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Korosec-The_differential_ant_stigmergy_algorithm:2012"
+
+\end_inset
+
+, the authors validated the suitability of the algorithm for solving numerical
+ problems.
+\end_layout
+
+\begin_layout Subsection
+Optimization objective 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Optimization-objective"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The optimization objective consists of adjusting the loss values of the
+ different clutter categories, i.e., 
+\begin_inset Formula $pl_{\mathrm{CLUT}}(d_{(x,y)})$
+\end_inset
+
+ from Equation
+\begin_inset space ~
+\end_inset
+
+(???) in Section
+\begin_inset space ~
+\end_inset
+
+???, according to a set of field measurements of multiple cells covering
+ a given geographical region.
+ The same three data sets used in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:05-Simulations"
+
+\end_inset
+
+ are used in for the clutter-optimization problem: the first for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, the second for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+, and the third for Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+.
+ Each region is independently optimized, so that the radio-propagation predictio
+ns of each set of network cells minimizes the mean-squared error against
+ the field measurements, i.e.,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-pl_{c}(i,\beta_{c}^{*})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $f_{\mathrm{clut}}$
+\end_inset
+
+ is the optimization objective to be minimized in each of the three regions,
+ 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+ is the transmit power of cell 
+\begin_inset Formula $c$
+\end_inset
+
+, 
+\begin_inset Formula $fm_{i}$
+\end_inset
+
+ is the 
+\begin_inset Formula $i$
+\end_inset
+
+-th field measurement of cell 
+\begin_inset Formula $c$
+\end_inset
+
+, the set of which has cardinality 
+\begin_inset Formula $m_{c}$
+\end_inset
+
+, and 
+\begin_inset Formula $m_{C}$
+\end_inset
+
+ is the number of field measurements of all the cells within a given region.
+ Similar to the least-squares approach in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:05-Linear_least_squares"
+
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $pl_{c}(i,\beta_{c}^{*})$
+\end_inset
+
+ represents the path loss of cell 
+\begin_inset Formula $c$
+\end_inset
+
+ at the same geographical point of the 
+\begin_inset Formula $i$
+\end_inset
+
+-th field measurement, and 
+\begin_inset Formula $\beta_{c}^{*}$
+\end_inset
+
+ denotes the fitted parameter values of the prediction model for cell 
+\begin_inset Formula $c$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For a reference of the different clutter categories used by the radio-propagatio
+n model, see Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Clutter_categories"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Differential ant-stigmergy algorithm
+\end_layout
+
+\begin_layout Standard
+As it has been mentioned before, the optimization algorithm we have chosen
+ for the clutter-optimization problem is the DASA (see Chapter
+\begin_inset space ~
+\end_inset
+
+???, Section
+\begin_inset space ~
+\end_inset
+
+???).
+ The mapping between the clutter-optimization problem and DASA is as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+X_{a}=\left\{ x_{0},x_{1},\ldots,x_{i},\ldots,x_{11}\right\} \label{eq:DASA-problem_mapping}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $X_{a}$
+\end_inset
+
+ is the solution vector of ant 
+\begin_inset Formula $a$
+\end_inset
+
+ during the minimization process, and 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ represents the 
+\begin_inset Formula $i$
+\end_inset
+
+-th clutter category within a given region or network.
+ At the end of every iteration, and after all the ants have created solutions,
+ they are evaluated to establish if any of them is better than the best
+ solution found so far.
+\end_layout
+
+\begin_layout Subsection
+Simulations
+\end_layout
+
+\begin_layout Standard
+In this case, one simulation round consists of multiple iterations of several
+ steps.
+ An iteration begins by generating a solution vector for each of the ants
+ in the DASA colony.
+ The following step involves the parallel evaluation of the solution vector
+ carried by an ant, i.e., one radio-propagation prediction per worker process.
+ The final step is calculating the objective-function value, as defined
+ in Equation
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mean_squared_error"
+
+\end_inset
+
+), before sending it back to the master process for the DASA to generate
+ the next set of solutions.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-PRATO_architecture_optimization"
+
+\end_inset
+
+ depicts the way PRATO performs the parallel objective-function evaluation
+ over the worker processes, while the optimization algorithm runs on the
+ master process.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/architecture.eps
+	lyxscale 50
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+PRATO architecture and data flow during the clutter-optimization phase.
+ The optimization algorithm runs on the master process, while the radio-propagat
+ion predictions of the involved network cells run in parallel over several
+ worker processes.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-PRATO_architecture_optimization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As opposed to the least-squares case, presented in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:05-Simulations"
+
+\end_inset
+
+, a much larger number of evaluations is needed for this kind of optimization.
+ Therefore, it is essential to exploit the parallel nature of the framework
+ in order to simultaneously evaluate the radio-coverage prediction of multiple
+ cells.
+ Otherwise, a metaheuristic approach would not be feasible, due to the computati
+onal time required to reach a reasonable solution.
+\end_layout
+
+\begin_layout Standard
+The default clutter-loss values (in dB) for each clutter category, which
+ are listed in the second column of Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Clutter_optimization_solutions"
+
+\end_inset
+
+, were provided by the radio experts of the Radio Network department at
+ Telekom Slovenije, d.d.
+ These values were empirically calculated using a classical (i.e., manual)
+ approach, the results of which are regularly loaded into a commercial radio-pla
+nning application in order to validate the radio coverage at a network-wide
+ level.
+ The radio experts also suggested limiting the optimized clutter-loss values
+ to a maximum of 40
+\begin_inset space ~
+\end_inset
+
+dB.
+\end_layout
+
+\begin_layout Standard
+The stopping criteria for the optimization runs involves limiting the maximum
+ number of objective-function evaluations.
+ In this sense, the limits for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ were set the 200, whereas for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ the value was 500, since this network contains the largest number of cells.
+ Overall, the framework completed 48,000 objective-function evaluations,
+ i.e., 576,000 radio-coverage predictions for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and 288,000 for Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, whereas for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ the number of objective-function evaluations was 120,000, for a total of
+ 15,600,000 radio-coverage predictions.
+\end_layout
+
+\begin_layout Standard
+Regarding the parameters that control the behavior of the DASA, they were
+ set to the following values
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $m=240$
+\end_inset
+
+, the number of ants;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $b=10,$
+\end_inset
+
+ the discrete base;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $q=0.2$
+\end_inset
+
+, the pheromone dispersion factor;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $s_{+}=0.01$
+\end_inset
+
+, the global scale-increasing factor;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $s_{-}=0.01$
+\end_inset
+
+, the global scale-decreasing factor; and 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $e=1.0^{-2}$
+\end_inset
+
+, the maximum parameter precision.
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Clutter-category losses after the optimization.
+ The default losses for each clutter category are given along the solutions
+ for each of the test networks.
+ All values are expressed in dB.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:05-Clutter_optimization_solutions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Clutter category
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Default
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.90
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.39
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.69
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+23.00
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.80
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.26
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.49
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.75
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.63
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.93
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The results achieved by the optimization process are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Clutter_optimization_solutions"
+
+\end_inset
+
+.
+ The solutions are given for each of the test networks, along with the empirical
+ly-calculated (default) loss values due to clutter.
+ Hyphens represent clutter categories for which there are no field measurements
+ available.
+ Consequently, it is not possible to evaluate the objective-function for
+ them.
+\end_layout
+
+\begin_layout Standard
+The optimized loss for the first clutter category, 0, representing urban
+ area without buildings, is larger than the default value in all three networks.
+ This may be attributed to the fact that these areas are not completely
+ open, mostly surrounded by forests (Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+) and buildings of different sizes (Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+).
+ As for the category 1, representing suburban area, the value for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ is lower than the default one, mainly because this network is deployed
+ over a predominant agricultural area, i.e., suburban areas are less dense
+ here.
+ On the other hand, the value for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ is larger, indicating a building density above the average, whereas for
+ Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, the value could not be calculated due to lack of measurements.
+ For the category 2, representing urban area, the optimized values are above
+ the default ones, clearly showing an underestimation of the manual approach.
+ However, the relation among the clutter losses corresponds with the population
+ density in each of the regions, being Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ the less dense urban area among the three networks.
+ The optimized values of the category 3, representing dense urban area,
+ are lower than the default ones.
+ This indicates that the dense urban areas in these regions have a lower
+ density than the average case.
+ Representing agricultural area, the category 4 gets a value very close
+ to the default one for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, whereas for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ the value is lower, indicating that this type of land is mostly open near
+ the city, e.g., without plantations.
+ As for the category 5, representing forests, the results correspond with
+ the type of forest that dominates each of the test-network regions.
+ Namely, Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ are dominated by dense forests presenting leave foliage, whereas in Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ the forests are mostly coniferous and more sparse.
+ Keeping the most of the default loss values for the categories 6, 7 and
+ 8, the results of the next category, 9, representing water, indicate creeks
+ and rivers in these area are almost entirely surrounded by forests (Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+) or buildings (Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+), since none of the regions lays by the sea.
+ As for the industrial area, denoted by the clutter category 10, lower loss
+ values than the empirically-calculated defaults appear.
+ This indicates the presence of sparse industrial buildings in Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, and a higher density of mostly commercial buildings for Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+.
+ The last clutter category, 11, could not be calculated for Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+ due to lack of field measurements.
+\end_layout
+
+\begin_layout Standard
+Notice that the relationships among the different clutter categories is
+ correctly kept for the three test networks.
+ For example, it can be observed that the clutter loss for dense urban area
+ (category 3) is higher than the values of the urban area (category 2),
+ as well as of the agricultural area (category 4).
+ Hence, the results reflect physically feasible losses, despite the higher
+ deviation from the default losses shown by the category 2, and the lower
+ deviation for the category 3, again with respect to the default losses.
+ Such relations hold for different categories of all three test networks,
+ strongly suggesting the correctness of the applied optimization approach
+ and the evaluation methodology used.
+ Consequently, it can be confirmed that the combination of PRATO and a metaheuri
+stic algorithm is applicable for performing optimization of clutter losses,
+ since it is capable of reflecting the physical phenomena appearing in real-worl
+d conditions and improving the quality of radio-propagation predictions
+ for three, geographically different radio-network instances.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-MS-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-MS-opt_clutter.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\backslash
+hspace*{3.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+: (a) with fitted parameter values and default clutter losses, and (b) with
+ fitted parameter values and optimized clutter losses.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Clutter_error_distribution_for_Net8"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-LJ-def_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-LJ-opt_clutter.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\backslash
+hspace*{3.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+: (a) with fitted parameter values and default clutter losses, and (b) with
+ fitted parameter values and optimized clutter losses.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Clutter_error_distribution_for_Net9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-HI-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-HI-opt_clutter.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\backslash
+hspace*{3.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+: (a) with fitted parameter values and default clutter losses, and (b) with
+ fitted parameter values and optimized clutter losses.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Clutter_error_distribution_for_Net10"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similar to Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:05-Least_squares_results"
+
+\end_inset
+
+, bar charts show the cumulative distribution of the absolute error between
+ the signal-propagation prediction and the field measurements (see Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net8"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net9"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net10"
+
+\end_inset
+
+).
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net8"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(a) depicts the error distribution of the prediction for test network Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ using the fitted model parameters, whereas Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net8"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(b) shows the absolute-error distribution for the same test network, but
+ using the optimized clutter losses (see Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Clutter_optimization_solutions"
+
+\end_inset
+
+, column Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+).
+ Notice how the error distributions show an improvement when the optimized
+ clutter losses are used, lowering the biggest (right-most) deviations even
+ more.
+\end_layout
+
+\begin_layout Standard
+The error distributions of the radio-propagation predictions for test network
+ Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+ using fitted parameters and default clutter losses, and fitted parameters
+ with optimized clutter losses are shown in Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net9"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(a) and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net9"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(b), respectively.
+ Similar to Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+, the improvement appears in the biggest deviations, since their values
+ are lower than when using the default clutter losses.
+\end_layout
+
+\begin_layout Standard
+For the last test network, Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+, the error distributions are depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net10"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(a) using the default clutter losses, and Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Clutter_error_distribution_for_Net10"
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+(b) for the optimized ones.
+ Again, fitted model parameters are used for both simulation sets.
+ In this case, a more significant improvement than for the other two networks
+ appears, clearly showing the favorable effect of the optimization process.
+ Moreover, this result suggests that some of the default clutter losses
+ considerably fail in representing the actual physical conditions in the
+ geographical region of this network.
+\end_layout
+
+\begin_layout Standard
+The presented results confirm that the optimization of clutter losses with
+ respect to field measurements improves the quality of the calculated radio-prop
+agation predictions.
+ Considering the default clutter losses were empirically calculated by the
+ radio engineers for the whole network, the convenience of the automated
+ optimization procedure is clear.
+ Indeed, these advantages are a consequence of a simpler method that automatical
+ly delivers radio-predictions of superior quality, thus accurately representing
+ the physical properties of a given environment.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Statistical analysis of the optimization solutions for each test network.
+ All values are expressed in dB.
+ The corresponding box plots are depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Statistical_analysis_boxplots"
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:05-Statistical_analysis_of_solutions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\begin_inset Tabular
+<lyxtabular version="3" rows="14" columns="16">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0.75cm">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0.75cm">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0.75cm">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Cat.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Min
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Max
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Avg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+St.dev.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Min
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Max
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Avg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+St.dev.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Min
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Max
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+Avg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+St.dev.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+13.36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+13.97
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+13.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.22
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.72
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.85
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.07
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+14.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+19.20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1.87
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.84
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.72
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.69
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+19.15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+20.07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+19.59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.95
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+18.12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+18.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+22.68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+23.20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+23.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.16
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+9.63
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+9.77
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+9.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+10.73
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+10.84
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+10.80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.03
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.54
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.45
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11.62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.19
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.04
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+12.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+14.52
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+13.49
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.39
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+12.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+15.79
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+13.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.83
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+18.80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.83
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+4.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+6.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+5.60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+7.79
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+8.54
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+8.26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.19
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.87
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.75
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+16.63
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.07
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+18.62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+19.20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+17.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+0.13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/boxplot-MS.eps
+	lyxscale 50
+	width 75text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(a)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/boxplot-LJ.eps
+	lyxscale 50
+	width 75text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/boxplot-HI.eps
+	lyxscale 50
+	width 75text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace*{0.2in}(c)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Box plots representing the statistical-analysis values of Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Statistical_analysis_of_solutions"
+
+\end_inset
+
+, for the solutions of the clutter-optimization process of each test network:
+ (a) Net
+\begin_inset Formula $_{1}$
+\end_inset
+
+, (b) Net
+\begin_inset Formula $_{2}$
+\end_inset
+
+, and (c) Net
+\begin_inset Formula $_{3}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Statistical_analysis_boxplots"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because of the stochastic nature of the optimization algorithm, the results
+ of 30 independent runs were collected in order to have enough data for
+ them to be statistically relevant.
+ In other words, the robustness of the solutions, that have been presented
+ in the previous section, is analyzed here.
+\end_layout
+
+\begin_layout Standard
+To this end, Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Statistical_analysis_of_solutions"
+
+\end_inset
+
+ shows the solutions reached by the DASA for each of three test networks.
+ The calculated signal losses are depicted with the minimum, maximum and
+ average values for every clutter category, along with their standard deviations.
+ Again, hyphens represent clutter categories for which there are no field
+ measurements available, and thus they could not be optimized.
+ In order to easily visualize the data shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:05-Statistical_analysis_of_solutions"
+
+\end_inset
+
+, box plots based on the same values are provided in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Statistical_analysis_boxplots"
+
+\end_inset
+
+.
+ It can be observed that the standard deviation is low for almost all optimized
+ categories, indicating a consistent convergence of the optimization algorithm.
+ However, some exceptions are noticeable, e.g., the category 9 in Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+, representing water.
+ In this case, there is a lower density of field measurements nearby water
+ trails since none of the test networks lays by the sea.
+ Regarding the categories 1 (suburban area), 7 and 8 (dry open land area)
+ of Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+, we again find very few field measurements over this areas, thus higher
+ standard-deviation values appear.
+ Based on these findings, the standard deviation of the optimized clutter
+ losses can be considered a quantity indicator of the field measurements
+ required by the optimization process, i.e., a higher standard deviation denotes
+ more field measurements are needed to optimize the target clutter category.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+This chapter shown the suitability of PRATO as a network-planning tool by
+ tackling two coverage-planning problems, which were tested over the newly
+ deployed LTE network in Slovenia.
+ The first one involved the parameter tuning of the empirical radio-propagation
+ model using a snapshot of field measurements.
+ The second one considered the optimization of the clutter losses over different
+ regions of the country, therefore adapting them to the local conditions
+ of the geographical region of each network.
+\end_layout
+
+\begin_layout Standard
+The combination of the afore-mentioned techniques with PRATO provides an
+ environment-adaptable framework for radio-network planning.
+ This delivers a tool with a considerable improvent of the solution accuracy
+ of the analyzed instances, especially if compared to traditional, i.e., manual
+ or semi-automated, coverage-planning methods.
+\end_layout
+
+\begin_layout Standard
+Additionally, the simulation results indicate that PRATO is applicable for
+ planning and optimization of real-world radio networks, since it is capable
+ of tackling bigger problem instances in a feasible amount of time.
+ Particularly, several of the presented instances show a large computational-tim
+e complexity, which is beyond reach for a serial implementation of an automated
+ approach.
+ Moreover, the parallelization capabilities provided by the framework create
+ new problem-solving possibilities.
+ Indeed, even computational-intensive tasks such as stochastic optimization,
+ which involves millions of radio-prediction evaluations, are feasible if
+ PRATO is used.
+\end_layout
+
+\end_body
+\end_document

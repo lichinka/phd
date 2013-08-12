@@ -729,7 +729,7 @@ Chapter
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Framework-parameter-tuning"
+reference "chap:05-Framework_parameter_tuning"
 
 \end_inset
 
@@ -748,7 +748,7 @@ In Chapter
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
+reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 
 \end_inset
 
@@ -784,6 +784,10 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
  to achieve impressive speed-up.
  We report the results of our experiments for three UMTS networks of different
  sizes based on a real network currently deployed in Slovenia.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body

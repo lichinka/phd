@@ -3930,7 +3930,7 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
+reference "sec:06-Radio_network_model"
 
 \end_inset
 

@@ -635,7 +635,7 @@ Finally, we will evaluate the benefits of the above-mentioned framework
 \end_layout
 
 \begin_layout Section
-Contributions
+Contributions (na koncu, v Conclusion)???
 \end_layout
 
 \begin_layout Standard
@@ -729,7 +729,7 @@ Chapter
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Framework-parameter-tuning"
+reference "chap:05-Framework_parameter_tuning"
 
 \end_inset
 
@@ -748,7 +748,7 @@ In Chapter
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Experimental-evaluation-the-SHO-alignment-problem"
+reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 
 \end_inset
 

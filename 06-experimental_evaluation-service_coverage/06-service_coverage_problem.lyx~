@@ -177,15 +177,6 @@ reference "sec:06-Optimization-approaches"
 
 \end_inset
 
-.
- A detailed description of the tested implementations is given in Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:06-Implementation"
-
-\end_inset
-
 , followed by the simulations and their analyses in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -590,7 +581,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
+reference "sub:04-Radio_propagation_model"
 
 \end_inset
 
@@ -2190,7 +2181,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
+reference "sub:04-Radio_propagation_model"
 
 \end_inset
 
@@ -4655,8 +4646,11 @@ name "fig:06-Convergence_Net3"
 
 \end_layout
 
-\begin_layout Subsubsection
-Performance analysis
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
