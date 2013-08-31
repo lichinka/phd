@@ -664,8 +664,8 @@ key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012"
  is necessary to accurately predict the system performance and to provide
  a mechanism to analyze the effects caused by signal propagation 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Ericsson-Long_term_evolution_an_introduction:2007"
+LatexCommand cite
+key "Parsons-The_mobile_radio_propagation_channel:2000"
 
 \end_inset
 

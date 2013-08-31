@@ -144,7 +144,11 @@ key "Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013"
 
 .
  The rest of this chapter is organized as follows.
- Section 
+ Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Motivation"
@@ -153,7 +157,11 @@ reference "sec:06-Motivation"
 
  gives a description of the coverage problem and its motivation from the
  mobile operator's perspective.
- In Section 
+ In Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Related-work"
@@ -161,7 +169,11 @@ reference "sec:06-Related-work"
 \end_inset
 
 , a short overview of related research works is given, before formally introduci
-ng the key elements of the service-coverage problem in Section 
+ng the key elements of the service-coverage problem in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Radio_network_model"
@@ -170,14 +182,22 @@ reference "sec:06-Radio_network_model"
 
 .
  The parallel-agent approach, as well as the strategies used for result
- comparison, are presented in Section 
+ comparison, are presented in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Optimization-approaches"
 
 \end_inset
 
-, followed by the simulations and their analyses in Section 
+, followed by the simulations and their analyses in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Simulations"

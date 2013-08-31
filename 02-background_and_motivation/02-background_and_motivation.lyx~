@@ -60,19 +60,8 @@
 
 \begin_body
 
-\begin_layout Part
-Preliminaries
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
-Optimization methods 
+Overview of optimization methods 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Optimization_models"
@@ -98,14 +87,6 @@ status open
 
 \begin_layout Standard
 \noindent
-Short introduction to the content of this chapter.
-\end_layout
-
-\begin_layout Section
-Introduction
-\end_layout
-
-\begin_layout Standard
 Optimization may be informally defined as the procedure of finding better
  solutions to a given problem that usually models some physical phenomenon.
  In our every day life, we are constantly solving small optimization problems,
@@ -337,7 +318,14 @@ reference "eq:02-maximization_minization_problem_relation"
 \end_layout
 
 \begin_layout Section
-Gradient-based methods
+Gradient-based methods 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:02-Gradient-based-methods"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1811,7 +1799,7 @@ Notice also that the acceptance of a move in the search space is left to
  SA and its stochastic components.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Black-box optimization 
 \begin_inset CommandInset label
 LatexCommand label
@@ -2013,7 +2001,11 @@ Typically, the experiments associated with these kind of problems are very
  expensive in terms of time and cost, since a simulation must be forced
  to evaluate the solution.
  Generally speaking, the most time-consuming part of a metaheuristic optimizatio
-n process is the evaluation of the objective function 
+n process is the evaluation of the objective function
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -2022,32 +2014,48 @@ key "Talbi_Metaheuristics:2009"
 
 .
  This is especially true when dealing with real-world problems of areas
- such as structural design 
+ such as structural design
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Barthelemy-Approximation_concepts_for_optimum_structural_design:1993"
 
 \end_inset
 
-, molecular docking 
+, molecular docking
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction:2007"
 
 \end_inset
 
- and, the field on which this thesis focuses, radio-network design 
+ and, the field on which this thesis focuses, radio-network design
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Benedicic_Pilot.power.optimization:2010"
+key "Benedicic_Pilot.power.optimization:2010,Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013,Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013,Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013,Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012"
 
 \end_inset
 
 .
  A possible subtitution for lenghty evaluations is to reduce their complexity
- by approximating the objective function, thus replacing the it with an
- approximation during the optimization process.
- This approach is known as meta-modeling 
+ by approximating the objective function, thus replacing it with an approximatio
+n during the optimization process.
+ This approach is known as meta-modeling
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -2057,13 +2065,25 @@ key "Talbi_Metaheuristics:2009"
 .
  However, when dealing with approximations, some degree of solution quality
  is inevitably sacrified.
- As we will show in the following chapters, there is a very fine balance
+ As it will be shown in the following chapters, there is a very fine balance
  between the number of evaluations and the quality of the achieved solutions.
  Consequently, reducing the time spent in objective-function evaluation
  should favorably influence the solution quality achieved by a preferred
  metaheuristic algorithm.
  A major portion of this thesis is dedicated to improve this specific aspect
- on the area of radio-network optimization.
+ in the area of radio-network optimization, starting with a high-performance,
+ unified framework for radio-network planning, which is presented in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2077,13 +2097,17 @@ key "Talbi_Metaheuristics:2009"
 In practice, black-box evaluation of the objective function presents an
  inherent problem.
  In the context of research works related to radio-network optimization,
- there is an increasingly habit of not providing the black-box used to evaluate
- a given approach, and that leads to the results provided.
+ there is an inherent difficulty of providing the black-box used to evaluate
+ a given approach.
  A quick review of the state-of-the-art in radio-network optimization indicates
  that this fact has become increasingly regular in several published works
  [refs???].
- This fact creates a barrier to one of the most important phases of scientific
- methodology: experimental reproducibility 
+ Clearly, this fact creates a barrier to one of the most important phases
+ of scientific methodology: experimental reproducibility
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "gauch2002scientific"
@@ -2095,35 +2119,36 @@ key "gauch2002scientific"
 \end_layout
 
 \begin_layout Standard
-There are several reasons why the situation has reached this point.
- It is a known fact that proprierary software, providing good computational
- models for radio-network simulation, is a very expensive tool for science.
+There are several reasons behind this situation.
+ For example, it is a known fact that proprierary software, providing good
+ computational models for radio-network simulation, is a very expensive
+ tool for science.
  Even neglecting the economical aspect, but considering the great variety
  of software packages and license combinations, it is practically impossible
- for a research laboratory to have at its disposal the whole pallete of
- commercially-available solutions.
+ for a research laboratory to have the whole pallete of commercially-available
+ solutions at its disposal.
  Moreover, genuine users of these applications are generally not allowed
  to mention the formats, protocols, or algorithms used by the proprietary
- software, since their disclosure is explicitly forbidden by the commercial
+ software, since their disclosure is often explicitly forbidden by restrictive
  licenses.
 \end_layout
 
 \begin_layout Standard
 If we turn our attention to non-commercial and open-source packages for
- radio-network simulation [refs!???], we would quickly run into mainly two
+ radio-network simulation [refs!???], we would quickly run into two main
  difficulties: poor documentation and low scalability.
  The scalability issues shown by some projects [refs!???] retrain the packages
  to be used in real-world environments, where big problem instances are
  the rule.
  Despite this, it is a huge merit and acknowledgement to the authors of
- this packages, not only for providing it to the scientific community, including
- their source code, but fundamentaly because providing an environment in
- which different kinds of simulations are completely reproducible.
+ these packages, not only for providing them to the scientific community,
+ but fundamentaly because for providing an environment in which different
+ kinds of simulations are completely reproducible.
  Regarding the lack of documentation, it represents a big hurdle when extending
- the base code, which becomes a difficult taskj without the help of the
- original authors of the package, who have a deep knowlegge of the code-base.
- This knowledge is required in order to effectivelly expand the functionality
- of the open-source tool in question.
+ the base code, which becomes a difficult task without the help of the original
+ authors of the package.
+ This author's knowledge is required for effectivelly expanding the functionalit
+y of an open-source tool.
  This is especially true when dealing with complex simulation frameworks,
  as the ones used for radio networks.
 \end_layout
@@ -2139,23 +2164,133 @@ name "chap:02-Principles_of_mobile_radio_networks"
 
 \end_layout
 
-\begin_layout Section
-Quality of service 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:02-Quality-of-service"
+\begin_layout Standard
+A cellular mobile radio network is a collection of individual cells that
+ are served by several transmitters, called base stations (BSs
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "BSs"
+description "Base station."
 
 \end_inset
 
+).
+ Each BS gives radio coverage to a small geographical area.
+ The integration of the coverage of various BSs provides radio coverage
+ over a much larger geographical area, thus defining a cellular radio network.
+ The two basic functions of a radio-network system are: 
+\end_layout
 
+\begin_layout Itemize
+locate and track both active and idle mobile devices, called user equipments
+ (UEs
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "UE"
+description "User equipment."
+
+\end_inset
+
+); and
+\end_layout
+
+\begin_layout Itemize
+attempt to connect each UE to the best available BS.
 \end_layout
 
 \begin_layout Standard
-QoS...???
+The first task involves a location-update procedure, which allows an UE
+ to inform the network about its movement from one location area to the
+ next.
+ This process is called mobility management.
+ The second task requires the constant evaluation of the quality of the
+ radio link with the serving BS, and the radio-link qualities of alternate
+ BSs.
+ This process is called radio-resource management, and is performed by the
+ network using knowledge of the link-quality evaluations of reference channels,
+ i.e., pilot channels.
+\end_layout
+
+\begin_layout Standard
+The radio communications between an UE and a grid of BSs use low power.
+ However, the movement of the UE causes highly irregular radio-link conditions,
+ thus consistent monitoring and precise control are required to keep the
+ radio-link quality at an acceptable level.
+ At the core of the evaluation of radio-link quality is a statistical-measuremen
+t process based on a previous knowledge of the expected characteristics
+ of the pilot channel.
+ On the one hand, the link quality, and the size and distribution of cells
+ of a modern radio cellular system are essentially limited by the speed
+ of link-quality measurement and network control.
+ On the other hand, the spectral efficiency of a radio network is bounded
+ by the cell sizes, the ability of radio links to withstand interference,
+ and the ability of the system to react to variations in traffic
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stuber-Principles_of_mobile_communication:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Cellular radio systems partition the available spectrum among the BSs, and
+ a given frequency is reused at the closest possible distance that the radio
+ link will allow.
+ Consequently, smaller cells have a shorter distance between reused frequencies,
+ and this results in an increased spectral efficiency and traffic-carrying
+ capacity.
+ The radio links of a high-capacity radio network interfere with each other
+ due to frequency reuse.
+ For this reason, it is always desirable to use the lowest possible transmit
+ power while maintaining each radio link above a given quality-of-service
+ (QoS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "QoS"
+description "Quality of service."
+
+\end_inset
+
+) threshold.
+ Therefore, radio links should not significantly exceed their target QoS
+ since doing so will cause unnecessary interference to other radio links
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stuber-Principles_of_mobile_communication:2011"
+
+\end_inset
+
+.
+ This particular situation is further discussed in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
+
+\end_inset
+
+, where an optimization approach that minimizes the total transmit power
+ used in a radio network is presented.
 \end_layout
 
 \begin_layout Section
-Handover and soft-handover 
+Handover 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:02-Handover-and-soft-handover"
@@ -2166,8 +2301,12 @@ name "sub:02-Handover-and-soft-handover"
 \end_layout
 
 \begin_layout Standard
-In mobile networks, handover is one of the main features that allows user's
- mobility 
+In radio networks, handover (or handoff) is one of the main features that
+ allows the mobility of UEs
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
@@ -2175,11 +2314,106 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 \end_inset
 
 .
- The concept behind the handover operation is simple: when a user moves
- from the coverage area of a cell to the coverage area of a neighboring
- cell, the system creates a new connection with the latter cell and disconnects
- the user from the former one, while keeping the current connection active.
- Soft-handover (SHO
+ The concept behind the handover operation is simple: when a UE moves from
+ the coverage area of a cell to the coverage area of a neighboring cell,
+ the system creates a new connection with the latter cell and disconnects
+ the user from the former one, so that an acceptable link quality can be
+ maintained.
+ Otherwise, the increase in transmit power, required to compensate for path
+ loss, results in excessive interference.
+ The handover procedure consists of two processes
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stuber-Principles_of_mobile_communication:2011"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+link-quality evaluation before handover initiation, and
+\end_layout
+
+\begin_layout Itemize
+allocation of radio and network resources.
+\end_layout
+
+\begin_layout Standard
+Generally speaking, radio networks with smaller cell sizes require faster
+ and more reliable handover algorithms.
+ Indeed, it has been shown that the number of cell boundary crossings is
+ inversely proportional to the cell size
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Labedz-Handover_control_issues:1987"
+
+\end_inset
+
+.
+ Since there is certain probability of dropping a connection whenever a
+ handover is attempted, it is clear that the role of handover configuration
+ becomes more important as the cell sizes decrease.
+ Therefore, if the radio network does not detect poor signal quality fast
+ enough, or makes too many handovers, the capacity is diminished due to
+ increased interference and/or excessive control traffic
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stuber-Principles_of_mobile_communication:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Hard handover
+\end_layout
+
+\begin_layout Standard
+During a hard handover, an UE can connect to only one BS at a time.
+ A unique decision initiates and executes a handover without making a number
+ of simultaneous connections among candidate BSs.
+ Based on link measurements, the target BS is selected prior to executing
+ the handover, and the active connection is instantly transferred to it.
+ Indeed, the connection even experiences a brief interruption during the
+ actual transfer, because the UE can only connect to one BS at a time.
+ In contrast to soft handover (see next section), hard handovers do not
+ take advantage of the diversity gain, where the signals from two or more
+ BSs arrive at comparable strengths.
+ Hard handover is a simple and inexpensive way to support UE mobility.
+ It is used in TDMA cellular systems such as GSM
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stuber-Principles_of_mobile_communication:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Soft handover
+\end_layout
+
+\begin_layout Standard
+Soft handover (SHO
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2188,25 +2422,31 @@ description "Soft handover."
 
 \end_inset
 
-), on the other hand, is a possibility available in mobile networks using
- the Wideband Code Division Multiple Access (WCDMA
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "WCDMA"
-description "Wideband Code Division Multiple Access."
+) enhances handover functionality by allowing an UE to potentially operate
+ on multiple radio links at a time.
+ During SHO, the target BS is selected as the best candidate from among
+ the available BSs.
+ The UE performs the necessary link-quality measurements by monitoring the
+ signals from the surrounding BSs.
+ Simultaneously keeping multiple connections means that SHO enhances the
+ system performance through diversity reception.
+\end_layout
 
+\begin_layout Standard
+Despite the advantages it provides, SHO is complex and expensive to implement.
+ Additionally, interference actually increases with SHO since several BSs,
+ instead of one, can connect to the same UE.
+ This increase in forward interference can become a problem .
+ If the handover region is large, such that there are many UEs in SHO mode,
+ the increased interference due to several BSs connected to the same UE
+ can become a problem
+\begin_inset space ~
 \end_inset
 
-) technology, which the UMTS employs.
- SHO enhances handover functionality by allowing a user to potentially operate
- on multiple radio links in parallel.
- Since different users are separated by unique spreading codes, the detection
- of single user's signal is implemented by despreading with the same code
- sequence used in the transmitter 
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+key "Stuber-Principles_of_mobile_communication:2011"
 
 \end_inset
 
@@ -2214,26 +2454,124 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 \end_layout
 
 \begin_layout Standard
-Every mobile terminal constantly monitors the common pilot power channel
- (CPICH
+SHO is especially important in systems using the channel-access method known
+ as Code Division Multiple Access (CDMA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
-symbol "CPICH"
-description "Common Pilot power Channel."
+symbol "CDMA"
+description "Code division multiple access."
 
 \end_inset
 
-) of the connected cell and its neighbors.
- The information about these measurements is sent to the network by the
- user terminal (i.e.
- mobile).
- The SHO condition depends on the relative received signal quality from
+) in general and wide CDMA (WCDMA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "WCDMA"
+description "Wide-code division multiple access."
+
+\end_inset
+
+) in particular, which is employed by the UMTS.
+ CDMA systems are interference-limited meaning their capacities are closely
+ related to the level of interference they can tolerate.
+ Specifically, a CDMA system cell is affected by the interference within
+ its own cell, and also interference from its neighboring cells.
+ In order to mitigate the level of interference, and thus increase the capacity
+ and quality, CDMA systems use power control.
+ The main idea behind power control is to prevent the MSs and the BSs from
+ transmitting more power than is strictly necessary to meet the target QoS
+ level.
+ For the power control to work properly, the system must ensure that each
+ MS is connected to the BS having the least path attenuation at all times.
+ If this is not the case, a positive-feedback problem appears, and it can
+ potentially destabilize the entire system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wong-Soft_handoffs_in_CDMA_mobile_systems:1997"
+
+\end_inset
+
+.
+ The SHO procedure helps to prevent such situations by ensuring that each
+ MS is served by the best BS most of the time, i.e., by allowing connections
+ to multiple BSs.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/soft_handover.png
+	lyxscale 50
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example of two UEs in soft handover with two BSs.
+ Adapted from [219???].
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:02-SHO_example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The SHO condition depends on the relative, received-signal quality from
  different cells and the SHO window, which triggers the addition of a cell
- to the user's active set.
- Depending on radio propagation characteristics and different transceiver
- capabilities, the radio transmission can gain more than 3 dB out of a SHO
- situation 
+ to the active set of the UE.
+ Depending on radio propagation characteristics, the radio transmission
+ can gain more than 3
+\begin_inset space ~
+\end_inset
+
+dB out of a SHO situation 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
@@ -2251,9 +2589,8 @@ key "3GPP_R99"
 
 \end_inset
 
-, SHO is specified to work from the network towards the user (i.e.
- downlink), and from the user towards the network (i.e.
- uplink).
+, SHO is specified to work from the BS towards the UE (i.e., downlink), and
+ from the UE towards the BS (i.e., uplink).
 \end_layout
 
 \begin_layout Standard
@@ -2288,7 +2625,7 @@ description "High Speed Uplink Packet Access."
 \end_inset
 
 ) does.
- This particular distinction is discussed in Chapter
+ This particular distinction is further discussed in Chapter
 \begin_inset space ~
 \end_inset
 
@@ -2299,8 +2636,12 @@ reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 
 \end_inset
 
-, since it has some key implications in the balanced distribution of SHO
- areas, and thus in the quality of HSPA services 
+, since it has some important implications in the balanced distribution
+ of SHO areas, and thus in the quality and capacity of HSPA services
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "holma2006hsdpa"
@@ -2308,19 +2649,6 @@ key "holma2006hsdpa"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Add a Figure to better explain SHO and SHO areas.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -2339,7 +2667,7 @@ name "sub:02-Pilot-signal-and-power"
 status open
 
 \begin_layout Plain Layout
-Explicar como funciona esto en GSM,UMTS y LTE
+Explicar que es esto y como funciona en el resto de la tesis
 \end_layout
 
 \end_inset
@@ -2389,7 +2717,7 @@ key "Nawrocki_Understanding:2006"
 \end_layout
 
 \begin_layout Chapter
-Optimization of radio networks 
+Overview of radio-network optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Optimization_of_radio_networks"
@@ -2399,51 +2727,31 @@ name "chap:02-Optimization_of_radio_networks"
 
 \end_layout
 
-\begin_layout Section
-Introduction
-\end_layout
-
 \begin_layout Standard
 Once a radio network is launched, an important part of its operation and
- maintenance deals with monitoring its quality characteristics and making
- changes in the configuration of the deployed equipment and parameter values
- in order to improve its overall performance.
-\end_layout
-
-\begin_layout Standard
-The evolution from 3G to 4G has introduced not only the technology needed
- to increase data capacity and voice quality, but also a greater complexity
- in terms of network planning, deployment, and configuration, which have
- rendered some of the traditionally used methods to be ineffective.
- In a traditional approach (i.e.
- manual), during the network planning and maintenance processes, a radio-network
- simulation software executes the analysis, while an engineer makes the
- change decisions.
- Therefore, a radio-planning engineer adapts the network parameters manually
- and the network-planning tool analyzes the given configuration.
- If the obtained results are not acceptable, the analysis process has to
- be repeated several times, until a given goal is achieved.
-\end_layout
-
-\begin_layout Standard
-The complexity of radio-network has grown even faster than their throughput
- capacity, thus making it impossible to plan 4G radio networks with traditional
- methods.
- In this sense, an examination of colored coverage maps in conjunction with
- some statistical analysis are no longer appropriate tools for troubleshooting
- a network.
- Moreover, since real-world 4G radio networks are large and many of their
- configuration parameters are interdependent, an engineer is not able to
- cope with the level of complexity present in such systems.
- For that reason, the computer, along with specialized software, guides
+ maintenance deals with monitoring its quality characteristics.
+ With the evolution of mobile communications, the complexity of network
+ planning has grown along with its throughput capacity, thus making it practical
+ly impossible to plan modern radio networks with traditional methods.
+ In this sense, an examination of coloured coverage maps in conjunction
+ with some statistical analysis are no longer appropriate tools for troubleshoot
+ing a network.
+ Moreover, since real-world radio networks are large and many of their configura
+tion parameters are interdependent, an engineer is not able to cope with
+ the level of complexity present in these systems.
+ For this reason, the computer, along with specialized software, guides
  the engineer to the most appropriate configuration for the network.
- In the context of this work, we will refer to this process as radio-network
+ In the context of this thesis, we will refer to this process as radio-network
  optimization.
 \end_layout
 
 \begin_layout Standard
 Radio-network optimization may be divided into two fundamental phases: analysis
- and decision 
+ and decision
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
@@ -2451,15 +2759,28 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 \end_inset
 
 .
- The analysis phase consists on the examination of network performance,
- which mainly focuses on the definition and collection of several Key Performanc
-e Indicators (KPIs).
- KPIs are quantifiable measurements, agreed to beforehand, that reflect
- network quality factors.
+ The analysis phase consists on the examination of the network performance,
+ which mainly focuses on the definition and collection of key performance
+ indicators (KPIs
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "KPI"
+description "Key performance indicator."
+
+\end_inset
+
+).
+ KPIs are quantifiable measurements that reflect different network-quality
+ factors.
  The second phase deals with the decision making, based on the analytical
- results collected in the previous phase, about the configuration of a particula
-r configuration or parameter setting.
- This process, depicted in Figure 
+ results collected in the previous phase, about changing a particular configurat
+ion or parameter setting.
+ The process, which is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Optimization-cycle"
@@ -2467,6 +2788,30 @@ reference "fig:Optimization-cycle"
 \end_inset
 
 , is repeated until the achieved results are acceptable.
+ Notice the similarity with the general, decision-making process that was
+ presented in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:01-Introduction"
+
+\end_inset
+
+, Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:01-decision_making_process"
+
+\end_inset
+
+, .
 \end_layout
 
 \begin_layout Standard
@@ -2505,7 +2850,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Typical optimization cycle for radio networks.
+A typical optimization cycle for radio networks.
  This sequence is repeated until the achieved results are acceptable.
  
 \begin_inset CommandInset label
@@ -2528,18 +2873,6 @@ name "fig:Optimization-cycle"
 \end_layout
 
 \begin_layout Standard
-A common limitation of several optimization methods appearing in the literature
- [ref!???] is their inability to meet the requirements needed by real-world
- radio networks, since their computational-time complexity make them unfeasible
- for practical use in industrial-sized scenarios.
- Particularly, this limitation is more common in implementations targeting
- traditional computer architectures of sequential execution [ref!???].
- When analyzing real-world radio networks with thousands of transmitters
- it is necessary to reduce the execution time of the optimization processes,
- so that they are useful for practical use.
-\end_layout
-
-\begin_layout Standard
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -2548,10 +2881,14 @@ A common limitation of several optimization methods appearing in the literature
 
 \begin_layout Standard
 Since radio networks are increasingly more sophisticated, the need for optimizat
-ion methods, capable of copeing with greater complexity, is far from declining.
- It has been established that most radio-network optimization problems are
- NP-hard, since the computational time grows non-polynomially as the problem
- size increases 
+ion methods that are capable of copeing with greater complexity, is far
+ from declining.
+ Indeed, several radio-network optimization problems were shown to be NP-hard,
+ since the computational time grows non-polynomially with the problem size
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Amaldi-Planning_UMTS_base_station_locations:2003,Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Gordejuela-LTE_access_network_planning_and_optimization:2009,Han-Optimizing_cell_size_for_energy_saving_in_cellular_networks:2012,Lee-Proportional_fair_frequency_domain_packet_scheduling_for_LTE_uplink:2009,Razavi-Performance_improvement_of_LTE_tracking_area_design:2008,Siomina-Minimum_pilot_power_for_service_coverage:2007"
@@ -2559,16 +2896,19 @@ key "Amaldi-Planning_UMTS_base_station_locations:2003,Amaldi-Radio_planning_and_
 \end_inset
 
 .
- Moreover, there are other reasons directly related with the evolution of
- already deployed networks that greatly increase the need for optimization
- methods, as described in 
+ As described in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
-:
+, there are other reasons directly related with the growth of already deployed
+ networks that also increase the need for optimization methods:
 \end_layout
 
 \begin_layout Description
@@ -2594,11 +2934,11 @@ in
 \begin_inset space ~
 \end_inset
 
-users’
+user
 \begin_inset space ~
 \end_inset
 
-profile the introduction of new and faster services puts additional stress
+profile the introduction of new, faster services puts additional stress
  on the infrastructure, requiring additional optimization efforts.
 \end_layout
 
@@ -2619,21 +2959,21 @@ propagation
 \begin_inset space ~
 \end_inset
 
-conditions the allocation of a different frequency band for LTE compared
- to UMTS requires deployment of 4G sites, which radio propagation behaves
- differently than in 3G networks, mostly in urban areas.
+conditions the allocation of different frequency bands for different systems,
+ e.g., GSM, UMTS or LTE, requires deployment of new BSs, the radio propagations
+ of which behave differently, especially in urban areas.
 \end_layout
 
 \begin_layout Standard
-In this context, network operators define different optimization targets,
- depending on the addressed optimization problem.
- These targets are formed by an objective function that maps possible configurat
-ions into a real value.
- This number represents a quality rating of the proposed solution and it
- is used to compare different solutions among each other, and ultimately
- select the best one.
- Unfortunately, there is no definitive objective function in the field of
- radio-network optimization 
+Depending on the addressed optimization problem, network operators define
+ an optimization target, which are formed by an objective function that
+ maps possible configurations into a real value.
+ Unfortunately, there is no universal objective function in the field of
+ radio-network optimization
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
@@ -2641,64 +2981,104 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 \end_inset
 
 .
- However, it is possible to optimize for different targets such as service
- coverage, base station locations, interference levels, etc.
-\end_layout
+ However, it is possible to optimize for a different target at a time, such
+ as service coverage, SHO balance or signal propagation.
+ Particular optimization algorithms for solving these problems are presented
+ Chapters
+\begin_inset space ~
+\end_inset
 
-\begin_layout Standard
-In this work, we will address network optimization methods that are performed
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
+
+\end_inset
+
+ and
+\series bold
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:05-Framework_parameter_tuning"
+
+\end_inset
+
+
+\series default
+, respectively.
+ In all three cases, the introduced optimization approaches are performed
  
 \begin_inset Quotes eld
 \end_inset
 
-off-line
+offline
 \begin_inset Quotes erd
 \end_inset
 
-, meaning that the optimization software is not an active functioning part
- of the radio network in operation.
- Statistical data about network operation is used as the input or feedback
- information for different optimization targets.
+, meaning that the optimization software is not an active part of the target
+ radio network.
+ As the feedback information of each optimization target, the statistical
+ data about the network functioning is used.
 \end_layout
 
 \begin_layout Standard
-This paper gives an overview of well-known optimization problems in 3G mobile
- networks.
- At the beginning of each of the following sections, a description of an
- optimization problem is given, followed by a short survey of recently proposed
- optimization methods.
- Finally, a discussion about the introduced methods is given, before closing
- with some concluding remarks.
-\end_layout
+\begin_inset VSpace bigskip
+\end_inset
 
-\begin_layout Subsection
-Optimizing base station locations
-\end_layout
 
-\begin_layout Subsubsection
-Problem formulation
 \end_layout
 
 \begin_layout Standard
-Some references 
+In the following, an overview of some well-known optimization problems for
+ radio-mobile networks is given.
+ Each section describes an optimization problem, and presents a short survey
+ of recently proposed optimization methods.
+\end_layout
+
+\begin_layout Section
+Optimizing base-station locations
+\end_layout
+
+\begin_layout Standard
+Some authors
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
-key "minimum.set.covering.problem:1997,minimum.set.covering.problem:1998,minimum.set.covering.problem:2000"
+LatexCommand cite
+key "minimum.set.covering.problem:1997,minimum.set.covering.problem:2000"
 
 \end_inset
 
- formulate the base station location problem in terms of the minimum set
- covering problem (shown in Figure 
+ formulate the problem of locating BSs in terms of the minimum set covering
+ problem (see Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:The-minimum-set"
+reference "fig:02-Minimum_set_covering_problem"
 
 \end_inset
 
 ).
- The coverage problem is defined by considering the signal level in every
- test point from all base stations and requiring that at least one level
- is above a fixed threshold.
+ The set-coverage problem is defined by considering the signal level in
+ every test point from all BSs and requiring that at least one level is
+ above a fixed threshold.
 \end_layout
 
 \begin_layout Standard
@@ -2826,10 +3206,11 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-The minimum set covering problem: (a) the problem input and (b) the solution.
+A graphical representation of the set-covering problem: (a) the problem
+ input and (b) the solution.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:The-minimum-set"
+name "fig:02-Minimum_set_covering_problem"
 
 \end_inset
 
@@ -2848,54 +3229,91 @@ name "fig:The-minimum-set"
 
 \begin_layout Standard
 A different formulation considers the site selection problem as a 
-\begin_inset Formula $p$
+\emph on
+p
+\emph default
+-median problem
+\begin_inset space ~
 \end_inset
 
--median problem, in which base station location is the only decision variable
- considered.
- To each of the candidates solutions, an installation cost is also associated.
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yang-UMTS_base_station_location_planning:2007"
+
+\end_inset
+
+, in which the BS location is the only decision variable considered.
+ To each of the candidate solutions, an installation cost is also associated.
  The 
-\begin_inset Formula $p$
-\end_inset
-
+\emph on
+p
+\emph default
 -median problem constitutes seeking 
-\begin_inset Formula $p$
-\end_inset
-
+\emph on
+p
+\emph default
  different locations each time, regardless of how distant the sites are.
- The problem is to select one candidate site from each region to install
- a base station such that the traffic capacity and the size of the covered
- area are maximized with the lowest installation cost.
+ The problem involves selecting one installation-candidate site from each
+ region such that the traffic capacity and the size of the covered area
+ of the network are maximized with the lowest installation cost.
 \end_layout
 
-\begin_layout Subsubsection
-Proposed solutions
+\begin_layout Subsection
+Related work
 \end_layout
 
 \begin_layout Standard
 Aydin et al.
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "Aydin:Heuristic.Optimization.Of.WCDMA"
 
 \end_inset
 
- propose a solution to the 
+ proposed a solution to the 
 \begin_inset Formula $p$
 \end_inset
 
--median problem based on three meta-heuristic algorithms; a genetic algorithm,
- simulated annealing, and tabu search.
- Their experimental study focuses on performance comparison between the
- three algorithms.
+-median problem based on three metaheuristic algorithms: a genetic algorithm,
+ SA, and tabu search.
+ Their experimental study focused on the performance comparison between
+ the three algorithms.
+\end_layout
+
+\begin_layout Standard
+In
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yang-UMTS_base_station_location_planning:2007"
+
+\end_inset
+
+, the authors also used a simplified 
+\begin_inset Formula $p$
+\end_inset
+
+-median problem as the model.
+ They presented the results of extensive simulations to compare the performance
+ of three different metaheuristic algorithms.
 \end_layout
 
 \begin_layout Standard
 A solution to the set covering problem is proposed by Hao et al.
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "minimum.set.covering.problem:1997"
 
 \end_inset
@@ -2903,149 +3321,140 @@ key "minimum.set.covering.problem:1997"
 .
  A simulated annealing implementation was developed to solve the formulated
  combinatorial problem.
- The results presented demonstrate the feasibility of the proposed approach.
- Tutschku 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "minimum.set.covering.problem:1998"
+ The presented results showed the feasibility of the proposed approach.
+ 
+\end_layout
 
+\begin_layout Standard
+Mathar and Niessen
+\begin_inset space ~
 \end_inset
 
- presents a specialized greedy algorithm to solve the same problem.
- This work is part of the implementation of a planning tool prototype.
- Mathar and Niessen 
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "minimum.set.covering.problem:2000"
 
 \end_inset
 
- propose a solution based on integer linear programming, which they claim
- finds optimal solutions in most cases.
- They also introduce simulated annealing as an approximate optimization
- technique.
- This approach substitutes linear programming whenever an exact solution
- is out of reach because of the complexity of the problem.
+ proposed a hibrid method that combines a linear-programming approach with
+ SA.
+ The SA algorithm substituted linear programming whenever an exact solution
+ was out of reach because of the complexity of the problem instance.
 \end_layout
 
 \begin_layout Standard
 Amaldi et al.
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "amaldi:planning.umts.base.station.location"
 
 \end_inset
 
- offer a discussion about the computational results of two different heuristics:
- greedy search and tabu search.
- The problem formulation is based on a set of candidate sites where the
- base stations can be installed, an estimation of the traffic distribution
- and a propagation description of the area to be covered.
- Some years later, the same authors 
+ presented a discussion about the computational results of two different
+ heuristics: greedy search and tabu search.
+ The problem formulation was based on a set of candidate sites where the
+ BSs can be installed, an estimation of the traffic distribution and a propagati
+on description of the area to be covered.
+ Some years later, the same authors
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Amaldi:Radio.planning.and.coveraga.optimization"
 
 \end_inset
 
- extended the problem formulation by also considering base station configuration
- and hardware characteristics.
- In both works, they propose a mixed integer programming model with which
- they aim to maximize the trade-off between total traffic covered and total
- installation costs.
- The only difference between the models is the constraint definition of
- the linear program, where the constraints in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "amaldi:planning.umts.base.station.location"
-
-\end_inset
-
- are a subset of the constraints in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Amaldi:Radio.planning.and.coveraga.optimization"
-
-\end_inset
-
-.
+ extended the problem formulation by adding the BS configuration and the
+ hardware characteristics as additional constraints of the integer programme.
+ In both works, they proposed a mixed integer programming model to maximize
+ the trade-off between covered area and installation costs.
 \end_layout
 
 \begin_layout Standard
 Finally, Whitaker et al.
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "GA.for.antenna.placement:2005"
 
 \end_inset
 
- focus on providing the required service coverage at the lowest possible
+ focused on providing a required service coverage target at the lowest possible
  financial cost.
- Their framework supports the use of any multiple objective optimization
- algorithm which seeks to approximate a Pareto front.
- The performance of four different algorithms is explored, namely SEAMO,
- SPEA2, NSGA-II and PESA.
+ Their work compared the performance of four different algorithms, namely
+ SEAMO, SPEA2, NSGA-II and PESA, all targeting multiobjective optimization
+ targets.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Optimizing antenna parameters
 \end_layout
 
 \begin_layout Standard
-There are many antenna parameters that control the coverage and interference
- in the network, since the antenna shapes the emitted energy.
- Two important parameters are the azimuth angle and the elevation angle
- (or tilt) of the antenna.
- The antenna azimuth (shown in Figure 
+Since an antenna shapes the emitted energy, its configuration plays an important
+ role in the coverage and interference of a radio network.
+ The two most important parameters in this sense are the azimuth angle and
+ the tilt (or elevation angle) of the antenna.
+ The antenna azimuth, a pattern of which is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Antenna-azimuth"
+reference "fig:02-Antenna_azimuth"
 
 \end_inset
 
-) is the direction in which the main beam of the horizontal pattern points
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
-
+, is the horizontal direction of the main antenna beam.
+ The antenna tilt (see Figure
+\begin_inset space ~
 \end_inset
 
-.
- The antenna tilt (shown in Figure 
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Antenna-tilt"
+reference "fig:02-Antenna-tilt"
 
 \end_inset
 
-) is defined as the angle of the main beam of the antenna relative to the
- horizontal plane 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
-
-\end_inset
-
-.
+) is defined as the angle of the main antenna beam relative to the horizontal
+ plane.
  Both of these parameters have a great influence on network quality, although
- antenna tilt requires less effort to implement, since most modern radio
- networks already support remote electrical tilt.
+ the antenna tilt usually requires less effort to implement, since most
+ modern radio networks already support remote electrical tilt
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Athley-Impact_of_electrical_tilt_on_LTE_performance:2010"
+
+\end_inset
+
+.
  The adjustment of these two parameters optimize some important aspects
- of the network, namely:
+ of the network, e.g.,:
 \end_layout
 
 \begin_layout Itemize
-path loss between the base station and the mobile phone, since less power
- is required for a connection, hence more power is available for traffic;
- and
+the path loss between the BS and the UE,
 \end_layout
 
 \begin_layout Itemize
-interference between neighboring cells, which leads to an overall capacity
- increase.
+the interference between neighboring cells, which leads to an overall capacity
+ increase of the network.
 \end_layout
 
 \begin_layout Standard
@@ -3089,7 +3498,7 @@ centering
 A typical antenna azimuth pattern.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Antenna-azimuth"
+name "fig:02-Antenna_azimuth"
 
 \end_inset
 
@@ -3143,10 +3552,10 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-The antenna tilt angle with the horizontal plane.
+The antenna tilt, showing its angle with the horizontal plane.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Antenna-tilt"
+name "fig:02-Antenna-tilt"
 
 \end_inset
 
@@ -3163,19 +3572,23 @@ name "fig:Antenna-tilt"
 
 \end_layout
 
-\begin_layout Subsubsection
-Proposed solutions
+\begin_layout Subsection
+Related work
 \end_layout
 
 \begin_layout Standard
-Karner 
+One of the approaches proposed by Gerdenitsch et al.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
-key "MSc.antenna.optimization:2003"
+LatexCommand cite
+key "Antenna.tilt.and.CPICH:2003"
 
 \end_inset
 
- proposes an 
+ comprised an 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3185,285 +3598,166 @@ ad-hoc
 
  strategy for adjusting antenna azimuth and downtilt by analyzing the structure
  of the network.
- The objective of this optimization is to improve the results presented
- in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Antenna.tilt.and.CPICH:2003"
-
-\end_inset
-
- by increasing the number of served users in the target area.
- In a similar line of work, Jakl 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Jakl:PhD"
-
-\end_inset
-
- included in his doctoral thesis an antenna azimuth optimization algorithm,
- based on attempts of avoiding coverage holes by properly adjusting the
- azimuth settings.
+ The objective of this optimization was to improve the number of served
+ users in the target area.
+ 
 \end_layout
 
 \begin_layout Standard
-Siomina and Yuan 
+Siomina and Yuan
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Antenna.Configuration:2008"
 
 \end_inset
 
- propose a framework for automated optimization of antenna azimuth and tilt,
- including both mechanical and electrical tilt.
- The implementation introduces a simulated annealing algorithm that searches
- the solution space of possible antenna configurations.
- The goal of the optimization is targeted to address power sharing among
- cell channels and ultimately improve High-Speed Downlink Packet Access
- (HSDPA) 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "wiki:hsdpa"
-
-\end_inset
-
- throughput.
+ proposed an approach for automated optimization of antenna azimuth and
+ tilt, including support for both mechanical and electrical tilt.
+ The implementation introduced a simulated annealing algorithm that searches
+ the solution space of feasible antenna configurations.
+ The goal of the optimization was to improve power sharing among different
+ cell channels and ultimately improve network throughput.
 \end_layout
 
 \begin_layout Standard
-Zhang et al.
- 
+In
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "Antenna.azimuth.tilt:2009"
 
 \end_inset
 
- present a method which is composed of two optimization loops: the inner
- one and the outer one.
- The inner loop concentrates on frequency planning while the outer loop
- focuses on finding the optimal setting of antenna azimuth and tilt for
+, the authors presented a compound optimization method containing two loops:
+ the inner one and the outer one.
+ The inner loop concentrated on frequency planning while the outer loop
+ focused on finding the optimal settings of antenna azimuth and tilt for
  the current solution delivered by the inner loop.
- Although frequency planning is not directly related to 3G network optimization,
- we found this approach interesting enough to make a reference to it.
- The inner loop could be easily replaced with some other optimization target,
- e.g.
- common pilot channel power setting.
-\end_layout
-
-\begin_layout Subsection
-Optimizing common pilot channel power
+ This approach is interesting because of its flexibility, e.g., the inner
+ loop could be replaced with some other optimization objective, like service
+ coverage.
 \end_layout
 
 \begin_layout Standard
-The Common Pilot Channel (CPICH) is used as reference for handover 
+In
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
-key "umts_world:handover"
+LatexCommand cite
+key "Eckhardt-Vertical_antenna_tilt_optimization_for_LTE:2011"
 
 \end_inset
 
-, cell selection 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "3glteinfo:cellSelection"
+, the authors proposed an autonomous optimization approach for the antenna
+ tilts.
+ Based on the gradient-ascent method (see Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:02-Gradient-based-methods"
 
 \end_inset
 
-, and cell reselection 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "flore2005:cell_reselection"
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_models"
 
 \end_inset
 
-.
- Whenever a mobile phone is switched on, it tries to register with the cell
- providing the highest received CPICH level.
- It also defines the effective coverage area of the cell: according to the
- the CPICH power level, the cell coverage area will enlarge or shrink.
- Consequently, by appropriately adjusting the CPICH power at the base stations,
- the number of served users per cell can be balanced among neighboring cells.
- This procedure is called load balancing and it reduces interference, stabilizes
- network operation, and facilitates radio resource management 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-Proposed solutions
-\end_layout
-
-\begin_layout Standard
-Chen and Yuan 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CPICH.optimization:2008"
-
-\end_inset
-
- optimize CPICH transmit power starting from a uniform allocation (i.e.
- all cells are set with the same transmit power level).
- Their objective is to enhance HSDPA performance at cell edges while preserving
- control of R99 soft handover 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "wiki:soft_handover"
-
-\end_inset
-
-.
- The solution approach is based on a linear-integer mathematical model.
- A very similar problem and proposed solution is presented by Siomina and
- Yuan 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CPICH.optimization:2007"
-
-\end_inset
-
-.
- The problem definition slightly differs from 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CPICH.optimization:2008"
-
-\end_inset
-
- as there is no reference to soft handover control.
- The solution is also implemented as a linear program.
-\end_layout
-
-\begin_layout Standard
-Olmos et al.
+), the presented heuristic shows the fast convergence needed for an online
+ optimization method to be effective.
  
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CPICH.optimization:2003"
+\end_layout
 
+\begin_layout Standard
+\begin_inset VSpace bigskip
 \end_inset
 
- apply simulated annealing to the optimization of CPICH transmit powers
- in order to force mobile phones to transmit to the best available cell
- in a service area.
- Their results show decreased cell load with a consequently increased network
- capacity.
+
 \end_layout
 
 \begin_layout Standard
-Chen and Yuan 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CPICH.optimization:2009"
-
+Combining the power setting of the pilot signal with the antenna configuration
+ is also a common practice.
+ For example, Siomina et al.
+\begin_inset space ~
 \end_inset
 
- present a two-phase optimization algorithm for large-scale mobile networks.
- The algorithm uses the total CPICH power consumption as a minimization
- objective.
- The authors claim that the tabu-search-based algorithm can compute near
- optimal solutions within a few seconds, even for large networks.
-\end_layout
 
-\begin_layout Subsection
-Optimizing CPICH and antenna parameters
-\end_layout
-
-\begin_layout Standard
-Both the antenna tilt and azimuth directly affect the direction and range
- in which the cell broadcasts its CPICH.
- Consequently, optimal CPICH power is highly dependent on how the antenna
- tilt and azimuth are configured at base stations.
- Ideal configuration of antenna tilt and azimuth network-wise, with the
- objective of optimizing the CPICH power consumption, is a challenging task.
- For this reason, many authors have considered optimization methods that
- address all three parameters.
-\end_layout
-
-\begin_layout Subsubsection
-Proposed solutions
-\end_layout
-
-\begin_layout Standard
-Varbrand et al.
- 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "Coverage.optimization.on.CPICH.tilt.and.azimuth:2006"
 
 \end_inset
 
- approach the optimization of service coverage (see section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Optimizing-coverage"
-
-\end_inset
-
-) by considering all three configuration parameters, namely: CPICH transmit
- power, antenna tilt, and antenna azimuth.
+ present an optimization approach for maximizing the service coverage that
+ combines both antenna parameters with the power of the pilot signal.
  Their simulated annealing algorithm searches the solution space of possible
- configurations in order to find improvements in network performance and
- total transmitted power.
- Interestingly, the algorithm is efficient enough to optimize large networks
- without using excessive computing resources.
+ configurations in order to improve the performance of the target radio
+ network by reducing the total interference.
+ The simulation results show the algorithm is capable of tackling large
+ network instances.
 \end_layout
 
 \begin_layout Standard
-Siomina 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CPICH.and.antenna.tilt.optimization:2005"
-
+Two optimization algorithms for finding an optimal setting of antenna tilt
+ and pilot-signal power were introduced in the previously cited work by
+ Gerdenitsch et al.
+\begin_inset space ~
 \end_inset
 
- combines optimization of base station antenna tilts and CPICH power to
- reduce the total interference level and to improve network capacity.
- The introduced algorithm optimizes the antenna downtilt setting so that
- the total CPICH power in the network is minimized.
-\end_layout
 
-\begin_layout Standard
-Neubauer et al.
- 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "Antenna.tilt.and.CPICH:2003"
 
 \end_inset
 
- present two optimization algorithms for finding an optimal setting of antenna
- tilt and CPICH power of the base stations.
- The first algorithm builds on a rule-based approach, while the second one
- extends it by incorporating simulated annealing.
- An evaluation of both techniques shows that the second algorithm returns
- better results.
+.
+ The first algorithm is based on a rule-based approach, while the second
+ one extends it by incorporating simulated annealing.
+ The evaluation of both techniques shows that the second algorithm achieves
+ better solutions.
 \end_layout
 
 \begin_layout Standard
-Jakl et al.
- 
+In a different work, Gerdenitsch et al.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
 key "GA.for.tilt.and.CPICH:2004"
 
 \end_inset
 
- proposed a problem-specific genetic algorithm to tackle the optimization
- of antenna tilts and CPICH transmit powers.
- The goal of the optimization is to increase network capacity.
+ proposed a genetic algorithm to tackle the optimization of antenna tilt
+ and pilot-signal power, the goal of which is to increase network capacity.
  The implementation involves a deterministic fitness selection scheme, a
  problem specific recombination operator and an improved mutation operator.
- After the initial identification of the best individuals, a local optimization
- technique is used to improve their fitness.
+ After the initial identification of the best promising individuals, a local
+ optimization technique is applied to improve their fitness.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Optimizing coverage 
 \begin_inset CommandInset label
 LatexCommand label
@@ -3475,15 +3769,16 @@ name "sec:Optimizing-coverage"
 \end_layout
 
 \begin_layout Standard
-Coverage is maybe the most common optimization objective considered in 3G
- network optimization.
- The objective function for coverage optimization may be defined as follows:
+Coverage is arguably the most common optimization objective considered in
+ radio-network optimization.
+ A general objective function for coverage optimization can be defined as
+ follows
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}}
+f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}},
 \]
 
 \end_inset
@@ -3538,13 +3833,12 @@ where
 \end_inset
 
  represents the portion of the total area that is actually under network
- coverage.
- This value ranges from 0 (no coverage) to 1 (total coverage).
+ coverage, the value of which ranges from 0 (no coverage) to 1 (total coverage).
 \end_layout
 
 \begin_layout Standard
-The area being optimized is usually divided in squares (or pixels) of a
- certain size, creating a regular square grid (RSG
+The area under optimization is usually divided into squares (or pixels)
+ of a certain size, creating a regular square grid (RSG
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -3554,16 +3848,9 @@ description "Regular square grid."
 \end_inset
 
 ) of a certain resolution.
- A pixel is considered covered if the signal to noise ratio is above a given
- threshold 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "3GPP_TS_25.133"
-
-\end_inset
-
-.
- It is also common to use a test function 
+ A pixel is considered covered if a given QoS measure is above a defined
+ threshold.
+ It is also common to use a binary function, e.g., 
 \begin_inset Formula $cov(x,y)$
 \end_inset
 
@@ -3576,91 +3863,115 @@ description "Returns 1 if the coordinate $(x,y)$ is under mobile-network coverag
 
 \end_inset
 
-, which returns 1 if the pixel located at 
+, to check the coverage of a given pixel.
+ The function returns 1 if the pixel located at 
 \begin_inset Formula $(x,y)$
 \end_inset
 
  is covered, and 0 otherwise.
 \end_layout
 
-\begin_layout Subsubsection
-Proposed solutions
+\begin_layout Subsection
+Related work
 \end_layout
 
 \begin_layout Standard
-Siomina and Yuan 
+Siomina and Yuan
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 
- consider the problem of minimizing pilot power subject to the coverage
- constraint.
- Their approach consists of mathematical programming models and methods,
- based on a linear-integer mathematical formulation of the problem.
- A special numerical analysis studies the trade-off between service coverage
- and pilot power consumption for different test networks.
+ considered the problem of minimizing the pilot-signal power subject to
+ the coverage constraint.
+ Their approach consists of an iterative mathematical programme, based on
+ a linear-integer mathematical formulation of the problem.
+ The simulation results showed the trade-off between service coverage and
+ power consumption for different test networks.
 \end_layout
 
 \begin_layout Standard
-Capone et al.
- 
+Almaldi et al.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Amaldi:Radio.planning.and.coveraga.optimization"
+LatexCommand cite
+key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008"
 
 \end_inset
 
- investigate mathematical programming models for supporting decisions on
- where to install new base stations and how to select their configuration
- (antenna height and tilt, sector orientations, maximum emission power,
- pilot signal, etc.) so to find a trade-off between maximizing coverage and
- minimizing costs.
+ investigated several mathematical-programming models for supporting decisions
+ on where to install new BSs and how to select their configuration in order
+ to find a trade-off between coverage and costs.
  The overall model takes into account signal-quality constraints in both
- uplink and downlink directions, as well as the power control mechanism
- and the CPICH signal.
+ uplink and downlink directions, as well as the pilot-signal power.
 \end_layout
 
 \begin_layout Standard
-Valkealahti et al.
- 
+Connecting UMTS and LTE-network optimization from the coverage point of
+ view, Sallent et al.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Coverage.balance:2002"
+LatexCommand cite
+key "Sallent-A_roadmap_from_UMTS_to_LTE_optimization:2011"
 
 \end_inset
 
- propose a method for automatic setting of CPICH power.
- The control algorithm applies total transmission power measurements from
- the base station, neighboring cells and mobile terminals to determine the
- pilot qualification.
- The CPICH power is then periodically updated based on a group of heuristic
- rules in order to improve coverage and load balance.
- A similar approach is described by Parkinnen et al.
- 
+ presented a framework to automatically identify a cell with sub-optimal
+ coverage.
+ The framework input is a collection of KPIs, including usage statistics
+ and UE field measurements.
+ The authors used the experimental results to provide a projection for the
+ LTE self-optimization functionality.
+\end_layout
+
+\begin_layout Standard
+In
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand cite
+key "Thampi-A_sparse_sampling_algorithm_for_self_optimisation_of_coverage_in_LTE_networks:2012"
+
+\end_inset
+
+, the authors introduced a sparse-sampling algorithm to optimize the coverage
+ of LTE networks by means of antenna tilt.
+ By applying a reinforcement-learning technique, their technique optimizes
+ coverage without prior knowledge about the target network.
+\end_layout
+
+\begin_layout Standard
+Parkinnen et al.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Coverage.optimization.with.cost.function:2002"
 
 \end_inset
 
- where some network performance parameters are combined with service coverage
- in a cost function.
- The pilot power of a cell is periodically updated with a gradient descent
- method that minimizes the afore mentioned function.
+ presented a gradient-descent method to minimizes an objective function
+ that combines some network KPIs with the service coverage.
+ The power of the pilot signal of the cells are periodically updated in
+ order to improve the afore-mentioned function.
 \end_layout
 
-\begin_layout Subsection
-Optimizing alignment of soft-handover areas
-\end_layout
-
-\begin_layout Standard
-We have defined this new problem.
- About the connecting of this 3G-specific problem with LTE ...???
-\end_layout
-
-\begin_layout Subsection
+\begin_layout Section
 Discussion
 \end_layout
 
@@ -3790,9 +4101,10 @@ algorithms These algorithms work on a population of solutions that allows
  a more comprehensive search for optimal solutions.
  As a direct consequence, an increase in running time is commonly observed.
  The implementation effort of genetic algorithms is to some degree higher
- than for simpler search methods (e.g.
- local search), but their inherent structure greatly simplifies possible
- parallel implementations and execution.
+ than for simpler search methods, e.g., local search, but their inherent structure
+ makes parallel implementations rather simple.
+ Additionally, genetic algorithms are less likely of being trapped in local
+ optima, since they are a population-based metaheuristic.
 \end_layout
 
 \begin_layout Description
@@ -3800,16 +4112,13 @@ Linear
 \begin_inset space ~
 \end_inset
 
-programming Linear optimization problems are widely used in different optimizati
-on areas and there are many good software packages to solve such problems.
+programming Linear-integer or mixed-integer programming are widely used
+ in different optimization areas and there are many good software packages
+ to solve such problems.
  Consequently, if a problem can be modeled as a continuous linear problem,
  there is usually no difficulty in finding optimality.
  In the context of this survey, linear programming has proven useful for
  coverage optimization in early network planning stages.
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Description
@@ -3821,309 +4130,15 @@ search
 \begin_inset space ~
 \end_inset
 
-methods Other search methods
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Namely, local search, simulated annealing and tabu search in the context
- of this survey.
-\end_layout
-
-\end_inset
-
- usually represent a compromise between running time and quality of results.
- They rely on evaluating a great number of alternative configurations.
+methods Other search methods, e.g., local search, SA, tabu search or gradient
+ descent, usually represent a compromise between running time and quality
+ of results.
+ Their effectiveness relies on evaluating a great number of alternative
+ solutions.
  The number of parameters taken into account, as well as the evaluation
  precision, directly influence their running time.
  These methods don't excel in full simulation scenarios.
- On the other hand, some search methods (e.g.
- tabu search) have powerful mechanisms to escape local minima.
-\end_layout
-
-\begin_layout Standard
-A short comparison of the optimization methods presented in this survey
- is shown in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Comparison-of-optimization-methods"
-
-\end_inset
-
-.
- The comparison variables arise from the context in which the methods were
- presented.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\size footnotesize
-
-\begin_inset Caption
-
-\begin_layout Plain Layout
-A comparison among the presented optimization methods.
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Comparison-of-optimization-methods"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size footnotesize
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Algorithm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Running time
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Typical application
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Local search
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Shorter
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Solution quality improvement.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Tabu search
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Shorter
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Solution quality improvement.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Simulated annealing
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Longer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Initial search of the solution space.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Genetic algorithm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Longer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Initial search of the solution space and solution quality improvement.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Linear programming
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-(formulation dependent)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Coverage network planning.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ Moreover, some of them are easily trapped in local minima.
 \end_layout
 
 \begin_layout Section*
@@ -4131,35 +4146,33 @@ Summary
 \end_layout
 
 \begin_layout Standard
-The variety of optimization problems that have been introduced in the previous
- sections differ in many aspects like implementation, running time and solution
- quality.
+The variety of optimization problems described in the previous sections
+ differ in many aspects like implementation, running time and solution quality.
  Picking the right method for a given situation depends on the optimization
  task and the desired results.
- Since computation time is usually an important restriction, simpler and
+ Since computational time is usually an important restriction, simpler and
  faster methods may be preferable.
  
 \end_layout
 
 \begin_layout Standard
-Beside the convenience of a survey such as the one presented in this work,
- it is very important to develop a feeling for the properties, advantages
- and drawbacks of the respective methods.
- Moreover, radio expert's recommendations regarding solution interpretation
- and feedback from everyday network operation, are an essential input for
- creating quality optimization methods.
- In this sense, and based on our own experience, the expert's advice is
- irreplaceable and a most valuable contribution to the research work.
+Besides the convenience of a literature overview as presented here, it is
+ very important to develop a feeling for the properties, advantages and
+ drawbacks of the respective methods.
+ Moreover, the recommendations of radio experts regarding the interpretation
+ of the solutions and the feedback from everyday network operation are an
+ essential input for establishing high-quality optimization methods.
 \end_layout
 
 \begin_layout Standard
-Also, as it may be observed in some of the presented references, it is often
- advisable to combine different methods.
- Therefore, a simple optimization method may find a subset of reasonable
- parameter configuration, whereas a more complex method could be applied
- afterward, to refine the search.
- Sometimes it may also be useful to apply a simple search method at the
- end to find better solutions in the vicinity of a current promising one.
+Additionally, as noted for some of the cited works, hybrid methods, i.e.,
+ approaches that combine different optimization and/or search techniques,
+ usually give competitive solutions to complex optimization problems.
+ Therefore, a simple optimization algorithm can quickly find a subset of
+ reasonable solutions, whereas a more complex method could be applied afterwards
+, to refine the search.
+ Sometimes it may also be useful to apply a local search method at the end
+ to find better solutions in the proximity of a current one.
 \end_layout
 
 \begin_layout Chapter
@@ -4174,19 +4187,314 @@ name "chap:02-Principles_of_GPU_programming"
 \end_layout
 
 \begin_layout Standard
+During the past few years, the computing industry has been delivering extra
+ processing power in the form of parallel computing, i.e., more cores instead
+ of higher frequency rates.
+ Concurrently to this situation, new hardware architectures have appeared.
+ Among them is the programmable graphics processing unit (GPU
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GPU"
+description "Graphics processing unit."
+
+\end_inset
+
+), the computing capacity of which is already showing a faster progress
+ compared to CPUs.
+ As it can be observed from Figure
+\begin_inset space ~
+\end_inset
+
+??? [Cruz!3], the peak performance of the latest GPU is several times greater
+ than the latest CPU, but even more important is the trend
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The GPU market was almost exclusively driven by the games industry.
+ This fact makes this commodity hardware cheaper than other alternatives
+ for high-performance computing (HPC
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HPC"
+description "High-performance computing."
+
+\end_inset
+
+), e.g., the classic ‘mainframe’ servers.
+ Moreover, the performance per watt of GPUs is an extra benefit over their
+ raw performance
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In February 2007, the first real opportunity for using GPUs for general
+ programming and scientific computing came about with the release of the
+ Compute Unified Device Architecture (CUDA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "CUDA"
+description "Compute unified device architecture."
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+In the following, the focus on the CUDA architecture.
+ In particular, similar hardware produced by other vendors, e.g., AMD and
+ Intel, as well as other programming frameworks like OpenCL, are based on
+ the same technology paradigm of massively-parallel processors.
+ For this reason, the principles discussed in this section can be applied
+ to current GPU technologies, in a vendor-independent manner.
+\end_layout
+
+\begin_layout Section
+CUDA
+\end_layout
+
+\begin_layout Standard
+A GPU is effectively a large set of processor cores with the ability to
+ directly address into a global memory.
+ This makes it easier for developers to implement data-parallel kernels.
+ The CUDA programming model 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CUDA"
+
+\end_inset
+
+ was created for developing applications for the GPU platform.
+ A system within this model consists of a host, i.e., a traditional CPU, and
+ one or more compute devices that are massively data-parallel coprocessors,
+ i.e., a GPU.
+ The host code transfers data to and from the global memory of the GPU using
+ CUDA-function calls.
+ Each processor of a CUDA device supports the Single-Program Multiple-Data
+ (SPMD
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SPMD"
+description "Single-program multiple-data."
+
+\end_inset
+
+) model
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Atallah-Algorithms_and_theory_of_computation:2002"
+
+\end_inset
+
+, in which all concurrent threads are based on the same code, although they
+ may not follow exactly the same path of execution.
+\end_layout
+
+\begin_layout Standard
+A CUDA program consists of multiple parts that are executed on either the
+ CPU or the GPU.
+ For this reason, the CUDA programming model may be viewed as an environment
+ to isolate program parts that are rich in data parallelism and thus should
+ be executed on the GPU.
+ The parallel parts of a CUDA program are implemented as kernels, which
+ are functions written in the C language and describe the work of a single
+ thread of execution.
+ Several restrictions apply on kernel functions: there must be no recursion,
+ no static variable declarations, and a non-variable number of arguments
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
+
+\end_inset
+
+.
+ At run time, the kernel invocation is typically done on thousands of threads,
+ which are organized within developer-defined groups called thread blocks.
+ The threads can share data and synchronize their execution only within
+ the block they belong to.
+ Thread blocks are, in turn, organized in a higher-hierarchy level called
+ grid.
+ All threads within a given grid execute the same kernel function.
+ During execution, continous sections of threads within a block are grouped
+ into warps of 32 parallel threads, which represent the multi-threading
+ scheduling unit
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
+
+\end_inset
+
+.
+ A SM executes issues one instruction a a time for all the 32 threads in
+ the warp.
+ Consequently, if a thread block is not evenly divisible by the warp size,
+ any remaining thread slots are wasted.
+ Another undesirable situation appears when threads in a warp take different
+ control paths, since the execution performance of the entire warp is reduced.
+\end_layout
+
+\begin_layout Standard
+The architecture of a typical GPU is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:04-GPU_memory_organization"
+
+\end_inset
+
+ (2 from Whu???).
+ It consists of a 
+\begin_inset Formula $n$
+\end_inset
+
+ streaming multiprocessors (SMs
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SM"
+description "Streaming multiprocessor."
+
+\end_inset
+
+), each containing 
+\begin_inset Formula $m$
+\end_inset
+
+ streaming processors (SPs
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SP"
+description "Streaming processor."
+
+\end_inset
+
+).
+ Each SP executes a single instruction of a thread in a single-instruction,
+ multiple-data thread (SIMT
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SIMT"
+description "Single-instruction, multiple-thread."
+
+\end_inset
+
+)
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+
+\end_inset
+
+.
+ The registers of each SM are dynamically partitioned among the threads
+ running on it.
+ Due to the different memory system a GPU has (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:04-GPU_memory_organization"
+
+\end_inset
+
+), the actual throughput an application can achieve depends on issues related
+ to the access to memory, in particular the slow accesses to global memory
+ from the GPU chip, and the use of shared memory in the SPs to mitigate
+ the high-latency effects
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+
+\end_inset
+
+.
+ Since variables in the source code can be declared to reside in global,
+ shared, local, or constant memory, a programmer has the means to organize
+ the code in such a way that the application throughput can be maximized.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Hacer un lindo resumen de 
-\begin_inset Quotes eld
+>>> rephrase this
+\end_layout
+
 \end_inset
 
-How to obtain efficient GPU kernels: An illustration using FMM & FGT algorithms
-\begin_inset Quotes erd
-\end_inset
 
- y el paper de Wen Mei Whu.
+\end_layout
+
+\begin_layout Standard
+In summary, there are hard limits to the memories, threads, and total bandwidth
+ available to an application running on the GeForce 8800.
+ Managing these limits is critical when optimizing applications, but strategies
+ for avoiding one limit can cause other limits to be hit.
+ They can also reduce the number of thread blocks that can run simultaneously.
+ In addition, managing the behavior of threads so that those in the same
+ warp follow the same control paths and load contiguous values from global
+ memory can also improve performance.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+<<<
 \end_layout
 
 \end_inset
@@ -4264,25 +4572,112 @@ name "fig:04-GPU_memory_organization"
 \end_layout
 
 \begin_layout Standard
-GPUs have a totally different memory system (see Figure
+A detailed discussion of the CUDA programming model can be found in
 \begin_inset space ~
 \end_inset
 
 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:04-GPU_memory_organization"
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Farber-CUDA_application_design_and_development:2011"
 
 \end_inset
 
-) and many times more processor cores than CPUs.
- Specifically, the actual throughput an application can achieve depends
- on issues related to the access to memory, in particular the slow accesses
- to global memory from the GPU chip, and the use of shared memory in the
- streaming processors to mitigate the high-latency effects 
+.
+\end_layout
+
+\begin_layout Standard
+-----------------------------
+\end_layout
+
+\begin_layout Standard
+En contraste, los procesa- dores de los CPU convencionales no pueden manejar
+ m ́as de una operaci ́on al mismo tiempo.
+\end_layout
+
+\begin_layout Standard
+However, all threads share the same global address space
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+key "Kirk-NVIDIA_CUDA_software_and_GPU_parallel_computing:2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+>>> reciclar esta parte de texto en algun otro lado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+There is a constant growing demand for hardware resources, longer-processing
+ times and more memory to follow the evolution of 3G radio networks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
+
+\end_inset
+
+.
+ Fortunately, high-performance computer systems are increasingly accessible;
+ something made possible because of the emergence of computer clusters and
+ commodity hardware, capable of true parallel processing, e.g.
+ multi-core CPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore"
+
+\end_inset
+
+ and GPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wen2011gpu"
+
+\end_inset
+
+.
+ Moreover, the highly parallel structure present on GPUs makes them more
+ effective than CPUs for execution of algorithms where large blocks of data
+ need to be processed in parallel.
+ Commodity GPUs have evolved from being a graphic accelerator into a general-pur
+pose processor.
+ They can achieve higher performance at lower power consumption and lower
+ costs when compared to conventional CPUs.
+ Additionally, the implementation of the framework will benefit from valuable
+ advances in computer science and High Performance Computing (HPC), in order
+ to perform faster and more reliable simulations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore,wen2011gpu"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+<<<
+\end_layout
 
 \end_inset
 
@@ -4301,22 +4696,25 @@ name "sub:02-OpenCL"
 \end_layout
 
 \begin_layout Standard
-We have chosen the Open Computing Language (OpenCL) 
+The Open computing language (OpenCL)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Stone_OpenCL.A.parallel.programming.standard:2010"
 
 \end_inset
 
- as the implementation platform of our optimization system on GPU.
-\end_layout
-
-\begin_layout Standard
-OpenCL is an open parallel computing API designed to enable GPUs and other
- co-processors to work together with the CPU, providing additional computing
- power.
+ is an open parallel computing API designed to enable GPUs and other co-processo
+rs to work together with the CPU, providing additional computing power.
  As a standard, OpenCL 1.0 was released in 2008, by The Khronos Group, an
- independent standards consortium 
+ independent standards consortium
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Munshi_The.OpenCL.specification:2009"
@@ -4324,38 +4722,40 @@ key "Munshi_The.OpenCL.specification:2009"
 \end_inset
 
 .
- For additional information about the OpenCL standard and API, we refer
- the reader to the numerous guides available online.
 \end_layout
 
 \begin_layout Standard
-Our choice in using OpenCL was greatly influenced by the fact that its bitcode
- runs on a variety of hardware, including multicore CPUs and GPUs from different
- vendors.
- This provides a complete framework capable of comparing execution speed-up
- on different hardware without the need of changing the implementation.
- 
+The main advantage of OpenCL over CUDA relies on the fact that its source
+ code can be compiled to run on a variety of hardware, including multicore
+ CPUs and GPUs from different vendors.
+ This provides a complete framework that capable of exploiting the parallel
+ features of different hardware without the need of changing the implementation.
+ Moreover, being an open standard, the ....??? As it was mentioned before, the
+ details described in the previous section may be equally applied on CUDA
+ and OpenCL.
 \end_layout
 
 \begin_layout Standard
-One unfortunate consequence of the vendor variety is that NVIDIA's CUDA
- 
+One unfortunate consequence of the vendor variety is that CUDA 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "NVIDIA_Compute.Unified.Device.Architecture:2007"
 
 \end_inset
 
- and OpenCL documentation present disparate naming conventions for some
- key components.
- For the sake of consistency, in Table 
+ and OpenCL have each introduced its own naming conventions.
+ For the sake of consistency, in Table
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:CUDA-OpenCL-translation"
 
 \end_inset
 
-, we present a short 
+, a short 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4363,9 +4763,7 @@ translation dictionary
 \begin_inset Quotes erd
 \end_inset
 
- between them.
- In the remaining of this work, we will stick to the naming convention used
- in the CUDA documentation.
+ between both platforms is presented.
 \end_layout
 
 \begin_layout Standard
@@ -4378,9 +4776,11 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
+Naming-convention translation between OpenCL and CUDA
+\emph on
+ 
+\emph default
 
-\shape italic
-Terminology translation between OpenCL and CUDA 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Kloeckner_CUDA.OpenCL.dictionary:2011"
@@ -4711,8 +5111,23 @@ get_global_id(0|1|2)
 \end_layout
 
 \begin_layout Standard
-Despite the use of OpenCL as the target platform for our implementation,
- the details described in the next sections may be equally applied on CUDA.
+In the remaining of this thesis, the naming convention introduced by the
+ CUDA platform is used.
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+This chapter gave an overview of the basic concepts, the potential and the
+ limitations of the GPUs, when used as parallel procesors for general programmin
+g.
+ In particular, emphasis has been given to the details that differenciate
+ this platform from the traditional serial architecture on CPUs.
+ In this sense, it is important to recognize which applications can benefit
+ from using a GPU and which not, also taking into consideration the effort
+ required at the implementation time.
 \end_layout
 
 \end_body

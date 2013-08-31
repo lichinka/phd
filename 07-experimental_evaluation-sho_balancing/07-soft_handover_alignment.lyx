@@ -3966,5 +3966,14 @@ us environments, because it imposes no restrictions regarding cell layout
  PRATO.
 \end_layout
 
+\begin_layout Standard
+ It is important to note that some methods proposed in this thesis have
+ been particularly designed for problems emerging during the planning of
+ 3G radio networks.
+ Despite this, they may be adapted to other standards, e.g., 2G or 4G without
+ lose of generality.
+ For example, in LTE ...???
+\end_layout
+
 \end_body
 \end_document
