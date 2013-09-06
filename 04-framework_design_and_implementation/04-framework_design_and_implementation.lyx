@@ -1715,7 +1715,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Pseudo code of the radio-coverage prediction algorithm.
+Pseudo-code of the radio-coverage prediction algorithm.
  The time complexity is given per line.
 \begin_inset CommandInset label
 LatexCommand label

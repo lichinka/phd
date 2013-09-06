@@ -175,7 +175,7 @@ where
 \end_inset
 
  makes it possible to define a total order relation between any pair of
- solutions in the search space 
+ solutions in 
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -195,7 +195,7 @@ The search space
 \begin_inset Formula 
 \begin{eqnarray}
 g(x_{1},\dots,x_{n}) & \leq & 0\nonumber \\
-h(x_{1},\dots,x_{n}) & = & 0
+h(x_{1},\dots,x_{n}) & = & 0.
 \end{eqnarray}
 
 \end_inset
@@ -211,7 +211,7 @@ Optimization problems involving the maximization of the objective function
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\max f(\vec{x})=-\min(-f(\vec{x}))\label{eq:02-maximization_minization_problem_relation}
+\max f(\vec{x})=-\min(-f(\vec{x})).\label{eq:02-maximization_minization_problem_relation}
 \end{equation}
 
 \end_inset
@@ -228,8 +228,7 @@ A point
 \begin_inset Formula $f$
 \end_inset
 
- if it holds a better value than all its neightbours, i.e.
- there exits 
+ if it holds a better value than all its neightbours, i.e., there exits 
 \begin_inset Formula $\epsilon>0$
 \end_inset
 
@@ -239,7 +238,7 @@ A point
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-f(\vec{x}^{*})\le f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}\qquad\mid\vec{x}-\vec{x}^{*}\mid<\epsilon\label{eq:02-local_minimum}
+f(\vec{x}^{*})\le f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}\qquad\mid\vec{x}-\vec{x}^{*}\mid<\epsilon.\label{eq:02-local_minimum}
 \end{equation}
 
 \end_inset
@@ -263,7 +262,7 @@ Similarly, a point
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-f(\vec{x}^{*})\leq f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}\label{eq:02-global_minimum}
+f(\vec{x}^{*})\leq f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}.\label{eq:02-global_minimum}
 \end{equation}
 
 \end_inset
@@ -273,14 +272,22 @@ f(\vec{x}^{*})\leq f(\vec{x})\qquad\forall\vec{x}\in\mathbb{R}^{n}\label{eq:02-g
 
 \begin_layout Standard
 The concepts of local and global minimum are considered strict if the inequaliti
-es of 
+es of Equations
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:02-local_minimum"
 
 \end_inset
 
- and 
+ and
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:02-global_minimum"
@@ -290,15 +297,18 @@ reference "eq:02-global_minimum"
  are strict.
  Likewise, the definition of local and global maximum is given by the existing
  relation between a minimization and a maximization problem, as specified
- in 
+ in Equation
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:02-maximization_minization_problem_relation"
 
 \end_inset
 
-, i.e.
- a point 
+, i.e., a point 
 \begin_inset Formula $\vec{x}^{*}$
 \end_inset
 
@@ -346,12 +356,15 @@ Gradient-based methods are among the oldest and most studied optimization
 \begin_inset Formula $\vec{x}$
 \end_inset
 
- in that dimension, i.e.
- 
+ in that dimension, i.e., 
 \begin_inset Formula $<\frac{\partial f}{\partial x_{1}},\dots,\frac{\partial f}{\partial x_{n}}>$
 \end_inset
 
- 
+
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Luke-Essentials_of_metaheuristics:2009"
@@ -367,8 +380,8 @@ The principle behind gradient-based methods is rather simple.
 \begin_inset Formula $x$
 \end_inset
 
-, we iteratevily substract (or add) a small positive value to it, e.g.
- for gradient descent:
+, a substraction (or addition) of a small positive value is iteratively
+ applied to it, e.g., for gradient descent:
 \end_layout
 
 \begin_layout Standard
@@ -394,7 +407,11 @@ where
 \end_inset
 
  decrease, whereas a negative slope will make it increase.
- Figure 
+ Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:02-gradient_descent"
@@ -439,7 +456,7 @@ centering
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename img/gradient_descent.eps
-	width 75text%
+	width 55text%
 
 \end_inset
 
@@ -494,9 +511,8 @@ zig-zag
 
  way.
  This behavior is directly related to the slope of the function at the given
- point, i.e.
- a steepest slope translates into a larger jump, and may be allivieatted
- by adjusting the value of 
+ point, i.e., a steepest slope translates into a larger jump, and may be allivieat
+ted by adjusting the value of 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -540,7 +556,11 @@ Another issue is how other points are handled.
  (known as inflection points in one-dimensional functions).
  Clearly, the first derivative of a saddle point is zero, meaning gradient
  descent will stop looking for the minimum, even though it hasn't found
- it (see Figure 
+ it (see Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:02-gradient_descent_saddle_point"
@@ -548,11 +568,12 @@ reference "fig:02-gradient_descent_saddle_point"
 \end_inset
 
 ).
- Newton's method, on the other hand, does not help either.
- Moreover, in this case, we would be even dividing by zero! These observations
- clearly show how gradient methods get caught in local optima.
- We define local optima of a function as the optima (or minima in our case)
- of a local region.
+ Newton's method, on the other hand, does not help either, even trying to
+ divide by zero in this case.
+ These observations clearly show how gradient methods get caught in local
+ optima.
+ Local optima of a function is defined as the optima (or minima in this
+ case) of a local region.
  Similarly, global optima are defined as the optima of the whole domain
  of a function.
  It follows that gradient methods, as gradient descent or Newton’s method,
@@ -591,7 +612,7 @@ centering
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename img/gradient_descent_saddle_point.eps
-	width 75text%
+	width 55text%
 
 \end_inset
 
@@ -627,12 +648,23 @@ name "fig:02-gradient_descent_saddle_point"
 But maybe the biggest concern with gradient-based methods is they assume
  the function under optimization is derivable.
  This assumption holds only when optimizing a well-formed mathematical function.
- Unfortunately, this is generally not the case, since in most cases the
- gradient is not computable because the function is not known.
+ Unfortunately, this is generally not true, since in most cases the gradient
+ is not computable because the function is not known.
  The only available approach in such situations is creating inputs to the
  function in order to assess their quality.
- Metaheuristics are good candidates for this class of problems to solve
- moderate and large instances.
+ Metaheuristics (see Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:02-Metaheuristics"
+
+\end_inset
+
+) are good candidates for this class of problems, for solving both moderate
+ and large instances.
 \end_layout
 
 \begin_layout Section
@@ -659,10 +691,9 @@ In a linear programming optimization problem, both the objective function
 \begin_inset Formula $\vec{x}$
 \end_inset
 
-, i.e.
- they must meet certain requirements as, for example, fullfil a limited
+, i.e., they must meet certain requirements as, for example, fullfil a limited
  availability of resources.
- An problem may be formulated as follows, e.g.:
+ A problem may be formulated as follows:
 \end_layout
 
 \begin_layout Standard
@@ -713,7 +744,7 @@ reference "eq:02-linear_programming_objective_function"
 \end_layout
 
 \begin_layout Standard
-For solving continous linear optimization problems, efficient exact algorithms
+For solving continous, linear-optimization problems, efficient exact algorithms
  exist, such as the simplex method 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -729,7 +760,7 @@ key "Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984"
 \end_inset
 
 .
- Indeed, linear programming is one of the most satisfactory models of solving
+ Indeed, linear programming is one of the most satisfactory models for solving
  optimization problems, since the feasible region of the problem is a convex
  set and the objective function is a convex function.
  It follows that the global optimum is a node of the polytope representing
@@ -777,7 +808,7 @@ centering
 \begin_inset Graphics
 	filename img/linear_programming.eps
 	lyxscale 80
-	width 75text%
+	width 55text%
 
 \end_inset
 
@@ -834,7 +865,7 @@ key "Bazaraa-Nonlinear_programming:2006"
 
 .
  However, non-linear continuous problems are more difficult to solve.
- Despite several existing technique to linearize such models, they often
+ Despite several existing techniques to linearize such models, they often
  not only introduce extra variables and constraints, but also some degree
  of approximation 
 \begin_inset CommandInset citation
@@ -856,9 +887,9 @@ key "Glover-Improved_linear_programming_formulations_for_nonlinear_problems:1975
 \end_layout
 
 \begin_layout Standard
-Generally, when dealing with real-world problems, the availability of analytical
- optimization models, such as required by gradient methods or (non-)linear
- programming, is not guaranteed.
+Generally speaking, when dealing with real-world problems, the availability
+ of analytical optimization models, such as those required by gradient methods
+ or (non-)linear programming, is not guaranteed.
  Indeed, for some applications, only simulations or physical models are
  the available means for objective-function evaluation 
 \begin_inset CommandInset citation
@@ -874,7 +905,14 @@ key "Fu-Optimization_for_simulation:2002"
 \end_layout
 
 \begin_layout Section
-Metaheuristics
+Metaheuristics 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:02-Metaheuristics"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -885,7 +923,7 @@ key "Glover-Future_paths_for_integer_programming_and_links_to_artificial_intelli
 
 \end_inset
 
-, represent a group of approximation algorithms designed to combine basic
+, represent a group of approximation algorithms designed to combine basic,
  heuristic principles with advanced high-level guidance methods, targeted
  at improving the efficiency of a search process.
  These techniques are meant to find good solutions to a given problem, for
@@ -903,7 +941,7 @@ key "Kochenberger_Handbook_of_metaheuristics:2003"
 \begin_layout Standard
 From the theorical point of view, metaheuristics represent a subset of stochasti
 c optimization, since they use some degree of randomness to find optimal
- (or as optimal as possible) solutions to hard problems.
+ (or as good as possible) solutions to hard problems.
  They are the most general of these kinds of algorithms, and are applied
  to a wide range of problems 
 \begin_inset CommandInset citation
@@ -1003,7 +1041,7 @@ good
 
  solutions, are thoughfully explored during the intensification phase, hoping
  to find better solutions.
- On the other hand, during the diversification phase, not yet visited regions
+ On the other hand, during the diversification phase, not-yet-visited regions
  are explored, making sure the search space as a whole is evenly explored,
  thus avoid confining the search to a reduced number of regions.
  In this context, the ultimate search algorithm in terms of diversification
@@ -1033,7 +1071,7 @@ key "Talbi_Metaheuristics:2009"
 \begin_layout Standard
 Metaheuristics are applicable where state-of-the-art exact algorithms cannot
  tackle the given instances within the required time, either because of
- the size or the structure of the given problem instances.
+ their size or structure.
  The meaning of 
 \begin_inset Quotes eld
 \end_inset
@@ -1045,8 +1083,8 @@ required time
  within this context directly depends on the target optimization problem
  itself.
  A feasible or acceptable time may vary from some seconds to several months,
- again, depending on the target optimization problem, e.g.
- real-time decisions against structural-design problems.
+ again, depending on the target optimization problem, e.g., real-time decisions
+ against structural-design problems.
 \end_layout
 
 \begin_layout Standard
@@ -1057,14 +1095,14 @@ key "Talbi-Metaheuristics_from_design_to_implementation:2009"
 
 \end_inset
 
-, let us summarize the essential properties of optimization problems that
- justify the use of metaheuristics:
+, a summary of the essential properties of optimization problems that justify
+ the use of metaheuristics follows:
 \end_layout
 
 \begin_layout Itemize
 Very large problem instances.
  Even though exact polynomial-time algorithms might be known for solving
- the target problem, they are too expensive due to the size of instances.
+ the target problem, they are too expensive due to the size of the instances.
 \end_layout
 
 \begin_layout Itemize
@@ -1098,13 +1136,27 @@ ts.
 Problems that cannot be solved with exhaustive search due to the non-analytical
  models on which they are based.
  These problems are defined by a black-box evaluation of the objective function
- (see next section).
+ (see Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-Black_box_optimization"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
 The influence of these conditions may increase in the presence of non-determinis
-tic optimization models, e.g.
- problems with complex Monte Carlo simulations 
+tic optimization models, e.g., problems with complex Monte Carlo simulations
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Creutz-Microcanonincal_monte_carlo_simulation:1983"
@@ -1122,14 +1174,16 @@ Undoubtedly, metaheuristics are rapidly gaining popularity as optimization
  accurate models of real-world problems in engineering and science.
 \end_layout
 
-\begin_layout Subsection
-Metaheuristic algorithms (zbrisi ta naslov???)
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Related literature groups metaheuristic algorithms due to their behaviour.
- For example, the following is a list of fundamentally different optimization
- algorithms, namely:
+Related literature groups metaheuristic algorithms due to their behaviour,
+ for example:
 \end_layout
 
 \begin_layout Itemize
@@ -1142,24 +1196,18 @@ differential ant-stigmergy algorithm, from the family of swarm-intelligence
 \end_layout
 
 \begin_layout Itemize
-simulated annealing, from the group of classic metaheuristic algorithms,
- targeted at combinatorial optimization problems.
+simulated annealing, from the group of classic metaheuristic algorithms.
+ 
 \end_layout
 
 \begin_layout Standard
-Each of these algorithms shall minimize an objective-function value by adopting
- essentially disparate approaches, hence the diversity of applying algorithms
- belonging to different families to solve the same optimization problem.
- In this way we want to find out whether any of the presented approaches
- is better suited for solving our problem.
+Each of these algorithms minimize an objective-function value by adopting
+ essentially distinct approaches.
+ In the following sections, a short description about their functioning
+ is given.
 \end_layout
 
-\begin_layout Standard
-In the following sections we give a short introduction about their functioning
- and controlling parameters.
-\end_layout
-
-\begin_layout Subsubsection
+\begin_layout Subsection
 Differential evolution 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1171,142 +1219,178 @@ name "sub:02-DE"
 \end_layout
 
 \begin_layout Standard
-Differential evolution (DE) 
+Differential Evolution
+\begin_inset space ~
+\end_inset
+
+(DE
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "DE"
+description "Differential evolution."
+
+\end_inset
+
+)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "storn1997_Differential_evolution"
 
 \end_inset
 
- is a simple and powerful evolutionary algorithm proposed for global optimizatio
-n.
- A wide range of optimization problems have been solved by applying DE 
+ is a simple and powerful evolutionary algorithm proposed for numerical
+ optimization.
+ The version of DE used for this thesis is known as DE/rand/1/bin, or "classic
+ DE"
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "das2010_differential_evolution_state_of_the_art"
+key "Price-Differential_evolution_a_practical_approach:2005"
 
 \end_inset
 
 .
- The algorithm exhibits a parallel direct search method, which utilizes
- 
+ At the beggining, the classic DE initializes a population of 
+\begin_inset Formula $N$
+\end_inset
+
+, 
 \begin_inset Formula $D$
 \end_inset
 
--dimensional parameter vectors.
- The balancing problem is expressed in each component of a vector 
-\begin_inset Formula $X$
+-dimensional vectors with parameter values that are distributed with random
+ uniformity between pre-specified lower and upper initial parameter bounds,
+ 
+\begin_inset Formula $x_{i,\mathrm{{low}}}$
 \end_inset
 
- of the population, which maps to the CPICH power of one cell under optimization
-:
+ and 
+\begin_inset Formula $x_{i,\mathrm{{high}}}$
+\end_inset
+
+, respectively
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ronkkonen-Real_parameter_optimization_with_differential_evolution:2005"
+
+\end_inset
+
+, i.e.:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{equation}
-X_{aG}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} ,\label{eq:DE_mapping-1}
-\end{equation}
+\begin{multline}
+x_{i,j,g}=x_{i,\mathrm{{low}}}+\mathrm{{uniform}[0,1)}\cdot(x_{i,\mathrm{{high}}}-x_{i,\mathrm{{low}}}),\\
+i=(1,2,...,D),\, j=(1,2,...,N),\, g=0.\label{eq:02-DE_structure}
+\end{multline}
 
 \end_inset
 
-where 
-\begin_inset Formula $x_{i}\in P_{i}$
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+In Equation
+\begin_inset space ~
 \end_inset
 
- represents a candidate CPICH power setting of cell 
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:02-DE_structure"
+
+\end_inset
+
+, 
+\begin_inset Formula $g$
+\end_inset
+
+ denotes the generation index, while 
 \begin_inset Formula $i$
 \end_inset
 
-, and 
-\begin_inset Formula $G$
+ and 
+\begin_inset Formula $j$
 \end_inset
 
- indicates the generation of an individual 
-\begin_inset Formula $a$
+ indicate the parameter and population indices, respectively.
+ Consequently, 
+\begin_inset Formula $x_{i,j,g}$
 \end_inset
 
- in the population.
- Since there are 
-\begin_inset Formula $|N|$
+ is the 
+\begin_inset Formula $i^{\mathrm{th}}$
 \end_inset
 
- cells in the mobile network, it follows that 
-\begin_inset Formula $D=|N|$
+ parameter of the 
+\begin_inset Formula $j^{\mathrm{th}}$
+\end_inset
+
+ population vector in generation 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ The (pseudo)-random number generator 
+\begin_inset Formula $\mathrm{{uniform}[0,1)}$
+\end_inset
+
+ is represented by a function for selecting a uniformly-distributed random
+ number from the interval 
+\begin_inset Formula $[0,1)$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-In each generation, DE produces new parameter vectors by adding the weighted
- difference between two population vectors to a third one 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "storn1997_Differential_evolution"
-
+DE generates solutions by applying the mutation and cross-over operations.
+ A vector from the current population is mutated by adding the scaled difference
+ of two other vectors from the same population, combined with the mutation-scale
+ factor.
+ A proportion of the parameters of the mutated vector are crossed with those
+ belonging to the 
+\begin_inset Formula $j^{\mathrm{th}}$
 \end_inset
 
-.
- The resulting vector is retained if it yields a lower objective function
- value than a predetermined population member; otherwise, the old vector
- is kept.
+ population vector, resulting in a new solution vector.
+ The cross-over constant controls the proportion of parameters that the
+ mutant vector contributes to the new vector.
 \end_layout
 
 \begin_layout Standard
-There are different variants of DE.
- We have chosen the most popular one to solve our optimization problem,
- called 
-\emph on
-DE/rand/1/bin
-\emph default
-.
- The nomenclature used to name this variant indicates the way the algorithm
- works:
-\end_layout
+The generated solution vector is retained if it yields a lower objective-functio
+n value than the 
+\begin_inset Formula $j^{\mathrm{th}}$
+\end_inset
 
-\begin_layout Itemize
+ population vector, otherwise the 
+\begin_inset Formula $j^{\mathrm{th}}$
+\end_inset
 
-\emph on
-DE 
-\emph default
-denotes the differential evolution algorithm,
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-rand 
-\emph default
-indicates that the individuals selected to compute the mutation values are
- randomly chosen,
-\end_layout
-
-\begin_layout Itemize
-1
-\emph on
- 
-\emph default
-specifies the number of pairs of selected solutions used to calculate the
- weighted difference vector, and
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-bin 
-\emph default
-means that a binomial recombination operator is used.
+ vector is kept for at least one more generation.
 \end_layout
 
 \begin_layout Standard
-We considered four parameters to control the search process of DE: the populatio
-n size, the maximum number of generations for the algorithm to run, the
- crossover constant, and the mutation scaling factor.
-\end_layout
+An extensive description of DE and its variants may be found in
+\begin_inset space ~
+\end_inset
 
-\begin_layout Standard
-An extensive description of DE and its variants may be found in 
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "price2005differential_evolution"
@@ -1314,9 +1398,32 @@ key "price2005differential_evolution"
 \end_inset
 
 .
+ A wide range of optimization problems have been solved by applying DE
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "das2010_differential_evolution_state_of_the_art"
+
+\end_inset
+
+, also in the area of radio-network optimization
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,DaSilva-Analysis_of_parameter_settings_for_differential_evolution:2008,Mendes-A_differencial_evolution_algorithm_to_optimize_the_radio_network_design:2006"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Differential ant-stigmergy algorithm 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1328,44 +1435,81 @@ name "sub:02-DASA"
 \end_layout
 
 \begin_layout Standard
-Based on the metaheuristic Ant-Colony Optimization (ACO) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "dorigo2006ant_colony_optimization"
+The Differential Ant-Stigmergy Algorithm
+\begin_inset space ~
+\end_inset
+
+(DASA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "DASA"
+description "Differential ant-stigmergy algorithm."
 
 \end_inset
 
-, the differential ant-stigmergy algorithm (DASA) 
+)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "korosec2010_DASA"
 
 \end_inset
 
- provides a framework to successfully cope with high-dimensional numerical
- optimization problems.
- It creates a fine-grained discrete form of the search space, representing
- it as a graph.
- This graph is then used as the walking paths for the ants, which iteratively
- improve the temporary best solution.
-\end_layout
-
-\begin_layout Standard
-The mapping between the balancing problem and DASA is similar to the one
- depicted in Equation (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:DE_mapping-1"
+ is based on the metaheuristic Ant-Colony Optimization (ACO
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "ACO"
+description "Ant-colony optimization."
 
 \end_inset
 
-):
+)
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "dorigo2006ant_colony_optimization"
+
+\end_inset
+
+.
+ ACO was pioneered by Dorigo in 1992 and is based on the foraging behaviour
+ of social ants, which use pheromone as a chemical messenger.
+ When looking for a food source, a swarm of ants interacts in their local
+ environment.
+ An ant is able to follow the route marked with pheromone laid by other
+ ants.
+ When an ant finds a food source, it will mark the trail to and from it
+ with pheromone.
+\end_layout
+
+\begin_layout Standard
+The pheromone concentration, 
+\begin_inset Formula $p$
+\end_inset
+
+, evaporates at a constant rate, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ , over time, 
+\begin_inset Formula $t$
+\end_inset
+
+, i.e.:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:DASA_mapping-1}
+p(t)=p_{0}e^{-\gamma t},\label{eq:02-ACO_structure}
 \end{equation}
 
 \end_inset
@@ -1374,16 +1518,51 @@ X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:DASA_mappi
 \end_layout
 
 \begin_layout Standard
-In this case, each ant, 
-\begin_inset Formula $a$
+\noindent
+where 
+\begin_inset Formula $p_{0}$
 \end_inset
 
-, creates its own solution vector, 
-\begin_inset Formula $X_{a}$
+ is the initial pheromone concentration at 
+\begin_inset Formula $t=0$
 \end_inset
 
-, during the minimization process.
- At the end of every iteration, and after all the ants have created solutions,
+.
+ The evaporation is important, as it provides the means for algorithm convergenc
+e and self-organization.
+\end_layout
+
+\begin_layout Standard
+The pheromone concentration varies over time and the ants follow the route
+ with higher concentration.
+ In turn, the pheromone concentration increases with the number of ants.
+ That is, as more and more ants follow the same route, it becomes the favored
+ path, producing a positive feedback mechanism.
+ Consequently, as the system evolves in time, it converges to a self-organized
+ state, which is the essence of any ant-based algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As it was mentioned before, DASA is an ant-based algorithm that provides
+ a framework to successfully cope with high-dimensional numerical optimization
+ problems.
+ It creates a fine-grained discrete form of the search space, representing
+ it as a graph.
+ This graph is then used as the walking paths for the ants, which iteratively
+ improve the temporary best solution.
+ 
+\end_layout
+
+\begin_layout Standard
+At the end of every iteration, and after all the ants have created solutions,
  they are evaluated to establish if any of them is better than the best
  solution found so far.
 \end_layout
@@ -1396,8 +1575,12 @@ There are six parameters that control the way DASA explores the search space:
 \end_layout
 
 \begin_layout Standard
-For a more in-depth explanation about these parameters and the DASA algorithm
- itself, we refer the reader to 
+A more in-depth explanation about these parameters and the DASA algorithm
+ itself can be found in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "korosec2010_DASA"
@@ -1407,7 +1590,7 @@ key "korosec2010_DASA"
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Simulated annealing 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1419,76 +1602,154 @@ name "sub:02-SA"
 \end_layout
 
 \begin_layout Standard
-As the third optimization algorithm to tackle the balancing problem we have
- chosen simulated annealing (SA) 
+This metaheuristic was introduced in the area of combinatorial optimization
+ by Kirkpatrick et al.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kirkpatrick_OptimizationBySimulatesAnnealing"
 
 \end_inset
 
-, a classic metaheuristic algorithm often used when the search space is
- discrete.
- SA has proved to be a solid optimization algorithm, capable of giving high-qual
-ity solutions to a wide scope of optimization problems 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Suman_SurveyOfSimulatedAnnealing"
+.
+ The algorithm resembles the physical annealing process, where particles
+ of a solid material arrange themselves into a thermal equilibrium.
+ Simulated Annealing
+\begin_inset space ~
+\end_inset
+
+(SA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SA"
+description "Simulated annealing."
 
 \end_inset
 
+) is based on the principle of local-search heuristics, and uses a pre-defined
+ neighborhood structure on the search space 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\Omega$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 .
-\end_layout
+ The temperature parameter controls the search behavior.
+ Its name follows the analogy to the physical annealing process.
+ In each iteration, a solution 
+\begin_inset Formula $y$
+\end_inset
 
-\begin_layout Standard
-At each time step during the process, the system under optimization is in
- a given 
-\emph on
-state
-\emph default
+, which is a neighbour of the current solution 
+\begin_inset Formula $x$
+\end_inset
+
+, is computed.
+ If 
+\begin_inset Formula $y$
+\end_inset
+
+ has a better objective-function value than 
+\begin_inset Formula $x$
+\end_inset
+
+, it becomes the new solution, i.e., the current solution 
+\begin_inset Formula $x$
+\end_inset
+
+ is replaced by 
+\begin_inset Formula $y$
+\end_inset
+
 .
- The objective function maps a system state to a value known as the 
-\emph on
-energy
-\emph default
- of the system in that state.
- A 
-\emph on
-move
-\emph default
- in the search space represents a change in the state of the system.
- After making a move, the system may exhibit lower or higher energy, depending
- on the results of the objective function.
- When dealing with minimization problems, a better state always describes
- lower energy than the previous one.
+ If, on the other hand, 
+\begin_inset Formula $y$
+\end_inset
+
+ has a worse objective-function value than 
+\begin_inset Formula $x$
+\end_inset
+
+, it is only accepted with a certain probability depending on two factors:
+ 
+\end_layout
+
+\begin_layout Itemize
+the difference of the objective-function values of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+, and
+\end_layout
+
+\begin_layout Itemize
+the temperature parameter.
+ 
 \end_layout
 
 \begin_layout Standard
-SA incorporates the notion of 
-\emph on
-temperature
-\emph default
-, by which the probability of moving the current state of the system into
- a worst one is lowered as the temperature decreases.
- Exploration of the search space is thus induced at higher temperature,
- whereas exploitation appears at lower temperature, when only improving
- moves are accepted.
-\end_layout
+Intensification in SA is provided by the local-search nature of the algorithm,
+ while diversification is produced with non-zero temperatures, by ‘‘uphill’’
+ moves.
+ The pseudo-code of the SA metaheuristic can be represented as in Algorithm
+\begin_inset space ~
+\end_inset
 
-\begin_layout Standard
-Table 
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:SA_move-1"
+reference "alg:07-SA_pseudocode"
 
 \end_inset
 
- shows the pseudo-code of a move in the search space of possible CPICH power
- settings, resulting in a new state of the system.
+.
+ In this pseudo-code, 
+\begin_inset Formula $T_{1},T_{2},...$
+\end_inset
+
+ represent an usually decreasing sequence of values for the temperature
+ parameter, and 
+\begin_inset Formula $\mathrm{{uniform}[0,1]}$
+\end_inset
+
+ is a function for selecting a uniformly-distributed random number from
+ the given interval.
+ whereas the meaning of the rest of the symbols is as defined above.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
+\begin_inset Float algorithm
 wide false
 sideways false
 status open
@@ -1513,12 +1774,24 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Pseudo-code: a move in the search space of SA.
+Pseudo-code of the simulated-annealing metaheuristic.
+ Adapted from
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bianchi-A_survey_on_metaheuristics_for_stachastic_combinatorial_optimization:2009"
+
+\end_inset
+
+.
 \shape italic
 
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:SA_move-1"
+name "alg:07-SA_pseudocode"
 
 \end_inset
 
@@ -1531,179 +1804,123 @@ name "tab:SA_move-1"
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="left" valignment="top" width="0">
-<row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Step
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
+
+\backslash
+begin{algorithmic}
 \end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i'=random\, cell(N)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
+
+\backslash
+Require $x 
+\backslash
+gets$ initial solution
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{do}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\, if\, rand()<0.5\, then\, p_{i'}^{\mathrm{NEW}}=p_{i'}+0.01$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
+
+\backslash
+Require $T_{
+\backslash
+mathrm{1}} 
+\backslash
+gets$ temperature parameter
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\,\,\, else\, p_{i'}^{\mathrm{NEW}}=p_{i'}-0.01$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\mathbf{while}\, p_{i'}^{\mathrm{NEW}}\notin P_{i'}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\noun off
-\color none
-\begin_inset Formula $p_{i'}=p_{i'}^{\mathrm{NEW}}$
-\end_inset
 
-
+\backslash
+For {k=1,2,...}
 \end_layout
 
-\end_inset
-</cell>
-</row>
-</lyxtabular>
+\begin_layout Plain Layout
+
+	
+\backslash
+State $y 
+\backslash
+gets$ random solution from $
+\backslash
+Omega$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+If {$f(y) 
+\backslash
+le f(x)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+State $x 
+\backslash
+gets y$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+ElsIf {$e^{(
+\backslash
+frac{f(x)-f(y)}{T_{k}})} 
+\backslash
+le 
+\backslash
+mathrm{uniform}[0,1]$}
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+State $x 
+\backslash
+gets y$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+EndIf
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+State $T_{k+1} 
+\backslash
+gets$ update temperature $T_{k}$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
 
 \end_inset
 
@@ -1716,87 +1933,32 @@ Step
 \end_layout
 
 \begin_layout Standard
-At the first step, a cell, 
-\begin_inset Formula $i'$
-\end_inset
-
-, is randomly selected from the set of all cells in the network, 
-\begin_inset Formula $N$
-\end_inset
-
-.
- In step 2, a change of +0.01
+SA has proved to be a solid optimization algorithm, capable of giving high-quali
+ty solutions to a wide scope of optimization problems
 \begin_inset space ~
 \end_inset
 
-dB or -0.01
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Suman_SurveyOfSimulatedAnnealing"
+
+\end_inset
+
+.
+ Additionally, several works employ the SA metaheuristic for solving optimizatio
+n problems in the area of radio network
 \begin_inset space ~
 \end_inset
 
-dB is applied with 50% probability to 
-\begin_inset Formula $p_{i'}$
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Duque-Channel_assignment_for_cellular_radio_using_simulated_annealing:1993,CPICH.optimization:2003,minimum.set.covering.problem:2000,Coverage.optimization.on.CPICH.tilt.and.azimuth:2006,Zhang-Mathematical_modelling_and_comparisons_of_heuristics_for_WCDMA_radio_planning:2006"
+
 \end_inset
 
 .
- The current CPICH power of cell 
-\begin_inset Formula $i'$
-\end_inset
-
- is expressed in dBm.
- The randomly generated CPICH power setting, 
-\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
-\end_inset
-
-, is checked for validity in step 3, i.e.
- it must be an element of the set 
-\begin_inset Formula $P_{i'}$
-\end_inset
-
-.
- If 
-\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
-\end_inset
-
- is not a valid CPICH power, step 2 is executed again, generating another
- random CPICH power.
- Finally, in step 4, the CPICH power of cell 
-\begin_inset Formula $i$
-\end_inset
-
- is replaced by 
-\begin_inset Formula $p_{i'}^{\mathrm{NEW}}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-It is important to note that, as long as 
-\begin_inset Formula $|P_{i'}|>1$
-\end_inset
-
-, the algorithm shown in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:SA_move-1"
-
-\end_inset
-
- shall never be trapped in an endless loop.
- On the other hand, if 
-\begin_inset Formula $|P_{i'}|<2$
-\end_inset
-
-, there are no candidate CPICH powers for cell 
-\begin_inset Formula $i'$
-\end_inset
-
- and thus no possibility of optimization by means of CPICH power adjustment.
-\end_layout
-
-\begin_layout Standard
-Notice also that the acceptance of a move in the search space is left to
- SA and its stochastic components.
 \end_layout
 
 \begin_layout Section
@@ -1811,8 +1973,12 @@ name "sub:02-Black_box_optimization"
 \end_layout
 
 \begin_layout Standard
-A problem complexity is equivalent to the complexity of the best algorithm
- solving that problem 
+The complexity of a problem is equivalent to the complexity of the best
+ known algorithm solving that problem
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi-Metaheuristics_from_design_to_implementation:2009"
@@ -1820,8 +1986,8 @@ key "Talbi-Metaheuristics_from_design_to_implementation:2009"
 \end_inset
 
 .
- If there exists a polynomial-time algorithm to solve a problem, we say
- the problem is easy or tractable.
+ If there exists a polynomial-time algorithm to solve a problem, the problem
+ is said to be easy or tractable.
  Similarly, if a problem is difficult or intractable, there is no known
  polynomial-time algorithm to solve it.
  
@@ -1838,9 +2004,9 @@ key "Kargupta-Search_blackbox_optimization_and_sample_complexity:1996"
 \end_inset
 
 .
- This is one of the main advantages when using metaheuristics, i.e.
- there is no need of a complete knowledge of the targeted model.
- Indeed, in a black box optimization, no analytical formulation of the objective
+ This is one of the main advantages when using metaheuristics, i.e., there
+ is no need of a complete knowledge of the targeted model.
+ Indeed, in a black-box optimization, no analytical formulation of the objective
  exists 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1884,7 +2050,7 @@ centering
 \begin_inset Graphics
 	filename img/blackbox_optimization.eps
 	lyxscale 90
-	width 80text%
+	width 55text%
 
 \end_inset
 
@@ -1926,7 +2092,7 @@ name "fig:02-black_box_optimization"
 \end_layout
 
 \begin_layout Standard
-More specifically, we say a function 
+More specifically, a function 
 \begin_inset Formula $f(\vec{x})$
 \end_inset
 
@@ -1958,7 +2124,11 @@ More specifically, we say a function
 \uwave default
 \noun default
 \color inherit
- is a black-box function if and only if 
+ is a black-box function if and only if
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi-Metaheuristics_from_design_to_implementation:2009"
@@ -2043,7 +2213,7 @@ key "Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Benedicic_Pilot.power.optimization:2010,Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013,Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013,Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013,Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012"
+key "Benedicic_Pilot.power.optimization:2010,Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013,Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013,Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013"
 
 \end_inset
 
@@ -2094,14 +2264,24 @@ reference "chap:04-Framework-design-and-implementation"
 \end_layout
 
 \begin_layout Standard
-In practice, black-box evaluation of the objective function presents an
- inherent problem.
- In the context of research works related to radio-network optimization,
- there is an inherent difficulty of providing the black-box used to evaluate
- a given approach.
+In practice, however, the black-box evaluation of the objective function
+ presents a problem.
+ In the context of research about radio-network optimization there is an
+ inherent difficulty of providing the black-box used to evaluate a given
+ approach.
  A quick review of the state-of-the-art in radio-network optimization indicates
  that this fact has become increasingly regular in several published works
- [refs???].
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "amaldi2007radio_planning,chen2008automated,chen2009fast,gordejuela2009two,siomina2008enhancing,siomina2007minimum_pilot_power"
+
+\end_inset
+
+.
  Clearly, this fact creates a barrier to one of the most important phases
  of scientific methodology: experimental reproducibility
 \begin_inset space ~
@@ -2134,21 +2314,30 @@ There are several reasons behind this situation.
 \end_layout
 
 \begin_layout Standard
-If we turn our attention to non-commercial and open-source packages for
- radio-network simulation [refs!???], we would quickly run into two main
- difficulties: poor documentation and low scalability.
- The scalability issues shown by some projects [refs!???] retrain the packages
- to be used in real-world environments, where big problem instances are
- the rule.
- Despite this, it is a huge merit and acknowledgement to the authors of
- these packages, not only for providing them to the scientific community,
- but fundamentaly because for providing an environment in which different
- kinds of simulations are completely reproducible.
- Regarding the lack of documentation, it represents a big hurdle when extending
+Some non-commercial and open-source packages for radio-network simulation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Momentum.project,Ozimek_Open.source.radio.coverage.prediction:2010,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004"
+
+\end_inset
+
+ present two main drawbacks: poor documentation and/or low scalability.
+ The scalability issues shown by some projects retrain these packages to
+ be used in larger, real-world environments, where big problem instances
+ are the rule.
+ Despite this, the merit and acknowledgement go the authors of these frameworks,
+ not only for providing them to the scientific community, but fundamentaly
+ because for providing an environment in which different kinds of simulations
+ are completely reproducible.
+ Additionally, the lack of documentation represents a big hurdle for extending
  the base code, which becomes a difficult task without the help of the original
  authors of the package.
- This author's knowledge is required for effectivelly expanding the functionalit
-y of an open-source tool.
+ In such cases, author's knowledge is required for effectivelly expanding
+ the functionality of an open-source tool.
  This is especially true when dealing with complex simulation frameworks,
  as the ones used for radio networks.
 \end_layout
@@ -2166,7 +2355,11 @@ name "chap:02-Principles_of_mobile_radio_networks"
 
 \begin_layout Standard
 A cellular mobile radio network is a collection of individual cells that
- are served by several transmitters, called base stations (BSs
+ are served by several transmitters, called Base Stations
+\begin_inset space ~
+\end_inset
+
+(BSs
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2183,8 +2376,11 @@ description "Base station."
 \end_layout
 
 \begin_layout Itemize
-locate and track both active and idle mobile devices, called user equipments
- (UEs
+locate and track both active and idle mobile devices, called User Equipments
+\begin_inset space ~
+\end_inset
+
+(UEs
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2205,12 +2401,11 @@ The first task involves a location-update procedure, which allows an UE
  to inform the network about its movement from one location area to the
  next.
  This process is called mobility management.
- The second task requires the constant evaluation of the quality of the
- radio link with the serving BS, and the radio-link qualities of alternate
- BSs.
+ The second task requires the constant evaluation of the radio-link quality
+ with the serving BS, and the radio-link qualities of alternate BSs.
  This process is called radio-resource management, and is performed by the
- network using knowledge of the link-quality evaluations of reference channels,
- i.e., pilot channels.
+ network using knowledge about the link-quality evaluations of the reference
+ channels, e.g., the pilot channels.
 \end_layout
 
 \begin_layout Standard
@@ -2221,9 +2416,9 @@ The radio communications between an UE and a grid of BSs use low power.
  At the core of the evaluation of radio-link quality is a statistical-measuremen
 t process based on a previous knowledge of the expected characteristics
  of the pilot channel.
- On the one hand, the link quality, and the size and distribution of cells
- of a modern radio cellular system are essentially limited by the speed
- of link-quality measurement and network control.
+ On the one hand, the link quality, and the size and distribution of the
+ cells of a modern radio cellular system are limited by the speed of the
+ link-quality measurement and network control.
  On the other hand, the spectral efficiency of a radio network is bounded
  by the cell sizes, the ability of radio links to withstand interference,
  and the ability of the system to react to variations in traffic
@@ -2250,8 +2445,11 @@ Cellular radio systems partition the available spectrum among the BSs, and
  The radio links of a high-capacity radio network interfere with each other
  due to frequency reuse.
  For this reason, it is always desirable to use the lowest possible transmit
- power while maintaining each radio link above a given quality-of-service
- (QoS
+ power while maintaining each radio link above a given Quality-of-Service
+\begin_inset space ~
+\end_inset
+
+(QoS
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2261,7 +2459,7 @@ description "Quality of service."
 \end_inset
 
 ) threshold.
- Therefore, radio links should not significantly exceed their target QoS
+ Therefore, radio links should not significantly exceed their target QoS,
  since doing so will cause unnecessary interference to other radio links
 \begin_inset space ~
 \end_inset
@@ -2285,8 +2483,8 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \end_inset
 
-, where an optimization approach that minimizes the total transmit power
- used in a radio network is presented.
+, where an optimization approach, that minimizes the total transmit power
+ used in a radio network, is presented.
 \end_layout
 
 \begin_layout Section
@@ -2319,8 +2517,8 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
  the system creates a new connection with the latter cell and disconnects
  the user from the former one, so that an acceptable link quality can be
  maintained.
- Otherwise, the increase in transmit power, required to compensate for path
- loss, results in excessive interference.
+ Otherwise, the increase in transmit power, that is required to compensate
+ for path loss, results in excessive interference.
  The handover procedure consists of two processes
 \begin_inset space ~
 \end_inset
@@ -2336,17 +2534,17 @@ key "Stuber-Principles_of_mobile_communication:2011"
 \end_layout
 
 \begin_layout Itemize
-link-quality evaluation before handover initiation, and
+the link-quality evaluation before handover initiation, and
 \end_layout
 
 \begin_layout Itemize
-allocation of radio and network resources.
+the allocation of radio and network resources.
 \end_layout
 
 \begin_layout Standard
 Generally speaking, radio networks with smaller cell sizes require faster
  and more reliable handover algorithms.
- Indeed, it has been shown that the number of cell boundary crossings is
+ Indeed, it has been shown that the number of cell-boundary crossings is
  inversely proportional to the cell size
 \begin_inset space ~
 \end_inset
@@ -2388,13 +2586,22 @@ During a hard handover, an UE can connect to only one BS at a time.
  of simultaneous connections among candidate BSs.
  Based on link measurements, the target BS is selected prior to executing
  the handover, and the active connection is instantly transferred to it.
- Indeed, the connection even experiences a brief interruption during the
+ Moreover, the connection even experiences a brief interruption during the
  actual transfer, because the UE can only connect to one BS at a time.
  In contrast to soft handover (see next section), hard handovers do not
  take advantage of the diversity gain, where the signals from two or more
  BSs arrive at comparable strengths.
  Hard handover is a simple and inexpensive way to support UE mobility.
- It is used in TDMA cellular systems such as GSM
+ It is used in Time-Division, Multiple-Access (TDMA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "TDMA"
+description "Time division multiple access."
+
+\end_inset
+
+) cellular systems such as GSM
 \begin_inset space ~
 \end_inset
 
@@ -2413,7 +2620,11 @@ Soft handover
 \end_layout
 
 \begin_layout Standard
-Soft handover (SHO
+Soft Handover
+\begin_inset space ~
+\end_inset
+
+(SHO
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2434,9 +2645,9 @@ description "Soft handover."
 
 \begin_layout Standard
 Despite the advantages it provides, SHO is complex and expensive to implement.
- Additionally, interference actually increases with SHO since several BSs,
- instead of one, can connect to the same UE.
- This increase in forward interference can become a problem .
+ Additionally, interference actually increases with SHO, since several BSs
+ can connect to the same UE.
+ This increase in forward interference can become a problem.
  If the handover region is large, such that there are many UEs in SHO mode,
  the increased interference due to several BSs connected to the same UE
  can become a problem
@@ -2454,8 +2665,12 @@ key "Stuber-Principles_of_mobile_communication:2011"
 \end_layout
 
 \begin_layout Standard
-SHO is especially important in systems using the channel-access method known
- as Code Division Multiple Access (CDMA
+The SHO procedure is important in systems using the channel-access method
+ known as Code Division Multiple Access
+\begin_inset space ~
+\end_inset
+
+(CDMA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2464,7 +2679,11 @@ description "Code division multiple access."
 
 \end_inset
 
-) in general and wide CDMA (WCDMA
+), and especially in Wide CDMA
+\begin_inset space ~
+\end_inset
+
+(WCDMA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2473,18 +2692,18 @@ description "Wide-code division multiple access."
 
 \end_inset
 
-) in particular, which is employed by the UMTS.
+), which is employed by the UMTS.
  CDMA systems are interference-limited meaning their capacities are closely
  related to the level of interference they can tolerate.
  Specifically, a CDMA system cell is affected by the interference within
  its own cell, and also interference from its neighboring cells.
  In order to mitigate the level of interference, and thus increase the capacity
  and quality, CDMA systems use power control.
- The main idea behind power control is to prevent the MSs and the BSs from
+ The main idea behind power control is to prevent the UEs and the BSs from
  transmitting more power than is strictly necessary to meet the target QoS
  level.
  For the power control to work properly, the system must ensure that each
- MS is connected to the BS having the least path attenuation at all times.
+ UE is connected to the BS having the least attenuation at all times.
  If this is not the case, a positive-feedback problem appears, and it can
  potentially destabilize the entire system
 \begin_inset space ~
@@ -2499,7 +2718,7 @@ key "Wong-Soft_handoffs_in_CDMA_mobile_systems:1997"
 
 .
  The SHO procedure helps to prevent such situations by ensuring that each
- MS is served by the best BS most of the time, i.e., by allowing connections
+ UE is served by the best BS most of the time, i.e., by allowing connections
  to multiple BSs.
 \end_layout
 
@@ -2580,8 +2799,8 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 
 .
  From this point of view, SHO is a method to reduce interference and improve
- radio quality, particularly at the cell border where radio coverage is
- of inferior quality.
+ radio quality, particularly at the cell border where the radio coverage
+ is of inferior quality.
  In UMTS Release 99 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2589,12 +2808,16 @@ key "3GPP_R99"
 
 \end_inset
 
-, SHO is specified to work from the BS towards the UE (i.e., downlink), and
- from the UE towards the BS (i.e., uplink).
+, SHO is specified to work from the BS towards the UE (downlink), and from
+ the UE towards the BS (uplink).
 \end_layout
 
 \begin_layout Standard
-With the introduction of High Speed Packet Access (HSPA
+With the introduction of the High Speed Packet Access
+\begin_inset space ~
+\end_inset
+
+(HSPA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2606,7 +2829,11 @@ description "High Speed Packet Access."
 ) as an improvement of the performance existing in WCDMA protocols, the
  role SHO plays in mobile network configuration and functioning slightly
  changed.
- The key difference is that High Speed Downlink Packet Access (HSDPA
+ The key difference is that the High Speed Downlink Packet Access
+\begin_inset space ~
+\end_inset
+
+(HSDPA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2615,7 +2842,11 @@ description "High Speed Downlink Packet Access."
 
 \end_inset
 
-) does not support SHO, whereas the High Speed Uplink Packet Access (HSUPA
+) does not support SHO, whereas the High Speed Uplink Packet Access
+\begin_inset space ~
+\end_inset
+
+(HSUPA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2636,7 +2867,7 @@ reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 
 \end_inset
 
-, since it has some important implications in the balanced distribution
+, because it has some important implications in the balanced distribution
  of SHO areas, and thus in the quality and capacity of HSPA services
 \begin_inset space ~
 \end_inset
@@ -2741,7 +2972,7 @@ tion parameters are interdependent, an engineer is not able to cope with
  the level of complexity present in these systems.
  For this reason, the computer, along with specialized software, guides
  the engineer to the most appropriate configuration for the network.
- In the context of this thesis, we will refer to this process as radio-network
+ In the context of this thesis, this process is refered to as radio-network
  optimization.
 \end_layout
 
@@ -2760,8 +2991,8 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 .
  The analysis phase consists on the examination of the network performance,
- which mainly focuses on the definition and collection of key performance
- indicators (KPIs
+ which mainly focuses on the definition and collection of Key-Performance
+ Indicators (KPIs
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -2776,7 +3007,7 @@ description "Key performance indicator."
  The second phase deals with the decision making, based on the analytical
  results collected in the previous phase, about changing a particular configurat
 ion or parameter setting.
- The process, which is depicted in Figure
+ The process, a representation of which is depicted in Figure
 \begin_inset space ~
 \end_inset
 
@@ -2811,11 +3042,12 @@ reference "fig:01-decision_making_process"
 
 \end_inset
 
-, .
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -2881,8 +3113,8 @@ name "fig:Optimization-cycle"
 
 \begin_layout Standard
 Since radio networks are increasingly more sophisticated, the need for optimizat
-ion methods that are capable of copeing with greater complexity, is far
- from declining.
+ion methods that are capable of copeing with greater complexity is far from
+ declining.
  Indeed, several radio-network optimization problems were shown to be NP-hard,
  since the computational time grows non-polynomially with the problem size
 \begin_inset space ~
@@ -2960,14 +3192,14 @@ propagation
 \end_inset
 
 conditions the allocation of different frequency bands for different systems,
- e.g., GSM, UMTS or LTE, requires deployment of new BSs, the radio propagations
- of which behave differently, especially in urban areas.
+ e.g., GSM, UMTS or LTE, requires the deployment of new BSs, the radio propagation
+s of which behave differently, especially in urban areas.
 \end_layout
 
 \begin_layout Standard
-Depending on the addressed optimization problem, network operators define
- an optimization target, which are formed by an objective function that
- maps possible configurations into a real value.
+Depending on the optimization problem being addressed, network operators
+ define an optimization target that is represented by an objective function
+ that maps possible configurations into a real value.
  Unfortunately, there is no universal objective function in the field of
  radio-network optimization
 \begin_inset space ~
@@ -2984,7 +3216,7 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
  However, it is possible to optimize for a different target at a time, such
  as service coverage, SHO balance or signal propagation.
  Particular optimization algorithms for solving these problems are presented
- Chapters
+ in Chapters
 \begin_inset space ~
 \end_inset
 
@@ -3003,8 +3235,6 @@ reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 \end_inset
 
  and
-\series bold
-
 \begin_inset space ~
 \end_inset
 
@@ -3015,8 +3245,6 @@ reference "chap:05-Framework_parameter_tuning"
 
 \end_inset
 
-
-\series default
 , respectively.
  In all three cases, the introduced optimization approaches are performed
  
@@ -3044,7 +3272,7 @@ offline
 In the following, an overview of some well-known optimization problems for
  radio-mobile networks is given.
  Each section describes an optimization problem, and presents a short survey
- of recently proposed optimization methods.
+ of recently proposed optimization methods for solving them.
 \end_layout
 
 \begin_layout Section
@@ -3063,7 +3291,7 @@ key "minimum.set.covering.problem:1997,minimum.set.covering.problem:2000"
 
 \end_inset
 
- formulate the problem of locating BSs in terms of the minimum set covering
+ formulate the problem of locating BSs in terms of the minimum set-covering
  problem (see Figure
 \begin_inset space ~
 \end_inset
@@ -3076,7 +3304,7 @@ reference "fig:02-Minimum_set_covering_problem"
 \end_inset
 
 ).
- The set-coverage problem is defined by considering the signal level in
+ The set-covering problem is defined by considering the signal level in
  every test point from all BSs and requiring that at least one level is
  above a fixed threshold.
 \end_layout
@@ -3228,7 +3456,7 @@ name "fig:02-Minimum_set_covering_problem"
 \end_layout
 
 \begin_layout Standard
-A different formulation considers the site selection problem as a 
+A different formulation considers the BS-site location problem as a 
 \emph on
 p
 \emph default
@@ -3282,7 +3510,7 @@ key "Aydin:Heuristic.Optimization.Of.WCDMA"
 -median problem based on three metaheuristic algorithms: a genetic algorithm,
  SA, and tabu search.
  Their experimental study focused on the performance comparison between
- the three algorithms.
+ the three approaches.
 \end_layout
 
 \begin_layout Standard
@@ -3319,8 +3547,8 @@ key "minimum.set.covering.problem:1997"
 \end_inset
 
 .
- A simulated annealing implementation was developed to solve the formulated
- combinatorial problem.
+ An implementation of SA was developed to solve the formulated combinatorial
+ problem.
  The presented results showed the feasibility of the proposed approach.
  
 \end_layout
@@ -3350,30 +3578,30 @@ Amaldi et al.
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "amaldi:planning.umts.base.station.location"
+LatexCommand cite
+key "Amaldi-Planning_UMTS_base_station_locations:2003"
 
 \end_inset
 
  presented a discussion about the computational results of two different
  heuristics: greedy search and tabu search.
  The problem formulation was based on a set of candidate sites where the
- BSs can be installed, an estimation of the traffic distribution and a propagati
-on description of the area to be covered.
+ BSs could be installed, an estimation of the traffic distribution and a
+ propagation description of the area to be covered.
  Some years later, the same authors
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Amaldi:Radio.planning.and.coveraga.optimization"
+LatexCommand cite
+key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008"
 
 \end_inset
 
  extended the problem formulation by adding the BS configuration and the
- hardware characteristics as additional constraints of the integer programme.
- In both works, they proposed a mixed integer programming model to maximize
+ hardware characteristics as additional constraints of the integer program.
+ In both works, they proposed a mixed, integer-programming model to maximize
  the trade-off between covered area and installation costs.
 \end_layout
 
@@ -3389,7 +3617,7 @@ key "GA.for.antenna.placement:2005"
 
 \end_inset
 
- focused on providing a required service coverage target at the lowest possible
+ focused on providing a required service-coverage target at the lowest possible
  financial cost.
  Their work compared the performance of four different algorithms, namely
  SEAMO, SPEA2, NSGA-II and PESA, all targeting multiobjective optimization
@@ -3405,7 +3633,7 @@ Since an antenna shapes the emitted energy, its configuration plays an important
  role in the coverage and interference of a radio network.
  The two most important parameters in this sense are the azimuth angle and
  the tilt (or elevation angle) of the antenna.
- The antenna azimuth, a pattern of which is depicted in Figure
+ The antenna azimuth, an example pattern of which is depicted in Figure
 \begin_inset space ~
 \end_inset
 
@@ -3445,7 +3673,7 @@ key "Athley-Impact_of_electrical_tilt_on_LTE_performance:2010"
 
 .
  The adjustment of these two parameters optimize some important aspects
- of the network, e.g.,:
+ of the network, e.g.:
 \end_layout
 
 \begin_layout Itemize
@@ -3495,7 +3723,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-A typical antenna azimuth pattern.
+An example of an antenna-azimuth pattern.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:02-Antenna_azimuth"
@@ -3588,7 +3816,7 @@ key "Antenna.tilt.and.CPICH:2003"
 
 \end_inset
 
- comprised an 
+ involves an 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3617,10 +3845,10 @@ key "Antenna.Configuration:2008"
 
  proposed an approach for automated optimization of antenna azimuth and
  tilt, including support for both mechanical and electrical tilt.
- The implementation introduced a simulated annealing algorithm that searches
- the solution space of feasible antenna configurations.
+ The implementation introduced a SA-based algorithm that searches the solution
+ space of feasible antenna configurations.
  The goal of the optimization was to improve power sharing among different
- cell channels and ultimately improve network throughput.
+ cell channels and ultimately improve the throughput of the network.
 \end_layout
 
 \begin_layout Standard
@@ -3659,30 +3887,8 @@ key "Eckhardt-Vertical_antenna_tilt_optimization_for_LTE:2011"
 
 , the authors proposed an autonomous optimization approach for the antenna
  tilts.
- Based on the gradient-ascent method (see Section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:02-Gradient-based-methods"
-
-\end_inset
-
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Optimization_models"
-
-\end_inset
-
-), the presented heuristic shows the fast convergence needed for an online
- optimization method to be effective.
+ Based on the gradient-ascent method, the presented heuristic showed the
+ fast convergence needed for an online-optimization method to be effective.
  
 \end_layout
 
@@ -3709,17 +3915,17 @@ key "Coverage.optimization.on.CPICH.tilt.and.azimuth:2006"
 
  present an optimization approach for maximizing the service coverage that
  combines both antenna parameters with the power of the pilot signal.
- Their simulated annealing algorithm searches the solution space of possible
- configurations in order to improve the performance of the target radio
- network by reducing the total interference.
+ Their SA-based algorithm searches the solution space of possible configurations
+ in order to improve the performance of the target radio network by reducing
+ the total interference.
  The simulation results show the algorithm is capable of tackling large
  network instances.
 \end_layout
 
 \begin_layout Standard
 Two optimization algorithms for finding an optimal setting of antenna tilt
- and pilot-signal power were introduced in the previously cited work by
- Gerdenitsch et al.
+ and pilot-signal power were also introduced in the previously cited work
+ by Gerdenitsch et al.
 \begin_inset space ~
 \end_inset
 
@@ -3732,8 +3938,8 @@ key "Antenna.tilt.and.CPICH:2003"
 
 .
  The first algorithm is based on a rule-based approach, while the second
- one extends it by incorporating simulated annealing.
- The evaluation of both techniques shows that the second algorithm achieves
+ one extends it by incorporating SA.
+ The evaluation of both techniques showed that the second algorithm achieves
  better solutions.
 \end_layout
 
@@ -3752,9 +3958,9 @@ key "GA.for.tilt.and.CPICH:2004"
  proposed a genetic algorithm to tackle the optimization of antenna tilt
  and pilot-signal power, the goal of which is to increase network capacity.
  The implementation involves a deterministic fitness selection scheme, a
- problem specific recombination operator and an improved mutation operator.
- After the initial identification of the best promising individuals, a local
- optimization technique is applied to improve their fitness.
+ problem-specific recombination operator and an improved mutation operator.
+ After the initial identification of the best promising individuals, a local-opt
+imization technique is applied to improve their fitness.
 \end_layout
 
 \begin_layout Section
@@ -3772,7 +3978,7 @@ name "sec:Optimizing-coverage"
 Coverage is arguably the most common optimization objective considered in
  radio-network optimization.
  A general objective function for coverage optimization can be defined as
- follows
+ follows:
 \end_layout
 
 \begin_layout Standard
@@ -3832,13 +4038,13 @@ where
 \begin_inset Formula $f_{\mathrm{cov}}$
 \end_inset
 
- represents the portion of the total area that is actually under network
+ represents the proportion of the total area that is actually under network
  coverage, the value of which ranges from 0 (no coverage) to 1 (total coverage).
 \end_layout
 
 \begin_layout Standard
 The area under optimization is usually divided into squares (or pixels)
- of a certain size, creating a regular square grid (RSG
+ of a certain size, creating a Regular Square Grid (RSG
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -3888,9 +4094,9 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 \end_inset
 
  considered the problem of minimizing the pilot-signal power subject to
- the coverage constraint.
- Their approach consists of an iterative mathematical programme, based on
- a linear-integer mathematical formulation of the problem.
+ a coverage constraint.
+ Their approach consists of an iterative mathematical program, based on
+ a linear-integer formulation of the problem.
  The simulation results showed the trade-off between service coverage and
  power consumption for different test networks.
 \end_layout
@@ -3910,7 +4116,7 @@ key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008"
  investigated several mathematical-programming models for supporting decisions
  on where to install new BSs and how to select their configuration in order
  to find a trade-off between coverage and costs.
- The overall model takes into account signal-quality constraints in both
+ The overall model takes into account signal-quality constraints, in both
  uplink and downlink directions, as well as the pilot-signal power.
 \end_layout
 
@@ -3949,7 +4155,7 @@ key "Thampi-A_sparse_sampling_algorithm_for_self_optimisation_of_coverage_in_LTE
 
 , the authors introduced a sparse-sampling algorithm to optimize the coverage
  of LTE networks by means of antenna tilt.
- By applying a reinforcement-learning technique, their technique optimizes
+ By applying a reinforcement-learning technique, their approach optimizes
  coverage without prior knowledge about the target network.
 \end_layout
 
@@ -3965,10 +4171,10 @@ key "Coverage.optimization.with.cost.function:2002"
 
 \end_inset
 
- presented a gradient-descent method to minimizes an objective function
- that combines some network KPIs with the service coverage.
- The power of the pilot signal of the cells are periodically updated in
- order to improve the afore-mentioned function.
+ presented a gradient-descent method to minimize an objective function that
+ combines some KPIs with the service coverage.
+ The power of the pilot signal of the cells is periodically updated in order
+ to improve the afore-mentioned function.
 \end_layout
 
 \begin_layout Section
@@ -3976,7 +4182,7 @@ Discussion
 \end_layout
 
 \begin_layout Standard
-Regarding the optimizations methods presented in previous chapters, three
+Regarding the optimization methods presented in the previous sections, three
  distinctive groups emerge: genetic algorithms, linear programming and other
  search methods.
 \end_layout
@@ -3986,7 +4192,7 @@ Genetic
 \begin_inset space ~
 \end_inset
 
-algorithms These algorithms work on a population of solutions that allows
+algorithms These algorithms work on a population of solutions, allowing
  a more comprehensive search for optimal solutions.
  As a direct consequence, an increase in running time is commonly observed.
  The implementation effort of genetic algorithms is to some degree higher
@@ -4007,7 +4213,7 @@ programming Linear-integer or mixed-integer programming are widely used
  Consequently, if a problem can be modeled as a continuous linear problem,
  there is usually no difficulty in finding optimality.
  In the context of this survey, linear programming has proven useful for
- coverage optimization in early network planning stages.
+ BS-location optimization in early network planning stages.
 \end_layout
 
 \begin_layout Description
@@ -4030,27 +4236,26 @@ methods Other search methods, e.g., local search, SA, tabu search or gradient
  Moreover, some of them are easily trapped in local minima.
 \end_layout
 
-\begin_layout Section*
+\begin_layout Section
 Summary
 \end_layout
 
 \begin_layout Standard
 The variety of optimization problems described in the previous sections
- differ in many aspects like implementation, running time and solution quality.
+ differ in many aspect, like implementation, running time and solution quality.
  Picking the right method for a given situation depends on the optimization
  task and the desired results.
  Since computational time is usually an important restriction, simpler and
  faster methods may be preferable.
- 
 \end_layout
 
 \begin_layout Standard
-Besides the convenience of a literature overview as presented here, it is
+Beside the convenience of a literature overview as presented here, it is
  very important to develop a feeling for the properties, advantages and
  drawbacks of the respective methods.
- Moreover, the recommendations of radio experts regarding the interpretation
- of the solutions and the feedback from everyday network operation are an
- essential input for establishing high-quality optimization methods.
+ Moreover, the recommendations of experts regarding the interpretation of
+ the solutions and the feedback from everyday network operation are an essential
+ input for establishing high-quality optimization methods.
 \end_layout
 
 \begin_layout Standard
@@ -4078,9 +4283,9 @@ name "chap:02-Principles_of_GPU_programming"
 \begin_layout Standard
 During the past few years, the computing industry has been delivering extra
  processing power in the form of parallel computing, i.e., more cores instead
- of higher frequency rates.
+ of higher-frequency rates.
  Concurrently to this situation, new hardware architectures have appeared.
- Among them is the programmable graphics processing unit (GPU
+ Among them is the programmable Graphics Processing Unit (GPU
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -4091,12 +4296,8 @@ description "Graphics processing unit."
 
 ), the computing capacity of which is already showing a faster progress
  compared to CPUs.
- As it can be observed from Figure
-\begin_inset space ~
-\end_inset
-
-??? [Cruz!3], the peak performance of the latest GPU is several times greater
- than the latest CPU, but even more important is the trend
+ The peak performance of the latest GPU is several times greater than the
+ latest CPU, but even more important is the trend
 \begin_inset space ~
 \end_inset
 
@@ -4113,7 +4314,7 @@ key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
 \begin_layout Standard
 The GPU market was almost exclusively driven by the games industry.
  This fact makes this commodity hardware cheaper than other alternatives
- for high-performance computing (HPC
+ for High-Performance Computing (HPC
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -4123,7 +4324,7 @@ description "High-performance computing."
 \end_inset
 
 ), e.g., the classic ‘mainframe’ servers.
- Moreover, the performance per watt of GPUs is an extra benefit over their
+ Moreover, the performance-per-watt of GPUs is an extra benefit over their
  raw performance
 \begin_inset space ~
 \end_inset
@@ -4141,7 +4342,11 @@ key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
 \begin_layout Standard
 In February 2007, the first real opportunity for using GPUs for general
  programming and scientific computing came about with the release of the
- Compute Unified Device Architecture (CUDA
+ Compute Unified Device Architecture
+\begin_inset space ~
+\end_inset
+
+(CUDA
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -4158,7 +4363,7 @@ In the following, the focus on the CUDA architecture.
  In particular, similar hardware produced by other vendors, e.g., AMD and
  Intel, as well as other programming frameworks like OpenCL, are based on
  the same technology paradigm of massively-parallel processors.
- For this reason, the principles discussed in this section can be applied
+ For this reason, the principles presented in this section can be applied
  to current GPU technologies, in a vendor-independent manner.
 \end_layout
 
@@ -4184,7 +4389,10 @@ key "CUDA"
  The host code transfers data to and from the global memory of the GPU using
  CUDA-function calls.
  Each processor of a CUDA device supports the Single-Program Multiple-Data
- (SPMD
+\begin_inset space ~
+\end_inset
+
+(SPMD
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -4214,9 +4422,9 @@ A CUDA program consists of multiple parts that are executed on either the
  For this reason, the CUDA programming model may be viewed as an environment
  to isolate program parts that are rich in data parallelism and thus should
  be executed on the GPU.
- The parallel parts of a CUDA program are implemented as kernels, which
- are functions written in the C language and describe the work of a single
- thread of execution.
+ The parallel parts of a CUDA program are implemented as kernels, i.e., functions
+ written in the C language that describe the work of a single thread of
+ execution.
  Several restrictions apply on kernel functions: there must be no recursion,
  no static variable declarations, and a non-variable number of arguments
 \begin_inset space ~
@@ -4251,32 +4459,7 @@ key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
 \end_inset
 
 .
- A SM executes issues one instruction a a time for all the 32 threads in
- the warp.
- Consequently, if a thread block is not evenly divisible by the warp size,
- any remaining thread slots are wasted.
- Another undesirable situation appears when threads in a warp take different
- control paths, since the execution performance of the entire warp is reduced.
-\end_layout
-
-\begin_layout Standard
-The architecture of a typical GPU is depicted in Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:04-GPU_memory_organization"
-
-\end_inset
-
- (2 from Whu???).
- It consists of a 
-\begin_inset Formula $n$
-\end_inset
-
- streaming multiprocessors (SMs
+ A Streaming Multiprocessor (SM
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -4285,110 +4468,11 @@ description "Streaming multiprocessor."
 
 \end_inset
 
-), each containing 
-\begin_inset Formula $m$
-\end_inset
-
- streaming processors (SPs
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "SP"
-description "Streaming processor."
-
-\end_inset
-
-).
- Each SP executes a single instruction of a thread in a single-instruction,
- multiple-data thread (SIMT
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "SIMT"
-description "Single-instruction, multiple-thread."
-
-\end_inset
-
-)
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
-
-\end_inset
-
-.
- The registers of each SM are dynamically partitioned among the threads
- running on it.
- Due to the different memory system a GPU has (see Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:04-GPU_memory_organization"
-
-\end_inset
-
-), the actual throughput an application can achieve depends on issues related
- to the access to memory, in particular the slow accesses to global memory
- from the GPU chip, and the use of shared memory in the SPs to mitigate
- the high-latency effects
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
-
-\end_inset
-
-.
- Since variables in the source code can be declared to reside in global,
- shared, local, or constant memory, a programmer has the means to organize
- the code in such a way that the application throughput can be maximized.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
->>> rephrase this
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In summary, there are hard limits to the memories, threads, and total bandwidth
- available to an application running on the GeForce 8800.
- Managing these limits is critical when optimizing applications, but strategies
- for avoiding one limit can cause other limits to be hit.
- They can also reduce the number of thread blocks that can run simultaneously.
- In addition, managing the behavior of threads so that those in the same
- warp follow the same control paths and load contiguous values from global
- memory can also improve performance.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-<<<
-\end_layout
-
-\end_inset
-
-
+) executes one instruction at a time for all the 32 threads in the warp.
+ Consequently, if a thread block is not evenly divisible by the warp size,
+ any remaining thread slots are wasted.
+ Another undesirable situation appears when threads in a warp take different
+ control paths, since the execution performance of the entire warp is reduced.
 \end_layout
 
 \begin_layout Standard
@@ -4415,8 +4499,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../04-framework_design_and_implementation/img/GPU_memory.eps
-	lyxscale 70
+	filename img/GPU_architecture.eps
 	width 40text%
 
 \end_inset
@@ -4428,8 +4511,8 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Simplified diagram of the memory system on a modern GPU, including access
- times in computational cycles
+A simplified diagram of the architecture of a modern GPU.
+ Adapted from
 \begin_inset space ~
 \end_inset
 
@@ -4440,10 +4523,10 @@ key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
 
 \end_inset
 
-???.
+.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:04-GPU_memory_organization"
+name "fig:02-GPU_architecture"
 
 \end_inset
 
@@ -4458,6 +4541,431 @@ name "fig:04-GPU_memory_organization"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The architecture of a typical GPU is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-GPU_architecture"
+
+\end_inset
+
+.
+ It consists of 
+\begin_inset Formula $n$
+\end_inset
+
+ SMs, each containing 
+\begin_inset Formula $m$
+\end_inset
+
+ Streaming Processors (SPs
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SP"
+description "Streaming processor."
+
+\end_inset
+
+).
+ Each SP executes a single instruction of a thread in a Single-Instruction,
+ Multiple-Thread (SIMT
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SIMT"
+description "Single instruction multiple thread."
+
+\end_inset
+
+) manner
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+
+\end_inset
+
+.
+ The registers of each SM are dynamically partitioned among the threads
+ running on it.
+ 
+\end_layout
+
+\begin_layout Standard
+Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:02-GPU_memory_properties"
+
+\end_inset
+
+ lists the different types of memory on a GPU, along with some of their
+ properties.
+ Specifically, the location of the memory, its hit-latency in terms of clock
+ cycles, whether it is read-only or not, and the program scope it may be
+ accessed from.
+ Due to the different memory system a GPU has, the actual throughput an
+ application can achieve depends on issues related to the access to memory,
+ in particular the slow accesses to global memory from the GPU chip, and
+ the use of shared memory in the SPs to mitigate the high-latency effects
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+
+\end_inset
+
+.
+ Since variables in the source code can be declared to reside in global,
+ shared, local, or constant memory, a programmer has the means to organize
+ the code in such a way that the application throughput can be maximized.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Properties of different memory types on a GeForge 8800 GPU.
+ Adapted from
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:02-GPU_memory_properties"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row bottomspace="default">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Memory
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Location
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Latency
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Read-only
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Program scope
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Global
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+off-chip
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200-300 cycles
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+no
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+global
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Texture
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+on-chip cache
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+~100 cycles
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+global
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shared
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+on-chip
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+~register
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+no
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+function
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Register
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+on-chip
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+~1 cycle
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+no
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+function
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clearly, there are hard limits to the memories, threads, and total bandwidth
+ available to an application running on a GPU.
+ Managing these limits is critical when optimizing applications, but applying
+ strategies for avoiding one limit can easily cause other limits to be hit.
+ Additionally, managing the behavior of threads so that those in the same
+ warp follow the same control paths and load contiguous values from global
+ memory can improve the execution performance
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4476,30 +4984,6 @@ key "Farber-CUDA_application_design_and_development:2011"
 \end_layout
 
 \begin_layout Standard
------------------------------
-\end_layout
-
-\begin_layout Standard
-En contraste, los procesa- dores de los CPU convencionales no pueden manejar
- m ́as de una operaci ́on al mismo tiempo.
-\end_layout
-
-\begin_layout Standard
-However, all threads share the same global address space
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kirk-NVIDIA_CUDA_software_and_GPU_parallel_computing:2007"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -4507,12 +4991,7 @@ status open
 >>> reciclar esta parte de texto en algun otro lado
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+\begin_layout Plain Layout
 \noindent
 There is a constant growing demand for hardware resources, longer-processing
  times and more memory to follow the evolution of 3G radio networks 
@@ -4559,10 +5038,6 @@ key "gorder2007multicore,wen2011gpu"
 
 .
 \end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
 
 \begin_layout Plain Layout
 <<<
@@ -4617,22 +5092,17 @@ key "Munshi_The.OpenCL.specification:2009"
 The main advantage of OpenCL over CUDA relies on the fact that its source
  code can be compiled to run on a variety of hardware, including multicore
  CPUs and GPUs from different vendors.
- This provides a complete framework that capable of exploiting the parallel
+ This provides a complete framework that is capable of exploiting the parallel
  features of different hardware without the need of changing the implementation.
- Moreover, being an open standard, the ....??? As it was mentioned before, the
- details described in the previous section may be equally applied on CUDA
- and OpenCL.
+ Moreover, being an open standard, its users are not tight to the decision
+ of only one vendor.
+ As it was mentioned before, the details described in the previous sections
+ may be equally applied on CUDA and OpenCL.
 \end_layout
 
 \begin_layout Standard
-One unfortunate consequence of the vendor variety is that CUDA 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "NVIDIA_Compute.Unified.Device.Architecture:2007"
-
-\end_inset
-
- and OpenCL have each introduced its own naming conventions.
+One unfortunate consequence of the vendor variety is that CUDA and OpenCL
+ have each introduced its own naming conventions.
  For the sake of consistency, in Table
 \begin_inset space ~
 \end_inset
@@ -4640,7 +5110,7 @@ key "NVIDIA_Compute.Unified.Device.Architecture:2007"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:CUDA-OpenCL-translation"
+reference "tab:02-CUDA_OpenCL_translation"
 
 \end_inset
 
@@ -4665,10 +5135,11 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Naming-convention translation between OpenCL and CUDA
-\emph on
- 
-\emph default
+Naming-convention translation between OpenCL and CUDA.
+ Adapted from
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -4679,7 +5150,7 @@ key "Kloeckner_CUDA.OpenCL.dictionary:2011"
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:CUDA-OpenCL-translation"
+name "tab:02-CUDA_OpenCL_translation"
 
 \end_inset
 
@@ -5010,8 +5481,7 @@ Summary
 
 \begin_layout Standard
 This chapter gave an overview of the basic concepts, the potential and the
- limitations of the GPUs, when used as parallel procesors for general programmin
-g.
+ limitations of the GPUs when used as parallel procesors for general programming.
  In particular, emphasis has been given to the details that differenciate
  this platform from the traditional serial architecture on CPUs.
  In this sense, it is important to recognize which applications can benefit

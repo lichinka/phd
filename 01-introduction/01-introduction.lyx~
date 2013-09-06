@@ -61,7 +61,14 @@
 \begin_body
 
 \begin_layout Chapter
-Introduction
+Introduction 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:01-Introduction"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -124,8 +131,8 @@ Formulating a decision problem means making an initial statement about it.
  Although this first formulation may be imprecise, the objectives of the
  problem are outlined, together with the internal and external factors that
  have some degree of influence over it.
- During the modelling of the problem, an abstract mathematical model is
- built for it.
+ During the modeling of the problem, an abstract mathematical model is built
+ for it.
  Sometimes this model is inspired by similar models in the literature, making
  it possible to tackle the problem with well-studied methods.
  After a model of the problem is available, the optimization step, i.e., generatin
@@ -290,7 +297,7 @@ key "law2007simulation"
 
 \begin_layout Standard
 A model is a simplified representation of a studied problem, and one of
- its purposes is to predict the effects of variations within the system.
+ its purposes is to predict the effects of the variations within the system.
  A good model is a balance between realism and simplicity.
  The system simulation, on the other hand, is the operation of the model.
  Its configuration can be changed, thus allowing multiple experimental execution
@@ -310,9 +317,9 @@ key "maria1997introduction"
  essential as reference points for understanding the studied phenomena.
  Consequently, problems categorized as of large size and of considerable
  complexity represent a challenge, because of the different involved disciplines
- and the degree of difficulty of their modeling.
- Radio networks, in particular those of the third and fourth generations,
- fall under this categorization.
+ for their study and the degree of difficulty of their modeling.
+ Cellular radio networks in general, and those of the lastest generations
+ in particular, fall under this categorization.
 \end_layout
 
 \begin_layout Section
@@ -338,7 +345,7 @@ key "3GPP_TR_50.099"
 \end_inset
 
 .
- Known to be part of the second generation of mobile networks (2G
+ As an implementation of the second generation of mobile networks (2G
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -403,8 +410,8 @@ key "Gerstenberger-Introduction_to_LTE:2011"
 
 .
  The always increasing demand for more bandwidth has been one of the main
- forces behind the standardization and later implementation of the systems
- delivering higher speed data services in order to improve the user's experience.
+ forces behind the standardization and later implementation of systems deliverin
+g higher-speed data services in order to improve the user's experience.
 \end_layout
 
 \begin_layout Standard
@@ -417,8 +424,8 @@ This evolution, first from 2G to 3G and later from 3G to 4G, has introduced
 \end_layout
 
 \begin_layout Standard
-In a traditional or manual approach, during the design phase of a radio
- network, a software tool, i.e., the model in Figure
+During the design phase of a radio network, a traditional or manual approach
+ comprises the software tool, i.e., the model in Figure
 \begin_inset space ~
 \end_inset
 
@@ -429,8 +436,8 @@ reference "fig:01-decision_making_process"
 
 \end_inset
 
-, executes the analysis, while the human makes the configuration changes,
- i.e., the optimization in Figure
+, that executes the analysis, and the human that makes the configuration
+ changes, i.e., the optimization in Figure
 \begin_inset space ~
 \end_inset
 
@@ -513,14 +520,15 @@ key "amaldi2007radio_planning,chen2008automated,chen2009fast,gordejuela2009two,s
  such as evolutionary computing or numerical optimization, where several
  sets of open and well-known benchmarks are available for the community
  to use.
- Consequently, an open and unified framework should researchers to compare
- different methods and results in a simplified and objective manner.
+ Consequently, an open and unified framework should allow researchers to
+ compare different methods and results in a simplified and objective manner.
 \end_layout
 
 \begin_layout Itemize
-Available commercial tools for radio-network evaluation have major drawbacks
- with respect to the size of networks that can be considered, especially
- regarding the computational time.
+Available commercial tools for radio-network evaluation present several
+ drawbacks.
+ In particular, regarding to the size of networks that can be considered
+ and their computational-time complexity.
  Yet, even if precise and fast methods were commercially available, the
  would lack the level of flexibility required by the scientific community.
  Consequently, an essential attribute of the framework is to be open source,
@@ -602,22 +610,22 @@ On the one hand, a larger number of evaluations in the same amount of time
  translates in a better search of the search space by the optimization algorithm
  used.
  On the other hand, more complex or exact models may be evaluated in the
- same amount of time, which translates in better solutions.
+ same amount of time, which implies more accurate solutions.
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Using the parallel framework as the objective-function-evaluation component
- of an automatic optimization system should provide the means for solving
- new, previously inaccessible optimization problems.
+Using the parallel framework to evaluate the objective function of an automatic-
+optimization system should provide the means for solving new, previously
+ inaccessible optimization problems.
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-With the gained performance at the objective-function-evaluation level,
- there is a clear possibility for formally defining and solving desing problems
- that were previously out-of-reach of state-of-the-art methods, either because
- of their complexity or size.
+The improved performance at the evaluation level opens new possibilities
+ for formally defining and tackling oprimization problems that were previously
+ out-of-reach of state-of-the-art methods, either because of their complexity
+ or size.
 \end_layout
 
 \end_deeper
@@ -644,13 +652,13 @@ Design and development of an unified framework for radio-network planning
 Proposal of a new approach for parallel programming that combines a classic
  master-worker method with an external database.
  The proposed approach improves the scalability of the classic master-worker
- paradigm by preventing the master process to become the bottleneck of the
- system.
+ paradigm by preventing the master process to become the bottleneck of a
+ parallel system.
 \end_layout
 
 \begin_layout Itemize
 Quality improvement of renowned radio-propagation models by applying metaheurist
-ic-optimization techniques that enhances the results of current state-of-the-art
+ic-optimization techniques that enhance the results of current state-of-the-art
  methods.
 \end_layout
 
@@ -676,9 +684,9 @@ Organization
 \end_layout
 
 \begin_layout Standard
-Here, a context has been provided for the following content of this thesis.
+So far, a context has been provided for the following content of this thesis.
  An introduction of the three research areas addressed by this work, i.e.,
- radio networks, optimization and parallel methods, is given in Chapters
+ optimization, radio networks, and parallel methods, is given in Chapters
 \begin_inset space ~
 \end_inset
 
@@ -689,9 +697,40 @@ reference "chap:02-Optimization_models"
 
 \end_inset
 
-, ???, respectively.
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Principles_of_mobile_radio_networks"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Principles_of_GPU_programming"
+
+\end_inset
+
+, respectively.
  They provide an overview of the theoretical elements needed for a better
  understanding of the rest of the thesis.
+ Additionally, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_of_radio_networks"
+
+\end_inset
+
+ provides a short literature survey about the optimization of radio networks.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -798,9 +837,9 @@ reference "chap:05-Framework_parameter_tuning"
 
 \end_inset
 
- further extends the framework with automated tuning capabilities that enable
- adaptation to different environments and thus improved quality of radio
- predictions.
+ further extends the framework with automated-tuning capabilities that enable
+ its adaptation to different environments, thus improving the accuracy of
+ the radio-propagation predictions.
  In Chapter
 \begin_inset space ~
 \end_inset
@@ -838,6 +877,11 @@ Publications
 \end_layout
 
 \begin_layout Standard
+The work presented in this thesis is supported by a number of previous publicati
+ons ...???
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -845,12 +889,7 @@ status open
 >>> Kaluza
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+\begin_layout Plain Layout
 A number of previous publications underlie this thesis.
  The initial work on activity recognition was published by Lustrek and Kaluza
  (2009).
@@ -882,10 +921,6 @@ nce (Lustrek et al., 2012) and the Inter- national Conference on Autonomous
  The comprehensive list of related publications is collected in Appendix
  B.
 \end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
 
 \begin_layout Plain Layout
 <<<
