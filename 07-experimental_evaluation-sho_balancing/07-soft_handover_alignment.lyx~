@@ -99,20 +99,20 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 \end_inset
 
 , an application exploiting the advantages of faster evaluation methods
- has been introduced.
- Solving the service coverage problem for real-world networks capitalizes
- on the ability to tackle bigger problem instances, i.e.
- problems that, because of their size, were previously unsolvable in a feasible
+ has been presented.
+ Solving the service-coverage problem for real-world networks capitalizes
+ on the ability to tackle bigger problem instances.
+ Because of their size, such problems were previously unsolvable in a feasible
  amount of time.
  This improved performance also allows solving optimization problems with
  a higher degree of complexity, usually represented by the evaluation of
- multi-dimensional non-convex objective functions.
+ multi-dimensional, non-convex objective functions.
 \end_layout
 
 \begin_layout Standard
 \noindent
 This chapter focuses on solving a new optimization problem for 3G networks,
- dealing with downlink and uplink SHO areas (see Section
+ that deals with downlink and uplink SHO areas (see Section
 \begin_inset space ~
 \end_inset
 
@@ -120,6 +120,17 @@ This chapter focuses on solving a new optimization problem for 3G networks,
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:02-Handover-and-soft-handover"
+
+\end_inset
+
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Principles_of_mobile_radio_networks"
 
 \end_inset
 
@@ -136,7 +147,7 @@ reference "sub:02-Handover-and-soft-handover"
 
 \begin_layout Standard
 To the best of the author's knowledge, there is no reference in the literature
- to a simulation-based approach to find active downlink and uplink SHO areas.
+ of a simulation-based approach to find active downlink and uplink SHO areas.
  Additionally, there are no formal optimization methods known to the author
  that tackle the SHO balancing problem as described here.
  The approach described in this chapter extends the research work published
@@ -174,7 +185,7 @@ reference "sec:07-Related-work"
 
 \end_inset
 
- gives an overview of other works related to CPICH-power and SHO optimization
+ gives an overview of other works related to pilot-power and SHO optimization
  in UMTS.
  The static network model is presented in Section
 \begin_inset space ~
@@ -196,12 +207,23 @@ reference "sec:07-Radio_network_model"
 
 \begin_inset CommandInset ref
 LatexCommand ref
+reference "sec:07-Problem_definition"
+
+\end_inset
+
+, the problem is formally defined, followed by a short description of the
+ optimization algorithms used in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "sec:07-Optimization_algorithms"
 
 \end_inset
 
- a short description of the optimization algorithms used is given, including
- their mapping to the SHO-balancing problem.
+.
  The simulations, including their environment and parameter setup, are introduce
 d in Section
 \begin_inset space ~
@@ -214,7 +236,7 @@ reference "sec:07-Simulations"
 
 \end_inset
 
-, followed by their results in Section
+, before their result analysis in Section
 \begin_inset space ~
 \end_inset
 
@@ -329,7 +351,7 @@ vskip -0.3in(b)
 
 \begin_layout Plain Layout
 HSUPA traffic and uplink interference with: (a) balanced downlink and uplink
- SHO conditions; (b) unbalanced downlink and uplink SHO conditions.
+ SHO conditions, and (b) unbalanced downlink and uplink SHO conditions.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:07-Problem_illustration"
@@ -350,7 +372,7 @@ name "fig:07-Problem_illustration"
 \end_layout
 
 \begin_layout Standard
-Despite several built-in mechanisms that allow the radio network to overcome
+Despite several built-in mechanisms, that allow a radio network to overcome
  different problems due to the lack of SHO during a HSDPA connection, some
  abnormal cases do arise, especially in those areas where there is SHO capabilit
 y in the uplink, but none in the downlink.
@@ -361,37 +383,69 @@ reference "fig:07-Problem_illustration"
 
 \end_inset
 
-, which shows interference behavior during a HSPA connection in normal SHO
- conditions (a), and in unbalanced SHO conditions (b).
- Graph data are actual radio network statistics, taken from the mobile network
- deployed in Slovenia by Telekom Slovenije, d.d..
- The graph on the left (a) shows a normal HSUPA-enabled service situation,
+, which shows the interference behavior during a HSPA connection in: (a)
+ normal SHO conditions, and (b) unbalanced SHO conditions.
+ The plotted data are actual radio network statistics, taken from the mobile
+ network deployed in Slovenia by Telekom Slovenije, d.d.
+ The graph on the left, (a), shows a normal HSUPA-enabled service situation,
  in which the measured interference is proportional to the traffic being
  served.
- Note how the noise rises with the increased traffic on cell 1, while its
- neighbor (cell 2) has almost no interference nor traffic.
- Moreover, the graph profile for both traffic and noise of cell 1 are almost
- identical.
- The graph on the right (b) depicts a problematic situation, where the noise
- level does not only rise on the cell serving the HSUPA services (cell 1),
- but also on the neighboring one.
+ Note how the noise rises with the increased traffic on cell
+\begin_inset space ~
+\end_inset
+
+1, while its neighbor (cell
+\begin_inset space ~
+\end_inset
+
+2) has almost no interference nor traffic.
+ Moreover, the graph profile for both traffic and noise of cell
+\begin_inset space ~
+\end_inset
+
+1 are almost identical.
+ The graph on the right, (b), depicts a problematic situation, where the
+ noise level does not only rise on the cell serving the HSUPA services (cell
+\begin_inset space ~
+\end_inset
+
+1), but also on the neighboring one.
  Notice how the interference level rises on the cell that has almost no
- traffic (cell 2).
+ traffic (cell
+\begin_inset space ~
+\end_inset
+
+2).
  It is clear that the source of this noise rise is generated by the active
- connection on cell 1, which shows an increase in HSUPA traffic.
- However, the noise level profile on cell 2 does not follow its traffic,
- as it did in the normal situation (a).
- This is due to cell 2 not being part of the active set.
+ connection on cell
+\begin_inset space ~
+\end_inset
+
+1, which shows an increase in HSUPA traffic.
+ However, the noise-level profile on cell
+\begin_inset space ~
+\end_inset
+
+2 does not follow its traffic, as it did in the normal situation (a).
+ This is due to cell
+\begin_inset space ~
+\end_inset
+
+2 not being part of the active set.
  Such situations appear when the UL coverage is larger than the DL coverage.
  Interestingly enough, this seems to be an exceptional case, as Holma and
- Toskala write in 
+ Toskala write in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "holma2006hsdpa"
 
 \end_inset
 
- when describing soft handover in chapter 5:
+, when describing the SHO in chapter 5:
 \end_layout
 
 \begin_layout Standard
@@ -412,9 +466,13 @@ key "holma2006hsdpa"
 Given the described context, the challenge is to achieve the correct balance
  or distribution of downlink and uplink SHO areas within a working UMTS
  network.
- Therefore, the network has to be fine-tuned to achieve a better SHO-area
- balancing, and thus avoiding the exceptional appearance of problematic
- situations as shown in Figure 
+ Therefore, the network has to be fine-tuned to improve the SHO-area balancing,
+ thus to avoid the exceptional appearance of problematic situations, as
+ shown in Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:07-Problem_illustration"
@@ -425,46 +483,55 @@ reference "fig:07-Problem_illustration"
  This clearly implies that the mobile network configuration should not be
  excessively altered, since other aspects of the network are working well
  before starting the optimization process.
- Hence, the objective of the optimization problem is to find a CPICH power
- level configuration for all the cells in the target network, such that
- the balance of downlink and uplink SHO areas is improved and other network
- aspects are preserved.
- The optimization process takes into account different kinds of hardware
- (e.g.
- amplifiers, cables, and antennas), changing only the CPICH powers of the
+ Hence, the objective of the optimization problem is to find a pilot-power
+ configuration for all the cells in the target network, such that the balance
+ of downlink and uplink SHO areas is improved and other network aspects
+ are preserved.
+ The optimization process takes into account different kinds of hardware,
+ e.g., amplifiers, cables, and antennas, adjusting the pilot powers of the
  cells.
 \end_layout
 
 \begin_layout Standard
-PRATO is used as the evaluation framework, as defined in Chapter 
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+PRATO, as defined in Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:04-Framework-design-and-implementation"
 
 \end_inset
 
-.
- A state-of-the-art mathematical model 
+, is used as the evaluation framework of the SHO-balancing problem.
+ A state-of-the-art mathematical model
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "nawrocki2006understanding"
 
 \end_inset
 
- describes downlink and uplink SHO areas, considering the static nature
- of the evaluation.
+ describes the downlink and uplink SHO areas.
  By introducing a penalty-based objective function and some hard constraints,
  a formal definition of the SHO-balancing problem in UMTS networks is given.
  The mathematical model and the penalty scores of the objective function
  are set according to the configuration and layout of a real mobile network,
  deployed in Slovenia by Telekom Slovenije, d.d.
- The SHO settings are also taken from actual network configuration, still
- they were adapted to closely model interference and other dynamics present
- in the network.
- The balancing problem is then tackled by three optimization algorithms,
- each of them belonging to a different category of metaheuristics.
- The optimization results, as well as the performance of each of the optimizatio
-n algorithms used, are afterwards analyzed.
+ The SHO settings are also taken from the actual network configuration,
+ still they were adapted to closely model interference and other dynamic
+ aspects of the network.
 \end_layout
 
 \begin_layout Standard
@@ -577,20 +644,24 @@ name "sec:07-Related-work"
 \end_layout
 
 \begin_layout Standard
-SHO optimization has received quite some attention from the scientific community
- in the last years.
- This mainly relates to the importance it has within deployed networks that
- provide high speed services such as video telephony 
+The SHO optimization has received quite some attention from the scientific
+ community during the past years.
+ This mainly relates to the importance it has within the deployed networks
+ that provide high-speed services, such as video telephony
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "chen2010_impact_of_soft_handover"
 
 \end_inset
 
- and Internet access by means of HSPA 
+ and data services by means of HSPA 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "chen2011_coverage_planning_for_optimizing_HSDPA"
+key "chen2011_coverage_planning_for_optimizing_HSDPA,chen2008cpich"
 
 \end_inset
 
@@ -598,25 +669,34 @@ key "chen2011_coverage_planning_for_optimizing_HSDPA"
 \end_layout
 
 \begin_layout Standard
-Some authors tackle optimization problems at the planning stage of the network
- 
+Some authors tackled optimization problems at the planning stage of the
+ network
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,ghosh2011_optimising_CDMA_cell_planning"
 
 \end_inset
 
-, considering, among other variables, base-station locations and hardware.
- However, most mobile operators are unable to apply these contributions
- to a live network since the planning phase has long been concluded.
- Moreover, the great majority of the base stations have already been deployed
- and their hardware also installed.
+, considering, among other variables, BS locations and hardware.
+ However, most mobile operators are unable to apply such methods to a live
+ network, since the planning phase of the new installation has long been
+ concluded.
+ Moreover, the great majority of the BSs has already been deployed and their
+ hardware also installed.
  Therefore, from the mobile operator's point of view, mainly parameter and
- software optimization are the only tools available when it comes to QoS
- improvement (see Section 
+ software optimization are the only tools available, when it comes to QoS
+ improvement (see Chapter
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:02-Handover-and-soft-handover"
+reference "chap:02-Optimization_of_radio_networks"
 
 \end_inset
 
@@ -624,9 +704,13 @@ reference "sub:02-Handover-and-soft-handover"
 \end_layout
 
 \begin_layout Standard
-Optimizing SHO by means of CPICH is an established way of enhancing network
- capacity when high speed services like HSDPA and HSUPA coexist with legacy
- technologies 
+Optimizing SHO by means of pilot-power adjustment is an established way
+ of enhancing network capacity, when high-speed services like HSDPA and
+ HSUPA coexist with legacy technologies
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "chen2008cpich"
@@ -634,25 +718,36 @@ key "chen2008cpich"
 \end_inset
 
 .
- The CPICH transmit power is typically between 5% to 10% of the total downlink
- transmit power of the base station 
+ In the UMTS, the pilot power is typically between 5% to 10% of the total
+ downlink transmit power of the BS
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RadioNetworkPlanningAndOptimisationForUMTS"
 
 \end_inset
 
-, but there is no standardized method to ﬁnd a CPICH power setting.
+, but there is no standardized method to ﬁnd a pilot-power setting.
  A number of existing approaches to resolve this issue exist in the related
- literature (see 
+ literature
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications,Siomina_PilotPowerManagementInWCDMANetworksCoverageControlWithRespectToTrafficDistribution,Ying_CPICHPowerSettingsInIrregularWCDMAMacroCellularNetworks"
 
 \end_inset
 
-).
- The most eﬀective ones are those based on optimization methods 
+, being those based on optimization methods the most eﬀective ones
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CPICHPowerOptimisationByMeansOfSimulatedAnnealingInAnUTRAFDDEnvironment,RadioNetworkPlanningAndOptimisationForUMTS,UMTSRadioNetworkPlanning_OptimizationAndQoSManagementForPracticalEngineeringTasks,siomina2008minimum"
@@ -661,10 +756,23 @@ key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CP
 
 .
  Such a wide spectrum of available procedures is directly related to the
- diverse criteria taken into account when assigning the CPICH power of a
+ diverse criteria taken into account when assigning the pilot power of a
  cell.
- The fundamental reason behind this fact is that the CPICH power is a common
- factor of various optimization problems in UMTS networks.
+ The fundamental reason behind this fact is that the pilot power is a common
+ adjustment vairble of various optimization problems in radio networks.
+ This is especially true for UMTS networks, due to their frequency-reuse
+ factor of 1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -679,19 +787,8 @@ name "sec:07-Radio_network_model"
 \end_layout
 
 \begin_layout Standard
-In this chapter, the representation of a radio-network model, previously
- introduced in Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
-
-\end_inset
-
-, Section
+This section extends the representation of the radio-network model, previously
+ introduced in Section
 \begin_inset space ~
 \end_inset
 
@@ -702,9 +799,21 @@ reference "sec:06-Radio_network_model"
 
 \end_inset
 
-, is extended to include SHO functionality.
- In this context, the mathematical model links the SHO settings with pilot
- power level of each cell, the best-server pattern, and the network coverage.
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
+
+\end_inset
+
+, in order to include the SHO functionality.
+ In this context, the mathematical model links the SHO settings with the
+ pilot-power level of each cell, the best-server pattern, and the network
+ coverage.
 \end_layout
 
 \begin_layout Standard
@@ -713,10 +822,14 @@ By introducing a change step of 0.01
 \end_inset
 
 dB and bounding the pilot power of a cell 
+\begin_inset Formula $c$
+\end_inset
+
+, 
 \begin_inset Formula $c\in C$
 \end_inset
 
- to 
+, to 
 \begin_inset Formula $\pm2$
 \end_inset
 
@@ -724,7 +837,7 @@ dB and bounding the pilot power of a cell
 \begin_inset space ~
 \end_inset
 
-dB (relative to the pilot power setting the cell had before optimization)
+dB (relative to the pilot-power setting the cell had before optimization),
  the number of elements in the set 
 \begin_inset Formula $P_{c}$
 \end_inset
@@ -750,9 +863,9 @@ name "sub:07-SHO_areas"
 \end_layout
 
 \begin_layout Standard
-To obtain a realistic outline of the areas where a mobile may potentially
- maintain connections to more than one cell, a static version of the active
- set, as defined in 
+To obtain a realistic outline of the areas where an UE may potentially maintain
+ connections to more than one cell, a static version of the active set,
+ as defined in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "nawrocki2006understanding"
@@ -794,11 +907,15 @@ description "Maximum number of neighbouring cells in the active set."
 
 , are introduced.
  Both parameters are taken from the working configuration of the real network.
- It follows that the cells to which a mobile 
+ It follows that the cells to which an UE 
+\begin_inset Formula $m$
+\end_inset
+
+, 
 \begin_inset Formula $m\in M$
 \end_inset
 
- may maintain concurrent downlink connections are part of the set
+, may maintain concurrent downlink connections are part of the set:
 \end_layout
 
 \begin_layout Standard
@@ -828,10 +945,6 @@ description "Cell set to which a mobile may maintain concurrent downlink connect
 \begin_layout Standard
 \noindent
 where 
-\begin_inset Formula $c\in C$
-\end_inset
-
-, 
 \begin_inset Formula $L_{c^{*}m}^{\downarrow}$
 \end_inset
 
@@ -839,7 +952,7 @@ where
 \begin_inset Formula $p_{c^{*}}$
 \end_inset
 
- is its CPICH power.
+ is its pilot power.
  Since the number of elements in 
 \begin_inset Formula $SHO_{m}^{\downarrow}$
 \end_inset
@@ -862,8 +975,8 @@ key "nawrocki2006understanding"
 \end_layout
 
 \begin_layout Standard
-Additionally, in the uplink, the set of cells to which a mobile can potentially
- be in SHO is defined as
+Additionally, in the uplink, the set of cells to which an UE can potentially
+ be in SHO is defined as:
 \end_layout
 
 \begin_layout Standard
@@ -895,11 +1008,11 @@ where
 \begin_inset Formula $L_{mc}^{\uparrow}$
 \end_inset
 
- is the uplink attenuation factor from mobile 
+ is the uplink attenuation factor from an UE 
 \begin_inset Formula $m$
 \end_inset
 
- to cell 
+ to a cell 
 \begin_inset Formula $c$
 \end_inset
 
@@ -916,7 +1029,7 @@ description "Uplink transmit power of mobile $m\\in M$."
 
 \end_inset
 
- is the uplink transmit power of mobile 
+ is the uplink transmit power of 
 \begin_inset Formula $m$
 \end_inset
 
@@ -924,8 +1037,8 @@ description "Uplink transmit power of mobile $m\\in M$."
 \end_layout
 
 \begin_layout Standard
-The static nature of the model intentionally neglects mobility and interference
- by narrowing 
+The static nature of the model intentionally neglects mobility and dynamic
+ interference by narrowing 
 \begin_inset Formula $\gamma^{\mathrm{sho}}$
 \end_inset
 
@@ -933,7 +1046,11 @@ The static nature of the model intentionally neglects mobility and interference
 \begin_inset space ~
 \end_inset
 
-dB 
+dB
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "nawrocki2006understanding"
@@ -944,7 +1061,14 @@ key "nawrocki2006understanding"
 \end_layout
 
 \begin_layout Section
-Problem definition
+Problem definition 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:07-Problem_definition"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -963,7 +1087,7 @@ reference "sec:07-Radio_network_model"
  engineers of the Radio Network Department at Telekom Slovenije, d.d.
  The objective function is constructed as a weighted sum, containing different
  costs that penalize the occurrence of specific SHO conditions in downlink
- and uplink, which may potentially cause the aforementioned malfunctioning,
+ and uplink, which may potentially cause the afore-mentioned malfunctioning,
  introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -984,7 +1108,7 @@ A cost-based objective function is the most natural and straight-forward
 
 \begin_layout Standard
 Hence, the definition of the objective function for the SHO-balancing problem
- is the minimization of the sum of penalty scores given as
+ is the minimization of the sum of penalty scores given as:
 \end_layout
 
 \begin_layout Standard
@@ -1117,8 +1241,8 @@ reference "eq:07-objective_function"
 \end_layout
 
 \begin_layout Standard
-It is clear that coverage is the most important quality aspect from the
- network point of view (penalty factor 
+It is clear that the coverage is the most important quality aspect from
+ the network point of view (penalty factor 
 \begin_inset Formula $pf_{\mathrm{cov}}$
 \end_inset
 
@@ -1143,8 +1267,8 @@ reference "sec:07-Motivation"
 
 \end_inset
 
-, consequences of such SHO arrangement produce serious interference rise
- in neighboring cells (Figure
+, the consequences of such SHO arrangement produce severe interference in
+ neighboring cells (Figure
 \begin_inset space ~
 \end_inset
 
@@ -1172,17 +1296,21 @@ reference "fig:07-Problem_illustration"
 \begin_inset Formula $pf_{\mathrm{sho}}^{\downarrow}$
 \end_inset
 
- imposes a penalty value over areas where SHO capability is available in
- the downlink, but not in the uplink.
+ imposes a penalty value over areas where the SHO capability is available
+ in the downlink, but not in the uplink.
  Recall that when accessing HSPA services, SHO is available only in the
  uplink.
- For this reason, the link throughput may benefit from SHO in the uplink
+ For this reason, the link throughput may benefit from the SHO in the uplink
  if it is available.
- The relative lower importance of the last penalty factor compared with
- the other ones is directly related to the consequences of such unbalancing
- of SHO areas may have on the network.
- In this case only HSPA throughput is affected, while the service accessibility
- should not be an issue, given there is enough uplink coverage 
+ The relative lower importance of the last penalty factor, when compared
+ to the other ones, is directly related to the consequences of the unbalancing
+ that such SHO areas may have on the network.
+ In this case, only the HSPA throughput is affected, while the service accessibi
+lity should not be an issue, given there is enough uplink coverage
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "holma2006hsdpa"
@@ -1209,10 +1337,25 @@ The SHO-balancing problem has been tackled using three fundamentally different
 \end_layout
 
 \begin_layout Itemize
-differential evolution (DE, see Section 
+DE (see Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:02-DE"
+
+\end_inset
+
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_models"
 
 \end_inset
 
@@ -1220,10 +1363,25 @@ reference "sub:02-DE"
 \end_layout
 
 \begin_layout Itemize
-differential ant-stigmergy algorithm (DASA, see Section 
+DASA (see Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:02-DASA"
+
+\end_inset
+
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_models"
 
 \end_inset
 
@@ -1231,10 +1389,25 @@ reference "sub:02-DASA"
 \end_layout
 
 \begin_layout Itemize
-simulated annealing (SA, see Section 
+SA (see Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:02-SA"
+
+\end_inset
+
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Optimization_models"
 
 \end_inset
 
@@ -1253,8 +1426,8 @@ s is better suited for solving the SHO-balancing problem.
 
 \begin_layout Standard
 The following sections describe how the SHO-balancing problem is represented
- (or mapped) by the internal structure of each of the selected algorithms
- and their controlling parameters.
+ by the internal structure of each of the selected algorithms and their
+ controlling parameters.
 \end_layout
 
 \begin_layout Subsection
@@ -1272,8 +1445,7 @@ The DE algorithm features a parallel direct search method, which utilizes
 \begin_inset Formula $X$
 \end_inset
 
- of the population, which maps to the CPICH power of one cell under optimization
-, i.e.
+ of the population, which represents the pilot power of a target cell, i.e.:
 \end_layout
 
 \begin_layout Standard
@@ -1288,7 +1460,7 @@ where
 \begin_inset Formula $x_{c}\in P_{c}$
 \end_inset
 
- represents a candidate CPICH power setting of cell 
+ represents a candidate pilot-power setting of cell 
 \begin_inset Formula $c$
 \end_inset
 
@@ -1305,7 +1477,7 @@ where
 \begin_inset Formula $|C|$
 \end_inset
 
- cells in the mobile network, it follows that 
+ cells in a mobile network, it follows that the population size, 
 \begin_inset Formula $D=|C|$
 \end_inset
 
@@ -1346,7 +1518,7 @@ indicates that the individuals selected to compute the mutation values are
  
 \emph default
 specifies the number of pairs of selected solutions used to calculate the
- weighted difference vector, and
+ crossover vector, and
 \end_layout
 
 \begin_layout Itemize
@@ -1357,41 +1529,13 @@ bin
 means that a binomial recombination operator is used.
 \end_layout
 
-\begin_layout Standard
-Four control parameters of the search process for DE were considered: the
- population size (
-\begin_inset Formula $NP$
-\end_inset
-
-), the number of generations for the algorithm to run (
-\begin_inset Formula $G_{max}$
-\end_inset
-
-), the crossover constant (
-\begin_inset Formula $CR$
-\end_inset
-
-), and the mutation scaling factor (
-\begin_inset Formula $F$
-\end_inset
-
-).
-\end_layout
-
 \begin_layout Subsection
 Differential ant-stigmergy algorithm
 \end_layout
 
 \begin_layout Standard
 The mapping between the balancing problem and DASA is similar to the one
- for DE, depicted in Equation (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:07-DE_mapping"
-
-\end_inset
-
-):
+ for DE:
 \end_layout
 
 \begin_layout Standard
@@ -1406,6 +1550,7 @@ X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:07-DASA_ma
 \end_layout
 
 \begin_layout Standard
+\noindent
 In this case, each ant, 
 \begin_inset Formula $a$
 \end_inset
@@ -1418,35 +1563,6 @@ In this case, each ant,
  At the end of every iteration, and after all the ants have created solutions,
  they are evaluated to establish if any of them is better than the best
  solution found so far.
-\end_layout
-
-\begin_layout Standard
-There are six parameters that control the way DASA explores the search space:
- the number of ants (
-\begin_inset Formula $m$
-\end_inset
-
-), the discrete base (
-\begin_inset Formula $b$
-\end_inset
-
-), the pheromone dispersion factor (
-\begin_inset Formula $q$
-\end_inset
-
-), the global scale-increasing factor (
-\begin_inset Formula $s_{+}$
-\end_inset
-
-), the global scale-decreasing factor (
-\begin_inset Formula $s_{-}$
-\end_inset
-
-), and the maximum parameter precision (
-\begin_inset Formula $e$
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Subsection
@@ -1485,7 +1601,7 @@ reference "alg:07-SA_move"
 
 \end_inset
 
- shows the pseudo-code of a move in the search space of possible CPICH power
+ shows the pseudo-code of a move in the search space of possible pilot-power
  settings, resulting in a new state of the system.
 \end_layout
 
@@ -1567,7 +1683,9 @@ Repeat
 
 	
 \backslash
-If{$rand()<0.5$}
+If{$ 
+\backslash
+mathrm{uniform}[0,1] < 0.5$}
 \end_layout
 
 \begin_layout Plain Layout
@@ -1668,17 +1786,17 @@ dB is applied with 50% probability to
 \end_inset
 
 .
- The CPICH power of cell 
+ The pilot power of cell 
 \begin_inset Formula $c'$
 \end_inset
 
  is expressed in dBm.
- The randomly generated CPICH power setting, 
+ The randomly generated pilot-power setting, 
 \begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
-, is checked for validity in step 3, i.e.
- it must be an element of the set 
+, is checked for validity in step 3, i.e., it must be an element of the set
+ 
 \begin_inset Formula $P_{c'}$
 \end_inset
 
@@ -1687,9 +1805,9 @@ dB is applied with 50% probability to
 \begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
- is not a valid CPICH power, step 2 is executed again, generating another
- random CPICH power.
- Finally, in step 4, the CPICH power of cell 
+ is not a valid pilot power, step 2 is executed again, generating another
+ random pilot power.
+ Finally, in step 4, the pilot power of cell 
 \begin_inset Formula $c$
 \end_inset
 
@@ -1721,26 +1839,13 @@ reference "alg:07-SA_move"
 \begin_inset Formula $|P_{c'}|<2$
 \end_inset
 
-, there are no candidate CPICH powers for cell 
+, there are no candidate pilot powers for cell 
 \begin_inset Formula $c'$
 \end_inset
 
- and thus no possibility of optimization by means of CPICH power adjustment.
+, and thus there is no possibility of optimization.
  Notice also that the acceptance of a move in the search space is left to
  SA and its stochastic components.
-\end_layout
-
-\begin_layout Standard
-SA has two parameters to control the search process: the initial temperature
- (
-\begin_inset Formula $t_{initial}$
-\end_inset
-
-) and the total number of iterations or evaluations (
-\begin_inset Formula $it$
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Section
@@ -1755,11 +1860,16 @@ name "sec:07-Simulations"
 \end_layout
 
 \begin_layout Standard
-The simulations are performed using a standard Monte-Carlo method, assuming
- the mobile users are uniformly distributed.
- The SHO conditions of different users depend on the relative received signal
- quality from different cells and the SHO window, which triggers the addition
- of a cell to the user's active set 
+The simulations were performed over the target geographical area, for which
+ DEM and clutter data were available.
+ The mobile users were assumed to be uniformly distributed.
+ The SHO conditions were determined by the relative received-signal quality
+ from different cells, and the SHO window, which triggers the addition of
+ a cell to a user's active set
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
@@ -1826,6 +1936,7 @@ reference "fig:07-Coverage_areas"
 
 \begin_layout Standard
 \begin_inset Float table
+placement h
 wide false
 sideways false
 status open
@@ -2060,7 +2171,6 @@ Population density
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -2137,21 +2247,10 @@ Algorithm parameters
 \end_layout
 
 \begin_layout Standard
-In this section the algorithm parameter setup, as used during the simulations,
+In this section, the algorithm-parameter setup used during the simulations
  is given.
- In all three cases, the naming conventions, as previously introduced in
- Section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:07-Optimization_algorithms"
-
-\end_inset
-
-, have been followed.
+ In all three cases, the parameter names are given with their respective
+ values and descriptions.
 \end_layout
 
 \begin_layout Standard
@@ -2184,7 +2283,7 @@ The parameters controlling the behavior of the DE algorithm were set as
 \begin_inset Formula $F=0.5$
 \end_inset
 
-, the mutation scaling factor.
+, the mutation-scaling factor.
 \end_layout
 
 \begin_layout Standard
@@ -2234,7 +2333,7 @@ As for DASA, the parameters were set to the following values:
 \end_layout
 
 \begin_layout Standard
-There are only two parameters controlling SA:
+There are only two parameters controlling SA, namely:
 \end_layout
 
 \begin_layout Itemize
@@ -2252,9 +2351,8 @@ There are only two parameters controlling SA:
 \end_layout
 
 \begin_layout Standard
-SA also allows to define the way the temperature is lowered during the annealing
- process.
- In this case, the exponential-lowering schema has been used.
+In this case, the exponential-lowering schema was chosen as the way the
+ temperature was lowered during the SA searches.
 \end_layout
 
 \begin_layout Subsection
@@ -2277,8 +2375,8 @@ GB of RAM running a 64-bit Linux operating system.
  To lower the time needed to run one optimization round, the entire objective-fu
 nction evaluation was implemented using OpenCL and executed on a nVidia
  GeForce GTX 260.
- This individual improvement exhibited more than 15-fold, execution-time
- speedup when compared to the original CPU-only version.
+ This individual change exhibited more than 15-fold, execution-time speedup,
+ when compared to the original CPU-only version.
 \end_layout
 
 \begin_layout Subsection
@@ -2293,7 +2391,7 @@ name "sub:07-Results"
 \end_layout
 
 \begin_layout Standard
-In this section the performance of the selected algorithms is presented.
+In this section, the performance of the selected algorithms is presented.
  The analysis includes aspects related to solution quality and convergence
  speed.
  All experimental results were obtained after 30 independent runs, each
@@ -2570,16 +2668,16 @@ SA
 \end_layout
 
 \begin_layout Standard
-It may be observed that DE reaches the lowest objective function value,
+It may be observed that DE reached the lowest objective-function value,
  closely followed by DASA.
- Likewise, both algorithms reach very similar results for the worst, mean
- and standard deviation values.
+ Likewise, both algorithms arrived at very similar results for the worst,
+ mean and standard-deviation values.
  SA, on the other hand, did not achieve comparable values, since its results
  are behind those of DE and DASA.
  Notice that even the best SA solution is no better than the worst solution
  of DASA.
- Moreover, the standard deviation exhibited by SA is many times bigger to
- those of DASA and DE, induced by the greater level of variance of its results.
+ Moreover, the standard deviation exhibited by SA is one order of magnitude
+ bigger than those of DASA and DE.
 \end_layout
 
 \begin_layout Standard
@@ -2619,7 +2717,8 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Convergence analysis for each algorithm, showing the best results obtained.
+Convergence analysis for each of the three algorithms, i.e., DE, DASA and
+ SA, showing the best results obtained for the SHO-balancing problem.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:07-Algorithm_convergence"
@@ -2654,7 +2753,7 @@ reference "fig:07-Algorithm_convergence"
 
 .
  It is worth mentioning that every optimization run starts from a different
- solution, randomly constructed by picking a CPICH power setting, 
+ solution, randomly constructed by picking a pilot-power setting, 
 \begin_inset Formula $p_{c}^{k}$
 \end_inset
 
@@ -2671,7 +2770,7 @@ reference "fig:07-Algorithm_convergence"
 \end_inset
 
 .
- Notice how fast DASA converges to a good solution.
+ Notice how fast DASA converged to a good solution.
  After a number of evaluations without improvement, DASA resets itself and
  continues searching from a new random point within the search space 
 \begin_inset CommandInset citation
@@ -2681,15 +2780,14 @@ key "korosec2010_DASA"
 \end_inset
 
 .
- Similarly, DE converges considerably fast, although not as fast as DASA
- does.
+ DE also converged considerably fast, although not as fast as DASA did.
  It this case, DE does not reset itself if the current solution cannot be
  improved.
  Despite this, and based on the flat profile the graph exhibits towards
  the end of the optimization run, it is clear that 100,000 evaluations is
- an adequate stopping criterion for this algorithm.
- The third algorithm, SA, slowly converges towards the best solution found,
- even though it is not as good as the solutions found by DE and DASA.
+ an adequate stopping criterion for all algorithms.
+ The third algorithm, SA, slowly converged towards the best solution found,
+ even though it was not as good as the solutions found by DE and DASA.
  
 \end_layout
 
@@ -2710,8 +2808,9 @@ reference "fig:07-Algorithm_convergence"
 \end_layout
 
 \begin_layout Standard
-The simulation running times have been intentionally omitted, since the
- implementations used are fundamentally different and therefore not comparable.
+The simulation-running times have been intentionally omitted, since the
+ algorithm implementations are fundamentally different and therefore not
+ comparable with each other.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2744,7 +2843,8 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Improvement analysis for each of the achieved best solutions.
+Improvement analysis of the best solution that each algorithm achieved for
+ the SHO-balancing problem.
 \shape italic
 
 \begin_inset CommandInset label
@@ -3527,8 +3627,8 @@ reference "tab:07-Optimization_result_analysis"
  presents the analysis of the obtained results from the network point of
  view.
  After 30 independent runs of each of the three algorithms, the best results
- obtained where evaluated for improvement and decline of each of the measured
- network aspects.
+ obtained where evaluated for the improvement and the decline of each of
+ the measured network-performance aspects.
  The results are shown in Table
 \begin_inset space ~
 \end_inset
@@ -3540,10 +3640,12 @@ reference "tab:07-Optimization_result_analysis"
 
 \end_inset
 
-, where '+' indicates improvement and '-' indicates decline of a given criteria.
+, where '+' indicates improvement and '-' indicates a decline of a given
+ criteria.
  Overall, it may be observed that the measured criteria have been significantly
  improved.
- The only exception is the measure labeled as `
+ The only exception is the measure for downlink SHO, without SHO in the
+ uplink (labeled as `
 \family roman
 \series medium
 \shape up
@@ -3575,19 +3677,19 @@ SHO
 \uwave default
 \noun default
 \color inherit
-', which shows an expected decline, since it is the optimization aspect
- with the lowest penalty factor value.
+'), which shows an expected decline, since it is the optimization aspect
+ with the lowest penalty-factor value.
 \end_layout
 
 \begin_layout Standard
-Coverage has been improved with an average of 4.29%, whereas the coverage
- area where there is no SHO capability has been increased 7.74% in average.
+The coverage has been improved with an average of 4.29%, whereas the coverage
+ area where there is no SHO capability, has been increased 7.74% in average.
  Areas where SHO is available in both downlink and uplink have also been
- improved, 3.75% in average.
+ improved, i.e., 3.75% in average.
  This particular improvement is interesting from the optimization point
  of view, because it had no explicit penalty factor set.
- Therefore, it may be understood as a consequence of the criteria completeness
- the objective function has taken into account.
+ Therefore, this may be understood as a consequence of the correct representatio
+n of the different network aspects in the objective function.
 \end_layout
 
 \begin_layout Standard
@@ -3628,7 +3730,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Spatial distribution of SHO areas before the optimization.
+Spatial distribution of the SHO areas before the optimization.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:07-SHO_areas_initial"
@@ -3686,7 +3788,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Spatial distribution of SHO areas after the optimization.
+Spatial distribution of the SHO areas after the optimization.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:07-SHO_areas_final"
@@ -3808,14 +3910,14 @@ reference "tab:07-Optimization_result_analysis"
  capable of serving HSDPA data access, as the downlink SHO condition confirms.
  For this reason, the serving cell should not only deliver HSDPA, but also
  take care of the user signaling and power control, received in the uplink.
- Obviously, this is only feasible in areas where uplink coverage is guaranteed.
+ Clearly, this is only feasible in areas where uplink coverage is guaranteed.
 \end_layout
 
 \begin_layout Standard
 It is worth mentioning that the simulation results were obtained for a real
- mobile network with actual configuration data.
- Moreover, the hard constraints imposed to the optimization process (CPICH
- power limited within the 
+ radio network with actual configuration data.
+ Moreover, the hard constraints imposed to the optimization process (the
+ pilot power limited to the 
 \begin_inset Formula $\pm$
 \end_inset
 
@@ -3824,7 +3926,7 @@ It is worth mentioning that the simulation results were obtained for a real
 \end_inset
 
 dB interval) ensure that the resulting configuration may be immediately
- applied to the mobile network.
+ applied to a mobile network.
  This fact can be contrasted with the spatial distribution of each of the
  optimized aspects, before and after applying the optimization results,
  as it is shown in Figures
@@ -3838,7 +3940,11 @@ reference "fig:07-SHO_areas_initial"
 
 \end_inset
 
- and 
+ and
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:07-SHO_areas_final"
@@ -3857,7 +3963,11 @@ reference "fig:07-SHO_areas_initial"
 
 \end_inset
 
- and 
+ and
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:07-SHO_areas_final"
@@ -3867,8 +3977,8 @@ reference "fig:07-SHO_areas_final"
  is a desired consequence of the fine-tuning procedure the network has been
  exposed to.
  Still, the improvements are present precisely over the areas that are most
- exposed to malfunctioning due to unbalanced SHO, e.g.
- their borders.
+ exposed to malfunctioning due to unbalanced SHO, e.g., the cell-coverage
+ borders.
 \end_layout
 
 \begin_layout Standard
@@ -3911,19 +4021,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_layout Standard
 \noindent
-Using a extension of the state-of-the-art radio-network model presented
- in Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
-
-\end_inset
-
-, Section
+Using a extension of the radio-network model presented in Section
 \begin_inset space ~
 \end_inset
 
@@ -3931,6 +4029,17 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Radio_network_model"
+
+\end_inset
+
+, Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \end_inset
 
@@ -3946,8 +4055,8 @@ The balancing problem has been tackled by three optimization algorithms,
  All three algorithms were able to improve the given network configuration,
  being DE the most successful one.
  The presented results confirm that a great proportion of the SHO areas,
- that were not balanced before the optimization, were correctly balanced,
- therefore significantly reducing the possibility of HSPA-service failures.
+ that were not balanced before the optimization, were corrected, therefore
+ significantly reducing the possibility of HSPA-service failures.
  Additionally, radio coverage was improved, while all other essential network
  services were not altered.
 \end_layout
@@ -3967,11 +4076,11 @@ us environments, because it imposes no restrictions regarding cell layout
 \end_layout
 
 \begin_layout Standard
- It is important to note that some methods proposed in this thesis have
- been particularly designed for problems emerging during the planning of
- 3G radio networks.
- Despite this, they may be adapted to other standards, e.g., 2G or 4G without
- lose of generality.???
+It is important to note that some methods proposed in this chapter have
+ been particularly designed for problems that emerge during the planning
+ of 3G radio networks.
+ Despite this, they may be adapted to other standards, e.g., 2G and 4G, without
+ lose of generality.
 \end_layout
 
 \end_body

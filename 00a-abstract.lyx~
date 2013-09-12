@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass book
+\textclass MPSthesis
 \use_default_options false
 \maintain_unincluded_children false
 \language english
@@ -65,40 +65,129 @@ Abstract
 \end_layout
 
 \begin_layout Standard
+The complexity of the design of radio networks has grown with the adoption
+ of modern standards.
+ Therefore, the role of the computer for delivering fast and accurate results,
+ to support this decision-making process, has become increasingly important.
+ In this thesis, novel methods for the planning and automatic optimization
+ of radio networks are developed and discussed.
+\end_layout
+
+\begin_layout Standard
+The state-of-the-art methaheuristic algorithms, which compare a large number
+ of different network configurations, rely on model-based simulations for
+ the evaluation of the solution quality and the exploration of the search
+ space.
+ However, current radio-network solutions, based on snapshot simulations,
+ have major weaknesses with respect to the simulation time and flexibility
+ provided.
+ In particular, the size of networks that can be analyzed in a feasible
+ time is typically very limited.
+\end_layout
+
+\begin_layout Standard
+The new unified framework developed in this thesis significantly outperforms
+ the currently available solutions for snapshot-based, radio-network simulations.
+ It brings together novel and state-of-the-art parallelization methods,
+ in order to allow for a detailed analysis of very large networks within
+ an acceptable amount of time for everyday planning.
+ This is achieved by the parallel features of the framework, which are exploitab
+le on a single multi-core CPU, as well as on a network of standard PCs with
+ GPU devices.
+ Clearly, the significant speed-up achieved at the simulation stage allows
+ for an increased level of detail of the simulations, which improves the
+ accuracy of the results.
+\end_layout
+
+\begin_layout Standard
+Increasing the performance of the simulations involved in the objective-function
+ evaluation is only the first step towards a practical running-time reduction
+ for radio-network optimization.
+ In addition to this, also the optimization algorithms have to be improved
+ in terms of speed, but not at the expense of the quality of results.
+ In this sense, a novel agent-based algorithm is presented and tailored
+ to a classic optimization problem in radio networks.
+ The algorithm, which is based on several techniques of cellular automata
+ and population-based metaheuristics, shows considerable gains with respect
+ to the size of problem instances it may handle, as well as regarding its
+ speed performance and solution quality.
+\end_layout
+
+\begin_layout Standard
+The performance speedup also enables the formalization of new optimization
+ problems and the automatization of time-consuming, radio-planning tasks
+ that was not previously possible...???
+\end_layout
+
+\begin_layout Standard
+From the practical point of view, the utility and performance of the developed
+ methods is assessed against an enterprise, commercial tool for radio-network
+ planning with real-world scenarios ...???
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+>>> reciclar esta parte de texto en algun otro lado
+\end_layout
+
+\begin_layout Plain Layout
 \noindent
-First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
- First paragraph in current heading.
+There is a constant growing demand for hardware resources, longer-processing
+ times and more memory to follow the evolution of 3G radio networks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
+
+\end_inset
+
+.
+ Fortunately, high-performance computer systems are increasingly accessible;
+ something made possible because of the emergence of computer clusters and
+ commodity hardware, capable of true parallel processing, e.g.
+ multi-core CPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore"
+
+\end_inset
+
+ and GPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wen2011gpu"
+
+\end_inset
+
+.
+ Moreover, the highly parallel structure present on GPUs makes them more
+ effective than CPUs for execution of algorithms where large blocks of data
+ need to be processed in parallel.
+ Commodity GPUs have evolved from being a graphic accelerator into a general-pur
+pose processor.
+ They can achieve higher performance at lower power consumption and lower
+ costs when compared to conventional CPUs.
+ Additionally, the implementation of the framework will benefit from valuable
+ advances in computer science and High Performance Computing (HPC), in order
+ to perform faster and more reliable simulations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorder2007multicore,wen2011gpu"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Standard
-Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
+\begin_layout Plain Layout
+<<<
 \end_layout
 
-\begin_layout Standard
-Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
- Next paragraph in current heading.
+\end_inset
+
+
 \end_layout
 
 \end_body

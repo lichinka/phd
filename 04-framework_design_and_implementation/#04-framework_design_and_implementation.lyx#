@@ -60,17 +60,6 @@
 
 \begin_body
 
-\begin_layout Part
-Methodology
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
 A parallel framework for radio-network planning and optimization 
 \begin_inset CommandInset label
@@ -97,26 +86,26 @@ status open
 \end_layout
 
 \begin_layout Standard
-In this chapter, a parallel radio-coverage simulation framework is presented.
+In this chapter, a parallel framework for radio-coverage simulation is presented.
  The objective of the framework is to provide an environment for the radio-cover
-age prediction of large radio networks with several cells.
+age prediction of large radio networks.
  Due to its high performance, the framework also enables the evaluation
- of larger and more complex optimization problems for radio networks.
+ of more complex optimization problems for radio networks.
  
 \end_layout
 
 \begin_layout Standard
 The framework is implemented as a module of a geographical information system,
  since the prediction calculation employs digital elevation models and land-usag
-e data in order to analyze the radio coverage of a geographical area.
- Following a classic master-worker parallel paradigm over a message-passing
- communication model proved to be a bottleneck for the performance of the
- parallel module.
+e data.
+ Following a master-worker parallel paradigm over a message-passing communicatio
+n model proved to be a bottleneck for the performance of the parallel module.
  A new approach, that overcomes this performance constraint, is introduced
  in this chapter.
  The efficiency improvement is based on overlapping process execution and
- communication in order to minimize the idle time of the worker processes
- and thus improve the overall efficiency of the system.
+ communication.
+ This minimizes the idle time of the worker processes and thus improves
+ the overall efficiency of the system.
  To this end, the intermediate calculation results are saved into an external
  database (DB
 \begin_inset CommandInset nomenclature
@@ -147,7 +136,11 @@ description "Geographic Resources Analysis Support System."
 
 \end_inset
 
-) 
+)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Neteler_Open_source_GIS_a_GRASS_GIS_approach"
@@ -157,12 +150,11 @@ key "Neteler_Open_source_GIS_a_GRASS_GIS_approach"
 .
  An extended analysis of the experimental results is provided, which are
  based on real data from an LTE network currently deployed in Slovenia.
- Based on these results, which were performed on a computer cluster, the
- new technique exhibits better scalability than the traditional master-worker
- approach.
- Some real-world-sized data sets are presented, the radio-coverage predictions
- of which are calculated in a shorter time while saturating the hardware
- utilization.
+ Based on these experiments, which were performed on a computer cluster,
+ the new technique exhibits better scalability than the traditional master-worke
+r approach.
+ Some real-world data sets are presented, the coverage predictions of which
+ are calculated in a shorter time while saturating the hardware utilization.
 \end_layout
 
 \begin_layout Standard
@@ -184,7 +176,7 @@ reference "sec:04-Related_work"
 \end_inset
 
  gives an overview of the relevant publications, describing how they relate
- to our work.
+ to the presented work.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -201,8 +193,8 @@ reference "sec:04-Design_and_implementation"
 
 \end_inset
 
- concentrates on the design principles and implementation details of the
- radio-propagation tool, for the serial and parallel versions.
+ concentrates on the design and implementation of the radio-propagation
+ tool, for both the serial and parallel versions.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -211,74 +203,6 @@ reference "sec:04-Simulations"
 \end_inset
 
  discusses the experimental results and their analysis.
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace 3cm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
---- reciclar esta parte de texto en algun otro lado ---
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-There is a constant growing demand for hardware resources, longer-processing
- times and more memory to follow the evolution of 3G radio networks 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
-
-\end_inset
-
-.
- Fortunately, high-performance computer systems are increasingly accessible;
- something made possible because of the emergence of computer clusters and
- commodity hardware, capable of true parallel processing, e.g.
- multi-core CPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore"
-
-\end_inset
-
- and GPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wen2011gpu"
-
-\end_inset
-
-.
- Moreover, the highly parallel structure present on GPUs makes them more
- effective than CPUs for execution of algorithms where large blocks of data
- need to be processed in parallel.
- Commodity GPUs have evolved from being a graphic accelerator into a general-pur
-pose processor.
- They can achieve higher performance at lower power consumption and lower
- costs when compared to conventional CPUs.
- Additionally, the implementation of the framework will benefit from valuable
- advances in computer science and High Performance Computing (HPC), in order
- to perform faster and more reliable simulations 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore,wen2011gpu"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -305,11 +229,11 @@ key "Moore_Cramming_more_components_onto_integrated_circuits:1998"
  Instead, the number of cores within a single CPU is increasing.
  This situation poses a challenge for software development in general and
  research in particular: a hardware upgrade will, most of the time, fail
- to double the serial execution speed of its predecessor.
+ to double the serial-execution speed of its predecessor.
  However, since this commodity hardware is present in practically all modern
  desktop computers, it creates an opportunity for the parallel exploitation
- of these computing resources to enhance the performance of complex algorithms
- over large data sets.
+ of these computing resources in order to enhance the performance of complex
+ algorithms over large data sets.
  The challenge is thus to deliver the computing power of multi-core systems
  in order to tackle a computationally time-consuming problem, the completion
  of which is unfeasible using traditional serial approaches.
@@ -320,11 +244,15 @@ key "Moore_Cramming_more_components_onto_integrated_circuits:1998"
 
 \begin_layout Standard
 A traditional approach when dealing with computationally expensive problem
- solving is to simplify the models in order to be able to execute their
- calculations within a feasible amount of time.
+ solving is to simplify the models, thus reducing the time needed for their
+ calculation.
  Clearly, this method increases the introduced error level, which is not
- an option for a certain group of simulations, e.g., those dealing with disaster
- contingency planning and decision support 
+ an option for a certain group of simulations, e.g., those dealing with disaster-c
+ontingency planning and decision support
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_enabling_the_computability_of_dust_storm_forecasting:2012,Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012"
@@ -335,15 +263,16 @@ key "Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_en
  The conducted simulations during the planning phase of a radio network
  also belong to this group.
  Their results are the basis for the decision making prior to physically
- installing the base stations and antennas that will cover a certain geographica
-l area.
+ installing the BSs and antennas that will cover a certain geographical
+ area.
  A larger deviation of these results increases the probability of making
- the wrong decisions at the time of the installation, which may considerably
- increase the costs or even cause mobile-network operators to incur losses.
+ the wrong decisions at installation time, which may considerably increase
+ the costs or even cause mobile-network operators to incur losses.
 \end_layout
 
 \begin_layout Standard
-Various groups have successfully deployed high-performance computing (HPC
+Various researchers have successfully deployed high-performance computing
+ (HPC
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -353,7 +282,11 @@ description "High-perfomance computing."
 \end_inset
 
 ) systems and techniques to solve different problems dealing with spatial
- data 
+ data
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_enabling_the_computability_of_dust_storm_forecasting:2012,Li_Parallel_cellular_automata_for_large_scale_urban_simulation_using_load_balancing_techniques:2010,Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012,Osterman_CUDA_on_GRASS:2012,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013,Tabik_Simultaneous_computation_of_total_viewshed_on_large_high_resolution_grids:2012,Widener_Developing_a_parallel_computational_implementation_of_AMOEBA:2012"
@@ -361,13 +294,16 @@ key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Armstrong_
 \end_inset
 
 .
- This research has confirmed that a parallel paradigm such as master-worker,
+ Their work confirms that a parallel paradigm such as master-worker, and
  techniques like work pool (or task farming) and spatial-block partitioning
  are applicable when dealing with parallel implementations over large spatial
  data sets.
  However, it is well known that parallel programming and HPC often call
- for area experts in order to integrate these practices into a given environment
- 
+ for area experts in order to integrate them into a given environment
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Clematis_High_performance_computing_with_geographical_data:2003"
@@ -387,18 +323,23 @@ key "Clematis_High_performance_computing_with_geographical_data:2003"
 \end_layout
 
 \begin_layout Standard
-In the following, a high-performance radio-propagation prediction tool for
- GSM (2G), UMTS (3G) and LTE (4G) radio networks is presented.
+In the following, a high-performance, radio-propagation prediction tool
+ for GSM (2G), UMTS (3G) and LTE (4G) networks is presented.
  It can be used for planning the different phases of a new radio-network
  installation, as well as a support tool for maintenance activities related
  to network troubleshooting in general and optimization in particular.
  Specifically, automatic radio-coverage optimization requires the evaluation
  of millions of radio-propagation predictions in order to find a good solution
- set, which is unfeasible using other serial implementations of academic
- or commercial tools 
+ set.
+ This is often unfeasible using other serial implementations of academic
+ or commercial tools
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Ozimek_Open.source.radio.coverage.prediction:2010"
+key "Ozimek_Open.source.radio.coverage.prediction:2010,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011"
 
 \end_inset
 
@@ -407,7 +348,11 @@ key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_c
 
 \begin_layout Standard
 As a reference implementation, the publicly available radio-coverage prediction
- tool, presented in 
+ tool, presented in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ozimek_Open.source.radio.coverage.prediction:2010"
@@ -423,7 +368,10 @@ key "Ozimek_Open.source.radio.coverage.prediction:2010"
  the target area, in which each point represents the received signal from
  the best-serving transmitter (or cell).
  This work implements some well-known radio-propagation models, e.g., Okumura-Hata
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980"
@@ -437,22 +385,27 @@ key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
+reference "sub:04-Radio_propagation_model"
 
 \end_inset
 
 .
- Regarding the accuracy of the predicted values, the authors 
+ Regarding the accuracy of the predicted values, the authors reported comparable
+ results to those of an industrial tool
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ozimek_Open.source.radio.coverage.prediction:2010"
 
 \end_inset
 
- report comparable results to those of an industrial tool.
+.
  To ensure that the presented implementation is completely compliant with
- the previously mentioned reference, a comparison test that consists of
- running both tools with the same set of input parameters was designed.
+ this reference, a comparison test was designed, that consists of running
+ both tools with the same set of input parameters.
  The test results from PRATO and the reference implementation were identical
  in all the tested cases.
 \end_layout
@@ -533,28 +486,36 @@ name "sec:04-Related_work"
 \begin_layout Standard
 The task-parallelization problem within the GRASS environment has been addressed
  by several authors in a variety of studies.
- For example, in 
+ For example, in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Campos_Parallel_modelling_in_GIS:2012"
 
 \end_inset
 
-, the authors present a collection of GRASS modules for a watershed analysis.
+, the authors presented a collection of GRASS modules for a watershed analysis.
  Their work concentrates on different ways of slicing raster maps to take
  advantage of a Message Passing Interface (MPI) implementation.
 \end_layout
 
 \begin_layout Standard
-In the field of HPC, the authors of 
+In the field of HPC, the authors of
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007"
 
 \end_inset
 
- presented implementation examples of a GRASS raster module, used to process
- vegetation indexes for satellite images, for MPI and Ninf-G environments.
+ presented MPI and Ninf-G implementation examples of a GRASS raster module,
+ that processes vegetation indexes from satellite images.
  The authors acknowledge a limitation in the performance of their MPI implementa
 tion for big processing jobs.
  The restriction appears due to the computing nodes being fixed to a specific
@@ -564,7 +525,11 @@ s.
 \end_layout
 
 \begin_layout Standard
-Using a master-worker technique, the work 
+Using a master-worker technique, the work presented in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
@@ -578,35 +543,39 @@ struct
  and MPI data types, thus not requiring the GRASS in the worker nodes.
  The data are evenly distributed by row among the workers, with each one
  receiving an exclusive column extent to work on.
- The test cluster contains heterogeneous hardware configurations.
- The authors note that data-set size is bounded by the amount of memory
+ Their test cluster contained heterogeneous hardware configurations.
+ The authors noted that data-set size is bounded by the amount of memory
  on each of the nodes, since they allocate the memory for the whole map
  as part of the set-up stage, before starting the calculation.
- Regarding the data sets during the simulations, the largest one contains
+ Regarding the data sets during the simulations, the largest one contained
  3,265,110 points.
- They conclude that the data-set size should be large enough for the communicati
-on overhead to be hidden by the calculation time, so that the parallelization
+ They concluded that the data-set size should be large enough for the communicat
+ion overhead to be hidden by the calculation time, so that the parallelization
  pays off.
 \end_layout
 
 \begin_layout Standard
-In 
+In
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011"
 
 \end_inset
 
-, the authors employ a master-worker approach, using one worker process
+, the authors employed a master-worker approach, using one worker process
  per worker node.
  The complete exploitation of the computing resources of a single computing
  node is achieved with OpenMP.
- The experimental environment features one host.
+ The experimental environment featured one host.
  The horizon-composition algorithm presents no calculation dependency among
  the spatial blocks.
- Consequently, the digital elevation model (DEM) may be divided into separate
+ Consequently, the digital elevation model (DEM) was divided into separate
  blocks to be independently calculated by each worker process.
- The authors present an improved algorithm that can also be used to accelerate
+ The authors presented an improved algorithm that can also be used to accelerate
  other applications like visibility maps.
  The tasks are dynamically assigned to idle processes using a task-farming
  paradigm over the MPI.
@@ -614,32 +583,51 @@ key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_
 \end_layout
 
 \begin_layout Standard
-Similarly, in 
+Similar to
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011"
+
+\end_inset
+
+, in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
 
 \end_inset
 
- there is no calculation dependency among the spatial blocks.
- The experimental evaluation is made over multiple cores of one CPU and
- a GPU, and a master-worker setup is used for process communication.
+ there was no calculation dependency among the spatial blocks.
+ The experimental evaluation was made over multiple cores of one CPU and
+ a GPU, and a master-worker setup was used for process communication.
 \end_layout
 
 \begin_layout Standard
-In 
+In
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012"
 
 \end_inset
 
-, the authors present a parallel framework for GIS integration.
- Based on the principle of spatial dependency, they lower the calculation-proces
-sing time using a knowledge database, delivering the heavy calculation load
- to the parallel back-end if a specific problem instance is not found in
- the database.
- There is an additional effort to achieve the presented goals, since the
+, the authors presented a parallel framework for GIS integration.
+ Based on the principle of spatial dependency, they lowered the calculation-proc
+essing time using a knowledge database, delivering the heavy calculation
+ load to the parallel back-end if a specific problem instance is not found
+ in the database.
+ There was an additional effort to achieve the presented goals, since the
  implementation of a fully functional GIS (or 
 \begin_inset Quotes eld
 \end_inset
@@ -648,13 +636,17 @@ thick GIS
 \begin_inset Quotes erd
 \end_inset
 
- as the authors call it) is required on both the desktop client and in the
- parallel environment.
+ as the authors call it) was required on both the desktop client and in
+ the parallel environment.
 \end_layout
 
 \begin_layout Standard
-An agent-based approach for simulating spatial interactions is presented
- in 
+An agent-based approach for simulating spatial interactions was presented
+ in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Gong_Parallel_agent_based_simulation_of_individual_level_spatial_interactions_within_a_multicore_computing_environment:2012"
@@ -662,8 +654,8 @@ key "Gong_Parallel_agent_based_simulation_of_individual_level_spatial_interactio
 \end_inset
 
 .
- The presented technique decomposes the entire landscape into equally-sized
- regions, i.e., a spatial-block division as in 
+ This technique decomposes the entire landscape into equally-sized regions,
+ i.e., a spatial-block division as in 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011"
@@ -671,13 +663,18 @@ key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_
 \end_inset
 
 , which are in turn processed by a different core of a multi-core CPU.
- This work uses multi-core CPUs instead of a computing cluster.
+ This work used multi-core CPUs instead of a computing cluster.
 \end_layout
 
 \begin_layout Standard
-Some years ago, grid computing received the attention of the research community
- as a way of accessing the extra computational power needed for the spatial
- analysis of large data sets 
+Some years ago, grid computing received a lot of attention from the research
+ community.
+ It appeared to be a good alternative for accessing the extra computational
+ power needed for the spatial analysis of large data sets
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005,Vouk_Cloud_computing_issues_research_and_implementations:2008,Wang_A_cybergis_framework_for_the_synthesis_of_cyberinfrastructure_GIS_and_spatial_analysis:2010"
@@ -689,7 +686,11 @@ key "Armstrong_Using_a_computational_grid_for_geographic_information_analysis:20
  widely used.
  In particular, its adoption requires not only hardware and software compromises
  with respect to the involved parts, but also a behavioral change at the
- human level 
+ human level
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005"
@@ -715,8 +716,12 @@ Background
 \end_layout
 
 \begin_layout Standard
-Radio communications in a mobile network take place between a fixed transmitter
- or base station and a number of mobile receivers.
+As it was mentioned in Chapter
+\begin_inset space ~
+\end_inset
+
+???, radio communications in a mobile network take place between a BS (or
+ fixed transmitter) and a number of UEs (or mobile receivers).
  The effects of signal propagation limit the performance of a mobile-radio
  system.
  For this reason, the characterization and modeling of radio propagation
@@ -732,8 +737,8 @@ key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012"
  is necessary to accurately predict the system performance and to provide
  a mechanism to analyze the effects caused by signal propagation 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Ericsson-Long_term_evolution_an_introduction:2007"
+LatexCommand cite
+key "Parsons-The_mobile_radio_propagation_channel:2000"
 
 \end_inset
 
@@ -795,7 +800,7 @@ reference "sub:04-Computational_complexity"
 Radio-propagation model 
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:04-Radio_propagation_modeling"
+name "sub:04-Radio_propagation_model"
 
 \end_inset
 
@@ -1794,7 +1799,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Pseudo code of the radio-coverage prediction algorithm.
+Pseudo-code of the radio-coverage prediction algorithm.
  The time complexity is given per line.
 \begin_inset CommandInset label
 LatexCommand label
@@ -2284,7 +2289,7 @@ double
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:04-Memory_organization_spatial_data"
+reference "fig:04-Spatial_data_location_mapping"
 
 \end_inset
 
@@ -2334,10 +2339,12 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Memory organization of the input-spatial data.
+Example of a geographical-location mapping of the input-spatial data into
+ a 2D matrix, the lower-left corner of which indicates the nearest point
+ to the origin of the map-projection system.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:04-Memory_organization_spatial_data"
+name "fig:04-Spatial_data_location_mapping"
 
 \end_inset
 
@@ -3315,106 +3322,41 @@ name "sub:04-GPU_worker_implementation"
 PRATO provides multi-GPU support for performance improvement on the computing
  nodes hosting the worker processes.
  The algorithmic adaptation from a CPU to a GPU is not a trivial task.
- This section focuses on the main modifications of the radio-propagation
- algorithm to work on GPU hardware.
+ This section focuses on the main modifications made to the radio-propagation
+ algorithm in order to work on GPU hardware.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
----- a diagram of the different types of memory on a GPU ----
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../06-experimental_evaluation-service_coverage/img/pathloss_matrices.eps
-	lyxscale 70
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Memory system of a modern GPU, including random-access times in milliseconds.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:04-GPU_memory_organization"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-GPUs have a totally different memory system (see Figure
+It is well known that the bandwidth of the PCI Express bus can cause a throughpu
+t bottleneck when a significant amount of data is transferred between a
+ CPU and a GPU in a heterogeneous system
 \begin_inset space ~
 \end_inset
 
 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:04-GPU_memory_organization"
-
-\end_inset
-
-) and many times more processor cores than CPUs.
- Specifically, the actual throughput an application can achieve depends
- on issues related to the access to memory, in particular the high-latency
- accesses to global memory from the GPU chip, and the use of shared memory
- in the streaming multiprocessors to mitigate the high-latency effects 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Cruz-How_to_obtain_efficient_GPU_kernels:2011"
+key "Gregg-Where_is_the_data:2011"
 
 \end_inset
 
 .
- For this reason, it is imperative to have as much data as allocated on
- the GPU itself.
+ Some researchers acknowledge that unless a full working set of data can
+ fit into the memory on a GPU, the PCI Express will become the bottleneck
+ of the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Owens-GPU_computing:2008,Schaa-Exploring_the_multiple_GPU_design_space:2009"
+
+\end_inset
+
+.
+ For this reason, it is imperative to have as much data as possible allocated
+ on the GPU itself.
 \end_layout
 
 \begin_layout Standard
@@ -3438,7 +3380,7 @@ reference "sub:04-Design_of_the_parallel_version"
 \emph on
 unsigned char
 \emph default
-, since they express signal loss (in dB) due to land usage.
+, since they express signal loss in dB.
  It follows that for the radio-propagation prediction of one transmitter,
  the following matrices should be allocated on the GPU:
 \end_layout
@@ -3475,7 +3417,22 @@ The dimension of all matrices is based on the transmission radius, within
  The contents of the DEM and clutter matrices is constant throughout the
  calculation process.
  For this reason they were saved into read-only texture memory to take advantage
- of the faster access time.
+ of the faster access time (see Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Principles_of_GPU_programming"
+
+\end_inset
+
+, Section
+\begin_inset space ~
+\end_inset
+
+???).
  Regarding the resulting path-loss matrix, each step of the radio-prediction
  algorithm is applied over the results of the previous step (see Figure
 \begin_inset space ~
@@ -3488,8 +3445,8 @@ reference "fig:04-Flow_diagram_serial_version"
 
 \end_inset
 
- for a flow diagram of the steps involved), thus avoiding the allocation
- of extra memory or a data-transfer from/to the CPU.
+ for a flow diagram of the steps involved), thus avoiding extra allocation
+ on global memory or a data-transfer from/to the CPU.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3779,7 +3736,7 @@ The parallel performance of PRATO was tested with real radio networks of
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:04-Radio_propagation_modeling"
+reference "sub:04-Radio_propagation_model"
 
 \end_inset
 

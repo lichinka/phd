@@ -1386,6 +1386,27 @@ n value than the
 \end_layout
 
 \begin_layout Standard
+The four parameters to control the search process of DE are: the population
+ size (
+\begin_inset Formula $NP$
+\end_inset
+
+), the number of generations for the algorithm to run (
+\begin_inset Formula $G_{max}$
+\end_inset
+
+), the crossover constant (
+\begin_inset Formula $CR$
+\end_inset
+
+), and the mutation scaling factor (
+\begin_inset Formula $F$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
 An extensive description of DE and its variants may be found in
 \begin_inset space ~
 \end_inset
@@ -1569,9 +1590,31 @@ At the end of every iteration, and after all the ants have created solutions,
 
 \begin_layout Standard
 There are six parameters that control the way DASA explores the search space:
- the number of ants, the discrete base, the pheromone dispersion factor,
- the global scale-increasing factor, the global scale-decreasing factor,
- and the maximum parameter precision.
+ the number of ants (
+\begin_inset Formula $m$
+\end_inset
+
+), the discrete base (
+\begin_inset Formula $b$
+\end_inset
+
+), the pheromone dispersion factor (
+\begin_inset Formula $q$
+\end_inset
+
+), the global scale-increasing factor (
+\begin_inset Formula $s_{+}$
+\end_inset
+
+), the global scale-decreasing factor (
+\begin_inset Formula $s_{-}$
+\end_inset
+
+), and the maximum parameter precision (
+\begin_inset Formula $e$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -1930,6 +1973,21 @@ end{algorithmic}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+SA has two parameters to control the search process: the initial temperature
+ (
+\begin_inset Formula $t_{initial}$
+\end_inset
+
+) and the total number of iterations or evaluations (
+\begin_inset Formula $it$
+\end_inset
+
+).
+ SA also allows to define the way the temperature is lowered during the
+ annealing process.
 \end_layout
 
 \begin_layout Standard
@@ -2894,6 +2952,10 @@ name "sub:02-Pilot-signal-and-power"
 \end_layout
 
 \begin_layout Standard
+<Not yet finished ...???>
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -2901,12 +2963,11 @@ status open
 Explicar que es esto y como funciona en el resto de la tesis
 \end_layout
 
-\end_inset
-
-
+\begin_layout Plain Layout
+----
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The CPICH transmit power is typically between 5% to 10% of the total downlink
  transmit power of the base station 
 \begin_inset CommandInset citation
@@ -2918,7 +2979,7 @@ key "RadioNetworkPlanningAndOptimisationForUMTS"
 , but there is no standardized method to ﬁnd a CPICH power setting.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The CPICH transmits in the downlink of a UMTS cell system.
  The transmit power is usually between 5% and 10% of the total power available
  at the base station 
@@ -2935,7 +2996,7 @@ key "Holma_WCDMA.for.UMTS:2005"
  which consequently modifies the service area of the network.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The CPICH transmit power is common to many different planning and optimization
  problems in UMTS networks 
 \begin_inset CommandInset citation
@@ -2945,6 +3006,11 @@ key "Nawrocki_Understanding:2006"
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -4368,7 +4434,14 @@ In the following, the focus on the CUDA architecture.
 \end_layout
 
 \begin_layout Section
-CUDA
+CUDA 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:02-CUDA"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4981,71 +5054,6 @@ key "Farber-CUDA_application_design_and_development:2011"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
->>> reciclar esta parte de texto en algun otro lado
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-There is a constant growing demand for hardware resources, longer-processing
- times and more memory to follow the evolution of 3G radio networks 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
-
-\end_inset
-
-.
- Fortunately, high-performance computer systems are increasingly accessible;
- something made possible because of the emergence of computer clusters and
- commodity hardware, capable of true parallel processing, e.g.
- multi-core CPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore"
-
-\end_inset
-
- and GPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wen2011gpu"
-
-\end_inset
-
-.
- Moreover, the highly parallel structure present on GPUs makes them more
- effective than CPUs for execution of algorithms where large blocks of data
- need to be processed in parallel.
- Commodity GPUs have evolved from being a graphic accelerator into a general-pur
-pose processor.
- They can achieve higher performance at lower power consumption and lower
- costs when compared to conventional CPUs.
- Additionally, the implementation of the framework will benefit from valuable
- advances in computer science and High Performance Computing (HPC), in order
- to perform faster and more reliable simulations 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore,wen2011gpu"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-<<<
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
