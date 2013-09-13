@@ -1,556 +1,356 @@
 
-\chapter{Framework automatic tuning \label{chap:Framework-parameter-tuning}}
+\chapter{Framework automated tuning \label{chap:05-Framework_parameter_tuning}}
 
 % First paragraph has no indentation.
 
-The assessment of the radio coverage is essential for network planning
-and optimization. Consequently, the planning tools used to gather
-this information play a key role in the decisions made during the
-planning phase of a radio network. But acquiring the necessary information
-to support the decision making in this context is a challenging task.
-Particularly, planning tools have to be adapted for a specific environment
-and technology in order to improve their accuracy. The complexity
-of this problem means that radio-coverage prediction is generally
-a computationally-intensive and time-consuming task, hence the importance
-of fast and accurate prediction tools.
+\noindent The models and algorithms from Chapter~\ref{chap:04-Framework-design-and-implementation}
+constitute the basis for the radio-coverage framework used throughout
+this thesis. Until here, the framework has been studied in the context
+of optimization-problem solving for radio networks. In this chapter,
+the focus is shifted towards radio-network planning activities, and
+how the framework can aid a network-planning engineer in his or her
+everyday tasks. The objective is to facilitate refined network planning,
+the complexity of which is generally beyond the scope of any manual
+approach.
 
-Within this context, we present an open-source simulation framework
-for planning and optimization of radio networks. We provide two use
-cases for the newly deployed LTE network in Slovenia. The first one
-involves the parameter tuning of an empirical radio-propagation model
-using a snapshot of field measurements. The other one involves the
-optimization of clutter losses over different regions of the country,
-therefore adapting the losses due to land usage to the local conditions
-of each region.
+A central part of a radio-planning tool is its radio-propagation model.
+Generally speaking, the signal-propagation predictions will be as
+good as the input data used for their estimation. Moreover, acquiring
+and constantly upgrading the necessary data to support the decision
+making in this context is an expensive and challenging task. In practical
+situations, an emitted signal propagates by interacting with the surrounding
+environments. Consequently, the ability of a propagation model to
+adapt to the environment where it is used improves the accuracy of
+the calculated signal-propagation predictions.
 
-We report the results of our experimental simulations over three regions
-of the real LTE network, deployed by Telekom Slovenije, d.d., thus
-showing the suitability of the parallel framework for tackling real-world
-planning and optimization problems.
+In this context, this chapter presents two automated-tuning capabilities
+for PRATO. The first one involves the parameter tuning of the empirical
+radio-propagation model using a snapshot of field measurements. The
+second one involves the optimization of clutter losses over different
+regions of the country, therefore adapting the loss factors to the
+local conditions of each region. The results of the experimental simulations,
+performed over three regions of the real LTE network deployed by Telekom
+Slovenije, d.d., show the suitability of the presented methods to
+improve the accuracy of the calculated radio-propagation predictions.
+
+To the best of the author's knowledge, there is no reference in the
+literature of an optimization-based approach to automatically adapt
+the signal losses due to clutter. The content of this chapter extends
+the research work published by the author in~\cite{Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013}. 
+
+The rest of this chapter is organized as follows. Section~\ref{sec:05-Motivation}
+describes the benefits of the presented approach from the radio-planning
+point of view. After giving an overview of relevant publications in
+Section~\ref{sec:05-Related_work}, the parameter-tuning problem
+and the analytical approach for solving it are presented in Section~\ref{sec:05-Parameter_tuning_radio-propagation_model},
+including the experimental simulations and their results. Section~\ref{sec:05-Clutter_optimization}
+concentrates on the description of the optimization problem involving
+the regional adaptation of signal losses due to clutter, including
+an extensive analysis of the performed simulations on three test networks.
 
 
-\section{Introduction}
+\section{Motivation \label{sec:05-Motivation}}
 
-With the advent of long-term evolution (LTE) as the fourth generation
-(4G) in cellular technology, mobile operators are facing the challenges
-of deploying a new network. LTE follows the well established universal
-mobile telecommunication system/high-speed packet access (UMTS/HSPA)
-combo, targeting higher peak data rates, higher spectral efficiency
-and lower latency \cite{Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010}. 
+With the advent of LTE as part of the 4G in cellular technology, mobile
+operators are facing the challenges of deploying a new network. LTE
+follows the well established UMTS/HSPA combo, targeting higher peak
+data rates, higher spectral efficiency and lower latency \cite{Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010}. 
 
-The deployment of a new mobile network is always a challenge for mobile
+The deployment of a new radio network is always a challenge for mobile
 operators, who constantly struggle to find the optimal investment
 in order to provide a competitive network in terms of coverage and
-quality of service. Indeed, coverage planning remains a key problem
-that all operators have to deal with. It has proven to be a fundamental
-issue since the deployment of the first GSM networks, more than 20
-year ago.
-
-One of the primary objectives of radio-coverage planning is to efficiently
-use the allocated frequency band for a geographic area to be satisfactorily
-reached with the radio stations of the network. To this end, radio-coverage
-prediction tools are of great importance as they allow network engineers
-to test different configurations before physically implementing the
-changes. However, to accurately predict the radio coverage of a mobile
-network is a very complex task, mainly due to the wide range of various
-combinations of hardware and configuration parameters which have to
-be analyzed in the context of different environments. The complexity
-of the problem means that radio-coverage prediction is generally a
-computationally-intensive and time-consuming task, hence the importance
-of fast and accurate prediction tools.
+QoS. Indeed, coverage planning remains a key problem that all operators
+have to deal with.
 
 Although different mathematical models have been proposed for radio-propagation
 modeling, none of them excels in a network-wide scenario \cite{Shabbir_Comparison_of_radio_propagation_models:2011}.
 Empirical propagation models usually give good results with a limited
 computational effort. However, for improved accuracy, the model parameters
-have to be adapted to better fit a specific network or region within
-it, mainly because of inaccuracies in input data and environmental
-changes in the network region, e.g. foliage of trees or snow. Consequently,
-a combination of different parameters is generally needed in order
-to reliably calculate radio-propagation predictions for particular
-environments. Moreover, since the number of deployed cells (transmitters)
-keeps growing with the adoption of modern standards \cite{Saleh_On_the_coveraga_extension_in_LTE_networks:2010},
-there is a clear need for a radio propagation tool that is able to
-cope with larger work loads in a feasible amount of time.
+have to conform to a specific network or region within it, mainly
+because of the inaccuracies in input data and the environmental changes
+in the region, e.g., foliage of trees or snow. Consequently, a combination
+of different parameters is generally needed in order to reliably calculate
+radio-propagation predictions of lar networks that cover different
+environments.
 
-To address the afore-mentioned issues, we adapt the parameters of
-an empirical propagation model to a set of field measurements. The
-parameter tuning is analytically calculated per cell, in order to
-increase the accuracy of the calculated predictions. Moreover, we
-fine tune the signal losses due to land usage (clutter) in a regional
-basis, using an optimization approach. As a working framework to tackle
-the presented problems, we use a parallel radio-prediction tool \cite{Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013},
-thus showing the suitability of the presented framework for real-world
-planning and optimization of LTE radio networks. Particularly, we
-show the tool capabilities to handle several parallel radio-prediction
-runs using a metaheuristic algorithm and distributed objective-function
-evaluation, while resolving the clutter optimization problem.
+To address the afore-mentioned issues, the parameters of an empirical
+propagation model are adapted based on a set of field measurements.
+The parameter tuning is analytically calculated per cell, in order
+to increase the accuracy of the calculated predictions. Moreover,
+by applying an optimization approach, the signal losses due to clutter
+are automatically adjusted in a regional basis.
 
-This paper is organized as follows. Section \ref{sec:Simulation-framework}
-gives a description of the parallel simulation framework, including
-some implementation details and performance figures. Section \ref{sec:Radio-propagation-prediction}
-introduces principles of radio-propagation prediction, and the mathematical
-model used. The parameter-tuning problem and the analytical approach
-for tackling it are presented in Section \ref{sec:Parameter-tuning},
-including the simulations performed on the framework and their results.
-Section \ref{sec:Clutter-optimization} concentrates on describing
-the optimization problem involving the regional adaptation of signal
-losses due to clutter, including the performed simulations the achieved
-results. Finally, Section \ref{sec:Related-work} gives an overview
-of relevant publications, describing how they relate to our work,
-before drawing some conclusions.
+As a simulation framework to evaluate the presented problems, PRATO,
+the parallel radio-prediction tool presented in Chapter~\ref{chap:04-Framework-design-and-implementation},
+is used. Therefore, the suitability of the framework for network planning
+and optimization of LTE radio networks is also validated. Specifically,
+the tool should be capable of handling a large number of radio-propagation
+predictions using a metaheuristic algorithm, and a distributed objective-function
+evaluation.
 
 
-\section{Simulation framework}\label{sec:Simulation-framework}
+\section{Related work \label{sec:05-Related_work}}
 
-As if was mentioned before, we use the parallel radio-prediction tool
-PRATO \cite{Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013}
-as our simulation and optimization framework. PRATO deals with complex
-calculations over large data sets by applying a work-pool parallel
-paradigm over a message-passing communication model. As such, PRATO
-is ready to be deployed over small groups of networked computers as
-well as over a computer cluster with hundreds of nodes. Since the
-prediction calculation employs digital elevation models and land-usage
-data in order to analyze the radio coverage of a geographic area,
-the framework is implemented as a module of the open source Geographic
-Resources Analysis Support System (GRASS) \cite{Neteler_Open_source_GIS_a_GRASS_GIS_approach}.
+Following an optimization-oriented approach, the authors of \cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004}
+study the effects on location accuracy while performing semi-automated
+optimization of the parameters of a radio-propagation model. While
+their optimization component improves the accuracy of the radio predictions,
+it does so requiring human intervention, hence the term semi-automated
+optimization. In terms of the effects of location accuracy, they conclude
+that locations with a median accuracy of around 60~m may be used
+for parameter tuning. Also, they notice that although the model accuracy
+improved after the parameter tuning, it gives inadequate results when
+used for predicting radio propagation over distant areas.
 
-
-\subsection{Parallel computation on computer clusters}
-
-Considering the high computational power needed for evaluating the
-radio coverage of real mobile networks during optimization, the use
-of a computer cluster is preferred. A computer cluster is a group
-of interconnected computers that work together as a single system.
-To reach high levels of parallel performance and scalability, PRATO
-performs the parallel decomposition big data sets, distributing the
-computational load among the computing nodes that belong to the cluster.
-
-Computer clusters typically consist of several commodity PCs connected
-through a high-speed local network with a distributed file system,
-like NFS \cite{Shepler_Network_file_system:2003}. One such system
-is the DEGIMA cluster \cite{Hamada_Cluster_of_GPUs:2010} at the Nagasaki
-Advanced Computing Center (NACC) of the Nagasaki University in Japan.
-This system ranked in the TOP 500 list of supercomputers until June
-2012%
-\footnote{http://www.top500.org%
-}, and in June 2011 held the third place of the Green 500 list%
-\footnote{http://www.green500.org%
-} as one of the most energy-efficient supercomputers in the world.
+<More related work...???>
 
 
-\subsection{Multi-paradigm parallel programming}
+\section{Parameter tuning of the radio-propagation model \label{sec:05-Parameter_tuning_radio-propagation_model}}
 
-The implementation methodology adopted for PRATO follows a multi-paradigm
-parallel programming approach in order to fully exploit the resources
-of each of the nodes in a computing cluster. To effectively use a
-shared memory multi-processor, PRATO uses POSIX threads to implement
-parallelism \cite{Butenhof_Programming.with.POSIX.threads:1997}.
-By using POSIX threads, multiple threads can exist within the same
-process while sharing its resources. For instance, an application
-using POSIX threads can execute multiple threads in parallel by using
-the cores of a multi-core processor, or use the system resources more
-effectively, thus avoiding process execution-halt due to I/O latency
-by using one thread for computing, while a second thread waits for
-an I/O operation to complete. 
+The effectiveness of the decision-making process during radio-network
+planning is tightly coupled with the precision achieved by the propagation
+model used. In order to obtain a radio-propagation model that most
+accurately reflects the propagation characteristics of the area covered
+by each radio cell in the network, the parameters of the mathematical
+model are adapted to the target environment into which it is to be
+used. Current state-of-the-art methods for such parameter tuning depend
+on existing field-measurement data \cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008},
+which are collected in advance for the area covered by the target
+network. Starting from an a-priori best-known set of parameters, empirically
+calculated by the radio engineers, this approach adapts the model
+parameters so that the deviation of the radio-propagation prediction
+to a given set of field measurements is minimized.
 
-To use the computing resources of a distributed memory system, such
-as a cluster of processors, PRATO uses the Message Passing Interface
-(MPI) \cite{Gropp_Using_MPI:1999}. MPI is a message-passing standard,
-which defines syntax and semantics designed to function on a wide
-variety of parallel computers. MPI enables multiple processes running
-on different processors of a computer cluster to communicate with
-each other. It was designed for high performance on both massively
-parallel machines and on workstation clusters. Its development is
-supported by a broadly-based committee of vendors, developers, and
-users.
+To calculate the radio-propagation predictions, the empirical model,
+previously introduced in Section~\ref{sub:04-Radio_propagation_model},
+Chapter~\ref{chap:04-Framework-design-and-implementation}, is used.
+Recall that the model contains a vector of adaptable parameters, $\beta$.
+For this reason, this mathematical model is especially appropriate
+for tuning, since it can be adapted to a given scenario and its local
+conditions by adjusting the values of the vector $\beta=(a_{0},a_{1},a_{2},a_{3})$,
+the elements of which represent:
+\begin{description}
+\item [{$a_{0}$}] the reference loss or offset,
+\item [{$a_{1}$}] the loss slope due to distance of the receiver from
+the transmitter,
+\item [{$a_{2}$}] the loss slope due to height of the transmitter antenna,
+\item [{$a_{3}$}] the loss slope due to the combined effect of the distance
+and height of the antenna.
+\end{description}
+The parameter tuning is performed per cell to improve the local fitting
+of the radio predictions, being its resulting solution a vector $\beta_{c}$
+for a target cell $c$, $c\in C$.
 
-
-\subsection{Master-worker model}
-
-PRATO follows a master-worker paradigm \cite{Mattson_Patterns_for_parallel_programming:2004},
-where the main process, i.e. the master, produces many sub-problems,
-which are delivered to be executed by the worker processes. These
-sub problems are, in this case, the radio-coverage prediction for
-individual cells of the radio network under optimization.
-
-The master process is the only component that should be run from within
-the GRASS environment. It is responsible for dynamically starting
-the worker processes using the available computing nodes, based on
-the amount of network cells for which the coverage prediction should
-be calculated. For distributing the work among the worker processes,
-the master process dispatches the loaded geographic data, before dispatching
-them to the multiple worker processes. In this case, the decomposition
-of the data applies to the digital-elevation and the clutter data
-only, but it could be applied to any point-based data set, vector
-or raster. In the next step, the master process starts a message-driven
-processing loop, which main task is to evaluate the radio-coverage
-prediction of different transmitters among idle worker processes.
-
-The worker processes, on the other hand, are completely independent
-from GRASS, i.e. they do not have to run within the GRASS environment
-nor use any of the GRASS libraries to work. This aspect significantly
-simplifies the deployment phase to run PRATO on a computer cluster,
-since no GRASS installation is needed on the computing nodes hosting
-the worker processes. During the result-saving phase, each of the
-worker processes sends its results independently from each other,
-following an asynchronous and decoupled design. Moreover, worker processes
-do this from an independent thread, which runs concurrently with the
-radio-prediction evaluation of the next transmitter received from
-the master process. The overlap between calculation and communication
-achieved by the use of an auxiliary thread completely hides the latency
-created by the result-dumping task, and makes better use of the system
-resources.
-
-
-\subsection{Performance}
-
-From the performance point of view, PRATO is capable of reaching levels
-of high efficiency, as the following measurements show. 
-
-Figure \ref{fig:weak_scalability_time-1} shows the time measurements
-of a weak-scalability experiment. To measure the weak-scalability
-properties of PRATO means analyzing the scalability of the parallel
-implementation in cases where the workload assigned to each MPI process
-(one process per processor core) remains constant as the number of
-processor cores, and thus the total size of the problem, is increased.
-
-\begin{figure}
-\centering
-
-\includegraphics[width=1\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/weak_scaling-time_plot}
-
-\caption{\textit{\emph{Measured wall-clock time for weak-scalability experiments.}}\textit{
-}\textit{\emph{Experiments performed assigned one MPI worker process
-per available core. The wall-clock time axis is expressed in base-10
-logarithmic scale, whereas the axis representing the number of cores
-is expressed in base-2 logarithmic scale.\label{fig:weak_scalability_time-1}}}}
-\end{figure}
-
-
-The time measurements observed from the weak-scalability results show
-that the wall-clock times are almost constant for bigger problem instances,
-revealing that the achieved level of scalability gets close-to-linear
-as the amount of transmitters-per-core increases. Specifically, PRATO
-scales especially well when challenged with a big number of cells
-or transmitters (10,240 for the biggest instance) over 128 cores.
-
-Another aspect is the strong-scalability capabilities of PRATO, which
-represents the performance when increasing the number of computing
-cores for a given problem size, i.e. the number of cells deployed
-over the target area does not change, while only the number of cores
-used is increased. Figure \ref{fig:strong_scalability_speedup-1}
-shows the speedup factors achieved for a set of strong-scaling experiments.
-We may see that a close-to-linear scaling is achieved, especially
-for the biggest problem sizes. Linear scaling occurs when the obtained
-speedup is equal to the total number of processors used. However,
-it should be noted that perfect speedup is almost never achieved,
-due to the existence of serial stages within an algorithm and communication
-overheads of the parallel implementation. 
-
-\begin{figure}
-\centering
-
-\includegraphics[width=1\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/strong_scaling-speedup_plot}
-
-\caption{\textit{\emph{Measured speedup for strong-scalability experiments.}}\textit{
-}\textit{\emph{The speedup axis is expressed in base-2 logarithmic
-scale, whereas the axis representing the number of cores is expressed
-in base-2 logarithmic scale.\label{fig:strong_scalability_speedup-1}}}}
-\end{figure}
-
-
-For more detailed information about PRATO, its design and capabilities,
-we refer the reader to \cite{Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013}.
-
-
-\section{Radio-propagation prediction}\label{sec:Radio-propagation-prediction}
-
-The objective here is to improve the quality performance of a given
-mathematical model, used for radio-propagation calculations, by fine-tuning
-its configurable parameters as per-cell basis. In order to do this,
-we apply a state-of-the-art analytical approach, based on least squares
-method \cite{Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008},
-thus combining field measurements to fit the parameters of the mathematical
-model.
-
-The idea is to automatically adapt the parameters of the mathematical
-model for each of the cells targeted by the optimization. That is,
-starting from an a-priori best-known set of parameters, empirically
-calculated by the radio engineers at Telekom Slovenije, d.d., this
-approach adapts the model parameters so that the deviation of the
-radio-propagation prediction to a given set of field measurements
-is minimized.
-
-To calculate the radio-coverage predictions we use a mathematical
-model based on the well-known empirical Okumura-Hata formula \cite{Hata-Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980}.
-Other more accurate methods exist, like the ones based on ray tracing
-\cite{Corre_Three_dimensional_urban_EM_wave_propagation_model_for_radio_network_planning_and_optimization_over_large_areas:2009,Vilhar-Efficient_open_source_ray_tracing_methods_for_rural_environment:efficient}.
-However, these methods are more sensible to deviations in input data,
-like digital elevation models and buildings, and are still inefficient
-in terms of the computational effort required to achieve satisfying
-results.
-
-Empirical methods for radio-propagation predictions, on the other
-hand, give acceptable results within a feasible amount of time. For
-this reason, they have become the industry standard for non-deterministic
-propagation-loss calculations \cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Cichon_Propagation.prediction.models:1995,Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011,Hata-Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980,Ozimek_Open.source.radio.coverage.prediction:2010}.
-
-
-\subsection{Radio-prediction model\label{sub:Radio-prediction-model}}
-
-The Okumura-Hata model has been largely studied and shown to be suitable
-for predicting radio propagation of LTE networks \cite{Ahmad:Studying_different_propagation_models_for_LTE_system:2012}.
-Moreover, this mathematical model is especially appropriate for tuning,
-as it contains a number of adjustable parameters, which adapt the
-model according to a given scenario and its local conditions. In its
-primary form, the model distinguishes the distance of receiver from
-the transmitter, the frequency used and the effective antenna height,
-i.e. the antenna height above the receiver's level, in order to calculate
-the path loss in line-of-sight (LOS) conditions. However, the for
-distinguishing non-line-of-sight (NLOS) conditions, the terrain profile
-and Earth shape are added to the original formula. Moreover, empirical
-corrections due to different land usage are also included to improve
-the quality of the calculated predictions. Equation (\ref{eq:eric_los})
-describes the path loss when there is LOS between the transmitter
-and the receiver. 
-
-\begin{multline}
-pl_{\mathrm{LOS}}(d_{(x,y)},\beta)=a_{0}+a_{1}\log(d_{(x,y)})+a_{2}\log(H_{A})+\\
-a_{3}\log(d_{(x,y)})\log(H_{A})-3.2\left[\log(11.75\cdot H_{R})\right]^{2}+\\
-44.49\log(F)-4.78\left[\log(F)\right]^{2},\label{eq:eric_los}
-\end{multline}
-
-
-\noindent where $\beta=(a_{0},a_{1},a_{2},a_{3})$ is the vector containing
-the tuning parameters of the model, $d_{(x,y)}$ is the distance (in
-kilometers) from the transmitter to the topography point with coordinates
-$(x,y)$, $H_{A}$ is the effective antenna height (in meters) of
-the transmitter, $H_{R}$ is the antenna height (in meters) of the
-receiver, and $F$ is the frequency, expressed in MHz. On the other
-hand, in NLOS conditions, the path loss is calculated as in Equation
-(\ref{eq:eric_nlos}).
-
-\begin{multline}
-pl_{\mathrm{NLOS}}(d_{(x,y)})=\sqrt{\left[\alpha K(d_{(x,y)})\right]^{2}+E(d_{(x,y)})^{2}},\label{eq:eric_nlos}
-\end{multline}
-
-
-\noindent where $\alpha$ is the knife-edge diffraction control parameter,
-$K(d_{(x,y)})$ is the knife-edge diffraction loss (in dB) and $E(d_{(x,y)})$
-is the correction due to the Earth sphere (in dB). The latter two
-values are calculated on the topography point with coordinates $(x,y)$.
-
-In this work, the terrain profile is used for LOS determination. In
-order to adequately predict propagation effects due to foliage, buildings
-and other fabricated structures, additional loss factors based on
-the land usage (clutter data), are included. This technique is adopted
-by several propagation models for radio networks \cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Neskovic_Microcell_electric_field_strength_prediction_model:2010}.
-Consequently, we introduce an extra term for signal loss due to clutter,
-thus defining the model-predicted path loss as
-
-\begin{multline}
-pl(d_{(x,y)},\beta)=pl_{\mathrm{LOS}}(d_{(x,y)},\beta)+\\
-pl_{\mathrm{NLOS}}(d_{(x,y)})+pl_{\mathrm{CLUT}}(d_{(x,y)}),\label{eq:eric_pathloss}
-\end{multline}
-
-
-\noindent where $pl_{\mathrm{CLUT}}(d_{(x,y)})$ is clutter loss at
-the topography point with coordinates $(x,y)$, expressed in dB.
-
-In our case, we recognize twelve different clutter categories representing
-loss values due to different land usage. These categories, including
-their label numbers and descriptions, are depicted in Table \ref{tab:Clutter-categories}.
+Also, recall that the model includes an extra term in order to adequately
+predict signal-loss effects due to foliage, buildings and other fabricated
+structures. These loss factors are based on the land usage, known
+as clutter data. Here, twelve different clutter categories are recognized.
+Table~\ref{tab:05-Clutter_categories} lists these categories, including
+their label numbers and descriptions. 
 
 \begin{table}
-\caption{Clutter-category label numbers and their land-usage meanings for the
-radio-prediction model. \label{tab:Clutter-categories}}
+\centering
+
+\caption{Clutter-category label numbers and descriptions for the signal loss
+due to clutter, as reflected by a radio-propagation model. \label{tab:05-Clutter_categories}}
 
 
-{\footnotesize \centering}{\footnotesize \par}
-
-{\footnotesize }%
 \begin{tabular}{cl}
 \hline 
-{\footnotesize Clutter category} & {\footnotesize Description}\tabularnewline
+Clutter category & Description\tabularnewline
 \hline 
-{\footnotesize 0} & {\footnotesize Urban area without buildings, mostly roads}\tabularnewline
-{\footnotesize 1} & {\footnotesize Suburban area }\tabularnewline
-{\footnotesize 2} & {\footnotesize Urban area}\tabularnewline
-{\footnotesize 3} & {\footnotesize Dense urban area}\tabularnewline
-{\footnotesize 4} & {\footnotesize Agricultural area}\tabularnewline
-{\footnotesize 5} & {\footnotesize Forestall area}\tabularnewline
-{\footnotesize 6} & {\footnotesize Swamp area}\tabularnewline
-{\footnotesize 7} & {\footnotesize Dry open land area with special vegetation}\tabularnewline
-{\footnotesize 8} & {\footnotesize Dry open land area without special vegetation}\tabularnewline
-{\footnotesize 9} & {\footnotesize Water area}\tabularnewline
-{\footnotesize 10} & {\footnotesize Industrial area}\tabularnewline
-{\footnotesize 11 } & {\footnotesize Park area}\tabularnewline
+0 & Urban area without buildings, mostly roads\tabularnewline
+1 & Suburban area \tabularnewline
+2 & Urban area\tabularnewline
+3 & Dense urban area\tabularnewline
+4 & Agricultural area\tabularnewline
+5 & Forestall area\tabularnewline
+6 & Swamp area\tabularnewline
+7 & Dry open land area with special vegetation\tabularnewline
+8 & Dry open land area without special vegetation\tabularnewline
+9 & Water area\tabularnewline
+10 & Industrial area\tabularnewline
+11  & Park area\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
 
 
-In any case, the effectiveness of decision-making during radio-network
-planning is tightly coupled with the precision achieved by the propagation
-model used. In order to obtain a radio-propagation model that most
-accurately reflects the propagation characteristics of the area covered
-by each radio cell in the network, the parameters of the mathematical
-model are tuned using field-measurement campaigns. Parameter tuning
-using this method depends on existing field-measurement data, which
-are taken before hand over the area covered by the target network
-cells.
-
-
-\section{Parameter tuning of the radio-prediction model}\label{sec:Parameter-tuning}
-
-The objective here is thus improve the quality performance of a given
-mathematical model, used for radio-propagation calculations, by fine-tuning
-its configurable parameters as per-cell basis. In order to do this,
-we apply a state-of-the-art analytical approach, based on least squares
-method \cite{Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008},
-thus combining field measurements to fit the parameters of the mathematical
-model.
-
-The idea is to automatically adapt the parameters of the mathematical
-model for each of the cells targeted by the optimization. That is,
-starting from an a-priori best-known set of parameters, empirically
-calculated by the radio engineers at Telekom Slovenije, d.d., this
-approach adapts the model parameters so that the deviation of the
-radio-propagation prediction to a given set of field measurements
-is minimized.
-
-In the context of our work, this translates to fine tuning the parameters
-of the LOS part of the path-loss prediction model, i.e. $pl_{\mathrm{LOS}}(d_{(x,y)},\beta)$.
-The adjustable parameters are the elements of vector $\beta=(a_{0},a_{1},a_{2},a_{3})$,
-namely
-\begin{description}
-\item [{$a_{0}$}] the reference loss or offset;
-\item [{$a_{1}$}] the loss slope due to distance of the receiver from
-the transmitter;
-\item [{$a_{2}$}] the loss slope due to height of the transmitter antenna;
-\item [{$a_{3}$}] the loss slope due to the combined effect of the distance
-and height of the antenna.
-\end{description}
-The parameter tuning is performed per cell to improve local fitting
-of the radio predictions. The steps to be completed are: collect and
-process field-measurement data, and solve the particular system of
-linear equations. The resulting solution is the vector $\beta$ of
-the target cell, with its values locally adapted.
-
-In the following, we denote the default parameters of the radio-propagation
-model with these values
-\begin{description}
-\item [{$a_{0}$}] 38.0,
-\item [{$a_{1}$}] 32.0,
-\item [{$a_{2}$}] -12.0, and
-\item [{$a_{3}$}] 0.1.
-\end{description}
 
 \subsection{Field measurements}
 
-In mobile networks, a moving mobile constantly performs cell selection/reselection
-and handover in order to keep the best possible connection to the
-network. Within this context, the best connection is selected by measuring
-the signal strength or quality of the neighboring cells. In LTE networks,
-a mobile measures two parameters on reference signal, namely the Reference
-Signal Received Power (RSRP) and the Reference Signal Received Quality
-(RSRQ).
+In radio networks, an UE constantly performs cell selection/reselection
+procedures and handover (see Section~\ref{sub:02-Handover-and-soft-handover},
+Chapter~\ref{chap:02-Principles_of_mobile_radio_networks}), in order
+to keep the best possible connection to the network. Within this context,
+the best connection is selected by probing a QoS measure of the neighboring
+cells. In LTE networks, the UE measures two parameters from the reference
+signal of the network, namely the Reference Signal Received Power
+(RSRP) and the Reference Signal Received Quality (RSRQ).
 
 For a certain frequency bandwidth, RSRP measures the average received
 power over the resource elements that carry cell-specific reference
-signals. RSRP is applicable in idle (e.g. waiting for a call) and
-connected (e.g. during a call) modes. During the procedure of cell
-selection/reselection in idle mode, RSRP is used. On the other hand,
-RSRQ is only applicable when the mobile is in connected mode. 
+signals. RSRP is applicable in both idle mode (e.g., waiting for a
+call) and connected mode (e.g., during a call). During the procedure
+of cell selection/reselection in idle mode, RSRP is used, whereas
+RSRQ is only applicable when the UE is in connected mode. 
 
-The radio-coverage calculation involves predicting the network coverage
-over a certain region, and thus to the users' mobiles within it. Hence,
-in the first place, we are interested on accurately predicting the
-best connection the mobile would select in idle mode and the RSRP
-field measurements it uses.
+The radio-propagation prediction involves calculating the network
+coverage over a certain region. Hence, in the first place, the focus
+is on accurately predicting the best connection an UE would select
+in idle mode and the RSRP measurements it uses.
 
-In our case, the field measurements, representing the RSRP at a given
-location, are collected using a small truck equipped with the spectrum
-analyzer Rohde \& Schwarz. The spectrum analyzer is connected to an
-external omni antenna mounted on the roof of the truck, at roughly
-2~meters above the ground, taking measurements at a rate of 50~Hz???,
-with the symbol rate set to ???~Mhz. To accurately establish the
-measurement location points, a GPS unit was used. The measurement
-locations covered most of the streets within the target area, with
-over 300,000 individual field-measurement points taken at more of
-more than 150 network cells.
+Here, the field measurements representing the RSRP at a given location
+were collected using a small truck, that was equipped with a spectrum
+analyzer. The spectrum analyzer was connected to an external omni
+antenna mounted on the roof of the truck, at roughly 2~m above the
+ground, taking measurements at a rate of 2~Hz. To accurately establish
+the measurement-location points, a GPS unit was used. These GPS-informed
+locations have been tested to be compliant with the 60m limit mentioned
+in~\cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004}.
+The measurements cover most of the streets within the target area,
+with over 300,000 individual points, collected for more than 140 network
+cells.
 
-To minimize the error impact in measured RSRP and estimated location,
-all field measurements are processed so that a single value, the median%
-\footnote{The median is the numerical value separating the higher half of a
-sample set from the lower half.%
-}, is calculated for each of the measured locations. The resulting
-RSRP is then used to estimate the path-loss prediction at the location
-corresponding to each of the measurements, which resolution matches
-those of the digital elevation model and clutter data.
-
-
-\subsection{Linear least squares}
-
-It is important to note the linear relationship between the predicted
-loss $pl(d_{(x,y)},\beta)$ and the components of vector $\beta$,
-for this is a necessary condition for the least-squares method to
-find a solution. Following this method, the parameter fitting of the
-propagation model is based on the minimization of an observed error,
-i.e. the sum of the squared difference between the predicted and measured
-RSRP,
-
-\begin{multline}
-E(c)=\sum_{i=1}^{m_{c}}(p_{c}-pl_{c}(d_{(x,y)},\beta_{c})-fm_{i})^{2},\label{eq:least_squares_error}
-\end{multline}
+To minimize the error impact in measured RSRP, all field measurements
+are processed so that a single value, the median, was calculated for
+each of the measured locations. This processing step improves measured-data
+quality in terms of possible deviations due to external factors, e.g.,
+driving speed. The resulting RSRP was then used to estimate the path-loss
+prediction at the corresponding location, the resolution of which
+matches that of the DEM and clutter data used.
 
 
-\noindent where $E(c)$ is the observed error for cell $c$, $p_{c}$
-is the transmit power of cell $c$, and $fm_{i}$ is the $i$-th field
-measurement out of a set of measurements of cell $c$ with cardinality
-$m_{c}$.
+\subsection{Linear least squares \label{sub:05-Linear_least_squares}}
+
+The approach for tailoring the radio-prediction model is to correlate
+the field measurements with the predicted RSRP values. The new parameter
+set originates from the minimization of an error criterion. Similar
+to~\cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012,Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008},
+the minimization criterion is the squared-sum difference between the
+predicted and the observed RSRP levels, i.e.:
+
+\begin{equation}
+E(\beta_{c})=\sum_{i=1}^{m_{c}}(p_{c}-pl_{c}(i,\beta_{c})-fm_{i})^{2},\label{eq:05-Least_squares_error}
+\end{equation}
 
 
-\subsection{Simulations \label{sub:Simulations}}
+\noindent where $E(\beta_{c})$ is the observed error for cell $c$
+given the parameters $\beta_{c}$, $p_{c}$ is the pilot power of
+cell $c$, and $pl_{c}(i,\beta_{c})$ is the path loss of cell $c$
+at the same geographical point of $fm_{i}$, i.e., the $i$-th field
+measurement out of a set of measurements for cell $c$, the cardinality
+of which is $m_{c}$.
 
-The simulations carried out for this part of our work comprise building
-the matrices of observed-error values, $E(c)$, for each cell $c$
-in the target network. The linear systems of equations are then individually
-solved by applying the linear least squares method \cite{Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008},
-which involves the evaluation of one radio-coverage prediction per
-cell. Each system holds a unique solution for each cell $c$, denoted
-by the vector $\beta_{c}$.
-
-\begin{table*}
-\caption{Percentage of clutter-category proportions for each of the test networks
-used. The category legend is given in Table \ref{tab:Clutter-categories}.
-\label{tab:Proportion_of_clutter_for_test_networks}}
+A necessary condition for the linear least-squares method to find
+the global minimum is the linear relationship between the predicted
+path loss, $pl_{c}(i,\beta)$, and the vector $\beta_{c}$~\cite{Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008}.
+This condition can be verified by calculating the first derivative
+of $E(\beta_{c})$ in terms of the components of vector $\beta_{c}=<a_{0c},a_{1c},a_{2c},a_{3c}>$,
+i.e., $\frac{\partial E(\beta_{c})}{\partial a_{0c}}=0$, $\frac{\partial E(\beta_{c})}{\partial a_{1c}}=0$,
+$\frac{\partial E(\beta_{c})}{\partial a_{2c}}=0$, and $\frac{\partial E(\beta_{c})}{\partial a_{3c}}=0$.
 
 
-{\footnotesize \centering}{\footnotesize \par}
+\subsection{Simulations \label{sub:05-Simulations}}
 
-{\footnotesize }%
-\begin{tabular}{ccccccccccccc}
+The simulations consisted in building the matrices of the observed-error
+values, $E(\beta_{c})$, for each cell $c$ in the target network.
+The linear systems of equations are then individually solved by applying
+the linear least-squares method, which involves the evaluation of
+one radio-coverage prediction per cell. Each solved system holds a
+unique solution for a cell $c$, $c\in C$, denoted by the vector
+$\beta_{c}$.
+
+
+\subsection{Test networks \label{sub:05-Test_networks}}
+
+The test networks, Net$_{8}$, Net$_{9}$, and Net$_{10}$, are subsets
+of a real LTE network deployed in Slovenia by Telekom Slovenije, d.d.
+The path-loss predictions are calculated using PRATO, with a DEM and
+clutter map of 25~m$^{2}$ resolution, and a receiver height of 2~m
+above ground level. A transmission radius of 16~km defines the coverage
+prediction area around each network transmitter, thus limiting the
+path-loss prediction to a distance where it is feasible for an UE
+to connect to a cell, with a RSRP greater or equal to -124~dBm~\cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011}.
+At the same time, the selected transmission radius provides enough
+overlap among neighboring cells to calculate the network coverage
+over the whole region. Table~\ref{tab:05-Test_network_properties}
+provides detailed information about the test networks used, showing
+the number of network cells, the area surface, and the covering proportion
+of the collected field measurements in terms of the total area of
+each test network.
+
+\begin{table}
+\centering
+
+\caption{Several properties of the test networks Net$_{8}$, Net$_{9}$ and
+Net$_{10}$, that were used for the experimental simulations during
+the automated tuning of the radio-propagation model.\label{tab:05-Test_network_properties}}
+
+
+\begin{tabular}{cccc}
+\cline{2-4} 
+ & Number of cells  & Area (km$^{2}$) & Field-measurement proportion (\%)\tabularnewline
 \hline 
- & {\footnotesize Cat. 0} & {\footnotesize Cat. 1} & {\footnotesize Cat. 2} & {\footnotesize Cat. 3} & {\footnotesize Cat. 4} & {\footnotesize Cat. 5} & {\footnotesize Cat. 6} & {\footnotesize Cat. 7} & {\footnotesize Cat. 8} & {\footnotesize Cat. 9} & {\footnotesize Cat. 10} & {\footnotesize Cat. 11}\tabularnewline
-\hline 
-{\footnotesize Net$_{1}$ } & {\footnotesize 0.53} & {\footnotesize 4.53} & {\footnotesize 1.68} & {\footnotesize 0.45} & {\footnotesize 71.89} & {\footnotesize 17.94} & {\footnotesize 0.07} & {\footnotesize 0.00} & {\footnotesize 0.03} & {\footnotesize 2.21} & {\footnotesize 0.67} & {\footnotesize 0.00}\tabularnewline
-{\footnotesize Net$_{2}$ } & {\footnotesize 0.91} & {\footnotesize 5.53} & {\footnotesize 9.48} & {\footnotesize 3.84} & {\footnotesize 29.73} & {\footnotesize 48.57} & {\footnotesize 0.14} & {\footnotesize 0.03} & {\footnotesize 0.03} & {\footnotesize 0.76} & {\footnotesize 0.86} & {\footnotesize 0.12}\tabularnewline
-{\footnotesize Net$_{3}$ } & {\footnotesize 0.15} & {\footnotesize 3.99} & {\footnotesize 1.14} & {\footnotesize 0.11} & {\footnotesize 26.50} & {\footnotesize 67.13} & {\footnotesize 0.26} & {\footnotesize 0.00} & {\footnotesize 0.00} & {\footnotesize 0.36} & {\footnotesize 0.36} & {\footnotesize 0.00}\tabularnewline
+Net$_{8}$  & 12 & 103.74 & 5.41\tabularnewline
+Net$_{9}$  & 130  & 1298.02 & 12.02\tabularnewline
+Net$_{10}$  & 6  & 386.38 & 2.30\tabularnewline
 \hline 
 \end{tabular}
-\end{table*}
+\end{table}
 
 
-\begin{figure*}
+Net$_{8}$ represents a network deployed over a dominant agricultural
+area with almost flat terrain, some forests and water streams. Net$_{9}$
+is deployed over a densely populated urban area, containing high buildings,
+parks and avenues. The last one, Net$_{10}$, represents a network
+deployed over hilly terrain, including some smaller villages and vast
+forests. It is important to note that the number of deployed cells
+is directly proportional to the population density within the region
+of each test network (see Chapter~\ref{chap:02-Principles_of_mobile_radio_networks}).
+This relationship can be derived from the information listed in Table~\ref{tab:05-Test_network_properties},
+where the number of cells is shown along the area of every test network.
+For a clearer characterization in terms of the terrain types and their
+extent, the proportion of each clutter category with respect to the
+total area of every test network is shown in Table~\ref{tab:05-Proportion_of_clutter_for_test_networks}.
+
+\begin{table}
+\centering
+
+\caption{Clutter-category proportions, expressed in percent, in terms of the
+surface area of each of the test networks. The category legend is
+given in Table~\ref{tab:05-Clutter_categories}. \label{tab:05-Proportion_of_clutter_for_test_networks}}
+
+
+{\scriptsize{}}%
+\begin{tabular}{>{\centering}p{0.4cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.7cm}>{\centering}p{0.6cm}}
+\cline{2-14} 
+ & {\scriptsize{Cat.0}} & {\scriptsize{Cat.1}} & {\scriptsize{Cat.2}} & {\scriptsize{Cat.3}} & {\scriptsize{Cat.4}} & {\scriptsize{Cat.5}} & {\scriptsize{Cat.6}} & {\scriptsize{Cat.7}} & {\scriptsize{Cat.8}} & {\scriptsize{Cat.9}} & {\scriptsize{Cat.10}} & {\scriptsize{Cat.11}} & {\scriptsize{Total}}\tabularnewline
+\hline 
+{\scriptsize{Net$_{8}$ }} & {\scriptsize{0.53}} & {\scriptsize{4.53}} & {\scriptsize{1.68}} & {\scriptsize{0.45}} & {\scriptsize{71.89}} & {\scriptsize{17.94}} & {\scriptsize{0.07}} & {\scriptsize{0.00}} & {\scriptsize{0.03}} & {\scriptsize{2.21}} & {\scriptsize{0.67}} & {\scriptsize{0.00}} & {\scriptsize{100.00}}\tabularnewline
+{\scriptsize{Net$_{9}$ }} & {\scriptsize{0.91}} & {\scriptsize{5.53}} & {\scriptsize{9.48}} & {\scriptsize{3.84}} & {\scriptsize{29.73}} & {\scriptsize{48.57}} & {\scriptsize{0.14}} & {\scriptsize{0.03}} & {\scriptsize{0.03}} & {\scriptsize{0.76}} & {\scriptsize{0.86}} & {\scriptsize{0.12}} & {\scriptsize{100.00}}\tabularnewline
+{\scriptsize{Net$_{10}$ }} & {\scriptsize{0.15}} & {\scriptsize{3.99}} & {\scriptsize{1.14}} & {\scriptsize{0.11}} & {\scriptsize{26.50}} & {\scriptsize{67.13}} & {\scriptsize{0.26}} & {\scriptsize{0.00}} & {\scriptsize{0.00}} & {\scriptsize{0.36}} & {\scriptsize{0.36}} & {\scriptsize{0.00}} & {\scriptsize{100.00}}\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+
+The terrain profiles are most relevant for Net$_{8}$ and Net$_{10}$,
+since none of them contains densely populated urban areas. Note that
+the terrain shown in Figure~\ref{fig:05-Terrain_profile_for_Net8}
+is mostly flat, since the agricultural area prevails in Net$_{8}$.
+In contrast, the terrain for Net$_{10}$ is dominated by hills, which
+are mostly covered by dense forests, including some small villages
+in the valleys (see Figure~\ref{fig:05-Terrain_profile_for_Net10}).
+
+\begin{figure}
 \begin{minipage}[t]{0.49\textwidth}%
 \centering
 
 \includegraphics[width=1\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/terrain_MS}
 
-\caption{Terrain profile for network Net$_{1}$, dominated by an agricultural
-area.\label{fig:terrain_profile-Net1}}
+\caption{Terrain profile of the test network Net$_{8}$, dominated by a flat
+agricultural area. \label{fig:05-Terrain_profile_for_Net8}}
 %
 \end{minipage}\hfill{}%
 \begin{minipage}[t]{0.49\textwidth}%
@@ -558,381 +358,272 @@ area.\label{fig:terrain_profile-Net1}}
 
 \includegraphics[width=1\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/terrain_HI}
 
-\caption{Terrain profile for network Net$_{3}$, dominated by hills.\label{fig:terrain_profile-Net3}}
+\caption{Terrain profile of the test network Net$_{10}$, dominated by forested
+hills. \label{fig:05-Terrain_profile_for_Net10}}
 %
 \end{minipage}
-\end{figure*}
+\end{figure}
 
 
-
-\subsubsection{Test networks \label{sub:Test-networks}}
-
-All the test networks, Net$_{1}$, Net$_{2}$, and Net$_{3}$ are
-subsets of a real LTE network deployed in Slovenia by Telekom Slovenije,
-d.d. The path-loss predictions are calculated using a digital elevation
-model and clutter map of 25~m$^{2}$ resolution and a receiver height
-of 1.5~m above ground level. A radius of 16~km is taken around each
-network cell, thus limiting the path-loss prediction to a distance
-where the it is still feasible for the mobile to connect to a cell,
-with a RSRP greater or equal to -124~dBm \cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011}.
-At the same time, the selected calculation radius provides enough
-overlap among neighboring cells to also calculate the network coverage
-over the whole region. Table \ref{tab:Test_network_properties} provides
-more information about the test networks used.
-
-\begin{table}
-\caption{Several properties of the test networks used for the experimental
-simulations.\label{tab:Test_network_properties}}
+In the following, the default parameters of the radio-propagation
+model correspond to the values provided by the engineers of the Radio
+Network department at Telekom Slovenije, d.d.
 
 
-{\footnotesize \centering}{\footnotesize \par}
+\subsection{Experimental environment \label{sub:05-Experimental_environment}}
 
-{\footnotesize }%
-\begin{tabular}{ccc>{\centering}p{2.5cm}}
-\hline 
- & {\footnotesize Number of cells } & {\footnotesize Area (km$^{2}$)} & {\footnotesize Field-measurement proportion (\%)}\tabularnewline
-\hline 
-{\footnotesize Net$_{1}$ } & {\footnotesize 12} & {\footnotesize 103.74} & {\footnotesize 5.41}\tabularnewline
-{\footnotesize Net$_{2}$ } & {\footnotesize 130 } & {\footnotesize 1298.02} & {\footnotesize 12.02}\tabularnewline
-{\footnotesize Net$_{3}$ } & {\footnotesize 6 } & {\footnotesize 386.38} & {\footnotesize 2.30}\tabularnewline
-\hline 
-\end{tabular}
-\end{table}
+The simulations were carried out on several computing nodes of the
+previously presented DEGIMA cluster~\cite{Hamada_Cluster_of_GPUs:2010}
+at the NACC of the Nagasaki University in Japan (see Section~\ref{sec:04-Simulations},
+Chapter~\ref{chap:04-Framework-design-and-implementation}). Groups
+of 3, 4, and 34 nodes were used for executing the simulations of the
+different problem instances, i.e., Net$_{8}$, Net$_{9}$ and Net$_{10}$,
+respectively.
 
 
-Net$_{1}$ represents a network deployed over a dominant agricultural
-area with almost flat terrain, some forests and waters streams. Net$_{2}$,
-on the other hand, is deployed over a densely populated urban area,
-containing high buildings, parks and avenues. The last network, Net$_{3}$,
-represents a network deployed over hilly terrain, including some smaller
-villages and vast forests. It is important to note that the number
-of deployed cells is directly related to the population density within
-the region of each test network, as the number of cells from Table
-\ref{tab:Test_network_properties} show. For a clearer representation
-of the test networks used, we present the proportion of each land-usage
-(clutter) category in Table \ref{tab:Proportion_of_clutter_for_test_networks}.
+\subsection{Results \label{sub:05-Least_squares_results}}
 
-The terrain profiles are most relevant for Net$_{1}$ and Net$_{3}$,
-since none of them comprehends an urban environment. Note that the
-terrain shown in Figure \ref{fig:terrain_profile-Net1} is mostly
-flat, since the agricultural area is predominant there. In contrast,
-the terrain for Net$_{3}$ is dominated by hills, which are mostly
-covered by dense forests, with some small villages in the valleys
-(see Figure \ref{fig:terrain_profile-Net3}).
-
-
-\subsubsection{Experimental environment}
-
-The simulations were carried out on 40 computing nodes of the DEGIMA
-cluster \cite{Hamada_Cluster_of_GPUs:2010} at the Nagasaki Advanced
-Computing Center (NACC) of the Nagasaki University in Japan. This
-system ranked in the TOP 500 list of supercomputers until June 2012%
-\footnote{http://www.top500.org%
-}, and in June 2011 held the third place of the Green 500 list%
-\footnote{http://www.green500.org%
-} as one of the most energy-efficient supercomputers in the world.
-
-The computing nodes are connected by a LAN, over a Gigabit Ethernet
-interconnect. The reason for using a high-end computer cluster as
-DEGIMA is to exploit the parallel nature of PRATO. However, this does
-not mean that the presented simulation cannot be carried out serially
-in a commodity desktop computer. PRATO does support serial calculation
-of radio-propagation predictions for several cells.
-
-Each computing node of DEGIMA features one of two possible configurations,
-namely:
-\begin{itemize}
-\item Intel Core i5-2500T quad-core processor CPU, clocked at 2.30 GHz,
-with 16 GB of RAM; and
-\item Intel Core i7-2600K quad-core processor CPU, clocked at 3.40 GHz,
-also with 16 GB of RAM.
-\end{itemize}
-During the simulation runs, the nodes equipped with the Intel i5 CPU
-host the worker processes, whereas the master process runs on a computing
-node featuring an Intel i7 CPU, and performing all its I/O operations
-on the local file system.
-
-All the nodes are equipped with a Linux 64-bit operating system (Fedora
-distribution). As the message passing implementation we use OpenMPI,
-version 1.6.1, which has been manually compiled with the distribution-supplied
-gcc compiler, version 4.4.4.
-
-
-\subsubsection{Results \label{sub:Optimization-results}}
-
-The results of applying the linear least squares method to fit the
-parameters of the radio-prediction model to a set of field measurements
-presented in this section. We have prepared bar charts showing the
-cumulative distribution of the absolute error between the prediction
-points and the field measurements. Each bar represents an open interval,
-expressed in dB, denoting the proportion of points that deviate from
-the prediction for the expressed number of dB. For example, in Figure
-\ref{fig:error_distribution_default_parameters-Net1}, we may see
-that the proportion of predicted points differing from the field measurements
-in 35 dB or more is around 16\%, whereas the proportion differing
-in less than 5 dB is 10\%. These numbers represent the test network
-Net$_{1}$ before applying the model-parameter fitting. For comparison,
-in Figure \ref{fig:error_distribution_optimal_parameters-Net1}, the
-absolute-error distribution for the same test network is given, but
-with the model parameters fitted to the available field measurements.
+The results of applying the linear least-squares method to fit the
+parameters of the radio-propagation model to a set of field measurements
+are presented in this section. Bar charts were prepared to show the
+cumulative distribution of the absolute error between the radio-propagation
+prediction and the field measurements (see Figures~\ref{fig:05-Error_distribution_for_Net8},
+\ref{fig:05-Error_distribution_for_Net9}, and \ref{fig:05-Error_distribution_for_Net10}).
+Each bar represents an open interval, expressed in dB, denoting the
+proportion of points that deviate from the prediction in the given
+number of dB. For example, in Figure~\ref{fig:05-Error_distribution_for_Net8}~(a),
+it can be observed that the proportion of predicted points differing
+from the field measurements in 35~dB or more is around 16\%, whereas
+the proportion of points differing in less than 5~dB is 10\%. These
+values correspond to the test network Net$_{8}$, before applying
+the model-parameter fitting. For comparison, in Figure~\ref{fig:05-Error_distribution_for_Net8}~(b),
+the absolute-error distribution for the same test network is given,
+but with the model parameters fitted to the available field measurements.
 Notice how the proportions describing the biggest deviation have dropped
-to under 5\% (35 dB and more) and less than 6\% (30 dB to 35 dB).
-Moreover, it is clear how all proportions improved, raising the bars
-towards the left-hand side.
+to under 5\% (35~dB and more), and to less than 6\% (30~dB to 35~dB),
+respectively. Moreover, it is clear how all proportions improved,
+raising the bars towards the left-hand side of the chart and lowering
+them on the right-hand side.
 
 The error distributions of the radio-propagation prediction for test
-network Net$_{2}$ using default parameters and fitted ones are given
-in Figures \ref{fig:error_distribution_default_parameters-Net2} and
-\ref{fig:error_distribution_optimal_parameters-Net2}, respectively.
+network Net$_{9}$ using the default parameters and the fitted ones
+are given in Figures~\ref{fig:05-Error_distribution_for_Net9}~(a)
+and \ref{fig:05-Error_distribution_for_Net9}~(b), respectively.
 In this case, the improvement is even more significant than for the
-first test network, clearly showing that the tuned propagation model
-represents the local radio propagation conditions within this environment
-more accurately.
+previous test network, clearly showing that the tuned propagation
+model represents the local radio-propagation conditions more accurately
+than the default parameter set.
 
-For the third test network, Net$_{3}$, the error distributions are
-depicted in Figure \ref{fig:error_distribution_default_parameters-Net3}
-using the default parameters, and Figure \ref{fig:error_distribution_optimal_parameters-Net3}
-for the tinned ones. Similarly as for the first test network, Net$_{1}$,
-we may see a how the proportion of highest error deviation has been
-lowered over those with lower deviation values. 
+For the last test network, Net$_{10}$, the error distributions are
+depicted in Figure~\ref{fig:05-Error_distribution_for_Net10}~(a)
+using the default parameters, and Figure~\ref{fig:05-Error_distribution_for_Net10}~(b)
+for the tuned ones. Similar to the test network Net$_{8}$, it can
+be clearly seen how the proportions of highest error deviations have
+been lowered with respect to those with lower deviation values. 
 
 The overall results confirm that fitting the parameters of the radio-propagation
-model to the field measurements within a certain region significantly
-improve the quality of the calculated propagation prediction.
+model to the field measurements of each network cell significantly
+improves the quality of the calculated radio-propagation predictions.
+Indeed, since the default parameters were provided by the radio engineers
+after following a traditional approach for the whole network, it can
+be concluded that the automated-fitting method is not only simpler
+and faster, but also superior in terms of solution quality.
 
-Despite the presented results are encouraging, there are some specific
-reasons behind the considerable better results for Net$_{2}$, when
-compared to those of Net$_{1}$ and Net$_{2}$. Clearly, the number
-of available field measurements directly affects the quality of the
-calculated results, making the least squares approximation rougher
-and thus less precise (see Table \ref{tab:Test_network_properties}
-in Section \ref{sub:Test-networks}). However, it is out of the scope
-of this work, in which we focus is on the applicability of PRATO as
-a tool for planning and optimization of LTE networks, to assess the
-quality of the achieved results. Nevertheless, for the sake of completeness,
-we would like to point out that some researchers have already started
-working on different ways on how to improve this aspect \cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011,Neuland_Influence_of_positioning_error_on_X_Map_estimation_in_LTE:2011}.
+However, it is important to note the particular reasons behind the
+considerable better results for Net$_{9}$, when compared to those
+of Net$_{8}$ and Net$_{10}$. Clearly, the relative quantity of the
+available field measurements directly affects the quality of the calculated
+results. Therefore, the least squares approximation is rougher and
+less precise for the networks where the field-measurement proportion
+is lower. See Table~\ref{tab:05-Test_network_properties} for a reference
+of the field-measurement proportions with respect to the area surface
+of each test network. Similar findings were confirmed by other authors,
+who worked on the adjustment of radio-propagation models to different
+environments \cite{Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012}.
+For the sake of completeness, it is worth pointing out that some researchers
+have already started working on different ways on how to improve this
+aspect \cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011,Neuland_Influence_of_positioning_error_on_X_Map_estimation_in_LTE:2011}.
 
-\begin{figure*}
-\begin{minipage}[t]{0.49\textwidth}%
+\begin{figure}
 \centering
 
-\includegraphics[width=0.8\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-def_params}
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
 
-\caption{Error distribution of the radio prediction for network Net$_{1}$
-with default parameter values.\label{fig:error_distribution_default_parameters-Net1}}
-%
-\end{minipage}\hfill{}%
-\begin{minipage}[t]{0.49\textwidth}%
+\caption{Error distribution of the radio prediction for network Net$_{8}$:
+(a) with default parameter values, and (b) with fitted parameter values.\label{fig:05-Error_distribution_for_Net8}}
+\end{figure}
+
+
+\begin{figure}[h]
 \centering
 
-\includegraphics[width=0.8\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
 
-\caption{Error distribution of the radio prediction for network Net$_{1}$
-with fitted parameter values.\label{fig:error_distribution_optimal_parameters-Net1}}
-%
-\end{minipage}
-\end{figure*}
+\caption{Error distribution of the radio prediction for network Net$_{9}$:
+(a) with default parameter values, and (b) with fitted parameter values.\label{fig:05-Error_distribution_for_Net9}}
+\end{figure}
 
 
-\begin{figure*}
-\begin{minipage}[t]{0.49\textwidth}%
+\begin{figure}[h]
 \centering
 
-\includegraphics[width=0.8\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_params}
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
 
-\caption{Error distribution of the radio prediction for network Net$_{2}$
-with default parameter values.\label{fig:error_distribution_default_parameters-Net2}}
-%
-\end{minipage}\hfill{}%
-\begin{minipage}[t]{0.49\textwidth}%
-\centering
-
-\includegraphics[width=0.8\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}
-
-\caption{Error distribution of the radio prediction for network Net$_{2}$
-with fitted parameter values.\label{fig:error_distribution_optimal_parameters-Net2}}
-%
-\end{minipage}
-\end{figure*}
-
-
-\begin{figure*}
-\begin{minipage}[t]{0.49\textwidth}%
-\centering
-
-\includegraphics[width=0.8\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-def_params}
-
-\caption{Error distribution of the radio prediction for network Net$_{3}$
-with default parameter values.\label{fig:error_distribution_default_parameters-Net3}}
-%
-\end{minipage}\hfill{}%
-\begin{minipage}[t]{0.49\textwidth}%
-\centering
-
-\includegraphics[width=0.8\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}
-
-\caption{Error distribution of the radio prediction for network Net$_{3}$
-with fitted parameter values.\label{fig:error_distribution_optimal_parameters-Net3}}
-%
-\end{minipage}
-\end{figure*}
+\caption{Error distribution of the radio prediction for network Net$_{10}$:
+(a) with default parameter values, and (b) with fitted parameter values.\label{fig:05-Error_distribution_for_Net10}}
+\end{figure}
 
 
 
-\section{Clutter optimization}\label{sec:Clutter-optimization}
+\section{Clutter optimization \label{sec:05-Clutter_optimization}}
 
-In order to better adapt the radio-prediction calculation to a given
-regional environment, the signal losses due to clutter have to be
-optimized. As it was mentioned before, there are several reasons for
-the signal loss values to be inaccurate. Among them, we can mention
-seasonal changes, like tree foliage or snow, construction or demolition
-of buildings and parks, different kinds of forests or agricultural
-areas. These changes are only noticeable through regular field-measurement
-campaigns and land-usage data updates. The challenge is thus to combine
-both in order to improve the prediction results even further.
+In order to further improve the accuracy of the radio-prediction calculation
+over a given regional environment, the signal losses due to clutter
+are optimized in this section.
 
-In the following, we use a metaheuristic algorithm in order to optimize
-the clutter losses, i.e. the signal loss due to terrain influence,
-of several regions within the mobile network under optimization. This
-is done over a group of network cells within different regions of
-the target network, e.g. agricultural, urban or hilly. In terms of
-radio-network planning, a regional classification of signal loss due
-to clutter further improve the accuracy of the radio-coverage prediction,
-thus enhancing the model by distinguishing, for example, different
-types of agricultural, park and vegetation areas.
+As it was mentioned before, there are several reasons for the predicted
+signal-loss values to be inaccurate. The seasonal changes are among
+them, like tree foliage or snow. Also, changes related to urban development,
+like demolition or construction of buildings and parks, and different
+kinds of forests or agricultural areas, etc. These changes are only
+noticeable through regular updates of accurate land-usage data. However,
+in the short term, updates are only available in the form of feedback
+by means of field-measurement campaigns.
 
-Compared to the parameter tuning of the mathematical model presented
-in Section \ref{sub:Radio-prediction-model}, we are not using an
-analytical approach for tackling this problem, since we wish to potentially
-include corrections for possible errors in the NLOS part Equation
-\ref{eq:eric_pathloss}. For this reason, we turn our attention to
-metaheuristic algorithms \cite{Talbi_Metaheuristics:2009} in general
-and swarm intelligence in particular \cite{Kennedy_Swarm_intelligence:2006}.
-From this last family of metaheuristic algorithms, we choose the differential
-ant-stigmergy algorithm (DASA) \cite{Korosec-The_differential_ant_stigmergy_algorithm:2012}.
+In the following, a metaheuristic algorithm is used to optimize the
+clutter losses of several regions within a target radio network. This
+is done over groups of network cells within different regions of the
+target network, e.g., agricultural, urban or hilly. In terms of coverage
+planning, a regional classification of the signal losses due to clutter
+improves the accuracy of the radio-coverage prediction.
 
-Several authors have shown the benefits of using metaheuristic algorithms
-for tackling radio-related problems \cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Garcia-Lozano_Metaheuristic_procedure_to_optimize_transmission_delays_in_DVB-T_single_frequency_networks:2011,Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012,Malla_Energy_efficient_resource_allocation_in_OFDMA_networks_using_ant_colony_optimization:2012}.
-In our case, an analytical approach may also be possible, but our
-objective is to show the capabilities of PRATO when combining an optimization
-algorithm with parallel and distributed objective-function evaluation.
-For the following simulations, the DASA runs as the master process,
-whereas the workers evaluate the current solution in parallel for
-all the involved cells (see Figure \ref{fig:PRATO_architecture_optimization}).
+In contrast to the parameter tuning of the mathematical model presented
+in Section~\ref{sec:05-Parameter_tuning_radio-propagation_model},
+an analytical approach is not used for tackling this problem. Instead,
+the DASA metaheuristic algorithm is the tool of choice for optimizing
+the clutter losses.
+
+There are several reasons for choosing the DASA as the optimization
+algorithm in the context of this problem. First, the benefits of metaheuristic
+algorithms for solving optimization problems, particularly in the
+context of radio networks, was demonstrated by several authors in
+general~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Garcia-Lozano_Metaheuristic_procedure_to_optimize_transmission_delays_in_DVB-T_single_frequency_networks:2011,Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012,Malla_Energy_efficient_resource_allocation_in_OFDMA_networks_using_ant_colony_optimization:2012},
+and in this thesis in particular (see Chapters~\ref{chap:02-Optimization_of_radio_networks},
+\ref{chap:06-Experimental-evaluation-the-service-coverage-problem}
+and~\ref{chap:07-Experimental-evaluation-the-SHO-alignment-problem}).
+Second, in~\cite{Korosec-The_differential_ant_stigmergy_algorithm:2012},
+the authors validated the suitability of the algorithm for solving
+numerical-optimization problems.
 
 
 \subsection{Optimization objective \label{sub:Optimization-objective}}
 
-The optimization objective consists of adjusting the loss values of
-the different clutter categories, i.e. $pl_{\mathrm{CLUT}}(d_{(x,y)})$
-of Equation (\ref{eq:eric_pathloss}), to best fit a set of field
-measurements in a given region containing multiple cells. We have
-three data sets at our disposal, one for each of the three regions:
-the first for Net$_{1}$, the second for Net$_{2}$, and the third
-for Net$_{3}$. Each region is independently optimized, so that the
-radio-propagation predictions of its network cells, which already
-have their model parameters fitted, minimize the mean-squared error
-against the field measurements, namely
+The optimization objective consists in adjusting the loss values of
+the different clutter categories, i.e., $pl_{\mathrm{CLUT}}(d_{(x,y)})$
+from Equation~(\ref{eq:04-Hata_pathloss}), Chapter~\ref{chap:04-Framework-design-and-implementation},
+according to a set of field measurements of a given geographical region.
+The same three data sets used in Section~\ref{sub:05-Simulations}
+were used for the clutter-optimization problem: the first for Net$_{8}$,
+the second for Net$_{9}$, and the third for Net$_{10}$. Each region
+was independently optimized, so that the radio-propagation predictions
+of each set of network cells minimized the mean-squared error against
+the field measurements, i.e.:
 
-\begin{multline}
-F^{*}(R)=\sum_{i=1}^{m_{c}}\frac{(p_{c}-pl_{c}(d_{(x,y)},\beta_{c})-fm_{i})^{2}}{m_{R}}\;\forall c\in R,\label{eq:mean_squared_error}
-\end{multline}
+\begin{equation}
+\min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-pl_{c}(i,\beta_{c}^{*})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
+\end{equation}
 
 
-\noindent where $F^{*}(R)$ is the optimization objective to be minimized,
-$R$ is one of the three regions, $p_{c}$ is the transmit power of
-cell $c$, $fm_{i}$ is the $i$-th field measurement out of a set
-of measurements of cell $c$ with cardinality $m_{c}$, $m_{R}$ is
-the number of field measurements of all the cells within the region
-$R$, and $pl_{c}(d_{(x,y)},\beta)$ is the path loss of cell $c$
-at coordinate $(x,y)$, where $\beta$ contains per-cell fitted parameter
-values of the prediction model.
+\noindent where $f_{\mathrm{clut}}$ is the optimization objective
+to be minimized in each of the three regions, $p_{c}$ is the transmit
+power of cell $c$, $fm_{i}$ is the $i$-th field measurement of
+cell $c$, the set of which has cardinality $m_{c}$, and $m_{C}$
+is the number of field measurements of all the cells of a given network.
+Similar to the least-squares approach, $pl_{c}(i,\beta_{c}^{*})$
+represents the path loss of cell $c$ at the same geographical point
+of the $i$-th field measurement, and $\beta_{c}^{*}$ denotes the
+fitted parameter values of the prediction model for cell $c$.
 
-For a reference of the different clutter categories our prediction
-model recognizes, see Table \ref{tab:Clutter-categories}.
+For a reference of the different clutter categories used by the radio-propagation
+model, see Table~\ref{tab:05-Clutter_categories}.
 
 
 \subsection{Differential ant-stigmergy algorithm}
 
-As it has been mentioned before, the optimization algorithm we have
-chosen for the clutter-optimization problem is the (DASA). Based on
-the metaheuristic Ant-Colony Optimization (ACO) \cite{Dorigo_Ant_colony_optimization:2006},
-the DASA \cite{Korosec-The_differential_ant_stigmergy_algorithm:2012}
-provides a framework to successfully cope with high-dimensional numerical
-optimization problems. It creates a fine-grained discrete form of
-the search space, representing it as a graph. This graph is then used
-as the walking paths for the ants, which iteratively improve the temporary
-best solution.
-
+The chosen optimization algorithm for the clutter-optimization problem
+is the DASA (see Section~\ref{sub:02-DASA}, Chapter~\ref{chap:02-Optimization_models}).
 The mapping between the clutter-optimization problem and DASA is as
 follows:
 
 \begin{equation}
-X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{12}\right\} \label{eq:DASA-problem_mapping}
+X_{a}=\left\{ x_{0},x_{1},\ldots,x_{i},\ldots,x_{11}\right\} ,\label{eq:DASA-problem_mapping}
 \end{equation}
 
 
 \noindent where $X_{a}$ is the solution vector of ant $a$ during
 the minimization process, and $x_{i}$ represents the $i$-th clutter
-category within a given region. At the end of every iteration, and
-after all the ants have created solutions, they are evaluated to establish
-if any of them is better than the best solution found so far.
-
-There are six parameters that control the way DASA explores the search
-space: the number of ants, the discrete base, the pheromone dispersion
-factor, the global scale-increasing factor, the global scale-decreasing
-factor, and the maximum parameter precision.
-
-For a more in-depth explanation about these parameters and the DASA
-algorithm itself, we refer the reader to \cite{Korosec-The_differential_ant_stigmergy_algorithm:2012}.
+category within a given region or network. At the end of every iteration,
+and after all the ants have created solutions, they are evaluated
+to establish if any of them is better than the best solution found
+so far.
 
 
 \subsection{Simulations}
 
-In this case, the simulations for each test network comprise multiple
-iterations of several steps. An iteration begins by generating a solution
-vector for each of the ants in the DASA population. The following
-step involves the parallel evaluation of each solution, i.e. one radio-coverage
-prediction per cell. The final step is calculating the objective-function
-value, as defined in Equation (\ref{eq:mean_squared_error}), before
-sending it to the DASA for it to generate the next set of solutions.
-Figure \ref{fig:PRATO_architecture_optimization} depicts the way
-PRATO performs the objective-function evaluation in parallel over
-the worker processes, while the optimization algorithm runs on the
-master one.
+In this case, one simulation round consisted of multiple iterations
+of several steps. An iteration begins by generating a solution vector
+for each of the ants in the DASA colony. The following step involves
+the parallel evaluation of the solution vector carried by an ant,
+i.e., one radio-propagation prediction per worker process. The final
+step consists in calculating the objective-function value, as defined
+in Equation~(\ref{eq:05-Mean-squared_error}), before sending it
+back to the master process for the DASA to generate the next set of
+solutions. Figure~\ref{fig:05-PRATO_architecture_optimization} depicts
+the way PRATO performs the parallel objective-function evaluation
+over the worker processes, while the optimization algorithm runs on
+the master process.
 
 \begin{figure}
 \centering
 
-\includegraphics[width=0.6\columnwidth]{\lyxdot \lyxdot /tun_par/doc/img/architecture}
+\includegraphics[width=0.4\textwidth]{05-framework_parameter_tuning/img/architecture}
 
-\caption{\textit{PRATO architecture and data flow during the clutter-optimization
-phase.\label{fig:PRATO_architecture_optimization}}}
+\caption{\textit{\emph{Architecture and data flow of PRATO during the clutter-optimization
+phase. The optimization algorithm runs on the master process, while
+the radio-propagation predictions of the involved network cells run
+in parallel over several worker processes. \label{fig:05-PRATO_architecture_optimization}}}}
 \end{figure}
 
 
-Compared to the experiments presented in Section \ref{sub:Simulations},
-a much higher number of evaluations is needed for this kind of optimization.
-In this context, it is of key importance to perform the radio-coverage
-prediction for multiple cells in a parallel manner. Otherwise, such
-an approach would not be feasible, since the time required to reach
-a reasonable solution would be excessive.
+As opposed to the least-squares case, a much larger number of evaluations
+is needed for this kind of optimization. Therefore, it is essential
+to exploit the parallel nature of the framework in order to simultaneously
+evaluate the radio-coverage prediction of multiple cells. Otherwise,
+a metaheuristic approach would not be feasible, due to the computational
+time required to reach a reasonable solution.
 
-The loss value (in dB) each clutter category may take has been limited
-to the interval {[}0,40{]}. This information has been provided by
-the radio experts of the Radio Network department at Telekom Slovenije,
-d.d.
+The default clutter-loss values (expressed in dB) for each clutter
+category, which are listed in the second column of Table~\ref{tab:05-Clutter_optimization_solutions},
+were provided by the radio experts of the Radio Network department
+at Telekom Slovenije, d.d. These values were empirically calculated
+using a classic (i.e., manual) approach, the results of which are
+regularly loaded into a commercial radio-planning application in order
+to validate the radio coverage at a network-wide level. The radio
+experts also suggested limiting the optimized clutter-loss values
+to a maximum of 40~dB.
 
-As stopping criteria of the optimization runs for Net$_{1}$ and Net$_{3}$,
-we have fixed the maximum number of iterations to 200, whereas for
-Net$_{2}$ this values has been set to 500 iterations, since this
-networks comprises the largest number of network cells. Overall, the
-framework completed 48,000 objective-function evaluations in the former
-case, and 120,000 in the latter one.
+The stopping criteria for the optimization runs was setting the maximum
+allowed number of objective-function evaluations. In this sense, the
+limits for Net$_{8}$ and Net$_{10}$ were set the 200, whereas for
+Net$_{9}$ the value was 500, since this network contains the largest
+number of cells. Overall, the framework completed 48,000 objective-function
+evaluations, i.e., 576,000 radio-coverage predictions for Net$_{8}$
+and 288,000 for Net$_{10}$, whereas for Net$_{9}$, the number of
+objective-function evaluations was 120,000, for a total of 15,600,000
+radio-coverage predictions.
 
-Regarding the parameters that control algorithm behavior, we have
-set them to the following values
+Regarding the parameters that control the behavior of the DASA, they
+were set to the following values:
 \begin{itemize}
 \item $m=240$, the number of ants;
 \item $b=10,$ the discrete base;
@@ -945,225 +636,295 @@ set them to the following values
 \subsection{Results}
 
 \begin{table}
+\centering
+
 \caption{Clutter-category losses after the optimization. The default losses
 for each clutter category are given along the solutions for each of
-the test networks. All values are expressed in dB. \label{tab:Clutter-optimization-solutions}}
+the test networks. All values are expressed in dB. \label{tab:05-Clutter_optimization_solutions}}
 
 
-{\footnotesize \centering}{\footnotesize \par}
-
-{\footnotesize }%
+{\small{}}%
 \begin{tabular}{ccccc}
 \hline 
-{\footnotesize Clutter category} & {\footnotesize Default} & {\footnotesize Net$_{1}$} & {\footnotesize Net$_{2}$} & {\footnotesize Net$_{3}$}\tabularnewline
+{\small{Clutter category}} & {\small{Default}} & {\small{Net$_{8}$}} & {\small{Net$_{9}$}} & {\small{Net$_{10}$}}\tabularnewline
 \hline 
-{\footnotesize 0} & {\footnotesize 5.0} & {\footnotesize 13.71} & {\footnotesize 11.30} & {\footnotesize 17.90}\tabularnewline
-{\footnotesize 1} & {\footnotesize 15.0} & {\footnotesize 12.39} & {\footnotesize 16.67} & {\footnotesize -}\tabularnewline
-{\footnotesize 2} & {\footnotesize 13.0} & {\footnotesize 16.04} & {\footnotesize 17.04} & {\footnotesize 15.69}\tabularnewline
-{\footnotesize 3} & {\footnotesize 28.0} & {\footnotesize 19.59} & {\footnotesize 18.01} & {\footnotesize 23.00}\tabularnewline
-{\footnotesize 4} & {\footnotesize 12.0} & {\footnotesize 11.48} & {\footnotesize 9.71} & {\footnotesize 10.80}\tabularnewline
-{\footnotesize 5} & {\footnotesize 20.0} & {\footnotesize 16.26} & {\footnotesize 11.62} & {\footnotesize 16.26}\tabularnewline
-{\footnotesize 6} & {\footnotesize 15.0} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
-{\footnotesize 7} & {\footnotesize 8.0} & {\footnotesize -} & {\footnotesize 13.49} & {\footnotesize -}\tabularnewline
-{\footnotesize 8} & {\footnotesize 5.0} & {\footnotesize -} & {\footnotesize 13.50} & {\footnotesize -}\tabularnewline
-{\footnotesize 9} & {\footnotesize 1.0} & {\footnotesize 17.50} & {\footnotesize 5.60} & {\footnotesize -}\tabularnewline
-{\footnotesize 10} & {\footnotesize 20.0} & {\footnotesize 8.26} & {\footnotesize 16.75} & {\footnotesize 16.63}\tabularnewline
-{\footnotesize 11 } & {\footnotesize 8.0} & {\footnotesize -} & {\footnotesize 18.93} & {\footnotesize -}\tabularnewline
+{\small{0}} & {\small{5.0}} & {\small{13.71}} & {\small{11.30}} & {\small{17.90}}\tabularnewline
+{\small{1}} & {\small{15.0}} & {\small{12.39}} & {\small{16.67}} & {\small{-}}\tabularnewline
+{\small{2}} & {\small{13.0}} & {\small{16.04}} & {\small{17.04}} & {\small{15.69}}\tabularnewline
+{\small{3}} & {\small{28.0}} & {\small{19.59}} & {\small{18.01}} & {\small{23.00}}\tabularnewline
+{\small{4}} & {\small{12.0}} & {\small{11.48}} & {\small{9.71}} & {\small{10.80}}\tabularnewline
+{\small{5}} & {\small{20.0}} & {\small{16.26}} & {\small{11.62}} & {\small{16.26}}\tabularnewline
+{\small{6}} & {\small{15.0}} & {\small{-}} & {\small{-}} & {\small{-}}\tabularnewline
+{\small{7}} & {\small{8.0}} & {\small{-}} & {\small{13.49}} & {\small{-}}\tabularnewline
+{\small{8}} & {\small{5.0}} & {\small{-}} & {\small{13.50}} & {\small{-}}\tabularnewline
+{\small{9}} & {\small{1.0}} & {\small{17.50}} & {\small{5.60}} & {\small{-}}\tabularnewline
+{\small{10}} & {\small{20.0}} & {\small{8.26}} & {\small{16.75}} & {\small{16.63}}\tabularnewline
+{\small{11 }} & {\small{8.0}} & {\small{-}} & {\small{18.93}} & {\small{-}}\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
 
 
-The results calculated by the optimization process are shown in Table
-\ref{tab:Clutter-optimization-solutions}. The solutions are given
-for each of the test networks, along with typical default loss values
-due to clutter. Hyphens represent clutter categories for which there
-are no field measurements available. Consequently, it is not possible
-to calculate an objective-function value for them.
+The results achieved by the optimization process are shown in Table~\ref{tab:05-Clutter_optimization_solutions}.
+The solutions are given for each of the test networks, along with
+the empirically-calculated (default) loss values. Hyphens represent
+clutter categories for which there were no field measurements available.
+Consequently, it was not possible to evaluate the objective-function
+for them.
 
 The optimized loss for the first clutter category, 0, representing
 urban area without buildings, is larger than the default value in
-all three networks. This may be attributed to the fact that ...???
-As for the category 1, representing suburban area, the value for Net$_{1}$
+all three networks. This may be attributed to the fact that these
+areas are not completely open, mostly surrounded by forests (Net$_{8}$
+and Net$_{10}$) and buildings of different sizes (Net$_{9}$). As
+for the category 1, representing suburban area, the value for Net$_{8}$
 is lower than the default one, mainly because this network is deployed
-over a predominant agricultural area, i.e. suburban areas are less
-dense here. On the other hand, the value for Net$_{2}$ is larger,
-indicating a building density above the average, whereas for Net$_{3}$,
-the value could not be calculated due to lack of measurements. A similar
-behavior may be observed for category 2, representing urban area.
-However, for category 3, representing dense urban area, the optimized
-losses of all three networks are lower than the default value, indicating
-dense urban areas here are not as dense as the average case. Representing
-agricultural area, category 4 gets a value very close to the default
-one for Net$_{1}$ and Net$_{3}$, whereas for Net$_{2}$ the value
-is lower, indicating the most of this kind of land is not being exploited
-near the city. As for category 5, representing forests, the results
-are well corresponded with the kind of forest dominating each of the
-test networks, being those of Net$_{1}$ and Net$_{3}$ more dense
-due to leave foliage, whereas as for Net$_{2}$ the forests are mostly
-coniferous and more sparse. Keeping the default loss values for categories
-6, 7 and 8, we move on to category 9, representing water, for which
-the results of all three networks indicate creeks and rivers in these
-areas are mostly surrounded by forests (Net$_{1}$) or buildings (Net$_{2}$),
-since none of the regions lays by the sea. As for the industrial areas,
-denoted by clutter category 10, show lower loss values than the typical
-default, indicating very sparse industrial buildings (Net$_{1}$)
-and a higher density of mostly commercial buildings for Net$_{2}$
-and Net$_{3}$).
+over a predominant agricultural area, i.e., suburban areas are less
+dense here. On the other hand, the value for Net$_{9}$ is larger,
+indicating a building density above the average, whereas for Net$_{10}$,
+the value could not be calculated due to the lack of measurements.
+For the category 2, representing urban area, the optimized values
+are above the default ones, clearly showing an underestimation of
+the manual approach. However, there is a relation among the clutter
+losses that corresponds to the population density in each of the regions,
+being Net$_{10}$ the less dense urban area among the three networks.
+The optimized values of the category 3, representing dense urban area,
+are lower than the default ones. This indicates that the dense urban
+areas in these regions have a lower density than the average case.
+Representing the agricultural area, the category 4 gets a value very
+close to the default one for Net$_{8}$ and Net$_{10}$, whereas for
+Net$_{9}$ the value is lower, indicating that this type of land is
+mostly open near the city, e.g., without plantations. As for the category
+5, representing forests, the results correspond with the type of forest
+that dominates each of the test-network regions. Namely, Net$_{8}$
+and Net$_{10}$ are dominated by dense forests presenting leave foliage,
+whereas in Net$_{9}$ the forests are mostly coniferous and more sparse.
+Keeping most of the default loss values for the categories 6, 7 and
+8, the results of the next category, 9, representing water, indicate
+creeks and rivers in these areas are almost entirely surrounded by
+forests (Net$_{8}$) or buildings (Net$_{9}$), since none of the
+regions lays by the sea. As for the industrial area, denoted by the
+clutter category 10, lower loss values than the empirically-calculated
+defaults appear. This indicates the presence of sparse industrial
+buildings in Net$_{8}$, and a higher density of mostly commercial
+buildings for Net$_{9}$ and Net$_{10}$. The last clutter category,
+11, could not be calculated for Net$_{8}$ and Net$_{10}$ due to
+the lack of field measurements.
 
-These results clearly show the benefit of the optimization of losses
-due to land usage or clutter, by finely adapting these values to local
-conditions within the environment where these networks are deployed.
+Notice that the relation among the different clutter categories is
+correctly kept for the three test networks. For example, it can be
+observed that the clutter loss for dense urban area (category 3) is
+higher than the values of the urban area (category 2), as well as
+of the agricultural area (category 4). Hence, the results reflect
+physically feasible losses, despite the higher deviation from the
+default losses shown by the category 2, and the lower deviation for
+the category 3, again with respect to the default losses. Such relations
+hold for different categories of all three test networks, strongly
+suggesting the correctness of the applied optimization approach and
+the evaluation methodology used. Consequently, it can be confirmed
+that the combination of PRATO and a metaheuristic algorithm is applicable
+for performing the automatic adjustment of clutter losses, since it
+is capable of reflecting the physical phenomena appearing in real-world
+conditions and improving the quality of radio-propagation predictions
+for three, geographically different, radio-network instances.
+
+\begin{figure}
+\centering
+
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_clutter}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
+
+\caption{Error distribution of the radio prediction for network Net$_{8}$:
+(a) with fitted parameter values and default clutter losses, and (b)
+with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net8}}
+\end{figure}
 
 
-\subsubsection{Statistical analysis}
+\begin{figure*}
+\centering
 
-Because of the stochastic nature of the optimization algorithm, we
-have collected the results from 30 independent runs, in order to have
-enough data for the results to be statistically relevant. In other
-words, the robustness of the solutions presented in the previous section
-is analyzed here.
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_clutter}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
 
-To this end, Table \ref{tab:Solutions-analysis} shows the solutions
-reached by the DASA for each of three test networks. The calculated
-signal losses are thus depicted with the minimum, maximum and average
-values for every clutter category, along with their standard deviation.
-Similarly as before, hyphens represent clutter categories for which
-there are no field measurements available, and thus they cannot be
-optimized. 
-
-\begin{table*}
-\caption{Statistical analysis of the optimization solutions for each test network.
-All values are expressed in dB. \label{tab:Solutions-analysis}}
+\caption{Error distribution of the radio prediction for network Net$_{9}$:
+(a) with fitted parameter values and default clutter losses, and (b)
+with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net9}}
+\end{figure*}
 
 
-{\footnotesize \centering}{\footnotesize \par}
+\begin{figure*}
+\centering
 
-\begin{tabular}{cccccccccccccccc}
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_clutter}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
+
+\caption{Error distribution of the radio prediction for network Net$_{10}$:
+(a) with fitted parameter values and default clutter losses, and (b)
+with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net10}}
+\end{figure*}
+
+
+\bigskip{}
+
+
+Similar to Section~\ref{sub:05-Least_squares_results}, bar charts
+show the cumulative distribution of the absolute error between the
+signal-propagation prediction and the field measurements (see Figures~\ref{fig:05-Clutter_error_distribution_for_Net8},
+\ref{fig:05-Clutter_error_distribution_for_Net9}, and \ref{fig:05-Clutter_error_distribution_for_Net10}).
+Figure~\ref{fig:05-Clutter_error_distribution_for_Net8}~(a) depicts
+the error distribution of the prediction for test network Net$_{8}$
+using the fitted model parameters, whereas Figure~\ref{fig:05-Clutter_error_distribution_for_Net8}~(b)
+shows the absolute-error distribution for the same test network, but
+using the optimized clutter losses (see Table~\ref{tab:05-Clutter_optimization_solutions},
+column Net$_{8}$). Notice how the error distributions show an improvement
+when the optimized clutter losses are used, lowering the biggest (right-most)
+deviations even further.
+
+The error distributions of the radio-propagation predictions for test
+network Net$_{9}$ using fitted parameters and default clutter losses,
+and fitted parameters with optimized clutter losses, are shown in
+Figures~\ref{fig:05-Clutter_error_distribution_for_Net9}~(a) and
+\ref{fig:05-Clutter_error_distribution_for_Net9}~(b), respectively.
+Similar to Net$_{8}$, the improvement appears in the biggest deviations,
+since their values are lower than when using the default clutter losses.
+
+For the last test network, Net$_{10}$, the error distributions are
+depicted in Figure~\ref{fig:05-Clutter_error_distribution_for_Net10}~(a)
+using the default clutter losses, and Figure~\ref{fig:05-Clutter_error_distribution_for_Net10}~(b)
+for the optimized ones. Again, the fitted model parameters were used
+for both simulation sets. In this case, a more significant improvement
+than for the other two networks appears, clearly showing the favorable
+effect of the optimization process. Moreover, this result suggests
+that some of the default clutter losses considerably fail in representing
+the actual physical conditions in the geographical region of this
+network.
+
+Overall, the presented results confirm that the optimization of clutter
+losses with respect to field measurements improves the quality of
+the calculated radio-propagation predictions. Considering the default
+clutter losses were empirically calculated by the radio engineers
+for the whole network, the convenience of the automated optimization
+procedure is clear. Indeed, these advantages are a consequence of
+a simpler method that automatically delivers radio-predictions of
+superior quality, thus accurately representing the physical properties
+of a given environment.
+
+\begin{table}
+\centering
+
+\caption{Statistical analysis of the solutions for the clutter-optimization
+problem. All values are expressed in dB. The corresponding box plots
+are depicted in Figure~\ref{fig:05-Statistical_analysis_boxplots}.
+\label{tab:05-Statistical_analysis_of_solutions}}
+
+
+{\scriptsize{}}%
+\begin{tabular}{ccccc>{\centering}p{0.75cm}cccc>{\centering}p{0.75cm}cccc>{\centering}p{0.75cm}}
 \cline{3-16} 
- &  &  & Net$_{1}$ &  &  &  &  & Net$_{2}$ &  &  &  &  & Net$_{3}$ &  & \tabularnewline
+ &  &  & \multicolumn{2}{c}{{\scriptsize{Net$_{8}$}}} &  &  &  & \multicolumn{2}{c}{{\scriptsize{Net$_{9}$}}} &  &  &  & \multicolumn{2}{c}{{\scriptsize{Net$_{10}$}}} & \tabularnewline
 \hline 
-{\footnotesize Category} &  & {\footnotesize Min} & {\footnotesize Max} & {\footnotesize Avg} & {\footnotesize St.dev.} &  & {\footnotesize Min} & {\footnotesize Max} & {\footnotesize Avg} & {\footnotesize St.dev.} &  & {\footnotesize Min} & {\footnotesize Max} & {\footnotesize Avg} & {\footnotesize St.dev.}\tabularnewline
+{\scriptsize{Cat.}} &  & {\scriptsize{Min}} & {\scriptsize{Max}} & {\scriptsize{Avg}} & {\scriptsize{St.dev.}} &  & {\scriptsize{Min}} & {\scriptsize{Max}} & {\scriptsize{Avg}} & {\scriptsize{St.dev.}} &  & {\scriptsize{Min}} & {\scriptsize{Max}} & {\scriptsize{Avg}} & {\scriptsize{St.dev.}}\tabularnewline
 \hline 
-{\footnotesize 0} &  & {\footnotesize 13.36} & {\footnotesize 13.97} & {\footnotesize 13.71} & {\footnotesize 0.15} &  & {\footnotesize 11.22} & {\footnotesize 11.40} & {\footnotesize 11.30} & {\footnotesize 0.04} &  & {\footnotesize 17.72} & {\footnotesize 17.85} & {\footnotesize 17.90} & {\footnotesize 0.07}\tabularnewline
+{\scriptsize{0}} &  & {\scriptsize{13.36}} & {\scriptsize{13.97}} & {\scriptsize{13.71}} & {\scriptsize{0.15}} &  & {\scriptsize{11.22}} & {\scriptsize{11.40}} & {\scriptsize{11.30}} & {\scriptsize{0.04}} &  & {\scriptsize{17.72}} & {\scriptsize{17.85}} & {\scriptsize{17.90}} & {\scriptsize{0.07}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 1} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} &  & {\footnotesize 14.25} & {\footnotesize 19.20} & {\footnotesize 16.67} & {\footnotesize 1.87} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
+{\scriptsize{1}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} &  & {\scriptsize{14.25}} & {\scriptsize{19.20}} & {\scriptsize{16.67}} & {\scriptsize{1.87}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 2} &  & {\footnotesize 15.84} & {\footnotesize 16.21} & {\footnotesize 16.04} & {\footnotesize 0.08} &  & {\footnotesize 16.99} & {\footnotesize 17.11} & {\footnotesize 17.04} & {\footnotesize 0.03} &  & {\footnotesize 15.64} & {\footnotesize 15.72} & {\footnotesize 15.69} & {\footnotesize 0.03}\tabularnewline
+{\scriptsize{2}} &  & {\scriptsize{15.84}} & {\scriptsize{16.21}} & {\scriptsize{16.04}} & {\scriptsize{0.08}} &  & {\scriptsize{16.99}} & {\scriptsize{17.11}} & {\scriptsize{17.04}} & {\scriptsize{0.03}} &  & {\scriptsize{15.64}} & {\scriptsize{15.72}} & {\scriptsize{15.69}} & {\scriptsize{0.03}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 3} &  & {\footnotesize 19.15} & {\footnotesize 20.07} & {\footnotesize 19.59} & {\footnotesize 0.25} &  & {\footnotesize 17.95} & {\footnotesize 18.12} & {\footnotesize 18.01} & {\footnotesize 0.04} &  & {\footnotesize 22.68} & {\footnotesize 23.20} & {\footnotesize 23.00} & {\footnotesize 0.16}\tabularnewline
+{\scriptsize{3}} &  & {\scriptsize{19.15}} & {\scriptsize{20.07}} & {\scriptsize{19.59}} & {\scriptsize{0.25}} &  & {\scriptsize{17.95}} & {\scriptsize{18.12}} & {\scriptsize{18.01}} & {\scriptsize{0.04}} &  & {\scriptsize{22.68}} & {\scriptsize{23.20}} & {\scriptsize{23.00}} & {\scriptsize{0.16}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 4} &  & {\footnotesize 11.35} & {\footnotesize 11.62} & {\footnotesize 11.48} & {\footnotesize 0.05} &  & {\footnotesize 9.63} & {\footnotesize 9.77} & {\footnotesize 9.71} & {\footnotesize 0.03} &  & {\footnotesize 10.73} & {\footnotesize 10.84} & {\footnotesize 10.80} & {\footnotesize 0.03}\tabularnewline
+{\scriptsize{4}} &  & {\scriptsize{11.35}} & {\scriptsize{11.62}} & {\scriptsize{11.48}} & {\scriptsize{0.05}} &  & {\scriptsize{9.63}} & {\scriptsize{9.77}} & {\scriptsize{9.71}} & {\scriptsize{0.03}} &  & {\scriptsize{10.73}} & {\scriptsize{10.84}} & {\scriptsize{10.80}} & {\scriptsize{0.03}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 5} &  & {\footnotesize 16.00} & {\footnotesize 16.54} & {\footnotesize 16.26} & {\footnotesize 0.14} &  & {\footnotesize 11.45} & {\footnotesize 11.80} & {\footnotesize 11.62} & {\footnotesize 0.08} &  & {\footnotesize 16.19} & {\footnotesize 16.30} & {\footnotesize 16.26} & {\footnotesize 0.04}\tabularnewline
+{\scriptsize{5}} &  & {\scriptsize{16.00}} & {\scriptsize{16.54}} & {\scriptsize{16.26}} & {\scriptsize{0.14}} &  & {\scriptsize{11.45}} & {\scriptsize{11.80}} & {\scriptsize{11.62}} & {\scriptsize{0.08}} &  & {\scriptsize{16.19}} & {\scriptsize{16.30}} & {\scriptsize{16.26}} & {\scriptsize{0.04}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 6} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
+{\scriptsize{6}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 7} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} &  & {\footnotesize 12.71} & {\footnotesize 14.52} & {\footnotesize 13.49} & {\footnotesize 0.39} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
+{\scriptsize{7}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} &  & {\scriptsize{12.71}} & {\scriptsize{14.52}} & {\scriptsize{13.49}} & {\scriptsize{0.39}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 8} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} &  & {\footnotesize 12.25} & {\footnotesize 15.79} & {\footnotesize 13.50} & {\footnotesize 0.83} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
+{\scriptsize{8}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} &  & {\scriptsize{12.25}} & {\scriptsize{15.79}} & {\scriptsize{13.50}} & {\scriptsize{0.83}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 9} &  & {\footnotesize 16.07} & {\footnotesize 18.80} & {\footnotesize 17.50} & {\footnotesize 0.83} &  & {\footnotesize 4.67} & {\footnotesize 6.26} & {\footnotesize 5.60} & {\footnotesize 0.35} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
+{\scriptsize{9}} &  & {\scriptsize{16.07}} & {\scriptsize{18.80}} & {\scriptsize{17.50}} & {\scriptsize{0.83}} &  & {\scriptsize{4.67}} & {\scriptsize{6.26}} & {\scriptsize{5.60}} & {\scriptsize{0.35}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 10} &  & {\footnotesize 7.79} & {\footnotesize 8.54} & {\footnotesize 8.26} & {\footnotesize 0.19} &  & {\footnotesize 16.68} & {\footnotesize 16.87} & {\footnotesize 16.75} & {\footnotesize 0.05} &  & {\footnotesize 16.50} & {\footnotesize 16.68} & {\footnotesize 16.63} & {\footnotesize 0.07}\tabularnewline
+{\scriptsize{10}} &  & {\scriptsize{7.79}} & {\scriptsize{8.54}} & {\scriptsize{8.26}} & {\scriptsize{0.19}} &  & {\scriptsize{16.68}} & {\scriptsize{16.87}} & {\scriptsize{16.75}} & {\scriptsize{0.05}} &  & {\scriptsize{16.50}} & {\scriptsize{16.68}} & {\scriptsize{16.63}} & {\scriptsize{0.07}}\tabularnewline
 \cline{1-6} \cline{8-11} \cline{13-16} 
-{\footnotesize 11} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} &  & {\footnotesize 18.62} & {\footnotesize 19.20} & {\footnotesize 17.04} & {\footnotesize 0.13} &  & {\footnotesize -} & {\footnotesize -} & {\footnotesize -} & {\footnotesize -}\tabularnewline
+{\scriptsize{11}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} &  & {\scriptsize{18.62}} & {\scriptsize{19.20}} & {\scriptsize{17.04}} & {\scriptsize{0.13}} &  & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}} & {\scriptsize{-}}\tabularnewline
 \hline 
 \end{tabular}
-\end{table*}
+\end{table}
 
 
-\begin{figure*}[tp]
+\begin{figure}
 \centering
 
-\includegraphics[width=0.49\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/boxplot-MS}\includegraphics[width=0.49\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/boxplot-LJ}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
-\end{figure*}
+\includegraphics[width=0.65\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/boxplot-MS}\\\hspace*{0.2in}(a)
+
+\includegraphics[width=0.65\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/boxplot-LJ}\\\hspace*{0.2in}(b)
+
+\includegraphics[width=0.65\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/boxplot-HI}\\\hspace*{0.2in}(c)
+
+\caption{Box plots representing the statistical-analysis values of Table~\ref{tab:05-Statistical_analysis_of_solutions},
+for the solutions of the clutter-optimization process of each test
+network: (a)~Net$_{8}$, (b)~Net$_{9}$, and (c)~Net$_{10}$.\label{fig:05-Statistical_analysis_boxplots}}
+\end{figure}
 
 
-\begin{figure*}[tp]
-\centering
-
-\includegraphics[width=0.51\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/boxplot-HI}\\\hspace*{0.2in}(c)
-
-\caption{Box plots showing the statistical analysis values of Table \ref{tab:Solutions-analysis},
-showing the solutions of the clutter-optimization process for each
-test network: (a) Net$_{1}$; (b) Net$_{2}$; (c) Net$_{3}$.\label{fig:boxplot}}
-\end{figure*}
+\bigskip{}
 
 
+Because of the stochastic nature of the DASA, the results of 30 independent
+runs were collected in order to have enough data for them to be statistically
+relevant. In other words, the robustness of the solutions, that have
+been presented in the previous section, is analyzed here.
 
-\section{Related work}\label{sec:Related-work}
+To this end, Table~\ref{tab:05-Statistical_analysis_of_solutions}
+shows the solutions reached by the DASA for each of three test networks.
+The calculated signal losses are depicted with the minimum, maximum
+and average values for every clutter category, along with their standard
+deviations. Again, hyphens represent clutter categories for which
+there were no field measurements available, and thus they could not
+be optimized. In order to easily visualize the data shown in Table~\ref{tab:05-Statistical_analysis_of_solutions},
+box plots based on the same values are provided in Figure~\ref{fig:05-Statistical_analysis_boxplots}.
+It can be observed that the standard deviation is low for almost all
+optimized categories, indicating a consistent convergence of the optimization
+algorithm. However, some exceptions are noticeable, e.g., the category
+9 in Net$_{8}$ and Net$_{9}$, representing water. In this case,
+there was a significantly lower density of field measurements nearby
+water trails, since none of the test networks lays by the sea. Regarding
+the categories 1 (suburban area), 7 and 8 (dry open land area) of
+Net$_{9}$, a lower proportion of field measurements over these areas
+was indentified, thus higher standard-deviation values appear.
 
-There are a few examples of radio-network simulators available for
-LTE \cite{Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Sanchez_Performance_evaluation_of_OFDMA_wireless_systems_using_WM_SIM:2006},
-mostly developed for academic environments, they are not targeted
-at real-world environments. A Matlab-based LTE simulator has been
-proposed in \cite{Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011}.
-It implements a standard LTE downlink physical layer, including Adaptive
-Modulation and Coding (AMC), multiple users, MIMO transmission and
-scheduler. Despite being open source and freely available, the fact
-of being implemented in Matlab make it very restrictive in terms of
-tackling bigger problem instances of real networks. A promising tool
-in this sense is presented in \cite{Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011},
-where the authors implement a full-stack LTE system in C++. Although
-the tool has no capability for graphically displaying the simulations,
-it could be implemented, since the source code is available. In our
-opinion, the main drawback of this tool is the lack of documentation,
-which makes it very time-consuming to continue extending this work
-without the direct help of one of the original authors. In \cite{Ozimek_Open.source.radio.coverage.prediction:2010},
-the authors present a tool for radio-coverage calculations of wireless
-networks. Implemented as a module of the open-source GRASS system,
-it made an ideal basis for expanding it with parallel-computation
-capabilities.
+Based on these findings, the standard deviation of the optimized clutter
+losses can be considered an indicator of the field measurements required
+by the optimization process, i.e., a higher standard deviation denotes
+more field measurements are needed to optimize the target clutter
+category.
 
-As an extension to the well-known NS-2 network simulator, Filiposka
-and Trajanov \cite{Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011}
-introduced a module for radio-propagation predictions, which takes
-the terrain profile into account. In this case, the authors focus
-on the relief and leave out signal loss due to land-usage, which is
-a key factor for acquiring more realistic radio-propagation predictions.
-
-Following an optimization-oriented approach \cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004},
-the authors study the effects of the location accuracy while performing
-a semi-automatic optimization of the parameters of a radio-propagation
-model. When compared to our work, where we take a fully automatic
-optimization approach, the advantage is clear, since no human intervention
-is needed during the optimization process. Besides, they conclude
-that locations with a median accuracy of around 60~mts, may be used
-for parameter tuning. In this sense, the GPS-informed location of
-the field measurements we had available, has been tested to be within
-this limit.
+\clearpage{}
 
 
-\section{Sumary}
+\section{Summary}
 
-We have presented an open-source simulation framework for planning
-and optimization of radio networks (PRATO). Based on extensive experimental
-simulations, we have shown the suitability of PRATO by tackling two
-planning and optimization cases, tested over the newly deployed LTE
-network in Slovenia. The first one involved the parameter tuning of
-an empirical radio-propagation model using a snapshot of field measurements.
-The other one consisted in optimizing the clutter losses over different
-regions of the country, therefore adapting the losses due to land
-usage to the local conditions of each region.
+This chapter illustrated the suitability of PRATO as a network-planning
+tool by tackling two coverage-planning problems, which were tested
+over the newly deployed LTE network in Slovenia. The first one involved
+the parameter tuning of the empirical radio-propagation model using
+a snapshot of field measurements. The second one considered the optimization
+of the clutter losses over different regions of the country, therefore
+automaticallty adapting them to the local conditions of the geographical
+region of each network.
 
-The encouraging results indicate that PRATO is applicable in planning
-and optimization of real-world radio networks in general, and LTE
-in particular. Moreover, even computational intensive tasks such as
-stochastic optimization, involving thousands of radio-prediction evaluations,
-are feasible thanks to the parallelization capabilities provided by
-the framework.
+The combination of the afore-mentioned techniques with PRATO provides
+an environment-adaptable framework for radio-network planning. This
+delivers a tool with a considerable improvent of the solution accuracy
+of the analyzed instances, especially if compared to traditional,
+i.e., manual or semi-automated, coverage-planning methods.
 
-
-\section*{Acknowledgments}
-
-The authors would like to especially thank the staff at the Nagasaki
-Advanced Computing Center (NACC) of the Nagasaki University for their
-support while making the computer cluster DEGIMA available for the
-experimental simulations used in this work. We are also grateful with
-the radio engineers at Telekom Slovenije, d.d., for supplying the
-network data sets and sharing their professional expertise throughout
-the creation of this work.
-
-This project was co-financed by the European Union, through the European
-Social Fund.
+Additionally, the simulation results indicate that PRATO is applicable
+for planning and optimization of real-world radio networks, since
+it is capable of simulating a large number of coverage configurations
+in a feasible amount of time. In particular, several of the presented
+instances show a large computational-time complexity, which is beyond
+reach for a serial implementation of an automated approach. Moreover,
+the parallelization capabilities provided by the framework create
+new problem-solving possibilities, together with the automation of
+tasks, that have been traditionally done manually by the network engineers.
+Furthermore, even computational-intensive tasks such as objective-function
+evaluations for stochastic optimization are feasible if PRATO is used.

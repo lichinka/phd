@@ -67,14 +67,14 @@ Abstract
 \begin_layout Standard
 The complexity of the design of radio networks has grown with the adoption
  of modern standards.
- Therefore, the role of the computer for delivering fast and accurate results,
- to support this decision-making process, has become increasingly important.
+ Therefore, the role of the computer for the faster delivery of accurate
+ results has become increasingly important.
  In this thesis, novel methods for the planning and automatic optimization
  of radio networks are developed and discussed.
 \end_layout
 
 \begin_layout Standard
-The state-of-the-art methaheuristic algorithms, which compare a large number
+The state-of-the-art metaheuristic algorithms, which compare a large number
  of different network configurations, rely on model-based simulations for
  the evaluation of the solution quality and the exploration of the search
  space.
@@ -100,9 +100,9 @@ le on a single multi-core CPU, as well as on a network of standard PCs with
 \end_layout
 
 \begin_layout Standard
-Increasing the performance of the simulations involved in the objective-function
- evaluation is only the first step towards a practical running-time reduction
- for radio-network optimization.
+Increasing the performance of the simulations involved during the objective-func
+tion evaluation is only the first step towards a practical running-time
+ reduction for radio-network optimization.
  In addition to this, also the optimization algorithms have to be improved
  in terms of speed, but not at the expense of the quality of results.
  In this sense, a novel agent-based algorithm is presented and tailored
@@ -114,15 +114,32 @@ Increasing the performance of the simulations involved in the objective-function
 \end_layout
 
 \begin_layout Standard
-The performance speedup also enables the formalization of new optimization
- problems and the automatization of time-consuming, radio-planning tasks
- that was not previously possible...???
+Another way to take advantage of the achieved speed-up at the simulation
+ stage is to tackle problems of greater complexity.
+ This thesis identifies a new optimization problem in 3G radio networks
+ that deals with soft-handover balancing of downlink and uplink areas.
+ Using a black-box approach, different metaheuristic algorithms are employed
+ for solving the problem, the solutions of which show a substantial improvement
+ of downlink and uplink balance.
 \end_layout
 
 \begin_layout Standard
-From the practical point of view, the utility and performance of the developed
- methods is assessed against an enterprise, commercial tool for radio-network
- planning with real-world scenarios ...???
+From the practical point of view, the automation of time-consuming, radio-planni
+ng tasks is yet another way to exploit the benefits of faster and more precise
+ simulations.
+ One such task is the configuration of the control parameters of empirical
+ radio-propagation models.
+ Another one is identified with the environmental adaptation of the signal
+ losses due to clutter.
+ Both tasks are automated, using the parallel framework as a central component
+ of the system.
+\end_layout
+
+\begin_layout Standard
+The utility and performance of the developed methods is assessed against
+ an enterprise, commercial tool for radio-network planning.
+ The objective of such comparison is to determine the usage properties of
+ the parallel framework in everyday planning, using real-world scenarios.
 \end_layout
 
 \begin_layout Standard

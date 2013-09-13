@@ -1,391 +1,111 @@
-%% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[12pt,a4paper,english,final,openany]{book}
+\documentclass[11pt,twoside,english]{MPSthesis}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
-\usepackage{color}
-\usepackage{babel}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 \usepackage{array}
-\usepackage{prettyref}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{setspace}
 \usepackage{nomencl}
 % the following is useful when we have the old nomencl.sty package
 \providecommand{\printnomenclature}{\printglossary}
 \providecommand{\makenomenclature}{\makeglossary}
 \makenomenclature
-\usepackage[unicode=true,pdfusetitle,
- bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
- breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
- {hyperref}
-\hypersetup{
- dvipdfm,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
 
 \makeatletter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-\pdfpageheight\paperheight
-\pdfpagewidth\paperwidth
-
 %% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
 %% A simple dot to overcome graphicx limitations
 \newcommand{\lyxdot}{.}
 
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-%
-% IPS PhD thesis template for LyX
-%	by Lucas Benedicic
-%
-% based on IPS PhD thesis template for LaTex by Erik Zupanic, Andreja Erzte
-%
+\author{Lucas Benedi\v{c}i\v{c}}
+
+\title{OPTIMIZATION AND PARALLELIZATION\\ METHODS FOR THE DESIGN\\ OF NEXT-GENERATION\\ RADIO NETWORKS}
+
+\naslov{OPTIMIZACIJSKE IN VZPOREDNE METODE ZA NA\v{C}RTOVANJE RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
+
+\supervisor{Assist. Prof. Dr. Peter Koro\v{s}ec}
+\supervisorlong{Assist. Prof. Dr. Peter Koro\v{s}ec, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\cosupervisor{Assist. Prof. Dr. Toma\v{z} Javornik}
+\cosupervisorlong{Assist. Prof. Dr. Toma\v{z} Javornik, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+
+\month{September}
+\year{2013}
+
+\evaluationBoardChairman{Assist. Prof. Dr. Jurij \v{S}ilc}
+\evaluationBoardChairmanAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+
+\evaluationBoardMember{Assist. Prof. Dr. Ale\v{s} \v{S}viglej}
+\evaluationBoardMemberAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+
+\evaluationBoardMembers{Prof. Dr. Marian Vajter\v{s}ic}
+\evaluationBoardMemberAffiliations{Department of Computer Science, University of Salzburg,\\ Austria}
 
 %
-% Page margins and binding offset
+% Package for algorithms
 %
-\usepackage[top=2.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,bindingoffset=0.7cm]{geometry}
-
-% fleqn enables left justification of equations in combination with \setlength{\mathindent}{1cm}
-%\usepackage[slovene,english]{babel}
-% Uses font family: Times Roman
-\usepackage{aecompl}
-\usepackage{mathrsfs}% for \mathscr
-%\setlength{\mathindent}{1cm}    % sets indentation of equations
-\usepackage{url}
-\usepackage{psfrag}
-\usepackage{units}
-\usepackage{fancyhdr}
-\usepackage[small]{caption}
-\usepackage{cite}
-\usepackage{subfigure}
-\usepackage{fixltx2e}% Enables commands \textsuperscript and \textsubscript
-\usepackage[nottoc,numbib]{tocbibind}% bibliography numbered
-
-%
-% Tables
-%
-\usepackage[table]{xcolor}% enables color cellc in tables
-\usepackage{hhline}% makes black lines when color cells are used (because \hline does not work)
-
-%
-% Algorithms - float environment for custom Algorithms defined lower in the template: myalgorithm
-% In this case, program package is selected and program environment is used for algorithms as subfloat in myalgortihm floats
-%
-\usepackage{program}
-
-\usepackage{titlesec}
-\usepackage{chngcntr}
-\usepackage{titletoc}
-\usepackage[subfigure]{tocloft}%manipulates contents lists
-\usepackage{appendix}
-\usepackage{float}
-
-%package for inputing urls and other links
-
-
-%% Chapter titles and fonts
-    %\usepackage{titlesec}
-\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
-\titlespacing{\chapter}{0pt}{0pt}{35mm}
-\addto\captionsenglish{\renewcommand{\chaptername}{}}   %remove chapter X
-    %\usepackage{chngcntr}
-\counterwithout{figure}{chapter}    %correct counting of figures - ips template style
-\counterwithout{table}{chapter}     %correct counting of tables - ips template style
-\counterwithout{equation}{chapter}  %correct counting of equations - ips template style
-
-    %\usepackage{titletoc}
-\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
-\titlespacing{\chapter}{0pt}{0pt}{35mm}
-    %\usepackage[subfigure]{tocloft} %manipulates contents lists
-\renewcommand{\cfttoctitlefont}{\LARGE\bfseries}
-\setlength{\cftaftertoctitleskip}{35mm}
-\renewcommand{\cftlottitlefont}{\LARGE\bfseries}
-\setlength{\cftafterlottitleskip}{35mm}
-\renewcommand{\cftloftitlefont}{\LARGE\bfseries}
-\setlength{\cftafterloftitleskip}{35mm}
-\renewcommand{\cfttabpresnum}{\tablename\ } %put the name before the number in the listoftables (lot)
-\renewcommand{\cftfigpresnum}{\figurename\ } %put the name before the number in the listoffigures (lof)
-\renewcommand{\cftfigaftersnum}{:} %put : after the number in the listoffigures
-\renewcommand{\cfttabaftersnum}{:} %put : after the number in the listoftables
-\setlength{\cfttabnumwidth}{5em} %space for the name before number in the listoftables
-\setlength{\cftfignumwidth}{5em} %space for the name before number in the listoffigures
-\setlength{\cftbeforefigskip}{0em} %changing the space between entries in the lof
-\setlength{\cftbeforetabskip}{0em} %changing the space between entries in the lot
-
-% shows numbers of subsections in toc
-% numbers all sub(-sub)sections
-%
-
-%%
-\renewcommand{\citeleft}{[}
-\renewcommand{\citeright}{]}
-
-\graphicspath{{images/}}
-
-%% myalgorithm float (used for writing algorithms) - definitions
-%\usepackage{float}
-
-%%
-\newcommand{\floatc@simplerule}[2]{{\@fs@cfont #1 #2}\par}
-\newcommand{\fs@simplerule}{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@simplerule
-  \def\@fs@pre{\hrule height0pt depth0pt \kern4pt}%
-  \def\@fs@post{\kern4pt\hrule height0.1mm depth0pt \kern4pt \relax}%
-  \def\@fs@mid{\kern8pt}%
-  \let\@fs@iftopcapt\iftrue}
-
-\floatstyle{simplerule}
-\newfloat{myalgorithm}{thp}{lob}[chapter]
-\floatname{myalgorithm}{Algorithm}
-%\listof{myalgorithm}{Index of algorithms}
-\counterwithout{myalgorithm}{chapter} %correct counting of algorithms - ips template style
-%%
-\newcommand{\listmyalgorithmname}{Index of Algorithms} %define the name for the list of algorithms (loa)
-\newlistof{myalgorithms}{loa}{\listmyalgorithmname} %make newlistof
-%\renewcommand{\cftmyalgorithmtitlefont}{\Large\bfseries}
-%\setlength{\cftaftermyalgorithmtitleskip}{35mm}
-%\setlength{\cftmyalgorithmsnumwidth}{5em} %space for the name before number in the listofalgorithms (loa)
-%\setlength{\cftmybeforealgorithmsskip}{0em} %changing the space between entries in the loa
-
-\newcommand{\HRule}{\rule{\linewidth}{0.1mm}} % defines line used in the example
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
 
 \makeatother
 
+\usepackage{babel}
 \begin{document}
-% *******************************************
-%           First page (title page)
-% *******************************************
-% This page uses modified margins
+\frontmatter
 
+\makepreamble
 
-\newgeometry{margin=2cm, bindingoffset=0.7cm}
-
-\thispagestyle{empty} 
-
-\noindent \begin{flushright}
-{\huge {}\textbf{\LARGE OPTIMIZATION AND PARALLELIZATION}\\
-\textbf{\LARGE METHODS FOR THE DESIGN}\\
-\textbf{\LARGE OF NEXT-GENERATION}\\
-\textbf{\LARGE RADIO NETWORKS}{\huge }\\
-{\huge }} 
-\par\end{flushright}
-
-\begin{flushright}
-\vspace{3cm}
-
-\par\end{flushright}
-
-\noindent \begin{flushright}
-{\LARGE {Lucas Benedi\v{c}i\v{c}}} 
-\par\end{flushright}
-
-\clearpage{}
-
-% *******************************************
-% *******************************************
-%        Second page - information
-% *******************************************
-% This page uses modified margins
-
-
-\newgeometry{margin=2cm, bindingoffset=1.2cm}
-
-\thispagestyle{empty}
-
-\textnormal{ } \\ % empty line
-\textnormal{ } \\ % empty line
-
-\vspace{2.1cm}
-
-
-\noindent \textbf{Doctoral Dissertation}
-
-\noindent \textbf{Jo¸ef Stefan International Postgraduate School}
-
-\noindent \textbf{Ljubljana, Slovenia, September 2013} % Insert: month and year
-
-
-\vspace{1.6cm}
-
-
-\noindent \textbf{Evaluation Board:}\\
- % Insert data about board members into lines below
-\vspace{-2mm}
- 
-
-\begin{spacing}{1.3500000000000001}
-\noindent {\textit{Assist. Prof. Dr. Jurij \v{S}ilc, Chairman, Jo\v{z}ef
-Stefan Institute, Ljubljana, Slovenia}.}\\
-{\textit{Assist. Prof. Dr. Ale\v{s} \v{S}viglej, Jo\v{z}ef Stefan
-Institute, Ljubljana, Slovenia}.}\\
-{\textit{Prof. Dr. Marian Vajter\v{s}ic, Department of Computer
-Science, University of Salzburg, Austria}.} 
-\end{spacing}
-
-\noindent \clearpage{}
-
-% Third page - title page
-% This page uses modified margins
-
-\newgeometry{margin=2cm, bindingoffset=1.2cm}
-
-\thispagestyle{empty}
-
-\begin{minipage}[t]{1\textwidth}%
-\vspace{-10cm}
-
-
-\hspace{-0.5cm}\includegraphics[width=16cm]{img/header}
-
-\vspace{-8cm}
-
-
-{\Large \noindent{Lucas Benedi\v{c}i\v{c}}}\\
-
-
-\vspace{1.4cm}
-
-
-\begin{doublespace}
-\noindent {\huge {}\textbf{\LARGE OPTIMIZATION AND PARALLELIZATION}\\
-\textbf{\LARGE METHODS FOR THE DESIGN}\\
-\textbf{\LARGE OF NEXT-GENERATION}\\
-\textbf{\LARGE RADIO NETWORKS}{\huge }}\\
- 
-\end{doublespace}
-
-\vspace{0.5cm}
-
-
-\noindent {\Large {}\textbf{\Large Doctoral Dissertation}{\Large }}\\
-
-
-\vspace{1.5cm}
-
-
-\begin{doublespace}
-\noindent {\huge {}\textbf{\LARGE OPTIMIZACIJSKE IN VZPOREDNE}\\
-\textbf{\LARGE METODE ZA NA\v{C}RTOVANJE}\\
-\textbf{\LARGE RADIJSKIH OMRE´IJ}\\
-\textbf{\LARGE NASLEDNJE GENERA\-{CI}\-{JE}}{\huge }}\\
- 
-\end{doublespace}
-
-\vspace{0.5cm}
-
-
-\noindent {\Large {}\textbf{\Large Doktorska disertacija}{\Large }}\\
-
-
-\vspace{1.5cm}
-
-
-\noindent \textit{\large Supervisor}{\large : Assist. Prof. Peter
-Koro\v{s}ec}\\
-\\
-\textit{\large Co-supervisor}{\large : Assist. Prof. Toma\v{z} Javornik}\\
-\\
-\\
-{Ljubljana, Slovenia, September 2013}%
-\end{minipage}
-
-\clearpage{}
-
-\thispagestyle{empty}
+\maketitle
 
 \cleardoublepage{}
 
-\thispagestyle{empty}
-
-\vfill{}
-
-
-Dedicatoria de la thesis. Dedicatoria de la thesis. Dedicatoria de
-la thesis. Dedicatoria de la thesis. Dedicatoria de la thesis. Dedicatoria
-de la thesis. Dedicatoria de la thesis. Dedicatoria de la thesis.
-Dedicatoria de la thesis. 
-
-\clearpage{}
-
-% *******************************************
-
-
-%               Dissertation
-% *******************************************
-% From now on, document uses margins specified in the preamble
-
-\restoregeometry
-
-\thispagestyle{empty}
-
-\global\long\def\listfigurename{List of Figures}
-
-
-\global\long\def\listtablename{List of Tables}
-
-
-\global\long\def\contentsname{Contents}
-
-
-\global\long\def\bibname{References}
-
-
-\global\long\def\supers#1{\ensuremath{^{\textrm{#1}}}}
- \global\long\def\subs#1{\ensuremath{_{\textrm{#1}}}}
-
-
-\global\long\def\chaptermark#1{\markboth{\thechapter.\ #1}{}}
-
-
-\pagestyle{fancy}
-
-%\renewcommand{\sectionmark}[1]{\markright {\thechapter.\ #1}}
-
-\global\long\def\headrulewidth{0pt}
- \global\long\def\footrulewidth{0pt}
- \global\long\def\tim{\fontfamily{tm}\fontseries{a}\fontsize{10}{12}\selectfont}
-
-
-\fancyhf{} \fancyhead[LE,RO]{\tim \thepage} \fancyhead[LO,RE]{\tim \leftmark}
-
-\fancypagestyle{plain}{ \fancyhf{} \fancyhead[LE,RO]{\tim \thepage}
-\global\long\def\headrulewidth{0pt}
- \global\long\def\footrulewidth{0pt}
-}
+\include{00a-abstract}
 
 \cleardoublepage{}
 
-\pagenumbering{Roman} 
+\include{00b-povzetek}
 
-\pagestyle{fancy}
+\cleardoublepage{}
 
-\setcounter{page}{7}
+%\pagenumbering{Roman} 
+
+%\pagestyle{fancy}
+
+%\setcounter{page}{7}
 
 \tableofcontents{}
 
+\cleardoublepage{} \listoffigures
+
+
+\cleardoublepage{} \listoftables
+
+
+\cleardoublepage{} 
+
+\listof{algorithm}{List of Algorithms}
+
+
 \cleardoublepage{}
 
-\addcontentsline{toc}{chapter}{Abstract}
-
-\thispagestyle{plain}\include{00a-abstract}\cleardoublepage{}
-
-\addcontentsline{toc}{chapter}{Povzetek}
-
-\thispagestyle{plain}
-
-\include{00b-povzetek}\cleardoublepage{}
+\thispagestyle{fancy}
 
 \addcontentsline{toc}{chapter}{Abbreviations}
 
 \renewcommand{\nomname}{Abbreviations}
-
-\thispagestyle{fancy}
 
 %
 % Custom format for displaying nomenclature entries
@@ -396,79 +116,58 @@ Dedicatoria de la thesis.
 %
 % Fancy dividing line for nomenclature groups (A - abbreviations, S - symbols)
 %
+%\renewcommand{\nomgroup}[1]{%
+%	\item[]\hspace*{-\leftmargin}%
+%	\rule[2pt]{0.45\linewidth}{1pt}%
+%	\hfill #1\hfill \rule[2pt]{0.45\linewidth}{1pt}%
+%}
 \renewcommand{\nomgroup}[1]{%
-	\item[]\hspace*{-\leftmargin}%
-	\rule[2pt]{0.45\linewidth}{1pt}%
-	\hfill #1\hfill \rule[2pt]{0.45\linewidth}{1pt}%
-}\printnomenclature[7em]{}
+	\ifthenelse{\equal{#1}{A}}{\item[]\hspace*{-\leftmargin}\textbf{\huge{Abbreviations}} }{%
+		\ifthenelse{\equal{#1}{S}}{\item[]\hspace*{-\leftmargin}\textbf{\huge{Symbols}} }{}}}\printnomenclature[7em]{}
 
 \cleardoublepage{}
 
-\pagenumbering{arabic}
+\mainmatter
 
-\pagestyle{fancy}
+\mychapterstyle
 
-\global\long\def\chaptermark#1{\markboth{#1}{}}
- % shows only chapter name in header
-%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
-\setcounter{page}{1}
+\include{01-introduction/01-introduction}
 
-\setlength{\subfigtopskip}{6mm} %vertical space between subfigures when \\ is used
+\cleardoublepage{}
 
+\include{02-background_and_motivation/02-background_and_motivation}
 
-\include{01-introduction/01-introduction}\cleardoublepage{}
-
-\include{02-background_and_motivation/02-background_and_motivation}\cleardoublepage{}
+\cleardoublepage{}
 
 \include{04-framework_design_and_implementation/04-framework_design_and_implementation}
 
 \cleardoublepage{}
 
 \include{06-experimental_evaluation-service_coverage/06-service_coverage_problem}
-\cleardoublepage{}
-
-\include{07-experimental_evaluation-sho_balancing/07-soft_handover_alignment} 
 
 \cleardoublepage{}
 
-\include{05-framework_parameter_tuning/05-framework_parameter_tuning}\cleardoublepage{}
+\include{07-experimental_evaluation-sho_balancing/07-soft_handover_alignment}
 
-\include{08-real_network_planning/08-real_network_planning}\cleardoublepage{}
+\cleardoublepage{}
 
-\include{09-conclusion/09-conclusion} \cleardoublepage{}
+\include{05-framework_parameter_tuning/05-framework_parameter_tuning}
 
-\include{10-acknowledgments/10-acknowledgments} \cleardoublepage{}
+\cleardoublepage{}
 
-%\thispagestyle{plain}
+\include{08-real_network_planning/08-real_network_planning}
 
-\bibliographystyle{nature}
-\bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,05-framework_parameter_tuning/05-framework_parameter_tuning,07-experimental_evaluation/07-01-soft_handover_alignment,07-experimental_evaluation/07-02-service_coverage_problem}
+\cleardoublepage{}
 
+\include{09-conclusion/09-conclusion}
 
-\cleardoublepage{} \listoffigures
+\cleardoublepage{}
 
-
-\cleardoublepage{} \listoftables
-
-
-\cleardoublepage{}\addcontentsline{toc}{chapter}{Index of Algorithms} 
-
-\listof{myalgorithm}{Index of Algorithms} 
-
-\appendix
-%dummy comment inserted by tex2lyx to ensure that this paragraph is not empty
-%%
-%To not show sections in TOC use new command \tocless (uncomment next two lines)
-%\newcommand{\nocontentsline}[3]{}
-%\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
-%% Example:
-%\tocless\section{hide}
-%\tocless\subsection{subhide}
-%%
+\bibliographystyle{plain}
+\bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning}
 
 
-\renewcommand*{\thechapter}{ } \renewcommand*{\thesection}{\Alph{section}}
-\include{00e-Appendix1} \cleardoublepage{}
+\cleardoublepage{}
 
-\include{00e-Appendix2}
+\include{10-acknowledgments/10-acknowledgments}
 \end{document}
