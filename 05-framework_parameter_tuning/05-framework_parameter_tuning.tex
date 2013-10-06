@@ -54,7 +54,7 @@ an extensive analysis of the performed simulations on three test networks.
 With the advent of LTE as part of the 4G in cellular technology, mobile
 operators are facing the challenges of deploying a new network. LTE
 follows the well established UMTS/HSPA combo, targeting higher peak
-data rates, higher spectral efficiency and lower latency \cite{Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010}. 
+data rates, higher spectral efficiency and lower latency~\cite{Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010}. 
 
 The deployment of a new radio network is always a challenge for mobile
 operators, who constantly struggle to find the optimal investment
@@ -63,7 +63,7 @@ QoS. Indeed, coverage planning remains a key problem that all operators
 have to deal with.
 
 Although different mathematical models have been proposed for radio-propagation
-modeling, none of them excels in a network-wide scenario \cite{Shabbir_Comparison_of_radio_propagation_models:2011}.
+modeling, none of them excels in a network-wide scenario~\cite{Shabbir_Comparison_of_radio_propagation_models:2011}.
 Empirical propagation models usually give good results with a limited
 computational effort. However, for improved accuracy, the model parameters
 have to conform to a specific network or region within it, mainly
@@ -102,7 +102,7 @@ for parameter tuning. Also, they notice that although the model accuracy
 improved after the parameter tuning, it gives inadequate results when
 used for predicting radio propagation over distant areas.
 
-<More related work...???>
+
 
 
 \section{Parameter tuning of the radio-propagation model \label{sec:05-Parameter_tuning_radio-propagation_model}}
@@ -123,22 +123,22 @@ to a given set of field measurements is minimized.
 
 To calculate the radio-propagation predictions, the empirical model,
 previously introduced in Section~\ref{sub:04-Radio_propagation_model},
-Chapter~\ref{chap:04-Framework-design-and-implementation}, is used.
-Recall that the model contains a vector of adaptable parameters, $\beta$.
-For this reason, this mathematical model is especially appropriate
-for tuning, since it can be adapted to a given scenario and its local
-conditions by adjusting the values of the vector $\beta=(a_{0},a_{1},a_{2},a_{3})$,
+is used. Recall that the model contains a vector of adaptable parameters,
+$\vec{\beta}$. For this reason, this mathematical model is especially
+appropriate for tuning, since it can be adapted to a given scenario
+and its local conditions by adjusting the values of the vector $\vec{\beta}=(\beta_{0},\beta_{1},\beta_{2},\beta_{3})$,
 the elements of which represent:
 \begin{description}
-\item [{$a_{0}$}] the reference loss or offset,
-\item [{$a_{1}$}] the loss slope due to distance of the receiver from
+\item [{$\beta_{0}$}] the reference loss or offset,
+\item [{$\beta_{1}$}] the loss slope due to distance of the receiver from
 the transmitter,
-\item [{$a_{2}$}] the loss slope due to height of the transmitter antenna,
-\item [{$a_{3}$}] the loss slope due to the combined effect of the distance
-and height of the antenna.
+\item [{$\beta_{2}$}] the loss slope due to height of the transmitter
+antenna, and
+\item [{$\beta_{3}$}] the loss slope due to the combined effect of the
+distance and height of the antenna.
 \end{description}
 The parameter tuning is performed per cell to improve the local fitting
-of the radio predictions, being its resulting solution a vector $\beta_{c}$
+of the radio predictions, being its resulting solution a vector $\vec{\beta}_{c}$
 for a target cell $c$, $c\in C$.
 
 Also, recall that the model includes an extra term in order to adequately
@@ -177,16 +177,15 @@ Clutter category & Description\tabularnewline
 
 
 
-\subsection{Field measurements}
+\subsection{Field measurements \label{sub:05-Field_measurements}}
 
 In radio networks, an UE constantly performs cell selection/reselection
-procedures and handover (see Section~\ref{sub:02-Handover-and-soft-handover},
-Chapter~\ref{chap:02-Principles_of_mobile_radio_networks}), in order
-to keep the best possible connection to the network. Within this context,
-the best connection is selected by probing a QoS measure of the neighboring
-cells. In LTE networks, the UE measures two parameters from the reference
-signal of the network, namely the Reference Signal Received Power
-(RSRP) and the Reference Signal Received Quality (RSRQ).
+procedures and handover (see Section~\ref{sub:02-Handover-and-soft-handover}),
+in order to keep the best possible connection to the network. Within
+this context, the best connection is selected by probing a QoS measure
+of the neighboring cells. In LTE networks, the UE measures two parameters
+from the reference signal of the network, namely the Reference Signal
+Received Power (RSRP) and the Reference Signal Received Quality (RSRQ).
 
 For a certain frequency bandwidth, RSRP measures the average received
 power over the resource elements that carry cell-specific reference
@@ -206,7 +205,7 @@ analyzer. The spectrum analyzer was connected to an external omni
 antenna mounted on the roof of the truck, at roughly 2~m above the
 ground, taking measurements at a rate of 2~Hz. To accurately establish
 the measurement-location points, a GPS unit was used. These GPS-informed
-locations have been tested to be compliant with the 60m limit mentioned
+locations have been tested to be compliant with the 60~m limit mentioned
 in~\cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004}.
 The measurements cover most of the streets within the target area,
 with over 300,000 individual points, collected for more than 140 network
@@ -231,35 +230,36 @@ the minimization criterion is the squared-sum difference between the
 predicted and the observed RSRP levels, i.e.:
 
 \begin{equation}
-E(\beta_{c})=\sum_{i=1}^{m_{c}}(p_{c}-pl_{c}(i,\beta_{c})-fm_{i})^{2},\label{eq:05-Least_squares_error}
+E(\vec{\beta_{c}})=\sum_{i=1}^{m_{c}}(p_{c}-\mathrm{L}{}_{c}(i,\vec{\beta_{c}})-fm_{i})^{2},\label{eq:05-Least_squares_error}
 \end{equation}
 
 
-\noindent where $E(\beta_{c})$ is the observed error for cell $c$
-given the parameters $\beta_{c}$, $p_{c}$ is the pilot power of
-cell $c$, and $pl_{c}(i,\beta_{c})$ is the path loss of cell $c$
-at the same geographical point of $fm_{i}$, i.e., the $i$-th field
-measurement out of a set of measurements for cell $c$, the cardinality
-of which is $m_{c}$.
+\noindent where $E(\vec{\beta_{c}})$ is the observed error (in dB)
+for cell $c$ given the parameters $\vec{\beta_{c}}$, $p_{c}$ is
+the pilot power of cell $c$, and $\mathrm{L}_{c}(i,\beta_{c})$ is
+the path loss of cell $c$ at the same geographical point of $fm_{i}$,
+i.e., the $i$-th field measurement out of a set of measurements for
+cell $c$, the cardinality of which is $m_{c}$.
 
 A necessary condition for the linear least-squares method to find
 the global minimum is the linear relationship between the predicted
-path loss, $pl_{c}(i,\beta)$, and the vector $\beta_{c}$~\cite{Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008}.
+path loss, $\mathrm{L}{}_{c}(i,\vec{\beta})$, and the vector $\vec{\beta_{c}}$~\cite{Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion_network_planning:2008}.
 This condition can be verified by calculating the first derivative
-of $E(\beta_{c})$ in terms of the components of vector $\beta_{c}=<a_{0c},a_{1c},a_{2c},a_{3c}>$,
-i.e., $\frac{\partial E(\beta_{c})}{\partial a_{0c}}=0$, $\frac{\partial E(\beta_{c})}{\partial a_{1c}}=0$,
-$\frac{\partial E(\beta_{c})}{\partial a_{2c}}=0$, and $\frac{\partial E(\beta_{c})}{\partial a_{3c}}=0$.
+of $E(\vec{\beta_{c}})$ in terms of the components of vector $\vec{\beta_{c}}=<\beta_{0c},\beta{}_{1c},\beta_{2c},\beta_{3c}>$,
+i.e., $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta{}_{0c}}=0$,
+$\frac{\partial E(\vec{\beta_{c}})}{\partial\beta_{1c}}=0$, $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta_{2c}}=0$,
+and $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta{}_{3c}}=0$.
 
 
 \subsection{Simulations \label{sub:05-Simulations}}
 
 The simulations consisted in building the matrices of the observed-error
-values, $E(\beta_{c})$, for each cell $c$ in the target network.
+values, $E(\vec{\beta_{c}})$, for each cell $c$ in the target network.
 The linear systems of equations are then individually solved by applying
 the linear least-squares method, which involves the evaluation of
 one radio-coverage prediction per cell. Each solved system holds a
 unique solution for a cell $c$, $c\in C$, denoted by the vector
-$\beta_{c}$.
+$\vec{\beta_{c}}$.
 
 
 \subsection{Test networks \label{sub:05-Test_networks}}
@@ -283,14 +283,14 @@ each test network.
 \begin{table}
 \centering
 
-\caption{Several properties of the test networks Net$_{8}$, Net$_{9}$ and
-Net$_{10}$, that were used for the experimental simulations during
-the automated tuning of the radio-propagation model.\label{tab:05-Test_network_properties}}
+\caption{Parameters of the test networks Net$_{8}$, Net$_{9}$ and Net$_{10}$,
+that were used for the experimental simulations during the automated
+tuning of the radio-propagation model.\label{tab:05-Test_network_properties}}
 
 
 \begin{tabular}{cccc}
 \cline{2-4} 
- & Number of cells  & Area (km$^{2}$) & Field-measurement proportion (\%)\tabularnewline
+ & Number of cells  & Area {[}km$^{2}${]} & Field-measurement proportion {[}\%{]}\tabularnewline
 \hline 
 Net$_{8}$  & 12 & 103.74 & 5.41\tabularnewline
 Net$_{9}$  & 130  & 1298.02 & 12.02\tabularnewline
@@ -335,8 +335,9 @@ given in Table~\ref{tab:05-Clutter_categories}. \label{tab:05-Proportion_of_clut
 \end{table}
 
 
-The terrain profiles are most relevant for Net$_{8}$ and Net$_{10}$,
-since none of them contains densely populated urban areas. Note that
+Since the terrain profiles are most relevant for Net$_{8}$ and Net$_{10}$,
+they are shown in Figures~\ref{fig:05-Terrain_profile_for_Net8}
+and~\ref{fig:05-Terrain_profile_for_Net10}, respectively. Note that
 the terrain shown in Figure~\ref{fig:05-Terrain_profile_for_Net8}
 is mostly flat, since the agricultural area prevails in Net$_{8}$.
 In contrast, the terrain for Net$_{10}$ is dominated by hills, which
@@ -369,16 +370,15 @@ In the following, the default parameters of the radio-propagation
 model correspond to the values provided by the engineers of the Radio
 Network department at Telekom Slovenije, d.d.
 
+\bigskip{}
 
-\subsection{Experimental environment \label{sub:05-Experimental_environment}}
 
 The simulations were carried out on several computing nodes of the
 previously presented DEGIMA cluster~\cite{Hamada_Cluster_of_GPUs:2010}
-at the NACC of the Nagasaki University in Japan (see Section~\ref{sec:04-Simulations},
-Chapter~\ref{chap:04-Framework-design-and-implementation}). Groups
-of 3, 4, and 34 nodes were used for executing the simulations of the
-different problem instances, i.e., Net$_{8}$, Net$_{9}$ and Net$_{10}$,
-respectively.
+at the NACC of the Nagasaki University in Japan (see Section~\ref{sec:04-Simulations}).
+Groups of 3, 4, and 34 nodes were used for executing the simulations
+of the different problem instances, i.e., Net$_{8}$, Net$_{9}$ and
+Net$_{10}$, respectively.
 
 
 \subsection{Results \label{sub:05-Least_squares_results}}
@@ -439,15 +439,15 @@ is lower. See Table~\ref{tab:05-Test_network_properties} for a reference
 of the field-measurement proportions with respect to the area surface
 of each test network. Similar findings were confirmed by other authors,
 who worked on the adjustment of radio-propagation models to different
-environments \cite{Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012}.
+environments~\cite{Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012}.
 For the sake of completeness, it is worth pointing out that some researchers
 have already started working on different ways on how to improve this
-aspect \cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011,Neuland_Influence_of_positioning_error_on_X_Map_estimation_in_LTE:2011}.
+aspect~\cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011,Neuland_Influence_of_positioning_error_on_X_Map_estimation_in_LTE:2011}.
 
 \begin{figure}
 \centering
 
-\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
 
 \caption{Error distribution of the radio prediction for network Net$_{8}$:
 (a) with default parameter values, and (b) with fitted parameter values.\label{fig:05-Error_distribution_for_Net8}}
@@ -457,17 +457,17 @@ aspect \cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2
 \begin{figure}[h]
 \centering
 
-\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
 
 \caption{Error distribution of the radio prediction for network Net$_{9}$:
 (a) with default parameter values, and (b) with fitted parameter values.\label{fig:05-Error_distribution_for_Net9}}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 
-\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
 
 \caption{Error distribution of the radio prediction for network Net$_{10}$:
 (a) with default parameter values, and (b) with fitted parameter values.\label{fig:05-Error_distribution_for_Net10}}
@@ -483,7 +483,7 @@ are optimized in this section.
 
 As it was mentioned before, there are several reasons for the predicted
 signal-loss values to be inaccurate. The seasonal changes are among
-them, like tree foliage or snow. Also, changes related to urban development,
+them, like tree foliage and snow. Also, changes related to urban development,
 like demolition or construction of buildings and parks, and different
 kinds of forests or agricultural areas, etc. These changes are only
 noticeable through regular updates of accurate land-usage data. However,
@@ -518,19 +518,19 @@ numerical-optimization problems.
 
 \subsection{Optimization objective \label{sub:Optimization-objective}}
 
-The optimization objective consists in adjusting the loss values of
-the different clutter categories, i.e., $pl_{\mathrm{CLUT}}(d_{(x,y)})$
-from Equation~(\ref{eq:04-Hata_pathloss}), Chapter~\ref{chap:04-Framework-design-and-implementation},
-according to a set of field measurements of a given geographical region.
-The same three data sets used in Section~\ref{sub:05-Simulations}
-were used for the clutter-optimization problem: the first for Net$_{8}$,
-the second for Net$_{9}$, and the third for Net$_{10}$. Each region
-was independently optimized, so that the radio-propagation predictions
-of each set of network cells minimized the mean-squared error against
-the field measurements, i.e.:
+The optimization objective consists of adjusting the loss values of
+the different clutter categories, i.e., $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
+from Equation~(\ref{eq:04-Hata_pathloss}), according to a set of
+field measurements of a given geographical region. The same three
+data sets used in Section~\ref{sub:05-Simulations} were used for
+the clutter-optimization problem: the first for Net$_{8}$, the second
+for Net$_{9}$, and the third for Net$_{10}$. Each region was independently
+optimized, so that the radio-propagation predictions of each set of
+network cells minimized the mean-squared error against the field measurements,
+i.e.:
 
 \begin{equation}
-\min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-pl_{c}(i,\beta_{c}^{*})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
+\min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-\mathrm{L}{}_{c}(i,\vec{\beta_{c}^{*}})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
 \end{equation}
 
 
@@ -539,10 +539,10 @@ to be minimized in each of the three regions, $p_{c}$ is the transmit
 power of cell $c$, $fm_{i}$ is the $i$-th field measurement of
 cell $c$, the set of which has cardinality $m_{c}$, and $m_{C}$
 is the number of field measurements of all the cells of a given network.
-Similar to the least-squares approach, $pl_{c}(i,\beta_{c}^{*})$
+Similar to the least-squares approach, $\mathrm{L}{}_{c}(i,\vec{\beta_{c}^{*}})$
 represents the path loss of cell $c$ at the same geographical point
-of the $i$-th field measurement, and $\beta_{c}^{*}$ denotes the
-fitted parameter values of the prediction model for cell $c$.
+of the $i$-th field measurement, and $\vec{\beta_{c}^{*}}$ denotes
+the fitted parameter vector of the prediction model for cell $c$.
 
 For a reference of the different clutter categories used by the radio-propagation
 model, see Table~\ref{tab:05-Clutter_categories}.
@@ -551,9 +551,8 @@ model, see Table~\ref{tab:05-Clutter_categories}.
 \subsection{Differential ant-stigmergy algorithm}
 
 The chosen optimization algorithm for the clutter-optimization problem
-is the DASA (see Section~\ref{sub:02-DASA}, Chapter~\ref{chap:02-Optimization_models}).
-The mapping between the clutter-optimization problem and DASA is as
-follows:
+is the DASA (see Section~\ref{sub:02-DASA}). The mapping between
+the clutter-optimization problem and DASA is as follows:
 
 \begin{equation}
 X_{a}=\left\{ x_{0},x_{1},\ldots,x_{i},\ldots,x_{11}\right\} ,\label{eq:DASA-problem_mapping}
@@ -612,26 +611,30 @@ to validate the radio coverage at a network-wide level. The radio
 experts also suggested limiting the optimized clutter-loss values
 to a maximum of 40~dB.
 
-The stopping criteria for the optimization runs was setting the maximum
-allowed number of objective-function evaluations. In this sense, the
-limits for Net$_{8}$ and Net$_{10}$ were set the 200, whereas for
-Net$_{9}$ the value was 500, since this network contains the largest
-number of cells. Overall, the framework completed 48,000 objective-function
+The stopping criteria for the optimization runs was set by limiting
+the maximum number of objective-function evaluations. In this sense,
+the limits for Net$_{8}$ and Net$_{10}$ were set the 200, whereas
+for Net$_{9}$ the value was 500, since this network contains the
+largest number of cells. Overall, the framework completed 48,000 objective-function
 evaluations, i.e., 576,000 radio-coverage predictions for Net$_{8}$
 and 288,000 for Net$_{10}$, whereas for Net$_{9}$, the number of
 objective-function evaluations was 120,000, for a total of 15,600,000
 radio-coverage predictions.
 
 Regarding the parameters that control the behavior of the DASA, they
-were set to the following values:
+were set to the following values after some trial-optimization runs:
 \begin{itemize}
 \item $m=240$, the number of ants;
 \item $b=10,$ the discrete base;
-\item $q=0.2$, the pheromone dispersion factor;
+\item $\rho=0.2$, the pheromone dispersion factor;
 \item $s_{+}=0.01$, the global scale-increasing factor;
 \item $s_{-}=0.01$, the global scale-decreasing factor; and 
-\item $e=1.0^{-2}$, the maximum parameter precision.
+\item $\epsilon=1.0^{-2}$, the maximum parameter precision.
 \end{itemize}
+The trial runs consisted in doubling $m$ from 15 to 480, and verifying
+the convergence profile and best solution found. The values of the
+other parameters were left unchanged.
+
 
 \subsection{Results}
 
@@ -728,39 +731,6 @@ is capable of reflecting the physical phenomena appearing in real-world
 conditions and improving the quality of radio-propagation predictions
 for three, geographically different, radio-network instances.
 
-\begin{figure}
-\centering
-
-\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_clutter}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
-
-\caption{Error distribution of the radio prediction for network Net$_{8}$:
-(a) with fitted parameter values and default clutter losses, and (b)
-with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net8}}
-\end{figure}
-
-
-\begin{figure*}
-\centering
-
-\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_clutter}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
-
-\caption{Error distribution of the radio prediction for network Net$_{9}$:
-(a) with fitted parameter values and default clutter losses, and (b)
-with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net9}}
-\end{figure*}
-
-
-\begin{figure*}
-\centering
-
-\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_clutter}\\\hspace*{0.2in}(a)\hspace*{3.2in}(b)
-
-\caption{Error distribution of the radio prediction for network Net$_{10}$:
-(a) with fitted parameter values and default clutter losses, and (b)
-with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net10}}
-\end{figure*}
-
-
 \bigskip{}
 
 
@@ -784,6 +754,39 @@ Figures~\ref{fig:05-Clutter_error_distribution_for_Net9}~(a) and
 \ref{fig:05-Clutter_error_distribution_for_Net9}~(b), respectively.
 Similar to Net$_{8}$, the improvement appears in the biggest deviations,
 since their values are lower than when using the default clutter losses.
+
+\begin{figure}[h]
+\centering
+
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-MS-opt_clutter}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
+
+\caption{Error distribution of the radio prediction for network Net$_{8}$:
+(a) with fitted parameter values and default clutter losses, and (b)
+with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net8}}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-def_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-LJ-opt_clutter}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
+
+\caption{Error distribution of the radio prediction for network Net$_{9}$:
+(a) with fitted parameter values and default clutter losses, and (b)
+with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net9}}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+
+\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_params}\includegraphics[width=0.47\textwidth]{\lyxdot \lyxdot /tun_par/doc/img/error_distribution-HI-opt_clutter}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
+
+\caption{Error distribution of the radio prediction for network Net$_{10}$:
+(a) with fitted parameter values and default clutter losses, and (b)
+with fitted parameter values and optimized clutter losses.\label{fig:05-Clutter_error_distribution_for_Net10}}
+\end{figure}
+
 
 For the last test network, Net$_{10}$, the error distributions are
 depicted in Figure~\ref{fig:05-Clutter_error_distribution_for_Net10}~(a)
@@ -897,8 +900,6 @@ by the optimization process, i.e., a higher standard deviation denotes
 more field measurements are needed to optimize the target clutter
 category.
 
-\clearpage{}
-
 
 \section{Summary}
 
@@ -928,3 +929,7 @@ new problem-solving possibilities, together with the automation of
 tasks, that have been traditionally done manually by the network engineers.
 Furthermore, even computational-intensive tasks such as objective-function
 evaluations for stochastic optimization are feasible if PRATO is used.
+
+To the best of the author's knowledge, an automatic-optimization method
+for the clutter losses of a geographical area has not yet been presented
+in the related literature.

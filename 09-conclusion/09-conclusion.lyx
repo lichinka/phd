@@ -72,53 +72,48 @@ name "chap:Conclusion"
 \end_layout
 
 \begin_layout Standard
-The methods and tools introduced in this thesis have a direct correlation
- with the simulation and optimization of radio networks in general and with
- those of the 3G and 4G in particular.
- We will introduce the steps necessary to mitigate the problem of experimental
- reproducibility found in most published works, by simplifying setup, execution,
- and sharing of experimental results.
- With the development of the framework, we will evaluate and assess the
- possibilities it offers as a support system for simulation and optimization
- problems of radio networks.
- By including parallel programming techniques for computer clusters and
- GPUs, we intend to go beyond the classical methodology provided by previous
- works, taking advantage of the inherent parallelism of some optimization
- techniques.
- We will also be looking into the application of many advances in HPC that
- should provide the framework with the computing power needed to improve
- the simulation process, thus enhancing its scalability to support real-world
- 3G radio networks.
- Finally, since we believe that this work will only become truly productive
- through the cooperation and long-term development of the scientific and
- engineering community, we will be releasing the source code, algorithms,
- documentation, and data to the public domain.
- This way, anyone will be able to use and to extend the framework for their
- own needs.
- Encouraging cooperation and sharing of experimentation-related tools and
- data should be a common goal from which everyone will benefit.
+Fast and accurate performance evaluation is of essential importance for
+ the planning and optimization of mobile radio networks.
+ In this thesis, several high-performance and novel methods for the analysis
+ and optimization of radio networks were developed and discussed.
+ Some of them even outperform state-of-the-art methods, to which they were
+ compared, in terms of result accuracy and instance-size complexity.
 \end_layout
 
 \begin_layout Standard
-We have presented an open-source simulation framework for coverage-planning
- and optimization of radio networks (PRATO)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The source code is available for download from the corresponding author's
- home page, http://csd.ijs.si/benedicic/
+The snapshot analysis is best suited for the detailed performance evaluation
+ of radio networks.
+ The performance of a snapshot method is mainly influenced by two factors.
+ First, the performance of the method for modeling a single snapshot and,
+ second, the quality level of the estimate applied for obtaining the interest
+ figures from the individual snapshot results.
+ Both topics were comprehensively addressed in this thesis.
 \end_layout
 
+\begin_layout Standard
+While providing detailed and accurate results for various applications in
+ network planning, the snapshot analysis is too time-consuming to be applied
+ in radio-network optimization, where typically a large number of different
+ configurations need to be compared in a shorter time-frame.
+ To this end, a parallel framework for radio-network planning was presented
+ in this thesis.
+ The framework is very flexible in terms of air-interface modeling, e.g.,
+ different QoS schemes, and is of significantly higher computational-time
+ performance compared with any currently available solution known to the
+ author.
+ Moreover, it incorporates multi-GPU support and the corresponding parallel-prog
+ramming techniques that are required to exploit the computational power
+ of such hardware.
+ The performance gain results mainly due to the combination of a novel parallel-
+programming approach and some state-of-the-art methods.
+ The achieved performance improvement excels in radio-network optimization
+ environments.
+ Further research in this field will include abstracting the introduced
+ MWD principle into a multi-purpose parallel framework such as Charm++
+\begin_inset space ~
 \end_inset
 
-.
-\end_layout
 
-\begin_layout Standard
-Encouraged by the favorable results, further work will include abstracting
- the introduced MWD principle into a multi-purpose parallel framework such
- as Charm++ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Kale-The_Charm_Approach:2013"
@@ -130,112 +125,95 @@ key "Kale-The_Charm_Approach:2013"
 \end_layout
 
 \begin_layout Standard
-Encouraged by the favorable results, further work will include abstracting
- some of the introduced principles and methodology into a multi-purpose
- library for parallel simulation of radio-coverage predictions, which shall
- be published as free and open source software.
- The aim of such tool is to ultimately validate the suitability and usefulness
- of the presented framework.
+When applying automatic network optimization, a fast and accurate performance
+ analysis is of crucial importance.
+ However, an overview of the related literature shown that this fact seems
+ to have been only partially taken into consideration in the design of several
+ optimization methods for radio networks.
+ A common approach is to apply a detailed and too time-consuming method
+ for evaluating different candidate solutions, resulting in an unacceptable
+ computational-time complexity for medium to large-sized problem instances.
+ The opposite approach, which is even less satisfactory, is to build fast
+ but inaccurate models, the results of which do not sufficiently correlate
+ with reality.
+ To this end, the quality and speed performance of the presented framework
+ was empirically verified with an industrial software tool for radio-network
+ planning.
+ The results clearly show a very good agreement in terms of accuracy of
+ the radio-propagation predictions, compared to those obtained with the
+ commercial tool.
+ Additionally, the results demonstrated the performance advantage of the
+ framework compared to the computational time of the enterprise software.
+ It is important to note that these results also apply for an application
+ in everyday network planning.
+ However, to ultimate validate the complete array of radio-planning activities
+ the framework can handle requires some further research, which has already
+ started.
 \end_layout
 
 \begin_layout Standard
-Furthermore, in the context of radio-coverage planning activities carried
- out at the Radio Network department of Telekom Slovenije, d.d., supplementary
- testing of PRATO as a coverage-planning tool is currently being conducted.
- So far, the performed predictions show evidence of faster and high-quality
- results when compared with well-established industrial software tools.
+Increasing the performance of the simulations involved during the objective-func
+tion evaluation is only the first step towards a practical running-time
+ reduction for radio-network optimization.
+ In this sense, the performance of the novel agent-based algorithm presented
+ in this thesis was tested while solving the service-coverage problem in
+ radio networks.
+ The results show significant gains with respect to the size of problem
+ instances, as well as regarding its speed performance and solution quality,
+ even outperforming a state-of-the-art method, to which it was compared.
+ Further research will include experimentation with different parameters
+ and optimization problems, in order to gain better understanding of the
+ dynamics that guide the algorithm through the search space of the problem.
 \end_layout
 
 \begin_layout Standard
-In addition, as PRATO is also a free and open-source software project
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The source code is available for download from http://cs.ijs.si/benedicic/
+The new optimization problem for 3G radio networks indentified in this thesis
+ deals with SHO balancing of downlink and uplink areas.
+ The problem was tacled by three different metaheuristic algorithms, the
+ solutions of which show a substantial improvement of downlink and uplink
+ balance.
+ A challenge for future work is to evaluate this optimization problem in
+ a dynamic context.
+ This requires using a full-stack simulation tool that includes dynamic
+ effects, such as fast power control.
 \end_layout
 
-\end_inset
+\begin_layout Standard
+The clutter-loss optimization method developed in this thesis makes use
+ of the tools discussed above, providing a faster, more accurate and simpler
+ method that replaces a manual approach.
+ It applies a metaheuristic algorithm which has been tailored for the special
+ requirements of the automatic clutter-loss optimization.
+ The presented results make the benefits of an automated-optimization approach
+ evident.
+ Furthermore, in the context of other radio-coverage planning activities
+ carried out at the Radio Network department of Telekom Slovenije, d.d., supplemen
+tary testing of the framework as a coverage-planning tool is currently being
+ conducted.
+\end_layout
 
-, it can be readily modified and extended to support, for example, other
- propagation models and post-processing algorithms.
+\begin_layout Standard
+PRATO, the radio-planning framework presented is this thesis, is free and
+ open-source software.
+ For this reason, it can be readily modified and extended to support, for
+ example, other propagation models and post-processing algorithms.
  This characteristic provides it with a clear advantage when compared to
  commercial and closed-source tools.
+ The source code is available for download from the author's home page,
+ http://csd.ijs.si/benedicic/.
 \end_layout
 
 \begin_layout Standard
-Comparison of our experimental results with other algorithms dealing with
- the same and similar problems would be useful.
- However, this task is not straightforward, since the results of several
- works (e.g.
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Gerdenitsch_PhD:2004,Turke_Advanced.site.configuration.techniques:2005"
-
-\end_inset
-
-) depend on black-box evaluations, making experimental association very
- difficult, if possible at all.
- 
-\end_layout
-
-\begin_layout Standard
-All in all, we consider that the present work provides a robust foundation
- for future work on grid-based metaheuristics with expensive objective-function
- evaluation.
-\end_layout
-
-\begin_layout Standard
-In future work, we will consider further analysis of our parallel-agent
- approach, including experimentation with different parameters, in order
- to gain better understanding of the dynamics leading the metaheuristic
- during the search process.
- Multi-GPU environments present an interesting possibility, where evaluator(s)
- and worker agents are run on separate GPU devices.
-\end_layout
-
-\begin_layout Standard
-To further improve the presented results, dynamic effects, such as fast
- power control, should be included in the simulations, particularly for
- recognizing dynamic functionality like SHO in a WCDMA mobile system.
- Another extension of the current work is to incorporate antenna tilt as
- an additional objective of the optimization process.
- This should certainly include experimentation with models and algorithms
- that support multiobjective optimization.
-\end_layout
-
-\begin_layout Standard
-It is important to note that some methods proposed in this thesis have been
- particularly designed for problems emerging in radio planning of 3G networks.
- Despite this, they may be adapted to other standards, e.g.
- GSM or LTE, without lose of generality.
- Moreover, some of them may even be applied in other research areas, e.g.,
- parallelization techniques in the area of greographical information sciences.
-\end_layout
-
-\begin_layout Standard
-As it was mentioned in the introduction, it is important to understand that
- the models used in scientific simulations and engineering never offer a
- perfect model of the system they represent, but only a subset of its compositio
-n and dynamics.
- For this reason, experimentation and expert observation will always be
- essential as reference points for understanding the studied phenomena.
- Consequently, problems categorized as of large size and of considerable
- complexity represent a challenge, because of the different involved disciplines
- and the degree of difficulty of their modeling.
- Radio networks, in particular those of the third and fourth generations,
- fall under this characterization.
-\end_layout
-
-\begin_layout Standard
-It is very important to develop a feeling for the properties, advantages
- and drawbacks of the respective methods.
- Moreover, the recommendations of radio experts regarding the interpretation
- of the solutions and the feedback from everyday network operation are an
- essential input for establishing high-quality optimization methods.
- In this sense, and based on our own experience, the expert's advice is
- irreplaceable and a most valuable contribution to the research work.
+The constantly improving performance of computer hardware might allow an
+ even more detailed analysis of networks in the near future.
+ In this sense, a major challenge, that will require further research, is
+ to extend the presented models and algorithms, e.g., by incorporating user
+ mobility and traffic dynamics.
+ This is especially important due to different existing and emerging mobile
+ technologies.
+ Indeed, the co-existence of multiple technologies will motivate an increasing
+ interest about the combined analysis and optimization of different technologies
+ and their mutual dependency.
 \end_layout
 
 \begin_layout Section
@@ -243,109 +221,54 @@ Scientific contributions
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
->>> Kaluza
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The work in this thesis has led to the following original contributions
- to science: 
+ to science:
 \end_layout
 
-\begin_layout Standard
-1.
- A unied anomalous and suspicious behavior detection framework: We proposed
- a unied framework for detection of anomalous and suspicious behavior that
- can be observed from complex, spatio-temporal sequential data generated
- by an agent moving in a physical environment.
- The framework incorporates several components to address the main challenges
- and is demonstrated empirically in three studies.
- 
+\begin_layout Enumerate
+Design and development of an unified framework for radio-network planning
+ and optimization, incorporating the second and third items, as well as
+ experimentation on real-world radio networks.
+ The experimentation includes a comparison with a commercial tool that is
+ currently being used for real radio-network planning.
+ Moreover, the parallel implementation of the framework exploits the computing
+ resources of computer clusters and GPUs.
 \end_layout
 
-\begin_layout Standard
-2.
- Contribution to anomalous and suspicious behavior detection: We gave the
- rst clear problem denition and established a theoretical framework for
- anomalous and suspicious behavior detection from agent traces to show how
- to optimally perform detection.
- We discussed why detection error is often inevitable and proved the lower
- error bound.
- We further provided several heuristic approaches that either estimated
- distributions required to perform detection or directly rank the behavior
- signatures using machine-learning approaches.
- 
+\begin_layout Enumerate
+Proposal of a new approach for parallel programming that combines a classic
+ master-worker method with an external database.
+ The proposed approach improves the scalability of the classic master-worker
+ paradigm by preventing the master process to become the bottleneck of a
+ parallel system.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-<<<
+\begin_layout Enumerate
+Quality improvement of radio-propagation predictions by applying metaheuristic-o
+ptimization techniques that improve the quality of results.
+ This technique enables the adaptation of radio-propagation models to the
+ local environment over which a radio network is deployed, as well as the
+ automatic optimization of signal losses due to clutter.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Enumerate
+A new algorithm, based on autonomous agents, to tackle the service-coverage
+ problem in radio networks.
+ The algorithm deals with problem instances that are out-of-reach of other
+ compared state-of-the-art techniques used as reference.
+ It also reaches good quality of solutions if compared to classic network-planni
+ng techniques.
+ The proposed approach is especially suitable for optimizing large radio
+ networks.
 \end_layout
 
-\begin_layout Standard
-The contributions of this thesis to the fields of telecommunications and
- computer sciences include the following:
-\end_layout
-
-\begin_layout Itemize
-State-of-the-art overview of optimization methods for 3G radio networks.
-\end_layout
-
-\begin_layout Itemize
-Design and development of a framework that provides an open environment
- for radio network simulations, implemented for execution on computer clusters
- and GPUs.
- The framework will allow the scientific community to share a common domain
- to run the simulations needed by modern optimization methods, since most
- currently available simulation tools are proprietary and therefore unsuitable
- for experimental reproducibility.
-\end_layout
-
-\begin_layout Itemize
-Improvement of quality and speed of renowned mathematical models, used for
- radio propagation predictions, by applying parameter optimization and paralleli
-zation techniques.
- The expected speed improvement should be of at least one order of magnitude.
-\end_layout
-
-\begin_layout Itemize
-Proposal of a new algorithm, based on autonomous agents, to solve the service
- coverage problem.
- The solved problem instances should be of bigger size than ever solved
- in the literature and reach equal or better quality thereof.
- This should make our approach applicable for large real-world problem instances
- and data sets.
-\end_layout
-
-\begin_layout Itemize
-Identification of a new optimization problem in 3G radio networks that deals
- with soft-handover alignment of downlink and uplink areas.
- By solving this problem, we should avoid abnormal network functioning in
- areas where there is soft-handover capability in the uplink, but none in
- the downlink.
- So far this problem has been solved manually by radio experts.
-\end_layout
-
-\begin_layout Itemize
-Empirical comparison of the proposed metaheuristic algorithm against the
- existing state-of-the-art optimization algorithms on the soft-handover
- alignment problem.
+\begin_layout Enumerate
+Identification and formalization of a new optimization problem in 3G radio
+ networks that deals with SHO alignment of downlink and uplink areas.
+ By solving this problem, network malfunctioning is avoided in areas where
+ there is SHO capability in the uplink, but none in the downlink.
+ So far, this problem has not been formalized nor tackled by means of automatic
+ optimization.
 \end_layout
 
 \end_body

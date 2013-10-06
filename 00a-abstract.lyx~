@@ -61,10 +61,90 @@
 \begin_body
 
 \begin_layout Chapter*
+
+\size larger
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-2.3cm}
+\end_layout
+
+\end_inset
+
 Abstract
 \end_layout
 
 \begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Abstract}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyfoot{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{
+\backslash
+footnotesize Abstract}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
 The complexity of the design of radio networks has grown with the adoption
  of modern standards.
  Therefore, the role of the computer for the faster delivery of accurate
@@ -94,7 +174,7 @@ The new unified framework developed in this thesis significantly outperforms
  This is achieved by the parallel features of the framework, which are exploitab
 le on a single multi-core CPU, as well as on a network of standard PCs with
  GPU devices.
- Clearly, the significant speed-up achieved at the simulation stage allows
+ Clearly, the significant speedup achieved at the simulation stage allows
  for an increased level of detail of the simulations, which improves the
  accuracy of the results.
 \end_layout
@@ -107,10 +187,10 @@ tion evaluation is only the first step towards a practical running-time
  in terms of speed, but not at the expense of the quality of results.
  In this sense, a novel agent-based algorithm is presented and tailored
  to a classic optimization problem in radio networks.
- The algorithm, which is based on several techniques of cellular automata
- and population-based metaheuristics, shows considerable gains with respect
- to the size of problem instances it may handle, as well as regarding its
- speed performance and solution quality.
+ The algorithm, which is based on techniques of cellular automata and population
+-based metaheuristics, shows considerable gains with respect to the size
+ of problem instances it may handle, as well as regarding its speed performance
+ and solution quality.
 \end_layout
 
 \begin_layout Standard
@@ -138,8 +218,9 @@ ng tasks is yet another way to exploit the benefits of faster and more precise
 \begin_layout Standard
 The utility and performance of the developed methods is assessed against
  an enterprise, commercial tool for radio-network planning.
- The objective of such comparison is to determine the usage properties of
- the parallel framework in everyday planning, using real-world scenarios.
+ The objective of such comparison is to determine the performance and usage
+ properties of the parallel framework in everyday planning, using real-world
+ scenarios.
 \end_layout
 
 \begin_layout Standard

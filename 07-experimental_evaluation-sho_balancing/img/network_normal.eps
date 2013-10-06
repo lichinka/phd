@@ -1,6 +1,6 @@
 %!PS-Adobe-2.0
-%%Creator: gnuplot 4.4 patchlevel 3
-%%CreationDate: Mon Jan 16 17:14:42 2012
+%%Creator: gnuplot 4.6 patchlevel 2
+%%CreationDate: Thu Oct  3 15:51:29 2013
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -21,10 +21,12 @@ gnudict begin
 /Level1 false def
 /Rounded false def
 /ClipToBoundingBox false def
+/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -60 def
 /dl1 {
@@ -39,22 +41,6 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
-Level1 {} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title ()
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.4 patchlevel 3)
-  /Author (luka)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Mon Jan 16 17:14:42 2012)
-  /DOCINFO pdfmark
-end
-} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 554 50 lineto 554 770 lineto 50 770 lineto closepath
@@ -62,7 +48,7 @@ end
   } if
 } def
 %
-% Gnuplot Prolog Version 4.4 (August 2010)
+% Gnuplot Prolog Version 4.6 (September 2012)
 %
 %/SuppressPDFMark true def
 %
@@ -329,7 +315,8 @@ end
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  gsave 1 setgray fill grestore clip
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -462,6 +449,23 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title ()
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 2)
+  /Author (luka)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Thu Oct  3 15:51:29 2013)
+  /DOCINFO pdfmark
+end
+} ifelse
 end
 %%EndProlog
 %%Page: 1 1
@@ -475,140 +479,159 @@ doclip
 0 setgray
 newpath
 (Times) findfont 180 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
 1.000 UL
 LTb
-1098 1059 M
+LCb setrgbcolor
+882 358 M
 63 0 V
 stroke
-990 1059 M
-[ [(Times) 180.0 0.0 true true 0 (-105.5)]
-] -60.0 MRshow
-1.000 UL
-LTb
-1098 2000 M
-63 0 V
-stroke
-990 2000 M
-[ [(Times) 180.0 0.0 true true 0 (-105)]
-] -60.0 MRshow
-1.000 UL
-LTb
-1098 2941 M
-63 0 V
-stroke
-990 2941 M
-[ [(Times) 180.0 0.0 true true 0 (-104.5)]
-] -60.0 MRshow
-1.000 UL
-LTb
-1098 3882 M
-63 0 V
-stroke
-990 3882 M
-[ [(Times) 180.0 0.0 true true 0 (-104)]
-] -60.0 MRshow
-1.000 UL
-LTb
-1098 4823 M
-63 0 V
-stroke
-990 4823 M
-[ [(Times) 180.0 0.0 true true 0 (-103.5)]
-] -60.0 MRshow
-1.000 UL
-LTb
-6047 358 M
--63 0 V
-stroke
-6155 358 M
+774 358 M
 [ [(Times) 180.0 0.0 true true 0 ( 0)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 773 M
--63 0 V
+LCb setrgbcolor
+882 773 M
+63 0 V
 stroke
-6155 773 M
+774 773 M
 [ [(Times) 180.0 0.0 true true 0 ( 40)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 1189 M
--63 0 V
+LCb setrgbcolor
+882 1189 M
+63 0 V
 stroke
-6155 1189 M
+774 1189 M
 [ [(Times) 180.0 0.0 true true 0 ( 80)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 1604 M
--63 0 V
+LCb setrgbcolor
+882 1604 M
+63 0 V
 stroke
-6155 1604 M
+774 1604 M
 [ [(Times) 180.0 0.0 true true 0 ( 120)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 2019 M
--63 0 V
+LCb setrgbcolor
+882 2019 M
+63 0 V
 stroke
-6155 2019 M
+774 2019 M
 [ [(Times) 180.0 0.0 true true 0 ( 160)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 2435 M
--63 0 V
+LCb setrgbcolor
+882 2435 M
+63 0 V
 stroke
-6155 2435 M
+774 2435 M
 [ [(Times) 180.0 0.0 true true 0 ( 200)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 2850 M
--63 0 V
+LCb setrgbcolor
+882 2850 M
+63 0 V
 stroke
-6155 2850 M
+774 2850 M
 [ [(Times) 180.0 0.0 true true 0 ( 240)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 3265 M
--63 0 V
+LCb setrgbcolor
+882 3265 M
+63 0 V
 stroke
-6155 3265 M
+774 3265 M
 [ [(Times) 180.0 0.0 true true 0 ( 280)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 3681 M
--63 0 V
+LCb setrgbcolor
+882 3681 M
+63 0 V
 stroke
-6155 3681 M
+774 3681 M
 [ [(Times) 180.0 0.0 true true 0 ( 320)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 4096 M
--63 0 V
+LCb setrgbcolor
+882 4096 M
+63 0 V
 stroke
-6155 4096 M
+774 4096 M
 [ [(Times) 180.0 0.0 true true 0 ( 360)]
-] -60.0 MLshow
+] -60.0 MRshow
 1.000 UL
 LTb
-6047 4511 M
+LCb setrgbcolor
+882 4511 M
+63 0 V
+stroke
+774 4511 M
+[ [(Times) 180.0 0.0 true true 0 ( 400)]
+] -60.0 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5831 1059 M
 -63 0 V
 stroke
-6155 4511 M
-[ [(Times) 180.0 0.0 true true 0 ( 400)]
+5939 1059 M
+[ [(Times) 180.0 0.0 true true 0 (-105.5)]
 ] -60.0 MLshow
 1.000 UL
 LTb
+LCb setrgbcolor
+5831 2000 M
+-63 0 V
+stroke
+5939 2000 M
+[ [(Times) 180.0 0.0 true true 0 (-105)]
+] -60.0 MLshow
 1.000 UL
 LTb
-1098 4823 N
-0 -4517 V
+LCb setrgbcolor
+5831 2941 M
+-63 0 V
+stroke
+5939 2941 M
+[ [(Times) 180.0 0.0 true true 0 (-104.5)]
+] -60.0 MLshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5831 3882 M
+-63 0 V
+stroke
+5939 3882 M
+[ [(Times) 180.0 0.0 true true 0 (-104)]
+] -60.0 MLshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5831 4823 M
+-63 0 V
+stroke
+5939 4823 M
+[ [(Times) 180.0 0.0 true true 0 (-103.5)]
+] -60.0 MLshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1.000 UL
+LTb
+LCb setrgbcolor
+882 4823 N
+882 306 L
 4949 0 V
 0 4517 V
 -4949 0 V
@@ -616,36 +639,38 @@ Z stroke
 LCb setrgbcolor
 144 2564 M
 currentpoint gsave translate -270 rotate 0 0 moveto
-[ [(Times) 180.0 0.0 true true 0 (dBm)]
+[ [(Times) 180.0 0.0 true true 0 (Traffic [kB])]
 ] -60.0 MCshow
 grestore
 LTb
 LCb setrgbcolor
 6784 2564 M
 currentpoint gsave translate -270 rotate 0 0 moveto
-[ [(Times) 180.0 0.0 true true 0 (kBytes)]
+[ [(Times) 180.0 0.0 true true 0 (Interference [dBm])]
 ] -60.0 MCshow
 grestore
 LTb
 LCb setrgbcolor
-3572 126 M
+3356 126 M
 [ [(Times) 180.0 0.0 true true 0 (Time)]
 ] -60.0 MCshow
 LTb
 1.000 UP
 1.000 UL
 LTb
+LCb setrgbcolor
 % Begin plot #1
 2.000 UL
 LT0
+LC0 setrgbcolor
 LCb setrgbcolor
-5228 4670 M
+5012 4670 M
 [ [(Times) 180.0 0.0 true true 0 (UL RSSI \(cell 1\))]
 ] -60.0 MRshow
 LT0
-5336 4670 M
+5120 4670 M
 495 0 V
-1098 1071 M
+882 1071 M
 95 355 V
 95 -371 V
 96 -387 V
@@ -702,14 +727,15 @@ LT0
 % Begin plot #2
 stroke
 LT2
+LC2 setrgbcolor
 LCb setrgbcolor
-5228 4490 M
+5012 4490 M
 [ [(Times) 180.0 0.0 true true 0 (UL RSSI \(cell 2\))]
 ] -60.0 MRshow
 LT2
-5336 4490 M
+5120 4490 M
 495 0 V
-1098 1074 M
+882 1074 M
 95 -27 V
 95 8 V
 96 19 V
@@ -766,14 +792,15 @@ LT2
 % Begin plot #3
 stroke
 LT4
+LC4 setrgbcolor
 LCb setrgbcolor
-5228 4310 M
+5012 4310 M
 [ [(Times) 180.0 0.0 true true 0 (HSUPA traffic \(cell 1\))]
 ] -60.0 MRshow
 LT4
-5336 4310 M
+5120 4310 M
 495 0 V
-1098 369 M
+882 369 M
 95 103 V
 95 -112 V
 96 -1 V
@@ -796,7 +823,7 @@ LT4
 95 224 V
 96 -2144 V
 95 799 V
-3287 866 L
+3071 866 L
 95 -377 V
 95 -118 V
 96 -3 V
@@ -830,14 +857,15 @@ LT4
 % Begin plot #4
 stroke
 LT3
+LC3 setrgbcolor
 LCb setrgbcolor
-5228 4130 M
+5012 4130 M
 [ [(Times) 180.0 0.0 true true 0 (HSUPA traffic \(cell 2\))]
 ] -60.0 MRshow
 LT3
-5336 4130 M
+5120 4130 M
 495 0 V
-1098 361 M
+882 361 M
 95 -2 V
 95 -1 V
 96 0 V
@@ -894,8 +922,9 @@ LT3
 stroke
 1.000 UL
 LTb
-1098 4823 N
-0 -4517 V
+LCb setrgbcolor
+882 4823 N
+882 306 L
 4949 0 V
 0 4517 V
 -4949 0 V
@@ -903,6 +932,7 @@ Z stroke
 1.000 UP
 1.000 UL
 LTb
+LCb setrgbcolor
 stroke
 grestore
 end

@@ -226,7 +226,11 @@ name "sec:05-Motivation"
 With the advent of LTE as part of the 4G in cellular technology, mobile
  operators are facing the challenges of deploying a new network.
  LTE follows the well established UMTS/HSPA combo, targeting higher peak
- data rates, higher spectral efficiency and lower latency 
+ data rates, higher spectral efficiency and lower latency
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010"
@@ -247,7 +251,11 @@ The deployment of a new radio network is always a challenge for mobile operators
 
 \begin_layout Standard
 Although different mathematical models have been proposed for radio-propagation
- modeling, none of them excels in a network-wide scenario 
+ modeling, none of them excels in a network-wide scenario
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Shabbir_Comparison_of_radio_propagation_models:2011"
@@ -332,7 +340,16 @@ m may be used for parameter tuning.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 <More related work...???>
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -382,55 +399,44 @@ reference "sub:04-Radio_propagation_model"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:04-Framework-design-and-implementation"
-
-\end_inset
-
 , is used.
  Recall that the model contains a vector of adaptable parameters, 
-\begin_inset Formula $\beta$
+\begin_inset Formula $\vec{\beta}$
 \end_inset
 
 .
  For this reason, this mathematical model is especially appropriate for
  tuning, since it can be adapted to a given scenario and its local conditions
  by adjusting the values of the vector 
-\begin_inset Formula $\beta=(a_{0},a_{1},a_{2},a_{3})$
+\begin_inset Formula $\vec{\beta}=(\beta_{0},\beta_{1},\beta_{2},\beta_{3})$
 \end_inset
 
 , the elements of which represent:
 \end_layout
 
 \begin_layout Description
-\begin_inset Formula $a_{0}$
+\begin_inset Formula $\beta_{0}$
 \end_inset
 
  the reference loss or offset,
 \end_layout
 
 \begin_layout Description
-\begin_inset Formula $a_{1}$
+\begin_inset Formula $\beta_{1}$
 \end_inset
 
  the loss slope due to distance of the receiver from the transmitter,
 \end_layout
 
 \begin_layout Description
-\begin_inset Formula $a_{2}$
+\begin_inset Formula $\beta_{2}$
 \end_inset
 
- the loss slope due to height of the transmitter antenna,
+ the loss slope due to height of the transmitter antenna, and
 \end_layout
 
 \begin_layout Description
-\begin_inset Formula $a_{3}$
+\begin_inset Formula $\beta_{3}$
 \end_inset
 
  the loss slope due to the combined effect of the distance and height of
@@ -440,7 +446,7 @@ reference "chap:04-Framework-design-and-implementation"
 \begin_layout Standard
 The parameter tuning is performed per cell to improve the local fitting
  of the radio predictions, being its resulting solution a vector 
-\begin_inset Formula $\beta_{c}$
+\begin_inset Formula $\vec{\beta}_{c}$
 \end_inset
 
  for a target cell 
@@ -797,7 +803,14 @@ Park area
 \end_layout
 
 \begin_layout Subsection
-Field measurements
+Field measurements 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:05-Field_measurements"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -810,17 +823,6 @@ In radio networks, an UE constantly performs cell selection/reselection
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:02-Handover-and-soft-handover"
-
-\end_inset
-
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Principles_of_mobile_radio_networks"
 
 \end_inset
 
@@ -866,7 +868,11 @@ Hz.
  To accurately establish the measurement-location points, a GPS unit was
  used.
  These GPS-informed locations have been tested to be compliant with the
- 60m limit mentioned in
+ 60
+\begin_inset space ~
+\end_inset
+
+m limit mentioned in
 \begin_inset space ~
 \end_inset
 
@@ -926,7 +932,7 @@ key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_acc
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-E(\beta_{c})=\sum_{i=1}^{m_{c}}(p_{c}-pl_{c}(i,\beta_{c})-fm_{i})^{2},\label{eq:05-Least_squares_error}
+E(\vec{\beta_{c}})=\sum_{i=1}^{m_{c}}(p_{c}-\mathrm{L}{}_{c}(i,\vec{\beta_{c}})-fm_{i})^{2},\label{eq:05-Least_squares_error}
 \end{equation}
 
 \end_inset
@@ -937,15 +943,15 @@ E(\beta_{c})=\sum_{i=1}^{m_{c}}(p_{c}-pl_{c}(i,\beta_{c})-fm_{i})^{2},\label{eq:
 \begin_layout Standard
 \noindent
 where 
-\begin_inset Formula $E(\beta_{c})$
+\begin_inset Formula $E(\vec{\beta_{c}})$
 \end_inset
 
- is the observed error for cell 
+ is the observed error (in dB) for cell 
 \begin_inset Formula $c$
 \end_inset
 
  given the parameters 
-\begin_inset Formula $\beta_{c}$
+\begin_inset Formula $\vec{\beta_{c}}$
 \end_inset
 
 , 
@@ -969,7 +975,7 @@ where
 \noun off
 \color none
 
-\begin_inset Formula $pl_{c}(i,\beta_{c})$
+\begin_inset Formula $\mathrm{L}_{c}(i,\beta_{c})$
 \end_inset
 
  is the path loss of cell 
@@ -1010,11 +1016,11 @@ where
 \begin_layout Standard
 A necessary condition for the linear least-squares method to find the global
  minimum is the linear relationship between the predicted path loss, 
-\begin_inset Formula $pl_{c}(i,\beta)$
+\begin_inset Formula $\mathrm{L}{}_{c}(i,\vec{\beta})$
 \end_inset
 
 , and the vector 
-\begin_inset Formula $\beta_{c}$
+\begin_inset Formula $\vec{\beta_{c}}$
 \end_inset
 
 
@@ -1030,11 +1036,11 @@ key "Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion
 
 .
  This condition can be verified by calculating the first derivative of 
-\begin_inset Formula $E(\beta_{c})$
+\begin_inset Formula $E(\vec{\beta_{c}})$
 \end_inset
 
  in terms of the components of vector 
-\begin_inset Formula $\beta_{c}=<a_{0c},a_{1c},a_{2c},a_{3c}>$
+\begin_inset Formula $\vec{\beta_{c}}=<\beta_{0c},\beta{}_{1c},\beta_{2c},\beta_{3c}>$
 \end_inset
 
 , i.e., 
@@ -1050,19 +1056,19 @@ key "Yang_A_linear_least_square_method_of_propagation_model_tuning_for_3G_radion
 \noun off
 \color none
 
-\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{0c}}=0$
+\begin_inset Formula $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta{}_{0c}}=0$
 \end_inset
 
 , 
-\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{1c}}=0$
+\begin_inset Formula $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta_{1c}}=0$
 \end_inset
 
 , 
-\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{2c}}=0$
+\begin_inset Formula $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta_{2c}}=0$
 \end_inset
 
 , and 
-\begin_inset Formula $\frac{\partial E(\beta_{c})}{\partial a_{3c}}=0$
+\begin_inset Formula $\frac{\partial E(\vec{\beta_{c}})}{\partial\beta{}_{3c}}=0$
 \end_inset
 
 .
@@ -1082,7 +1088,7 @@ name "sub:05-Simulations"
 \begin_layout Standard
 The simulations consisted in building the matrices of the observed-error
  values, 
-\begin_inset Formula $E(\beta_{c})$
+\begin_inset Formula $E(\vec{\beta_{c}})$
 \end_inset
 
 , for each cell 
@@ -1102,7 +1108,7 @@ erage prediction per cell.
 \end_inset
 
 , denoted by the vector 
-\begin_inset Formula $\beta_{c}$
+\begin_inset Formula $\vec{\beta_{c}}$
 \end_inset
 
 .
@@ -1216,7 +1222,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Several properties of the test networks Net
+Parameters of the test networks Net
 \begin_inset Formula $_{8}$
 \end_inset
 
@@ -1275,11 +1281,11 @@ Number of cells
 \begin_inset Text
 
 \begin_layout Plain Layout
-Area (km
+Area [km
 \begin_inset Formula $^{2}$
 \end_inset
 
-)
+]
 \end_layout
 
 \end_inset
@@ -1288,7 +1294,7 @@ Area (km
 \begin_inset Text
 
 \begin_layout Plain Layout
-Field-measurement proportion (%)
+Field-measurement proportion [%]
 \end_layout
 
 \end_inset
@@ -2215,7 +2221,7 @@ Net
 \end_layout
 
 \begin_layout Standard
-The terrain profiles are most relevant for Net
+Since the terrain profiles are most relevant for Net
 \begin_inset Formula $_{8}$
 \end_inset
 
@@ -2223,7 +2229,29 @@ The terrain profiles are most relevant for Net
 \begin_inset Formula $_{10}$
 \end_inset
 
-, since none of them contains densely populated urban areas.
+, they are shown in Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Terrain_profile_for_Net8"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:05-Terrain_profile_for_Net10"
+
+\end_inset
+
+, respectively.
  Note that the terrain shown in Figure
 \begin_inset space ~
 \end_inset
@@ -2417,12 +2445,8 @@ In the following, the default parameters of the radio-propagation model
  department at Telekom Slovenije, d.d.
 \end_layout
 
-\begin_layout Subsection
-Experimental environment 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:05-Experimental_environment"
-
+\begin_layout Standard
+\begin_inset VSpace bigskip
 \end_inset
 
 
@@ -2449,17 +2473,6 @@ key "Hamada_Cluster_of_GPUs:2010"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:04-Simulations"
-
-\end_inset
-
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:04-Framework-design-and-implementation"
 
 \end_inset
 
@@ -2718,7 +2731,11 @@ reference "tab:05-Test_network_properties"
  for a reference of the field-measurement proportions with respect to the
  area surface of each test network.
  Similar findings were confirmed by other authors, who worked on the adjustment
- of radio-propagation models to different environments 
+ of radio-propagation models to different environments
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON_system:2012"
@@ -2728,7 +2745,10 @@ key "Huang_Online_propagation_model_correction_based_on_PSO_algorithm_in_LTE_SON
 .
  For the sake of completeness, it is worth pointing out that some researchers
  have already started working on different ways on how to improve this aspect
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011,Neuland_Influence_of_positioning_error_on_X_Map_estimation_in_LTE:2011"
@@ -2788,9 +2808,9 @@ status open
 \backslash
 
 \backslash
-hspace*{0.2in}(a)
+hspace{0.4cm}(a)
 \backslash
-hspace*{3.2in}(b)
+hspace{6.7cm}(b)
 \end_layout
 
 \end_inset
@@ -2877,9 +2897,9 @@ status open
 \backslash
 
 \backslash
-hspace*{0.2in}(a)
+hspace{0.4cm}(a)
 \backslash
-hspace*{3.2in}(b)
+hspace{6.7cm}(b)
 \end_layout
 
 \end_inset
@@ -2917,7 +2937,7 @@ name "fig:05-Error_distribution_for_Net9"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -2966,9 +2986,9 @@ status open
 \backslash
 
 \backslash
-hspace*{0.2in}(a)
+hspace{0.4cm}(a)
 \backslash
-hspace*{3.2in}(b)
+hspace{6.7cm}(b)
 \end_layout
 
 \end_inset
@@ -3024,7 +3044,7 @@ In order to further improve the accuracy of the radio-prediction calculation
 \begin_layout Standard
 As it was mentioned before, there are several reasons for the predicted
  signal-loss values to be inaccurate.
- The seasonal changes are among them, like tree foliage or snow.
+ The seasonal changes are among them, like tree foliage and snow.
  Also, changes related to urban development, like demolition or construction
  of buildings and parks, and different kinds of forests or agricultural
  areas, etc.
@@ -3134,9 +3154,9 @@ name "sub:Optimization-objective"
 \end_layout
 
 \begin_layout Standard
-The optimization objective consists in adjusting the loss values of the
+The optimization objective consists of adjusting the loss values of the
  different clutter categories, i.e., 
-\begin_inset Formula $pl_{\mathrm{CLUT}}(d_{(x,y)})$
+\begin_inset Formula $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
 \end_inset
 
  from Equation
@@ -3150,18 +3170,7 @@ reference "eq:04-Hata_pathloss"
 
 \end_inset
 
-), Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:04-Framework-design-and-implementation"
-
-\end_inset
-
-, according to a set of field measurements of a given geographical region.
+), according to a set of field measurements of a given geographical region.
  The same three data sets used in Section
 \begin_inset space ~
 \end_inset
@@ -3194,7 +3203,7 @@ reference "sub:05-Simulations"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-pl_{c}(i,\beta_{c}^{*})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
+\min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-\mathrm{L}{}_{c}(i,\vec{\beta_{c}^{*}})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
 \end{equation}
 
 \end_inset
@@ -3251,7 +3260,7 @@ where
 \noun off
 \color none
 
-\begin_inset Formula $pl_{c}(i,\beta_{c}^{*})$
+\begin_inset Formula $\mathrm{L}{}_{c}(i,\vec{\beta_{c}^{*}})$
 \end_inset
 
  represents the path loss of cell 
@@ -3263,10 +3272,10 @@ where
 \end_inset
 
 -th field measurement, and 
-\begin_inset Formula $\beta_{c}^{*}$
+\begin_inset Formula $\vec{\beta_{c}^{*}}$
 \end_inset
 
- denotes the fitted parameter values of the prediction model for cell 
+ denotes the fitted parameter vector of the prediction model for cell 
 \begin_inset Formula $c$
 \end_inset
 
@@ -3303,17 +3312,6 @@ The chosen optimization algorithm for the clutter-optimization problem is
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:02-DASA"
-
-\end_inset
-
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Optimization_models"
 
 \end_inset
 
@@ -3498,8 +3496,8 @@ dB.
 \end_layout
 
 \begin_layout Standard
-The stopping criteria for the optimization runs was setting the maximum
- allowed number of objective-function evaluations.
+The stopping criteria for the optimization runs was set by limiting the
+ maximum number of objective-function evaluations.
  In this sense, the limits for Net
 \begin_inset Formula $_{8}$
 \end_inset
@@ -3532,7 +3530,7 @@ The stopping criteria for the optimization runs was setting the maximum
 
 \begin_layout Standard
 Regarding the parameters that control the behavior of the DASA, they were
- set to the following values:
+ set to the following values after some trial-optimization runs:
 \end_layout
 
 \begin_layout Itemize
@@ -3550,7 +3548,7 @@ Regarding the parameters that control the behavior of the DASA, they were
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $q=0.2$
+\begin_inset Formula $\rho=0.2$
 \end_inset
 
 , the pheromone dispersion factor;
@@ -3571,10 +3569,20 @@ Regarding the parameters that control the behavior of the DASA, they were
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $e=1.0^{-2}$
+\begin_inset Formula $\epsilon=1.0^{-2}$
 \end_inset
 
 , the maximum parameter precision.
+\end_layout
+
+\begin_layout Standard
+The trial runs consisted in doubling 
+\begin_inset Formula $m$
+\end_inset
+
+ from 15 to 480, and verifying the convergence profile and best solution
+ found.
+ The values of the other parameters were left unchanged.
 \end_layout
 
 \begin_layout Subsection
@@ -4556,273 +4564,6 @@ on predictions for three, geographically different, radio-network instances.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../../tun_par/doc/img/error_distribution-MS-opt_params.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../../tun_par/doc/img/error_distribution-MS-opt_clutter.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-hspace*{0.2in}(a)
-\backslash
-hspace*{3.2in}(b)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Error distribution of the radio prediction for network Net
-\begin_inset Formula $_{8}$
-\end_inset
-
-: (a) with fitted parameter values and default clutter losses, and (b) with
- fitted parameter values and optimized clutter losses.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:05-Clutter_error_distribution_for_Net8"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide true
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../../tun_par/doc/img/error_distribution-LJ-def_params.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../../tun_par/doc/img/error_distribution-LJ-opt_clutter.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-hspace*{0.2in}(a)
-\backslash
-hspace*{3.2in}(b)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Error distribution of the radio prediction for network Net
-\begin_inset Formula $_{9}$
-\end_inset
-
-: (a) with fitted parameter values and default clutter losses, and (b) with
- fitted parameter values and optimized clutter losses.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:05-Clutter_error_distribution_for_Net9"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide true
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../../tun_par/doc/img/error_distribution-HI-opt_params.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../../tun_par/doc/img/error_distribution-HI-opt_clutter.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-hspace*{0.2in}(a)
-\backslash
-hspace*{3.2in}(b)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Error distribution of the radio prediction for network Net
-\begin_inset Formula $_{10}$
-\end_inset
-
-: (a) with fitted parameter values and default clutter losses, and (b) with
- fitted parameter values and optimized clutter losses.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:05-Clutter_error_distribution_for_Net10"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -4964,6 +4705,276 @@ reference "fig:05-Clutter_error_distribution_for_Net9"
 
 , the improvement appears in the biggest deviations, since their values
  are lower than when using the default clutter losses.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-MS-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-MS-opt_clutter.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace{0.4cm}(a)
+\backslash
+hspace{6.7cm}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{8}$
+\end_inset
+
+: (a) with fitted parameter values and default clutter losses, and (b) with
+ fitted parameter values and optimized clutter losses.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Clutter_error_distribution_for_Net8"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-LJ-def_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-LJ-opt_clutter.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace{0.4cm}(a)
+\backslash
+hspace{6.7cm}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{9}$
+\end_inset
+
+: (a) with fitted parameter values and default clutter losses, and (b) with
+ fitted parameter values and optimized clutter losses.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Clutter_error_distribution_for_Net9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-HI-opt_params.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../tun_par/doc/img/error_distribution-HI-opt_clutter.eps
+	lyxscale 70
+	width 47text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\backslash
+hspace{0.4cm}(a)
+\backslash
+hspace{6.7cm}(b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error distribution of the radio prediction for network Net
+\begin_inset Formula $_{10}$
+\end_inset
+
+: (a) with fitted parameter values and default clutter losses, and (b) with
+ fitted parameter values and optimized clutter losses.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:05-Clutter_error_distribution_for_Net10"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7761,13 +7772,6 @@ Based on these findings, the standard deviation of the optimized clutter
  field measurements are needed to optimize the target clutter category.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Summary
 \end_layout
@@ -7804,6 +7808,12 @@ me complexity, which is beyond reach for a serial implementation of an automated
  that have been traditionally done manually by the network engineers.
  Furthermore, even computational-intensive tasks such as objective-function
  evaluations for stochastic optimization are feasible if PRATO is used.
+\end_layout
+
+\begin_layout Standard
+To the best of the author's knowledge, an automatic-optimization method
+ for the clutter losses of a geographical area has not yet been presented
+ in the related literature.
 \end_layout
 
 \end_body

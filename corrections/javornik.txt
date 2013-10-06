@@ -1,0 +1,12 @@
+* Skrajsati captione slik?!
+* Velikost crk pri grafih mora biti v skladu z velikostjo pisav captiona.
+* Sections with only one paragraph are too short to be alone!
+* Thermal noise tau_0 -> N_0
+* sir(c,m) -> SINR(c,m)
+* Vsa imena funkcij se pisejo z 'navadno' pisavo (ne italics).
++ 6.3.2 --- pl_LOS -> ni LOS, ampak open area! Primerno popravi besedilo.
++ 6.3.2 --- pl -> L
+- 7.6.4 --- Shannon's formula o kapaciteti kanala oz. signal to interference ratio.
++ 7.7 --- manjka primerjava s 'commom radio-planning techniques'. Magari kr zbrisi ...
+
++ Preveri all the above with 'grep' through LyX files.

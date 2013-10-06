@@ -32,7 +32,7 @@ from a group of possible decisions, which may be defined as:
 
 \noindent where $\vec{x}=(x_{1},\dots,x_{n})$ is a vector representing
 the decision variables, $f(\vec{x})$ is the objective function measuring
-the quality of the decisions and $\Omega$ is the set of feasible
+the quality of the decisions and $\Omega$ is the set of possible
 solutions of the problem, also known as search space. Note that the
 objective function $f$ makes it possible to define a total order
 relation between any pair of solutions in $\Omega$.
@@ -101,12 +101,12 @@ x\leftarrow x-\alpha f'(x),
 \end{equation}
 
 
-\noindent where $\alpha$ is a small positive value. Consequently,
-a positive slope will make $x$ decrease, whereas a negative slope
-will make it increase. Figure~\ref{fig:02-gradient_descent} shows
-an example of this behaviour. Therefore, $x$ will gradually move
-down the function until it finds its minimum, where $f'(x)$ is zero,
-causing it to stop.
+\noindent where $\alpha$ is a small positive value, and $f'(x)$
+is the first derivative of $f(x)$. Consequently, a positive slope
+will make $x$ decrease, whereas a negative slope will make it increase.
+Figure~\ref{fig:02-gradient_descent} shows an example of this behaviour.
+Therefore, $x$ will gradually move down the function until it finds
+its minimum, where $f'(x)$ is zero, causing it to stop.
 
 \begin{figure}
 \centering
@@ -129,7 +129,7 @@ into a larger jump, and may be allivieatted by adjusting the value
 of $\alpha$. However, some functions (or regions of functions) may
 require smaller values, while for others a bigger value would be more
 appropiate. Newton's method improves this by taking the second derivative
-of the function into account, i.e.:
+of the function, $f''(x)$, into account, i.e.:
 
 \begin{equation}
 x\leftarrow x-\alpha\frac{f'(x)}{f''(x)},
@@ -197,8 +197,8 @@ A problem may be formulated as follows:
 \noindent subject to
 
 \begin{eqnarray}
-A\cdot\vec{x} & \le & b\label{eq:02-linear_programming_constraints}\\
-\vec{x} & \ge & \vec{0}\nonumber 
+A\cdot\vec{x} & \le & b\nonumber \\
+\vec{x} & \ge & \vec{0}.\label{eq:02-linear_programming_constraints}
 \end{eqnarray}
 
 
@@ -256,20 +256,20 @@ basic, heuristic principles with advanced high-level guidance methods,
 targeted at improving the efficiency of a search process. These techniques
 are meant to find good solutions to a given problem, for which the
 mathematical function is not available or its search space is big
-enough for an exhaustive search to be unfeasible \cite{Kochenberger_Handbook_of_metaheuristics:2003}.
+enough for an exhaustive search to be unfeasible~\cite{Kochenberger_Handbook_of_metaheuristics:2003}.
 
 From the theorical point of view, metaheuristics represent a subset
 of stochastic optimization, since they use some degree of randomness
 to find optimal (or as good as possible) solutions to hard problems.
-They are the most general of these kinds of algorithms, and are applied
-to a wide range of problems \cite{Luke-Essentials_of_metaheuristics:2009}.
+They are the most general of this kind of algorithms, and are applied
+to a wide range of problems~\cite{Luke-Essentials_of_metaheuristics:2009}.
 Unlike the exact optimization methods introduced in the previous sections,
-metaheuristics do not guarantee the optimality of the obtained solutions
-\cite{Talbi_Metaheuristics:2009}. Moreover, they do not define how
-close the obtained solutions are from the optimal ones, as approximation
-algorithms do.
+metaheuristics do not generally guarantee the optimality of the obtained
+solutions~\cite{Talbi_Metaheuristics:2009}. Moreover, they do not
+define how close the obtained solutions are from the optimal ones,
+as approximation algorithms do.
 
-The characterization given by Blum and Roli \cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}
+The characterization given by Blum and Roli~\cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}
 provides a clear overview of the fundamental properties associated
 with metaheuristics:
 \begin{itemize}
@@ -292,7 +292,7 @@ form of memory) to guide the search process.
 The strategies used by metaheuristics should provide a dynamic balance
 between the exploitation of the accumulated search experience (commonly
 called intensification) and the exploration of the search space (commonly
-called diversification) \cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}.
+called diversification)~\cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}.
 This balance provides the necessary means to quickly identify promising
 regions, and early discarding those which have already been explored
 or don't provide solutions of better quality. Promising regions within
@@ -304,10 +304,11 @@ space as a whole is evenly explored, thus avoid confining the search
 to a reduced number of regions. In this context, the ultimate search
 algorithm in terms of diversification is random search. Random search
 generates a random solution in the search space at each iteration,
-without using memory \cite{Talbi_Metaheuristics:2009}. In terms of
-intensification, iterative local search is a representative algorithm.
-The steepest local search algorithm selects, at each iteration, the
-best neighboring solution that improves the current one \cite{Talbi_Metaheuristics:2009}.
+without using memory~\cite{Talbi_Metaheuristics:2009}. In terms
+of intensification, iterated local search~\cite{Lourencco-Iterated_local_search:2003}
+is a representative algorithm. The steepest local search algorithm
+selects, at each iteration, the best neighboring solution that improves
+the current one~\cite{Talbi_Metaheuristics:2009}.
 
 Metaheuristics are applicable where state-of-the-art exact algorithms
 cannot tackle the given instances within the required time, either
@@ -376,18 +377,18 @@ parameter bounds, $x_{i,\mathrm{{low}}}$ and $x_{i,\mathrm{{high}}}$,
 respectively~\cite{Ronkkonen-Real_parameter_optimization_with_differential_evolution:2005},
 i.e.:
 
-\begin{multline}
-x_{i,j,g}=x_{i,\mathrm{{low}}}+\mathrm{{uniform}[0,1)}\cdot(x_{i,\mathrm{{high}}}-x_{i,\mathrm{{low}}}),\\
-i=(1,2,...,D),\, j=(1,2,...,N),\, g=0.\label{eq:02-DE_structure}
-\end{multline}
+\begin{eqnarray}
+x_{i,j,g} & = & x_{i,\mathrm{{low}}}+\mathrm{{uniform}[0,1)}\cdot(x_{i,\mathrm{{high}}}-x_{i,\mathrm{{low}}}),\nonumber \\
+i & = & (1,2,...,D),\, j=(1,2,...,N),\, g=0.\label{eq:02-DE_structure}
+\end{eqnarray}
 
 
-\noindent In Equation~\ref{eq:02-DE_structure}, $g$ denotes the
+\noindent In Equation~(\ref{eq:02-DE_structure}), $g$ denotes the
 generation index, while $i$ and $j$ indicate the parameter and population
 indices, respectively. Consequently, $x_{i,j,g}$ is the $i^{\mathrm{th}}$
 parameter of the $j^{\mathrm{th}}$ population vector in generation
-$g$. The (pseudo)-random number generator $\mathrm{{uniform}[0,1)}$
-is represented by a function for selecting a uniformly-distributed
+$g$. The (pseudo)-random number generator is represented by a function
+``$\mathrm{{uniform}[0,1)}$'', that selects a uniformly-distributed
 random number from the interval $[0,1)$.
 
 DE generates solutions by applying the mutation and cross-over operations.
@@ -425,10 +426,10 @@ laid by other ants. When an ant finds a food source, it will mark
 the trail to and from it with pheromone.
 
 The pheromone concentration, $p$, evaporates at a constant rate,
-$\gamma$ , over time, $t$, i.e.:
+$\rho$ , over time, $t$, i.e.:
 
 \begin{equation}
-p(t)=p_{0}e^{-\gamma t},\label{eq:02-ACO_structure}
+p(t)=p_{0}\mathrm{e}^{-\rho t},\label{eq:02-ACO_structure}
 \end{equation}
 
 
@@ -459,9 +460,9 @@ than the best solution found so far.
 
 There are six parameters that control the way DASA explores the search
 space: the number of ants ($m$), the discrete base ($b$), the pheromone
-dispersion factor ($q$), the global scale-increasing factor ($s_{+}$),
+dispersion factor ($\rho$), the global scale-increasing factor ($s_{+}$),
 the global scale-decreasing factor ($s_{-}$), and the maximum parameter
-precision ($e$).
+precision ($\epsilon$).
 
 A more in-depth explanation about these parameters and the DASA algorithm
 itself can be found in~\cite{korosec2010_DASA}.
@@ -495,9 +496,9 @@ by \textquoteleft{}\textquoteleft{}uphill\textquoteright{}\textquoteright{}
 moves. The pseudo-code of the SA metaheuristic can be represented
 as in Algorithm~\ref{alg:07-SA_pseudocode}. In this pseudo-code,
 $T_{1},T_{2},...$ represent an usually decreasing sequence of values
-for the temperature parameter, and $\mathrm{{uniform}[0,1]}$ is a
-function for selecting a uniformly-distributed random number from
-the given interval. whereas the meaning of the rest of the symbols
+for the temperature parameter, and ``$\mathrm{{uniform}[0,1]}$''
+is a function for selecting a uniformly-distributed random number
+from the given interval, whereas the meaning of the rest of the symbols
 is as defined above. 
 
 \begin{algorithm}
@@ -531,6 +532,8 @@ SA has proved to be a solid optimization algorithm, capable of giving
 high-quality solutions to a wide scope of optimization problems~\cite{Suman_SurveyOfSimulatedAnnealing}.
 Additionally, several works employ the SA metaheuristic for solving
 optimization problems in the area of radio network~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Duque-Channel_assignment_for_cellular_radio_using_simulated_annealing:1993,CPICH.optimization:2003,minimum.set.covering.problem:2000,Coverage.optimization.on.CPICH.tilt.and.azimuth:2006,Zhang-Mathematical_modelling_and_comparisons_of_heuristics_for_WCDMA_radio_planning:2006}.
+A detailed description about SA and its applications can be found
+in~\cite{Van-Simulated_annealing:1987}.
 
 
 \section{Black-box optimization \label{sub:02-Black_box_optimization}}
@@ -617,12 +620,12 @@ the formats, protocols, or algorithms used by the proprietary software,
 since their disclosure is often explicitly forbidden by restrictive
 licenses.
 
-Some non-commercial and open-source packages for radio-network simulation~\cite{Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Momentum.project,Ozimek_Open.source.radio.coverage.prediction:2010,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004}
+Some non-commercial and open-source packages for radio-network simulation~\cite{Ozimek_Open.source.radio.coverage.prediction:2010,Momentum.project,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004}
 present two main drawbacks: poor documentation and/or low scalability.
-The scalability issues shown by some projects retrain these packages
+The scalability issues shown by some projects prevent these packages
 to be used in larger, real-world environments, where big problem instances
-are the rule. Despite this, the merit and acknowledgement go the authors
-of these frameworks, not only for providing them to the scientific
+are the rule. Despite this, the merit and acknowledgement go to the
+authors of these frameworks, not only for providing them to the scientific
 community, but fundamentaly because for providing an environment in
 which different kinds of simulations are completely reproducible.
 Additionally, the lack of documentation represents a big hurdle for
@@ -636,7 +639,7 @@ complex simulation frameworks, as the ones used for radio networks.
 \chapter{Principles of mobile radio networks \label{chap:02-Principles_of_mobile_radio_networks}}
 
 A cellular mobile radio network is a collection of individual cells
-that are served by several transmitters, called Base Stations~(BSs\nomenclature[A]{BSs}{Base station.}).
+that are served by several transmitters, called Base Stations~(BSs\nomenclature[A]{BS}{Base station.}).
 Each BS gives radio coverage to a small geographical area. The integration
 of the coverage of various BSs provides radio coverage over a much
 larger geographical area, thus defining a cellular radio network.
@@ -733,11 +736,12 @@ cellular systems such as GSM~\cite{Stuber-Principles_of_mobile_communication:201
 
 Soft Handover~(SHO\nomenclature[A]{SHO}{Soft handover.}) enhances
 handover functionality by allowing an UE to potentially operate on
-multiple radio links at a time. During SHO, the target BS is selected
-as the best candidate from among the available BSs. The UE performs
-the necessary link-quality measurements by monitoring the signals
-from the surrounding BSs. Simultaneously keeping multiple connections
-means that SHO enhances the system performance through diversity reception.
+multiple radio links at a time (see Figure~\ref{fig:02-SHO_example}).
+During SHO, the target BS is selected as the best candidate from among
+the available BSs. The UE performs the necessary link-quality measurements
+by monitoring the signals from the surrounding BSs. Simultaneously
+keeping multiple connections means that SHO enhances the system performance
+through diversity reception.
 
 Despite the advantages it provides, SHO is complex and expensive to
 implement. Additionally, interference actually increases with SHO,
@@ -748,7 +752,7 @@ due to several BSs connected to the same UE can become a problem~\cite{Stuber-Pr
 
 The SHO procedure is important in systems using the channel-access
 method known as Code Division Multiple Access~(CDMA\nomenclature[A]{CDMA}{Code division multiple access.}),
-and especially in Wide CDMA~(WCDMA\nomenclature[A]{WCDMA}{Wide-code division multiple access.}),
+and especially in the Wideband CDMA~(WCDMA\nomenclature[A]{WCDMA}{Wideband code division multiple access.}),
 which is employed by the UMTS. CDMA systems are interference-limited
 meaning their capacities are closely related to the level of interference
 they can tolerate. Specifically, a CDMA system cell is affected by
@@ -768,9 +772,11 @@ connections to multiple BSs.
 \begin{figure}
 \centering
 
-\includegraphics[width=0.4\textwidth]{02-background_and_motivation/img/soft_handover}
+\includegraphics[width=0.3\textwidth]{02-background_and_motivation/img/sho_example}
 
-\caption{Example of two UEs in soft handover with two BSs. Adapted from {[}219???{]}.
+\caption{An example of the soft-handover region, showed as a grayed area. The
+area boundaries are configurable relative to the pilot-signal level
+of each cell. Adapted from~\cite{Stuber-Principles_of_mobile_communication:2011}.
 \label{fig:02-SHO_example}}
 \end{figure}
 
@@ -795,13 +801,6 @@ does not support SHO, whereas the High Speed Uplink Packet Access~(HSUPA\nomencl
 does. This particular distinction is further discussed in Chapter~\ref{chap:07-Experimental-evaluation-the-SHO-alignment-problem},
 because it has some important implications in the balanced distribution
 of SHO areas, and thus in the quality and capacity of HSPA services~\cite{holma2006hsdpa}.
-
-
-\section{Pilot signal and power \label{sub:02-Pilot-signal-and-power}}
-
-<Not yet finished ...???>
-
-
 
 
 \chapter{Overview of radio-network optimization \label{chap:02-Optimization_of_radio_networks}}
@@ -908,14 +907,14 @@ is above a fixed threshold.
 \begin{minipage}[c]{0.45\textwidth}%
 \centering
 
-\includegraphics[width=0.6\textwidth]{02-background_and_motivation/img/set_cover_in}
+\includegraphics[width=0.6\textwidth]{02-background_and_motivation/img/set_covering-IN}
 
 (a)%
 \end{minipage}\hfill{}%
 \begin{minipage}[c]{0.45\textwidth}%
 \centering
 
-\includegraphics[width=0.6\textwidth]{02-background_and_motivation/img/set_cover_out}
+\includegraphics[width=0.6\textwidth]{02-background_and_motivation/img/set_covering-OUT}
 
 (b)%
 \end{minipage}\caption{A graphical representation of the set-covering problem: (a) the problem
@@ -934,7 +933,7 @@ region such that the traffic capacity and the size of the covered
 area of the network are maximized with the lowest installation cost.
 
 
-\subsection{Related work}
+\subsection*{Related work}
 
 Aydin et al.~\cite{Aydin:Heuristic.Optimization.Of.WCDMA} proposed
 a solution to the $p$-median problem based on three metaheuristic
@@ -969,11 +968,7 @@ program. In both works, they proposed a mixed, integer-programming
 model to maximize the trade-off between covered area and installation
 costs.
 
-Finally, Whitaker et al.~\cite{GA.for.antenna.placement:2005} focused
-on providing a required service-coverage target at the lowest possible
-financial cost. Their work compared the performance of four different
-algorithms, namely SEAMO, SPEA2, NSGA-II and PESA, all targeting multiobjective
-optimization targets.
+
 
 
 \section{Optimizing antenna parameters}
@@ -999,23 +994,25 @@ capacity increase of the network.
 \begin{figure}[h]
 \centering
 
-\includegraphics[width=0.3\textwidth]{02-background_and_motivation/img/azimuth}
+\includegraphics[width=0.4\textwidth]{02-background_and_motivation/img/antenna_pattern}
 
-\caption{An example of an antenna-azimuth pattern.\label{fig:02-Antenna_azimuth}}
+\caption{An example of an antenna-azimuth pattern, showing the gain in each
+direction.\label{fig:02-Antenna_azimuth}}
 \end{figure}
 
 
 \begin{figure}
 \centering
 
-\includegraphics[width=0.6\textwidth]{02-background_and_motivation/img/tilt}
+\includegraphics[width=0.6\textwidth]{02-background_and_motivation/img/antenna_tilt}
 
-\caption{The antenna tilt, showing its angle with the horizontal plane.\label{fig:02-Antenna-tilt}}
+\caption{The antenna tilt, showing its angle with the horizontal plane. Adapted
+from~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.\label{fig:02-Antenna-tilt}}
 \end{figure}
 
 
 
-\subsection{Related work}
+\subsection*{Related work}
 
 One of the approaches proposed by Gerdenitsch et al.~\cite{Antenna.tilt.and.CPICH:2003}
 involves an ``ad-hoc'' strategy for adjusting antenna azimuth and
@@ -1085,7 +1082,7 @@ f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}},
 \]
 
 
-\noindent \nomenclature[S]{$f_{\mathrm{cov}}$}{Objective function for the service-coverage optimization problem.}\nomenclature[S]{$A_{\mathrm{covered}}$}{Area under service coverage of the mobile network.}\nomenclature[S]{$A_{\mathrm{total}}$}{Complete geographical area under optimization.}
+\noindent \nomenclature[S]{$A_{\mathrm{covered}}$}{Area under service coverage of the mobile network.}\nomenclature[S]{$A_{\mathrm{total}}$}{Complete geographical area under optimization.}
 
 \noindent where $A_{\mathrm{covered}}$ represents the area covered
 by the network and $A_{\mathrm{total}}$ represents the total area
@@ -1097,12 +1094,11 @@ The area under optimization is usually divided into squares (or pixels)
 of a certain size, creating a Regular Square Grid (RSG\nomenclature[A]{RSG}{Regular square grid.})
 of a certain resolution. A pixel is considered covered if a given
 QoS measure is above a defined threshold. It is also common to use
-a binary function, e.g., $cov(x,y)$\nomenclature[S]{$cov(x,y)$}{Returns 1 if the coordinate $(x,y)$ is under mobile-network coverage.},
-to check the coverage of a given pixel. The function returns 1 if
-the pixel located at $(x,y)$ is covered, and 0 otherwise.
+a binary function to check the coverage of a given pixel. The function
+returns 1 if the pixel located at $(x,y)$ is covered, and 0 otherwise.
 
 
-\subsection{Related work}
+\subsection*{Related work}
 
 Siomina and Yuan~\cite{Siomina:Minimum.pilot.power.for.service.coverage}
 considered the problem of minimizing the pilot-signal power subject
@@ -1204,8 +1200,7 @@ new hardware architectures have appeared. Among them is the programmable
 Graphics Processing Unit (GPU\nomenclature[A]{GPU}{Graphics processing unit.}),
 the computing capacity of which is already showing a faster progress
 compared to CPUs. The peak performance of the latest GPU is several
-times greater than the latest CPU, but even more important is the
-trend~\cite{Cruz-How_to_obtain_efficient_GPU_kernels:2011}.
+times higher than the latest CPU, but even more important is the trend~\cite{Cruz-How_to_obtain_efficient_GPU_kernels:2011}.
 
 The GPU market was almost exclusively driven by the games industry.
 This fact makes this commodity hardware cheaper than other alternatives
@@ -1216,14 +1211,14 @@ their raw performance~\cite{Cruz-How_to_obtain_efficient_GPU_kernels:2011}.
 
 In February 2007, the first real opportunity for using GPUs for general
 programming and scientific computing came about with the release of
-the Compute Unified Device Architecture~(CUDA\nomenclature[A]{CUDA}{Compute unified device architecture.}).
+the Compute Unified Device Architecture~(CUDA\nomenclature[A]{CUDA}{Compute unified device architecture.})~\cite{CUDA}.
 
 In the following, the focus on the CUDA architecture. In particular,
 similar hardware produced by other vendors, e.g., AMD and Intel, as
-well as other programming frameworks like OpenCL, are based on the
-same technology paradigm of massively-parallel processors. For this
-reason, the principles presented in this section can be applied to
-current GPU technologies, in a vendor-independent manner.
+well as other programming frameworks like OpenCL~\cite{Stone_OpenCL.A.parallel.programming.standard:2010},
+are based on the same technology paradigm of massively-parallel processors.
+For this reason, the principles presented in this section can be applied
+to current GPU technologies, in a vendor-independent manner.
 
 
 \section{CUDA \label{sec:02-CUDA}}
@@ -1256,14 +1251,15 @@ thread blocks. The threads can share data and synchronize their execution
 only within the block they belong to. Thread blocks are, in turn,
 organized in a higher-hierarchy level called grid. All threads within
 a given grid execute the same kernel function. During execution, continous
-sections of threads within a block are grouped into warps of 32 parallel
-threads, which represent the multi-threading scheduling unit~\cite{Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008}.
-A Streaming Multiprocessor (SM\nomenclature[A]{SM}{Streaming multiprocessor.})
-executes one instruction at a time for all the 32 threads in the warp.
-Consequently, if a thread block is not evenly divisible by the warp
-size, any remaining thread slots are wasted. Another undesirable situation
-appears when threads in a warp take different control paths, since
-the execution performance of the entire warp is reduced.
+sections of threads within a block are grouped into warps of several
+parallel threads (typically 32 or 64, depending on the target architecture),
+which represent the multi-threading scheduling unit~\cite{Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008}.
+A GPU contains several Streaming Multiprocessors (SM\nomenclature[A]{SM}{Streaming multiprocessor.}),
+each of which executes one instruction at a time for all the 32 threads
+in the warp. Consequently, if a thread block is not evenly divisible
+by the warp size, any remaining thread slots are wasted. Another undesirable
+situation appears when threads in a warp take different control paths,
+since the execution performance of the entire warp is reduced.
 
 \begin{figure}
 \centering
@@ -1298,7 +1294,7 @@ shared, local, or constant memory, a programmer has the means to organize
 the code in such a way that the application throughput can be maximized.
 
 \begin{table}
-\caption{Properties of different memory types on a GeForge 8800 GPU. Adapted
+\caption{Properties of different memory types on a GeForce 8800 GPU. Adapted
 from~\cite{Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008}.\label{tab:02-GPU_memory_properties}}
 
 
@@ -1309,8 +1305,8 @@ from~\cite{Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008}.\label{tab:02-
 Memory & Location & Latency & Read-only & Program scope\tabularnewline[\doublerulesep]
 \hline 
 Global & off-chip & 200-300 cycles & no & global\tabularnewline
-Texture & on-chip cache & \textasciitilde{}100 cycles & yes & global\tabularnewline
-Shared & on-chip & \textasciitilde{}register & no & function\tabularnewline
+Texture & on-chip cache & >100 cycles & yes & global\tabularnewline
+Shared & on-chip & >1 cycle & no & function\tabularnewline
 Register & on-chip & \textasciitilde{}1 cycle & no & function\tabularnewline
 \hline 
 \end{tabular}
@@ -1386,8 +1382,7 @@ by the CUDA platform is used.
 This chapter gave an overview of the basic concepts, the potential
 and the limitations of the GPUs when used as parallel procesors for
 general programming. In particular, emphasis has been given to the
-details that differenciate this platform from the traditional serial
-architecture on CPUs. In this sense, it is important to recognize
-which applications can benefit from using a GPU and which not, also
-taking into consideration the effort required at the implementation
-time.
+details that differenciate this platform from the traditional CPUs.
+In this sense, it is important to recognize which applications can
+benefit from using a GPU and which not, also taking into consideration
+the effort required at the implementation time.

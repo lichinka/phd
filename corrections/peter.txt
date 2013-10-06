@@ -1,0 +1,8 @@
++ 6.3.2. Fresnel zone -> kratka obrazlozitev
++ 6.3.2. Knife-edge diffraction -> kratka obrazlozitev
++ 6.5.2. Average running times, namesto best
++ 7...??? short (number of bytes)
++ 8.3 0.01: zakaj? ker ne izgubimo na quality ter manjsi koraki se prakticno ne vidijo.
++ 8.6.4: Figure za vsak algoritem, z avg, best, worst.
++ Table 8.3: % skupaj!
+

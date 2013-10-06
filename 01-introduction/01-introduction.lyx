@@ -88,7 +88,8 @@ status open
 \begin_layout Standard
 \noindent
 Many researchers believe the computer has become the third method to do
- research, behind theory and experimentation, for both science and engineering.
+ research, in addition to theory and experimentation, for both science and
+ engineering.
  Although there is no complete agreement on the position intended for scientific
  computing with respect to the other two methods, it is undeniable that
  computational methods are an essential tool in most disciplines, particularly
@@ -97,10 +98,14 @@ Many researchers believe the computer has become the third method to do
 
 \begin_layout Standard
 Nowadays, decision making is present practially everywhere.
- As scientistis, engineers and managers have to make decisions in more complex
+ As scientists, engineers and managers have to make decisions in more complex
  and competitive circumnstances every day, decision making involves dealing
  with rational and optimal approaches.
- According to Talbi 
+ According to Talbi
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -119,7 +124,7 @@ modeling the problem,
 \end_layout
 
 \begin_layout Itemize
-optimizing the problem, and
+solving the problem, and
 \end_layout
 
 \begin_layout Itemize
@@ -135,8 +140,8 @@ Formulating a decision problem means making an initial statement about it.
  for it.
  Sometimes this model is inspired by similar models in the literature, making
  it possible to tackle the problem with well-studied methods.
- After a model of the problem is available, the optimization step, i.e., generatin
-g 
+ After a model of the problem is available, one may start solving it.
+ In the context of this thesis, optimization means generating 
 \begin_inset Quotes eld
 \end_inset
 
@@ -144,11 +149,15 @@ good
 \begin_inset Quotes erd
 \end_inset
 
- solutions for the problem, may begin.
+ solutions for the problem.
  It is important to note that the resulting solutions are given for the
  abstract model, and not for the original problem itself.
  Therefore, the performance of the obtained solution is indicative when
- the model is an accurate one 
+ the model is an accurate one
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -192,7 +201,11 @@ unacceptable
 
  solutions, the decision-making process is repeated, possibly improving
  the model and/or the optimization algorithm.
- The process, as described here, is depicted in Figure 
+ The process, as described here, is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:01-decision_making_process"
@@ -239,7 +252,8 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-A diagram of the classic decision-making process, adapted from 
+A diagram of the classic decision-making process.
+ Adapted from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -247,9 +261,6 @@ key "Talbi_Metaheuristics:2009"
 \end_inset
 
 .
- Multiple iterations of this process improve the optimization algorithm
- and/or model until an acceptable solution is found.
- 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:01-decision_making_process"
@@ -337,7 +348,11 @@ description "Global System for Mobile communications."
 
 \end_inset
 
-) 
+)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "3GPP_TR_50.099"
@@ -364,7 +379,11 @@ description "Universal Mobitel Telecommunications System."
 
 \end_inset
 
-) 
+)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "3GPP_TR_23.101"
@@ -401,7 +420,11 @@ description "Fourth Generation of mobile networks."
 
 \end_inset
 
-) LTE, have also appeared 
+) LTE, have also appeared
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Gerstenberger-Introduction_to_LTE:2011"
@@ -537,7 +560,7 @@ Available commercial tools for radio-network evaluation present several
  drawbacks.
  In particular, regarding to the size of networks that can be considered
  and their computational-time complexity.
- Yet, even if precise and fast methods were commercially available, the
+ Yet, even if precise and fast methods were commercially available, they
  would lack the level of flexibility required by the scientific community.
  Consequently, an essential attribute of the framework is to be open source,
  so that anyone can extend it to meet some specific requirements.
@@ -646,45 +669,29 @@ The contributions of this thesis to the fields of telecommunications and
  computer sciences include the following:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Design and development of an unified framework for radio-network planning
- and optimization, incorporating the following two elements, as well as
- experimentation on real-world radio networks.
- The experimentation includes a comparison with a commercial tool that is
- currently being used for real radio-network planning.
- Moreover, the parallel implementation of the framework exploits the computing
- resources of computer clusters and GPUs.
+ and optimization that supports computer clusters and GPUs.
 \end_layout
 
-\begin_layout Itemize
-Proposal of a new approach for parallel programming that combines a classic
- master-worker method with an external database.
- The proposed approach improves the scalability of the classic master-worker
- paradigm by preventing the master process to become the bottleneck of a
- parallel system.
+\begin_layout Enumerate
+Proposal of a new approach for parallel programming that enhances the performanc
+e of a classic master-worker method.
 \end_layout
 
-\begin_layout Itemize
-Quality improvement of renowned radio-propagation models by applying metaheurist
-ic-optimization techniques that enhance the results of current state-of-the-art
- methods.
+\begin_layout Enumerate
+Quality improvement of radio-propagation predictions by applying metaheuristic-o
+ptimization techniques.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 A new algorithm, based on autonomous agents, to tackle the service-coverage
  problem in radio networks.
- The algorithm deals with problem instances that are out-of-reach of other
- state-of-the-art techniques, reaching good quality of solutions if compared
- to classic network-planning techniques.
- This approach is applicable for large real-world radio networks.
 \end_layout
 
-\begin_layout Itemize
-Identification of a new optimization problem in 3G radio networks that deals
- with soft-handover alignment of downlink and uplink areas.
- By solving this problem, network malfunctioning is avoided in areas where
- there is soft-handover capability in the uplink, but none in the downlink.
- So far this problem has never been solved by means of automatic optimization.
+\begin_layout Enumerate
+Identification and formalization of a new optimization problem in radio
+ networks.
 \end_layout
 
 \begin_layout Section
@@ -886,65 +893,94 @@ Publications
 
 \begin_layout Standard
 The work presented in this thesis is supported by a number of previous publicati
-ons ...???
-\end_layout
-
-\begin_layout Standard
-A comprenhensive list of related publications is given in Appendix
+ons.
+ The initial work on the unified framework for radio-network planning was
+ published by Benedičič et al.
+ in
 \begin_inset space ~
 \end_inset
 
-???.
-\end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
->>> Kaluza
-\end_layout
-
-\begin_layout Plain Layout
-A number of previous publications underlie this thesis.
- The initial work on activity recognition was published by Lustrek and Kaluza
- (2009).
- To address the challenges caused by sensor noise, Kaluza and Dovgan (2009)
- developed and published pre-processing ltering techniques, while Kaluza
- (2009) published the removal of spurious activity transitions (post-processing).
- The complete activity recognition pipeline was then fully applied and rst
- published at the European Conference on Ambient Intelligence (Lustrek et
- al., 2009).
- This publication enabled analyzing high-level behavior patterns such as
- spatio-activity matrices, which in turn was published at the International
- Conference on Machine Learning and Data Mining (Kaluza and Gams, 2010)
- and won the best student paper award.
- The paper was then further extended and published in Journal of Ambient
- Intelligence and Smart Enviroments (Kaluza and Gams, 2012).
- The initial ideas for repeated anomalous and suspicious behavior detection's
- theoretical foundations were published at the PAIR workshop at the AAAI
- Conference on Articial Intelligence (Kaluza et al., 2011e), and then distilled
- along with the F-UPR detector as a full paper at the International Conference
- on Autonomous Agents and Multiagent Systems (Kaluza et al., 2012b).
- Empirical studies on the ambient assisted living domain were also published
- at the Inter- national Joint Conference on Ambient Intelligence (Kaluza
- et al., 2010b) and demonstrated at the European Conference on Articial Intellige
-nce (Lustrek et al., 2012) and the Inter- national Conference on Autonomous
- Agents and Multiagent Systems (Kaluza et al., 2012a).
- Results on the security domain were published in the Journal of Ambient
- Intelligence and Smart Environments (Dovgan et al., 2010b) and Expert Systems
- with Applications (Kaluza et al., 2011c).
- The comprehensive list of related publications is collected in Appendix
- B.
-\end_layout
-
-\begin_layout Plain Layout
-<<<
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013"
 
 \end_inset
 
+.
+ To address the challenges of the computational-time complexity during optimizat
+ion and its objective-function evaluations, Benedičič et al.
+ published the GPU extensions for the framework in
+\begin_inset space ~
+\end_inset
 
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013"
+
+\end_inset
+
+.
+ The agent-based algorithm for solving the service-coverage problem was
+ initially published at the International multiconference Information Society
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Pilot.power.optimization:2010"
+
+\end_inset
+
+.
+ This work was further extended and later published in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013"
+
+\end_inset
+
+.
+ The primary ideas for the formal definition of the soft-handover balancing
+ problem were published at the World Congress of Computational Intelligence
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012"
+
+\end_inset
+
+.
+ The results of the automated tuning capabilities of the framework were
+ published in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A comprenhensive list of the author's publications is given in Appendix
+\begin_inset space ~
+\end_inset
+
+A.
 \end_layout
 
 \end_body

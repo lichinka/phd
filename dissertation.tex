@@ -1,8 +1,8 @@
 %% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[11pt,twoside,english]{MPSthesis}
+\documentclass[11pt,twoside,slovene,english]{MPSthesis}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\usepackage[latin2,latin9]{inputenc}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 \usepackage{array}
@@ -37,32 +37,39 @@
 
 \naslov{OPTIMIZACIJSKE IN VZPOREDNE METODE ZA NA\v{C}RTOVANJE RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
 
-\supervisor{Assist. Prof. Dr. Peter Koro\v{s}ec}
-\supervisorlong{Assist. Prof. Dr. Peter Koro\v{s}ec, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
-\cosupervisor{Assist. Prof. Dr. Toma\v{z} Javornik}
-\cosupervisorlong{Assist. Prof. Dr. Toma\v{z} Javornik, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\supervisor{Assoc.\ Prof.\ Dr.\ Peter Koro\v{s}ec}
+\supervisorlong{Assoc.\ Prof.\ Dr.\ Peter Koro\v{s}ec, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\cosupervisor{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik}
+\cosupervisorlong{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
-\month{September}
+\month{October}
 \year{2013}
 
-\evaluationBoardChairman{Assist. Prof. Dr. Jurij \v{S}ilc}
+\evaluationBoardChairman{Assist.\ Prof.\ Dr.\ Jurij \v{S}ilc}
 \evaluationBoardChairmanAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
-\evaluationBoardMember{Assist. Prof. Dr. Ale\v{s} \v{S}viglej}
+\evaluationBoardMember{Assist.\ Prof.\ Dr.\ Ale\v{s} \v{S}viglej}
 \evaluationBoardMemberAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
-\evaluationBoardMembers{Prof. Dr. Marian Vajter\v{s}ic}
+\evaluationBoardMembers{Prof.\ Dr.\ Marian Vajter\v{s}ic}
 \evaluationBoardMemberAffiliations{Department of Computer Science, University of Salzburg,\\ Austria}
 
 %
 % Package for algorithms
 %
-%\usepackage{algorithmic}
 \usepackage{algpseudocode}
+
+%
+% Package for in-text bibliography entries
+%
+\usepackage{bibentry}
+\nobibliography*
 
 \makeatother
 
 \usepackage{babel}
+\addto\captionsslovene{\renewcommand{\algorithmname}{Algoritem}}
+
 \begin{document}
 \frontmatter
 
@@ -80,50 +87,76 @@
 
 \cleardoublepage{}
 
-%\pagenumbering{Roman} 
+\noindent \renewcommand{\contentsname}{\vspace{-2.4cm} \Large Contents \vspace{1.5cm}}
+\fancyhead[RE]{\footnotesize Contents}
+\tableofcontents
+\newpage \thispagestyle{empty}
 
-%\pagestyle{fancy}
+\cleardoublepage{}\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {List of Figures}}
+\addcontentsline{toc}{chapter}{\listfigurename}
+\renewcommand\listfigurename{\vspace{-2.4cm} \Large List of Figures \vspace{1.5cm}}
+%
+% Increase spacing between figure numbers and caption in LOF
+%
+%\makeatletter    
+%	\renewcommand\l@figure{\@dottedtocline{1}{1.5em}{3em}}
+%\makeatother
 
-%\setcounter{page}{7}
-
-\tableofcontents{}
-
-\cleardoublepage{} \listoffigures
-
-
-\cleardoublepage{} \listoftables
-
-
-\cleardoublepage{} 
-
-\listof{algorithm}{List of Algorithms}
-
+\listoffigures
+\newpage \thispagestyle{empty}
 
 \cleardoublepage{}
 
-\thispagestyle{fancy}
+\noindent \fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {List of Tables}}
+\addcontentsline{toc}{chapter}{\listtablename}
+\renewcommand\listtablename{\vspace{-2.4cm} \Large List of Tables \vspace{1.5cm}}
+\listoftables
+\newpage \thispagestyle{empty}
 
-\addcontentsline{toc}{chapter}{Abbreviations}
+\cleardoublepage{} \fancyhead{}
+\fancyfoot{} 
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LO]{} 
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {List of Algorithms}}
+\addcontentsline{toc}{chapter}{List of Algorithms}
+\renewcommand\listalgorithmname{\vspace{-2.4cm} \Large List of Algorithms \vspace{1.5cm}}
+\begingroup 
+\let\oldnumberline\numberline
+\renewcommand{\numberline}{Algorithm~\oldnumberline}
+\listofalgorithms 
+\endgroup
+\newpage \thispagestyle{empty} 
 
-\renewcommand{\nomname}{Abbreviations}
+\cleardoublepage{}
 
 %
 % Custom format for displaying nomenclature entries
 %
 \renewcommand{\nomlabel}[1]{%
-	#1\hfill=%
+	#1 \hfill \dots %
 }
-%
-% Fancy dividing line for nomenclature groups (A - abbreviations, S - symbols)
-%
-%\renewcommand{\nomgroup}[1]{%
-%	\item[]\hspace*{-\leftmargin}%
-%	\rule[2pt]{0.45\linewidth}{1pt}%
-%	\hfill #1\hfill \rule[2pt]{0.45\linewidth}{1pt}%
-%}
 \renewcommand{\nomgroup}[1]{%
-	\ifthenelse{\equal{#1}{A}}{\item[]\hspace*{-\leftmargin}\textbf{\huge{Abbreviations}} }{%
-		\ifthenelse{\equal{#1}{S}}{\item[]\hspace*{-\leftmargin}\textbf{\huge{Symbols}} }{}}}\printnomenclature[7em]{}
+	\ifthenelse{\equal{#1}{A}}{ }{%
+		\ifthenelse{\equal{#1}{S}}{\bigskip}{}}}   
+
+\noindent \fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {Abbreviations and symbols}}
+\addcontentsline{toc}{chapter}{Abbreviations and symbols}
+\renewcommand{\nomname}{\Large Abbreviations and symbols}
+\printnomenclature[2.5cm]
+\newpage \thispagestyle{empty}
 
 \cleardoublepage{}
 
@@ -164,10 +197,16 @@
 \cleardoublepage{}
 
 \bibliographystyle{plain}
-\bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning}
+\bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning,A-bibliography/A-bibliography}
 
 
 \cleardoublepage{}
 
-\include{10-acknowledgments/10-acknowledgments}
+\include{A-bibliography/A-bibliography}\cleardoublepage{}
+
+\include{B-biography/B-biography}
+
+\cleardoublepage{}
+
+\include{C-acknowledgments/C-acknowledgments}
 \end{document}

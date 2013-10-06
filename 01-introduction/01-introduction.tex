@@ -4,22 +4,22 @@
 % First paragraph has no indentation.
 
 \noindent Many researchers believe the computer has become the third
-method to do research, behind theory and experimentation, for both
-science and engineering. Although there is no complete agreement on
-the position intended for scientific computing with respect to the
-other two methods, it is undeniable that computational methods are
-an essential tool in most disciplines, particularly in those related
+method to do research, in addition to theory and experimentation,
+for both science and engineering. Although there is no complete agreement
+on the position intended for scientific computing with respect to
+the other two methods, it is undeniable that computational methods
+are an essential tool in most disciplines, particularly in those related
 to decision making.
 
-Nowadays, decision making is present practially everywhere. As scientistis,
+Nowadays, decision making is present practially everywhere. As scientists,
 engineers and managers have to make decisions in more complex and
 competitive circumnstances every day, decision making involves dealing
-with rational and optimal approaches. According to Talbi \cite{Talbi_Metaheuristics:2009},
+with rational and optimal approaches. According to Talbi~\cite{Talbi_Metaheuristics:2009},
 decision making consists of the following steps:
 \begin{itemize}
 \item formulating the problem,
 \item modeling the problem, 
-\item optimizing the problem, and
+\item solving the problem, and
 \item implementing a solution for the problem.
 \end{itemize}
 Formulating a decision problem means making an initial statement about
@@ -29,26 +29,24 @@ factors that have some degree of influence over it. During the modeling
 of the problem, an abstract mathematical model is built for it. Sometimes
 this model is inspired by similar models in the literature, making
 it possible to tackle the problem with well-studied methods. After
-a model of the problem is available, the optimization step, i.e.,
-generating ``good'' solutions for the problem, may begin. It is
-important to note that the resulting solutions are given for the abstract
-model, and not for the original problem itself. Therefore, the performance
-of the obtained solution is indicative when the model is an accurate
-one \cite{Talbi_Metaheuristics:2009}. In the last step, the obtained
-solution is practically tested by the decision maker and implemented
-if it is an ``acceptable'' or ``good'' one. In case of ``bad''
-or ``unacceptable'' solutions, the decision-making process is repeated,
-possibly improving the model and/or the optimization algorithm. The
-process, as described here, is depicted in Figure \ref{fig:01-decision_making_process}.
+a model of the problem is available, one may start solving it. In
+the context of this thesis, optimization means generating ``good''
+solutions for the problem. It is important to note that the resulting
+solutions are given for the abstract model, and not for the original
+problem itself. Therefore, the performance of the obtained solution
+is indicative when the model is an accurate one~\cite{Talbi_Metaheuristics:2009}.
+In the last step, the obtained solution is practically tested by the
+decision maker and implemented if it is an ``acceptable'' or ``good''
+one. In case of ``bad'' or ``unacceptable'' solutions, the decision-making
+process is repeated, possibly improving the model and/or the optimization
+algorithm. The process, as described here, is depicted in Figure~\ref{fig:01-decision_making_process}.
 
 \begin{figure}
 \centering
 
 \includegraphics[width=0.75\textwidth]{01-introduction/img/decision_making_process}
 
-\caption{A diagram of the classic decision-making process, adapted from \cite{Talbi_Metaheuristics:2009}.
-Multiple iterations of this process improve the optimization algorithm
-and/or model until an acceptable solution is found. \label{fig:01-decision_making_process}}
+\caption{A diagram of the classic decision-making process. Adapted from \cite{Talbi_Metaheuristics:2009}.\label{fig:01-decision_making_process}}
 \end{figure}
 
 
@@ -88,17 +86,16 @@ particular, fall under this categorization.
 
 Radio networks represent one of the most fast-growing technology markets
 since the introduction of the Global System for Mobile communications
-(GSM\nomenclature[A]{GSM}{Global System for Mobile communications.})
-\cite{3GPP_TR_50.099}. As an implementation of the second generation
-of mobile networks (2G\nomenclature[A]{2G}{Second Generation of mobile networks.}),
+(GSM\nomenclature[A]{GSM}{Global System for Mobile communications.})~\cite{3GPP_TR_50.099}.
+As an implementation of the second generation of mobile networks (2G\nomenclature[A]{2G}{Second Generation of mobile networks.}),
 GSM appeared more than twenty years ago. Its successor, the Universal
-Mobile Telecommunications System (UMTS\nomenclature[A]{UMTS}{Universal Mobitel Telecommunications System.})
-\cite{3GPP_TR_23.101} marks an evolution from 2G, representing a
-milestone for the third generation of mobile radio networks (3G\nomenclature[A]{3G}{Third Generation of mobile networks.}).
+Mobile Telecommunications System (UMTS\nomenclature[A]{UMTS}{Universal Mobitel Telecommunications System.})~\cite{3GPP_TR_23.101}
+marks an evolution from 2G, representing a milestone for the third
+generation of mobile radio networks (3G\nomenclature[A]{3G}{Third Generation of mobile networks.}).
 In recent years, the first commercial networks implementing the Long
 Term Evolution (LTE\nomenclature[A]{LTE}{Long Term Evolution.}),
 also known as fourth generation (4G\nomenclature[A]{4G}{Fourth Generation of mobile networks.})
-LTE, have also appeared \cite{Gerstenberger-Introduction_to_LTE:2011}.
+LTE, have also appeared~\cite{Gerstenberger-Introduction_to_LTE:2011}.
 The always increasing demand for more bandwidth has been one of the
 main forces behind the standardization and later implementation of
 systems delivering higher-speed data services in order to improve
@@ -157,7 +154,7 @@ different methods and results in a simplified and objective manner.
 \item Available commercial tools for radio-network evaluation present several
 drawbacks. In particular, regarding to the size of networks that can
 be considered and their computational-time complexity. Yet, even if
-precise and fast methods were commercially available, the would lack
+precise and fast methods were commercially available, they would lack
 the level of flexibility required by the scientific community. Consequently,
 an essential attribute of the framework is to be open source, so that
 anyone can extend it to meet some specific requirements. In the long
@@ -231,35 +228,18 @@ of their complexity or size.
 
 The contributions of this thesis to the fields of telecommunications
 and computer sciences include the following:
-\begin{itemize}
+\begin{enumerate}
 \item Design and development of an unified framework for radio-network planning
-and optimization, incorporating the following two elements, as well
-as experimentation on real-world radio networks. The experimentation
-includes a comparison with a commercial tool that is currently being
-used for real radio-network planning. Moreover, the parallel implementation
-of the framework exploits the computing resources of computer clusters
-and GPUs.
-\item Proposal of a new approach for parallel programming that combines
-a classic master-worker method with an external database. The proposed
-approach improves the scalability of the classic master-worker paradigm
-by preventing the master process to become the bottleneck of a parallel
-system.
-\item Quality improvement of renowned radio-propagation models by applying
-metaheuristic-optimization techniques that enhance the results of
-current state-of-the-art methods.
+and optimization that supports computer clusters and GPUs.
+\item Proposal of a new approach for parallel programming that enhances
+the performance of a classic master-worker method.
+\item Quality improvement of radio-propagation predictions by applying metaheuristic-optimization
+techniques.
 \item A new algorithm, based on autonomous agents, to tackle the service-coverage
-problem in radio networks. The algorithm deals with problem instances
-that are out-of-reach of other state-of-the-art techniques, reaching
-good quality of solutions if compared to classic network-planning
-techniques. This approach is applicable for large real-world radio
-networks.
-\item Identification of a new optimization problem in 3G radio networks
-that deals with soft-handover alignment of downlink and uplink areas.
-By solving this problem, network malfunctioning is avoided in areas
-where there is soft-handover capability in the uplink, but none in
-the downlink. So far this problem has never been solved by means of
-automatic optimization.
-\end{itemize}
+problem in radio networks.
+\item Identification and formalization of a new optimization problem in
+radio networks.
+\end{enumerate}
 
 \section{Organization}
 
@@ -305,8 +285,18 @@ work.
 \section{Publications }
 
 The work presented in this thesis is supported by a number of previous
-publications ...???
+publications. The initial work on the unified framework for radio-network
+planning was published by Benedi\v{c}i\v{c} et al. in~\cite{Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013}.
+To address the challenges of the computational-time complexity during
+optimization and its objective-function evaluations, Benedi\v{c}i\v{c}
+et al. published the GPU extensions for the framework in~\cite{Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013}.
+The agent-based algorithm for solving the service-coverage problem
+was initially published at the International multiconference Information
+Society~\cite{Benedicic_Pilot.power.optimization:2010}. This work
+was further extended and later published in~\cite{Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013}.
+The primary ideas for the formal definition of the soft-handover balancing
+problem were published at the World Congress of Computational Intelligence~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012}.
+The results of the automated tuning capabilities of the framework
+were published in~\cite{Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013}.
 
-A comprenhensive list of related publications is given in Appendix~???.
-
-
+A comprenhensive list of the author's publications is given in Appendix~A.

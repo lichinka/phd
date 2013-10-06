@@ -159,7 +159,11 @@ r approach.
 
 \begin_layout Standard
 The content of this chapter extends the research work published by the author
- in 
+ in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Benedicic-A_GRASS_GIS_parallel_module_for_radio_propagation_predictions:2013"
@@ -168,16 +172,35 @@ key "Benedicic-A_GRASS_GIS_parallel_module_for_radio_propagation_predictions:201
 
 .
  The rest of this chapter is organized as follows.
- Section 
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:04-Motivation"
+
+\end_inset
+
+ describes the motivation behind the presented research, followed by an
+ overview of the relevant publications in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:04-Related_work"
 
 \end_inset
 
- gives an overview of the relevant publications, describing how they relate
- to the presented work.
- Section 
+, describing how they relate to this work.
+ Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:04-Radio_coverage_prediction_for_mobile_networks"
@@ -186,7 +209,11 @@ reference "sec:04-Radio_coverage_prediction_for_mobile_networks"
 
  gives a description of the radio-coverage prediction problem, including
  the radio-propagation model.
- Section 
+ Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:04-Design_and_implementation"
@@ -195,7 +222,11 @@ reference "sec:04-Design_and_implementation"
 
  concentrates on the design and implementation of the radio-propagation
  tool, for both the serial and parallel versions.
- Section 
+ Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:04-Simulations"
@@ -205,15 +236,15 @@ reference "sec:04-Simulations"
  discusses the experimental results and their analysis.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage clearpage
+\begin_layout Section
+Motivation 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:04-Motivation"
+
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Motivation
 \end_layout
 
 \begin_layout Standard
@@ -237,14 +268,13 @@ key "Moore_Cramming_more_components_onto_integrated_circuits:1998"
  The challenge is thus to deliver the computing power of multi-core systems
  in order to tackle a computationally time-consuming problem, the completion
  of which is unfeasible using traditional serial approaches.
- Indeed, improving the performance and data-set sizes a well-known approach
- may handle opens new possibilities for models and implementations of enhanced
- analytical methods.
+ Indeed, a performance improvement opens new possibilities regarding the
+ data sizes and accuracy a model may handle.
 \end_layout
 
 \begin_layout Standard
-A traditional approach when dealing with computationally expensive problem
- solving is to simplify the models, thus reducing the time needed for their
+A traditional approach, when dealing with computationally expensive problem
+ solving, is to simplify the models, thus reducing the time needed for their
  calculation.
  Clearly, this method increases the introduced error level, which is not
  an option for a certain group of simulations, e.g., those dealing with disaster-c
@@ -262,8 +292,8 @@ key "Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_en
 .
  The conducted simulations during the planning phase of a radio network
  also belong to this group.
- Their results are the basis for the decision making prior to physically
- installing the BSs and antennas that will cover a certain geographical
+ The simulation results are the basis for the decision making prior to physicall
+y installing the BSs and antennas that will cover a certain geographical
  area.
  A larger deviation of these results increases the probability of making
  the wrong decisions at installation time, which may considerably increase
@@ -271,25 +301,15 @@ key "Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_en
 \end_layout
 
 \begin_layout Standard
-Various researchers have successfully deployed high-performance computing
- (HPC
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "HPC"
-description "High-perfomance computing."
-
-\end_inset
-
-) systems and techniques to solve different problems dealing with spatial
- data
+Various researchers have successfully deployed HPC systems and techniques
+ to solve different problems dealing with spatial data
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_enabling_the_computability_of_dust_storm_forecasting:2012,Li_Parallel_cellular_automata_for_large_scale_urban_simulation_using_load_balancing_techniques:2010,Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012,Osterman_CUDA_on_GRASS:2012,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013,Tabik_Simultaneous_computation_of_total_viewshed_on_large_high_resolution_grids:2012,Widener_Developing_a_parallel_computational_implementation_of_AMOEBA:2012"
+LatexCommand cite
+key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_enabling_the_computability_of_dust_storm_forecasting:2012,Li_Parallel_cellular_automata_for_large_scale_urban_simulation_using_load_balancing_techniques:2010,Osterman_CUDA_on_GRASS:2012,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013,Tabik_Simultaneous_computation_of_total_viewshed_on_large_high_resolution_grids:2012,Widener_Developing_a_parallel_computational_implementation_of_AMOEBA:2012,Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012"
 
 \end_inset
 
@@ -323,11 +343,61 @@ key "Clematis_High_performance_computing_with_geographical_data:2003"
 \end_layout
 
 \begin_layout Standard
-In the following, a high-performance, radio-propagation prediction tool
- for GSM (2G), UMTS (3G) and LTE (4G) networks is presented.
- It can be used for planning the different phases of a new radio-network
- installation, as well as a support tool for maintenance activities related
- to network troubleshooting in general and optimization in particular.
+In this chapter, a high-performance, radio-planning framework for GSM
+\begin_inset space ~
+\end_inset
+
+(2G), UMTS
+\begin_inset space ~
+\end_inset
+
+(3G) and LTE
+\begin_inset space ~
+\end_inset
+
+(4G) networks is presented.
+ Using a snapshot-based approach (see Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Radio_network_model"
+
+\end_inset
+
+), the performance estimation of a radio network is divided into two parts,
+ i.e., the coverage prediction and the performance analysis.
+ During the coverage prediction, which is the subject of this chapter, path-loss
+ matrixes are created based on radio-propagation models, a network configuration
+, and digital maps of the target geographical area.
+ Hence, in addition to a reliable radio-propagation model, also the resolution
+ of the digital map should be high enough.
+\end_layout
+
+\begin_layout Standard
+During the performance-analysis part, which is discussed in the following
+ chapters, the predicted path losses are used for analyzing different phenomena,
+ e.g., service availability and SHO performance.
+ Therefore, the largest influence on the result performance of the framework
+ comes from the calculated coverage predictions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Coinchon-The_impact_of_radio_propagation_predictions:2020"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The framework is also suitable as a support tool for maintenance activities
+ related to network troubleshooting in general and optimization in particular.
  Specifically, automatic radio-coverage optimization requires the evaluation
  of millions of radio-propagation predictions in order to find a good solution
  set.
@@ -484,7 +554,102 @@ name "sec:04-Related_work"
 \end_layout
 
 \begin_layout Standard
-The task-parallelization problem within the GRASS environment has been addressed
+There are few examples of radio-network simulators in the literature
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ozimek_Open.source.radio.coverage.prediction:2010,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Sanchez_Performance_evaluation_of_OFDMA_wireless_systems_using_WM_SIM:2006,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004"
+
+\end_inset
+
+.
+ Most of these tools were developed for academic research, thus not targeting
+ industrial-sized environments.
+ 
+\end_layout
+
+\begin_layout Standard
+A Matlab-based LTE simulator was proposed in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011"
+
+\end_inset
+
+.
+ It implements a standard LTE downlink physical layer, including Adaptive
+ Modulation and Coding (AMC
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "AMC"
+description "Adaptive modulation and coding."
+
+\end_inset
+
+), multiple users, Multiple Input Multiple Output (MIMO
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "MIMO"
+description "Multiple input multiple output."
+
+\end_inset
+
+) transmission and scheduler.
+ Despite being open source and freely available, the fact of being implemented
+ in Matlab makes it restrictive in terms of tackling big problem instances
+ of real networks.
+\end_layout
+
+\begin_layout Standard
+A promising tool from the performance point of view was presented in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011"
+
+\end_inset
+
+, where the authors implemented a full-stack LTE system in C++.
+ Although the tool has no graphical capabilities for displaying the simulation
+ progress or outcome, they might be included, since the source code is available.
+ In our opinion, the main drawback of this tool is the lack of documentation,
+ which makes it very difficult to continue extending this work without the
+ direct help of some of the original authors.
+\end_layout
+
+\begin_layout Standard
+As an extension to the well-known NS-2 network simulator, Filiposka and
+ Trajanov 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011"
+
+\end_inset
+
+ introduced a module for radio-propagation predictions, which takes the
+ terrain profile into account.
+ In this case, the authors focus on the relief, leaving out signal loss
+ due to land-usage, which is an important factor when targeting realistic
+ radio-propagation scenarios.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The task-parallelization problem within the GRASS environment was addressed
  by several authors in a variety of studies.
  For example, in
 \begin_inset space ~
@@ -499,11 +664,20 @@ key "Campos_Parallel_modelling_in_GIS:2012"
 
 , the authors presented a collection of GRASS modules for a watershed analysis.
  Their work concentrates on different ways of slicing raster maps to take
- advantage of a Message Passing Interface (MPI) implementation.
+ advantage of a Message Passing Interface (MPI
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "MPI"
+description "Message passing interface."
+
+\end_inset
+
+) implementation.
 \end_layout
 
 \begin_layout Standard
-In the field of HPC, the authors of
+In the field of HPC, the authors in
 \begin_inset space ~
 \end_inset
 
@@ -541,7 +715,7 @@ key "Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_L
 struct
 \emph default
  and MPI data types, thus not requiring the GRASS in the worker nodes.
- The data are evenly distributed by row among the workers, with each one
+ The data are evenly distributed by rows among the workers, with each one
  receiving an exclusive column extent to work on.
  Their test cluster contained heterogeneous hardware configurations.
  The authors noted that data-set size is bounded by the amount of memory
@@ -573,8 +747,17 @@ key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_
  The experimental environment featured one host.
  The horizon-composition algorithm presents no calculation dependency among
  the spatial blocks.
- Consequently, the digital elevation model (DEM) was divided into separate
- blocks to be independently calculated by each worker process.
+ Consequently, the digital elevation model (DEM
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "DEM"
+description "Digital elevation model."
+
+\end_inset
+
+) was divided into separate blocks to be independently calculated by each
+ worker process.
  The authors presented an improved algorithm that can also be used to accelerate
  other applications like visibility maps.
  The tasks are dynamically assigned to idle processes using a task-farming
@@ -720,8 +903,15 @@ As it was mentioned in Chapter
 \begin_inset space ~
 \end_inset
 
-???, radio communications in a mobile network take place between a BS (or
- fixed transmitter) and a number of UEs (or mobile receivers).
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:02-Principles_of_mobile_radio_networks"
+
+\end_inset
+
+, radio communications in a mobile network take place between a BS (or fixed
+ transmitter) and a number of UEs (or mobile receivers).
  The effects of signal propagation limit the performance of a mobile-radio
  system.
  For this reason, the characterization and modeling of radio propagation
@@ -749,7 +939,11 @@ key "Parsons-The_mobile_radio_propagation_channel:2000"
 The coverage planning of radio networks is a key problem that all mobile
  operators have to deal with.
  Moreover, it has proven to be a fundamental issue, not only in LTE networks,
- but also in other standards for mobile communications 
+ but also in other standards for mobile communications
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010,Shabbir_Comparison_of_radio_propagation_models:2011,Siomina:Minimum.pilot.power.for.service.coverage,Valcarce_Applying.FDTD.to.the.coverage.prediction.of.WiMAX:2009"
@@ -759,9 +953,8 @@ key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010,Shabbir_Comparison_of_
 .
  One of the primary objectives of mobile-network planning is to efficiently
  use the allocated frequency band to ensure that some geographical area
- of interest can be satisfactorily reached with the base stations of the
- network.
- To this end, radio-coverage prediction tools are of great importance as
+ of interest can be satisfactorily reached with the BSs of the network.
+ To this end, radio-coverage prediction tools are of great importance, as
  they allow network engineers to test different network configurations before
  physically implementing the changes.
  Radio-coverage prediction is a complex task, mainly due to the several
@@ -769,7 +962,11 @@ key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010,Shabbir_Comparison_of_
  in the context of different environments.
  The complexity of the problem means that radio-coverage predictions are
  computationally-intensive and time-consuming, hence the importance of using
- fast and accurate tools (see Section 
+ fast and accurate tools (see Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:04-Computational_complexity"
@@ -778,7 +975,11 @@ reference "sub:04-Computational_complexity"
 
  for a complexity analysis of the algorithm).
  Additionally, since the number of deployed transmitters keeps growing with
- the adoption of modern standards 
+ the adoption of modern standards
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010"
@@ -786,7 +987,11 @@ key "Saleh_On_the_coveraga_extension_in_LTE_networks:2010"
 \end_inset
 
 , there is a clear need for a radio-propagation tool that is able to cope
- with larger work loads in a feasible amount of time (see Section 
+ with larger work loads in a feasible amount of time (see Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:04-Computational_complexity"
@@ -808,8 +1013,12 @@ name "sub:04-Radio_propagation_model"
 \end_layout
 
 \begin_layout Standard
-PRATO uses a modified version of the well-known Okumura-Hata empirical model
- for radio-propagation predictions 
+PRATO uses a modified version of the well-known Okumura-Hata model for radio-pro
+pagation predictions
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980"
@@ -817,7 +1026,11 @@ key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1
 \end_inset
 
 .
- Other accurate methods exist, like the ones based on ray tracing 
+ Other accurate methods exist, like the ones based on ray tracing
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Corre_Three_dimensional_urban_EM_wave_propagation_model_for_radio_network_planning_and_optimization_over_large_areas:2009,Vilhar-Efficient_open_source_ray_tracing_methods_for_rural_environment:efficient"
@@ -828,10 +1041,14 @@ key "Corre_Three_dimensional_urban_EM_wave_propagation_model_for_radio_network_p
  However, these methods are more sensible to deviations in input data, like
  DEMs and buildings, and are still inefficient in terms of the computational
  effort required to achieve satisfying results.
- Empirical methods for radio-propagation predictions, on the other hand,
+ Empirical methods for radio-propagation predictions, like Okumura-Hata,
  give acceptable results within a feasible amount of time.
  For this reason, they have become the industry standard for non-deterministic
- signal-propagation calculations 
+ signal-propagation calculations
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Cichon_Propagation.prediction.models:1995,Hata-Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980,Shabbir_Comparison_of_radio_propagation_models:2011,Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010"
@@ -843,7 +1060,11 @@ key "Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation
 
 \begin_layout Standard
 The Okumura-Hata model has been largely studied and shown to be suitable
- for predicting the radio propagation in LTE networks 
+ for predicting the radio propagation in LTE networks
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012,Shabbir_Comparison_of_radio_propagation_models:2011"
@@ -853,13 +1074,37 @@ key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012,Shabbir_Com
 .
  In its primary form, the model distinguishes the distance from the receiver
  to the transmitter, the frequency used and the effective antenna height,
- i.e., the antenna height above the receiver's level.
+ i.e., the height of the antenna above the receiver's level.
  These variables are taken into account in order to calculate the path loss
- in line-of-sight (LOS) conditions.
- Additionally, for distinguishing non-line-of-sight (NLOS) conditions, the
- terrain profile and Earth shape are added to the original formula.
+ in open-area (OA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "OA"
+description "Open area."
+
+\end_inset
+
+) conditions.
+ Additionally, for distinguishing non-line-of-sight (NLOS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "NLOS"
+description "Non line of sight."
+
+\end_inset
+
+) conditions, the terrain profile and Earth shape are added to the original
+ formula.
  In this context, a NLOS situation appears when the first Fresnel zone is
- obscured by at least one obstacle 
+ obscured by at least one obstacle.
+ A Fresnel zone is defined as one of the concentric ellipsoids which define
+ volumes in the radiation pattern of a circular aperture
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Xia-Radio_propagation_characteristics_for_line_of_sight_microcellular_and_personal_communications:1993"
@@ -867,28 +1112,89 @@ key "Xia-Radio_propagation_characteristics_for_line_of_sight_microcellular_and_p
 \end_inset
 
 .
- Equation
+\end_layout
+
+\begin_layout Standard
+As it was mentioned before, the path-loss evaluation employed here is based
+ on the Okumura-Hata model.
+ When in an OA environment, the path loss is described as in Equation
 \begin_inset space ~
 \end_inset
 
 (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:04-Hata_LOS"
+reference "eq:04-Hata_OA"
 
 \end_inset
 
-) describes the path loss when there is LOS between the transmitter and
- the receiver.
+):
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline}
-pl_{\mathrm{LOS}}(d_{(x,y)},\beta)=a_{0}+a_{1}\log(d_{(x,y)})+a_{2}\log(H_{\mathrm{A}})+\\
-a_{3}\log(d_{(x,y)})\log(H_{\mathrm{A}})-3.2\left[\log(11.75\cdot H_{\mathrm{R}})\right]^{2}+\\
-44.49\log(F)-4.78\left[\log(F)\right]^{2},\label{eq:04-Hata_LOS}
-\end{multline}
+\begin{eqnarray}
+\mathrm{L}{}_{\mathrm{OA}}(d_{(x,y)},\vec{\beta}) & = & \beta_{0}+\beta_{1}\log(d_{(x,y)})+\beta_{2}\log(H_{\mathrm{A}})+\beta_{3}\log(d_{(x,y)})\log(H_{\mathrm{A}})-\nonumber \\
+ &  & 3.2\left[\log(11.75\cdot H_{\mathrm{R}})\right]^{2}+44.49\log(F)-4.78\left[\log(F)\right]^{2},\label{eq:04-Hata_OA}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\mathrm{L}_{\\mathrm{OA}}$"
+description "Path loss in an open-area environment."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\vec{\\beta}$"
+description "Control-parameter vector of the path-loss model."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$d_{(x,y)}$"
+description "Distance from the cell to the topography point with coordinates $(x,y)$."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$H_A$"
+description "Antenna height above the receiver."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$H_R$"
+description "Height of the receiver antenna above ground level."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$F$"
+description "Transmission frequency."
 
 \end_inset
 
@@ -898,10 +1204,10 @@ a_{3}\log(d_{(x,y)})\log(H_{\mathrm{A}})-3.2\left[\log(11.75\cdot H_{\mathrm{R}}
 \begin_layout Standard
 \noindent
 where 
-\begin_inset Formula $\beta=(a_{0},a_{1},a_{2},a_{3})$
+\begin_inset Formula $\vec{\beta}=(\beta_{0},\beta_{1},\beta_{2},\beta_{3})$
 \end_inset
 
- is the vector containing the adaptable parameters of the model, 
+ is the vector containing the control parameters of the model, 
 \begin_inset Formula $d_{(x,y)}$
 \end_inset
 
@@ -923,8 +1229,7 @@ where
 \end_inset
 
  is the frequency, expressed in MHz.
- On the other hand, in NLOS conditions, the path loss is calculated as in
- Equation
+ In NLOS conditions, the additional path loss is calculated as in Equation
 \begin_inset space ~
 \end_inset
 
@@ -935,14 +1240,54 @@ reference "eq:04-Hata_NLOS"
 
 \end_inset
 
-).
+):
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-pl_{\mathrm{NLOS}}(d_{(x,y)})=\sqrt{\left[\alpha K(d_{(x,y)})\right]^{2}+E(d_{(x,y)})^{2}},\label{eq:04-Hata_NLOS}
+\mathrm{L}{}_{\mathrm{NLOS}}(d_{(x,y)})=\sqrt{\left[\alpha K(d_{(x,y)})\right]^{2}+E(d_{(x,y)})^{2}},\label{eq:04-Hata_NLOS}
 \end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\mathrm{L}_{\\mathrm{NLOS}}$"
+description "Path loss in non-line-of-sigth conditions."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\alpha$"
+description "Knife-edge diffraction control parameter."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$K(d_{(x,y)})$"
+description "Knife-edge diffraction loss."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$E(d_{(x,y)})$"
+description "Loss correction due to the Earth sphere."
 
 \end_inset
 
@@ -955,16 +1300,36 @@ where
 \begin_inset Formula $\alpha$
 \end_inset
 
- is the knife-edge diffraction control parameter, which value is calculated
- based on the level of obstruction of a Fresnel zone, 
+ is the knife-edge diffraction
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\noindent
+Knife-edge diffraction occurs when a portion of the incident radiation reaches
+ a well-defined obstacle such as a mountain or the edge of a building.
+\end_layout
+
+\end_inset
+
+ control parameter, the value of which is calculated based on the level
+ of obstruction of a Fresnel zone, 
 \begin_inset Formula $K(d_{(x,y)})$
 \end_inset
 
- is the knife-edge diffraction loss (in dB), and 
+ is the knife-edge diffraction loss (in
+\begin_inset space ~
+\end_inset
+
+dB), and 
 \begin_inset Formula $E(d_{(x,y)})$
 \end_inset
 
- is the correction due to the Earth sphere (in dB).
+ is the correction due to the Earth sphere (in
+\begin_inset space ~
+\end_inset
+
+dB).
  All three values depend on the characteristics of the topography point
  with coordinates 
 \begin_inset Formula $(x,y)$
@@ -974,20 +1339,36 @@ where
 \end_layout
 
 \begin_layout Standard
-In this work, as well as in 
+In this work, as well as in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011"
 
 \end_inset
 
-, the terrain profile is used for LOS determination, i.e., obstacle obstruction
- in the first Fresnel zone of the transmitter.
+, the terrain profile is used for line-of-sight (LOS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "LOS"
+description "Line of sight."
+
+\end_inset
+
+) determination, i.e., an obstacle obstruction in the first Fresnel zone of
+ the transmitter.
  In order to adequately predict signal-loss effects due to foliage, buildings
  and other fabricated structures, additional loss factors based on the land
- usage (i.e., clutter data), are included.
+ usage (clutter data), are included.
  This technique is adopted by several propagation models for radio networks
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004,Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Neskovic_Microcell_electric_field_strength_prediction_model:2010"
@@ -996,13 +1377,13 @@ key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_acc
 
 .
  Consequently, an extra term is introduced for signal loss due to clutter,
- thus defining the model-predicted path loss as
+ thus defining the model-predicted path loss as:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-pl(d_{(x,y)},\beta)=pl_{\mathrm{LOS}}(d_{(x,y)},\beta)+pl_{\mathrm{NLOS}}(d_{(x,y)})+pl_{\mathrm{CLUT}}(d_{(x,y)}),\label{eq:04-Hata_pathloss}
+\mathrm{L}(d_{(x,y)},\vec{\beta})=\mathrm{L}{}_{\mathrm{OA}}(d_{(x,y)},\vec{\beta})+\mathrm{L}_{\mathrm{NLOS}}(d_{(x,y)})+\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)}),\label{eq:04-Hata_pathloss}
 \end{equation}
 
 \end_inset
@@ -1012,8 +1393,30 @@ pl(d_{(x,y)},\beta)=pl_{\mathrm{LOS}}(d_{(x,y)},\beta)+pl_{\mathrm{NLOS}}(d_{(x,
 
 \begin_layout Standard
 \noindent
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$\\mathrm{L}(d_{(x,y)})$"
+description "Path loss at the topography point with coordinates $(x,y)$."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$L_{\\mathrm{CLUT}}$"
+description "Signal loss due to clutter."
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
 where 
-\begin_inset Formula $pl_{\mathrm{CLUT}}(d_{(x,y)})$
+\begin_inset Formula $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
 \end_inset
 
  represents the clutter loss at the topography point with coordinates 
@@ -1039,15 +1442,28 @@ Geographic Resources Analysis Support System
 \end_layout
 
 \begin_layout Standard
-As the software environment for PRATO we have chosen GRASS 
+GRASS
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neteler_Open_source_GIS_a_GRASS_GIS_approach"
 
 \end_inset
 
-, which is a free and open-source software project that implements a Geographica
-l Information System (GIS).
+, a free and open-source software project that implements a Geographical
+ Information System (GIS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GIS"
+description "Geographical information system."
+
+\end_inset
+
+), is used as the software environment for PRATO.
  This GIS software was originally developed at the US Army Construction
  Engineering Research Laboratories and is a full-featured system with a
  wide range of analytical, data-management, and visualization capabilities.
@@ -1068,12 +1484,12 @@ key "Stallman_GNU_License:1991"
 
 \end_inset
 
- and imposes the availability of the source code.
- This allows us to make potential modifications to the system, thus adapting
+ that imposes the availability of the source code.
+ This allows to make potential modifications to the system, thus adapting
  it for the parallel computation environment.
- Moreover, being an open system, GRASS provided us with a great deal of
- built-in functionality, capable of operating with raster and vector topological
- data that can be stored in an internal format or a DB.
+ Moreover, GRASS provides a great deal of built-in functionality, capable
+ of operating with raster and vector topological data that can be stored
+ in an internal format or a DB.
 \end_layout
 
 \begin_layout Subsection
@@ -1083,11 +1499,15 @@ Multi-paradigm parallel programming
 \begin_layout Standard
 The implementation methodology adopted for PRATO follows a multi-paradigm,
  parallel programming approach in order to fully exploit the resources of
- each of the nodes in a computing cluster.
+ each node in a computing cluster.
  This approach combines a master-worker paradigm with an external DB.
  To efficiently use a shared memory multi-processor on the worker side,
  and to effectively overlap the calculation and communication, PRATO uses
- POSIX threads 
+ POSIX threads
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Butenhof_Programming.with.POSIX.threads:1997"
@@ -1099,7 +1519,11 @@ key "Butenhof_Programming.with.POSIX.threads:1997"
 
 \begin_layout Standard
 To use the computing resources of a distributed memory system, such as a
- cluster of processors, PRATO uses the MPI 
+ cluster of processors, PRATO uses the MPI
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Gropp_Using_MPI:1999"
@@ -1108,7 +1532,7 @@ key "Gropp_Using_MPI:1999"
 
 .
  The MPI is a message-passing standard that defines the syntax and semantics
- designed to function on a wide variety of parallel computers.
+ designed to function on a wide variety of hardware.
  The MPI enables multiple processes, running on different processors of
  a computer cluster, to communicate with each other.
  It was designed for high performance on both massively parallel machines
@@ -1118,15 +1542,19 @@ key "Gropp_Using_MPI:1999"
 \begin_layout Standard
 PRATO also supports the execution of the most computationally-intensive
  parts of the radio-propagation algorithm on a GPU.
- Moreover, the GPU hardware is used if available on the computing nodes
- that host the worker processes (see Section 
+ Moreover, the GPU hardware is used if it is available on the computing
+ nodes that host the worker processes (see Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:04-GPU_worker_implementation"
 
 \end_inset
 
- later in this chapter).
+ later in this chapter for a discussion about the GPU implementation).
 \end_layout
 
 \begin_layout Standard
@@ -1213,7 +1641,7 @@ reference "fig:04-Flow_diagram_serial_version"
 \end_inset
 
 ).
- Their formats differ based on the data they contain, i.e.,
+ Their formats differ based on the data they contain, i.e.:
 \end_layout
 
 \begin_layout Itemize
@@ -1227,12 +1655,21 @@ nt options.
 
 \begin_layout Standard
 Since the module accepts a considerable amount of input parameters, they
- are read from a text-based initialization (INI) file.
+ are read from a text-based initialization (INI
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "INI"
+description "Initialization file."
+
+\end_inset
+
+) file.
  This is far more practical than passing them as command-line parameters,
  which would make them error-prune and difficult to read.
  Besides, the INI file may contain configuration parameters for many transmitter
 s.
- The user selects which one(s) to use at run-time by passing a command-line
+ The user selects which one(s) to process at run-time by passing a command-line
  option.
 \end_layout
 
@@ -1339,12 +1776,26 @@ reference "fig:04-Flow_diagram_serial_version"
 ).
  The transmission radius is defined around each transmitter in order to
  limit the radio-propagation calculation to a reasonable distance.
- For these points, the LOS and NLOS conditions are calculated with respect
- to the transmitter (see 
+ For these points, the path loss for an isotropic source (or omni antenna)
+ is estimated.
+ This calculation is performed by applying the radio-propagation model,
+ which was previously defined in Equation
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:04-Hata_pathloss"
+
+\end_inset
+
+), to each of the points within the transmission radius around the transmitter
+ (see 
 \begin_inset Quotes eld
 \end_inset
 
-Calculate LOS/NLOS
+Calculate path loss
 \begin_inset Quotes erd
 \end_inset
 
@@ -1360,21 +1811,6 @@ reference "fig:04-Flow_diagram_serial_version"
 \end_inset
 
 ).
- The following step consists of calculating the path loss for an isotropic
- source (or omni antenna).
- This calculation is performed by applying the radio-propagation model,
- which was previously defined in Equation
-\begin_inset space ~
-\end_inset
-
-(
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:04-Hata_pathloss"
-
-\end_inset
-
-), to each of the points within the transmission radius around the transmitter.
 \end_layout
 
 \begin_layout Standard
@@ -1389,7 +1825,7 @@ reference "fig:04-Raster_path_loss_example"
 
 \end_inset
 
- shows an example result of the isotropic path-loss calculation, only including
+ shows an example of the isotropic path-loss calculation, only including
  the map area within the transmission radius.
  The color scale is given in dB, indicating the signal loss from the isotropic
  source of the transmitter, located at the center.
@@ -1437,8 +1873,10 @@ centering
 
 \shape italic
 \emph on
-Example of raster map, showing the result of a path-loss calculation from
- an isotropic source.
+Example of a raster map, showing the result of a path-loss calculation from
+ an isotropic antenna.
+ The color scale is given in dB, indicating the path loss at a given point.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:04-Raster_path_loss_example"
@@ -1562,8 +2000,8 @@ centering
 
 \shape italic
 \emph on
-Example of raster map, showing the antenna influence over the isotropic
- path-loss result, as depicted in Figure
+Example of a raster map, showing the influence of a directional antenna
+ over the path-loss result depicted in Figure
 \begin_inset space ~
 \end_inset
 
@@ -1575,6 +2013,8 @@ reference "fig:04-Raster_path_loss_example"
 \end_inset
 
 .
+ The color scale is given in dB, indicating the path loss at a given point.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:04-Raster_antenna_example"
@@ -1685,7 +2125,7 @@ centering
 \emph on
 Example of a raster map, displaying the final coverage prediction of 136
  transmitters over a geographical area.
- The color scale is given in dBm, indicating the received signal strength.
+ The color scale is given in dBm, indicating the received-signal strength.
  Darker colors denote areas with a reduced signal due to the fading effect
  of the hilly terrain and clutter.
  
@@ -1736,7 +2176,7 @@ reference "fig:04-Flow_diagram_serial_version"
  receiver's corresponding position.
  This is done by executing an SQL query over the tables containing the path-loss
  predictions of each of the processed transmitters.
- Finally, the output is generated, using the GRASS built-in modules 
+ Finally, the output is generated using the GRASS built-in modules 
 \begin_inset Formula $v.in.ascii$
 \end_inset
 
@@ -1832,7 +2272,7 @@ begin{algorithmic}
 \backslash
 State $DEM 
 \backslash
-gets$ Digital Elevation Model (DEM) of the whole area.
+gets$ DEM of the whole area.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1848,7 +2288,7 @@ Comment $O(M)$
 \backslash
 State $Clutter 
 \backslash
-gets$ signal Losses due to land usage of the whole area.
+gets$ signal losses due to clutter of the whole area.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1896,9 +2336,9 @@ cdot m^2)$
 
 	
 \backslash
-State $DEM_t 
+State $DEM_{t} 
 \backslash
-gets $ DEM area within transmission radius of $t$
+gets $ DEM area within transmission radius of ${t}$
 \end_layout
 
 \begin_layout Plain Layout
@@ -1912,9 +2352,9 @@ Comment $O(m)$
 
 	
 \backslash
-State $Clut_t 
+State $Clut_{t} 
 \backslash
-gets $ Clutter area within transmission radius $t$
+gets $ Clutter area within transmission radius ${t}$
 \end_layout
 
 \begin_layout Plain Layout
@@ -1928,9 +2368,9 @@ Comment $O(m)$
 
 	
 \backslash
-State $LoS_t 
+State $LoS_{t} 
 \backslash
-gets$ LineOfSight ($DEM_t$)
+gets$ LineOfSight ($DEM_{t}$)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1944,9 +2384,9 @@ Comment $O(m^2)$
 
 	
 \backslash
-State $PL_t 
+State $PL_{t} 
 \backslash
-gets$ PathLoss ($DEM_t, Clut_t, LoS_t$)
+gets$ PathLoss ($DEM_{t}, Clut_{t}, LoS_{t}$)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1960,9 +2400,9 @@ Comment $O(m^2)$
 
 	
 \backslash
-State $Diag_t 
+State $Diag_{t} 
 \backslash
-gets $ Antenna diagram of $t$ 
+gets $ Antenna diagram of ${t}$ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1976,9 +2416,9 @@ Comment $O(1)$
 
 	
 \backslash
-State $PL_t 
+State $PL_{t} 
 \backslash
-gets$ AntennaInfluence ($Diag_t, PL_t$)
+gets$ AntennaInfluence ($Diag_{t}, PL_{t}$)
 \end_layout
 
 \begin_layout Plain Layout
@@ -2019,7 +2459,7 @@ cdot m)$
 \backslash
 State $CoveragePrediction 
 \backslash
-gets$ PathLossAggregation ($t, PL_t$)
+gets$ PathLossAggregation ($t, PL_{t}$)
 \end_layout
 
 \begin_layout Plain Layout
@@ -2064,7 +2504,7 @@ end{algorithmic}
 
 \begin_layout Standard
 In this section, the time complexity of the radio-coverage prediction algorithm
- is presented, for which the pseudo code is 
+ is presented, the pseudo-code of which is 
 \shape italic
 \emph on
 listed
@@ -2085,9 +2525,9 @@ reference "alg:04-Pseudocode_radio_coverage_algorithm"
 \end_layout
 
 \begin_layout Standard
-The algorithm starts by loading the input, i.e., the DEM and the clutter data.
- Both regular square grids (RSGs) should account for the same area and resolutio
-n, consequently containing the same number of pixels, 
+The algorithm starts by loading the input DEM and clutter data.
+ Both RSGs should account for the same area and resolution, consequently
+ containing the same number of pixels, 
 \begin_inset Formula $M$
 \end_inset
 
@@ -2105,7 +2545,7 @@ n, consequently containing the same number of pixels,
 \begin_inset Formula $t\in T$
 \end_inset
 
-, a smaller subarea of the DEM and clutter data (denoted 
+, a smaller subarea of the DEM and clutter data, denoted as 
 \begin_inset Formula $DEM_{t}$
 \end_inset
 
@@ -2113,7 +2553,7 @@ n, consequently containing the same number of pixels,
 \begin_inset Formula $Clut_{t}$
 \end_inset
 
-, respectively) is delimited around 
+, respectively, is delimited around 
 \begin_inset Formula $t$
 \end_inset
 
@@ -2133,7 +2573,11 @@ LineOfSight
 \emph default
  function, by walking from the antenna of the transmitter to the given pixel
  element, along the elements intersected by a LOS, until either the visibility
- is blocked, or the target is reached 
+ is blocked, or the target is reached
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "DeFloriani-Applications_of_computational_geometry_to_geographic_information_systems:1999"
@@ -2172,7 +2616,7 @@ reference "eq:04-Hata_NLOS"
 \emph on
 LineOfSight
 \emph default
-, resulting in an algorithmic complexity denoted by
+, resulting in an algorithmic complexity denoted by:
 \end_layout
 
 \begin_layout Standard
@@ -2187,7 +2631,8 @@ O(M+n\cdot m^{2}).
 \end_layout
 
 \begin_layout Standard
-Although 
+\noindent
+On the one hand, 
 \begin_inset Formula $n$
 \end_inset
 
@@ -2195,7 +2640,7 @@ Although
 \begin_inset Formula $m^{2}$
 \end_inset
 
-, its computational-time complexity is relevant for practical use.
+, although its computational-time complexity is relevant for practical use.
  For example, assuming the radio-coverage prediction for one transmitter
  completes in around 15
 \begin_inset space ~
@@ -2204,6 +2649,25 @@ Although
 seconds using a serial implementation, the prediction for a mobile network
  comprising 10,240 transmitters would have an execution time of almost two
  days.
+ On the other hand, when the input data correspond to a large geographical
+ area, and only one transmitter is selected with a narrow calculation radius,
+ i.e., 
+\begin_inset Formula $M$
+\end_inset
+
+ is large, 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+ is small, then 
+\begin_inset Formula $O(M)$
+\end_inset
+
+ will donimate the time complexity of the algorithm.
 \end_layout
 
 \begin_layout Subsection
@@ -2219,16 +2683,19 @@ name "sub:04-Design_of_the_parallel_version"
 
 \begin_layout Standard
 The focus here is on the practical usability and performance of PRATO.
- Therefore, to overcome the computational-time constraints that prevent
- a serial implementation of the radio-coverage prediction algorithm from
- tackling bigger problem instances in a feasible amount of time, a parallel
- implementation is presented.
+ The parallel implementation aims at overcoming the computational-time constrain
+ts that prevent a serial implementation from tackling bigger problem instances
+ in a feasible amount of time.
 \end_layout
 
 \begin_layout Standard
 A major drawback of the GRASS as a parallelization environment is that it
  is not thread-safe, meaning that concurrent changes to the same data set
- have an undefined behavior 
+ have an undefined behavior
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Blazek_GRASS_server:2004"
@@ -2238,14 +2705,18 @@ key "Blazek_GRASS_server:2004"
 .
  One technique to overcome this problem is to abstract the spatial data
  from the GRASS.
- For example, in 
+ For example, in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
 
 \end_inset
 
-, the authors achieve the GRASS abstraction by introducing a 
+, the authors achieved the GRASS abstraction by introducing a 
 \emph on
 Point 
 \emph default
@@ -2267,7 +2738,7 @@ key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Expl
 .
  In this case, an independence between row/column calculations is required,
  which is a problem-specific property.
- Here, abstraction from the GRASS is achieved by loading the each spatial-data
+ Here, abstraction from the GRASS is achieved by loading each spatial-data
  set into a separate 2D matrix of basic data-type elements, e.g., 
 \emph on
 float
@@ -2277,8 +2748,8 @@ float
 double
 \emph default
  depending on the desired accuracy.
- Each matrix is then assigned the geographical location the closest corner
- to the origin of the map-projection system used, e.g., lower-left corner
+ Each matrix is then assigned the geographical location of the closest corner
+ to the origin of the map-projection system used, e.g., the lower-left corner
  for the transverse Mercator map projection over central Europe.
  It follows that the geographical location of any element within the matrix
  is calculated as the combination of the geographical location of the matrix
@@ -2327,7 +2798,7 @@ centering
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename img/spatial_data_projection.eps
-	lyxscale 70
+	lyxscale 50
 	width 100text%
 
 \end_inset
@@ -2363,7 +2834,11 @@ name "fig:04-Spatial_data_location_mapping"
 
 \begin_layout Standard
 In the area of geographical-information science, the master-worker paradigm
- has been successfully applied by several authors 
+ has been successfully applied by several authors
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Campos_Parallel_modelling_in_GIS:2012,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
@@ -2371,33 +2846,20 @@ key "Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2
 \end_inset
 
 .
- However, sometimes this technique presents certain issues that prevent
- the full exploitation of the available computing resources when deployed
- over several networked computers.
- Additionally, such issues are difficult to measure when the parallelization
- involves only one computing node 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
-
-\end_inset
-
- (i.e., no network communication is required), or only a few processes deployed
- over a handful of nodes 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
-
-\end_inset
-
-.
- Specifically, we are referring to network saturation and idle processes
+ However, this technique presents certain issues that prevent the full exploitat
+ion of the available computing resources when deployed over several networked
+ computers.
+ Specifically, the problem refers to network saturation and idle processes
  within the master-worker model.
  Generally speaking, a single communicating process, e.g., the master, is
  usually not able to saturate the network connection of a node.
  Using more than one MPI process per node might solve this problem, but
  possible rank-ordering problems may appear, thus restricting the full utilizati
-on of the network 
+on of the network
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Rabenseifner-Hybrid_MPI_OpenMP_parallel_programming_on_clusters_of_multicore_nodes:2009"
@@ -2405,14 +2867,47 @@ key "Rabenseifner-Hybrid_MPI_OpenMP_parallel_programming_on_clusters_of_multicor
 \end_inset
 
 .
- Another issue appears when the master process executes the MPI code, in
+ Additionally, the hardware-exploitation level is difficult to measure when
+ the parallelization involves only one computing node
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
+
+\end_inset
+
+ (because no network communication is required), or only a few processes
+ deployed over a handful of nodes
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Another issue appears when the master process executes the MPI code, in
  which case other processes sleep, making a serial use of the communication
  component of the system.
  Consequently, the master process becomes the bottleneck of the parallel
- implementation as the number of worker processes it has to serve grows.
+ implementation as the number of worker processes grows.
  This situation is also common when dealing with the metadata of a spatial
  region, which may relate to several elements of a RSG, making it a frequent
- cause of load imbalance 
+ cause of load imbalance
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Gong_Parallel_agent_based_simulation_of_individual_level_spatial_interactions_within_a_multicore_computing_environment:2012,Hawick_Distributed_frameworks_and_parallel_algorithms_for_processing_large_scala_geographic_data:2003,Widener_Developing_a_parallel_computational_implementation_of_AMOEBA:2012"
@@ -2425,7 +2920,11 @@ key "Gong_Parallel_agent_based_simulation_of_individual_level_spatial_interactio
 \end_layout
 
 \begin_layout Standard
-Hybrid MPI-OpenMP implementations 
+Hybrid MPI-OpenMP implementations
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
@@ -2433,7 +2932,11 @@ key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_
 \end_inset
 
 , in which no MPI calls are issued inside the OpenMP-parallel regions, also
- fail to saturate the network 
+ fail to saturate the network
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Rabenseifner-Hybrid_MPI_OpenMP_parallel_programming_on_clusters_of_multicore_nodes:2009"
@@ -2444,20 +2947,28 @@ key "Rabenseifner-Hybrid_MPI_OpenMP_parallel_programming_on_clusters_of_multicor
  A possible solution to this problem is to improve the communication overlap
  among the processes.
  To this end, PRATO features non-blocking point-to-point MPI operations,
- and an independent thread in the worker process to save the intermediate
- results to a DB.
+ and an independent thread in the worker process that saves the intermediate
+ results into a DB.
  One such database system per computer cluster is used, which also serves
  the input data to the GRASS, in order to aggregate the partial results
  of the path-loss predictions or to visualize them.
- It is important to note that any kind of DB may be used.
- By this we mean relational, distributed 
+ It is important to note that any kind of DB may be used, e.g., relational,
+ distributed
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ozsu_Principles_of_distributed_database_systems:2011"
 
 \end_inset
 
- or even those of the NoSQL type 
+ or even those of the NoSQL type
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Stonebraker_SQL_databases_vs_NoSQL_databases:2010"
@@ -2465,13 +2976,13 @@ key "Stonebraker_SQL_databases_vs_NoSQL_databases:2010"
 \end_inset
 
 .
- Nevertheless, a central relational database system is used here, since
+ Nevertheless, a central, relational-database system is used here, since
  they are the most popular and widely available ones.
  Additionally, the non-blocking message-passing technique used to distribute
  the work-load among the nodes provides support for heterogeneous environments.
  As a result, computing nodes featuring more capable hardware receive more
  work than those with weaker configurations, thus ensuring a better utilization
- of the available computing resources despite hardware diversity and improved
+ of the available computing resources despite hardware diversity, and improved
  load balancing.
 \end_layout
 
@@ -2641,7 +3152,7 @@ name "fig:04-Processing_loop_in_master_process"
 \end_layout
 
 \begin_layout Standard
-The master process, for which the flow diagram is given in Figure
+The master process, the flow diagram of which is given in Figure
 \begin_inset space ~
 \end_inset
 
@@ -2675,7 +3186,7 @@ reference "fig:04-Master_process_flow_diagram"
 
 , and it is carried out in a similar way as in the serial version.
  The next step delivers the metadata that is common to all the transmitters
- and the whole region to all the processes (see 
+ to all the processes (see 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2754,7 +3265,7 @@ Processing loop
 
  step of the master process.
  In the processing loop, the master process starts by checking the available
- worker processes, which will calculate the radio-coverage prediction for
+ worker processes, that might calculate the radio-coverage prediction for
  the next transmitter.
  It is worth pointing out that this step also serves as a stopping condition
  for the processing loop itself (see 
@@ -2849,10 +3360,10 @@ reference "fig:04-Processing_loop_in_master_process"
 \end_inset
 
 ).
- The processing loop of the master process continues to distribute the transmitt
-er data among the worker processes, which asynchronously become idle as
- they finish the radio-prediction calculations they have been assigned by
- the master process.
+ The processing loop of the master process continues distributing the transmitte
+r data among the worker processes, which asynchronously become idle as they
+ finish the radio-prediction calculations they have been assigned by the
+ master process.
  When there are no more transmitters left, all the worker processes announcing
  they are idle will receive a shutdown message from the master process,
  indicating to them that they should stop running (see 
@@ -2942,9 +3453,9 @@ reference "fig:04-Master_process_flow_diagram"
 \end_inset
 
 , which provides the source data for the final raster map.
- The aggregation of the individual transmitter path-loss results is accomplished
- by issuing an SQL query over the database tables containing the partial
- results, in a similar way as in the serial version.
+ The aggregation of the individual path-loss results is accomplished by
+ issuing an SQL query over the database tables containing them, in a similar
+ way as in the serial version.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2965,7 +3476,11 @@ One possibility to overcome the thread-safety limitation of the GRASS is
  to save the transmitter path-loss predictions through the master process,
  thus avoiding concurrent access.
  However, for the workers to send intermediate results back to the master
- process, e.g., as in 
+ process, e.g., as in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
@@ -2973,9 +3488,9 @@ key "Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2
 \end_inset
 
 , is a major bottleneck for the scalability of a parallel implementation.
- The scalability is limited by the master process, because it must serially
- process the received results in order to avoid inconsistencies due to concurren
-t access.
+ In such case, the scalability is limited by the master process, because
+ it must serially process the received results in order to avoid inconsistencies
+ due to concurrent access.
  Instead, PRATO allows each of the worker processes to output its intermediate
  results into a DB, i.e., each path-loss prediction in its own table.
  Additionally, worker processes do this from an independent thread, which
@@ -2987,8 +3502,8 @@ y hides the latency created by the result-dumping task, thus making better
 \end_layout
 
 \begin_layout Standard
-The computations of the worker processes, for which the flow diagram is
- given in Figure
+The computations of the worker processes, the flow diagram of which is given
+ in Figure
 \begin_inset space ~
 \end_inset
 
@@ -3025,7 +3540,7 @@ reference "fig:04-Worker_process_flow_diagram"
 \begin_layout Standard
 After the broadcasted metadata are received by all the worker processes,
  each one proceeds to inform the master process that it is ready (i.e., in
- an idle state) to receive the transmitter-configuration data that defines
+ an idle state) to receive the transmitter-configuration data that define
  which transmitter path-loss prediction to perform (see 
 \begin_inset Quotes eld
 \end_inset
@@ -3133,7 +3648,7 @@ reference "fig:04-Worker_process_flow_diagram"
 
 \begin_layout Standard
 As mentioned before, the worker process launches an independent thread to
- save the path-loss prediction of the target transmitter to a database table
+ save the path-loss prediction of the target transmitter into a DB table
  (see 
 \begin_inset Quotes eld
 \end_inset
@@ -3319,11 +3834,11 @@ name "sub:04-GPU_worker_implementation"
 \end_layout
 
 \begin_layout Standard
-PRATO provides multi-GPU support for performance improvement on the computing
- nodes hosting the worker processes.
+PRATO provides multi-GPU support for improving the execution performance
+ on the computing nodes hosting the worker processes.
  The algorithmic adaptation from a CPU to a GPU is not a trivial task.
  This section focuses on the main modifications made to the radio-propagation
- algorithm in order to work on GPU hardware.
+ algorithm in order for it to work on GPU hardware.
 \end_layout
 
 \begin_layout Standard
@@ -3341,7 +3856,7 @@ key "Gregg-Where_is_the_data:2011"
 \end_inset
 
 .
- Some researchers acknowledge that unless a full working set of data can
+ Some researchers acknowledged that unless a full working set of data can
  fit into the memory on a GPU, the PCI Express will become the bottleneck
  of the system
 \begin_inset space ~
@@ -3361,8 +3876,7 @@ key "Owens-GPU_computing:2008,Schaa-Exploring_the_multiple_GPU_design_space:2009
 
 \begin_layout Standard
 In order to minimize the CPU-to-GPU memory transfers, the spatial data used
- by the radio-propagation algorithm was organized as explained before in
- Section
+ by the radio-propagation algorithm was organized as explained in Section
 \begin_inset space ~
 \end_inset
 
@@ -3416,23 +3930,19 @@ The dimension of all matrices is based on the transmission radius, within
  which the radio-propagation prediction should be calculated.
  The contents of the DEM and clutter matrices is constant throughout the
  calculation process.
- For this reason they were saved into read-only texture memory to take advantage
- of the faster access time (see Chapter
+ For this reason they were kept in texture memory to take advantage of the
+ faster access time (see Section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:02-Principles_of_GPU_programming"
+reference "sec:02-CUDA"
 
 \end_inset
 
-, Section
-\begin_inset space ~
-\end_inset
-
-???).
+).
  Regarding the resulting path-loss matrix, each step of the radio-prediction
  algorithm is applied over the results of the previous step (see Figure
 \begin_inset space ~
@@ -3454,7 +3964,11 @@ Master-worker communication
 \end_layout
 
 \begin_layout Standard
-Similar to 
+Similar to
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
@@ -3486,7 +4000,11 @@ The first reason to implement the message-passing technique is to support
  of each computing node, thus explicitly avoiding the bottlenecks introduced
  by the slowest computing node in the cluster.
  This problem appears when evenly distributing the data among the worker
- processes on disparate hardware, e.g., as in 
+ processes on disparate hardware, e.g., as in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011"
@@ -3504,7 +4022,11 @@ key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Expl
 \begin_layout Standard
 A second reason for selecting a message-passing technique is related to
  the flexibility it provides for load balancing, which is of greater importance
- when dealing with extra data or information besides spatial data 
+ when dealing with extra data or information besides spatial data
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Hawick_Distributed_frameworks_and_parallel_algorithms_for_processing_large_scala_geographic_data:2003"
@@ -3530,7 +4052,11 @@ reference "fig:04-Processing_loop_in_master_process"
  the asynchronous process communication.
  Notice that the subset of spatial data that a worker process receives is
  directly related to the transmitter for which the prediction will be calculated.
- Similar to 
+ Similar to
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013"
@@ -3545,14 +4071,22 @@ key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_
 \begin_layout Standard
 In general, there are many different ways a parallel program can be executed,
  because the steps from the different processes can be interleaved in various
- ways and a process can make non-deterministic choices 
+ ways and a process can make non-deterministic choices
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
 
 \end_inset
 
-, which may lead to situations such as race conditions 
+, which may lead to situations such as race conditions
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Clemencon_MPI_Race_detection:1995"
@@ -3564,7 +4098,11 @@ key "Clemencon_MPI_Race_detection:1995"
  each other to finish, and thus neither ever does.
  To prevent PRATO from deadlocking, message sending and receiving should
  be paired, i.e., an equal number of send and receive messages on the master
- and worker sides 
+ and worker sides
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Siegel_Verification_of_halting_properties_for_MPI_programs:2007"
@@ -3603,12 +4141,33 @@ name "sec:04-Simulations"
 
 \begin_layout Standard
 Considering the large computational power needed for predicting the radio-covera
-ge of a real mobile network, the use of a computer cluster is recommended.
+ge of a real radio network, the use of a computer cluster is recommended.
  A computer cluster is a group of interconnected computers that work together
  as a single system.
  Computer clusters typically consist of several commodity PCs connected
- through a high-speed local-area network (LAN) with a distributed file system,
- like NFS 
+ through a high-speed local-area network (LAN
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "LAN"
+description "Local area network."
+
+\end_inset
+
+) with a distributed file system, like the network file system (NFS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "NFS"
+description "Network file system."
+
+\end_inset
+
+)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Shepler_Network_file_system:2003"
@@ -3623,8 +4182,16 @@ key "Hamada_Cluster_of_GPUs:2010"
 
 \end_inset
 
- at the Nagasaki Advanced Computing Center (NACC) of the Nagasaki University
- in Japan.
+ at the Nagasaki Advanced Computing Center (NACC
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "NACC"
+description "Nagasaki advanced computing center."
+
+\end_inset
+
+) of the Nagasaki University in Japan.
  This system ranked in the TOP 500 list of supercomputers until June 2012
 \begin_inset Foot
 status open
@@ -3635,7 +4202,7 @@ http://www.top500.org
 
 \end_inset
 
-, and in June 2011 it held third place in the Green 500 list
+, and in June 2011 it held the third place in the Green 500 list
 \begin_inset Foot
 status open
 
@@ -3670,8 +4237,8 @@ t.
 s over a different group of networked computers that do not operate as a
  computer cluster.
  Moreover, PRATO also supports parallel calculation of radio-propagation
- predictions for several cells by distributing the processes among the individua
-l cores of a single CPU.
+ predictions for multiple cells by distributing the processes among the
+ individual cores of a single CPU.
 \end_layout
 
 \begin_layout Standard
@@ -3690,12 +4257,12 @@ Intel Core i7-2600K quad-core processor CPU, clocked at 3.40 GHz, also with
 \end_layout
 
 \begin_layout Standard
-During the simulation runs, the nodes equipped with the Intel i5 CPU host
+During the simulation runs, the nodes equipped with the Intel i5 CPU hosted
  the worker processes, whereas the master process and the PostgreSQL database
  server (version 9.1.4) each run on a different computing node, featuring
  an Intel i7 CPU.
- The database server performed all its I/O operations on the local file
- system, which was mounted on an 8
+ The DB server performed all its I/O operations on the local file system,
+ which was mounted on an 8
 \begin_inset space ~
 \end_inset
 
@@ -3727,7 +4294,7 @@ The parallel performance of PRATO was tested with real radio networks of
  of transmitters, a group of 2,000 transmitters of a real network was used.
  The configuration parameters of these transmitters resembled those of the
  LTE network deployed in Slovenia by Telekom Slovenije, d.d., which were,
- in turn, randomly replicated and distributed over the whole target area
+ in turn, randomly replicated and distributed over the whole target area.
  The path-loss predictions were calculated using the radio-propagation model
  introduced in Section
 \begin_inset space ~
@@ -3764,11 +4331,11 @@ m
 \begin_inset space ~
 \end_inset
 
-km around each transmitter, we assume that the receiver is positioned 1.5
+km around each transmitter, a receiver positioned 1.5
 \begin_inset space ~
 \end_inset
 
-m above the ground, and the frequency is set to 1,843
+m above the ground was assumed, and the frequency was set to 1,843
 \begin_inset space ~
 \end_inset
 
@@ -3786,11 +4353,27 @@ The weak-scalability experiments are meant to analyze the scalability of
  of processor cores is increased.
  It follows that the number of transmitters deployed over the target area
  is directly proportional to the number of processor cores and worker processes.
- This is accomplished by assigning a constant number of transmitters per
+ This was accomplished by assigning a constant number of transmitters per
  core, while increasing the number of cores hosting the worker processes.
  Here, the following numbers of transmitters per worker/core were tested
- {5,10,20,40,80}, by progressively doubling the number of worker processes
- from 1 to 64.
+ {5,
+\begin_inset space ~
+\end_inset
+
+10,
+\begin_inset space ~
+\end_inset
+
+20,
+\begin_inset space ~
+\end_inset
+
+40,
+\begin_inset space ~
+\end_inset
+
+80}, by progressively doubling the number of worker processes from 1 to
+ 64.
 \end_layout
 
 \begin_layout Standard
@@ -3839,14 +4422,14 @@ An important fact about the presented simulations when using multi-threaded
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsubsection*
 Results
 \end_layout
 
 \begin_layout Standard
 The results represent the best running time out of a set of 20 independent
- simulation runs, in which we randomly selected both the transmitters and
- the rank ordering of the worker processes.
+ simulation runs, for which the transmitters and the rank ordering of the
+ worker processes were randomly selected.
  The collected running times for the weak-scalability experiments are shown
  in Figure
 \begin_inset space ~
@@ -3926,10 +4509,7 @@ Measured wall-clock time for weak-scalability experiments, featuring MW
 \emph default
  
 \emph on
-Experiments allocate one MPI worker process per core.
- The wall-clock time axis is expressed in a base-10 logarithmic scale, whereas
- the axis representing the number of cores is expressed in a base-2 logarithmic
- scale.
+Experiments allocated one MPI worker process per core.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:04-Weak_scalability_time"
@@ -4664,14 +5244,17 @@ The time measurements observed from the weak-scalability results show that
 \end_layout
 
 \begin_layout Standard
-Certainly, the parallel version of PRATO, when using the MWD approach, scales
- better when challenged with a large number of transmitters (5,120 for the
- biggest instance) over 64 cores.
+Certainly, the parallel version of PRATO scales better using the MWD approach,
+ when challenged with a large number of transmitters (5,120 for the biggest
+ instance) over 64 cores.
  This fact shows PRATO would be able to calculate the radio-coverage prediction
  for real networks in a feasible amount of time, since many operational
  radio networks have already deployed a comparable number of transmitters,
  e.g., the 3G network within the Greater London Authority area, in the UK
- 
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Number_of_base_stations_in_England"
@@ -4732,12 +5315,19 @@ This set of simulations is meant to analyze the impact of increasing the
  number of computing cores for a given problem size, i.e., the number of transmitt
 ers deployed over the target area does not change, but only the number of
  worker processes used is increased.
- Here, the following number of transmitters are tested {1,280, 2,560, 5,120},
- by gradually doubling the number of workers from 1 to 64 for each problem
- size.
+ Here, the following number of transmitters were tested {1,280,
+\begin_inset space ~
+\end_inset
+
+2,560,
+\begin_inset space ~
+\end_inset
+
+5,120}, by gradually doubling the number of workers from 1 to 64 for each
+ problem size.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsubsection*
 Results
 \end_layout
 
@@ -4766,7 +5356,7 @@ centering
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename img/strong_scaling-time_plot.eps
-	width 70col%
+	width 80col%
 
 \end_inset
 
@@ -4787,9 +5377,7 @@ Measured wall-clock time for strong-scalability experiments, featuring MW
  
 \emph on
 Experiments assigned one MPI worker process per core.
- The wall-clock time axis is expressed in a base-10 logarithmic scale, whereas
- the axis representing the number of cores is expressed in a base-2 logarithmic
- scale.
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:04-Strong_scalability_time"
@@ -4810,16 +5398,27 @@ name "fig:04-Strong_scalability_time"
 \end_layout
 
 \begin_layout Standard
-Similar to the weak-scalability experiments, these time measurements show
- that when applying a classic MW approach the 
+Similar to the weak-scalability experiments, the time measurements plotted
+ in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:04-Strong_scalability_time"
+
+\end_inset
+
+ show that, when applying a classic MW approach, the 
 \shape italic
 \emph on
 running-time reduction
 \shape default
 \emph default
- starts flattening when more than eight worker processes are used.
+ starts flattening if more than eight worker processes were used.
  Moreover, the running times for 16, 32 and 64 worker processes are the
- same, i.e., it does not improve due to the master process being 
+ same, i.e., they do not improve due to the master process being 
 \shape italic
 \emph on
 saturated
@@ -4828,7 +5427,7 @@ saturated
 .
  In contrast, when using the proposed MWD technique, the running-time reduction
  improves for up to 32 worker processes, after which there is no further
- improvement since the network is being fully exploited.
+ improvement since the network was being fully exploited.
  These results clearly show that when applying parallelization using a larger
  number of worker processes, the master process becomes the bottleneck of
  the MW approach.
@@ -4850,7 +5449,7 @@ Speedup
 \begin_layout Standard
 In order to further analyze how well the PRATO scales using the MW and MWD
  approaches, the performance of the parallel implementation in terms of
- its speedup was measured, which is defined as
+ its speedup was measured, which is defined as:
 \end_layout
 
 \begin_layout Standard
@@ -4934,12 +5533,8 @@ centering
 
 \shape italic
 \emph on
-Average speedup for strong-scalability experiments.
-
-\emph default
+Average speedup for the strong-scalability experiments.
  
-\emph on
-Both axes are expressed in a base-2 logarithmic scale.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:04-Strong_scalability_speedup"
@@ -5007,14 +5602,12 @@ centering
 
 \shape italic
 \emph on
-Average parallel efficiency for strong-scalability experiments.
+Average parallel efficiency for the strong-scalability experiments.
 
 \emph default
  
 \emph on
-The parallel-efficiency axis is expressed in a linear scale, whereas the
- axis representing the number of cores is expressed in a base-2 logarithmic
- scale.
+
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:04-Strong_scalability_efficiency"
@@ -5065,8 +5658,8 @@ reference "fig:04-Strong_scalability_speedup"
  i.e., 1,280, 2,560, and 5,120 transmitters deployed over the target area.
  The number of transmitters used in these problem sizes is comparable to
  several real-world radio networks that were already deployed in England,
- e.g., Hampshire County with 227 base stations, West Midlands with 414 base
- stations, and Greater London Authority with 1,086 base stations 
+ e.g., Hampshire County with 227 BSs, West Midlands with 414 BSs, and Greater
+ London Authority with 1,086 BSs 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Number_of_base_stations_in_England"
@@ -5108,7 +5701,7 @@ Efficiency
 \begin_layout Standard
 Another measure to study how well PRATO utilizes the available computing
  resources considers the parallel efficiency of the implementation.
- The definition of parallel efficiency is as follows
+ The definition of parallel efficiency is as follows:
 \end_layout
 
 \begin_layout Standard
@@ -5156,9 +5749,9 @@ reference "fig:04-Strong_scalability_efficiency"
 \end_inset
 
  shows the average parallel efficiency of the parallel implementation for
- different problem sizes as the number of processing cores was increased.
+ different problem sizes, as the number of processing cores was increased.
  Like for the speedup measure, the average parallel efficiency from the
- three problem instances was calculated.
+ same problem instances was calculated.
 \end_layout
 
 \begin_layout Standard
@@ -5177,8 +5770,8 @@ reference "fig:04-Strong_scalability_efficiency"
 \end_inset
 
 , it can be observed that the efficiency of the MWD approach is better than
- in the MW case for larger number of processes and as long as there is still
- capacity at the LAN level.
+ in the MW case for larger number of processes, and as long as there was
+ available capacity at the LAN level.
  In accordance to the previous analysis, the under utilization of the computing
  resources is more significant when the master process is overloaded (in
  the MW case) than when the network infrastructure is saturated (in the
@@ -5196,7 +5789,7 @@ Overall, the experimental results confirm that the objective of fully exploiting
 \end_layout
 
 \begin_layout Subsection
-GPU performance 
+Performance analysis 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:04-GPU_performance"
@@ -5204,6 +5797,10 @@ name "sub:04-GPU_performance"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+<Experiments not yet finished ...???>
 \end_layout
 
 \begin_layout Standard
@@ -5221,13 +5818,6 @@ status open
  en donde se muestra el speedup (23.2 Performance analysis) ----
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -5256,9 +5846,9 @@ PRATO, a parallel radio-coverage prediction tool for radio networks, has
 \begin_layout Standard
 The parallel implementaion of PRATO includes a novel parallel technique
  for master-worker configurations.
- The introduced MWD technique, which combines the use of a database system
- with a work-pool approach, delivers improved performance when compared
- with a traditional MW setup.
+ The introduced MWD technique, which combines the use of a DB system with
+ a work-pool approach, delivers improved performance when compared with
+ a traditional MW setup.
  Moreover, the presented system provides parallel and asynchronous computation
  that is completely independent of the GIS used, in this case the GRASS
  environment.
@@ -5273,17 +5863,18 @@ The extensive simulations, performed on the DEGIMA cluster of the Nagasaki
  of the implementation, as well as the impact of the presented methods for
  parallel-algorithm design aimed at spatial-data processing.
  The conducted analyses show that when using the MWD approach, PRATO is
- able to calculate the radio-coverage prediction of real-world mobile networks
+ able to calculate the radio-coverage prediction of real-world radio networks
  in a reduced amount of time.
- Moreover, the experimental results show PRATO has a better scalability
+ Moreover, the experimental results show that PRATO has a better scalability
  when using the MWD approach than the standard MW setup, since it is able
  to completely saturate the network infrastructure of the computer cluster.
  These promising results also show the great potential of the MWD approach
- for parallelizing different time-consuming problems dealing with spatial
- data, where databases form an intrinsic part of almost all GIS.
- Furthermore, the automatic optimization of radio networks, where millions
- of radio-propagation predictions take part in the evaluation step of the
- optimization process, is also an excellent candidate for PRATO.
+ for parallelizing different time-consuming tasks dealing with spatial data,
+ where DBs form an intrinsic part of almost all GIS.
+ Furthermore, the automatic optimization of radio networks, where a large
+ number of radio-propagation predictions take part in the evaluation step
+ of the optimization process, can also an benefit from the improved performance
+ of PRATO.
  Indeed, this last point will be further discussed and validated in the
  following chapters.
 \end_layout
@@ -5299,7 +5890,7 @@ The performance of the worker processes has been additionally improved by
 
 \begin_layout Standard
 To the best of the author's knowledge, neither the MWD parallel technique
- nor the GPU implementation of the radio-prediction algorithm as presented
+ nor the parallel implementation of the radio-prediction algorithm as presented
  in this chapter, have yet been described in the related literature.
 \end_layout
 

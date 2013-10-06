@@ -169,7 +169,7 @@ where
 \begin_inset Formula $\Omega$
 \end_inset
 
- is the set of feasible solutions of the problem, also known as search space.
+ is the set of possible solutions of the problem, also known as search space.
  Note that the objective function 
 \begin_inset Formula $f$
 \end_inset
@@ -401,7 +401,15 @@ where
 \begin_inset Formula $\alpha$
 \end_inset
 
- is a small positive value.
+ is a small positive value, and 
+\begin_inset Formula $f'(x)$
+\end_inset
+
+ is the first derivative of 
+\begin_inset Formula $f(x)$
+\end_inset
+
+.
  Consequently, a positive slope will make 
 \begin_inset Formula $x$
 \end_inset
@@ -519,8 +527,12 @@ ted by adjusting the value of
 .
  However, some functions (or regions of functions) may require smaller values,
  while for others a bigger value would be more appropiate.
- Newton's method improves this by taking the second derivative of the function
- into account, i.e.:
+ Newton's method improves this by taking the second derivative of the function,
+ 
+\begin_inset Formula $f''(x)$
+\end_inset
+
+, into account, i.e.:
 \end_layout
 
 \begin_layout Standard
@@ -715,8 +727,8 @@ subject to
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray}
-A\cdot\vec{x} & \le & b\label{eq:02-linear_programming_constraints}\\
-\vec{x} & \ge & \vec{0}\nonumber 
+A\cdot\vec{x} & \le & b\nonumber \\
+\vec{x} & \ge & \vec{0}.\label{eq:02-linear_programming_constraints}
 \end{eqnarray}
 
 \end_inset
@@ -928,7 +940,11 @@ key "Glover-Future_paths_for_integer_programming_and_links_to_artificial_intelli
  at improving the efficiency of a search process.
  These techniques are meant to find good solutions to a given problem, for
  which the mathematical function is not available or its search space is
- big enough for an exhaustive search to be unfeasible 
+ big enough for an exhaustive search to be unfeasible
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kochenberger_Handbook_of_metaheuristics:2003"
@@ -942,8 +958,12 @@ key "Kochenberger_Handbook_of_metaheuristics:2003"
 From the theorical point of view, metaheuristics represent a subset of stochasti
 c optimization, since they use some degree of randomness to find optimal
  (or as good as possible) solutions to hard problems.
- They are the most general of these kinds of algorithms, and are applied
- to a wide range of problems 
+ They are the most general of this kind of algorithms, and are applied to
+ a wide range of problems
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Luke-Essentials_of_metaheuristics:2009"
@@ -952,8 +972,12 @@ key "Luke-Essentials_of_metaheuristics:2009"
 
 .
  Unlike the exact optimization methods introduced in the previous sections,
- metaheuristics do not guarantee the optimality of the obtained solutions
- 
+ metaheuristics do not generally guarantee the optimality of the obtained
+ solutions
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -966,7 +990,11 @@ key "Talbi_Metaheuristics:2009"
 \end_layout
 
 \begin_layout Standard
-The characterization given by Blum and Roli 
+The characterization given by Blum and Roli
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003"
@@ -1019,7 +1047,11 @@ advanced metaheuristics use search experience (implemented as some form
 The strategies used by metaheuristics should provide a dynamic balance between
  the exploitation of the accumulated search experience (commonly called
  intensification) and the exploration of the search space (commonly called
- diversification) 
+ diversification)
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003"
@@ -1047,7 +1079,11 @@ good
  In this context, the ultimate search algorithm in terms of diversification
  is random search.
  Random search generates a random solution in the search space at each iteration
-, without using memory 
+, without using memory
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -1055,10 +1091,24 @@ key "Talbi_Metaheuristics:2009"
 \end_inset
 
 .
- In terms of intensification, iterative local search is a representative
- algorithm.
+ In terms of intensification, iterated local search
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lourencco-Iterated_local_search:2003"
+
+\end_inset
+
+ is a representative algorithm.
  The steepest local search algorithm selects, at each iteration, the best
- neighboring solution that improves the current one 
+ neighboring solution that improves the current one
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -1292,10 +1342,10 @@ key "Ronkkonen-Real_parameter_optimization_with_differential_evolution:2005"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline}
-x_{i,j,g}=x_{i,\mathrm{{low}}}+\mathrm{{uniform}[0,1)}\cdot(x_{i,\mathrm{{high}}}-x_{i,\mathrm{{low}}}),\\
-i=(1,2,...,D),\, j=(1,2,...,N),\, g=0.\label{eq:02-DE_structure}
-\end{multline}
+\begin{eqnarray}
+x_{i,j,g} & = & x_{i,\mathrm{{low}}}+\mathrm{{uniform}[0,1)}\cdot(x_{i,\mathrm{{high}}}-x_{i,\mathrm{{low}}}),\nonumber \\
+i & = & (1,2,...,D),\, j=(1,2,...,N),\, g=0.\label{eq:02-DE_structure}
+\end{eqnarray}
 
 \end_inset
 
@@ -1308,14 +1358,14 @@ In Equation
 \begin_inset space ~
 \end_inset
 
-
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:02-DE_structure"
 
 \end_inset
 
-, 
+), 
 \begin_inset Formula $g$
 \end_inset
 
@@ -1345,12 +1395,19 @@ reference "eq:02-DE_structure"
 \end_inset
 
 .
- The (pseudo)-random number generator 
+ The (pseudo)-random number generator is represented by a function 
+\begin_inset Quotes eld
+\end_inset
+
+
 \begin_inset Formula $\mathrm{{uniform}[0,1)}$
 \end_inset
 
- is represented by a function for selecting a uniformly-distributed random
- number from the interval 
+
+\begin_inset Quotes erd
+\end_inset
+
+, that selects a uniformly-distributed random number from the interval 
 \begin_inset Formula $[0,1)$
 \end_inset
 
@@ -1517,7 +1574,7 @@ The pheromone concentration,
 \end_inset
 
 , evaporates at a constant rate, 
-\begin_inset Formula $\gamma$
+\begin_inset Formula $\rho$
 \end_inset
 
  , over time, 
@@ -1530,7 +1587,7 @@ The pheromone concentration,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-p(t)=p_{0}e^{-\gamma t},\label{eq:02-ACO_structure}
+p(t)=p_{0}\mathrm{e}^{-\rho t},\label{eq:02-ACO_structure}
 \end{equation}
 
 \end_inset
@@ -1599,7 +1656,7 @@ There are six parameters that control the way DASA explores the search space:
 \end_inset
 
 ), the pheromone dispersion factor (
-\begin_inset Formula $q$
+\begin_inset Formula $\rho$
 \end_inset
 
 ), the global scale-increasing factor (
@@ -1611,7 +1668,7 @@ There are six parameters that control the way DASA explores the search space:
 \end_inset
 
 ), and the maximum parameter precision (
-\begin_inset Formula $e$
+\begin_inset Formula $\epsilon$
 \end_inset
 
 ).
@@ -1782,12 +1839,20 @@ reference "alg:07-SA_pseudocode"
 
  represent an usually decreasing sequence of values for the temperature
  parameter, and 
+\begin_inset Quotes eld
+\end_inset
+
+
 \begin_inset Formula $\mathrm{{uniform}[0,1]}$
 \end_inset
 
+
+\begin_inset Quotes erd
+\end_inset
+
  is a function for selecting a uniformly-distributed random number from
- the given interval.
- whereas the meaning of the rest of the symbols is as defined above.
+ the given interval, whereas the meaning of the rest of the symbols is as
+ defined above.
  
 \end_layout
 
@@ -2013,6 +2078,18 @@ n problems in the area of radio network
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Duque-Channel_assignment_for_cellular_radio_using_simulated_annealing:1993,CPICH.optimization:2003,minimum.set.covering.problem:2000,Coverage.optimization.on.CPICH.tilt.and.azimuth:2006,Zhang-Mathematical_modelling_and_comparisons_of_heuristics_for_WCDMA_radio_planning:2006"
+
+\end_inset
+
+.
+ A detailed description about SA and its applications can be found in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Van-Simulated_annealing:1987"
 
 \end_inset
 
@@ -2379,18 +2456,18 @@ Some non-commercial and open-source packages for radio-network simulation
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Momentum.project,Ozimek_Open.source.radio.coverage.prediction:2010,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004"
+key "Ozimek_Open.source.radio.coverage.prediction:2010,Momentum.project,Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_communications_research:2011,Pillekeit-A_hybrid_simulation_framework_for_the_evaluation_of_common_RRM:2012,Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011,Yeung-Detailed_OFDM_modeling_in_network_simulation:2004"
 
 \end_inset
 
  present two main drawbacks: poor documentation and/or low scalability.
- The scalability issues shown by some projects retrain these packages to
+ The scalability issues shown by some projects prevent these packages to
  be used in larger, real-world environments, where big problem instances
  are the rule.
- Despite this, the merit and acknowledgement go the authors of these frameworks,
- not only for providing them to the scientific community, but fundamentaly
- because for providing an environment in which different kinds of simulations
- are completely reproducible.
+ Despite this, the merit and acknowledgement go to the authors of these
+ frameworks, not only for providing them to the scientific community, but
+ fundamentaly because for providing an environment in which different kinds
+ of simulations are completely reproducible.
  Additionally, the lack of documentation represents a big hurdle for extending
  the base code, which becomes a difficult task without the help of the original
  authors of the package.
@@ -2421,7 +2498,7 @@ A cellular mobile radio network is a collection of individual cells that
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
-symbol "BSs"
+symbol "BS"
 description "Base station."
 
 \end_inset
@@ -2692,7 +2769,18 @@ description "Soft handover."
 \end_inset
 
 ) enhances handover functionality by allowing an UE to potentially operate
- on multiple radio links at a time.
+ on multiple radio links at a time (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:02-SHO_example"
+
+\end_inset
+
+).
  During SHO, the target BS is selected as the best candidate from among
  the available BSs.
  The UE performs the necessary link-quality measurements by monitoring the
@@ -2737,7 +2825,7 @@ description "Code division multiple access."
 
 \end_inset
 
-), and especially in Wide CDMA
+), and especially in the Wideband CDMA
 \begin_inset space ~
 \end_inset
 
@@ -2746,7 +2834,7 @@ description "Code division multiple access."
 LatexCommand nomenclature
 prefix "A"
 symbol "WCDMA"
-description "Wide-code division multiple access."
+description "Wideband code division multiple access."
 
 \end_inset
 
@@ -2804,9 +2892,8 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/soft_handover.png
-	lyxscale 50
-	width 40text%
+	filename img/sho_example.eps
+	width 30text%
 
 \end_inset
 
@@ -2817,8 +2904,21 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Example of two UEs in soft handover with two BSs.
- Adapted from [219???].
+An example of the soft-handover region, showed as a grayed area.
+ The area boundaries are configurable relative to the pilot-signal level
+ of each cell.
+ Adapted from
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stuber-Principles_of_mobile_communication:2011"
+
+\end_inset
+
+.
  
 \begin_inset CommandInset label
 LatexCommand label
@@ -2938,79 +3038,6 @@ key "holma2006hsdpa"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Section
-Pilot signal and power 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:02-Pilot-signal-and-power"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-<Not yet finished ...???>
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Explicar que es esto y como funciona en el resto de la tesis
-\end_layout
-
-\begin_layout Plain Layout
-----
-\end_layout
-
-\begin_layout Plain Layout
-The CPICH transmit power is typically between 5% to 10% of the total downlink
- transmit power of the base station 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RadioNetworkPlanningAndOptimisationForUMTS"
-
-\end_inset
-
-, but there is no standardized method to ﬁnd a CPICH power setting.
-\end_layout
-
-\begin_layout Plain Layout
-The CPICH transmits in the downlink of a UMTS cell system.
- The transmit power is usually between 5% and 10% of the total power available
- at the base station 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
-
-\end_inset
-
-.
- The capacity of a cell is limited by the amount of available power at the
- base station and the interference level at the mobile terminal.
- The coverage area of any cell is controlled by changing its pilot power,
- which consequently modifies the service area of the network.
-\end_layout
-
-\begin_layout Plain Layout
-The CPICH transmit power is common to many different planning and optimization
- problems in UMTS networks 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Nawrocki_Understanding:2006"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Chapter
@@ -3430,8 +3457,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/set_cover_in.gif
-	lyxscale 50
+	filename img/set_covering-IN.eps
 	width 60text%
 
 \end_inset
@@ -3481,8 +3507,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/set_cover_out.gif
-	lyxscale 50
+	filename img/set_covering-OUT.eps
 	width 60text%
 
 \end_inset
@@ -3553,7 +3578,7 @@ p
  of the network are maximized with the lowest installation cost.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Related work
 \end_layout
 
@@ -3672,6 +3697,14 @@ key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+--- el nuestro no es multiobjective ---
+\end_layout
+
+\begin_layout Plain Layout
 Finally, Whitaker et al.
 \begin_inset space ~
 \end_inset
@@ -3688,6 +3721,11 @@ key "GA.for.antenna.placement:2005"
  Their work compared the performance of four different algorithms, namely
  SEAMO, SPEA2, NSGA-II and PESA, all targeting multiobjective optimization
  targets.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -3776,9 +3814,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/azimuth.gif
-	lyxscale 40
-	width 30text%
+	filename img/antenna_pattern.eps
+	lyxscale 50
+	width 40text%
 
 \end_inset
 
@@ -3789,7 +3827,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-An example of an antenna-azimuth pattern.
+An example of an antenna-azimuth pattern, showing the gain in each direction.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:02-Antenna_azimuth"
@@ -3833,8 +3871,8 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/tilt.jpg
-	lyxscale 40
+	filename img/antenna_tilt.eps
+	lyxscale 75
 	width 60text%
 
 \end_inset
@@ -3847,6 +3885,18 @@ centering
 
 \begin_layout Plain Layout
 The antenna tilt, showing its angle with the horizontal plane.
+ Adapted from
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
+
+\end_inset
+
+.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:02-Antenna-tilt"
@@ -3866,7 +3916,7 @@ name "fig:02-Antenna-tilt"
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Related work
 \end_layout
 
@@ -4063,15 +4113,6 @@ f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}},
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "S"
-symbol "$f_{\\mathrm{cov}}$"
-description "Objective function for the service-coverage optimization problem."
-
-\end_inset
-
-
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "S"
 symbol "$A_{\\mathrm{covered}}$"
 description "Area under service coverage of the mobile network."
 
@@ -4122,20 +4163,8 @@ description "Regular square grid."
 ) of a certain resolution.
  A pixel is considered covered if a given QoS measure is above a defined
  threshold.
- It is also common to use a binary function, e.g., 
-\begin_inset Formula $cov(x,y)$
-\end_inset
-
-
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "S"
-symbol "$cov(x,y)$"
-description "Returns 1 if the coordinate $(x,y)$ is under mobile-network coverage."
-
-\end_inset
-
-, to check the coverage of a given pixel.
+ It is also common to use a binary function to check the coverage of a given
+ pixel.
  The function returns 1 if the pixel located at 
 \begin_inset Formula $(x,y)$
 \end_inset
@@ -4143,7 +4172,7 @@ description "Returns 1 if the coordinate $(x,y)$ is under mobile-network coverag
  is covered, and 0 otherwise.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Related work
 \end_layout
 
@@ -4362,7 +4391,7 @@ description "Graphics processing unit."
 
 ), the computing capacity of which is already showing a faster progress
  compared to CPUs.
- The peak performance of the latest GPU is several times greater than the
+ The peak performance of the latest GPU is several times higher than the
  latest CPU, but even more important is the trend
 \begin_inset space ~
 \end_inset
@@ -4421,14 +4450,35 @@ description "Compute unified device architecture."
 
 \end_inset
 
-).
+)
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CUDA"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 In the following, the focus on the CUDA architecture.
  In particular, similar hardware produced by other vendors, e.g., AMD and
- Intel, as well as other programming frameworks like OpenCL, are based on
- the same technology paradigm of massively-parallel processors.
+ Intel, as well as other programming frameworks like OpenCL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stone_OpenCL.A.parallel.programming.standard:2010"
+
+\end_inset
+
+, are based on the same technology paradigm of massively-parallel processors.
  For this reason, the principles presented in this section can be applied
  to current GPU technologies, in a vendor-independent manner.
 \end_layout
@@ -4519,8 +4569,9 @@ key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
  grid.
  All threads within a given grid execute the same kernel function.
  During execution, continous sections of threads within a block are grouped
- into warps of 32 parallel threads, which represent the multi-threading
- scheduling unit
+ into warps of several parallel threads (typically 32 or 64, depending on
+ the target architecture), which represent the multi-threading scheduling
+ unit
 \begin_inset space ~
 \end_inset
 
@@ -4532,7 +4583,7 @@ key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
 \end_inset
 
 .
- A Streaming Multiprocessor (SM
+ A GPU contains several Streaming Multiprocessors (SM
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
@@ -4541,7 +4592,8 @@ description "Streaming multiprocessor."
 
 \end_inset
 
-) executes one instruction at a time for all the 32 threads in the warp.
+), each of which executes one instruction at a time for all the 32 threads
+ in the warp.
  Consequently, if a thread block is not evenly divisible by the warp size,
  any remaining thread slots are wasted.
  Another undesirable situation appears when threads in a warp take different
@@ -4721,7 +4773,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Properties of different memory types on a GeForge 8800 GPU.
+Properties of different memory types on a GeForce 8800 GPU.
  Adapted from
 \begin_inset space ~
 \end_inset
@@ -4890,7 +4942,7 @@ on-chip cache
 \begin_inset Text
 
 \begin_layout Plain Layout
-~100 cycles
+>100 cycles
 \end_layout
 
 \end_inset
@@ -4937,7 +4989,7 @@ on-chip
 \begin_inset Text
 
 \begin_layout Plain Layout
-~register
+>1 cycle
 \end_layout
 
 \end_inset
@@ -5491,7 +5543,7 @@ Summary
 This chapter gave an overview of the basic concepts, the potential and the
  limitations of the GPUs when used as parallel procesors for general programming.
  In particular, emphasis has been given to the details that differenciate
- this platform from the traditional serial architecture on CPUs.
+ this platform from the traditional CPUs.
  In this sense, it is important to recognize which applications can benefit
  from using a GPU and which not, also taking into consideration the effort
  required at the implementation time.

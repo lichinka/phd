@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-The soft-handover-balancing problem 
+Soft-handover optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
@@ -123,17 +123,6 @@ reference "sub:02-Handover-and-soft-handover"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Principles_of_mobile_radio_networks"
-
-\end_inset
-
 ).
  By introducing a penalty-based objective function and some hard constraints,
  the formal definition of the SHO-balancing problem in UMTS networks is
@@ -142,7 +131,7 @@ reference "chap:02-Principles_of_mobile_radio_networks"
  the objective function are set according to the configuration and layout
  of a real mobile network, deployed in Slovenia by Telekom Slovenije, d.d.
  The balancing problem is then tackled by three optimization algorithms,
- each of them belonging to a different category of metaheuristics.
+ each of them belonging to a different class of metaheuristic approaches.
 \end_layout
 
 \begin_layout Standard
@@ -224,8 +213,8 @@ reference "sec:07-Optimization_algorithms"
 \end_inset
 
 .
- The simulations, including their environment and parameter setup, are introduce
-d in Section
+ The simulations, including their environment, parameter setup and result
+ analysis, are introduced in Section
 \begin_inset space ~
 \end_inset
 
@@ -236,25 +225,7 @@ reference "sec:07-Simulations"
 
 \end_inset
 
-, before their result analysis in Section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:07-Results"
-
-\end_inset
-
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage clearpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -310,7 +281,9 @@ status open
 \backslash
 
 \backslash
-vskip -0.3in(a)
+vskip -0.3in 
+\backslash
+hskip -0.4cm (a)
 \end_layout
 
 \end_inset
@@ -338,7 +311,9 @@ status open
 \backslash
 
 \backslash
-vskip -0.3in(b)
+vskip -0.3in 
+\backslash
+hskip 0.2cm (b)
 \end_layout
 
 \end_inset
@@ -374,22 +349,25 @@ name "fig:07-Problem_illustration"
 \begin_layout Standard
 Despite several built-in mechanisms, that allow a radio network to overcome
  different problems due to the lack of SHO during a HSDPA connection, some
- abnormal cases do arise, especially in those areas where there is SHO capabilit
-y in the uplink, but none in the downlink.
- An example of such a case is depicted in Figure 
+ abnormal cases do arise, especially in areas where there is SHO capability
+ in the uplink, but none in the downlink.
+ An example of such a case is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:07-Problem_illustration"
 
 \end_inset
 
-, which shows the interference behavior during a HSPA connection in: (a)
- normal SHO conditions, and (b) unbalanced SHO conditions.
- The plotted data are actual radio network statistics, taken from the mobile
- network deployed in Slovenia by Telekom Slovenije, d.d.
- The graph on the left, (a), shows a normal HSUPA-enabled service situation,
- in which the measured interference is proportional to the traffic being
- served.
+, which shows the interference behavior (denoted as UL RSSI) during a HSPA
+ connection in: (a) normal SHO conditions, and (b) unbalanced SHO conditions.
+ The plotted data are actual radio-network statistics from the mobile network
+ deployed in Slovenia by Telekom Slovenije, d.d.
+ The graph (a) shows a normal HSUPA-enabled service situation, in which
+ the measured interference is proportional to the traffic being served.
  Note how the noise rises with the increased traffic on cell
 \begin_inset space ~
 \end_inset
@@ -404,8 +382,8 @@ reference "fig:07-Problem_illustration"
 \end_inset
 
 1 are almost identical.
- The graph on the right, (b), depicts a problematic situation, where the
- noise level does not only rise on the cell serving the HSUPA services (cell
+ The graph (b) depicts a problematic situation, where the noise level does
+ not only rise on the cell serving the HSUPA services (cell
 \begin_inset space ~
 \end_inset
 
@@ -658,10 +636,14 @@ key "chen2010_impact_of_soft_handover"
 
 \end_inset
 
- and data services by means of HSPA 
+ and data services by means of HSPA
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "chen2011_coverage_planning_for_optimizing_HSDPA,chen2008cpich"
+key "chen2008cpich,chen2011_coverage_planning_for_optimizing_HSDPA"
 
 \end_inset
 
@@ -759,9 +741,9 @@ key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CP
  diverse criteria taken into account when assigning the pilot power of a
  cell.
  The fundamental reason behind this fact is that the pilot power is a common
- adjustment vairble of various optimization problems in radio networks.
+ adjustment variable of various optimization problems in radio networks.
  This is especially true for UMTS networks, due to their frequency-reuse
- factor of 1
+ factor of one
 \begin_inset space ~
 \end_inset
 
@@ -799,17 +781,6 @@ reference "sec:06-Radio_network_model"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
-
-\end_inset
-
 , in order to include the SHO functionality.
  In this context, the mathematical model links the SHO settings with the
  pilot-power level of each cell, the best-server pattern, and the network
@@ -843,7 +814,15 @@ dB (relative to the pilot-power setting the cell had before optimization),
 \end_inset
 
  is reduced.
- The purpose of this reduction is twofold.
+ A smaller value for the change step would have practically no influence
+ over the transmit-power adaptation of the cells, whereas bigger changes
+ would suffer from excessive granularity.
+ These reasons were discussed and confirmed by the radio engineers at Telekom
+ Slovenije, d.d.
+\end_layout
+
+\begin_layout Standard
+From the optimization point of view, the purpose of the change step is twofold.
  First, since the optimization targets a live network, there is no need
  for the algorithms to create complete new configurations, but just to fine-tune
  existing ones.
@@ -921,8 +900,8 @@ description "Maximum number of neighbouring cells in the active set."
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray}
-SHO_{m}^{\downarrow} & = & \left\{ c\vert L_{c^{*}m}^{\downarrow}p_{c^{*}}-L_{cm}^{\downarrow}p_{c}\le\gamma^{\mathrm{sho}}\right\} ,\label{eq:sho_dl}\\
-\vert SHO_{m}^{\downarrow}\vert & \le & as^{\mathrm{max}},\nonumber 
+SHO_{m}^{\downarrow} & = & \left\{ c\,\vert\, l_{c^{*}m}^{\downarrow}p_{c^{*}}-l_{cm}^{\downarrow}p_{c}\le\gamma^{\mathrm{sho}}\right\} ,\nonumber \\
+\vert SHO_{m}^{\downarrow}\vert & \le & as^{\mathrm{max}},
 \end{eqnarray}
 
 \end_inset
@@ -945,7 +924,11 @@ description "Cell set to which a mobile may maintain concurrent downlink connect
 \begin_layout Standard
 \noindent
 where 
-\begin_inset Formula $L_{c^{*}m}^{\downarrow}$
+\begin_inset Formula $c$
+\end_inset
+
+ is a network cell, 
+\begin_inset Formula $l_{c^{*}m}^{\downarrow}$
 \end_inset
 
  is the downlink attenuation factor of the best-serving cell, and 
@@ -963,7 +946,11 @@ where
 
 , the weakest links are removed if there are several present.
  This method is well suited for configurations with no hysteresis, since
- dynamic effects are ignored in static models 
+ dynamic effects are ignored in static models
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "nawrocki2006understanding"
@@ -982,7 +969,7 @@ Additionally, in the uplink, the set of cells to which an UE can potentially
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-SHO_{m}^{\uparrow}=\left\{ c\vert L_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
+SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
 \end{equation}
 
 \end_inset
@@ -1005,7 +992,7 @@ description "Cell set to which a mobile may maintain concurrent uplink connectio
 \begin_layout Standard
 \noindent
 where 
-\begin_inset Formula $L_{mc}^{\uparrow}$
+\begin_inset Formula $l_{mc}^{\uparrow}$
 \end_inset
 
  is the uplink attenuation factor from an UE 
@@ -1114,7 +1101,7 @@ Hence, the definition of the objective function for the SHO-balancing problem
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\min f_{\mathrm{sho}}=\sum_{c\in C}\sum_{m\in M}pf_{\mathrm{cov}}(1-cov_{cm})+pf_{\mathrm{sho}}^{\uparrow}sho_{cm}^{\uparrow}(1-sho_{cm}^{\downarrow})+pf_{\mathrm{sho}}^{\downarrow}sho_{cm}^{\downarrow}(1-sho_{cm}^{\uparrow}),\label{eq:07-objective_function}
+\min f_{\mathrm{sho}}=\sum_{c\in C}\sum_{m\in M}pf_{\mathrm{cov}}(1-\mathrm{cov}(c,m))+pf_{\mathrm{sho}}^{\uparrow}sho_{cm}^{\uparrow}(1-sho_{cm}^{\downarrow})+pf_{\mathrm{sho}}^{\downarrow}sho_{cm}^{\downarrow}(1-sho_{cm}^{\uparrow}),\label{eq:07-objective_function}
 \end{equation}
 
 \end_inset
@@ -1170,6 +1157,21 @@ sho_{cm}^{\uparrow}=\begin{cases}
 \begin_layout Standard
 \noindent
 and
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathrm{cov}(c,m)$
+\end_inset
+
+ is the binary function used to determine the coverage of a UE 
+\begin_inset Formula $m$
+\end_inset
+
+ by a cell 
+\begin_inset Formula $c$
+\end_inset
+
+,
 \end_layout
 
 \begin_layout Itemize
@@ -1337,7 +1339,7 @@ The SHO-balancing problem has been tackled using three fundamentally different
 \end_layout
 
 \begin_layout Itemize
-DE (see Section
+Differential evolution (see Section
 \begin_inset space ~
 \end_inset
 
@@ -1348,22 +1350,11 @@ reference "sub:02-DE"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Optimization_models"
-
-\end_inset
-
 ), from the family of evolutionary algorithms;
 \end_layout
 
 \begin_layout Itemize
-DASA (see Section
+Differential ant-stigmergy algorithm (see Section
 \begin_inset space ~
 \end_inset
 
@@ -1374,22 +1365,11 @@ reference "sub:02-DASA"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Optimization_models"
-
-\end_inset
-
 ), from the family of swarm-intelligence algorithms; and
 \end_layout
 
 \begin_layout Itemize
-SA (see Section
+Simulated annealing (see Section
 \begin_inset space ~
 \end_inset
 
@@ -1400,19 +1380,7 @@ reference "sub:02-SA"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:02-Optimization_models"
-
-\end_inset
-
-), from the group of classic metaheuristic algorithms, targeted at combinatorial
- optimization problems.
+), from the group of classic metaheuristic algorithms.
 \end_layout
 
 \begin_layout Standard
@@ -1451,7 +1419,7 @@ The DE algorithm features a parallel direct search method, which utilizes
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-X_{aG}=\left\{ x_{1},x_{2},\ldots x_{c},\ldots,x_{D}\right\} ,\label{eq:07-DE_mapping}
+X_{ag}=\left\{ x_{1},x_{2},\ldots x_{c},\ldots,x_{D}\right\} ,\label{eq:07-DE_mapping}
 \end{equation}
 
 \end_inset
@@ -1465,7 +1433,7 @@ where
 \end_inset
 
 , and 
-\begin_inset Formula $G$
+\begin_inset Formula $g$
 \end_inset
 
  indicates the generation of an individual 
@@ -1764,7 +1732,7 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Standard
-At the first step, a cell, 
+At the begging, a cell, 
 \begin_inset Formula $c'$
 \end_inset
 
@@ -1773,7 +1741,7 @@ At the first step, a cell,
 \end_inset
 
 .
- In step 2, a change of +0.01
+ Next, a change of +0.01
 \begin_inset space ~
 \end_inset
 
@@ -1795,8 +1763,7 @@ dB is applied with 50% probability to
 \begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
-, is checked for validity in step 3, i.e., it must be an element of the set
- 
+, is then validated, i.e., it must be an element of the set 
 \begin_inset Formula $P_{c'}$
 \end_inset
 
@@ -1805,9 +1772,9 @@ dB is applied with 50% probability to
 \begin_inset Formula $p_{c'}^{\mathrm{new}}$
 \end_inset
 
- is not a valid pilot power, step 2 is executed again, generating another
+ is not a valid pilot power, the loop is executed again, generating another
  random pilot power.
- Finally, in step 4, the pilot power of cell 
+ Finally, the pilot power of cell 
 \begin_inset Formula $c$
 \end_inset
 
@@ -1884,59 +1851,7 @@ Test network
 \end_layout
 
 \begin_layout Standard
-The test network used for the simulations, Net
-\begin_inset Formula $_{7}$
-\end_inset
-
-, is a subset of the real UMTS network deployed in Slovenia by Telekom Slovenije
-, d.d.
- It represents a network extending over a hilly terrain, combining both
- rural and middle-dense suburban areas, which contains 25 cells within an
- area of more than 150
-\begin_inset space ~
-\end_inset
-
-km
-\begin_inset Formula $^{2}$
-\end_inset
-
-.
- Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Test_network_properties"
-
-\end_inset
-
- shows some characteristics of the test network used, and Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:07-Coverage_areas"
-
-\end_inset
-
- shows the area under radio coverage, 
-\begin_inset Formula $A_{\mathrm{covered}}$
-\end_inset
-
-, within 
-\begin_inset Formula $A_{\mathrm{total}}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
-placement h
 wide false
 sideways false
 status open
@@ -1983,10 +1898,30 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="2">
+<lyxtabular version="3" rows="7" columns="2">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parameter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Value
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
@@ -2242,6 +2177,58 @@ name "fig:07-Coverage_areas"
 
 \end_layout
 
+\begin_layout Standard
+\noindent
+The test network used for the simulations, Net
+\begin_inset Formula $_{7}$
+\end_inset
+
+, is a subset of the real UMTS network deployed in Slovenia by Telekom Slovenije
+, d.d.
+ It represents a network extending over a hilly terrain, combining both
+ rural and middle-dense suburban areas, which contains 25 cells within an
+ area of more than 150
+\begin_inset space ~
+\end_inset
+
+km
+\begin_inset Formula $^{2}$
+\end_inset
+
+.
+ Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Test_network_properties"
+
+\end_inset
+
+ shows some characteristics of the test network used, and Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Coverage_areas"
+
+\end_inset
+
+ shows the area under radio coverage, 
+\begin_inset Formula $A_{\mathrm{covered}}$
+\end_inset
+
+, within 
+\begin_inset Formula $A_{\mathrm{total}}$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Algorithm parameters
 \end_layout
@@ -2337,17 +2324,17 @@ There are only two parameters controlling SA, namely:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $t_{initial}=125$
+\begin_inset Formula $t_{initial}=$
 \end_inset
 
-, the initial temperature; and
+125, the initial temperature; and
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $it=100,000$
+\begin_inset Formula $it=$
 \end_inset
 
-, the total number of iterations.
+100,000, the total number of iterations.
 \end_layout
 
 \begin_layout Standard
@@ -2355,8 +2342,11 @@ In this case, the exponential-lowering schema was chosen as the way the
  temperature was lowered during the SA searches.
 \end_layout
 
-\begin_layout Subsection
-Experimental environment
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2467,7 +2457,7 @@ name "tab:07-Algorithm_performance"
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2649,7 +2639,7 @@ SA
 \begin_inset Text
 
 \begin_layout Plain Layout
-663.75
+159.61
 \end_layout
 
 \end_inset
@@ -2681,7 +2671,80 @@ It may be observed that DE reached the lowest objective-function value,
 \end_layout
 
 \begin_layout Standard
+The convergences of the best, mean and worst objective-function values are
+ shown in Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-DE"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-DASA"
+
+\end_inset
+
+, and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-SA"
+
+\end_inset
+
+, respectively.
+ It is worth mentioning that every optimization run starts from a different
+ solution, randomly constructed by picking a pilot-power setting, 
+\begin_inset Formula $p_{c}^{k}$
+\end_inset
+
+, from every 
+\begin_inset Formula $P_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $1\le k\le|P_{c}|$
+\end_inset
+
+, 
+\begin_inset Formula $\forall c\in C$
+\end_inset
+
+.
+ Notice how fast DE converged to a good solution.
+ DASA also converged considerably fast, although not as fast as DE did.
+ After a number of evaluations without improvement, DASA resets itself and
+ continues searching from a new random point within the search space
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "korosec2010_DASA"
+
+\end_inset
+
+.
+ Despite this, and based on the flat profile the graph exhibits towards
+ the end of the optimization run, it is clear that 100,000 evaluations is
+ an adequate stopping criterion for all algorithms.
+ The third algorithm, SA, slowly converged towards the best solution found,
+ even though it was not as good as the solutions found by DE and DASA.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -2704,9 +2767,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/algorithm_convergence.eps
-	lyxscale 70
-	width 90text%
+	filename img/DE_convergence.eps
+	lyxscale 60
+	width 70text%
 
 \end_inset
 
@@ -2717,11 +2780,11 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Convergence analysis for each of the three algorithms, i.e., DE, DASA and
- SA, showing the best results obtained for the SHO-balancing problem.
+Convergence analysis for DE, showing the best, mean and worst objective-function
+ values in each evaluation of the SHO-balancing problem.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:07-Algorithm_convergence"
+name "fig:07-Algorithm_convergence-DE"
 
 \end_inset
 
@@ -2739,81 +2802,165 @@ name "fig:07-Algorithm_convergence"
 \end_layout
 
 \begin_layout Standard
-The convergence of the best-recorded run of each of the three algorithms
- is shown in Figure
-\begin_inset space ~
-\end_inset
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
 
 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:07-Algorithm_convergence"
-
-\end_inset
-
-.
- It is worth mentioning that every optimization run starts from a different
- solution, randomly constructed by picking a pilot-power setting, 
-\begin_inset Formula $p_{c}^{k}$
-\end_inset
-
-, from every 
-\begin_inset Formula $P_{c}$
-\end_inset
-
-, 
-\begin_inset Formula $1\le k\le|P_{c}|$
-\end_inset
-
-, 
-\begin_inset Formula $\forall c\in C$
-\end_inset
-
-.
- Notice how fast DASA converged to a good solution.
- After a number of evaluations without improvement, DASA resets itself and
- continues searching from a new random point within the search space 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "korosec2010_DASA"
+\backslash
+centering
+\end_layout
 
 \end_inset
 
-.
- DE also converged considerably fast, although not as fast as DASA did.
- It this case, DE does not reset itself if the current solution cannot be
- improved.
- Despite this, and based on the flat profile the graph exhibits towards
- the end of the optimization run, it is clear that 100,000 evaluations is
- an adequate stopping criterion for all algorithms.
- The third algorithm, SA, slowly converged towards the best solution found,
- even though it was not as good as the solutions found by DE and DASA.
- 
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/DASA_convergence.eps
+	lyxscale 60
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Convergence analysis for DASA, showing the best, mean and worst objective-functi
+on values in each evaluation of the SHO-balancing problem.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:07-Algorithm_convergence-DASA"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The three convergence profiles shown in Figure
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/SA_convergence.eps
+	lyxscale 60
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Convergence analysis for SA, showing the best, mean and worst objective-function
+ values in each evaluation of the SHO-balancing problem.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:07-Algorithm_convergence-SA"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The three convergence profiles shown in Figures
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:07-Algorithm_convergence"
+reference "fig:07-Algorithm_convergence-DE"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-DASA"
+
+\end_inset
+
+, and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-SA"
 
 \end_inset
 
  give a clearer notion about the way these algorithms explore the search
- space of the SHO-balancing problem.
+ space of the SHO-balancing problem, and the variatons occurred during the
+ optimization process.
 \end_layout
 
 \begin_layout Standard
 The simulation-running times have been intentionally omitted, since the
- algorithm implementations are fundamentally different and therefore not
- comparable with each other.
+ algorithms are implemented in different programming languages and are therefore
+ not suitable for comparison with each other.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Performance analysis
 \end_layout
 
@@ -2875,7 +3022,7 @@ name "tab:07-Optimization_result_analysis"
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row bottomspace="default">
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2985,7 +3132,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-63.00 %
+63.00%
 \end_layout
 
 \end_inset
@@ -2996,7 +3143,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-15.11 %
+15.11%
 \end_layout
 
 \end_inset
@@ -3007,7 +3154,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-15.73 %
+15.73%
 \end_layout
 
 \end_inset
@@ -3018,7 +3165,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.80 %
+1.80%
 \end_layout
 
 \end_inset
@@ -3029,7 +3176,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-4.36 %
+4.36%
 \end_layout
 
 \end_inset
@@ -3040,7 +3187,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00 %
+100.00%
 \end_layout
 
 \end_inset
@@ -3064,7 +3211,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-60.23 %
+60.23%
 \end_layout
 
 \end_inset
@@ -3075,7 +3222,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.13 %
+16.13%
 \end_layout
 
 \end_inset
@@ -3086,7 +3233,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.09 %
+16.09%
 \end_layout
 
 \end_inset
@@ -3097,7 +3244,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.47 %
+1.47%
 \end_layout
 
 \end_inset
@@ -3108,7 +3255,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-6.08 %
+6.08%
 \end_layout
 
 \end_inset
@@ -3119,7 +3266,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00 %
+100.00%
 \end_layout
 
 \end_inset
@@ -3143,7 +3290,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-60.24 %
+60.24%
 \end_layout
 
 \end_inset
@@ -3154,7 +3301,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.16 %
+16.16%
 \end_layout
 
 \end_inset
@@ -3165,7 +3312,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.90 %
+16.90%
 \end_layout
 
 \end_inset
@@ -3176,7 +3323,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.46 %
+1.46%
 \end_layout
 
 \end_inset
@@ -3187,7 +3334,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-5.24 %
+5.24%
 \end_layout
 
 \end_inset
@@ -3198,7 +3345,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00 %
+100.00%
 \end_layout
 
 \end_inset
@@ -3222,7 +3369,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-60.42 %
+60.42%
 \end_layout
 
 \end_inset
@@ -3233,7 +3380,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.55 %
+16.55%
 \end_layout
 
 \end_inset
@@ -3244,7 +3391,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-15.97 %
+15.97%
 \end_layout
 
 \end_inset
@@ -3255,7 +3402,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.56 %
+1.56%
 \end_layout
 
 \end_inset
@@ -3266,7 +3413,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-5.50 %
+5.50%
 \end_layout
 
 \end_inset
@@ -3277,7 +3424,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00 %
+100.00%
 \end_layout
 
 \end_inset
@@ -3301,7 +3448,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.40 %
++4.40%
 \end_layout
 
 \end_inset
@@ -3312,7 +3459,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+6.75 %
++6.75%
 \end_layout
 
 \end_inset
@@ -3323,7 +3470,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+2.29 %
++2.29%
 \end_layout
 
 \end_inset
@@ -3334,7 +3481,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+18.33 %
++18.33%
 \end_layout
 
 \end_inset
@@ -3345,7 +3492,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
--39.45 %
+-39.45%
 \end_layout
 
 \end_inset
@@ -3380,7 +3527,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.38 %
++4.38%
 \end_layout
 
 \end_inset
@@ -3391,7 +3538,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+6.95 %
++6.95%
 \end_layout
 
 \end_inset
@@ -3402,7 +3549,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+7.44 %
++7.44%
 \end_layout
 
 \end_inset
@@ -3413,7 +3560,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+18.88 %
++18.88%
 \end_layout
 
 \end_inset
@@ -3424,7 +3571,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
--20.18 %
+-20.18%
 \end_layout
 
 \end_inset
@@ -3459,7 +3606,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.09 %
++4.09%
 \end_layout
 
 \end_inset
@@ -3470,7 +3617,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+9.53 %
++9.53%
 \end_layout
 
 \end_inset
@@ -3481,7 +3628,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+1.52 %
++1.52%
 \end_layout
 
 \end_inset
@@ -3492,7 +3639,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+13.33 %
++13.33%
 \end_layout
 
 \end_inset
@@ -3503,7 +3650,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
--26.15 %
+-26.15%
 \end_layout
 
 \end_inset
@@ -3539,7 +3686,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.29 %
++4.29%
 \end_layout
 
 \end_inset
@@ -3550,7 +3697,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+7.74 %
++7.74%
 \end_layout
 
 \end_inset
@@ -3561,7 +3708,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+3.75 %
++3.75%
 \end_layout
 
 \end_inset
@@ -3572,7 +3719,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+16.85 %
++16.85%
 \end_layout
 
 \end_inset
@@ -3583,7 +3730,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
--28.59 %
+-28.59%
 \end_layout
 
 \end_inset
@@ -3683,9 +3830,9 @@ SHO
 
 \begin_layout Standard
 The coverage has been improved with an average of 4.29%, whereas the coverage
- area where there is no SHO capability, has been increased 7.74% in average.
+ area where there is no SHO capability, has been increased 7.74% on average.
  Areas where SHO is available in both downlink and uplink have also been
- improved, i.e., 3.75% in average.
+ improved, i.e., 3.75% on average.
  This particular improvement is interesting from the optimization point
  of view, because it had no explicit penalty factor set.
  Therefore, this may be understood as a consequence of the correct representatio
@@ -3694,7 +3841,6 @@ n of the different network aspects in the objective function.
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -3752,7 +3898,6 @@ name "fig:07-SHO_areas_initial"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -3855,7 +4000,7 @@ reference "tab:07-Optimization_result_analysis"
 \end_inset
 
 ).
- This particular condition has been improved by almost 17% in average, greatly
+ This particular condition has been improved by almost 17% on average, greatly
  reducing the possibility of interference in neighboring cells when serving
  HSPA traffic.
  The last measured aspect takes into account areas with downlink SHO and
@@ -3981,13 +4126,6 @@ reference "fig:07-SHO_areas_final"
  borders.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Summary 
 \begin_inset CommandInset label
@@ -4032,17 +4170,6 @@ reference "sec:06-Radio_network_model"
 
 \end_inset
 
-, Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
-
-\end_inset
-
 , the penalty scores of the objective function were set according to the
  configuration and layout of a real mobile network, deployed in Slovenia
  by Telekom Slovenije, d.d.
@@ -4076,11 +4203,13 @@ us environments, because it imposes no restrictions regarding cell layout
 \end_layout
 
 \begin_layout Standard
-It is important to note that some methods proposed in this chapter have
- been particularly designed for problems that emerge during the planning
- of 3G radio networks.
- Despite this, they may be adapted to other standards, e.g., 2G and 4G, without
- lose of generality.
+It is important to note that, to the best of the author's knowledge, the
+ formal definition of the SHO-balancing problem as presented here has not
+ yet appeared in the related literature.
+ Also note that although some methods proposed in this chapter have been
+ particularly designed for problems that emerge during the planning of 3G
+ radio networks, they may be adapted to other standards, e.g., 2G and 4G,
+ without lose of generality.
 \end_layout
 
 \end_body

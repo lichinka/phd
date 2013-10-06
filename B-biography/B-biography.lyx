@@ -1,0 +1,198 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass MPSthesis
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter*
+
+\size larger
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-2.3cm}
+\end_layout
+
+\end_inset
+
+Appendix B: Biography
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Appendix B: Biography}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{
+\backslash
+footnotesize Appendix B: Biography}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% First paragraph has no indentation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Lucas Benedičič was born on December 12, 1977 in Buenos Aires, Argentina.
+ After enrolling as a grade student at the University of Buenos Aires, he
+ attended and completed the first 4 years of the undergraduate programme
+ in computer sciences at the Faculty of Exact and Natural Sciences.
+\end_layout
+
+\begin_layout Standard
+After moving to Slovenia in 2002, he enrolled the University of Ljubljana,
+ Faculty of Computer and Information Science, where he graduated in 2007
+ with the work titled »Application development using open-source technologies«.
+\end_layout
+
+\begin_layout Standard
+In September 2007, he started his postgraduate studies at the University
+ of Primorska, Faculty of Mathematics, Natural Sciences and Information
+ Technologies, after enrolling the Masters' study programme for computer
+ sciences.
+ He graduated in 2009 with the work titled »Optimization of Common Pilot
+ Channels in UMTS Networks«.
+\end_layout
+
+\begin_layout Standard
+Towards the end of 2007, he was awarded a scholarship for continuing postgraduat
+e studies in Slovenia.
+ The award was received after winning an open contest of problem solving,
+ organized by Halcom, d.d.
+\end_layout
+
+\begin_layout Standard
+In fall 2009, he enrolled in the PhD program entitled “Information and Communica
+tion Technologies” under the supervision of Assistant Professor Peter Korošec,
+ at the Jožef Stefan International Postgraduate School in Ljubljana, Slovenia.
+\end_layout
+
+\begin_layout Standard
+In November 2009 he became a junior researcher from industry, funded by
+ the European Union through the European Social Fund.
+ During this period he is holding working positions at Telekom Slovenije,
+ d.d., in research and development within the Radio Network Department, and
+ at the Jožef Stefan Institute, in the Computer Systems Department.
+\end_layout
+
+\begin_layout Standard
+In 2011 he attended and successfully completed the summer institute »Scientific
+ Computing in the Americas: the challenge of massive parallelism«, organized
+ by the Pan-American Advanced Studies Institute, Boston University.
+ The focus of the institute was on advanced topics of theory and programming
+ of massively parallel processors.
+\end_layout
+
+\begin_layout Standard
+In early 2012, he received an invitation to work as a visiting researcher
+ at the Nagasaki Advanced Computer Center (NACC) at the University of Nagasaki,
+ Japan.
+ His joint research work at NACC is to be completed by the end of 2012.
+\end_layout
+
+\begin_layout Standard
+His research interests include combinatorial and numerical optimization,
+ mostly applied to optimization problems in the area of 3G radio networks,
+ metaheuristic algorithms, parallel and GPU computing.
+ Over the last few years, he has presented his research work at several
+ international conferences and workshops in the areas of evolutionary computatio
+n, optimization and parallel computing.
+\end_layout
+
+\end_body
+\end_document
