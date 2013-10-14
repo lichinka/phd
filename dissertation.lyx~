@@ -692,17 +692,7 @@ ifthenelse{
 \backslash
 equal{#1}{S}}{
 \backslash
-cleardoublepage{} 
-\backslash
-chapter*{
-\backslash
-vspace{-2.3cm}
-\backslash
-hspace{-2.7cm}{
-\backslash
-Large{Symbols}}} 
-\backslash
-addcontentsline{toc}{chapter}{Symbols} }{}}}   
+bigskip}{}}}   
 \end_layout
 
 \end_inset
@@ -782,7 +772,7 @@ Large Abbreviations and symbols}
 
 
 \backslash
-printnomenclature[2.5cm]
+printnomenclature[3cm]
 \end_layout
 
 \begin_layout Plain Layout
@@ -978,7 +968,7 @@ filename "09-conclusion/09-conclusion.lyx"
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning,A-bibliography/A-bibliography"
-options "plain"
+options "plainnat"
 
 \end_inset
 

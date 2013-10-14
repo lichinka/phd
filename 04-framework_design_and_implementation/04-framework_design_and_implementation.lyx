@@ -132,7 +132,7 @@ description "Parallel radio-prediction tool."
 LatexCommand nomenclature
 prefix "A"
 symbol "GRASS"
-description "Geographic Resources Analysis Support System."
+description "Geographic resources analysis support system."
 
 \end_inset
 
@@ -166,7 +166,7 @@ The content of this chapter extends the research work published by the author
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Benedicic-A_GRASS_GIS_parallel_module_for_radio_propagation_predictions:2013"
+key "Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013"
 
 \end_inset
 
@@ -370,7 +370,7 @@ reference "sec:06-Radio_network_model"
 ), the performance estimation of a radio network is divided into two parts,
  i.e., the coverage prediction and the performance analysis.
  During the coverage prediction, which is the subject of this chapter, path-loss
- matrixes are created based on radio-propagation models, a network configuration
+ matrices are created based on radio-propagation models, a network configuration
 , and digital maps of the target geographical area.
  Hence, in addition to a reliable radio-propagation model, also the resolution
  of the digital map should be high enough.
@@ -1050,8 +1050,8 @@ key "Corre_Three_dimensional_urban_EM_wave_propagation_model_for_radio_network_p
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Cichon_Propagation.prediction.models:1995,Hata-Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980,Shabbir_Comparison_of_radio_propagation_models:2011,Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010"
+LatexCommand cite
+key "Begovic_Applicability_evaluation_of_Okumura_Ericsson_and_Winner_propagation_models_for_coverage_planning:2012,Cichon_Propagation.prediction.models:1995,Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1980,Shabbir_Comparison_of_radio_propagation_models:2011,Song_Evolved_cellular_network_planning_and_optimization_for_UMTS_and_LTE:2010"
 
 \end_inset
 
@@ -1190,15 +1190,6 @@ description "Height of the receiver antenna above ground level."
 \end_inset
 
 
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "S"
-symbol "$F$"
-description "Transmission frequency."
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1307,7 +1298,7 @@ status open
 \begin_layout Plain Layout
 \noindent
 Knife-edge diffraction occurs when a portion of the incident radiation reaches
- a well-defined obstacle such as a mountain or the edge of a building.
+ a well-defined obstacle, such as a mountain or the edge of a building.
 \end_layout
 
 \end_inset
@@ -1419,11 +1410,12 @@ where
 \begin_inset Formula $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
 \end_inset
 
- represents the clutter loss at the topography point with coordinates 
+ represents a look-up function for the clutter loss at the topography point
+ with coordinates 
 \begin_inset Formula $(x,y)$
 \end_inset
 
-, expressed in dB.
+, expressed in dB, which are given as input data.
 \end_layout
 
 \begin_layout Section
@@ -1559,8 +1551,8 @@ reference "sub:04-GPU_worker_implementation"
 
 \begin_layout Standard
 In order to make the text clearer and to differentiate between the programming
- paradigms used from here on, a POSIX thread will be refered to simply as
- a `thread' and a MPI process as a `process'.
+ paradigms used from here on, a POSIX thread will be referred to simply
+ as a `thread' and a MPI process as a `process'.
 \end_layout
 
 \begin_layout Subsection
@@ -1777,7 +1769,7 @@ reference "fig:04-Flow_diagram_serial_version"
  The transmission radius is defined around each transmitter in order to
  limit the radio-propagation calculation to a reasonable distance.
  For these points, the path loss for an isotropic source (or omni antenna)
- is estimated.
+ is calculated.
  This calculation is performed by applying the radio-propagation model,
  which was previously defined in Equation
 \begin_inset space ~
@@ -2667,7 +2659,7 @@ seconds using a serial implementation, the prediction for a mobile network
 \begin_inset Formula $O(M)$
 \end_inset
 
- will donimate the time complexity of the algorithm.
+ will dominate the time complexity of the algorithm.
 \end_layout
 
 \begin_layout Subsection
@@ -4048,7 +4040,7 @@ reference "fig:04-Processing_loop_in_master_process"
 , where the master process, before delivering the spatial subset and transmitter
 -configuration data, sends a message to the worker process, indicating that
  it is about to receive more work.
- This a priori meaningless message plays a key role in correctly supporting
+ This a-priori meaningless message plays a key role in correctly supporting
  the asynchronous process communication.
  Notice that the subset of spatial data that a worker process receives is
  directly related to the transmitter for which the prediction will be calculated.

@@ -772,7 +772,7 @@ Large Abbreviations and symbols}
 
 
 \backslash
-printnomenclature[2.5cm]
+printnomenclature[3cm]
 \end_layout
 
 \begin_layout Plain Layout

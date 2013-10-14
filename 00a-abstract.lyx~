@@ -166,6 +166,14 @@ The state-of-the-art metaheuristic algorithms, which compare a large number
 \end_layout
 
 \begin_layout Standard
+This thesis presents new approaches to increase the simulation and optimization
+ performance of radio networks.
+ These improvements allow the optimization of radio networks with metaheuristic
+ algorithms and their application to several optimization problems in radio
+ networks.
+\end_layout
+
+\begin_layout Standard
 The new unified framework developed in this thesis significantly outperforms
  the currently available solutions for snapshot-based, radio-network simulations.
  It brings together novel and state-of-the-art parallelization methods,
@@ -194,33 +202,36 @@ tion evaluation is only the first step towards a practical running-time
 \end_layout
 
 \begin_layout Standard
-Another way to take advantage of the achieved speed-up at the simulation
- stage is to tackle problems of greater complexity.
- This thesis identifies a new optimization problem in 3G radio networks
- that deals with soft-handover balancing of downlink and uplink areas.
+The proposed unified framework is tested on complex optimization problems,
+ namely (i) the problem of soft-handover balancing in third-generation systems,
+ and (ii) the parameter optimization of empirical radio-propagation models.
+\end_layout
+
+\begin_layout Standard
+Most mobile operators are aware of the soft-handover balancing problem,
+ but so far, and due to its complexity, it has not yet been tackled by any
+ moderm optimization approach.
+ This thesis identifies and formally defines the mentioned problem.
  Using a black-box approach, different metaheuristic algorithms are employed
  for solving the problem, the solutions of which show a substantial improvement
  of downlink and uplink balance.
 \end_layout
 
 \begin_layout Standard
-From the practical point of view, the automation of time-consuming, radio-planni
-ng tasks is yet another way to exploit the benefits of faster and more precise
- simulations.
- One such task is the configuration of the control parameters of empirical
- radio-propagation models.
- Another one is identified with the environmental adaptation of the signal
- losses due to clutter.
- Both tasks are automated, using the parallel framework as a central component
- of the system.
+Another use case of the presented methods is to optimize the parameters
+ of empirical radio-propagation models.
+ Until now, only one parameter set was used to adapt a radio-propagation
+ model to a complete radio network.
+ Using the proposed design automation, the model parameters can be adjusted
+ locally, e.g., for each cell or region in the network, and thus greatly improve
+ the accuracy of the calculated predictions.
 \end_layout
 
 \begin_layout Standard
-The utility and performance of the developed methods is assessed against
- an enterprise, commercial tool for radio-network planning.
- The objective of such comparison is to determine the performance and usage
- properties of the parallel framework in everyday planning, using real-world
- scenarios.
+On the one hand, the proposed approaches allow a more detailed analysis
+ of radio networks within a reasonable time.
+ On the other hand, the optimization of much larger radio networks is also
+ possible.
 \end_layout
 
 \begin_layout Standard

@@ -113,7 +113,7 @@ In this chapter, the challenge is to exploit PRATO for solving one the of
  The presented method, based on parallel autonomous agents, gives very good
  solutions to the problem in an acceptable amount of time.
  The parallel implementation takes full advantage of GPU hardware in order
- to achieve considerable speed-up.
+ to achieve considerable speedup.
  The analysis of the experimental results, considering six real-world, radio
  networks of different sizes, studies solution-quality and performance aspects.
 \end_layout
@@ -279,8 +279,8 @@ From the UMTS perspective, minimizing pilot-power usage leaves more power
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 
 \end_inset
 
@@ -303,8 +303,8 @@ key "Cunningham_Network.growth.theory.and.evidence:2010"
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Nawrocki_Understanding:2006"
+LatexCommand cite
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
@@ -371,7 +371,7 @@ There are several approaches in the literature that address the service-coverage
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Nawrocki_Understanding:2006,Siomina_Pilot.power.optimization:2004"
+key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006,Siomina_Pilot.power.optimization:2004"
 
 \end_inset
 
@@ -441,7 +441,7 @@ As for LTE networks, the service-coverage problem was addressed in
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Thampi-A_sparse_sampling_algorithm_for_self_optimisation_of_coverage_in_LTE_networks:2012"
+key "Thampi-A_sparse_sampling_algorithm_for_self_optimization_of_coverage_in_LTE:2012"
 
 \end_inset
 
@@ -477,7 +477,7 @@ Extending the representation of a radio-network model from
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "nawrocki2006understanding"
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
@@ -559,19 +559,19 @@ key "RadioNetworkPlanningAndOptimisationForUMTS,Laiho-Verification_of_WCDMA_netw
 
 \end_inset
 
-, the former one is implemented in the remaining of this work.
+, the former one is implemented in this work.
 \end_layout
 
 \begin_layout Standard
 For additional information regarding mathematical models for radio networks
- and signal propagations, see
+ and signal propagation, see
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "RadioNetworkPlanningAndOptimisationForUMTS,Nawrocki_Understanding:2006,Stuber-Principles_of_mobile_communication:2011"
+key "RadioNetworkPlanningAndOptimisationForUMTS,Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006,Stuber-Principles_of_mobile_communication:2011"
 
 \end_inset
 
@@ -712,7 +712,7 @@ description "Pilot-power setting of cell $c\\in C$."
 LatexCommand nomenclature
 prefix "S"
 symbol "$P_{c}$"
-description "Set of candidate CPICH power settings for cell $c\\in C$."
+description "Set of candidate pilot power settings for cell $c\\in C$."
 
 \end_inset
 
@@ -791,7 +791,7 @@ description "Signal-to-interference ratio from cell $c\\in C$ to mobile $m\\in M
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\gamma^{\\mathrm{cov}}$"
-description "Signal-to-interference ratio (SIR) coverage threshold."
+description "Signal-to-interference ratio coverage threshold."
 
 \end_inset
 
@@ -881,7 +881,7 @@ key "RadioNetworkPlanningAndOptimisationForUMTS"
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{cov}(c,m)$"
-description "Binary function to assert the coverage of a  mobile $m\\in M$ by from a cell $c\\in C$."
+description "Binary function to assert the coverage of a mobile $m\\in M$ from a cell $c\\in C$."
 
 \end_inset
 
@@ -916,7 +916,7 @@ description "Subset of cells, $C_m\\subset C$, that cover a mobile $m\\in M$."
 \begin_inset Formula $\mathrm{SINR}(c,m)$
 \end_inset
 
- is refered to as the best server, and denoted as 
+ is referred to as the best server, and denoted as 
 \begin_inset Formula $c_{m}^{*}$
 \end_inset
 
@@ -957,7 +957,7 @@ reference "eq:06-Signal_to_interference_ratio"
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Chen-Yuan_CPICH.optimization:2008,Siomina:Minimum.pilot.power.for.service.coverage"
+key "chen2008automated,Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 
@@ -969,8 +969,8 @@ key "Chen-Yuan_CPICH.optimization:2008,Siomina:Minimum.pilot.power.for.service.c
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 
 \end_inset
 
@@ -1303,7 +1303,7 @@ The moving process during the optimization is strictly random.
 \end_layout
 
 \begin_layout Standard
-Because the behaviour of the agents is independent between each other, a
+Because the behavior of the agents is independent between each other, a
  parallel implementation is fairly straight-forward to achieve.
  Figure
 \begin_inset space ~
@@ -1627,7 +1627,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Pseudo-code representing the behaviour of an agent.
+Pseudo-code representing the behavior of an agent.
 \shape italic
 
 \begin_inset CommandInset label
@@ -2185,7 +2185,7 @@ The values
 
 .
  On the one hand, lowering the pilot power of a cell decreases the interference
- it creates within its coverage area and those of their neighbours.
+ it creates within its coverage area and those of their neighbors.
  Since the 
 \begin_inset Formula $\mathrm{SINR}(c,m)$
 \end_inset
@@ -2430,16 +2430,24 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 
 \begin_layout Standard
 Network configurations, that represent what could be an initial-network
- setup by common planning standards 
+ setup by common-planning standards
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Holma_WCDMA.for.UMTS:2005"
+LatexCommand cite
+key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 
 \end_inset
 
 , were produced using the attenuation-based approach.
  Such configurations can be easily calculated by a network planner.
- Table 
+ Table
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:06-Test_network_sizes"
@@ -4597,6 +4605,7 @@ e solutions and no significant solution enhancement towards the end, can
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -4621,7 +4630,7 @@ centering
 \begin_inset Graphics
 	filename img/convergence_first.eps
 	lyxscale 30
-	width 75text%
+	width 70text%
 
 \end_inset
 
@@ -4661,6 +4670,7 @@ name "fig:06-Convergence_Net1"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -4685,7 +4695,7 @@ centering
 \begin_inset Graphics
 	filename img/convergence_second.eps
 	lyxscale 30
-	width 75text%
+	width 70text%
 
 \end_inset
 
@@ -4725,6 +4735,7 @@ name "fig:06-Convergence_Net2"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -4749,7 +4760,7 @@ centering
 \begin_inset Graphics
 	filename img/convergence_third.eps
 	lyxscale 30
-	width 75text%
+	width 70text%
 
 \end_inset
 
@@ -4847,8 +4858,40 @@ reference "tab:06-Performance_analysis"
  GPU-MPI implementation that consists of objective-function evaluation on
  GPU and parallel agents over MPI, and the GPU-GPU implementation that consists
  of objective-function evaluation and parallel agents on the same GPU.
- The CPU-MPI implementation is the basis for the speed-up calculation of
+ The CPU-MPI implementation is the basis for the speedup calculation of
  the other two implementations.
+\end_layout
+
+\begin_layout Standard
+The function evaluation on the GPU, that communicates with the agents over
+ MPI, provides the second measured setup.
+ The evaluator implementation takes advantage of shared memory for thread
+ collaboration within a thread block and texture memory for constant elements,
+ as is it was explained in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:04-GPU_worker_implementation"
+
+\end_inset
+
+.
+ Still, the speedup is considerable but improvable, since numerous data
+ transfers between CPU and GPU are needed for the agents to access optimization-
+related information.
+ The last result set presents measurements for the complete GPU implementation,
+ including objective-function evaluation and agents on the same device.
+ The improved speedup delivered by this combination highlights the impact
+ that CPU-to-GPU memory transfers have on the overall system performance.
+ This fact is supported by the second and third measured setups, the speedups
+ of which exhibit, on average, a four-fold improvement.
+ It is also interesting to note how the speedup gain increases with the
+ problem-instance size.
+ This fact confirms that larger problem instances have a greater benefit
+ from a parallel implementation in terms of computational time.
 \end_layout
 
 \begin_layout Standard
@@ -4861,8 +4904,8 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Wall-clock times (in seconds) and speed-up factors for the different implementat
-ions of the objective-function evaluation and the parallel agents, as measured
+Wall-clock times (in seconds) and speedup factors for the different implementati
+ons of the objective-function evaluation and the parallel agents, as measured
  during the experimentation of the service-coverage problem.
 \begin_inset CommandInset label
 LatexCommand label
@@ -5102,7 +5145,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.70
+4.71
 \end_layout
 
 \end_inset
@@ -5129,7 +5172,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.24
+19.93
 \end_layout
 
 \end_inset
@@ -5180,7 +5223,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.54
+2.55
 \end_layout
 
 \end_inset
@@ -5207,7 +5250,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.45
+6.24
 \end_layout
 
 \end_inset
@@ -5285,7 +5328,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.16
+24.02
 \end_layout
 
 \end_inset
@@ -5303,38 +5346,6 @@ Net
 
 \end_layout
 
-\begin_layout Standard
-The function evaluation on the GPU, that communicates with the agents over
- MPI, provides the second measured setup.
- The evaluator implementation takes advantage of shared memory for thread
- collaboration within a thread block and texture memory for constant elements,
- as is it was explained in Section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:04-GPU_worker_implementation"
-
-\end_inset
-
-.
- Still, the speed-up is considerable but improvable, since numerous data
- transfers between CPU and GPU are needed for the agents to access optimization-
-related information.
- The last result set presents measurements for the complete GPU implementation,
- including objective-function evaluation and agents on the same device.
- The improved speed-up delivered by this combination highlights the impact
- that CPU-to-GPU memory transfers have on the overall system performance.
- This fact is supported by the second and third measured setups, the speedups
- of which exhibit, on average, a four-fold improvement.
- It is also interesting to note how the speedup gain increases with the
- problem-instance size.
- This fact confirms that larger problem instances have a greater benefit
- in terms of computational time.
-\end_layout
-
 \begin_layout Section
 Summary
 \end_layout
@@ -5347,8 +5358,8 @@ This chapter presented a novel optimization approach for solving the well-known
  The newly introduced parallel-agent approach was successfully tested in
  six networks that represent real-world scenarios.
  The experimental results show that the parallel-agent approach is able
- to find better solutions than some elementary heuristics, like the presented
- attenuation-based approach.
+ to find better solutions than some heuristics, like the presented attenuation-b
+ased approach.
  Moreover, the algorithm successfully tackled larger networks, thus overcoming
  the obstacles of other state-of-the-art optimization methods regarding
  problem-instance size
@@ -5373,7 +5384,7 @@ Compared to a different optimization approach in the literature
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Siomina-Minimum_pilot_power_for_service_coverage:2007"
+key "Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 

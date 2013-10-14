@@ -149,10 +149,10 @@ footnotesize Povzetek}
 \noindent
 
 \lang slovene
-Zahtevnost oblikovanja radijskih omrežij se je povečala skupaj s pojavitvijo
- sodobnih standardov.
- Zato je vloga računalnika, kot pomožno orodje za hitrejši izračun natančnih
- rezultatov, vse bolj pomembna.
+Zahtevnost načrtovanja radijskih omrežij se je povečala z večanjem števila
+ celic v sodobnih celičnih standardov.
+ Zato je vloga računalnika, kot pomožno orodje za izvajanje hitrejših in
+ natančnih izračunov, vse bolj pomembna.
  Pričujoča disertacija predstavlja nove metode za načrtovanje in samodejno
  optimizacijo radijskih omrežij.
 \end_layout
@@ -160,12 +160,15 @@ Zahtevnost oblikovanja radijskih omrežij se je povečala skupaj s pojavitvijo
 \begin_layout Standard
 
 \lang slovene
-Delovanje metaheurističnih algoritmov temelji na velikem številu simulaciji
- modelov za pridobivanje ocene o kakovosti rešitev, ki usmerjajo raziskovanje
- v iskalnem prostoru.
- Vendar trenutne rešitve modeliranja radijskih omrežij, ki temeljijo na
- simulacijah, imajo večje pomanjkljivosti v zvezi s ponujeno fleksibilnostjo
- in z računskim časom izvajanja.
+Klasični pristopi za optimizacijo in načrtovanje sistemov, v velikih sistemih
+ odpovedo, zato sodobni pristopi pri optimizaciji velikih sistemov uporabljajo
+ metaheuristične algoritme.
+ Delovanje metaheurističnih algoritmov temelji na velikem številu poizkusov
+ in oceni kakovosti rešitev, ter usmerjenjem raziskovanja algoritma v iskalnem
+ prostoru.
+ Poizkusi v radijskih omrežjih se izvajajo z modeliranjem radijskih omrežji
+ in simulacijami, vendar imajo več pomanjkljivosti v zvezi s ponujeno fleksibiln
+ostjo in s časom izvajanja simulacije.
  Velikost omrežij, ki jih je mogoče analizirati na izvedljivem času, je
  običajno zelo omejena.
 \end_layout
@@ -173,13 +176,21 @@ Delovanje metaheurističnih algoritmov temelji na velikem številu simulaciji
 \begin_layout Standard
 
 \lang slovene
-Novo ogrodje, ki ga to delo predstavlja, precej prekaša trenutno izboljšuje
- stanje razpoložljivih rešitev za izvajanje simulacij radijskih omrežij.
- Ogrodje omogoči podrobno analizo velikih omrežij v sprejemljivem času s
- pomočjo novih in trenutno veljavnih metod za vzporedno izvajanje algoritmov.
- Značilnosti vgrajenih vzporednih metod so na voljo večjedrnim procesorjem,
- kot tudi gruči preko omrežja povezanih računalnikov z napravami GPU.
- Povečana hitrost izvajanje omogoča povečano stopnjo podrobnosti simulacij,
+Pričujoča disertacija zato predstavlja nove pristope za povečanje hitrosti
+ optimizacije radijskih omrežji z metaheurističnimi algoritmi in njihovo
+ uporabo v konkretnih optimizacijskih problemih radijskih omrežji.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Prvi korak, ki ga predlaga disertacija, zajema pohitritev izvajanja poizkusov
+ oz.
+ simulacij z metodami vzporednega računanja.
+ Disertacija podaja in primerja metode vzporednega računanja tako za izvajaje
+ simulacij na večjedrnih procesorjih kot na gruči računalnikov z grafičnimi
+ procesorji, ki so povezani preko lokalnega omrežja.
+ Povečana hitrost izvajanja omogoča povečano stopnjo podrobnosti simulacij,
  kar posledično izboljšuje natančnost rezultatov.
 \end_layout
 
@@ -192,48 +203,56 @@ ju računskega časa, potrebnega za evaluacijo cenovne funkcije in posledično
  Poleg tega je potrebno tudi zmanjšati čas izvajanja optimizacijskih algoritmov,
  vendar ne na račun kakovosti rezultatov.
  Doktorska disertacija v ta namen predstavlja optimizacijski algoritem,
- katerega delovanje je prilagojen za reševanje enega klasičnih optimizacijskih
- problemov v radijskih omrežjih.
- Novi algoritem, ki temelji na tehnikah, uporabljenih v celičnih avtomatih
- ter metaheurističnih algoritmih, doseže izboljšane rezultate z vidika velikosti
- preučenih primerkov, kakor tudi z vidika kakovosti rešitev.
+ katerega delovanje je prilagojeno reševanju klasičnih optimizacijskih problemov
+ v radijskih omrežjih.
+ Novi algoritem, ki temelji na tehnikah uporabljenih v celičnih avtomatih
+ ter metaheurističnih algoritmih, doseže boljše rezultate z vidika velikosti
+ preučenih primerkov, kot tudi z vidika kakovosti rešitev.
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Drugi način izkoriščenja dosežene pospešitve za izvajanje simulacij je reševanje
-, s pomočjo optimizacije, bolj kompleksnih problemov.
- Pričujoča disertacija formalno opredeljuje nov optimizacijski problem na
- področju radijskih omrežij 3G.
- Optimizacijski problem se ukvarja z ravnovesjem področij mehkega izročanja
- (angl.
- soft handover) v povezavah navzgor in navzdol.
- Dosežene rešitve problema po principu črne škatle (angl.
- black box) z uporabo različnih metaheurističnih algoritmov kažejo precejšnje
- izboljšane razporeditve področij mehkega izročanja.
+Predlagani pristopi so preizkušeni na kompleksnih optimizacijskih problemih
+ in sicer (i) problem optimizacije ravnovesja povezave navzdol-navzgor pri
+ mehkem izročanju v sistemih tretje generacije in (ii) optimizacija parametrov
+ empiričnih modelov razširjanja radijskega valovanja.
+ 
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Avtomatizacija zamudnih opravil načrtovanja radijskih omrežij je drug način,
- kako izkoristiti prednosti hitrejših in natančnejših simulacij.
- Konfiguracija krmilnih parametrov za empirične modele razširjanja signalov
- je takšno opravilo.
- Drugo pa predstavlja samodejno prilagajanje izgube signalov zaradi terena.
- Avtomatizacija obeh opravil je dosežena z uporabo ogrodja kot osrednji
- element sistema.
+Problem optimizacije ravnovesja povezave navzdol-navzgor pri mehkem izročanju
+ v sistemih tretje generacije je problem, ki se ga zaveda večina mobilnih
+ operaterjev, vendar do sedaj zaradi svoje kompleksnosti še ni bil rešen.
+ Pričujoča disertacija formalno opredeljuje ta optimizacijski problem ter
+ prikaže rešitev problema po principu črne škatle (angl.
+ black box) z uporabo različnih metaheuristicnih algoritmov.
+ Rezultati uporabe predlaganih metod pokažejo precejšnje izboljšane razporeditve
+ področij mehkega izročanja.
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Preverjanje uporabnosti in učinkovitosti razvitih metod z uporabo komercialnega
- orodja za načrtovanje radijskih omrežij.
- Cilj primerjave je določiti zmogljivosti in lastnosti ogrodja vzporednega
- izvajanja v vsakdanjem načrtovanju radijskih omrežij, zlasti v realnih
- scenarijih.
+Drugi primer uporabe metod je optimizacija parametrov empiričnih modelov
+ razširjanja radijskega valovanja.
+ Do sedaj, so se parametri empiričnih modelov razširjanja radijskega valovanja
+ uporabljali za celo radijsko omrežje.
+ Z uporabo predlagano avtomatizacijo načrtovanja, pa lahko parametre empiričnega
+ radijskega kanala lokalno prilagodimo, npr.
+ za vsako celico ali regijo v omrežju, s tem pa močno izboljšamo natančnost
+ izračunane predikcije.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Predlagani pristopi na eni strani omogočajo bolj podrobno analizo omrežij
+ v sprejemljivem času, po drugi strani pa z njimi lahko optimiziramo večja
+ radijska omrežja.
+ 
 \end_layout
 
 \end_body

@@ -111,7 +111,7 @@ Another important factor to further validate the adoption of the presented
  to improve the performance of radio-coverage predictions at the cost of
  precision loss.
  The scope of this chapter is therefore to establish that the accuracy of
- the radio-propagations predictions of PRATO, as described previously in
+ the radio-propagation predictions of PRATO, as described previously in
  Chapter
 \begin_inset space ~
 \end_inset
@@ -192,9 +192,9 @@ For a mobile operator, the utilization of a radio-network planning tool
  has clear economical and technical benefits.
  As it has been pointed out throughout the previous chapters, the usage
  of accurate planning tools minimizes the operator's costs and effort, and
- also accellerates particular processes.
- In this sense, the important role a radio-planning tool has during the
- optimization process of a network was also presented.
+ also automates manual processes.
+ In this sense, the important role that a radio-planning tool has during
+ the optimization process of a network was also presented.
  
 \end_layout
 
@@ -229,7 +229,19 @@ e radio-planning tool, the design of which is tailored to be used in industrial
 The second objective of this chapter is related to the the high-performance
  characteristics of PRATO.
  To this end, an insight to the computational-time performance of PRATO,
- compared to the commercial radio-planning tool, is also given.
+ compared to the commercial radio-planning tool
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Due to the currently applicable business-secrecy policy of Telekom Slovenije,
+ d.d., the author is not able to reveal any details about the commercial tool
+ that was used during experimentation.
+\end_layout
+
+\end_inset
+
+, is also given.
 \end_layout
 
 \begin_layout Section
@@ -252,15 +264,15 @@ Field measurements are used as the reference for analyzing the accuracy
 \begin_inset Formula $_{11}$
 \end_inset
 
- denotes a GSM network that contains 835 BSs with 1246 cells, Net
+ denotes a GSM network that contains 830 BSs with 1240 cells, Net
 \begin_inset Formula $_{12}$
 \end_inset
 
- is an UMTS network with 790 BSs and 2051 cells, and Net
+ is an UMTS network with 700 BSs and 2000 cells, and Net
 \begin_inset Formula $_{13}$
 \end_inset
 
- is a LTE network featuring 120 BSs with 351 cells.
+ is a LTE network featuring 120 BSs with 350 cells.
  The selected networks extend throughout diverse geographical regions, thus
  covering different terrains and representing various environmental characterist
 ics, including urban, suburban and rural.
@@ -279,8 +291,10 @@ reference "sub:05-Field_measurements"
 \end_inset
 
 , the average-received power was measured on the field for each network.
- The measurement results were captured with the air-interface measurement
+ The field measurements were captured with the air-interface measurement
  tool for the corresponding network technology.
+ The captured measurements are lower-bounded by the receiver sensitivity
+ of a given technology.
 \end_layout
 
 \begin_layout Standard
@@ -317,8 +331,6 @@ reference "sub:04-Radio_propagation_model"
 \end_inset
 
 ).
- Both propagation models were tuned, using the gathered field measurements,
- in order to match the local environmental conditions of each tested network.
  Additionally, the coverage-prediction parameters were equally set in both
  tools (see Table
 \begin_inset space ~
@@ -460,7 +472,7 @@ frequency
 \begin_inset space ~
 \end_inset
 
-Mhz
+MHz
 \end_layout
 
 \end_inset
@@ -475,7 +487,7 @@ Mhz
 \begin_inset space ~
 \end_inset
 
-Mhz
+MHz
 \end_layout
 
 \end_inset
@@ -490,7 +502,7 @@ Mhz
 \begin_inset space ~
 \end_inset
 
-Mhz
+MHz
 \end_layout
 
 \end_inset
@@ -647,8 +659,56 @@ In this section, the performance of both tools is presented, the analysis
  by comparing the simulation results and the field measurements.
  Its performance was investigated for different network types (GSM, UMTS
  and LTE) and terrains (hilly, almost flat rural, urban, and suburban).
- In the following, the evaluation for different frequency bands is presented
- first, followed by an analysis for the different terrain types.
+\end_layout
+
+\begin_layout Standard
+The accuracy of PRATO can be verified from Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:08-Received_signal_power-GSM"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:08-Received_signal_power-UMTS"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:08-Received_signal_power-LTE"
+
+\end_inset
+
+, the graphs of which present the simulation results of both tools for Net
+\begin_inset Formula $_{11}$
+\end_inset
+
+, Net
+\begin_inset Formula $_{12}$
+\end_inset
+
+ and Net
+\begin_inset Formula $_{13}$
+\end_inset
+
+, respectively.
+ The graphs labeled as (a) show the analysis comparison between PRATO and
+ the field measurements, whereas the ones labeled as (b) show the same analysis
+ for the commercial tool.
+ The field measurements used for this analysis are selected according to
+ the spatial arragement of the given coverage prediction.
 \end_layout
 
 \begin_layout Standard
@@ -835,7 +895,7 @@ name "fig:08-Received_signal_power-UMTS"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -925,55 +985,6 @@ name "fig:08-Received_signal_power-LTE"
 \end_layout
 
 \begin_layout Standard
-The accuracy of PRATO can be verified from Figures
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:08-Received_signal_power-GSM"
-
-\end_inset
-
-, 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:08-Received_signal_power-UMTS"
-
-\end_inset
-
- and
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:08-Received_signal_power-LTE"
-
-\end_inset
-
-, the graphs of which present the simulation results from both tools for
- the Net
-\begin_inset Formula $_{11}$
-\end_inset
-
-, Net
-\begin_inset Formula $_{12}$
-\end_inset
-
- and Net
-\begin_inset Formula $_{13}$
-\end_inset
-
-, respectively.
- The graphs labeled as (a) show the analysis comparison between PRATO and
- the field measurements, whereas the ones labeled as (b) show the same analysis
- for the commercial tool.
-\end_layout
-
-\begin_layout Standard
 Figure
 \begin_inset space ~
 \end_inset
@@ -993,8 +1004,8 @@ reference "fig:08-Received_signal_power-GSM"
 \begin_inset Formula $_{11}$
 \end_inset
 
- (GSM), shows that the prediction results match the field measurements significa
-ntly well.
+ (GSM), shows that the prediction results match the field measurements rather
+ well.
  A similar result arragement can be observed in Figure
 \begin_inset space ~
 \end_inset
@@ -1062,36 +1073,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/gsm_prato_diff.eps
+	filename img/gsm_diff.eps
 	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename img/gsm_tcpu_diff.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-hspace{0.4cm}(a)
-\backslash
-hspace{6.7cm}(b)
-\end_layout
+	width 60text%
 
 \end_inset
 
@@ -1107,7 +1091,7 @@ Probability distribution function for Net
 \end_inset
 
  (GSM) of the difference between the field measurements and the simulation
- results of: (a) PRATO, and (b) the commercial tool.
+ results of PRATO, and the commercial tool.
  
 \begin_inset CommandInset label
 LatexCommand label
@@ -1153,36 +1137,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/umts_prato_diff.eps
+	filename img/umts_diff.eps
 	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename img/umts_tcpu_diff.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-hspace{0.4cm}(a)
-\backslash
-hspace{6.7cm}(b)
-\end_layout
+	width 60text%
 
 \end_inset
 
@@ -1198,7 +1155,7 @@ Probability distribution function for Net
 \end_inset
 
  (UMTS) of the difference between the field measurements and the simulation
- results of: (a) PRATO, and (b) the commercial tool.
+ results of PRATO, and the commercial tool.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:08-Prediction_difference-UMTS"
@@ -1243,36 +1200,9 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/lte_prato_diff.eps
+	filename img/lte_diff.eps
 	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename img/lte_tcpu_diff.eps
-	lyxscale 70
-	width 47text%
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\backslash
-hspace{0.4cm}(a)
-\backslash
-hspace{6.7cm}(b)
-\end_layout
+	width 60text%
 
 \end_inset
 
@@ -1288,7 +1218,7 @@ Probability distribution function for Net
 \end_inset
 
  (LTE) of the difference between the field measurements and the simulation
- results of: (a) PRATO, and (b) the commercial tool.
+ results of PRATO, and the commercial tool.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:08-Prediction_difference-LTE"
@@ -1378,6 +1308,10 @@ reference "tab:08-PDF_properties"
 
  lists the mean and standard deviation of the PDFs for each network and
  tool tested, the values of which are expressed in dB.
+ It is important to note that the parameter set used for both tools intentionall
+y generate pessimistic results in terms of coverage prediction.
+ This is clearly observed from the mean-difference values of all three test
+ cases.
 \end_layout
 
 \begin_layout Standard
@@ -1523,7 +1457,7 @@ Commercial tool
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1638,7 +1572,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
--0.61
+8.71
 \end_layout
 
 \end_inset
@@ -1665,7 +1599,7 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-11.87
+11.23
 \end_layout
 
 \end_inset
@@ -1779,8 +1713,8 @@ reference "fig:08-Prediction_difference-LTE"
  which show a slightly greater deviation with respect to the measurements.
  Therefore, it can be concluded that the prediction results of PRATO are
  comparable with the results of the commercial tool for the three test networks.
- Moreover, the presented analysis also confirms that the result agreement
- is independent of the frequency band used, since each test network operates
+ Moreover, the presented analysis also confirms that the calculated results
+ are independent of the frequency band used, since each test network operates
  in a different frequency.
 \end_layout
 
@@ -1789,7 +1723,7 @@ Additionally, each of the test networks extended over different terrain
  types and environments, e.g., urban and suburban areas.
  Since the curves of the presented charts show similar profiles for the
  difference between the measurements and simulations for both tools, the
- applicability of PRATO for arbitrary terrain types can also be confirmed.
+ applicability of PRATO for arbitrary terrain types can also be expected.
 \end_layout
 
 \begin_layout Standard
@@ -1798,25 +1732,9 @@ Notice also that PRATO generated similar results as the commercial tool
  terrain type.
  The predicted values are also comparable for different distances between
  the BSs and UEs.
- Moreover, a slight improvement can be observed in the prediction values
- of PRATO, because they better resemble the profile depicted by the field
- measurements.
- This behavior can be attributed to the lack of parameter adaptation per
- cell in the commercial tool, whereas in PRATO this functionality is available
- and was used.
- These results further confirm the advantage of the parameter-tuning approach,
- which was presented in Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:05-Framework_parameter_tuning"
-
-\end_inset
-
-.
+ Moreover, a slight improvement can be observed in some of the prediction
+ values of PRATO, because they better resemble the profile shown by the
+ field measurements.
 \end_layout
 
 \begin_layout Subsection*
@@ -1824,9 +1742,9 @@ Computational-time performance
 \end_layout
 
 \begin_layout Standard
-In the following, the computational-time performance of both tools in analyzed.
+In the following, the computational-time performance of both tools is analyzed.
  The analysis focused on the required processing times of both tools on
- the same system, the hardware of which consisted in a 4-core Intel i7 2.67
+ the same system, the hardware of which consisted of a 4-core Intel i7 2.67
 \begin_inset space ~
 \end_inset
 
@@ -1946,7 +1864,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Simulation-processing times of Net
+Simulation-processing times and speedup factors of Net
 \begin_inset Formula $_{11}$
 \end_inset
 
@@ -2009,7 +1927,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Simulation-processing times of Net
+Simulation-processing times and speedup factors of Net
 \begin_inset Formula $_{12}$
 \end_inset
 
@@ -2072,7 +1990,7 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Simulation-processing times of Net
+Simulation-processing times and speedup factors of Net
 \begin_inset Formula $_{13}$
 \end_inset
 
@@ -2117,7 +2035,7 @@ GB of DRAM.
 The benefits of the parallel implementation of PRATO is clear in all three
  cases.
  Moreover, the multi-GPU support increases the running-time performance
- even further, achieving speedup factors of 19, 22, and 10, for Net
+ even further, achieving speedup factors of 18.96, 22.32, and 9.95, for Net
 \begin_inset Formula $_{11}$
 \end_inset
 

@@ -163,7 +163,7 @@ reference "sec:07-Motivation"
 
 \end_inset
 
- decribes the motivation behind the SHO-balancing problem, whereas Section
+ describes the motivation behind the SHO-balancing problem, whereas Section
 \begin_inset space ~
 \end_inset
 
@@ -410,7 +410,8 @@ reference "fig:07-Problem_illustration"
 \end_inset
 
 2 not being part of the active set.
- Such situations appear when the UL coverage is larger than the DL coverage.
+ Such situations appear when the uplink coverage is larger than the downlink
+ coverage.
  Interestingly enough, this seems to be an exceptional case, as Holma and
  Toskala write in
 \begin_inset space ~
@@ -497,7 +498,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "nawrocki2006understanding"
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
@@ -634,7 +635,7 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications,Siomina_Pilo
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CPICHPowerOptimisationByMeansOfSimulatedAnnealingInAnUTRAFDDEnvironment,RadioNetworkPlanningAndOptimisationForUMTS,UMTSRadioNetworkPlanning_OptimizationAndQoSManagementForPracticalEngineeringTasks,siomina2008minimum"
+key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CPICHPowerOptimisationByMeansOfSimulatedAnnealingInAnUTRAFDDEnvironment,RadioNetworkPlanningAndOptimisationForUMTS,UMTSRadioNetworkPlanning_OptimizationAndQoSManagementForPracticalEngineeringTasks,Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 
@@ -746,10 +747,14 @@ name "sub:07-SHO_areas"
 \begin_layout Standard
 To obtain a realistic outline of the areas where an UE may potentially maintain
  connections to more than one cell, a static version of the active set,
- as defined in 
+ as defined in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "nawrocki2006understanding"
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
@@ -812,18 +817,6 @@ SHO_{m}^{\downarrow} & = & \left\{ c\,\vert\, l_{c^{*}m}^{\downarrow}p_{c^{*}}-l
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "S"
-symbol "$SHO_{m}^{\\downarrow}$"
-description "Cell set to which a mobile may maintain concurrent downlink connections, i.e. downlink SHO."
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \noindent
 where 
 \begin_inset Formula $c$
@@ -855,7 +848,7 @@ where
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "nawrocki2006understanding"
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
@@ -873,18 +866,6 @@ Additionally, in the uplink, the set of cells to which an UE can potentially
 \begin{equation}
 SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
 \end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "S"
-symbol "$SHO_{m}^{\\uparrow}$"
-description "Cell set to which a mobile may maintain concurrent uplink connections, i.e. uplink SHO."
 
 \end_inset
 
@@ -942,7 +923,7 @@ dB
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "nawrocki2006understanding"
+key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
@@ -1634,7 +1615,7 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Standard
-At the begging, a cell, 
+At the beginning, a cell, 
 \begin_inset Formula $c'$
 \end_inset
 
@@ -1852,7 +1833,7 @@ Number of cells
 \begin_inset Text
 
 \begin_layout Plain Layout
-Coverage threshold (RSCP)
+Coverage threshold
 \end_layout
 
 \end_inset
@@ -2155,7 +2136,7 @@ The parameters controlling the behavior of the DE algorithm were set as
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $G_{max}=1000$
+\begin_inset Formula $g_{\mathrm{max}}=1000$
 \end_inset
 
 , the maximum number of generations for the algorithm to run;
@@ -2226,7 +2207,7 @@ There are only two parameters controlling SA, namely:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $t_{initial}=$
+\begin_inset Formula $t_{\mathrm{initial}}=$
 \end_inset
 
 125, the initial temperature; and
@@ -2269,37 +2250,6 @@ nction evaluation was implemented using OpenCL and executed on a nVidia
  GeForce GTX 260.
  This individual change exhibited more than 15-fold, execution-time speedup,
  when compared to the original CPU-only version.
-\end_layout
-
-\begin_layout Subsection
-Results 
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:07-Results"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In this section, the performance of the selected algorithms is presented.
- The analysis includes aspects related to solution quality and convergence
- speed.
- All experimental results were obtained after 30 independent runs, each
- of them limited to a maximum of 100,000 evaluations.
- The gathered results are shown in Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Algorithm_performance"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -2559,6 +2509,38 @@ SA
 
 \end_layout
 
+\begin_layout Subsection
+Results 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:07-Results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+In this section, the performance of the selected algorithms is presented.
+ The analysis includes aspects related to solution quality and convergence
+ speed.
+ All experimental results were obtained after 30 independent runs, each
+ of them limited to a maximum of 100,000 evaluations.
+ The gathered results are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Algorithm_performance"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 It may be observed that DE reached the lowest objective-function value,
  closely followed by DASA.
@@ -2646,7 +2628,7 @@ key "korosec2010_DASA"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -2852,8 +2834,8 @@ reference "fig:07-Algorithm_convergence-SA"
 \end_inset
 
  give a clearer notion about the way these algorithms explore the search
- space of the SHO-balancing problem, and the variatons occurred during the
- optimization process.
+ space of the SHO-balancing problem, and the variations occurred during
+ the optimization process.
 \end_layout
 
 \begin_layout Standard
@@ -2864,6 +2846,75 @@ The simulation-running times have been intentionally omitted, since the
 
 \begin_layout Subsection
 Performance analysis
+\end_layout
+
+\begin_layout Standard
+Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Optimization_result_analysis"
+
+\end_inset
+
+ presents the analysis of the obtained results from the network point of
+ view.
+ After 30 independent runs of each of the three algorithms, the best results
+ obtained where evaluated for the improvement and the decline of each of
+ the measured network-performance aspects.
+ The results are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Optimization_result_analysis"
+
+\end_inset
+
+, where '+' indicates improvement and '-' indicates a decline of a given
+ criteria.
+ Overall, it may be observed that the measured criteria have been significantly
+ improved.
+ The only exception is the measure for downlink SHO, without SHO in the
+ uplink (labeled as `
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+SHO
+\begin_inset Formula $^{\downarrow}$
+\end_inset
+
+, no SHO
+\begin_inset Formula $^{\uparrow}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+'), which shows an expected decline, since it is the optimization aspect
+ with the lowest penalty-factor value.
 \end_layout
 
 \begin_layout Standard
@@ -3659,75 +3710,6 @@ Avg.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Optimization_result_analysis"
-
-\end_inset
-
- presents the analysis of the obtained results from the network point of
- view.
- After 30 independent runs of each of the three algorithms, the best results
- obtained where evaluated for the improvement and the decline of each of
- the measured network-performance aspects.
- The results are shown in Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Optimization_result_analysis"
-
-\end_inset
-
-, where '+' indicates improvement and '-' indicates a decline of a given
- criteria.
- Overall, it may be observed that the measured criteria have been significantly
- improved.
- The only exception is the measure for downlink SHO, without SHO in the
- uplink (labeled as `
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-SHO
-\begin_inset Formula $^{\downarrow}$
-\end_inset
-
-, no SHO
-\begin_inset Formula $^{\uparrow}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-'), which shows an expected decline, since it is the optimization aspect
- with the lowest penalty-factor value.
 \end_layout
 
 \begin_layout Standard

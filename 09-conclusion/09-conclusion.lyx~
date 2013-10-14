@@ -109,7 +109,8 @@ programming approach and some state-of-the-art methods.
  The achieved performance improvement excels in radio-network optimization
  environments.
  Further research in this field will include abstracting the introduced
- MWD principle into a multi-purpose parallel framework such as Charm++
+ master-worker-database principle into a multi-purpose parallel framework
+ such as Charm++
 \begin_inset space ~
 \end_inset
 
@@ -146,9 +147,8 @@ When applying automatic network optimization, a fast and accurate performance
  framework compared to the computational time of the enterprise software.
  It is important to note that these results also apply for an application
  in everyday network planning.
- However, to ultimate validate the complete array of radio-planning activities
- the framework can handle requires some further research, which has already
- started.
+ However, to validate the complete array of radio-planning activities the
+ framework can handle will require further research.
 \end_layout
 
 \begin_layout Standard
@@ -167,9 +167,9 @@ tion evaluation is only the first step towards a practical running-time
 \end_layout
 
 \begin_layout Standard
-The new optimization problem for 3G radio networks indentified in this thesis
+The new optimization problem for 3G radio networks identified in this thesis
  deals with SHO balancing of downlink and uplink areas.
- The problem was tacled by three different metaheuristic algorithms, the
+ The problem was tackled by three different metaheuristic algorithms, the
  solutions of which show a substantial improvement of downlink and uplink
  balance.
  A challenge for future work is to evaluate this optimization problem in
@@ -193,14 +193,14 @@ tary testing of the framework as a coverage-planning tool is currently being
 \end_layout
 
 \begin_layout Standard
-PRATO, the radio-planning framework presented is this thesis, is free and
+PRATO, the radio-planning framework presented in this thesis, is free and
  open-source software.
  For this reason, it can be readily modified and extended to support, for
  example, other propagation models and post-processing algorithms.
  This characteristic provides it with a clear advantage when compared to
  commercial and closed-source tools.
  The source code is available for download from the author's home page,
- http://csd.ijs.si/benedicic/.
+ http://cs.ijs.si/benedicic/.
 \end_layout
 
 \begin_layout Standard
@@ -212,7 +212,7 @@ The constantly improving performance of computer hardware might allow an
  This is especially important due to different existing and emerging mobile
  technologies.
  Indeed, the co-existence of multiple technologies will motivate an increasing
- interest about the combined analysis and optimization of differenttechnologies
+ interest about the combined analysis and optimization of different technologies
  and their mutual dependency.
 \end_layout
 
@@ -227,8 +227,8 @@ The work in this thesis has led to the following original contributions
 
 \begin_layout Enumerate
 Design and development of an unified framework for radio-network planning
- and optimization, incorporating the second and third items, as well as
- experimentation on real-world radio networks.
+ and optimization, incorporating the second and third contribution items,
+ as well as experimentation on real-world radio networks.
  The experimentation includes a comparison with a commercial tool that is
  currently being used for real radio-network planning.
  Moreover, the parallel implementation of the framework exploits the computing
@@ -244,8 +244,8 @@ Proposal of a new approach for parallel programming that combines a classic
 \end_layout
 
 \begin_layout Enumerate
-Quality improvement of radio-propagation predictions by applying metaheuristic-o
-ptimization techniques that improve the quality of results.
+Quality improvement of radio-propagation predictions by applying metaheuristic
+ optimization to the parameters of a radio-propagation model.
  This technique enables the adaptation of radio-propagation models to the
  local environment over which a radio network is deployed, as well as the
  automatic optimization of signal losses due to clutter.

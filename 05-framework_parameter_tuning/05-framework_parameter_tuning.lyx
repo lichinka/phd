@@ -270,7 +270,7 @@ onal effort.
  in input data and the environmental changes in the region, e.g., foliage
  of trees or snow.
  Consequently, a combination of different parameters is generally needed
- in order to reliably calculate radio-propagation predictions of lar networks
+ in order to reliably calculate radio-propagation predictions of large networks
  that cover different environments.
 \end_layout
 
@@ -830,8 +830,25 @@ reference "sub:02-Handover-and-soft-handover"
  Within this context, the best connection is selected by probing a QoS measure
  of the neighboring cells.
  In LTE networks, the UE measures two parameters from the reference signal
- of the network, namely the Reference Signal Received Power (RSRP) and the
- Reference Signal Received Quality (RSRQ).
+ of the network, namely the Reference Signal Received Power (RSRP
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "RSRP"
+description "Reference signal received power."
+
+\end_inset
+
+) and the Reference Signal Received Quality (RSRQ
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "RSRQ"
+description "Reference signal received quality."
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -865,8 +882,17 @@ m above the ground, taking measurements at a rate of 2
 \end_inset
 
 Hz.
- To accurately establish the measurement-location points, a GPS unit was
- used.
+ To accurately establish the measurement-location points, a Global-Positioning-S
+ystem (GPS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GPS"
+description "Global positioning system"
+
+\end_inset
+
+) unit was used.
  These GPS-informed locations have been tested to be compliant with the
  60
 \begin_inset space ~
@@ -3133,8 +3159,8 @@ reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Korosec-The_differential_ant_stigmergy_algorithm:2012"
+LatexCommand cite
+key "korosec2010_DASA"
 
 \end_inset
 
@@ -3159,7 +3185,7 @@ The optimization objective consists of adjusting the loss values of the
 \begin_inset Formula $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
 \end_inset
 
- from Equation
+ as used in Equation
 \begin_inset space ~
 \end_inset
 
@@ -5094,7 +5120,7 @@ name "tab:05-Statistical_analysis_of_solutions"
 \begin_inset Tabular
 <lyxtabular version="3" rows="14" columns="16">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0.2cm">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
@@ -5111,7 +5137,7 @@ name "tab:05-Statistical_analysis_of_solutions"
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0.75cm">
 <row>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5275,7 +5301,7 @@ Net
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5447,7 +5473,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5619,7 +5645,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5791,7 +5817,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5963,7 +5989,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6135,7 +6161,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6307,7 +6333,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6479,7 +6505,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6651,7 +6677,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6823,7 +6849,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6995,7 +7021,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -7167,7 +7193,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -7761,7 +7787,7 @@ reference "fig:05-Statistical_analysis_boxplots"
 \begin_inset Formula $_{9}$
 \end_inset
 
-, a lower proportion of field measurements over these areas was indentified,
+, a lower proportion of field measurements over these areas was identified,
  thus higher standard-deviation values appear.
 \end_layout
 
@@ -7783,14 +7809,14 @@ This chapter illustrated the suitability of PRATO as a network-planning
  The first one involved the parameter tuning of the empirical radio-propagation
  model using a snapshot of field measurements.
  The second one considered the optimization of the clutter losses over different
- regions of the country, therefore automaticallty adapting them to the local
+ regions of the country, therefore automatically adapting them to the local
  conditions of the geographical region of each network.
 \end_layout
 
 \begin_layout Standard
 The combination of the afore-mentioned techniques with PRATO provides an
  environment-adaptable framework for radio-network planning.
- This delivers a tool with a considerable improvent of the solution accuracy
+ This delivers a tool with a considerable improvement of the solution accuracy
  of the analyzed instances, especially if compared to traditional, i.e., manual
  or semi-automated, coverage-planning methods.
 \end_layout

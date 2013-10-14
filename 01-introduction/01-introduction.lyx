@@ -97,9 +97,9 @@ Many researchers believe the computer has become the third method to do
 \end_layout
 
 \begin_layout Standard
-Nowadays, decision making is present practially everywhere.
+Nowadays, decision making is present practically everywhere.
  As scientists, engineers and managers have to make decisions in more complex
- and competitive circumnstances every day, decision making involves dealing
+ and competitive circumstances every day, decision making involves dealing
  with rational and optimal approaches.
  According to Talbi
 \begin_inset space ~
@@ -329,7 +329,7 @@ key "maria1997introduction"
  Consequently, problems categorized as of large size and of considerable
  complexity represent a challenge, because of the different involved disciplines
  for their study and the degree of difficulty of their modeling.
- Cellular radio networks in general, and those of the lastest generations
+ Cellular radio networks in general, and those of the latest generations
  in particular, fall under this categorization.
 \end_layout
 
@@ -344,7 +344,7 @@ Radio networks represent one of the most fast-growing technology markets
 LatexCommand nomenclature
 prefix "A"
 symbol "GSM"
-description "Global System for Mobile communications."
+description "Global system for mobile communications."
 
 \end_inset
 
@@ -365,7 +365,7 @@ key "3GPP_TR_50.099"
 LatexCommand nomenclature
 prefix "A"
 symbol "2G"
-description "Second Generation of mobile networks."
+description "Second generation of mobile networks."
 
 \end_inset
 
@@ -375,7 +375,7 @@ description "Second Generation of mobile networks."
 LatexCommand nomenclature
 prefix "A"
 symbol "UMTS"
-description "Universal Mobitel Telecommunications System."
+description "Universal mobile telecommunications system."
 
 \end_inset
 
@@ -396,7 +396,7 @@ key "3GPP_TR_23.101"
 LatexCommand nomenclature
 prefix "A"
 symbol "3G"
-description "Third Generation of mobile networks."
+description "Third generation of mobile networks."
 
 \end_inset
 
@@ -407,7 +407,7 @@ description "Third Generation of mobile networks."
 LatexCommand nomenclature
 prefix "A"
 symbol "LTE"
-description "Long Term Evolution."
+description "Long term evolution."
 
 \end_inset
 
@@ -416,7 +416,7 @@ description "Long Term Evolution."
 LatexCommand nomenclature
 prefix "A"
 symbol "4G"
-description "Fourth Generation of mobile networks."
+description "Fourth generation of mobile networks."
 
 \end_inset
 
@@ -488,8 +488,8 @@ reference "fig:01-decision_making_process"
 \end_inset
 
 .
- In the context of this thesis, this process is refered to as manual radio-netwo
-rk optimization.
+ In the context of this thesis, this process is referred to as manual radio-netw
+ork optimization.
  
 \end_layout
 
@@ -500,7 +500,7 @@ Advances in the past few years have improved the manual optimization process
  enlarging the scope of problems and instance sizes that may be subject
  to optimization.
  Still, there are some important aspects that restrict the automation level
- of these methods, not only in real-world enviroments, but also when doing
+ of these methods, not only in real-world environments, but also when doing
  research in the area of radio networks:
 \end_layout
 
@@ -539,7 +539,7 @@ A considerable number of publications in the field of radio-network optimization
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "amaldi2007radio_planning,chen2008automated,chen2009fast,gordejuela2009two,siomina2008enhancing,siomina2007minimum_pilot_power"
+key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,chen2008automated,Chen-Fast_algorithm_for_large_scale_UMTS_coverage_planning:2009,Antenna.azimuth.tilt:2009,Antenna.Configuration:2008,Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 
@@ -620,7 +620,7 @@ Using hardware, specialized for parallel execution (e.g., GPU), should improve
 
 \begin_deeper
 \begin_layout Itemize
-From its arrival a few years ago, general GPU programming is continously
+From its arrival a few years ago, general GPU programming is continuously
  gaining the attention of the research community and it is extending to
  several areas of science.
  In particular, the combination of parallel-programming techniques with
@@ -654,7 +654,7 @@ optimization system should provide the means for solving new, previously
 \begin_deeper
 \begin_layout Itemize
 The improved performance at the evaluation level opens new possibilities
- for formally defining and tackling oprimization problems that were previously
+ for formally defining and tackling optimization problems that were previously
  out-of-reach of state-of-the-art methods, either because of their complexity
  or size.
 \end_layout
@@ -923,7 +923,7 @@ key "Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013"
 
 .
  The agent-based algorithm for solving the service-coverage problem was
- initially published at the International multiconference Information Society
+ initially published at the International multi-conference Information Society
 \begin_inset space ~
 \end_inset
 
@@ -976,7 +976,7 @@ key "Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_plann
 \end_layout
 
 \begin_layout Standard
-A comprenhensive list of the author's publications is given in Appendix
+A comprehensive list of the author's publications is given in Appendix
 \begin_inset space ~
 \end_inset
 

@@ -60,8 +60,9 @@
 
 \begin_body
 
-\begin_layout Standard
-\noindent
+\begin_layout Chapter*
+
+\size larger
 \begin_inset ERT
 status open
 
@@ -69,14 +70,18 @@ status open
 
 
 \backslash
-chapter*{
-\backslash
-vspace{-2.3cm} 
-\backslash
-Large Appendix B: Biography 
-\backslash
-vspace{1.7cm}}
+vspace{-2.3cm}
 \end_layout
+
+\end_inset
+
+Appendix B: Biography
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -124,51 +129,145 @@ status open
 \begin_layout Standard
 \noindent
 Lucas Benedičič was born on December 12, 1977 in Buenos Aires, Argentina.
- After enrolling as a grade student at the University of Buenos Aires, he
- attended and completed the first 4 years of the undergraduate programme
- in computer sciences at the Faculty of Exact and Natural Sciences.
+ He was a student of the University of Buenos Aires, where attended and
+ completed the first 4 years of the undergraduate programme in computer
+ sciences, at the Faculty of Exact and Natural Sciences.
 \end_layout
 
 \begin_layout Standard
 After moving to Slovenia in 2002, he enrolled the University of Ljubljana,
  Faculty of Computer and Information Science, where he graduated in 2007
- with the work titled »Application development using open-source technologies«.
+ with the work titled 
+\begin_inset Quotes eld
+\end_inset
+
+Application development using open-source technologies
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 In September 2007, he started his postgraduate studies at the University
  of Primorska, Faculty of Mathematics, Natural Sciences and Information
- Technologies, after enrolling the Masters' study programme for computer
- sciences.
- He graduated in 2009 with the work titled »Optimization of Common Pilot
- Channels in UMTS Networks«.
+ Technologies, after enrolling the Masters study programme of computer sciences.
+ He graduated in 2009 with the work titled 
+\begin_inset Quotes eld
+\end_inset
+
+Optimization of Common Pilot Channels in UMTS Networks
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Towards the end of 2007, he was awarded a scholarship for continuing postgraduat
-e studies in Slovenia.
- The award was received after winning an open contest of problem solving,
- organized by Halcom, d.d.
+Towards the end of 2007, he was awarded a scholarship for continuing his
+ postgraduate studies in Slovenia.
+ The award was received after winning a problem-solving contest, organized
+ by Halcom, d.d.
 \end_layout
 
 \begin_layout Standard
-In fall 2009, he enrolled in the PhD program entitled “Information and Communica
-tion Technologies” under the supervision of Assistant Professor Peter Korošec,
- at the Jožef Stefan International Postgraduate School in Ljubljana, Slovenia.
+In fall 2009, he enrolled in the PhD program entitled 
+\begin_inset Quotes eld
+\end_inset
+
+Information and Communication Technologies
+\begin_inset Quotes erd
+\end_inset
+
+ under the supervision of Assoc.
+\begin_inset space ~
+\end_inset
+
+Prof.
+\begin_inset space ~
+\end_inset
+
+Peter Koro
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{s}
+\end_layout
+
+\end_inset
+
+ec and the co-supervision of Assist.
+\begin_inset space ~
+\end_inset
+
+Prof.
+\begin_inset space ~
+\end_inset
+
+Toma
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{z}
+\end_layout
+
+\end_inset
+
+ Javornik, at the Jo
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{z}
+\end_layout
+
+\end_inset
+
+ef Stefan International Postgraduate School in Ljubljana, Slovenia.
 \end_layout
 
 \begin_layout Standard
-In November 2009 he became a junior researcher from industry, funded by
- the European Union through the European Social Fund.
+In November 2009, he became a junior researcher from industry, partially
+ funded by the European Union through the European Social Fund.
  During this period he is holding working positions at Telekom Slovenije,
  d.d., in research and development within the Radio Network Department, and
- at the Jožef Stefan Institute, in the Computer Systems Department.
+ at the Jo
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{z}
+\end_layout
+
+\end_inset
+
+ef Stefan Institute, in the Computer Systems Department.
 \end_layout
 
 \begin_layout Standard
-In 2011 he attended and successfully completed the summer institute »Scientific
- Computing in the Americas: the challenge of massive parallelism«, organized
- by the Pan-American Advanced Studies Institute, Boston University.
+In 2011, he attended and successfully completed the summer institute 
+\begin_inset Quotes eld
+\end_inset
+
+Scientific Computing in the Americas: the challenge of massive parallelism
+\begin_inset Quotes erd
+\end_inset
+
+, organized by the Pan-American Advanced Studies Institute, Boston University.
  The focus of the institute was on advanced topics of theory and programming
  of massively parallel processors.
 \end_layout
@@ -177,16 +276,18 @@ In 2011 he attended and successfully completed the summer institute »Scientific
 In early 2012, he received an invitation to work as a visiting researcher
  at the Nagasaki Advanced Computer Center (NACC) at the University of Nagasaki,
  Japan.
- His joint research work at NACC is to be completed by the end of 2012.
+ His joint research work at NACC was completed by the end of 2012.
+\end_layout
+
+\begin_layout Standard
+ Over the past few years, he has presented his research work at several
+ international conferences and workshops in the areas of evolutionary computatio
+n, optimization and parallel computing.
 \end_layout
 
 \begin_layout Standard
 His research interests include combinatorial and numerical optimization,
- mostly applied to optimization problems in the area of 3G radio networks,
- metaheuristic algorithms, parallel and GPU computing.
- Over the last few years, he has presented his research work at several
- international conferences and workshops in the areas of evolutionary computatio
-n, optimization and parallel computing.
+ parallel and GPU computing, and metaheuristic algorithms.
 \end_layout
 
 \end_body

@@ -270,7 +270,7 @@ onal effort.
  in input data and the environmental changes in the region, e.g., foliage
  of trees or snow.
  Consequently, a combination of different parameters is generally needed
- in order to reliably calculate radio-propagation predictions of lar networks
+ in order to reliably calculate radio-propagation predictions of large networks
  that cover different environments.
 \end_layout
 
@@ -340,7 +340,16 @@ m may be used for parameter tuning.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 <More related work...???>
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -821,8 +830,25 @@ reference "sub:02-Handover-and-soft-handover"
  Within this context, the best connection is selected by probing a QoS measure
  of the neighboring cells.
  In LTE networks, the UE measures two parameters from the reference signal
- of the network, namely the Reference Signal Received Power (RSRP) and the
- Reference Signal Received Quality (RSRQ).
+ of the network, namely the Reference Signal Received Power (RSRP
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "RSRP"
+description "Reference signal received power."
+
+\end_inset
+
+) and the Reference Signal Received Quality (RSRQ
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "RSRQ"
+description "Reference signal received quality."
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -856,8 +882,17 @@ m above the ground, taking measurements at a rate of 2
 \end_inset
 
 Hz.
- To accurately establish the measurement-location points, a GPS unit was
- used.
+ To accurately establish the measurement-location points, a Global-Positioning-S
+ystem (GPS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GPS"
+description "Global positioning system"
+
+\end_inset
+
+) unit was used.
  These GPS-informed locations have been tested to be compliant with the
  60
 \begin_inset space ~
@@ -3124,8 +3159,8 @@ reference "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Korosec-The_differential_ant_stigmergy_algorithm:2012"
+LatexCommand cite
+key "korosec2010_DASA"
 
 \end_inset
 
@@ -3150,7 +3185,7 @@ The optimization objective consists of adjusting the loss values of the
 \begin_inset Formula $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
 \end_inset
 
- from Equation
+ as used in Equation
 \begin_inset space ~
 \end_inset
 
@@ -5085,7 +5120,7 @@ name "tab:05-Statistical_analysis_of_solutions"
 \begin_inset Tabular
 <lyxtabular version="3" rows="14" columns="16">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0.2cm">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
@@ -5102,7 +5137,7 @@ name "tab:05-Statistical_analysis_of_solutions"
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0.75cm">
 <row>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5266,7 +5301,7 @@ Net
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5438,7 +5473,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5610,7 +5645,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5782,7 +5817,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5954,7 +5989,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6126,7 +6161,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6298,7 +6333,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6470,7 +6505,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6642,7 +6677,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6814,7 +6849,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6986,7 +7021,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -7158,7 +7193,7 @@ St.dev.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
