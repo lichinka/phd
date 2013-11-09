@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Overview of optimization methods 
+Overview of Optimization Methods 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Optimization_models"
@@ -526,7 +526,7 @@ d by adjusting the value of
 
 .
  However, some functions (or regions of functions) may require smaller values,
- while for others a bigger value would be more appropriate.
+ while for others, a bigger value would be more appropriate.
  Newton's method improves this by taking the second derivative of the function,
  
 \begin_inset Formula $f''(x)$
@@ -567,7 +567,7 @@ Another issue is how other points are handled.
  Beside maxima and minima points, some functions also contain saddle points
  (known as inflection points in one-dimensional functions).
  Clearly, the first derivative of a saddle point is zero, meaning gradient
- descent will stop looking for the minimum, even though it hasn't found
+ descent will stop looking for the minimum, even though it has not found
  it (see Figure
 \begin_inset space ~
 \end_inset
@@ -584,7 +584,7 @@ reference "fig:02-gradient_descent_saddle_point"
  divide by zero in this case.
  These observations clearly show how gradient methods get caught in local
  optima.
- Local optima of a function is defined as the optima (or minima in this
+ Local optima of a function are defined as the optima (or minima in this
  case) of a local region.
  Similarly, global optima are defined as the optima of the whole domain
  of a function.
@@ -657,10 +657,10 @@ name "fig:02-gradient_descent_saddle_point"
 \end_layout
 
 \begin_layout Standard
-But maybe the biggest concern with gradient-based methods is they assume
+But maybe the biggest concern with gradient-based methods is that they assume
  the function under optimization is derivable.
  This assumption holds only when optimizing a well-formed mathematical function.
- Unfortunately, this is generally not true, since in most cases the gradient
+ Unfortunately, this is generally not true, since in most cases, the gradient
  is not computable because the function is not known.
  The only available approach in such situations is creating inputs to the
  function in order to assess their quality.
@@ -685,7 +685,7 @@ Linear and non-linear programming
 
 \begin_layout Standard
 It was in the early 40s of the twentieth century, through the work of teams
- formed by mathematicians, economists and physicists, that the basis were
+ formed by mathematicians, economists and physicists, that the bases were
  established for the resolution of problems with a set of techniques known
  as linear and non-linear programming.
  Their initial goal was to solve different kinds of logistic problems during
@@ -1061,7 +1061,7 @@ key "Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual
 .
  This balance provides the necessary means to quickly identify promising
  regions, and early discarding those which have already been explored or
- don't provide solutions of better quality.
+ do not provide solutions of better quality.
  Promising regions within the search space, which are identified by the
  obtained 
 \begin_inset Quotes eld
@@ -1075,7 +1075,7 @@ good
  hoping to find better solutions.
  On the other hand, during the diversification phase, not-yet-visited regions
  are explored, making sure the search space as a whole is evenly explored,
- thus avoid confining the search to a reduced number of regions.
+ thus confining the search to a reduced number of regions is avoided.
  In this context, the ultimate search algorithm in terms of diversification
  is random search.
  Random search generates a random solution in the search space at each iteration
@@ -1257,8 +1257,8 @@ simulated annealing, from the group of classic metaheuristic algorithms.
 \begin_layout Standard
 Each of these algorithms minimize an objective-function value by adopting
  essentially distinct approaches.
- In the following sections, a short description about their functioning
- is given.
+ In the following sections, a short description of their functioning is
+ given.
 \end_layout
 
 \begin_layout Subsection
@@ -1282,7 +1282,7 @@ Differential Evolution
 LatexCommand nomenclature
 prefix "A"
 symbol "DE"
-description "Differential evolution."
+description "Differential evolution"
 
 \end_inset
 
@@ -1378,7 +1378,7 @@ reference "eq:02-DE_structure"
 LatexCommand nomenclature
 prefix "S"
 symbol "$g$"
-description "Generation index in DE."
+description "Generation index in DE"
 
 \end_inset
 
@@ -1425,11 +1425,11 @@ description "Generation index in DE."
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{{uniform}[0,1)}$"
-description "Function representing a uniformly-distributed random number from the interval [0,1)."
+description "Function representing a uniformly-distributed random number from the interval [0,1)"
 
 \end_inset
 
-, that selects a uniformly-distributed random number from the interval 
+ that selects a uniformly-distributed random number from the interval 
 \begin_inset Formula $[0,1)$
 \end_inset
 
@@ -1475,7 +1475,7 @@ The four parameters to control the search process of DE are: the population
 LatexCommand nomenclature
 prefix "S"
 symbol "$NP$"
-description "Population size in DE."
+description "Population size in DE"
 
 \end_inset
 
@@ -1488,7 +1488,7 @@ description "Population size in DE."
 LatexCommand nomenclature
 prefix "S"
 symbol "$g_{\\mathrm{max}}$"
-description "Number of generations for DE to run."
+description "Number of generations for DE to run"
 
 \end_inset
 
@@ -1501,7 +1501,7 @@ description "Number of generations for DE to run."
 LatexCommand nomenclature
 prefix "S"
 symbol "$CR$"
-description "Crossover constant in DE."
+description "Crossover constant in DE"
 
 \end_inset
 
@@ -1514,7 +1514,7 @@ description "Crossover constant in DE."
 LatexCommand nomenclature
 prefix "S"
 symbol "$F$"
-description "Mutation scaling factor in DE."
+description "Mutation scaling factor in DE"
 
 \end_inset
 
@@ -1580,7 +1580,7 @@ The Differential Ant-Stigmergy Algorithm
 LatexCommand nomenclature
 prefix "A"
 symbol "DASA"
-description "Differential ant-stigmergy algorithm."
+description "Differential ant-stigmergy algorithm"
 
 \end_inset
 
@@ -1600,7 +1600,7 @@ key "korosec2010_DASA"
 LatexCommand nomenclature
 prefix "A"
 symbol "ACO"
-description "Ant-colony optimization."
+description "Ant-colony optimization"
 
 \end_inset
 
@@ -1714,7 +1714,7 @@ There are six parameters that control the way DASA explores the search space:
 LatexCommand nomenclature
 prefix "S"
 symbol "$m$"
-description "Number of ants in DASA."
+description "Number of ants in DASA"
 
 \end_inset
 
@@ -1727,7 +1727,7 @@ description "Number of ants in DASA."
 LatexCommand nomenclature
 prefix "S"
 symbol "$b$"
-description "Discrete base in DASA."
+description "Discrete base in DASA"
 
 \end_inset
 
@@ -1740,7 +1740,7 @@ description "Discrete base in DASA."
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\rho$"
-description "Pheromone dispersion factor in DASA."
+description "Pheromone dispersion factor in DASA"
 
 \end_inset
 
@@ -1753,7 +1753,7 @@ description "Pheromone dispersion factor in DASA."
 LatexCommand nomenclature
 prefix "S"
 symbol "$s_{+}$"
-description "Global scale-increasing factor in DASA."
+description "Global scale-increasing factor in DASA"
 
 \end_inset
 
@@ -1766,7 +1766,7 @@ description "Global scale-increasing factor in DASA."
 LatexCommand nomenclature
 prefix "S"
 symbol "$s_{-}$"
-description "Global scale-decreasing factor in DASA."
+description "Global scale-decreasing factor in DASA"
 
 \end_inset
 
@@ -1779,7 +1779,7 @@ description "Global scale-decreasing factor in DASA."
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\epsilon$"
-description "Maximum parameter precision in DASA."
+description "Maximum parameter precision in DASA"
 
 \end_inset
 
@@ -1838,7 +1838,7 @@ key "Kirkpatrick_OptimizationBySimulatesAnnealing"
 LatexCommand nomenclature
 prefix "A"
 symbol "SA"
-description "Simulated annealing."
+description "Simulated annealing"
 
 \end_inset
 
@@ -1965,18 +1965,18 @@ reference "alg:07-SA_pseudocode"
  is a function for selecting a uniformly-distributed random number from
  the given interval, whereas the meaning of the rest of the symbols is as
  defined above.
- 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float algorithm
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
+
+
+\backslash
+begin{myalgorithm}
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -1985,37 +1985,17 @@ status open
 centering
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
 \begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Pseudo-code of the simulated-annealing metaheuristic.
- Adapted from
-\begin_inset space ~
-\end_inset
 
 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Bianchi-A_survey_on_metaheuristics_for_stachastic_combinatorial_optimization:2009"
-
-\end_inset
-
-.
-\shape italic
-
-\begin_inset CommandInset label
-LatexCommand label
-name "alg:07-SA_pseudocode"
-
-\end_inset
-
-
+\backslash
+caption{Pseudo-code of the simulated-annealing metaheuristic.
+ Adapted from~
+\backslash
+cite{Bianchi-A_survey_on_metaheuristics_for_stachastic_combinatorial_optimizatio
+n:2009}.
+\backslash
+label{alg:07-SA_pseudocode}}
 \end_layout
 
 \end_inset
@@ -2023,7 +2003,7 @@ name "alg:07-SA_pseudocode"
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -2147,6 +2127,17 @@ end{algorithmic}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{myalgorithm}
+\end_layout
+
 \end_inset
 
 
@@ -2163,7 +2154,7 @@ SA has two parameters to control the search process: the initial temperature
 LatexCommand nomenclature
 prefix "S"
 symbol "$t_{\\mathrm{initial}}$"
-description "Initial temperature in SA."
+description "Initial temperature in SA"
 
 \end_inset
 
@@ -2176,7 +2167,7 @@ description "Initial temperature in SA."
 LatexCommand nomenclature
 prefix "S"
 symbol "$it$"
-description "Maximum number of iterations in SA."
+description "Maximum number of iterations in SA"
 
 \end_inset
 
@@ -2212,7 +2203,7 @@ key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:20
 \end_inset
 
 .
- A detailed description about SA and its applications can be found in
+ A detailed description of SA and its applications can be found in
 \begin_inset space ~
 \end_inset
 
@@ -2436,7 +2427,7 @@ there is no other information available for function
 \end_layout
 
 \begin_layout Standard
-Typically, the experiments associated with these kind of problems are very
+Typically, the experiments associated with this kind of problems are very
  expensive in terms of time and cost, since a simulation must be forced
  to evaluate the solution.
  Generally speaking, the most time-consuming part of a metaheuristic optimizatio
@@ -2600,7 +2591,7 @@ key "Ozimek_Open.source.radio.coverage.prediction:2010,Momentum.project,Mehlfuhr
  are the rule.
  Despite this, the merit and acknowledgment go to the authors of these framework
 s, not only for providing them to the scientific community, but fundamentally
- because for providing an environment in which different kinds of simulations
+ because of providing an environment in which different kinds of simulations
  are completely reproducible.
  Additionally, the lack of documentation represents a big hurdle for extending
  the base code, which becomes a difficult task without the help of the original
@@ -2612,7 +2603,7 @@ s, not only for providing them to the scientific community, but fundamentally
 \end_layout
 
 \begin_layout Chapter
-Principles of mobile radio networks 
+Principles of Mobile Radio Networks 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Principles_of_mobile_radio_networks"
@@ -2633,7 +2624,7 @@ A cellular mobile radio network is a collection of individual cells that
 LatexCommand nomenclature
 prefix "A"
 symbol "BS"
-description "Base station."
+description "Base station"
 
 \end_inset
 
@@ -2645,7 +2636,7 @@ description "Base station."
 \end_layout
 
 \begin_layout Itemize
-locate and track both active and idle mobile devices, called User Equipments
+to locate and track both active and idle mobile devices, called User Equipments
 \begin_inset space ~
 \end_inset
 
@@ -2654,7 +2645,7 @@ locate and track both active and idle mobile devices, called User Equipments
 LatexCommand nomenclature
 prefix "A"
 symbol "UE"
-description "User equipment."
+description "User equipment"
 
 \end_inset
 
@@ -2662,13 +2653,12 @@ description "User equipment."
 \end_layout
 
 \begin_layout Itemize
-attempt to connect each UE to the best available BS.
+to attempt to connect each UE to the best available BS.
 \end_layout
 
 \begin_layout Standard
-The first task involves a location-update procedure, which allows an UE
- to inform the network about its movement from one location area to the
- next.
+The first task involves a location-update procedure, which allows a UE to
+ inform the network about its movement from one location area to the next.
  This process is called mobility management.
  The second task requires the constant evaluation of the radio-link quality
  with the serving BS, and the radio-link qualities of alternate BSs.
@@ -2678,7 +2668,7 @@ The first task involves a location-update procedure, which allows an UE
 \end_layout
 
 \begin_layout Standard
-The radio communications between an UE and a grid of BSs use low power.
+The radio communications between a UE and a grid of BSs use low power.
  However, the movement of the UE causes highly irregular radio-link conditions,
  thus consistent monitoring and precise control are required to keep the
  radio-link quality at an acceptable level.
@@ -2723,7 +2713,7 @@ Cellular radio systems partition the available spectrum among the BSs, and
 LatexCommand nomenclature
 prefix "A"
 symbol "QoS"
-description "Quality of service."
+description "Quality of service"
 
 \end_inset
 
@@ -2752,8 +2742,8 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \end_inset
 
-, where an optimization approach, that minimizes the total transmit power
- used in a radio network, is presented.
+, where an optimization approach that minimizes the total transmit power
+ used in a radio network is presented.
 \end_layout
 
 \begin_layout Section
@@ -2786,8 +2776,8 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
  the system creates a new connection with the latter cell and disconnects
  the user from the former one, so that an acceptable link quality can be
  maintained.
- Otherwise, the increase in transmit power, that is required to compensate
- for path loss, results in excessive interference.
+ Otherwise, the increase in transmit power that is required to compensate
+ for path loss results in excessive interference.
  The handover procedure consists of two processes
 \begin_inset space ~
 \end_inset
@@ -2850,7 +2840,7 @@ Hard handover
 \end_layout
 
 \begin_layout Standard
-During a hard handover, an UE can connect to only one BS at a time.
+During a hard handover, a UE can connect to only one BS at a time.
  A unique decision initiates and executes a handover without making a number
  of simultaneous connections among candidate BSs.
  Based on link measurements, the target BS is selected prior to executing
@@ -2866,7 +2856,7 @@ During a hard handover, an UE can connect to only one BS at a time.
 LatexCommand nomenclature
 prefix "A"
 symbol "TDMA"
-description "Time division multiple access."
+description "Time division multiple access"
 
 \end_inset
 
@@ -2898,11 +2888,11 @@ Soft Handover
 LatexCommand nomenclature
 prefix "A"
 symbol "SHO"
-description "Soft handover."
+description "Soft handover"
 
 \end_inset
 
-) enhances handover functionality by allowing an UE to potentially operate
+) enhances handover functionality by allowing a UE to potentially operate
  on multiple radio links at a time (see Figure
 \begin_inset space ~
 \end_inset
@@ -2955,7 +2945,7 @@ The SHO procedure is important in systems using the channel-access method
 LatexCommand nomenclature
 prefix "A"
 symbol "CDMA"
-description "Code division multiple access."
+description "Code division multiple access"
 
 \end_inset
 
@@ -2968,7 +2958,7 @@ description "Code division multiple access."
 LatexCommand nomenclature
 prefix "A"
 symbol "WCDMA"
-description "Wideband code division multiple access."
+description "Wideband code division multiple access"
 
 \end_inset
 
@@ -3122,7 +3112,7 @@ With the introduction of the High Speed Packet Access
 LatexCommand nomenclature
 prefix "A"
 symbol "HSPA"
-description "High Speed Packet Access."
+description "High speed packet access"
 
 \end_inset
 
@@ -3138,7 +3128,7 @@ description "High Speed Packet Access."
 LatexCommand nomenclature
 prefix "A"
 symbol "HSDPA"
-description "High Speed Downlink Packet Access."
+description "High speed downlink packet access"
 
 \end_inset
 
@@ -3151,7 +3141,7 @@ description "High Speed Downlink Packet Access."
 LatexCommand nomenclature
 prefix "A"
 symbol "HSUPA"
-description "High Speed Uplink Packet Access."
+description "High speed uplink packet access"
 
 \end_inset
 
@@ -3183,7 +3173,7 @@ key "holma2006hsdpa"
 \end_layout
 
 \begin_layout Chapter
-Overview of radio-network optimization 
+Overview of Radio-Network Optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Optimization_of_radio_networks"
@@ -3225,14 +3215,14 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 \end_inset
 
 .
- The analysis phase consists on the examination of the network performance,
+ The analysis phase consists of the examination of the network performance,
  which mainly focuses on the definition and collection of Key-Performance
  Indicators (KPIs
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
 symbol "KPI"
-description "Key performance indicator."
+description "Key performance indicator"
 
 \end_inset
 
@@ -3504,8 +3494,8 @@ offline
 \end_layout
 
 \begin_layout Standard
-In the following, an overview of some well-known optimization problems for
- radio-mobile networks is given.
+Bellow, an overview of some well-known optimization problems for radio-mobile
+ networks is given.
  Each section describes an optimization problem, and presents a short survey
  of recently proposed optimization methods for solving them.
 \end_layout
@@ -3918,7 +3908,7 @@ key "Athley-Impact_of_electrical_tilt_on_LTE_performance:2010"
 \end_inset
 
 .
- The adjustment of these two parameters optimize some important aspects
+ The adjustment of these two parameters optimizes some important aspects
  of the network, e.g.:
 \end_layout
 
@@ -4256,7 +4246,7 @@ f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}},
 LatexCommand nomenclature
 prefix "S"
 symbol "$A_{\\mathrm{covered}}$"
-description "Area under service coverage of the mobile network."
+description "Area under service coverage of the mobile network"
 
 \end_inset
 
@@ -4265,7 +4255,7 @@ description "Area under service coverage of the mobile network."
 LatexCommand nomenclature
 prefix "S"
 symbol "$A_{\\mathrm{total}}$"
-description "Complete geographical area under optimization."
+description "Complete geographical area under optimization"
 
 \end_inset
 
@@ -4298,7 +4288,7 @@ The area under optimization is usually divided into squares (or pixels)
 LatexCommand nomenclature
 prefix "A"
 symbol "RSG"
-description "Regular square grid."
+description "Regular square grid"
 
 \end_inset
 
@@ -4411,7 +4401,7 @@ key "Coverage.optimization.with.cost.function:2002"
  presented a gradient-descent method to minimize an objective function that
  combines some KPIs with the service coverage.
  The power of the pilot signal of the cells is periodically updated in order
- to improve the afore-mentioned function.
+ to improve the aforementioned function.
 \end_layout
 
 \begin_layout Section
@@ -4435,7 +4425,7 @@ algorithms These algorithms work on a population of solutions, allowing
  The implementation effort of genetic algorithms is to some degree higher
  than for simpler search methods, e.g., local search, but their inherent structure
  makes parallel implementations rather simple.
- Additionally, genetic algorithms are less likely of being trapped in local
+ Additionally, genetic algorithms are less likely to be trapped in local
  optima, since they are a population-based metaheuristic.
 \end_layout
 
@@ -4469,7 +4459,7 @@ methods Other search methods, e.g., local search, SA, tabu search or gradient
  solutions.
  The number of parameters taken into account, as well as the evaluation
  precision, directly influence their running time.
- These methods don't excel in full simulation scenarios.
+ These methods do not excel in full simulation scenarios.
  Moreover, some of them are easily trapped in local minima.
 \end_layout
 
@@ -4479,7 +4469,8 @@ Summary
 
 \begin_layout Standard
 The variety of optimization problems described in the previous sections
- differ in many aspect, like implementation, running time and solution quality.
+ differ in many aspects, like implementation, running time and solution
+ quality.
  Picking the right method for a given situation depends on the optimization
  task and the desired results.
  Since computational time is usually an important restriction, simpler and
@@ -4507,7 +4498,7 @@ Additionally, as noted for some of the cited works, hybrid methods, i.e.,
 \end_layout
 
 \begin_layout Chapter
-Principles of GPU programming 
+Principles of GPU Programming 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Principles_of_GPU_programming"
@@ -4527,7 +4518,7 @@ During the past few years, the computing industry has been delivering extra
 LatexCommand nomenclature
 prefix "A"
 symbol "GPU"
-description "Graphics processing unit."
+description "Graphics processing unit"
 
 \end_inset
 
@@ -4556,7 +4547,7 @@ The GPU market was almost exclusively driven by the games industry.
 LatexCommand nomenclature
 prefix "A"
 symbol "HPC"
-description "High-performance computing."
+description "High-performance computing"
 
 \end_inset
 
@@ -4588,7 +4579,7 @@ In February 2007, the first real opportunity for using GPUs for general
 LatexCommand nomenclature
 prefix "A"
 symbol "CUDA"
-description "Compute unified device architecture."
+description "Compute unified device architecture"
 
 \end_inset
 
@@ -4649,7 +4640,7 @@ key "CUDA"
 
  was created for developing applications for the GPU platform.
  A system within this model consists of a host, i.e., a traditional CPU, and
- one or more compute devices that are massively data-parallel coprocessors,
+ one or more compute devices that are massively data-parallel co-processors,
  i.e., a GPU.
  The host code transfers data to and from the global memory of the GPU using
  CUDA-function calls.
@@ -4662,7 +4653,7 @@ key "CUDA"
 LatexCommand nomenclature
 prefix "A"
 symbol "SPMD"
-description "Single-program multiple-data."
+description "Single-program multiple-data"
 
 \end_inset
 
@@ -4730,7 +4721,7 @@ key "Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008"
 LatexCommand nomenclature
 prefix "A"
 symbol "SM"
-description "Streaming multiprocessor."
+description "Streaming multiprocessor"
 
 \end_inset
 
@@ -4836,7 +4827,7 @@ reference "fig:02-GPU_architecture"
 LatexCommand nomenclature
 prefix "A"
 symbol "SP"
-description "Streaming processor."
+description "Streaming processor"
 
 \end_inset
 
@@ -4847,7 +4838,7 @@ description "Streaming processor."
 LatexCommand nomenclature
 prefix "A"
 symbol "SIMT"
-description "Single instruction multiple thread."
+description "Single instruction multiple thread"
 
 \end_inset
 
@@ -5673,7 +5664,7 @@ get_global_id(0|1|2)
 \end_layout
 
 \begin_layout Standard
-In the remaining of this thesis, the naming convention introduced by the
+In the remainder of this thesis, the naming convention introduced by the
  CUDA platform is used.
 \end_layout
 
@@ -5683,7 +5674,8 @@ Summary
 
 \begin_layout Standard
 This chapter gave an overview of the basic concepts, the potential and the
- limitations of the GPUs when used as parallel procesors for general programming.
+ limitations of the GPUs when used as parallel processors for general programmin
+g.
  In particular, emphasis has been given to the details that differentiate
  this platform from CPUs.
  In this sense, it is important to recognize which applications can benefit

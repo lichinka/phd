@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Soft-handover optimization 
+Soft-Handover Optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:07-Experimental-evaluation-the-SHO-alignment-problem"
@@ -111,7 +111,7 @@ reference "chap:06-Experimental-evaluation-the-service-coverage-problem"
 
 \begin_layout Standard
 \noindent
-This chapter focuses on solving a new optimization problem for 3G networks,
+This chapter focuses on solving a new optimization problem for 3G networks
  that deals with downlink and uplink SHO areas (see Section
 \begin_inset space ~
 \end_inset
@@ -347,7 +347,7 @@ name "fig:07-Problem_illustration"
 \end_layout
 
 \begin_layout Standard
-Despite several built-in mechanisms, that allow a radio network to overcome
+Despite several built-in mechanisms that allow a radio network to overcome
  different problems due to the lack of SHO during a HSDPA connection, some
  abnormal cases do arise, especially in areas where there is SHO capability
  in the uplink, but none in the downlink.
@@ -428,10 +428,7 @@ key "holma2006hsdpa"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Quotes erd
-\end_inset
-
-...
+``...
  There is no obvious reason why the serving E-DCH cell would not be the
  same as the serving HSDPA cell, and this is also required to be the case
  in the specifications.
@@ -603,8 +600,15 @@ key "chen2008cpich"
 \end_inset
 
 .
- In the UMTS, the pilot power is typically between 5% to 10% of the total
- downlink transmit power of the BS
+ In the UMTS, the pilot power is typically between 5
+\begin_inset space ~
+\end_inset
+
+% to 10
+\begin_inset space ~
+\end_inset
+
+% of the total downlink transmit power of the BS
 \begin_inset space ~
 \end_inset
 
@@ -628,7 +632,7 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications,Siomina_Pilo
 
 \end_inset
 
-, being those based on optimization methods the most eﬀective ones
+, those based on optimization methods being the most eﬀective ones
 \begin_inset space ~
 \end_inset
 
@@ -728,7 +732,7 @@ dB (relative to the pilot-power setting the cell had before optimization),
 From the optimization point of view, the purpose of the change step is twofold.
  First, since the optimization targets a live network, there is no need
  for the algorithms to create complete new configurations, but just to fine-tune
- existing ones.
+ the existing ones.
  Second, the problem complexity is lowered, because the size of the search
  space is smaller and discrete.
 \end_layout
@@ -745,7 +749,7 @@ name "sub:07-SHO_areas"
 \end_layout
 
 \begin_layout Standard
-To obtain a realistic outline of the areas where an UE may potentially maintain
+To obtain a realistic outline of the areas where a UE may potentially maintain
  connections to more than one cell, a static version of the active set,
  as defined in
 \begin_inset space ~
@@ -768,7 +772,7 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\gamma^{\\mathrm{sho}}$"
-description "SHO window."
+description "SHO window"
 
 \end_inset
 
@@ -787,13 +791,13 @@ maximum
 LatexCommand nomenclature
 prefix "S"
 symbol "$as^{\\mathrm{max}}$"
-description "Maximum number of neighbouring cells in the active set."
+description "Maximum number of neighbouring cells in the active set"
 
 \end_inset
 
 , are introduced.
  Both parameters are taken from the working configuration of the real network.
- It follows that the cells to which an UE 
+ It follows that the cells to which a UE 
 \begin_inset Formula $m$
 \end_inset
 
@@ -857,7 +861,7 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 \end_layout
 
 \begin_layout Standard
-Additionally, in the uplink, the set of cells to which an UE can potentially
+Additionally, in the uplink, the set of cells to which a UE can potentially
  be in SHO is defined as:
 \end_layout
 
@@ -878,7 +882,7 @@ where
 \begin_inset Formula $l_{mc}^{\uparrow}$
 \end_inset
 
- is the uplink attenuation factor from an UE 
+ is the uplink attenuation factor from a UE 
 \begin_inset Formula $m$
 \end_inset
 
@@ -895,7 +899,7 @@ where
 LatexCommand nomenclature
 prefix "S"
 symbol "$p_{m}^{\\uparrow}$"
-description "Uplink transmit power of mobile $m\\in M$."
+description "Uplink transmit power of mobile $m\\in M$"
 
 \end_inset
 
@@ -957,7 +961,7 @@ reference "sec:07-Radio_network_model"
  engineers of the Radio Network Department at Telekom Slovenije, d.d.
  The objective function is constructed as a weighted sum, containing different
  costs that penalize the occurrence of specific SHO conditions in downlink
- and uplink, which may potentially cause the afore-mentioned malfunctioning,
+ and uplink, which may potentially cause the aforementioned malfunctioning,
  introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -997,7 +1001,7 @@ Hence, the definition of the objective function for the SHO-balancing problem
 LatexCommand nomenclature
 prefix "S"
 symbol "$f_{\\mathrm{sho}}$"
-description "Objective function of the SHO-balancing problem."
+description "Objective function of the SHO-balancing problem"
 
 \end_inset
 
@@ -1632,7 +1636,11 @@ dB or -0.01
 \begin_inset space ~
 \end_inset
 
-dB is applied with 50% probability to 
+dB is applied with 50
+\begin_inset space ~
+\end_inset
+
+% probability to 
 \begin_inset Formula $p_{c'}$
 \end_inset
 
@@ -2011,7 +2019,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/coverage_area.pdf
+	filename img/coverage_area.png
 	lyxscale 30
 	width 100text%
 
@@ -2175,7 +2183,7 @@ As for DASA, the parameters were set to the following values:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $q=0.2$
+\begin_inset Formula $\rho=0.2$
 \end_inset
 
 , the pheromone dispersion factor;
@@ -2196,7 +2204,7 @@ As for DASA, the parameters were set to the following values:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $e=1.0^{-2}$
+\begin_inset Formula $\epsilon=1.0^{-2}$
 \end_inset
 
 , the maximum parameter precision.
@@ -2945,6 +2953,7 @@ centering
 \begin_layout Plain Layout
 Improvement analysis of the best solution that each algorithm achieved for
  the SHO-balancing problem.
+ All values are expressed in percent.
 \shape italic
 
 \begin_inset CommandInset label
@@ -3085,7 +3094,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-63.00%
+63.00
 \end_layout
 
 \end_inset
@@ -3096,7 +3105,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-15.11%
+15.11
 \end_layout
 
 \end_inset
@@ -3107,7 +3116,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-15.73%
+15.73
 \end_layout
 
 \end_inset
@@ -3118,7 +3127,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.80%
+1.80
 \end_layout
 
 \end_inset
@@ -3129,7 +3138,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-4.36%
+4.36
 \end_layout
 
 \end_inset
@@ -3140,7 +3149,7 @@ Before opt.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00%
+100.00
 \end_layout
 
 \end_inset
@@ -3164,7 +3173,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-60.23%
+60.23
 \end_layout
 
 \end_inset
@@ -3175,7 +3184,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.13%
+16.13
 \end_layout
 
 \end_inset
@@ -3186,7 +3195,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.09%
+16.09
 \end_layout
 
 \end_inset
@@ -3197,7 +3206,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.47%
+1.47
 \end_layout
 
 \end_inset
@@ -3208,7 +3217,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-6.08%
+6.08
 \end_layout
 
 \end_inset
@@ -3219,7 +3228,7 @@ DE sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00%
+100.00
 \end_layout
 
 \end_inset
@@ -3243,7 +3252,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-60.24%
+60.24
 \end_layout
 
 \end_inset
@@ -3254,7 +3263,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.16%
+16.16
 \end_layout
 
 \end_inset
@@ -3265,7 +3274,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.90%
+16.90
 \end_layout
 
 \end_inset
@@ -3276,7 +3285,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.46%
+1.46
 \end_layout
 
 \end_inset
@@ -3287,7 +3296,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-5.24%
+5.24
 \end_layout
 
 \end_inset
@@ -3298,7 +3307,7 @@ DASA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00%
+100.00
 \end_layout
 
 \end_inset
@@ -3322,7 +3331,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-60.42%
+60.42
 \end_layout
 
 \end_inset
@@ -3333,7 +3342,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-16.55%
+16.55
 \end_layout
 
 \end_inset
@@ -3344,7 +3353,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-15.97%
+15.97
 \end_layout
 
 \end_inset
@@ -3355,7 +3364,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-1.56%
+1.56
 \end_layout
 
 \end_inset
@@ -3366,7 +3375,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-5.50%
+5.50
 \end_layout
 
 \end_inset
@@ -3377,7 +3386,7 @@ SA sol.
 \begin_layout Plain Layout
 
 \size scriptsize
-100.00%
+100.00
 \end_layout
 
 \end_inset
@@ -3401,7 +3410,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.40%
++4.40
 \end_layout
 
 \end_inset
@@ -3412,7 +3421,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+6.75%
++6.75
 \end_layout
 
 \end_inset
@@ -3423,7 +3432,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+2.29%
++2.29
 \end_layout
 
 \end_inset
@@ -3434,7 +3443,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+18.33%
++18.33
 \end_layout
 
 \end_inset
@@ -3445,7 +3454,7 @@ DE impr.
 \begin_layout Plain Layout
 
 \size scriptsize
--39.45%
+-39.45
 \end_layout
 
 \end_inset
@@ -3480,7 +3489,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.38%
++4.38
 \end_layout
 
 \end_inset
@@ -3491,7 +3500,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+6.95%
++6.95
 \end_layout
 
 \end_inset
@@ -3502,7 +3511,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+7.44%
++7.44
 \end_layout
 
 \end_inset
@@ -3513,7 +3522,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+18.88%
++18.88
 \end_layout
 
 \end_inset
@@ -3524,7 +3533,7 @@ DASA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
--20.18%
+-20.18
 \end_layout
 
 \end_inset
@@ -3559,7 +3568,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.09%
++4.09
 \end_layout
 
 \end_inset
@@ -3570,7 +3579,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+9.53%
++9.53
 \end_layout
 
 \end_inset
@@ -3581,7 +3590,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+1.52%
++1.52
 \end_layout
 
 \end_inset
@@ -3592,7 +3601,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
-+13.33%
++13.33
 \end_layout
 
 \end_inset
@@ -3603,7 +3612,7 @@ SA impr.
 \begin_layout Plain Layout
 
 \size scriptsize
--26.15%
+-26.15
 \end_layout
 
 \end_inset
@@ -3639,7 +3648,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+4.29%
++4.29
 \end_layout
 
 \end_inset
@@ -3650,7 +3659,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+7.74%
++7.74
 \end_layout
 
 \end_inset
@@ -3661,7 +3670,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+3.75%
++3.75
 \end_layout
 
 \end_inset
@@ -3672,7 +3681,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
-+16.85%
++16.85
 \end_layout
 
 \end_inset
@@ -3683,7 +3692,7 @@ Avg.
 \begin_layout Plain Layout
 
 \size scriptsize
--28.59%
+-28.59
 \end_layout
 
 \end_inset
@@ -3713,14 +3722,134 @@ Avg.
 \end_layout
 
 \begin_layout Standard
-The coverage has been improved with an average of 4.29%, whereas the coverage
- area where there is no SHO capability, has been increased 7.74% on average.
+The coverage has been improved with an average of 4.29
+\begin_inset space ~
+\end_inset
+
+%, whereas the coverage area where there is no SHO capability, has been
+ increased 7.74
+\begin_inset space ~
+\end_inset
+
+% on average.
  Areas where SHO is available in both downlink and uplink have also been
- improved, i.e., 3.75% on average.
+ improved, i.e., 3.75
+\begin_inset space ~
+\end_inset
+
+% on average.
  This particular improvement is interesting from the optimization point
  of view, because it had no explicit penalty factor set.
  Therefore, this may be understood as a consequence of the correct representatio
 n of the different network aspects in the objective function.
+\end_layout
+
+\begin_layout Standard
+The second most important optimized aspect in the SHO-balancing problem
+ is the proportion of areas with uplink SHO and no SHO in the downlink (labeled
+ as `
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+no SHO
+\begin_inset Formula $^{\downarrow}$
+\end_inset
+
+, SHO
+\begin_inset Formula $^{\uparrow}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+' in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Optimization_result_analysis"
+
+\end_inset
+
+).
+ This particular condition has been improved by almost 17
+\begin_inset space ~
+\end_inset
+
+% on average, greatly reducing the possibility of interference in neighboring
+ cells when serving HSPA traffic.
+ The last measured aspect takes into account areas with downlink SHO and
+ no SHO in the uplink (labeled as 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+`SHO
+\begin_inset Formula $^{\downarrow}$
+\end_inset
+
+, no SHO
+\begin_inset Formula $^{\uparrow}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+' in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Optimization_result_analysis"
+
+\end_inset
+
+).
+ This condition, although it has not improved, does not expose the mobile
+ network to malfunctioning, only to reduced throughput within these specific
+ areas.
+ However, the reduced throughput is relative, since there are many cells
+ capable of serving HSDPA data access, as the downlink SHO condition confirms.
+ For this reason, the serving cell should not only deliver HSDPA, but also
+ take care of the user signaling and power control, received in the uplink.
+ Clearly, this is only feasible in areas where uplink coverage is guaranteed.
 \end_layout
 
 \begin_layout Standard
@@ -3747,8 +3876,8 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/sho_areas_initial.pdf
-	lyxscale 30
+	filename img/sho_areas_initial.png
+	lyxscale 15
 	width 100text%
 
 \end_inset
@@ -3804,8 +3933,8 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/sho_areas_final.pdf
-	lyxscale 30
+	filename img/sho_areas_final.png
+	lyxscale 15
 	width 100text%
 
 \end_inset
@@ -3835,111 +3964,6 @@ name "fig:07-SHO_areas_final"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-The second most important optimized aspect in the SHO-balancing problem
- is the proportion of areas with uplink SHO and no SHO in the downlink (labeled
- as `
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-no SHO
-\begin_inset Formula $^{\downarrow}$
-\end_inset
-
-, SHO
-\begin_inset Formula $^{\uparrow}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-' in Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Optimization_result_analysis"
-
-\end_inset
-
-).
- This particular condition has been improved by almost 17% on average, greatly
- reducing the possibility of interference in neighboring cells when serving
- HSPA traffic.
- The last measured aspect takes into account areas with downlink SHO and
- no SHO in the uplink (labeled as 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-`SHO
-\begin_inset Formula $^{\downarrow}$
-\end_inset
-
-, no SHO
-\begin_inset Formula $^{\uparrow}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-' in Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Optimization_result_analysis"
-
-\end_inset
-
-).
- This condition, although it hasn't improved, does not expose the mobile
- network to malfunctioning, only to reduced throughput within these specific
- areas.
- However, the reduced throughput is relative, since there are many cells
- capable of serving HSDPA data access, as the downlink SHO condition confirms.
- For this reason, the serving cell should not only deliver HSDPA, but also
- take care of the user signaling and power control, received in the uplink.
- Clearly, this is only feasible in areas where uplink coverage is guaranteed.
 \end_layout
 
 \begin_layout Standard
@@ -4043,7 +4067,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_layout Standard
 \noindent
-Using a extension of the radio-network model presented in Section
+Using an extension of the radio-network model presented in Section
 \begin_inset space ~
 \end_inset
 
@@ -4064,9 +4088,9 @@ reference "sec:06-Radio_network_model"
 The balancing problem has been tackled by three optimization algorithms,
  namely DE, DASA and SA.
  All three algorithms were able to improve the given network configuration,
- being DE the most successful one.
- The presented results confirm that a great proportion of the SHO areas,
- that were not balanced before the optimization, were corrected, therefore
+ DE being the most successful one.
+ The presented results confirm that a great proportion of the SHO areas
+ that were not balanced before the optimization were corrected, therefore
  significantly reducing the possibility of HSPA-service failures.
  Additionally, radio coverage was improved, while all other essential network
  services were not altered.
@@ -4093,7 +4117,7 @@ It is important to note that, to the best of the author's knowledge, the
  Also note that although some methods proposed in this chapter have been
  particularly designed for problems that emerge during the planning of 3G
  radio networks, they may be adapted to other standards, e.g., 2G and 4G,
- without lose of generality.
+ without loss of generality.
 \end_layout
 
 \end_body

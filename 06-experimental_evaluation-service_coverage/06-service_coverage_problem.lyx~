@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Service-coverage optimization 
+Service-Coverage Optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:06-Experimental-evaluation-the-service-coverage-problem"
@@ -106,7 +106,7 @@ reference "chap:04-Framework-design-and-implementation"
 \end_layout
 
 \begin_layout Standard
-In this chapter, the challenge is to exploit PRATO for solving one the of
+In this chapter, the challenge is to exploit PRATO for solving one of the
  classic optimization problems of radio networks: the service-coverage problem.
  Considering the minimization of the total amount of pilot power subject
  to a full coverage constraint, a novel optimization approach is introduced.
@@ -505,8 +505,8 @@ key "Niemela-Performance_of_static_WCDMA_simulator:2005"
 
 \begin_layout Standard
 A snapshot consists of a set of UEs having individual properties, such as
- location, and equipment type, that provides an estimate of the average
- network behavior.
+ location, and equipment type that provides an estimate of the average network
+ behavior.
  The static approach inherently ignores dynamic effects that influence the
  system, like fast power control, but the analysis relies on having multiple
  independent snapshots to produce an average behavior.
@@ -535,7 +535,7 @@ key "Hamalainen-Advanced_WCDMA_radio_network_simulator:1999,Hoppe-Fast_planning_
 LatexCommand nomenclature
 prefix "A"
 symbol "RRM"
-description "Radio-resource management."
+description "Radio-resource management"
 
 \end_inset
 
@@ -592,7 +592,7 @@ Consider a radio network with a set of antenna installations (cells),
 LatexCommand nomenclature
 prefix "S"
 symbol "$C$"
-description "Set of antenna installations (cells) in a mobile network."
+description "Set of antenna installations (cells) in a mobile network"
 
 \end_inset
 
@@ -610,7 +610,7 @@ description "Set of antenna installations (cells) in a mobile network."
 LatexCommand nomenclature
 prefix "S"
 symbol "$M$"
-description "Set of mobile devices or users of a mobile network."
+description "Set of mobile devices or users of a mobile network"
 
 \end_inset
 
@@ -628,7 +628,7 @@ description "Set of mobile devices or users of a mobile network."
 LatexCommand nomenclature
 prefix "S"
 symbol "$l_{cm}^{\\downarrow}$"
-description "Downlink attenuation factor between cell $c\\in C$ and mobile $m\\in M$."
+description "Downlink attenuation factor between cell $c\\in C$ and mobile $m\\in M$"
 
 \end_inset
 
@@ -650,7 +650,7 @@ description "Downlink attenuation factor between cell $c\\in C$ and mobile $m\\i
 LatexCommand nomenclature
 prefix "S"
 symbol "$l_{mc}^{\\uparrow}$"
-description "Uplink attenuation factor between mobile $m\\in M$ and cell $c\\in C$."
+description "Uplink attenuation factor between mobile $m\\in M$ and cell $c\\in C$"
 
 \end_inset
 
@@ -698,7 +698,7 @@ The amount of power allocated to the pilot signal of cell
 LatexCommand nomenclature
 prefix "S"
 symbol "$p_{c}$"
-description "Pilot-power setting of cell $c\\in C$."
+description "Pilot-power setting of cell $c\\in C$"
 
 \end_inset
 
@@ -712,7 +712,7 @@ description "Pilot-power setting of cell $c\\in C$."
 LatexCommand nomenclature
 prefix "S"
 symbol "$P_{c}$"
-description "Set of candidate CPICH power settings for cell $c\\in C$."
+description "Set of candidate pilot power settings for cell $c\\in C$"
 
 \end_inset
 
@@ -744,7 +744,7 @@ Coverage
 \end_layout
 
 \begin_layout Standard
-An UE 
+A UE 
 \begin_inset Formula $m$
 \end_inset
 
@@ -757,7 +757,7 @@ An UE
 \end_inset
 
  covers it.
- Cell coverage is provided to an UE 
+ Cell coverage is provided to a UE 
 \begin_inset Formula $m$
 \end_inset
 
@@ -774,7 +774,7 @@ An UE
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{SINR}(c,m)$"
-description "Signal-to-interference ratio from cell $c\\in C$ to mobile $m\\in M$."
+description "Signal-to-interference ratio from cell $c\\in C$ to mobile $m\\in M$"
 
 \end_inset
 
@@ -791,7 +791,7 @@ description "Signal-to-interference ratio from cell $c\\in C$ to mobile $m\\in M
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\gamma^{\\mathrm{cov}}$"
-description "Signal-to-interference ratio coverage threshold."
+description "Signal-to-interference ratio coverage threshold"
 
 \end_inset
 
@@ -820,7 +820,7 @@ where
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{N}_0$"
-description "Thermal noise."
+description "Thermal noise"
 
 \end_inset
 
@@ -881,7 +881,7 @@ key "RadioNetworkPlanningAndOptimisationForUMTS"
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{cov}(c,m)$"
-description "Binary function to assert the coverage of a mobile $m\\in M$ from a cell $c\\in C$."
+description "Binary function to assert the coverage of a mobile $m\\in M$ from a cell $c\\in C$"
 
 \end_inset
 
@@ -899,7 +899,7 @@ A set, denoted as
 LatexCommand nomenclature
 prefix "S"
 symbol "$C_{m}$"
-description "Subset of cells, $C_m\\subset C$, that cover a mobile $m\\in M$."
+description "Subset of cells, $C_m\\subset C$, that cover a mobile $m\\in M$"
 
 \end_inset
 
@@ -907,7 +907,7 @@ description "Subset of cells, $C_m\\subset C$, that cover a mobile $m\\in M$."
 \begin_inset Formula $C_{m}\subset C$
 \end_inset
 
-, contains all the cells covering an UE 
+, contains all the cells covering a UE 
 \begin_inset Formula $m$
 \end_inset
 
@@ -925,7 +925,7 @@ description "Subset of cells, $C_m\\subset C$, that cover a mobile $m\\in M$."
 LatexCommand nomenclature
 prefix "S"
 symbol "$c_{m}^*$"
-description "Best-serving cell of mobile $m\\in M$."
+description "Best-serving cell of mobile $m\\in M$"
 
 \end_inset
 
@@ -962,7 +962,7 @@ key "chen2008automated,Siomina:Minimum.pilot.power.for.service.coverage"
 \end_inset
 
 .
- This assumption guarantees, that even under heavy user traffic, full coverage
+ This assumption guarantees that even under heavy user traffic full coverage
  of the service area is maintained, due to the cell-breathing principle
 \begin_inset space ~
 \end_inset
@@ -1165,7 +1165,7 @@ The first heuristic for setting the pilot power of all cells in the network
 \end_inset
 
 .
- An UE located on some pixel of the service area is always covered by the
+ A UE located on some pixel of the service area is always covered by the
  cell with the minimum path loss, i.e., the highest 
 \begin_inset Formula $l{}_{cm}^{\downarrow}$
 \end_inset
@@ -2429,8 +2429,8 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 \end_layout
 
 \begin_layout Standard
-Network configurations, that represent what could be an initial-network
- setup by common-planning standards
+Network configurations that represent what could be an initial-network setup
+ by common-planning standards
 \begin_inset space ~
 \end_inset
 
@@ -2441,7 +2441,7 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 
 \end_inset
 
-, were produced using the attenuation-based approach.
+ were produced using the attenuation-based approach.
  Such configurations can be easily calculated by a network planner.
  Table
 \begin_inset space ~
@@ -3868,16 +3868,28 @@ reference "tab:06-Optimization_results"
 \begin_inset Formula $_{1}$
 \end_inset
 
- improved the attenuation-based setting by more than 300%.
+ improved the attenuation-based setting by more than 300
+\begin_inset space ~
+\end_inset
+
+%.
  As for Net
 \begin_inset Formula $_{2}$
 \end_inset
 
-, the observed improvement is around 232%, while the improvement for Net
+, the observed improvement is around 232
+\begin_inset space ~
+\end_inset
+
+%, while the improvement for Net
 \begin_inset Formula $_{3}$
 \end_inset
 
- is more than 170%.
+ is more than 170
+\begin_inset space ~
+\end_inset
+
+%.
  
 \end_layout
 
@@ -3909,9 +3921,12 @@ key "Siomina:Minimum.pilot.power.for.service.coverage"
 
 \end_inset
 
-, an improvement of almost 3% can be observed in the solution provided by
- the parallel-agent approach, i.e., 0.778 against 0.759 for the average pilot
- power of Net
+, an improvement of almost 3
+\begin_inset space ~
+\end_inset
+
+% can be observed in the solution provided by the parallel-agent approach,
+ i.e., 0.778 against 0.759 for the average pilot power of Net
 \begin_inset Formula $_{6}$
 \end_inset
 
@@ -4568,7 +4583,7 @@ ion process.
 \begin_inset Formula $_{2}$
 \end_inset
 
-, that also shows a flat profile towards the end.
+ that also shows a flat profile towards the end.
  From the graph of Net
 \begin_inset Formula $_{3}$
 \end_inset
@@ -4600,7 +4615,11 @@ e solutions and no significant solution enhancement towards the end, can
  Indeed, this is the largest test network in terms of surface area.
  However, further investigation is needed to confirm this hypothesis.
  Nevertheless, the parallel-agent approach improved the pilot-power usage
- of this test network by almost 75%.
+ of this test network by almost 75
+\begin_inset space ~
+\end_inset
+
+%.
 \end_layout
 
 \begin_layout Standard
@@ -4863,8 +4882,8 @@ reference "tab:06-Performance_analysis"
 \end_layout
 
 \begin_layout Standard
-The function evaluation on the GPU, that communicates with the agents over
- MPI, provides the second measured setup.
+The function evaluation on the GPU that communicates with the agents over
+ MPI provides the second measured setup.
  The evaluator implementation takes advantage of shared memory for thread
  collaboration within a thread block and texture memory for constant elements,
  as is it was explained in Section

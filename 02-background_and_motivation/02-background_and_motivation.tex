@@ -1,5 +1,5 @@
 
-\chapter{Overview of optimization methods \label{chap:02-Optimization_models}}
+\chapter{Overview of Optimization Methods \label{chap:02-Optimization_models}}
 
 % First paragraph has no indentation.
 
@@ -19,7 +19,7 @@ computational time. In this respect, the field of mathematical optimization
 has received a lot of attention by the scientific community during
 the last decades. However, both ``good'' and ``reasonable'' are
 problem, application and context-specific concepts, in which the biggest
-challenge of selecting an appropiate optimization approach usually
+challenge of selecting an appropriate optimization approach usually
 lays.
 
 Mathematical optimization involves the process of finding solutions
@@ -38,7 +38,7 @@ objective function $f$ makes it possible to define a total order
 relation between any pair of solutions in $\Omega$.
 
 The search space $\Omega$ may also be expressed as a solution to
-a system of equalities or inequialities, e.g.:
+a system of equations or inequalities, e.g.:
 
 \begin{eqnarray}
 g(x_{1},\dots,x_{n}) & \leq & 0\nonumber \\
@@ -55,7 +55,7 @@ function also fall into this category, since:
 
 
 A point $\vec{x}^{*}$ is considered to be an unrestricted local minimum
-of a function $f$ if it holds a better value than all its neightbours,
+of a function $f$ if it holds a better value than all its neighbors,
 i.e., there exits $\epsilon>0$ so that:
 
 \begin{equation}
@@ -86,14 +86,14 @@ function $-f$, respectively.
 
 Gradient-based methods are among the oldest and most studied optimization
 approaches. They are based on the derivative of the optimized function,
-using the first and even the second derivate of a function $f$. The
-name gradient follows from the derivative of multidimensional functions,
-$\nabla f(\vec{x})$, which is simply a vector where each element
-is the slope of $\vec{x}$ in that dimension, i.e., $<\frac{\partial f}{\partial x_{1}},\dots,\frac{\partial f}{\partial x_{n}}>$~\cite{Luke-Essentials_of_metaheuristics:2009}.
+using the first and even the second derivative of a function $f$.
+The name gradient follows from the derivative of multidimensional
+functions, $\nabla f(\vec{x})$, which is simply a vector where each
+element is the slope of $\vec{x}$ in that dimension, i.e., $<\frac{\partial f}{\partial x_{1}},\dots,\frac{\partial f}{\partial x_{n}}>$~\cite{Luke-Essentials_of_metaheuristics:2009}.
 
 The principle behind gradient-based methods is rather simple. Starting
-from an arbitrary value for $x$, a substraction (or addition) of
-a small positive value is iteratively applied to it, e.g., for gradient
+from an arbitrary value for $x$, a subtraction (or addition) of a
+small positive value is iteratively applied to it, e.g., for gradient
 descent:
 
 \begin{equation}
@@ -104,7 +104,7 @@ x\leftarrow x-\alpha f'(x),
 \noindent where $\alpha$ is a small positive value, and $f'(x)$
 is the first derivative of $f(x)$. Consequently, a positive slope
 will make $x$ decrease, whereas a negative slope will make it increase.
-Figure~\ref{fig:02-gradient_descent} shows an example of this behaviour.
+Figure~\ref{fig:02-gradient_descent} shows an example of this behavior.
 Therefore, $x$ will gradually move down the function until it finds
 its minimum, where $f'(x)$ is zero, causing it to stop.
 
@@ -117,7 +117,7 @@ its minimum, where $f'(x)$ is zero, causing it to stop.
 \end{figure}
 
 
-However, gradient methods have certaing drawbacks that make them unsuitable
+However, gradient methods have certain drawbacks that make them unsuitable
 for tackling a wide range of optimization problems. Take, for example,
 the time they take to converge. As gradient descent approaches a function
 minimum, it will skip this point and land on the other side. In the
@@ -125,11 +125,11 @@ next step, something similar will happen, but this time from the other
 side of the minimum point, thus slowly approaching to the target in
 a ``zig-zag'' way. This behavior is directly related to the slope
 of the function at the given point, i.e., a steepest slope translates
-into a larger jump, and may be allivieatted by adjusting the value
-of $\alpha$. However, some functions (or regions of functions) may
-require smaller values, while for others a bigger value would be more
-appropiate. Newton's method improves this by taking the second derivative
-of the function, $f''(x)$, into account, i.e.:
+into a larger jump, and may be alleviated by adjusting the value of
+$\alpha$. However, some functions (or regions of functions) may require
+smaller values, while for others, a bigger value would be more appropriate.
+Newton's method improves this by taking the second derivative of the
+function, $f''(x)$, into account, i.e.:
 
 \begin{equation}
 x\leftarrow x-\alpha\frac{f'(x)}{f''(x)},
@@ -143,11 +143,11 @@ Another issue is how other points are handled. Beside maxima and minima
 points, some functions also contain saddle points (known as inflection
 points in one-dimensional functions). Clearly, the first derivative
 of a saddle point is zero, meaning gradient descent will stop looking
-for the minimum, even though it hasn't found it (see Figure~\ref{fig:02-gradient_descent_saddle_point}).
+for the minimum, even though it has not found it (see Figure~\ref{fig:02-gradient_descent_saddle_point}).
 Newton's method, on the other hand, does not help either, even trying
 to divide by zero in this case. These observations clearly show how
 gradient methods get caught in local optima. Local optima of a function
-is defined as the optima (or minima in this case) of a local region.
+are defined as the optima (or minima in this case) of a local region.
 Similarly, global optima are defined as the optima of the whole domain
 of a function. It follows that gradient methods, as gradient descent
 or Newton\textquoteright{}s method, are local optimization algorithms
@@ -163,10 +163,10 @@ or Newton\textquoteright{}s method, are local optimization algorithms
 \end{figure}
 
 
-But maybe the biggest concern with gradient-based methods is they
-assume the function under optimization is derivable. This assumption
+But maybe the biggest concern with gradient-based methods is that
+they assume the function under optimization is derivable. This assumption
 holds only when optimizing a well-formed mathematical function. Unfortunately,
-this is generally not true, since in most cases the gradient is not
+this is generally not true, since in most cases, the gradient is not
 computable because the function is not known. The only available approach
 in such situations is creating inputs to the function in order to
 assess their quality. Metaheuristics (see Section~\ref{sec:02-Metaheuristics})
@@ -178,7 +178,7 @@ and large instances.
 
 It was in the early 40s of the twentieth century, through the work
 of teams formed by mathematicians, economists and physicists, that
-the basis were established for the resolution of problems with a set
+the bases were established for the resolution of problems with a set
 of techniques known as linear and non-linear programming. Their initial
 goal was to solve different kinds of logistic problems during the
 second world war.
@@ -186,7 +186,7 @@ second world war.
 In a linear programming optimization problem, both the objective function
 $f$ and a given set of constraints are linear functions. The constraints
 impose restrictions over $\vec{x}$, i.e., they must meet certain
-requirements as, for example, fullfil a limited availability of resources.
+requirements as, for example, fulfill a limited availability of resources.
 A problem may be formulated as follows:
 
 \begin{equation}
@@ -205,7 +205,7 @@ A\cdot\vec{x} & \le & b\nonumber \\
 \noindent In the example above, the inequalities defined in \ref{eq:02-linear_programming_constraints}
 are the constraints to the linear program defined in \ref{eq:02-linear_programming_objective_function}.
 
-For solving continous, linear-optimization problems, efficient exact
+For solving continuous, linear-optimization problems, efficient exact
 algorithms exist, such as the simplex method \cite{Dantzig-Maximization_of_a_linear_function_of_variables_subject_to_linear_inequalities:1951}
 or the interior-points method \cite{Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984}.
 Indeed, linear programming is one of the most satisfactory models
@@ -222,7 +222,7 @@ example with several constraints.
 \includegraphics[width=0.55\textwidth]{02-background_and_motivation/img/linear_programming}
 
 \caption{Graphical representation of a linear-programming example with two
-constraints, $c_{1}$ and $c_{2}$. The greyed area is the polytope
+constraints, $c_{1}$ and $c_{2}$. The grayed area is the polytope
 representing the region of feasible solutions. \label{fig:02-linear_programming_example}}
 \end{figure}
 
@@ -258,7 +258,7 @@ are meant to find good solutions to a given problem, for which the
 mathematical function is not available or its search space is big
 enough for an exhaustive search to be unfeasible~\cite{Kochenberger_Handbook_of_metaheuristics:2003}.
 
-From the theorical point of view, metaheuristics represent a subset
+From the theoretical point of view, metaheuristics represent a subset
 of stochastic optimization, since they use some degree of randomness
 to find optimal (or as good as possible) solutions to hard problems.
 They are the most general of this kind of algorithms, and are applied
@@ -295,15 +295,15 @@ called intensification) and the exploration of the search space (commonly
 called diversification)~\cite{Blum-Metaheuristics_in_combinatorial_optimization_overview_and_coconceptual_comparison:2003}.
 This balance provides the necessary means to quickly identify promising
 regions, and early discarding those which have already been explored
-or don't provide solutions of better quality. Promising regions within
+or do not provide solutions of better quality. Promising regions within
 the search space, which are identified by the obtained ``good''
-solutions, are thoughfully explored during the intensification phase,
+solutions, are thoughtfully explored during the intensification phase,
 hoping to find better solutions. On the other hand, during the diversification
 phase, not-yet-visited regions are explored, making sure the search
-space as a whole is evenly explored, thus avoid confining the search
-to a reduced number of regions. In this context, the ultimate search
-algorithm in terms of diversification is random search. Random search
-generates a random solution in the search space at each iteration,
+space as a whole is evenly explored, thus confining the search to
+a reduced number of regions is avoided. In this context, the ultimate
+search algorithm in terms of diversification is random search. Random
+search generates a random solution in the search space at each iteration,
 without using memory~\cite{Talbi_Metaheuristics:2009}. In terms
 of intensification, iterated local search~\cite{Lourencco-Iterated_local_search:2003}
 is a representative algorithm. The steepest local search algorithm
@@ -318,7 +318,7 @@ itself. A feasible or acceptable time may vary from some seconds to
 several months, again, depending on the target optimization problem,
 e.g., real-time decisions against structural-design problems.
 
-Based on the characterization given by Talbi \cite{Talbi-Metaheuristics_from_design_to_implementation:2009},
+Based on the characterization given by Talbi~\cite{Talbi_Metaheuristics:2009},
 a summary of the essential properties of optimization problems that
 justify the use of metaheuristics follows:
 \begin{itemize}
@@ -329,7 +329,7 @@ due to the size of the instances.
 has to be found online. Metaheuristics appear as an alternative to
 exact algorithms in order to reduce the search time.
 \item A difficult problem of moderate size, which input instances have an
-intrincate structure.
+intricate structure.
 \item Optimization problems with time-consuming objective function(s) and/or
 constraints. Indeed, various real-world optimization problems are
 characterized by the huge computational cost of the objective functions.
@@ -351,7 +351,7 @@ more accurate models of real-world problems in engineering and science.
 \bigskip{}
 
 
-Related literature groups metaheuristic algorithms due to their behaviour,
+Related literature groups metaheuristic algorithms due to their behavior,
 for example:
 \begin{itemize}
 \item differential evolution, from the family of evolutionary algorithms;
@@ -361,16 +361,16 @@ algorithms; and
 \end{itemize}
 Each of these algorithms minimize an objective-function value by adopting
 essentially distinct approaches. In the following sections, a short
-description about their functioning is given.
+description of their functioning is given.
 
 
 \subsection{Differential evolution \label{sub:02-DE}}
 
-Differential Evolution~(DE\nomenclature[A]{DE}{Differential evolution.})~\cite{storn1997_Differential_evolution}
+Differential Evolution~(DE\nomenclature[A]{DE}{Differential evolution})~\cite{storn1997_Differential_evolution}
 is a simple and powerful evolutionary algorithm proposed for numerical
 optimization. The version of DE used for this thesis is known as DE/rand/1/bin,
 or \textquotedbl{}classic DE\textquotedbl{}~\cite{Price-Differential_evolution_a_practical_approach:2005}.
-At the beggining, the classic DE initializes a population of $N$,
+At the beginning, the classic DE initializes a population of $N$,
 $D$-dimensional vectors with parameter values that are distributed
 with random uniformity between pre-specified lower and upper initial
 parameter bounds, $x_{i,\mathrm{{low}}}$ and $x_{i,\mathrm{{high}}}$,
@@ -383,13 +383,14 @@ i & = & (1,2,...,D),\, j=(1,2,...,N),\, g=0.\label{eq:02-DE_structure}
 \end{eqnarray}
 
 
-\noindent In Equation~(\ref{eq:02-DE_structure}), $g$ denotes the
-generation index, while $i$ and $j$ indicate the parameter and population
-indices, respectively. Consequently, $x_{i,j,g}$ is the $i^{\mathrm{th}}$
-parameter of the $j^{\mathrm{th}}$ population vector in generation
-$g$. The (pseudo)-random number generator is represented by a function
-``$\mathrm{{uniform}[0,1)}$'', that selects a uniformly-distributed
-random number from the interval $[0,1)$.
+\noindent In Equation~(\ref{eq:02-DE_structure}), $g$\nomenclature[S]{$g$}{Generation index in DE}
+denotes the generation index, while $i$ and $j$ indicate the parameter
+and population indices, respectively. Consequently, $x_{i,j,g}$ is
+the $i^{\mathrm{th}}$ parameter of the $j^{\mathrm{th}}$ population
+vector in generation $g$. The (pseudo)-random number generator is
+represented by a function ``$\mathrm{{uniform}[0,1)}$''\nomenclature[S]{$\mathrm{{uniform}[0,1)}$}{Function representing a uniformly-distributed random number from the interval [0,1)}
+that selects a uniformly-distributed random number from the interval
+$[0,1)$.
 
 DE generates solutions by applying the mutation and cross-over operations.
 A vector from the current population is mutated by adding the scaled
@@ -405,10 +406,12 @@ value than the $j^{\mathrm{th}}$ population vector, otherwise the
 $j^{\mathrm{th}}$ vector is kept for at least one more generation.
 
 The four parameters to control the search process of DE are: the population
-size ($NP$), the number of generations for the algorithm to run ($G_{max}$),
-the crossover constant ($CR$), and the mutation scaling factor ($F$).
+size ($NP$\nomenclature[S]{$NP$}{Population size in DE}), the number
+of generations for the algorithm to run ($g_{\mathrm{max}}$\nomenclature[S]{$g_{\mathrm{max}}$}{Number of generations for DE to run}),
+the crossover constant ($CR$\nomenclature[S]{$CR$}{Crossover constant in DE}),
+and the mutation scaling factor ($F$\nomenclature[S]{$F$}{Mutation scaling factor in DE}).
 
-An extensive description of DE and its variants may be found in~\cite{price2005differential_evolution}.
+An extensive description of DE and its variants may be found in~\cite{Price-Differential_evolution_a_practical_approach:2005}.
 A wide range of optimization problems have been solved by applying
 DE~\cite{das2010_differential_evolution_state_of_the_art}, also
 in the area of radio-network optimization~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,DaSilva-Analysis_of_parameter_settings_for_differential_evolution:2008,Mendes-A_differencial_evolution_algorithm_to_optimize_the_radio_network_design:2006}.
@@ -416,9 +419,9 @@ in the area of radio-network optimization~\cite{Benedicic_Balancing_downlink_upl
 
 \subsection{Differential ant-stigmergy algorithm \label{sub:02-DASA}}
 
-The Differential Ant-Stigmergy Algorithm~(DASA\nomenclature[A]{DASA}{Differential ant-stigmergy algorithm.})~\cite{korosec2010_DASA}
-is based on the metaheuristic Ant-Colony Optimization (ACO\nomenclature[A]{ACO}{Ant-colony optimization.})~\cite{dorigo2006ant_colony_optimization}.
-ACO was pioneered by Dorigo in 1992 and is based on the foraging behaviour
+The Differential Ant-Stigmergy Algorithm~(DASA\nomenclature[A]{DASA}{Differential ant-stigmergy algorithm})~\cite{korosec2010_DASA}
+is based on the metaheuristic Ant-Colony Optimization (ACO\nomenclature[A]{ACO}{Ant-colony optimization})~\cite{dorigo2006ant_colony_optimization}.
+ACO was pioneered by Dorigo in 1992 and is based on the foraging behavior
 of social ants, which use pheromone as a chemical messenger. When
 looking for a food source, a swarm of ants interacts in their local
 environment. An ant is able to follow the route marked with pheromone
@@ -459,10 +462,12 @@ solutions, they are evaluated to establish if any of them is better
 than the best solution found so far.
 
 There are six parameters that control the way DASA explores the search
-space: the number of ants ($m$), the discrete base ($b$), the pheromone
-dispersion factor ($\rho$), the global scale-increasing factor ($s_{+}$),
-the global scale-decreasing factor ($s_{-}$), and the maximum parameter
-precision ($\epsilon$).
+space: the number of ants ($m$\nomenclature[S]{$m$}{Number of ants in DASA}),
+the discrete base ($b$\nomenclature[S]{$b$}{Discrete base in DASA}),
+the pheromone dispersion factor ($\rho$\nomenclature[S]{$\rho$}{Pheromone dispersion factor in DASA}),
+the global scale-increasing factor ($s_{+}$\nomenclature[S]{$s_{+}$}{Global scale-increasing factor in DASA}),
+the global scale-decreasing factor ($s_{-}$\nomenclature[S]{$s_{-}$}{Global scale-decreasing factor in DASA}),
+and the maximum parameter precision ($\epsilon$\nomenclature[S]{$\epsilon$}{Maximum parameter precision in DASA}).
 
 A more in-depth explanation about these parameters and the DASA algorithm
 itself can be found in~\cite{korosec2010_DASA}.
@@ -474,12 +479,12 @@ This metaheuristic was introduced in the area of combinatorial optimization
 by Kirkpatrick et al.~\cite{Kirkpatrick_OptimizationBySimulatesAnnealing}.
 The algorithm resembles the physical annealing process, where particles
 of a solid material arrange themselves into a thermal equilibrium.
-Simulated Annealing~(SA\nomenclature[A]{SA}{Simulated annealing.})
+Simulated Annealing~(SA\nomenclature[A]{SA}{Simulated annealing})
 is based on the principle of local-search heuristics, and uses a pre-defined
 neighborhood structure on the search space $\Omega$. The temperature
 parameter controls the search behavior. Its name follows the analogy
 to the physical annealing process. In each iteration, a solution $y$,
-which is a neighbour of the current solution $x$, is computed. If
+which is a neighbor of the current solution $x$, is computed. If
 $y$ has a better objective-function value than $x$, it becomes the
 new solution, i.e., the current solution $x$ is replaced by $y$.
 If, on the other hand, $y$ has a worse objective-function value than
@@ -499,7 +504,7 @@ $T_{1},T_{2},...$ represent an usually decreasing sequence of values
 for the temperature parameter, and ``$\mathrm{{uniform}[0,1]}$''
 is a function for selecting a uniformly-distributed random number
 from the given interval, whereas the meaning of the rest of the symbols
-is as defined above. 
+is as defined above.
 
 \begin{algorithm}
 \centering
@@ -524,22 +529,22 @@ is as defined above.
 
 
 SA has two parameters to control the search process: the initial temperature
-($t_{initial}$) and the total number of iterations or evaluations
-($it$). SA also allows to define the way the temperature is lowered
-during the annealing process.
+($t_{\mathrm{initial}}$\nomenclature[S]{$t_{\mathrm{initial}}$}{Initial temperature in SA})
+and the total number of iterations or evaluations ($it$\nomenclature[S]{$it$}{Maximum number of iterations in SA}).
+SA also allows to define the way the temperature is lowered during
+the annealing process.
 
 SA has proved to be a solid optimization algorithm, capable of giving
 high-quality solutions to a wide scope of optimization problems~\cite{Suman_SurveyOfSimulatedAnnealing}.
 Additionally, several works employ the SA metaheuristic for solving
-optimization problems in the area of radio network~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Duque-Channel_assignment_for_cellular_radio_using_simulated_annealing:1993,CPICH.optimization:2003,minimum.set.covering.problem:2000,Coverage.optimization.on.CPICH.tilt.and.azimuth:2006,Zhang-Mathematical_modelling_and_comparisons_of_heuristics_for_WCDMA_radio_planning:2006}.
-A detailed description about SA and its applications can be found
-in~\cite{Van-Simulated_annealing:1987}.
+optimization problems in the area of radio network~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Duque-Channel_assignment_for_cellular_radio_using_simulated_annealing:1993,GarciaLozano_CPICHPowerOptimisationByMeansOfSimulatedAnnealingInAnUTRAFDDEnvironment,minimum.set.covering.problem:2000,Coverage.optimization.on.CPICH.tilt.and.azimuth:2006,Zhang-Mathematical_modelling_and_comparisons_of_heuristics_for_WCDMA_radio_planning:2006}.
+A detailed description of SA and its applications can be found in~\cite{Van-Simulated_annealing:1987}.
 
 
 \section{Black-box optimization \label{sub:02-Black_box_optimization}}
 
 The complexity of a problem is equivalent to the complexity of the
-best known algorithm solving that problem~\cite{Talbi-Metaheuristics_from_design_to_implementation:2009}.
+best known algorithm solving that problem~\cite{Talbi_Metaheuristics:2009}.
 If there exists a polynomial-time algorithm to solve a problem, the
 problem is said to be easy or tractable. Similarly, if a problem is
 difficult or intractable, there is no known polynomial-time algorithm
@@ -551,8 +556,8 @@ a black box \cite{Kargupta-Search_blackbox_optimization_and_sample_complexity:19
 This is one of the main advantages when using metaheuristics, i.e.,
 there is no need of a complete knowledge of the targeted model. Indeed,
 in a black-box optimization, no analytical formulation of the objective
-exists \cite{Talbi-Metaheuristics_from_design_to_implementation:2009},
-as Figure \ref{fig:02-black_box_optimization} shows.
+exists~\cite{Talbi_Metaheuristics:2009}, as Figure \ref{fig:02-black_box_optimization}
+shows.
 
 \begin{figure}
 \centering
@@ -565,15 +570,15 @@ evaluation, $f(x)$, of a solution, $x$. \label{fig:02-black_box_optimization}}
 
 
 More specifically, a function $f(\vec{x})$, $\vec{x}\in\mathbb{R}^{n}$,
-is a black-box function if and only if~\cite{Talbi-Metaheuristics_from_design_to_implementation:2009}:
+is a black-box function if and only if~\cite{Talbi_Metaheuristics:2009}:
 \begin{itemize}
 \item the domain $\vec{x}$ is known,
 \item it is possible to get the value of $f$ for each $\vec{x}$ based
 on simulation, and
 \item there is no other information available for function $f$.
 \end{itemize}
-Typically, the experiments associated with these kind of problems
-are very expensive in terms of time and cost, since a simulation must
+Typically, the experiments associated with this kind of problems are
+very expensive in terms of time and cost, since a simulation must
 be forced to evaluate the solution. Generally speaking, the most time-consuming
 part of a metaheuristic optimization process is the evaluation of
 the objective function~\cite{Talbi_Metaheuristics:2009}. This is
@@ -581,12 +586,12 @@ especially true when dealing with real-world problems of areas such
 as structural design~\cite{Barthelemy-Approximation_concepts_for_optimum_structural_design:1993},
 molecular docking~\cite{Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction:2007}
 and, the field on which this thesis focuses, radio-network design~\cite{Benedicic_Pilot.power.optimization:2010,Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013,Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013,Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013}.
-A possible subtitution for lenghty evaluations is to reduce their
+A possible substitution for lengthy evaluations is to reduce their
 complexity by approximating the objective function, thus replacing
 it with an approximation during the optimization process. This approach
 is known as meta-modeling~\cite{Talbi_Metaheuristics:2009}. However,
 when dealing with approximations, some degree of solution quality
-is inevitably sacrified. As it will be shown in the following chapters,
+is inevitably sacrificed. As it will be shown in the following chapters,
 there is a very fine balance between the number of evaluations and
 the quality of the achieved solutions. Consequently, reducing the
 time spent in objective-function evaluation should favorably influence
@@ -604,17 +609,17 @@ presents a problem. In the context of research about radio-network
 optimization there is an inherent difficulty of providing the black-box
 used to evaluate a given approach. A quick review of the state-of-the-art
 in radio-network optimization indicates that this fact has become
-increasingly regular in several published works~\cite{amaldi2007radio_planning,chen2008automated,chen2009fast,gordejuela2009two,siomina2008enhancing,siomina2007minimum_pilot_power}.
+increasingly popular in several published works~\cite{Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,chen2008automated,Chen-Fast_algorithm_for_large_scale_UMTS_coverage_planning:2009,Antenna.azimuth.tilt:2009,Antenna.Configuration:2008,Siomina:Minimum.pilot.power.for.service.coverage}.
 Clearly, this fact creates a barrier to one of the most important
 phases of scientific methodology: experimental reproducibility~\cite{gauch2002scientific}. 
 
 There are several reasons behind this situation. For example, it is
-a known fact that proprierary software, providing good computational
+a known fact that proprietary software, providing good computational
 models for radio-network simulation, is a very expensive tool for
 science. Even neglecting the economical aspect, but considering the
 great variety of software packages and license combinations, it is
 practically impossible for a research laboratory to have the whole
-pallete of commercially-available solutions at its disposal. Moreover,
+palette of commercially-available solutions at its disposal. Moreover,
 genuine users of these applications are generally not allowed to mention
 the formats, protocols, or algorithms used by the proprietary software,
 since their disclosure is often explicitly forbidden by restrictive
@@ -624,33 +629,33 @@ Some non-commercial and open-source packages for radio-network simulation~\cite{
 present two main drawbacks: poor documentation and/or low scalability.
 The scalability issues shown by some projects prevent these packages
 to be used in larger, real-world environments, where big problem instances
-are the rule. Despite this, the merit and acknowledgement go to the
+are the rule. Despite this, the merit and acknowledgment go to the
 authors of these frameworks, not only for providing them to the scientific
-community, but fundamentaly because for providing an environment in
+community, but fundamentally because of providing an environment in
 which different kinds of simulations are completely reproducible.
 Additionally, the lack of documentation represents a big hurdle for
 extending the base code, which becomes a difficult task without the
 help of the original authors of the package. In such cases, author's
-knowledge is required for effectivelly expanding the functionality
+knowledge is required for effectively expanding the functionality
 of an open-source tool. This is especially true when dealing with
 complex simulation frameworks, as the ones used for radio networks.
 
 
-\chapter{Principles of mobile radio networks \label{chap:02-Principles_of_mobile_radio_networks}}
+\chapter{Principles of Mobile Radio Networks \label{chap:02-Principles_of_mobile_radio_networks}}
 
 A cellular mobile radio network is a collection of individual cells
-that are served by several transmitters, called Base Stations~(BSs\nomenclature[A]{BS}{Base station.}).
+that are served by several transmitters, called Base Stations~(BSs\nomenclature[A]{BS}{Base station}).
 Each BS gives radio coverage to a small geographical area. The integration
 of the coverage of various BSs provides radio coverage over a much
 larger geographical area, thus defining a cellular radio network.
 The two basic functions of a radio-network system are: 
 \begin{itemize}
-\item locate and track both active and idle mobile devices, called User
-Equipments~(UEs\nomenclature[A]{UE}{User equipment.}); and
-\item attempt to connect each UE to the best available BS.
+\item to locate and track both active and idle mobile devices, called User
+Equipments~(UEs\nomenclature[A]{UE}{User equipment}); and
+\item to attempt to connect each UE to the best available BS.
 \end{itemize}
 The first task involves a location-update procedure, which allows
-an UE to inform the network about its movement from one location area
+a UE to inform the network about its movement from one location area
 to the next. This process is called mobility management. The second
 task requires the constant evaluation of the radio-link quality with
 the serving BS, and the radio-link qualities of alternate BSs. This
@@ -658,7 +663,7 @@ process is called radio-resource management, and is performed by the
 network using knowledge about the link-quality evaluations of the
 reference channels, e.g., the pilot channels.
 
-The radio communications between an UE and a grid of BSs use low power.
+The radio communications between a UE and a grid of BSs use low power.
 However, the movement of the UE causes highly irregular radio-link
 conditions, thus consistent monitoring and precise control are required
 to keep the radio-link quality at an acceptable level. At the core
@@ -679,13 +684,13 @@ increased spectral efficiency and traffic-carrying capacity. The radio
 links of a high-capacity radio network interfere with each other due
 to frequency reuse. For this reason, it is always desirable to use
 the lowest possible transmit power while maintaining each radio link
-above a given Quality-of-Service~(QoS\nomenclature[A]{QoS}{Quality of service.})
+above a given Quality-of-Service~(QoS\nomenclature[A]{QoS}{Quality of service})
 threshold. Therefore, radio links should not significantly exceed
 their target QoS, since doing so will cause unnecessary interference
 to other radio links~\cite{Stuber-Principles_of_mobile_communication:2011}.
 This particular situation is further discussed in Chapter~\ref{chap:06-Experimental-evaluation-the-service-coverage-problem},
-where an optimization approach, that minimizes the total transmit
-power used in a radio network, is presented.
+where an optimization approach that minimizes the total transmit power
+used in a radio network is presented.
 
 
 \section{Handover \label{sub:02-Handover-and-soft-handover}}
@@ -696,8 +701,8 @@ The concept behind the handover operation is simple: when a UE moves
 from the coverage area of a cell to the coverage area of a neighboring
 cell, the system creates a new connection with the latter cell and
 disconnects the user from the former one, so that an acceptable link
-quality can be maintained. Otherwise, the increase in transmit power,
-that is required to compensate for path loss, results in excessive
+quality can be maintained. Otherwise, the increase in transmit power
+that is required to compensate for path loss results in excessive
 interference. The handover procedure consists of two processes~\cite{Stuber-Principles_of_mobile_communication:2011}:
 \begin{itemize}
 \item the link-quality evaluation before handover initiation, and
@@ -717,7 +722,7 @@ interference and/or excessive control traffic~\cite{Stuber-Principles_of_mobile_
 
 \subsection{Hard handover}
 
-During a hard handover, an UE can connect to only one BS at a time.
+During a hard handover, a UE can connect to only one BS at a time.
 A unique decision initiates and executes a handover without making
 a number of simultaneous connections among candidate BSs. Based on
 link measurements, the target BS is selected prior to executing the
@@ -728,14 +733,14 @@ a time. In contrast to soft handover (see next section), hard handovers
 do not take advantage of the diversity gain, where the signals from
 two or more BSs arrive at comparable strengths. Hard handover is a
 simple and inexpensive way to support UE mobility. It is used in Time-Division,
-Multiple-Access (TDMA\nomenclature[A]{TDMA}{Time division multiple access.})
+Multiple-Access (TDMA\nomenclature[A]{TDMA}{Time division multiple access})
 cellular systems such as GSM~\cite{Stuber-Principles_of_mobile_communication:2011}.
 
 
 \subsection{Soft handover}
 
-Soft Handover~(SHO\nomenclature[A]{SHO}{Soft handover.}) enhances
-handover functionality by allowing an UE to potentially operate on
+Soft Handover~(SHO\nomenclature[A]{SHO}{Soft handover}) enhances
+handover functionality by allowing a UE to potentially operate on
 multiple radio links at a time (see Figure~\ref{fig:02-SHO_example}).
 During SHO, the target BS is selected as the best candidate from among
 the available BSs. The UE performs the necessary link-quality measurements
@@ -751,8 +756,8 @@ such that there are many UEs in SHO mode, the increased interference
 due to several BSs connected to the same UE can become a problem~\cite{Stuber-Principles_of_mobile_communication:2011}.
 
 The SHO procedure is important in systems using the channel-access
-method known as Code Division Multiple Access~(CDMA\nomenclature[A]{CDMA}{Code division multiple access.}),
-and especially in the Wideband CDMA~(WCDMA\nomenclature[A]{WCDMA}{Wideband code division multiple access.}),
+method known as Code Division Multiple Access~(CDMA\nomenclature[A]{CDMA}{Code division multiple access}),
+and especially in the Wideband CDMA~(WCDMA\nomenclature[A]{WCDMA}{Wideband code division multiple access}),
 which is employed by the UMTS. CDMA systems are interference-limited
 meaning their capacities are closely related to the level of interference
 they can tolerate. Specifically, a CDMA system cell is affected by
@@ -785,32 +790,32 @@ The SHO condition depends on the relative, received-signal quality
 from different cells and the SHO window, which triggers the addition
 of a cell to the active set of the UE. Depending on radio propagation
 characteristics, the radio transmission can gain more than 3~dB out
-of a SHO situation \cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
+of a SHO situation~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
 From this point of view, SHO is a method to reduce interference and
 improve radio quality, particularly at the cell border where the radio
-coverage is of inferior quality. In UMTS Release 99 \cite{3GPP_R99},
+coverage is of inferior quality. In UMTS Release 99~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications},
 SHO is specified to work from the BS towards the UE (downlink), and
 from the UE towards the BS (uplink).
 
-With the introduction of the High Speed Packet Access~(HSPA\nomenclature[A]{HSPA}{High Speed Packet Access.})
+With the introduction of the High Speed Packet Access~(HSPA\nomenclature[A]{HSPA}{High speed packet access})
 as an improvement of the performance existing in WCDMA protocols,
 the role SHO plays in mobile network configuration and functioning
 slightly changed. The key difference is that the High Speed Downlink
-Packet Access~(HSDPA\nomenclature[A]{HSDPA}{High Speed Downlink Packet Access.})
-does not support SHO, whereas the High Speed Uplink Packet Access~(HSUPA\nomenclature[A]{HSUPA}{High Speed Uplink Packet Access.})
+Packet Access~(HSDPA\nomenclature[A]{HSDPA}{High speed downlink packet access})
+does not support SHO, whereas the High Speed Uplink Packet Access~(HSUPA\nomenclature[A]{HSUPA}{High speed uplink packet access})
 does. This particular distinction is further discussed in Chapter~\ref{chap:07-Experimental-evaluation-the-SHO-alignment-problem},
 because it has some important implications in the balanced distribution
 of SHO areas, and thus in the quality and capacity of HSPA services~\cite{holma2006hsdpa}.
 
 
-\chapter{Overview of radio-network optimization \label{chap:02-Optimization_of_radio_networks}}
+\chapter{Overview of Radio-Network Optimization \label{chap:02-Optimization_of_radio_networks}}
 
 Once a radio network is launched, an important part of its operation
 and maintenance deals with monitoring its quality characteristics.
 With the evolution of mobile communications, the complexity of network
 planning has grown along with its throughput capacity, thus making
 it practically impossible to plan modern radio networks with traditional
-methods. In this sense, an examination of coloured coverage maps in
+methods. In this sense, an examination of colored coverage maps in
 conjunction with some statistical analysis are no longer appropriate
 tools for troubleshooting a network. Moreover, since real-world radio
 networks are large and many of their configuration parameters are
@@ -818,13 +823,13 @@ interdependent, an engineer is not able to cope with the level of
 complexity present in these systems. For this reason, the computer,
 along with specialized software, guides the engineer to the most appropriate
 configuration for the network. In the context of this thesis, this
-process is refered to as radio-network optimization.
+process is referred to as radio-network optimization.
 
 Radio-network optimization may be divided into two fundamental phases:
 analysis and decision~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006}.
-The analysis phase consists on the examination of the network performance,
+The analysis phase consists of the examination of the network performance,
 which mainly focuses on the definition and collection of Key-Performance
-Indicators (KPIs\nomenclature[A]{KPI}{Key performance indicator.}).
+Indicators (KPIs\nomenclature[A]{KPI}{Key performance indicator}).
 KPIs are quantifiable measurements that reflect different network-quality
 factors. The second phase deals with the decision making, based on
 the analytical results collected in the previous phase, about changing
@@ -848,10 +853,10 @@ repeated until the achieved results are acceptable. \label{fig:Optimization-cycl
 
 
 Since radio networks are increasingly more sophisticated, the need
-for optimization methods that are capable of copeing with greater
+for optimization methods that are capable of dealing with greater
 complexity is far from declining. Indeed, several radio-network optimization
 problems were shown to be NP-hard, since the computational time grows
-non-polynomially with the problem size~\cite{Amaldi-Planning_UMTS_base_station_locations:2003,Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Gordejuela-LTE_access_network_planning_and_optimization:2009,Han-Optimizing_cell_size_for_energy_saving_in_cellular_networks:2012,Lee-Proportional_fair_frequency_domain_packet_scheduling_for_LTE_uplink:2009,Razavi-Performance_improvement_of_LTE_tracking_area_design:2008,Siomina-Minimum_pilot_power_for_service_coverage:2007}.
+non-polynomially with the problem size~\cite{Amaldi-Planning_UMTS_base_station_locations:2003,Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Gordejuela-LTE_access_network_planning_and_optimization:2009,Han-Optimizing_cell_size_for_energy_saving_in_cellular_networks:2012,Lee-Proportional_fair_frequency_domain_packet_scheduling_for_LTE_uplink:2009,Razavi-Performance_improvement_of_LTE_tracking_area_design:2008,Siomina:Minimum.pilot.power.for.service.coverage}.
 As described in~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006},
 there are other reasons directly related with the growth of already
 deployed networks that also increase the need for optimization methods:
@@ -886,10 +891,10 @@ the network functioning is used.
 \bigskip{}
 
 
-In the following, an overview of some well-known optimization problems
-for radio-mobile networks is given. Each section describes an optimization
-problem, and presents a short survey of recently proposed optimization
-methods for solving them.
+Bellow, an overview of some well-known optimization problems for radio-mobile
+networks is given. Each section describes an optimization problem,
+and presents a short survey of recently proposed optimization methods
+for solving them.
 
 
 \section{Optimizing base-station locations}
@@ -951,7 +956,7 @@ problem. The presented results showed the feasibility of the proposed
 approach. 
 
 Mathar and Niessen~\cite{minimum.set.covering.problem:2000} proposed
-a hibrid method that combines a linear-programming approach with SA.
+a hybrid method that combines a linear-programming approach with SA.
 The SA algorithm substituted linear programming whenever an exact
 solution was out of reach because of the complexity of the problem
 instance.
@@ -984,7 +989,7 @@ of the main antenna beam relative to the horizontal plane. Both of
 these parameters have a great influence on network quality, although
 the antenna tilt usually requires less effort to implement, since
 most modern radio networks already support remote electrical tilt~\cite{Athley-Impact_of_electrical_tilt_on_LTE_performance:2010}.
-The adjustment of these two parameters optimize some important aspects
+The adjustment of these two parameters optimizes some important aspects
 of the network, e.g.:
 \begin{itemize}
 \item the path loss between the BS and the UE,
@@ -1082,7 +1087,7 @@ f_{\mathrm{cov}}=\frac{A_{\mathrm{covered}}}{A_{\mathrm{total}}},
 \]
 
 
-\noindent \nomenclature[S]{$A_{\mathrm{covered}}$}{Area under service coverage of the mobile network.}\nomenclature[S]{$A_{\mathrm{total}}$}{Complete geographical area under optimization.}
+\noindent \nomenclature[S]{$A_{\mathrm{covered}}$}{Area under service coverage of the mobile network}\nomenclature[S]{$A_{\mathrm{total}}$}{Complete geographical area under optimization}
 
 \noindent where $A_{\mathrm{covered}}$ represents the area covered
 by the network and $A_{\mathrm{total}}$ represents the total area
@@ -1091,7 +1096,7 @@ the proportion of the total area that is actually under network coverage,
 the value of which ranges from 0 (no coverage) to 1 (total coverage).
 
 The area under optimization is usually divided into squares (or pixels)
-of a certain size, creating a Regular Square Grid (RSG\nomenclature[A]{RSG}{Regular square grid.})
+of a certain size, creating a Regular Square Grid (RSG\nomenclature[A]{RSG}{Regular square grid})
 of a certain resolution. A pixel is considered covered if a given
 QoS measure is above a defined threshold. It is also common to use
 a binary function to check the coverage of a given pixel. The function
@@ -1121,7 +1126,7 @@ coverage. The framework input is a collection of KPIs, including usage
 statistics and UE field measurements. The authors used the experimental
 results to provide a projection for the LTE self-optimization functionality.
 
-In~\cite{Thampi-A_sparse_sampling_algorithm_for_self_optimisation_of_coverage_in_LTE_networks:2012},
+In~\cite{Thampi-A_sparse_sampling_algorithm_for_self_optimization_of_coverage_in_LTE:2012},
 the authors introduced a sparse-sampling algorithm to optimize the
 coverage of LTE networks by means of antenna tilt. By applying a reinforcement-learning
 technique, their approach optimizes coverage without prior knowledge
@@ -1131,7 +1136,7 @@ Parkinnen et al.~\cite{Coverage.optimization.with.cost.function:2002}
 presented a gradient-descent method to minimize an objective function
 that combines some KPIs with the service coverage. The power of the
 pilot signal of the cells is periodically updated in order to improve
-the afore-mentioned function.
+the aforementioned function.
 
 
 \section{Discussion}
@@ -1146,7 +1151,7 @@ As a direct consequence, an increase in running time is commonly observed.
 The implementation effort of genetic algorithms is to some degree
 higher than for simpler search methods, e.g., local search, but their
 inherent structure makes parallel implementations rather simple. Additionally,
-genetic algorithms are less likely of being trapped in local optima,
+genetic algorithms are less likely to be trapped in local optima,
 since they are a population-based metaheuristic.
 \item [{Linear~programming}] Linear-integer or mixed-integer programming
 are widely used in different optimization areas and there are many
@@ -1160,15 +1165,15 @@ SA, tabu search or gradient descent, usually represent a compromise
 between running time and quality of results. Their effectiveness relies
 on evaluating a great number of alternative solutions. The number
 of parameters taken into account, as well as the evaluation precision,
-directly influence their running time. These methods don't excel in
-full simulation scenarios. Moreover, some of them are easily trapped
+directly influence their running time. These methods do not excel
+in full simulation scenarios. Moreover, some of them are easily trapped
 in local minima.
 \end{description}
 
 \section{Summary}
 
 The variety of optimization problems described in the previous sections
-differ in many aspect, like implementation, running time and solution
+differ in many aspects, like implementation, running time and solution
 quality. Picking the right method for a given situation depends on
 the optimization task and the desired results. Since computational
 time is usually an important restriction, simpler and faster methods
@@ -1191,27 +1196,27 @@ be useful to apply a local search method at the end to find better
 solutions in the proximity of a current one.
 
 
-\chapter{Principles of GPU programming \label{chap:02-Principles_of_GPU_programming}}
+\chapter{Principles of GPU Programming \label{chap:02-Principles_of_GPU_programming}}
 
 During the past few years, the computing industry has been delivering
 extra processing power in the form of parallel computing, i.e., more
 cores instead of higher-frequency rates. Concurrently to this situation,
 new hardware architectures have appeared. Among them is the programmable
-Graphics Processing Unit (GPU\nomenclature[A]{GPU}{Graphics processing unit.}),
+Graphics Processing Unit (GPU\nomenclature[A]{GPU}{Graphics processing unit}),
 the computing capacity of which is already showing a faster progress
 compared to CPUs. The peak performance of the latest GPU is several
 times higher than the latest CPU, but even more important is the trend~\cite{Cruz-How_to_obtain_efficient_GPU_kernels:2011}.
 
 The GPU market was almost exclusively driven by the games industry.
 This fact makes this commodity hardware cheaper than other alternatives
-for High-Performance Computing (HPC\nomenclature[A]{HPC}{High-performance computing.}),
+for High-Performance Computing (HPC\nomenclature[A]{HPC}{High-performance computing}),
 e.g., the classic \textquoteleft{}mainframe\textquoteright{} servers.
 Moreover, the performance-per-watt of GPUs is an extra benefit over
 their raw performance~\cite{Cruz-How_to_obtain_efficient_GPU_kernels:2011}.
 
 In February 2007, the first real opportunity for using GPUs for general
 programming and scientific computing came about with the release of
-the Compute Unified Device Architecture~(CUDA\nomenclature[A]{CUDA}{Compute unified device architecture.})~\cite{CUDA}.
+the Compute Unified Device Architecture~(CUDA\nomenclature[A]{CUDA}{Compute unified device architecture})~\cite{CUDA}.
 
 In the following, the focus on the CUDA architecture. In particular,
 similar hardware produced by other vendors, e.g., AMD and Intel, as
@@ -1229,9 +1234,10 @@ developers to implement data-parallel kernels. The CUDA programming
 model \cite{CUDA} was created for developing applications for the
 GPU platform. A system within this model consists of a host, i.e.,
 a traditional CPU, and one or more compute devices that are massively
-data-parallel coprocessors, i.e., a GPU. The host code transfers data
-to and from the global memory of the GPU using CUDA-function calls.
-Each processor of a CUDA device supports the Single-Program Multiple-Data~(SPMD\nomenclature[A]{SPMD}{Single-program multiple-data.})
+data-parallel co-processors, i.e., a GPU. The host code transfers
+data to and from the global memory of the GPU using CUDA-function
+calls. Each processor of a CUDA device supports the Single-Program
+Multiple-Data~(SPMD\nomenclature[A]{SPMD}{Single-program multiple-data})
 model~\cite{Atallah-Algorithms_and_theory_of_computation:2002},
 in which all concurrent threads are based on the same code, although
 they may not follow exactly the same path of execution.
@@ -1250,11 +1256,11 @@ of threads, which are organized within developer-defined groups called
 thread blocks. The threads can share data and synchronize their execution
 only within the block they belong to. Thread blocks are, in turn,
 organized in a higher-hierarchy level called grid. All threads within
-a given grid execute the same kernel function. During execution, continous
+a given grid execute the same kernel function. During execution, continuous
 sections of threads within a block are grouped into warps of several
 parallel threads (typically 32 or 64, depending on the target architecture),
 which represent the multi-threading scheduling unit~\cite{Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008}.
-A GPU contains several Streaming Multiprocessors (SM\nomenclature[A]{SM}{Streaming multiprocessor.}),
+A GPU contains several Streaming Multiprocessors (SMs\nomenclature[A]{SM}{Streaming multiprocessor}),
 each of which executes one instruction at a time for all the 32 threads
 in the warp. Consequently, if a thread block is not evenly divisible
 by the warp size, any remaining thread slots are wasted. Another undesirable
@@ -1273,9 +1279,9 @@ from~\cite{Ryoo-Optimization_principles_of_a_GPU_using_CUDA:2008}.\label{fig:02-
 
 The architecture of a typical GPU is depicted in Figure~\ref{fig:02-GPU_architecture}.
 It consists of $n$ SMs, each containing $m$ Streaming Processors
-(SPs\nomenclature[A]{SP}{Streaming processor.}). Each SP executes
+(SPs\nomenclature[A]{SP}{Streaming processor}). Each SP executes
 a single instruction of a thread in a Single-Instruction, Multiple-Thread
-(SIMT\nomenclature[A]{SIMT}{Single instruction multiple thread.})
+(SIMT\nomenclature[A]{SIMT}{Single instruction multiple thread})
 manner~\cite{Cruz-How_to_obtain_efficient_GPU_kernels:2011}. The
 registers of each SM are dynamically partitioned among the threads
 running on it. 
@@ -1373,16 +1379,16 @@ get\_global\_id(0|1|2) & \emph{(not implemented)}\tabularnewline
 \end{table}
 
 
-In the remaining of this thesis, the naming convention introduced
+In the remainder of this thesis, the naming convention introduced
 by the CUDA platform is used.
 
 
 \section{Summary}
 
 This chapter gave an overview of the basic concepts, the potential
-and the limitations of the GPUs when used as parallel procesors for
+and the limitations of the GPUs when used as parallel processors for
 general programming. In particular, emphasis has been given to the
-details that differenciate this platform from the traditional CPUs.
-In this sense, it is important to recognize which applications can
-benefit from using a GPU and which not, also taking into consideration
-the effort required at the implementation time.
+details that differentiate this platform from CPUs. In this sense,
+it is important to recognize which applications can benefit from using
+a GPU and which not, also taking into consideration the effort required
+at the implementation time.

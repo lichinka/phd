@@ -1,5 +1,5 @@
 
-\chapter{Service-coverage optimization \label{chap:06-Experimental-evaluation-the-service-coverage-problem}}
+\chapter{Service-Coverage Optimization \label{chap:06-Experimental-evaluation-the-service-coverage-problem}}
 
 % First paragraph has no indentation.
 
@@ -12,13 +12,13 @@ due to the computational-time complexity of their objective-function
 evaluation.
 
 In this chapter, the challenge is to exploit PRATO for solving one
-the of classic optimization problems of radio networks: the service-coverage
+of the classic optimization problems of radio networks: the service-coverage
 problem. Considering the minimization of the total amount of pilot
 power subject to a full coverage constraint, a novel optimization
 approach is introduced. The presented method, based on parallel autonomous
 agents, gives very good solutions to the problem in an acceptable
 amount of time. The parallel implementation takes full advantage of
-GPU hardware in order to achieve considerable speed-up. The analysis
+GPU hardware in order to achieve considerable speedup. The analysis
 of the experimental results, considering six real-world, radio networks
 of different sizes, studies solution-quality and performance aspects.
 
@@ -61,10 +61,10 @@ by antennas in a given range.
 From the UMTS perspective, minimizing pilot-power usage leaves more
 power available for increased network capacity. This is especially
 important if the traffic and other channels are configured relative
-to the pilot channel~\cite{Holma_WCDMA.for.UMTS:2005}. Moreover,
-as the demand for internet access and data services increases~\cite{Cunningham_Network.growth.theory.and.evidence:2010},
+to the pilot channel~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
+Moreover, as the demand for internet access and data services increases~\cite{Cunningham_Network.growth.theory.and.evidence:2010},
 so does the pressure on existing network infrastructure, making parameter
-optimization the only viable solution in the short-term~\cite{Nawrocki_Understanding:2006}.
+optimization the only viable solution in the short-term~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006}.
 
 \bigskip{}
 
@@ -83,7 +83,7 @@ by the amount of memory available on the GPU.
 \section{Related work \label{sec:06-Related-work}}
 
 There are several approaches in the literature that address the service-coverage
-problem in radio networks~\cite{Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Nawrocki_Understanding:2006,Siomina_Pilot.power.optimization:2004}.
+problem in radio networks~\cite{Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006,Siomina_Pilot.power.optimization:2004}.
 Some of them even claim to achieve near-optimal solutions~\cite{Siomina:Minimum.pilot.power.for.service.coverage}.
 As a matter of fact, most formulations are only useful for small network
 instances and often fail when challenged with larger, real-world networks.
@@ -103,7 +103,7 @@ reporting very good results for some test networks, containing from
 could not be solved because of hardware constraints on the target
 platform.
 
-As for LTE networks, the service-coverage problem was addressed in~\cite{Thampi-A_sparse_sampling_algorithm_for_self_optimisation_of_coverage_in_LTE_networks:2012}.
+As for LTE networks, the service-coverage problem was addressed in~\cite{Thampi-A_sparse_sampling_algorithm_for_self_optimization_of_coverage_in_LTE:2012}.
 The authors presented an algorithm, based on reinforcement learning,
 to tackle three aspects of the coverage problem, i.e., coverage holes,
 weak coverage and pilot pollution. The experimental simulations, performed
@@ -116,7 +116,7 @@ to achieving full coverage of the target area, without coverage holes.
 
 \section{Radio-network model \label{sec:06-Radio_network_model}}
 
-Extending the representation of a radio-network model from~\cite{nawrocki2006understanding},
+Extending the representation of a radio-network model from~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006},
 this section presents the definitions of all the elements included
 in the mathematical model used for the simulations.
 
@@ -126,7 +126,7 @@ instance. Radio-network planning tools, including the commercial ones,
 typically rely on static analysis~\cite{Niemela-Performance_of_static_WCDMA_simulator:2005}.
 
 A snapshot consists of a set of UEs having individual properties,
-such as location, and equipment type, that provides an estimate of
+such as location, and equipment type that provides an estimate of
 the average network behavior. The static approach inherently ignores
 dynamic effects that influence the system, like fast power control,
 but the analysis relies on having multiple independent snapshots to
@@ -134,7 +134,7 @@ produce an average behavior.
 
 Another alternative is to consider using a dynamic tool for radio-network
 planning~\cite{Hamalainen-Advanced_WCDMA_radio_network_simulator:1999,Hoppe-Fast_planning_of_efficient_WCDMA_radio_networks:2001}.
-A dynamic simulation considers all Radio-Resource Management~(RRM\nomenclature[A]{RRM}{Radio-resource management.})
+A dynamic simulation considers all Radio-Resource Management~(RRM\nomenclature[A]{RRM}{Radio-resource management})
 functionality, as well as user mobility. However, when compared to
 the static approach, a major disadvantage of the dynamic simulation
 is the large computational time it requires. This clearly excludes
@@ -144,22 +144,22 @@ which is one of the objectives of this thesis.
 Considering that the performance of a static approach was demonstrated
 to provide sufficiently accurate results compared to a fully dynamic
 approach~\cite{RadioNetworkPlanningAndOptimisationForUMTS,Laiho-Verification_of_WCDMA_network_planning_prediction_with_dynamic_simulations:2001},
-the former one is implemented in the remaining of this work.
+the former one is implemented in this work.
 
 For additional information regarding mathematical models for radio
-networks and signal propagations, see~\cite{RadioNetworkPlanningAndOptimisationForUMTS,Nawrocki_Understanding:2006,Stuber-Principles_of_mobile_communication:2011}.
+networks and signal propagation, see~\cite{RadioNetworkPlanningAndOptimisationForUMTS,Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006,Stuber-Principles_of_mobile_communication:2011}.
 
 
 \subsection{Basic elements}
 
 Consider a radio network with a set of antenna installations (cells),
-$C$\nomenclature[S]{$C$}{Set of antenna installations (cells) in a mobile network.}.
+$C$\nomenclature[S]{$C$}{Set of antenna installations (cells) in a mobile network}.
 A RSG of a given resolution represents a geographical area, $A_{\mathrm{total}}$,
-within which a set of UEs, $M$\nomenclature[S]{$M$}{Set of mobile devices or users of a mobile network.},
+within which a set of UEs, $M$\nomenclature[S]{$M$}{Set of mobile devices or users of a mobile network},
 is spatially distributed over the pixels of $A_{\mathrm{total}}$.
-Further, $l_{cm}^{\downarrow}$\nomenclature[S]{$l_{cm}^{\downarrow}$}{Downlink attenuation factor between cell $c\in C$ and mobile $m\in M$.}
+Further, $l_{cm}^{\downarrow}$\nomenclature[S]{$l_{cm}^{\downarrow}$}{Downlink attenuation factor between cell $c\in C$ and mobile $m\in M$}
 is defined as the downlink attenuation factor between cell $c\in C$
-and UE $m\in M$. Similarly, $l_{mc}^{\uparrow}$\nomenclature[S]{$l_{mc}^{\uparrow}$}{Uplink attenuation factor between mobile $m\in M$ and cell $c\in C$.}
+and UE $m\in M$. Similarly, $l_{mc}^{\uparrow}$\nomenclature[S]{$l_{mc}^{\uparrow}$}{Uplink attenuation factor between mobile $m\in M$ and cell $c\in C$}
 represents the uplink attenuation factor between UE $m$ and cell
 $c$. The attenuation factor values are calculated by performing signal-propagation
 predictions for every pair $(c,m)$, using the radio-propagation model
@@ -168,9 +168,9 @@ predictions already include losses and gains from cabling, hardware,
 and user equipment.
 
 The amount of power allocated to the pilot signal of cell $c$ is
-denoted as $p_{c}$\nomenclature[S]{$p_{c}$}{Pilot-power setting of cell $c\in C$.},
+denoted as $p_{c}$\nomenclature[S]{$p_{c}$}{Pilot-power setting of cell $c\in C$},
 and it can adopt any value from the sorted set of available pilot
-power levels, $P_{c}=\{p_{c}^{1},p_{c}^{2},...,p_{c}^{k}\}$\nomenclature[S]{$P_{c}$}{Set of candidate CPICH power settings for cell $c\in C$.},
+power levels, $P_{c}=\{p_{c}^{1},p_{c}^{2},...,p_{c}^{k}\}$\nomenclature[S]{$P_{c}$}{Set of candidate pilot power settings for cell $c\in C$},
 where $p_{c}^{k}$ is the maximum power.
 
 Based on the introduced elements, the received pilot power from cell
@@ -179,19 +179,19 @@ $c$ to UE $m$ is $l_{cm}^{\downarrow}p_{c}$.
 
 \subsection{Coverage}
 
-An UE $m$ within the area $A_{\mathrm{covered}}$ is under service
+A UE $m$ within the area $A_{\mathrm{covered}}$ is under service
 coverage if at least one cell $c$ covers it. Cell coverage is provided
-to an UE $m$ from a cell $c$ if its signal-to-interference ratio,
-$\mathrm{SINR}(c,m)$\nomenclature[S]{$\mathrm{SINR}(c,m)$}{Signal-to-interference ratio from cell $c\in C$ to mobile $m\in M$.},
+to a UE $m$ from a cell $c$ if its signal-to-interference ratio,
+$\mathrm{SINR}(c,m)$\nomenclature[S]{$\mathrm{SINR}(c,m)$}{Signal-to-interference ratio from cell $c\in C$ to mobile $m\in M$},
 at the RSG pixel where $m$ is located, is not lower than a given
-threshold, $\gamma^{\mathrm{cov}}$\nomenclature[S]{$\gamma^{\mathrm{cov}}$}{Signal-to-interference ratio (SIR) coverage threshold.}:
+threshold, $\gamma^{\mathrm{cov}}$\nomenclature[S]{$\gamma^{\mathrm{cov}}$}{Signal-to-interference ratio coverage threshold}:
 
 \begin{equation}
 \mathrm{SINR}(c,m)=\frac{l_{cm}^{\downarrow}p_{c}}{\mathrm{N}_{0}+\sum_{i\in C}l_{im}^{\downarrow}p_{i}}\ge\gamma^{\mathrm{cov}},\label{eq:06-Signal_to_interference_ratio}
 \end{equation}
 
 
-\noindent where $\mathrm{N}_{0}$\nomenclature[S]{$\mathrm{N}_0$}{Thermal noise.}
+\noindent where $\mathrm{N}_{0}$\nomenclature[S]{$\mathrm{N}_0$}{Thermal noise}
 is the thermal noise~\cite{RadioNetworkPlanningAndOptimisationForUMTS}.
 For convenience, a binary function is defined to determine the coverage
 of a UE $m$ by a cell $c$. So, for any pair $(c,m)$, the coverage
@@ -205,12 +205,12 @@ of UE $m$ by cell $c$ is defined as:
 \end{equation}
 
 
-\noindent \nomenclature[S]{$\mathrm{cov}(c,m)$}{Binary function to assert the coverage of a  mobile $m\in M$ by from a cell $c\in C$.}
+\noindent \nomenclature[S]{$\mathrm{cov}(c,m)$}{Binary function to assert the coverage of a mobile $m\in M$ from a cell $c\in C$}
 
-\noindent A set, denoted as $C_{m}$\nomenclature[S]{$C_{m}$}{Subset of cells, $C_m\subset C$, that cover a mobile $m\in M$.},
-$C_{m}\subset C$, contains all the cells covering an UE $m$. From
-this set, the cell with the highest $\mathrm{SINR}(c,m)$ is refered
-to as the best server, and denoted as $c_{m}^{*}$\nomenclature[S]{$c_{m}^*$}{Best-serving cell of mobile $m\in M$.}.
+\noindent A set, denoted as $C_{m}$\nomenclature[S]{$C_{m}$}{Subset of cells, $C_m\subset C$, that cover a mobile $m\in M$},
+$C_{m}\subset C$, contains all the cells covering a UE $m$. From
+this set, the cell with the highest $\mathrm{SINR}(c,m)$ is referred
+to as the best server, and denoted as $c_{m}^{*}$\nomenclature[S]{$c_{m}^*$}{Best-serving cell of mobile $m\in M$}.
 
 \noindent Notice that the described radio-network model is easily
 adaptable for different mobile technologies, e.g., GSM, UMTS and LTE.
@@ -218,10 +218,10 @@ For example, if solving the service-coverage problem for UMTS, it
 would be reasonable to assume that all cells in the network operate
 at maximum power, and adapt Equation~(\ref{eq:06-Signal_to_interference_ratio})
 accordingly. This is, from the interference point of view, the worst-case
-scenario~\cite{Chen-Yuan_CPICH.optimization:2008,Siomina:Minimum.pilot.power.for.service.coverage}.
-This assumption guarantees, that even under heavy user traffic, full
+scenario~\cite{chen2008automated,Siomina:Minimum.pilot.power.for.service.coverage}.
+This assumption guarantees that even under heavy user traffic full
 coverage of the service area is maintained, due to the cell-breathing
-principle~\cite{Holma_WCDMA.for.UMTS:2005}.
+principle~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
 
 
 \section{Problem definition}
@@ -283,7 +283,7 @@ Similar criteria for result comparison have also been used in~\cite{Siomina_Pilo
 
 The first heuristic for setting the pilot power of all cells in the
 network is known as attenuation-based, since it relies on the downlink-attenuation
-factor, $l_{cm}^{\downarrow}$. An UE located on some pixel of the
+factor, $l_{cm}^{\downarrow}$. A UE located on some pixel of the
 service area is always covered by the cell with the minimum path loss,
 i.e., the highest $l{}_{cm}^{\downarrow}$ value. Whenever the maximum
 available power, $p_{c}^{k}$, is the same for all the cells in the
@@ -332,7 +332,7 @@ constraints, the optimization process is guided back to the space
 of valid solutions, providing a mechanism for improving exploration
 and escaping from local optima.
 
-Because the behaviour of the agents is independent between each other,
+Because the behavior of the agents is independent between each other,
 a parallel implementation is fairly straight-forward to achieve. Figure~\ref{fig:06-Architecture_of_the_system_on_GPU}
 shows the architecture of the agent-optimization system. In this GPU-only
 architecture, agents work in a parallel and autonomous manner, while
@@ -420,7 +420,7 @@ of cells in $C_{m}$.
 \begin{algorithm}
 \centering
 
-\caption{Pseudo-code representing the behaviour of an agent.\textit{\label{alg:07-Agent-behavior}}}
+\caption{Pseudo-code representing the behavior of an agent.\textit{\label{alg:07-Agent-behavior}}}
 
 
 \begin{algorithmic}
@@ -505,7 +505,7 @@ that should be set before starting the optimization process. They
 indicate the relative adjustment (expressed in dB) of the pilot power
 of cell $c'$. On the one hand, lowering the pilot power of a cell
 decreases the interference it creates within its coverage area and
-those of their neighbours. Since the $\mathrm{SINR}(c,m)$ value increases
+those of their neighbors. Since the $\mathrm{SINR}(c,m)$ value increases
 with lower interference, the coverage of $m$ may be achieved by a
 neighbor cell with the same or lower pilot power. On the other hand,
 increasing the pilot power of the cell with the minimum path loss
@@ -586,10 +586,10 @@ information about BS locations, path-loss predictions and realistic
 antennas, which are part of the scenarios provided by the MOMENTUM
 project.
 
-Network configurations, that represent what could be an initial-network
-setup by common planning standards \cite{Holma_WCDMA.for.UMTS:2005},
+Network configurations that represent what could be an initial-network
+setup by common-planning standards~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}
 were produced using the attenuation-based approach. Such configurations
-can be easily calculated by a network planner. Table \ref{tab:06-Test_network_sizes}
+can be easily calculated by a network planner. Table~\ref{tab:06-Test_network_sizes}
 lists the number of BSs and cells per test network, as well as the
 size of the geographical area. Different network-parameter values
 used during the simulations are shown in Table \ref{tab:06-Test_network_parameters}.
@@ -692,12 +692,12 @@ improved the optimization objective significantly. They show that
 the pilot-power usage was reduced in all networks while the service
 area was kept under full coverage. Moreover, the parallel-agent solution
 for Net$_{1}$ improved the attenuation-based setting by more than
-300\%. As for Net$_{2}$, the observed improvement is around 232\%,
-while the improvement for Net$_{3}$ is more than 170\%. 
+300~\%. As for Net$_{2}$, the observed improvement is around 232~\%,
+while the improvement for Net$_{3}$ is more than 170~\%. 
 
 The last test network, Net$_{6}$, is the same as N6 in~\cite{Siomina:Minimum.pilot.power.for.service.coverage}.
 When comparing these results to those of~\cite{Siomina:Minimum.pilot.power.for.service.coverage},
-an improvement of almost 3\% can be observed in the solution provided
+an improvement of almost 3~\% can be observed in the solution provided
 by the parallel-agent approach, i.e., 0.778 against 0.759 for the
 average pilot power of Net$_{6}$.
 
@@ -743,7 +743,7 @@ initial convergence can be observed. This is followed by a steady
 improvement of the intermediate solutions. In Net$_{1}$, no additional
 solution improvement is noticed towards the end of the optimization
 process. This fact suggests that the stopping criteria is suitable
-for this problem instance. A similar situation is observed for Net$_{2}$,
+for this problem instance. A similar situation is observed for Net$_{2}$
 that also shows a flat profile towards the end. From the graph of
 Net$_{3}$ (see Figure~\ref{fig:06-Convergence_Net3}), a slower
 initial convergence, followed by a steady improvement of intermediate
@@ -753,32 +753,32 @@ instance presents a more difficult optimization case than for Net$_{1}$
 and Net$_{2}$. Indeed, this is the largest test network in terms
 of surface area. However, further investigation is needed to confirm
 this hypothesis. Nevertheless, the parallel-agent approach improved
-the pilot-power usage of this test network by almost 75\%.
+the pilot-power usage of this test network by almost 75~\%.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 
-\includegraphics[width=0.75\textwidth]{06-experimental_evaluation-service_coverage/img/convergence_first}
+\includegraphics[width=0.7\textwidth]{06-experimental_evaluation-service_coverage/img/convergence_first}
 
 \caption{Convergence profile of the parallel-agent approach for the test network
 Net$_{1}$, deployed over an urban area.\emph{\label{fig:06-Convergence_Net1}}}
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 
-\includegraphics[width=0.75\textwidth]{06-experimental_evaluation-service_coverage/img/convergence_second}
+\includegraphics[width=0.7\textwidth]{06-experimental_evaluation-service_coverage/img/convergence_second}
 
 \caption{Convergence profile of the parallel-agent approach for the test network
 Net$_{2}$, deployed over a rural area.\emph{\label{fig:06-Convergence_Net2}}}
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 
-\includegraphics[width=0.75\textwidth]{06-experimental_evaluation-service_coverage/img/convergence_third}
+\includegraphics[width=0.7\textwidth]{06-experimental_evaluation-service_coverage/img/convergence_third}
 
 \caption{Convergence profile of the parallel-agent approach for the test network
 Net$_{3}$, deployed over a suburban area.\emph{\label{fig:06-Convergence_Net3}}}
@@ -804,11 +804,29 @@ of objective-function evaluation on CPU and parallel agents over MPI,
 the GPU-MPI implementation that consists of objective-function evaluation
 on GPU and parallel agents over MPI, and the GPU-GPU implementation
 that consists of objective-function evaluation and parallel agents
-on the same GPU. The CPU-MPI implementation is the basis for the speed-up
+on the same GPU. The CPU-MPI implementation is the basis for the speedup
 calculation of the other two implementations.
 
+The function evaluation on the GPU that communicates with the agents
+over MPI provides the second measured setup. The evaluator implementation
+takes advantage of shared memory for thread collaboration within a
+thread block and texture memory for constant elements, as is it was
+explained in Section~\ref{sub:04-GPU_worker_implementation}. Still,
+the speedup is considerable but improvable, since numerous data transfers
+between CPU and GPU are needed for the agents to access optimization-related
+information. The last result set presents measurements for the complete
+GPU implementation, including objective-function evaluation and agents
+on the same device. The improved speedup delivered by this combination
+highlights the impact that CPU-to-GPU memory transfers have on the
+overall system performance. This fact is supported by the second and
+third measured setups, the speedups of which exhibit, on average,
+a four-fold improvement. It is also interesting to note how the speedup
+gain increases with the problem-instance size. This fact confirms
+that larger problem instances have a greater benefit from a parallel
+implementation in terms of computational time.
+
 \begin{table}
-\caption{Wall-clock times (in seconds) and speed-up factors for the different
+\caption{Wall-clock times (in seconds) and speedup factors for the different
 implementations of the objective-function evaluation and the parallel
 agents, as measured during the experimentation of the service-coverage
 problem.\label{tab:06-Performance_analysis}}
@@ -822,31 +840,13 @@ problem.\label{tab:06-Performance_analysis}}
 \cmidrule{2-2} \cmidrule{4-5} \cmidrule{7-8} 
  & Avg. time {[}s{]} &  & Avg. time {[}s{]} & Speedup &  & Avg. time {[}s{]} & Speedup\tabularnewline\addlinespace
 \cmidrule{1-2} \cmidrule{4-5} \cmidrule{7-8} 
-Net$_{1}$ & 4,105 &  & 872 & 4.70 &  & 206 & 4.24\tabularnewline
-Net$_{2}$ & 774 &  & 304 & 2.54 &  & 124 & 2.45\tabularnewline
-Net$_{3}$ & 5,981 &  & 1,283 & 4.66 &  & 249 & 5.16\tabularnewline
+Net$_{1}$ & 4,105 &  & 872 & 4.71 &  & 206 & 19.93\tabularnewline
+Net$_{2}$ & 774 &  & 304 & 2.55 &  & 124 & 6.24\tabularnewline
+Net$_{3}$ & 5,981 &  & 1,283 & 4.66 &  & 249 & 24.02\tabularnewline
 \bottomrule
 \end{tabular}
 \end{table}
 
-
-The function evaluation on the GPU, that communicates with the agents
-over MPI, provides the second measured setup. The evaluator implementation
-takes advantage of shared memory for thread collaboration within a
-thread block and texture memory for constant elements, as is it was
-explained in Section~\ref{sub:04-GPU_worker_implementation}. Still,
-the speed-up is considerable but improvable, since numerous data transfers
-between CPU and GPU are needed for the agents to access optimization-related
-information. The last result set presents measurements for the complete
-GPU implementation, including objective-function evaluation and agents
-on the same device. The improved speed-up delivered by this combination
-highlights the impact that CPU-to-GPU memory transfers have on the
-overall system performance. This fact is supported by the second and
-third measured setups, the speedups of which exhibit, on average,
-a four-fold improvement. It is also interesting to note how the speedup
-gain increases with the problem-instance size. This fact confirms
-that larger problem instances have a greater benefit in terms of computational
-time.
 
 
 \section{Summary}
@@ -857,13 +857,12 @@ addressed the full coverage of a geographical area using a minimum
 amount of pilot power. The newly introduced parallel-agent approach
 was successfully tested in six networks that represent real-world
 scenarios. The experimental results show that the parallel-agent approach
-is able to find better solutions than some elementary heuristics,
-like the presented attenuation-based approach. Moreover, the algorithm
-successfully tackled larger networks, thus overcoming the obstacles
-of other state-of-the-art optimization methods regarding problem-instance
-size~\cite{Siomina_Pilot.power.optimization:2004,Siomina:Minimum.pilot.power.for.service.coverage}.
+is able to find better solutions than some heuristics, like the presented
+attenuation-based approach. Moreover, the algorithm successfully tackled
+larger networks, thus overcoming the obstacles of other state-of-the-art
+optimization methods regarding problem-instance size~\cite{Siomina_Pilot.power.optimization:2004,Siomina:Minimum.pilot.power.for.service.coverage}.
 
-Compared to a different optimization approach in the literature~\cite{Siomina-Minimum_pilot_power_for_service_coverage:2007},
+Compared to a different optimization approach in the literature~\cite{Siomina:Minimum.pilot.power.for.service.coverage},
 the solution-quality of the parallel-agent approach showed a quality
 improvement. The proposed solutions, calculated for the same problem
 instance as in~\cite{Siomina:Minimum.pilot.power.for.service.coverage},
@@ -872,7 +871,7 @@ that it is feasible for the optimization algorithm to take a longer
 time to reach the solution, since design problems, as the service-coverage
 one, are usually solved offline. A comparison and analysis of the
 performance of the radio-coverage prediction for real-world, radio-network
-planning is latter provided in Chapter~\ref{chap:08-Real-world_network_planning}.
+planning is later provided in Chapter~\ref{chap:08-Real-world_network_planning}.
 
 Different implementations of the parallel-agent approach, combining
 a serial version on CPU, parallel processes over MPI and GPU kernels,

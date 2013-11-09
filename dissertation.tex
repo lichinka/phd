@@ -35,12 +35,12 @@
 
 \title{OPTIMIZATION AND PARALLELIZATION\\ METHODS FOR THE DESIGN\\ OF NEXT-GENERATION\\ RADIO NETWORKS}
 
-\naslov{OPTIMIZACIJSKE IN VZPOREDNE METODE ZA NA\v{C}RTOVANJE RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
+\naslov{OPTIMIZACIJSKE IN PARALELIZACIJSKE\\ METODE ZA NA\v{C}RTOVANJE\\ RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
 
 \supervisor{Assoc.\ Prof.\ Dr.\ Peter Koro\v{s}ec}
-\supervisorlong{Assoc.\ Prof.\ Dr.\ Peter Koro\v{s}ec, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\supervisorlong{}
 \cosupervisor{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik}
-\cosupervisorlong{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\cosupervisorlong{}
 
 \month{October}
 \year{2013}
@@ -52,7 +52,7 @@
 \evaluationBoardMemberAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
 \evaluationBoardMembers{Prof.\ Dr.\ Marian Vajter\v{s}ic}
-\evaluationBoardMemberAffiliations{Department of Computer Science, University of Salzburg,\\ Austria}
+\evaluationBoardMemberAffiliations{\emph{Department of Computer Science, University of Salzburg,}\\ \emph{Austria}}
 
 %
 % Package for algorithms
@@ -65,6 +65,8 @@
 \usepackage{bibentry}
 \nobibliography*
 
+\addto\captionsslovene{\renewcommand{\algorithmname}{Algorithm}}
+
 \makeatother
 
 \usepackage{babel}
@@ -73,9 +75,13 @@
 \begin{document}
 \frontmatter
 
+\pagenumbering{Roman}
+
 \makepreamble
 
 \maketitle
+
+\renewcommand{\algorithmname}{Algorithm}
 
 \cleardoublepage{}
 
@@ -83,80 +89,33 @@
 
 \cleardoublepage{}
 
-\include{00b-povzetek}
-
-\cleardoublepage{}
-
-\noindent \renewcommand{\contentsname}{\vspace{-2.4cm} \Large Contents \vspace{1.5cm}}
-\fancyhead[RE]{\footnotesize Contents}
+\noindent \renewcommand{\contentsname}{\vspace{-2.0cm} \Large{Index} \hfill \footnotesize \thepage \vspace{1.5cm}}
+\fancyhead[RO]{\thepage}
+\fancyhead[LO]{\footnotesize Index}
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{\footnotesize Index}
 \tableofcontents
-\newpage \thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
 
-\cleardoublepage{}\fancyhead{}
-\fancyfoot{}
-\fancyhead[RO]{\footnotesize \thepage}
-\fancyhead[LE]{\footnotesize \thepage}
-\fancyhead[RE]{\footnotesize {List of Figures}}
-\addcontentsline{toc}{chapter}{\listfigurename}
-\renewcommand\listfigurename{\vspace{-2.4cm} \Large List of Figures \vspace{1.5cm}}
-%
-% Increase spacing between figure numbers and caption in LOF
-%
-%\makeatletter    
-%	\renewcommand\l@figure{\@dottedtocline{1}{1.5em}{3em}}
-%\makeatother
+\clearpage{}
 
-\listoffigures
-\newpage \thispagestyle{empty}
-
-\cleardoublepage{}
-
-\noindent \fancyhead{}
-\fancyfoot{}
-\fancyhead[RO]{\footnotesize \thepage}
-\fancyhead[LE]{\footnotesize \thepage}
-\fancyhead[RE]{\footnotesize {List of Tables}}
-\addcontentsline{toc}{chapter}{\listtablename}
-\renewcommand\listtablename{\vspace{-2.4cm} \Large List of Tables \vspace{1.5cm}}
-\listoftables
-\newpage \thispagestyle{empty}
-
-\cleardoublepage{} \fancyhead{}
-\fancyfoot{} 
-\fancyhead[RO]{\footnotesize \thepage}
-\fancyhead[LO]{} 
-\fancyhead[LE]{\footnotesize \thepage}
-\fancyhead[RE]{\footnotesize {List of Algorithms}}
-\addcontentsline{toc}{chapter}{List of Algorithms}
-\renewcommand\listalgorithmname{\vspace{-2.4cm} \Large List of Algorithms \vspace{1.5cm}}
-\begingroup 
-\let\oldnumberline\numberline
-\renewcommand{\numberline}{Algorithm~\oldnumberline}
-\listofalgorithms 
-\endgroup
-\newpage \thispagestyle{empty} 
-
-\cleardoublepage{}
-
+\noindent \addcontentsline{toc}{chapter}{Abbreviations and symbols}
+\renewcommand{\nomname}{\vspace{-2.0cm} \Large{Abbreviations and symbols} \vspace{1.5cm}}
 %
 % Custom format for displaying nomenclature entries
 %
-\renewcommand{\nomlabel}[1]{%
-	#1 \hfill \dots %
-}
-\renewcommand{\nomgroup}[1]{%
-	\ifthenelse{\equal{#1}{A}}{ }{%
-		\ifthenelse{\equal{#1}{S}}{\bigskip}{}}}   
-
-\noindent \fancyhead{}
+\renewcommand{\nomlabel}[1]{#1 \hfill =}
+\renewcommand{\nomgroup}[1]{\ifthenelse{\equal{#1}{S}}{\bigskip}{}}
+\fancyhead{}
 \fancyfoot{}
 \fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LO]{\footnotesize {Abbreviations and symbols}}
 \fancyhead[LE]{\footnotesize \thepage}
 \fancyhead[RE]{\footnotesize {Abbreviations and symbols}}
-\addcontentsline{toc}{chapter}{Abbreviations and symbols}
-\renewcommand{\nomname}{\Large Abbreviations and symbols}
-\printnomenclature[2.5cm]
-\newpage \thispagestyle{empty}
+\printnomenclature[3cm]
+\newpage
+\thispagestyle{empty}
 
 \cleardoublepage{}
 
@@ -199,6 +158,52 @@
 \bibliographystyle{plain}
 \bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning,A-bibliography/A-bibliography}
 
+
+\cleardoublepage{}\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LO]{\footnotesize {Index of Figures}}
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {Index of Figures}}
+\addcontentsline{toc}{chapter}{Index of Figures}
+\renewcommand\listfigurename{\vspace{-2.4cm} \Large Index of Figures \vspace{1.5cm}}
+%
+% Increase spacing between figure numbers and caption in LOF
+%
+%\makeatletter    
+%	\renewcommand\l@figure{\@dottedtocline{1}{1.5em}{3em}}
+%\makeatother
+
+\listoffigures
+\newpage \thispagestyle{empty}
+
+\cleardoublepage{}
+
+\noindent \fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LO]{\footnotesize {Index of Tables}}
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {Index of Tables}}
+\addcontentsline{toc}{chapter}{Index of Tables}
+\renewcommand\listtablename{\vspace{-2.4cm} \Large Index of Tables \vspace{1.5cm}}
+\listoftables
+\newpage \thispagestyle{empty}
+
+\cleardoublepage{} \fancyhead{}
+\fancyfoot{} 
+\fancyhead[RO]{\footnotesize \thepage}
+\fancyhead[LO]{}
+\fancyhead[LE]{\footnotesize \thepage}
+\fancyhead[RE]{\footnotesize {Index of Algorithms}}
+\addcontentsline{toc}{chapter}{Index of Algorithms}
+\renewcommand\listalgorithmname{\vspace{-2.4cm} \Large Index of Algorithms \vspace{1.5cm}}
+\begingroup 
+\let\oldnumberline\numberline
+\renewcommand{\numberline}{Algorithm~\oldnumberline}
+\listofalgorithms 
+\endgroup
+\newpage \thispagestyle{empty} 
 
 \cleardoublepage{}
 

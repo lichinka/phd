@@ -11,9 +11,9 @@ the other two methods, it is undeniable that computational methods
 are an essential tool in most disciplines, particularly in those related
 to decision making.
 
-Nowadays, decision making is present practially everywhere. As scientists,
+Nowadays, decision making is present practically everywhere. As scientists,
 engineers and managers have to make decisions in more complex and
-competitive circumnstances every day, decision making involves dealing
+competitive circumstances every day, decision making involves dealing
 with rational and optimal approaches. According to Talbi~\cite{Talbi_Metaheuristics:2009},
 decision making consists of the following steps:
 \begin{itemize}
@@ -78,7 +78,7 @@ reference points for understanding the studied phenomena. Consequently,
 problems categorized as of large size and of considerable complexity
 represent a challenge, because of the different involved disciplines
 for their study and the degree of difficulty of their modeling. Cellular
-radio networks in general, and those of the lastest generations in
+radio networks in general, and those of the latest generations in
 particular, fall under this categorization.
 
 
@@ -86,15 +86,15 @@ particular, fall under this categorization.
 
 Radio networks represent one of the most fast-growing technology markets
 since the introduction of the Global System for Mobile communications
-(GSM\nomenclature[A]{GSM}{Global System for Mobile communications.})~\cite{3GPP_TR_50.099}.
-As an implementation of the second generation of mobile networks (2G\nomenclature[A]{2G}{Second Generation of mobile networks.}),
+(GSM\nomenclature[A]{GSM}{Global system for mobile communications})~\cite{3GPP_TR_50.099}.
+As an implementation of the second generation of mobile networks (2G\nomenclature[A]{2G}{Second generation of mobile networks}),
 GSM appeared more than twenty years ago. Its successor, the Universal
-Mobile Telecommunications System (UMTS\nomenclature[A]{UMTS}{Universal Mobitel Telecommunications System.})~\cite{3GPP_TR_23.101}
+Mobile Telecommunications System (UMTS\nomenclature[A]{UMTS}{Universal mobile telecommunications system})~\cite{3GPP_TR_23.101}
 marks an evolution from 2G, representing a milestone for the third
-generation of mobile radio networks (3G\nomenclature[A]{3G}{Third Generation of mobile networks.}).
+generation of mobile radio networks (3G\nomenclature[A]{3G}{Third generation of mobile networks}).
 In recent years, the first commercial networks implementing the Long
-Term Evolution (LTE\nomenclature[A]{LTE}{Long Term Evolution.}),
-also known as fourth generation (4G\nomenclature[A]{4G}{Fourth Generation of mobile networks.})
+Term Evolution (LTE\nomenclature[A]{LTE}{Long term evolution}), also
+known as fourth generation (4G\nomenclature[A]{4G}{Fourth generation of mobile networks})
 LTE, have also appeared~\cite{Gerstenberger-Introduction_to_LTE:2011}.
 The always increasing demand for more bandwidth has been one of the
 main forces behind the standardization and later implementation of
@@ -117,7 +117,7 @@ and the software tool analyzes the given configuration. If the obtained
 results are not acceptable, the analysis process has to be repeated
 several times, until the goal is achieved and the changes are implemented,
 i.e., the implementation in Figure~\ref{fig:01-decision_making_process}.
-In the context of this thesis, this process is refered to as manual
+In the context of this thesis, this process is referred to as manual
 radio-network optimization. 
 
 Advances in the past few years have improved the manual optimization
@@ -126,7 +126,7 @@ the role of the computer during the optimization of radio networks,
 consequently enlarging the scope of problems and instance sizes that
 may be subject to optimization. Still, there are some important aspects
 that restrict the automation level of these methods, not only in real-world
-enviroments, but also when doing research in the area of radio networks:
+environments, but also when doing research in the area of radio networks:
 \begin{itemize}
 \item A selected optimization method is typically a compromise between solution
 quality and computational-time complexity. The proposed state-of-the-art
@@ -141,7 +141,7 @@ too time-consuming for practical use. Therefore, for such applications
 and environments, methods with improved time efficiency are required.
 \item A considerable number of publications in the field of radio-network
 optimization, a few references of which are given for illustration
-purposes~\cite{amaldi2007radio_planning,chen2008automated,chen2009fast,gordejuela2009two,siomina2008enhancing,siomina2007minimum_pilot_power},
+purposes~\cite{Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,chen2008automated,Chen-Fast_algorithm_for_large_scale_UMTS_coverage_planning:2009,Antenna.azimuth.tilt:2009,Antenna.Configuration:2008,Siomina:Minimum.pilot.power.for.service.coverage},
 base their simulations on platforms for which it is not possible to
 reproduce the experiments, either because they have used proprietary
 software or because the data is not available. This fact reduces the
@@ -152,7 +152,7 @@ well-known benchmarks are available for the community to use. Consequently,
 an open and unified framework should allow researchers to compare
 different methods and results in a simplified and objective manner.
 \item Available commercial tools for radio-network evaluation present several
-drawbacks. In particular, regarding to the size of networks that can
+drawbacks. In particular, regarding the size of networks that can
 be considered and their computational-time complexity. Yet, even if
 precise and fast methods were commercially available, they would lack
 the level of flexibility required by the scientific community. Consequently,
@@ -195,7 +195,7 @@ improve the execution time of parallel algorithms using threads or
 message-passing mechanisms.
 
 \begin{itemize}
-\item From its arrival a few years ago, general GPU programming is continously
+\item From its arrival a few years ago, general GPU programming is continuously
 gaining the attention of the research community and it is extending
 to several areas of science. In particular, the combination of parallel-programming
 techniques with GPU hardware should reduce the computational-time
@@ -207,10 +207,10 @@ and enable tackling larger problem instances.
 
 \begin{itemize}
 \item On the one hand, a larger number of evaluations in the same amount
-of time translates in a better search of the search space by the optimization
-algorithm used. On the other hand, more complex or exact models may
-be evaluated in the same amount of time, which implies more accurate
-solutions.
+of time translates into a better exploration of the search space by
+the optimization algorithm used. On the other hand, more complex or
+exact models may be evaluated in the same amount of time, which implies
+more accurate solutions.
 \end{itemize}
 \item Using the parallel framework to evaluate the objective function of
 an automatic-optimization system should provide the means for solving
@@ -218,7 +218,7 @@ new, previously inaccessible optimization problems.
 
 \begin{itemize}
 \item The improved performance at the evaluation level opens new possibilities
-for formally defining and tackling oprimization problems that were
+for formally defining and tackling optimization problems that were
 previously out-of-reach of state-of-the-art methods, either because
 of their complexity or size.
 \end{itemize}
@@ -229,7 +229,7 @@ of their complexity or size.
 The contributions of this thesis to the fields of telecommunications
 and computer sciences include the following:
 \begin{enumerate}
-\item Design and development of an unified framework for radio-network planning
+\item Design and development of a unified framework for radio-network planning
 and optimization that supports computer clusters and GPUs.
 \item Proposal of a new approach for parallel programming that enhances
 the performance of a classic master-worker method.
@@ -291,7 +291,7 @@ To address the challenges of the computational-time complexity during
 optimization and its objective-function evaluations, Benedi\v{c}i\v{c}
 et al. published the GPU extensions for the framework in~\cite{Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013}.
 The agent-based algorithm for solving the service-coverage problem
-was initially published at the International multiconference Information
+was initially published at the International multi-conference Information
 Society~\cite{Benedicic_Pilot.power.optimization:2010}. This work
 was further extended and later published in~\cite{Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013}.
 The primary ideas for the formal definition of the soft-handover balancing
@@ -299,4 +299,4 @@ problem were published at the World Congress of Computational Intelligence~\cite
 The results of the automated tuning capabilities of the framework
 were published in~\cite{Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013}.
 
-A comprenhensive list of the author's publications is given in Appendix~A.
+A comprehensive list of the author's publications is given in Appendix~A.

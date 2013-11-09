@@ -117,7 +117,9 @@ thepage}
 
 
 \backslash
-fancyhead[LO]{}
+fancyhead[LO]{
+\backslash
+footnotesize Abstract}
 \end_layout
 
 \begin_layout Plain Layout
@@ -166,14 +168,6 @@ The state-of-the-art metaheuristic algorithms, which compare a large number
 \end_layout
 
 \begin_layout Standard
-This thesis presents new approaches to increase the simulation and optimization
- performance of radio networks.
- These improvements allow the optimization of radio networks with metaheuristic
- algorithms and their application to several optimization problems in radio
- networks.
-\end_layout
-
-\begin_layout Standard
 The new unified framework developed in this thesis significantly outperforms
  the currently available solutions for snapshot-based, radio-network simulations.
  It brings together novel and state-of-the-art parallelization methods,
@@ -210,7 +204,7 @@ The proposed unified framework is tested on complex optimization problems,
 \begin_layout Standard
 Most mobile operators are aware of the soft-handover balancing problem,
  but so far, and due to its complexity, it has not yet been tackled by any
- moderm optimization approach.
+ modern optimization approach.
  This thesis identifies and formally defines the mentioned problem.
  Using a black-box approach, different metaheuristic algorithms are employed
  for solving the problem, the solutions of which show a substantial improvement
@@ -235,63 +229,264 @@ On the one hand, the proposed approaches allow a more detailed analysis
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\size larger
+\lang slovene
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
->>> reciclar esta parte de texto en algun otro lado
+
+
+\backslash
+vspace{0.1cm}
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \noindent
-There is a constant growing demand for hardware resources, longer-processing
- times and more memory to follow the evolution of 3G radio networks 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "maple2004parallel,crainic2006tackling,soldani2007autonomic"
+
+\series bold
+\size larger
+\lang slovene
+Povzetek
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\size larger
+\lang slovene
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1.0cm}
+\end_layout
 
 \end_inset
 
-.
- Fortunately, high-performance computer systems are increasingly accessible;
- something made possible because of the emergence of computer clusters and
- commodity hardware, capable of true parallel processing, e.g.
- multi-core CPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore"
 
-\end_inset
+\end_layout
 
- and GPUs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wen2011gpu"
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
 
-\end_inset
+\begin_layout Plain Layout
 
-.
- Moreover, the highly parallel structure present on GPUs makes them more
- effective than CPUs for execution of algorithms where large blocks of data
- need to be processed in parallel.
- Commodity GPUs have evolved from being a graphic accelerator into a general-pur
-pose processor.
- They can achieve higher performance at lower power consumption and lower
- costs when compared to conventional CPUs.
- Additionally, the implementation of the framework will benefit from valuable
- advances in computer science and High Performance Computing (HPC), in order
- to perform faster and more reliable simulations 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorder2007multicore,wen2011gpu"
 
-\end_inset
-
-.
+\backslash
+addcontentsline{toc}{chapter}{Povzetek}
 \end_layout
 
 \begin_layout Plain Layout
-<<<
+
+
+\backslash
+fancyhead{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyfoot{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{
+\backslash
+footnotesize Povzetek}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\lang slovene
+Zahtevnost načrtovanja radijskih omrežij se je povečala z večanjem števila
+ celic v sodobnih celičnih standardih.
+ Zato je vloga računalnika kot pomožno orodje za izvajanje hitrejših in
+ natančnih izračunov vse bolj pomembna.
+ Pričujoča disertacija predstavlja nove metode za načrtovanje in samodejno
+ optimizacijo radijskih omrežij.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Klasični pristopi za optimizacijo in načrtovanje sistemov v velikih sistemih
+ odpovedo, zato sodobni pristopi pri optimizaciji velikih sistemov uporabljajo
+ metahevristične algoritme.
+ Delovanje metahevrističnih algoritmov temelji na velikem številu poizkusov
+ in oceni kakovosti rešitev ter usmerjanju raziskovanja algoritma v iskalnem
+ prostoru.
+ Poizkusi v radijskih omrežjih se izvajajo z modeliranjem radijskih omrežij
+ in simulacijami, vendar imajo več pomanjkljivosti v zvezi s ponujeno fleksibiln
+ostjo in s časom izvajanja simulacije.
+ Velikost omrežij, ki jih je mogoče analizirati na izvedljivem času, je
+ običajno zelo omejena.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Pričujoča disertacija zato predstavlja nove pristope za povečanje hitrosti
+ optimizacije radijskih omrežij z metahevrističnimi algoritmi in njihovo
+ uporabo v konkretnih optimizacijskih problemih radijskih omrežij.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Prvi korak, ki ga predlaga disertacija, zajema pohitritev izvajanja poizkusov
+ oz.
+ simulacij z metodami vzporednega računanja.
+ Disertacija podaja in primerja metode vzporednega računanja tako za izvajaje
+ simulacij na večjedrnih procesorjih kot na gruči računalnikov z grafičnimi
+ procesorji, ki so povezani preko lokalnega omrežja.
+ Povečana hitrost izvajanja omogoča povečano stopnjo podrobnosti simulacij,
+ kar posledično izboljšuje natančnost rezultatov.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Povečanje hitrosti izvajanja simulacij je le prvi korak k praktičnemu zmanjševan
+ju računskega časa, potrebnega za evaluacijo cenovne funkcije in posledično
+ optimizacijo radijskih omrežij.
+ Poleg tega je potrebno tudi zmanjšati čas izvajanja optimizacijskih algoritmov,
+ vendar ne na račun kakovosti rezultatov.
+ Doktorska disertacija v ta namen predstavlja optimizacijski algoritem,
+ katerega delovanje je prilagojeno reševanju klasičnih optimizacijskih problemov
+ v radijskih omrežjih.
+ Novi algoritem, ki temelji na tehnikah, uporabljenih v celičnih avtomatih
+ ter metahevrističnih algoritmih, doseže boljše rezultate z vidika velikosti
+ preučenih primerkov, kot tudi z vidika kakovosti rešitev.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Predlagani pristopi so preizkušeni na kompleksnih optimizacijskih problemih,
+ in sicer (i) problem optimizacije ravnovesja povezave navzdol-navzgor pri
+ mehkem izročanju v sistemih tretje generacije in (ii) optimizacija parametrov
+ empiričnih modelov razširjanja radijskega valovanja.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Problem optimizacije ravnovesja povezave navzdol-navzgor pri mehkem izročanju
+ v sistemih tretje generacije je problem, ki se ga zaveda večina mobilnih
+ operaterjev, vendar do sedaj zaradi svoje kompleksnosti še ni bil rešen.
+ Pričujoča disertacija formalno opredeljuje ta optimizacijski problem ter
+ prikaže rešitev problema po principu črne škatle (angl.
+ black box) z uporabo različnih metahevrističnih algoritmov.
+ Rezultati uporabe predlaganih metod pokažejo precejšnje izboljšane razporeditve
+ področij mehkega izročanja.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Drugi primer uporabe metod je optimizacija parametrov empiričnih modelov
+ razširjanja radijskega valovanja.
+ Do sedaj, so se parametri empiričnih modelov razširjanja radijskega valovanja
+ uporabljali za celo radijsko omrežje.
+ Z uporabo predlagane avtomatizacije načrtovanja, pa lahko parametre empiričnega
+ radijskega kanala lokalno prilagodimo, npr.
+ za vsako celico ali regijo v omrežju, s tem pa močno izboljšamo natančnost
+ izračunane predikcije.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+Predlagani pristopi na eni strani omogočajo bolj podrobno analizo omrežij
+ v sprejemljivem času, po drugi strani pa z njimi lahko optimiziramo večja
+ radijska omrežja.
+\end_layout
+
+\begin_layout Standard
+
+\lang slovene
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{}
 \end_layout
 
 \end_inset

@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Conclusion and further work 
+Conclusion and Further Work 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Conclusion"
@@ -76,8 +76,8 @@ Fast and accurate performance evaluation is of essential importance for
  the planning and optimization of mobile radio networks.
  In this thesis, several high-performance and novel methods for the analysis
  and optimization of radio networks were developed and discussed.
- Some of them even outperform state-of-the-art methods, to which they were
- compared, in terms of result accuracy and instance-size complexity.
+ Some of them even outperform state-of-the-art methods to which they were
+ compared in terms of result accuracy and instance-size complexity.
 \end_layout
 
 \begin_layout Standard
@@ -148,7 +148,7 @@ When applying automatic network optimization, a fast and accurate performance
  It is important to note that these results also apply for an application
  in everyday network planning.
  However, to validate the complete array of radio-planning activities the
- framework can handle will require further research.
+ framework can handle further research is required.
 \end_layout
 
 \begin_layout Standard
@@ -193,8 +193,8 @@ tary testing of the framework as a coverage-planning tool is currently being
 \end_layout
 
 \begin_layout Standard
-PRATO, the radio-planning framework presented in this thesis, is free and
- open-source software.
+PRATO, the radio-planning framework presented in this thesis, is a free
+ and open-source software.
  For this reason, it can be readily modified and extended to support, for
  example, other propagation models and post-processing algorithms.
  This characteristic provides it with a clear advantage when compared to
@@ -206,7 +206,7 @@ PRATO, the radio-planning framework presented in this thesis, is free and
 \begin_layout Standard
 The constantly improving performance of computer hardware might allow an
  even more detailed analysis of networks in the near future.
- In this sense, a major challenge, that will require further research, is
+ In this sense, a major challenge that will require further research is
  to extend the presented models and algorithms, e.g., by incorporating user
  mobility and traffic dynamics.
  This is especially important due to different existing and emerging mobile
@@ -245,7 +245,7 @@ Proposal of a new approach for parallel programming that combines a classic
 
 \begin_layout Enumerate
 Quality improvement of radio-propagation predictions by applying metaheuristic
- optimization to the parameters of a radio-propagation model.
+ optimization to the parameters of radio-propagation models.
  This technique enables the adaptation of radio-propagation models to the
  local environment over which a radio network is deployed, as well as the
  automatic optimization of signal losses due to clutter.

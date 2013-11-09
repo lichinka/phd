@@ -1,12 +1,12 @@
 
-\chapter{Conclusion and further work \label{chap:Conclusion}}
+\chapter{Conclusion and Further Work \label{chap:Conclusion}}
 
 Fast and accurate performance evaluation is of essential importance
 for the planning and optimization of mobile radio networks. In this
 thesis, several high-performance and novel methods for the analysis
 and optimization of radio networks were developed and discussed. Some
-of them even outperform state-of-the-art methods, to which they were
-compared, in terms of result accuracy and instance-size complexity.
+of them even outperform state-of-the-art methods to which they were
+compared in terms of result accuracy and instance-size complexity.
 
 The snapshot analysis is best suited for the detailed performance
 evaluation of radio networks. The performance of a snapshot method
@@ -31,9 +31,9 @@ such hardware. The performance gain results mainly due to the combination
 of a novel parallel-programming approach and some state-of-the-art
 methods. The achieved performance improvement excels in radio-network
 optimization environments. Further research in this field will include
-abstracting the introduced MWD principle into a multi-purpose parallel
-framework such as Charm++~\cite{Kale-The_Charm_Approach:2013}, which
-provides a functionality for overlapping execution and communication,
+abstracting the introduced master-worker-database principle into a
+multi-purpose parallel framework such as Charm++~\cite{Kale-The_Charm_Approach:2013},
+which provides a functionality for overlapping execution and communication,
 as well as fault tolerance.
 
 When applying automatic network optimization, a fast and accurate
@@ -54,9 +54,8 @@ obtained with the commercial tool. Additionally, the results demonstrated
 the performance advantage of the framework compared to the computational
 time of the enterprise software. It is important to note that these
 results also apply for an application in everyday network planning.
-However, to ultimate validate the complete array of radio-planning
-activities the framework can handle requires some further research,
-which has already started.
+However, to validate the complete array of radio-planning activities
+the framework can handle further research is required.
 
 Increasing the performance of the simulations involved during the
 objective-function evaluation is only the first step towards a practical
@@ -71,14 +70,13 @@ with different parameters and optimization problems, in order to gain
 better understanding of the dynamics that guide the algorithm through
 the search space of the problem.
 
-The new optimization problem for 3G radio networks indentified in
-this thesis deals with SHO balancing of downlink and uplink areas.
-The problem was tacled by three different metaheuristic algorithms,
-the solutions of which show a substantial improvement of downlink
-and uplink balance. A challenge for future work is to evaluate this
-optimization problem in a dynamic context. This requires using a full-stack
-simulation tool that includes dynamic effects, such as fast power
-control.
+The new optimization problem for 3G radio networks identified in this
+thesis deals with SHO balancing of downlink and uplink areas. The
+problem was tackled by three different metaheuristic algorithms, the
+solutions of which show a substantial improvement of downlink and
+uplink balance. A challenge for future work is to evaluate this optimization
+problem in a dynamic context. This requires using a full-stack simulation
+tool that includes dynamic effects, such as fast power control.
 
 The clutter-loss optimization method developed in this thesis makes
 use of the tools discussed above, providing a faster, more accurate
@@ -91,18 +89,18 @@ out at the Radio Network department of Telekom Slovenije, d.d., supplementary
 testing of the framework as a coverage-planning tool is currently
 being conducted.
 
-PRATO, the radio-planning framework presented is this thesis, is free
-and open-source software. For this reason, it can be readily modified
-and extended to support, for example, other propagation models and
-post-processing algorithms. This characteristic provides it with a
-clear advantage when compared to commercial and closed-source tools.
+PRATO, the radio-planning framework presented in this thesis, is a
+free and open-source software. For this reason, it can be readily
+modified and extended to support, for example, other propagation models
+and post-processing algorithms. This characteristic provides it with
+a clear advantage when compared to commercial and closed-source tools.
 The source code is available for download from the author's home page,
-http://csd.ijs.si/benedicic/.
+http://cs.ijs.si/benedicic/.
 
 The constantly improving performance of computer hardware might allow
 an even more detailed analysis of networks in the near future. In
-this sense, a major challenge, that will require further research,
-is to extend the presented models and algorithms, e.g., by incorporating
+this sense, a major challenge that will require further research is
+to extend the presented models and algorithms, e.g., by incorporating
 user mobility and traffic dynamics. This is especially important due
 to different existing and emerging mobile technologies. Indeed, the
 co-existence of multiple technologies will motivate an increasing
@@ -115,21 +113,21 @@ technologies and their mutual dependency.
 The work in this thesis has led to the following original contributions
 to science:
 \begin{enumerate}
-\item Design and development of an unified framework for radio-network planning
-and optimization, incorporating the second and third items, as well
-as experimentation on real-world radio networks. The experimentation
-includes a comparison with a commercial tool that is currently being
-used for real radio-network planning. Moreover, the parallel implementation
-of the framework exploits the computing resources of computer clusters
-and GPUs.
+\item Design and development of a unified framework for radio-network planning
+and optimization, incorporating the second and third contribution
+items, as well as experimentation on real-world radio networks. The
+experimentation includes a comparison with a commercial tool that
+is currently being used for real radio-network planning. Moreover,
+the parallel implementation of the framework exploits the computing
+resources of computer clusters and GPUs.
 \item Proposal of a new approach for parallel programming that combines
 a classic master-worker method with an external database. The proposed
 approach improves the scalability of the classic master-worker paradigm
 by preventing the master process to become the bottleneck of a parallel
 system.
-\item Quality improvement of radio-propagation predictions by applying metaheuristic-optimization
-techniques that improve the quality of results. This technique enables
-the adaptation of radio-propagation models to the local environment
+\item Quality improvement of radio-propagation predictions by applying metaheuristic
+optimization to the parameters of radio-propagation models. This technique
+enables the adaptation of radio-propagation models to the local environment
 over which a radio network is deployed, as well as the automatic optimization
 of signal losses due to clutter.
 \item A new algorithm, based on autonomous agents, to tackle the service-coverage

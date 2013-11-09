@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Framework verification 
+Framework Verification 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:08-Real-world_network_planning"
@@ -268,7 +268,7 @@ Field measurements are used as the reference for analyzing the accuracy
 \begin_inset Formula $_{12}$
 \end_inset
 
- is an UMTS network with 700 BSs and 2000 cells, and Net
+ is a UMTS network with 700 BSs and 2000 cells, and Net
 \begin_inset Formula $_{13}$
 \end_inset
 
@@ -736,7 +736,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/gsm_prato_rcv_pwr.eps
+	filename img/gsm_prato_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -744,7 +744,7 @@ centering
 
 
 \begin_inset Graphics
-	filename img/gsm_tcpu_rcv_pwr.eps
+	filename img/gsm_tcpu_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -827,7 +827,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/umts_prato_rcv_pwr.eps
+	filename img/umts_prato_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -835,7 +835,7 @@ centering
 
 
 \begin_inset Graphics
-	filename img/umts_tcpu_rcv_pwr.eps
+	filename img/umts_tcpu_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -918,7 +918,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/lte_prato_rcv_pwr.eps
+	filename img/lte_prato_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -926,7 +926,7 @@ centering
 
 
 \begin_inset Graphics
-	filename img/lte_tcpu_rcv_pwr.eps
+	filename img/lte_tcpu_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -1244,7 +1244,7 @@ Plots showing the probability distribution function (PDF
 LatexCommand nomenclature
 prefix "A"
 symbol "PDF"
-description "Probability deviation function."
+description "Probability distribution function"
 
 \end_inset
 
@@ -1756,7 +1756,7 @@ GB of RAM and a dual nVidia GeForce GTX 590 GPU.
  The simulations for PRATO were performed on a Linux operating system, using
  multiple processes on the CPU.
  The commercial tool required a Windows Server operating system, and provided
- single-process, multithreading support to use all the cores of the CPU.
+ single-process, multi-threading support to use all the cores of the CPU.
 \end_layout
 
 \begin_layout Standard

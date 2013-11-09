@@ -8,12 +8,12 @@
 
 \title{OPTIMIZATION AND PARALLELIZATION\\ METHODS FOR THE DESIGN\\ OF NEXT-GENERATION\\ RADIO NETWORKS}
 
-\naslov{OPTIMIZACIJSKE IN VZPOREDNE METODE ZA NA\v{C}RTOVANJE RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
+\naslov{OPTIMIZACIJSKE IN PARALELIZACIJSKE\\ METODE ZA NA\v{C}RTOVANJE\\ RADIJSKIH OMRE\v{Z}IJ\\ NASLEDNJE GENERACIJE}
 
 \supervisor{Assoc.\ Prof.\ Dr.\ Peter Koro\v{s}ec}
-\supervisorlong{Assoc.\ Prof.\ Dr.\ Peter Koro\v{s}ec, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\supervisorlong{}
 \cosupervisor{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik}
-\cosupervisorlong{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik, Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
+\cosupervisorlong{}
 
 \month{October}
 \year{2013}
@@ -25,7 +25,7 @@
 \evaluationBoardMemberAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
 \evaluationBoardMembers{Prof.\ Dr.\ Marian Vajter\v{s}ic}
-\evaluationBoardMemberAffiliations{Department of Computer Science, University of Salzburg,\\ Austria}
+\evaluationBoardMemberAffiliations{\emph{Department of Computer Science, University of Salzburg,}\\ \emph{Austria}}
 
 %
 % Package for algorithms
@@ -119,6 +119,22 @@ status open
 
 
 \backslash
+pagenumbering{Roman}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 makepreamble
 \end_layout
 
@@ -136,6 +152,28 @@ status open
 
 \backslash
 maketitle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addto
+\backslash
+captionsslovene{
+\backslash
+renewcommand{
+\backslash
+algorithmname}{Algorithm}}
 \end_layout
 
 \end_inset
@@ -168,23 +206,6 @@ filename "00a-abstract.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "00b-povzetek.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \noindent
 \begin_inset ERT
 status open
@@ -197,9 +218,15 @@ renewcommand{
 \backslash
 contentsname}{
 \backslash
-vspace{-2.4cm} 
+vspace{-2.0cm} 
 \backslash
-Large Contents 
+Large{Index} 
+\backslash
+hfill 
+\backslash
+footnotesize 
+\backslash
+thepage 
 \backslash
 vspace{1.5cm}}
 \end_layout
@@ -208,9 +235,36 @@ vspace{1.5cm}}
 
 
 \backslash
+fancyhead[RO]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize Index}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
 fancyhead[RE]{
 \backslash
-footnotesize Contents}
+footnotesize Index}
 \end_layout
 
 \begin_layout Plain Layout
@@ -224,7 +278,12 @@ tableofcontents
 
 
 \backslash
-newpage 
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 thispagestyle{empty}
 \end_layout
@@ -235,149 +294,7 @@ thispagestyle{empty}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead{}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyfoot{}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[RO]{
-\backslash
-footnotesize 
-\backslash
-thepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[LE]{
-\backslash
-footnotesize 
-\backslash
-thepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[RE]{
-\backslash
-footnotesize {List of Figures}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{
-\backslash
-listfigurename}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-renewcommand
-\backslash
-listfigurename{
-\backslash
-vspace{-2.4cm} 
-\backslash
-Large List of Figures 
-\backslash
-vspace{1.5cm}}
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\end_layout
-
-\begin_layout Plain Layout
-
-% Increase spacing between figure numbers and caption in LOF
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\backslash
-makeatletter    
-\end_layout
-
-\begin_layout Plain Layout
-
-%	
-\backslash
-renewcommand
-\backslash
-l@figure{
-\backslash
-@dottedtocline{1}{1.5em}{3em}}
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\backslash
-makeatother
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-listoffigures
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage 
-\backslash
-thispagestyle{empty}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -392,190 +309,7 @@ status open
 
 
 \backslash
-fancyhead{}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyfoot{}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[RO]{
-\backslash
-footnotesize 
-\backslash
-thepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[LE]{
-\backslash
-footnotesize 
-\backslash
-thepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[RE]{
-\backslash
-footnotesize {List of Tables}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{
-\backslash
-listtablename}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-renewcommand
-\backslash
-listtablename{
-\backslash
-vspace{-2.4cm} 
-\backslash
-Large List of Tables 
-\backslash
-vspace{1.5cm}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-listoftables
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage 
-\backslash
-thispagestyle{empty}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead{}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyfoot{} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[RO]{
-\backslash
-footnotesize 
-\backslash
-thepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[LO]{} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[LE]{
-\backslash
-footnotesize 
-\backslash
-thepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-fancyhead[RE]{
-\backslash
-footnotesize {List of Algorithms}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{List of Algorithms}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-renewcommand
-\backslash
-listalgorithmname{
-\backslash
-vspace{-2.4cm} 
-\backslash
-Large List of Algorithms 
-\backslash
-vspace{1.5cm}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begingroup 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-let
-\backslash
-oldnumberline
-\backslash
-numberline
+addcontentsline{toc}{chapter}{Abbreviations and symbols}
 \end_layout
 
 \begin_layout Plain Layout
@@ -584,49 +318,14 @@ numberline
 \backslash
 renewcommand{
 \backslash
-numberline}{Algorithm~
+nomname}{
 \backslash
-oldnumberline}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+vspace{-2.0cm} 
 \backslash
-listofalgorithms 
-\end_layout
-
-\begin_layout Plain Layout
-
-
+Large{Abbreviations and symbols} 
 \backslash
-endgroup
+vspace{1.5cm}}
 \end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage 
-\backslash
-thispagestyle{empty} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
@@ -649,21 +348,9 @@ status open
 \backslash
 renewcommand{
 \backslash
-nomlabel}[1]{%
-\end_layout
-
-\begin_layout Plain Layout
-
-	#1 
+nomlabel}[1]{#1 
 \backslash
-hfill 
-\backslash
-dots %
-\end_layout
-
-\begin_layout Plain Layout
-
-}
+hfill =}
 \end_layout
 
 \begin_layout Plain Layout
@@ -672,38 +359,14 @@ dots %
 \backslash
 renewcommand{
 \backslash
-nomgroup}[1]{%
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-ifthenelse{
-\backslash
-equal{#1}{A}}{ }{%
-\end_layout
-
-\begin_layout Plain Layout
-
-		
+nomgroup}[1]{
 \backslash
 ifthenelse{
 \backslash
 equal{#1}{S}}{
 \backslash
-bigskip}{}}}   
+bigskip}{}}
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
@@ -728,6 +391,15 @@ fancyhead[RO]{
 footnotesize 
 \backslash
 thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize {Abbreviations and symbols}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -754,24 +426,6 @@ footnotesize {Abbreviations and symbols}}
 
 
 \backslash
-addcontentsline{toc}{chapter}{Abbreviations and symbols}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-renewcommand{
-\backslash
-nomname}{
-\backslash
-Large Abbreviations and symbols}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
 printnomenclature[3cm]
 \end_layout
 
@@ -779,7 +433,12 @@ printnomenclature[3cm]
 
 
 \backslash
-newpage 
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 thispagestyle{empty}
 \end_layout
@@ -969,6 +628,403 @@ filename "09-conclusion/09-conclusion.lyx"
 LatexCommand bibtex
 bibfiles "01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning,A-bibliography/A-bibliography"
 options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyfoot{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize {Index of Figures}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{
+\backslash
+footnotesize {Index of Figures}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Index of Figures}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+listfigurename{
+\backslash
+vspace{-2.4cm} 
+\backslash
+Large Index of Figures 
+\backslash
+vspace{1.5cm}}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+% Increase spacing between figure numbers and caption in LOF
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+makeatletter    
+\end_layout
+
+\begin_layout Plain Layout
+
+%	
+\backslash
+renewcommand
+\backslash
+l@figure{
+\backslash
+@dottedtocline{1}{1.5em}{3em}}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+makeatother
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listoffigures
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage 
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyfoot{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize {Index of Tables}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{
+\backslash
+footnotesize {Index of Tables}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Index of Tables}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+listtablename{
+\backslash
+vspace{-2.4cm} 
+\backslash
+Large Index of Tables 
+\backslash
+vspace{1.5cm}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listoftables
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage 
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyfoot{} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RE]{
+\backslash
+footnotesize {Index of Algorithms}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Index of Algorithms}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+listalgorithmname{
+\backslash
+vspace{-2.4cm} 
+\backslash
+Large Index of Algorithms 
+\backslash
+vspace{1.5cm}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begingroup 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+let
+\backslash
+oldnumberline
+\backslash
+numberline
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+numberline}{Algorithm~
+\backslash
+oldnumberline}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listofalgorithms 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+endgroup
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage 
+\backslash
+thispagestyle{empty} 
+\end_layout
 
 \end_inset
 

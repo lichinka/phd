@@ -1,5 +1,5 @@
 
-\chapter{Soft-handover optimization \label{chap:07-Experimental-evaluation-the-SHO-alignment-problem}}
+\chapter{Soft-Handover Optimization \label{chap:07-Experimental-evaluation-the-SHO-alignment-problem}}
 
 % First paragraph has no indentation.
 
@@ -14,7 +14,7 @@ represented by the evaluation of multi-dimensional, non-convex objective
 functions.
 
 \noindent This chapter focuses on solving a new optimization problem
-for 3G networks, that deals with downlink and uplink SHO areas (see
+for 3G networks that deals with downlink and uplink SHO areas (see
 Section~\ref{sub:02-Handover-and-soft-handover}). By introducing
 a penalty-based objective function and some hard constraints, the
 formal definition of the SHO-balancing problem in UMTS networks is
@@ -33,7 +33,7 @@ as described here. The approach described in this chapter extends
 the research work published by the author in \cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012}.
 
 The remainder of this chapter is organized as follows. Section~\ref{sec:07-Motivation}
-decribes the motivation behind the SHO-balancing problem, whereas
+describes the motivation behind the SHO-balancing problem, whereas
 Section~\ref{sec:07-Related-work} gives an overview of other works
 related to pilot-power and SHO optimization in UMTS. The static network
 model is presented in Section~\ref{sec:07-Radio_network_model},
@@ -60,7 +60,7 @@ SHO conditions.\label{fig:07-Problem_illustration}}
 \end{figure}
 
 
-Despite several built-in mechanisms, that allow a radio network to
+Despite several built-in mechanisms that allow a radio network to
 overcome different problems due to the lack of SHO during a HSDPA
 connection, some abnormal cases do arise, especially in areas where
 there is SHO capability in the uplink, but none in the downlink. An
@@ -83,11 +83,12 @@ by the active connection on cell~1, which shows an increase in HSUPA
 traffic. However, the noise-level profile on cell~2 does not follow
 its traffic, as it did in the normal situation (a). This is due to
 cell~2 not being part of the active set. Such situations appear when
-the UL coverage is larger than the DL coverage. Interestingly enough,
-this seems to be an exceptional case, as Holma and Toskala write in~\cite{holma2006hsdpa},
-when describing the SHO in chapter 5:
+the uplink coverage is larger than the downlink coverage. Interestingly
+enough, this seems to be an exceptional case, as Holma and Toskala
+write in~\cite{holma2006hsdpa}, when describing the SHO in chapter
+5:
 
-''... There is no obvious reason why the serving E-DCH cell would
+``... There is no obvious reason why the serving E-DCH cell would
 not be the same as the serving HSDPA cell, and this is also required
 to be the case in the specifications.''
 
@@ -111,7 +112,7 @@ the pilot powers of the cells.
 
 PRATO, as defined in Chapter~\ref{chap:04-Framework-design-and-implementation},
 is used as the evaluation framework of the SHO-balancing problem.
-A state-of-the-art mathematical model~\cite{nawrocki2006understanding}
+A state-of-the-art mathematical model~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006}
 describes the downlink and uplink SHO areas. By introducing a penalty-based
 objective function and some hard constraints, a formal definition
 of the SHO-balancing problem in UMTS networks is given. The mathematical
@@ -144,12 +145,12 @@ and network troubleshooting in the short term.
 Optimizing SHO by means of pilot-power adjustment is an established
 way of enhancing network capacity, when high-speed services like HSDPA
 and HSUPA coexist with legacy technologies~\cite{chen2008cpich}.
-In the UMTS, the pilot power is typically between 5\% to 10\% of the
-total downlink transmit power of the BS~\cite{RadioNetworkPlanningAndOptimisationForUMTS},
+In the UMTS, the pilot power is typically between 5~\% to 10~\%
+of the total downlink transmit power of the BS~\cite{RadioNetworkPlanningAndOptimisationForUMTS},
 but there is no standardized method to fi{}nd a pilot-power setting.
 A number of existing approaches to resolve this issue exist in the
 related literature~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications,Siomina_PilotPowerManagementInWCDMANetworksCoverageControlWithRespectToTrafficDistribution,Ying_CPICHPowerSettingsInIrregularWCDMAMacroCellularNetworks},
-being those based on optimization methods the most eff{}ective ones~\cite{Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CPICHPowerOptimisationByMeansOfSimulatedAnnealingInAnUTRAFDDEnvironment,RadioNetworkPlanningAndOptimisationForUMTS,UMTSRadioNetworkPlanning_OptimizationAndQoSManagementForPracticalEngineeringTasks,siomina2008minimum}.
+those based on optimization methods being the most eff{}ective ones~\cite{Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,GarciaLozano_CPICHPowerOptimisationByMeansOfSimulatedAnnealingInAnUTRAFDDEnvironment,RadioNetworkPlanningAndOptimisationForUMTS,UMTSRadioNetworkPlanning_OptimizationAndQoSManagementForPracticalEngineeringTasks,Siomina:Minimum.pilot.power.for.service.coverage}.
 Such a wide spectrum of available procedures is directly related to
 the diverse criteria taken into account when assigning the pilot power
 of a cell. The fundamental reason behind this fact is that the pilot
@@ -178,19 +179,19 @@ at Telekom Slovenije, d.d.
 From the optimization point of view, the purpose of the change step
 is twofold. First, since the optimization targets a live network,
 there is no need for the algorithms to create complete new configurations,
-but just to fine-tune existing ones. Second, the problem complexity
+but just to fine-tune the existing ones. Second, the problem complexity
 is lowered, because the size of the search space is smaller and discrete.
 
 
 \subsection{Soft-handover areas \label{sub:07-SHO_areas}}
 
-To obtain a realistic outline of the areas where an UE may potentially
+To obtain a realistic outline of the areas where a UE may potentially
 maintain connections to more than one cell, a static version of the
-active set, as defined in \cite{nawrocki2006understanding}, is used.
-To this end, a SHO window, $\gamma^{\mathrm{sho}}$\nomenclature[S]{$\gamma^{\mathrm{sho}}$}{SHO window.},
-and a \textit{\emph{maximum}} active-set size, $as^{\mathrm{max}}$\nomenclature[S]{$as^{\mathrm{max}}$}{Maximum number of neighbouring cells in the active set.},
+active set, as defined in~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006},
+is used. To this end, a SHO window, $\gamma^{\mathrm{sho}}$\nomenclature[S]{$\gamma^{\mathrm{sho}}$}{SHO window},
+and a \textit{\emph{maximum}} active-set size, $as^{\mathrm{max}}$\nomenclature[S]{$as^{\mathrm{max}}$}{Maximum number of neighbouring cells in the active set},
 are introduced. Both parameters are taken from the working configuration
-of the real network. It follows that the cells to which an UE $m$,
+of the real network. It follows that the cells to which a UE $m$,
 $m\in M$, may maintain concurrent downlink connections are part of
 the set:
 
@@ -200,16 +201,14 @@ SHO_{m}^{\downarrow} & = & \left\{ c\,\vert\, l_{c^{*}m}^{\downarrow}p_{c^{*}}-l
 \end{eqnarray}
 
 
-\nomenclature[S]{$SHO_{m}^{\downarrow}$}{Cell set to which a mobile may maintain concurrent downlink connections, i.e. downlink SHO.}
-
 \noindent where $c$ is a network cell, $l_{c^{*}m}^{\downarrow}$
 is the downlink attenuation factor of the best-serving cell, and $p_{c^{*}}$
 is its pilot power. Since the number of elements in $SHO_{m}^{\downarrow}$
 is at most $as^{\mathrm{max}}$, the weakest links are removed if
 there are several present. This method is well suited for configurations
-with no hysteresis, since dynamic effects are ignored in static models~\cite{nawrocki2006understanding}. 
+with no hysteresis, since dynamic effects are ignored in static models~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006}. 
 
-Additionally, in the uplink, the set of cells to which an UE can potentially
+Additionally, in the uplink, the set of cells to which a UE can potentially
 be in SHO is defined as:
 
 \begin{equation}
@@ -217,15 +216,13 @@ SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.1622
 \end{equation}
 
 
-\nomenclature[S]{$SHO_{m}^{\uparrow}$}{Cell set to which a mobile may maintain concurrent uplink connections, i.e. uplink SHO.}
-
 \noindent where $l_{mc}^{\uparrow}$ is the uplink attenuation factor
-from an UE $m$ to a cell $c$, and $p_{m}^{\uparrow}$\nomenclature[S]{$p_{m}^{\uparrow}$}{Uplink transmit power of mobile $m\in M$.}
+from a UE $m$ to a cell $c$, and $p_{m}^{\uparrow}$\nomenclature[S]{$p_{m}^{\uparrow}$}{Uplink transmit power of mobile $m\in M$}
 is the uplink transmit power of $m$.
 
 The static nature of the model intentionally neglects mobility and
 dynamic interference by narrowing $\gamma^{\mathrm{sho}}$ down to
-2~dB~\cite{nawrocki2006understanding}.
+2~dB~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006}.
 
 
 \section{Problem definition \label{sec:07-Problem_definition}}
@@ -235,7 +232,7 @@ an objective function was formulated in cooperation with a team of
 radio engineers of the Radio Network Department at Telekom Slovenije,
 d.d. The objective function is constructed as a weighted sum, containing
 different costs that penalize the occurrence of specific SHO conditions
-in downlink and uplink, which may potentially cause the afore-mentioned
+in downlink and uplink, which may potentially cause the aforementioned
 malfunctioning, introduced in Section \ref{sec:07-Motivation}.
 
 A cost-based objective function is the most natural and straight-forward
@@ -252,7 +249,7 @@ problem is the minimization of the sum of penalty scores given as:
 \end{equation}
 
 
-\nomenclature[S]{$f_{\mathrm{sho}}$}{Objective function of the SHO-balancing problem.}
+\nomenclature[S]{$f_{\mathrm{sho}}$}{Objective function of the SHO-balancing problem}
 
 \noindent where 
 
@@ -419,10 +416,10 @@ new state of the system.
 \end{algorithm}
 
 
-At the begging, a cell, $c'$, is randomly selected from the set of
-all cells in the network, $C$. Next, a change of +0.01~dB or -0.01~dB
-is applied with 50\% probability to $p_{c'}$. The pilot power of
-cell $c'$ is expressed in dBm. The randomly generated pilot-power
+At the beginning, a cell, $c'$, is randomly selected from the set
+of all cells in the network, $C$. Next, a change of +0.01~dB or
+-0.01~dB is applied with 50~\% probability to $p_{c'}$. The pilot
+power of cell $c'$ is expressed in dBm. The randomly generated pilot-power
 setting, $p_{c'}^{\mathrm{new}}$, is then validated, i.e., it must
 be an element of the set $P_{c'}$. If $p_{c'}^{\mathrm{new}}$ is
 not a valid pilot power, the loop is executed again, generating another
@@ -461,7 +458,7 @@ the SHO-balancing problem. \label{tab:07-Test_network_properties}}
 Parameter & Value\tabularnewline
 \hline 
 Number of cells & $25$\tabularnewline
-Coverage threshold (RSCP) & $-115$~dBm\tabularnewline
+Coverage threshold & $-115$~dBm\tabularnewline
 SHO window ($\gamma^{\mathrm{sho}}$) & $2$~dB\tabularnewline
 User equipment ($p_{m}^{\uparrow}$) & $21$~dBm, power class 4\tabularnewline
 Pixel resolution & $25$~m$^{2}$\tabularnewline
@@ -502,8 +499,8 @@ The parameters controlling the behavior of the DE algorithm were set
 as follows:
 \begin{itemize}
 \item $NP=100$, the population size;
-\item $G_{max}=1000$, the maximum number of generations for the algorithm
-to run;
+\item $g_{\mathrm{max}}=1000$, the maximum number of generations for the
+algorithm to run;
 \item $CR=0.8$, the crossover constant; and
 \item $F=0.5$, the mutation-scaling factor.
 \end{itemize}
@@ -511,14 +508,14 @@ As for DASA, the parameters were set to the following values:
 \begin{itemize}
 \item $m=10$, the number of ants;
 \item $b=10,$ the discrete base;
-\item $q=0.2$, the pheromone dispersion factor;
+\item $\rho=0.2$, the pheromone dispersion factor;
 \item $s_{+}=0.01$, the global scale-increasing factor;
 \item $s_{-}=0.01$, the global scale-decreasing factor; and 
-\item $e=1.0^{-2}$, the maximum parameter precision.
+\item $\epsilon=1.0^{-2}$, the maximum parameter precision.
 \end{itemize}
 There are only two parameters controlling SA, namely:
 \begin{itemize}
-\item $t_{initial}=$125, the initial temperature; and
+\item $t_{\mathrm{initial}}=$125, the initial temperature; and
 \item $it=$100,000, the total number of iterations.
 \end{itemize}
 In this case, the exponential-lowering schema was chosen as the way
@@ -536,15 +533,6 @@ the time needed to run one optimization round, the entire objective-function
 evaluation was implemented using OpenCL and executed on a nVidia GeForce
 GTX 260. This individual change exhibited more than 15-fold, execution-time
 speedup, when compared to the original CPU-only version.
-
-
-\subsection{Results \label{sub:07-Results}}
-
-In this section, the performance of the selected algorithms is presented.
-The analysis includes aspects related to solution quality and convergence
-speed. All experimental results were obtained after 30 independent
-runs, each of them limited to a maximum of 100,000 evaluations. The
-gathered results are shown in Table~\ref{tab:07-Algorithm_performance}.
 
 \begin{table}
 \centering
@@ -564,6 +552,15 @@ SA  & 2,293,350.00 & 2,295,570.00 & 2,294,626.50 & 159.61\tabularnewline
 \end{tabular}
 \end{table}
 
+
+
+\subsection{Results \label{sub:07-Results}}
+
+\noindent In this section, the performance of the selected algorithms
+is presented. The analysis includes aspects related to solution quality
+and convergence speed. All experimental results were obtained after
+30 independent runs, each of them limited to a maximum of 100,000
+evaluations. The gathered results are shown in Table~\ref{tab:07-Algorithm_performance}.
 
 It may be observed that DE reached the lowest objective-function value,
 closely followed by DASA. Likewise, both algorithms arrived at very
@@ -590,7 +587,7 @@ is an adequate stopping criterion for all algorithms. The third algorithm,
 SA, slowly converged towards the best solution found, even though
 it was not as good as the solutions found by DE and DASA.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 
 \includegraphics[width=0.7\textwidth]{07-experimental_evaluation-sho_balancing/img/DE_convergence}
@@ -623,7 +620,7 @@ values in each evaluation of the SHO-balancing problem.\label{fig:07-Algorithm_c
 The three convergence profiles shown in Figures~\ref{fig:07-Algorithm_convergence-DE},
 \ref{fig:07-Algorithm_convergence-DASA}, and~\ref{fig:07-Algorithm_convergence-SA}
 give a clearer notion about the way these algorithms explore the search
-space of the SHO-balancing problem, and the variatons occurred during
+space of the SHO-balancing problem, and the variations occurred during
 the optimization process.
 
 The simulation-running times have been intentionally omitted, since
@@ -632,34 +629,6 @@ and are therefore not suitable for comparison with each other.
 
 
 \subsection{Performance analysis}
-
-\begin{table}
-\centering
-
-\caption{Improvement analysis of the best solution that each algorithm achieved
-for the SHO-balancing problem.\textit{\label{tab:07-Optimization_result_analysis}}}
-
-
-{\scriptsize{}}%
-\begin{tabular}{ccccccc}
-\cmidrule{2-7} 
- & {\scriptsize{Uncovered}} & {\scriptsize{Covered, no SHO}} & {\scriptsize{SHO}} & {\scriptsize{no SHO$^{\downarrow}$, SHO$^{\uparrow}$}} & {\scriptsize{SHO$^{\downarrow}$, no SHO$^{\uparrow}$}} & {\scriptsize{Total}}\tabularnewline\addlinespace
-\midrule
-{\scriptsize{Before opt.}} & {\scriptsize{63.00\%}} & {\scriptsize{15.11\%}} & {\scriptsize{15.73\%}} & {\scriptsize{1.80\%}} & {\scriptsize{4.36\%}} & {\scriptsize{100.00\%}}\tabularnewline
-\cmidrule{2-7} 
-{\scriptsize{DE sol.}} & {\scriptsize{60.23\%}} & {\scriptsize{16.13\%}} & {\scriptsize{16.09\%}} & {\scriptsize{1.47\%}} & {\scriptsize{6.08\%}} & {\scriptsize{100.00\%}}\tabularnewline
-{\scriptsize{DASA sol.}} & {\scriptsize{60.24\%}} & {\scriptsize{16.16\%}} & {\scriptsize{16.90\%}} & {\scriptsize{1.46\%}} & {\scriptsize{5.24\%}} & {\scriptsize{100.00\%}}\tabularnewline
-{\scriptsize{SA sol.}} & {\scriptsize{60.42\%}} & {\scriptsize{16.55\%}} & {\scriptsize{15.97\%}} & {\scriptsize{1.56\%}} & {\scriptsize{5.50\%}} & {\scriptsize{100.00\%}}\tabularnewline
-\cmidrule{2-7} 
-{\scriptsize{DE impr.}} & {\scriptsize{+4.40\%}} & {\scriptsize{+6.75\%}} & {\scriptsize{+2.29\%}} & {\scriptsize{+18.33\%}} & {\scriptsize{-39.45\%}} & {\scriptsize{---}}\tabularnewline
-{\scriptsize{DASA impr.}} & {\scriptsize{+4.38\%}} & {\scriptsize{+6.95\%}} & {\scriptsize{+7.44\%}} & {\scriptsize{+18.88\%}} & {\scriptsize{-20.18\%}} & {\scriptsize{---}}\tabularnewline
-{\scriptsize{SA impr.}} & {\scriptsize{+4.09\%}} & {\scriptsize{+9.53\%}} & {\scriptsize{+1.52\%}} & {\scriptsize{+13.33\%}} & {\scriptsize{-26.15\%}} & {\scriptsize{---}}\tabularnewline
-\cmidrule{2-7} 
-{\scriptsize{Avg. impr.}} & {\scriptsize{+4.29\%}} & {\scriptsize{+7.74\%}} & {\scriptsize{+3.75\%}} & {\scriptsize{+16.85\%}} & {\scriptsize{-28.59\%}} & {\scriptsize{---}}\tabularnewline
-\bottomrule
-\end{tabular}
-\end{table}
-
 
 Table~\ref{tab:07-Optimization_result_analysis} presents the analysis
 of the obtained results from the network point of view. After 30 independent
@@ -673,14 +642,59 @@ downlink SHO, without SHO in the uplink (labeled as `SHO$^{\downarrow}$,
 no SHO$^{\uparrow}$'), which shows an expected decline, since it
 is the optimization aspect with the lowest penalty-factor value.
 
-The coverage has been improved with an average of 4.29\%, whereas
+\begin{table}
+\centering
+
+\caption{Improvement analysis of the best solution that each algorithm achieved
+for the SHO-balancing problem. All values are expressed in percent.\textit{\label{tab:07-Optimization_result_analysis}}}
+
+
+{\scriptsize{}}%
+\begin{tabular}{ccccccc}
+\cmidrule{2-7} 
+ & {\scriptsize{Uncovered}} & {\scriptsize{Covered, no SHO}} & {\scriptsize{SHO}} & {\scriptsize{no SHO$^{\downarrow}$, SHO$^{\uparrow}$}} & {\scriptsize{SHO$^{\downarrow}$, no SHO$^{\uparrow}$}} & {\scriptsize{Total}}\tabularnewline\addlinespace
+\midrule
+{\scriptsize{Before opt.}} & {\scriptsize{63.00}} & {\scriptsize{15.11}} & {\scriptsize{15.73}} & {\scriptsize{1.80}} & {\scriptsize{4.36}} & {\scriptsize{100.00}}\tabularnewline
+\cmidrule{2-7} 
+{\scriptsize{DE sol.}} & {\scriptsize{60.23}} & {\scriptsize{16.13}} & {\scriptsize{16.09}} & {\scriptsize{1.47}} & {\scriptsize{6.08}} & {\scriptsize{100.00}}\tabularnewline
+{\scriptsize{DASA sol.}} & {\scriptsize{60.24}} & {\scriptsize{16.16}} & {\scriptsize{16.90}} & {\scriptsize{1.46}} & {\scriptsize{5.24}} & {\scriptsize{100.00}}\tabularnewline
+{\scriptsize{SA sol.}} & {\scriptsize{60.42}} & {\scriptsize{16.55}} & {\scriptsize{15.97}} & {\scriptsize{1.56}} & {\scriptsize{5.50}} & {\scriptsize{100.00}}\tabularnewline
+\cmidrule{2-7} 
+{\scriptsize{DE impr.}} & {\scriptsize{+4.40}} & {\scriptsize{+6.75}} & {\scriptsize{+2.29}} & {\scriptsize{+18.33}} & {\scriptsize{-39.45}} & {\scriptsize{---}}\tabularnewline
+{\scriptsize{DASA impr.}} & {\scriptsize{+4.38}} & {\scriptsize{+6.95}} & {\scriptsize{+7.44}} & {\scriptsize{+18.88}} & {\scriptsize{-20.18}} & {\scriptsize{---}}\tabularnewline
+{\scriptsize{SA impr.}} & {\scriptsize{+4.09}} & {\scriptsize{+9.53}} & {\scriptsize{+1.52}} & {\scriptsize{+13.33}} & {\scriptsize{-26.15}} & {\scriptsize{---}}\tabularnewline
+\cmidrule{2-7} 
+{\scriptsize{Avg. impr.}} & {\scriptsize{+4.29}} & {\scriptsize{+7.74}} & {\scriptsize{+3.75}} & {\scriptsize{+16.85}} & {\scriptsize{-28.59}} & {\scriptsize{---}}\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+The coverage has been improved with an average of 4.29~\%, whereas
 the coverage area where there is no SHO capability, has been increased
-7.74\% on average. Areas where SHO is available in both downlink and
-uplink have also been improved, i.e., 3.75\% on average. This particular
-improvement is interesting from the optimization point of view, because
-it had no explicit penalty factor set. Therefore, this may be understood
-as a consequence of the correct representation of the different network
-aspects in the objective function.
+7.74~\% on average. Areas where SHO is available in both downlink
+and uplink have also been improved, i.e., 3.75~\% on average. This
+particular improvement is interesting from the optimization point
+of view, because it had no explicit penalty factor set. Therefore,
+this may be understood as a consequence of the correct representation
+of the different network aspects in the objective function.
+
+The second most important optimized aspect in the SHO-balancing problem
+is the proportion of areas with uplink SHO and no SHO in the downlink
+(labeled as `no SHO$^{\downarrow}$, SHO$^{\uparrow}$' in Table~\ref{tab:07-Optimization_result_analysis}).
+This particular condition has been improved by almost 17~\% on average,
+greatly reducing the possibility of interference in neighboring cells
+when serving HSPA traffic. The last measured aspect takes into account
+areas with downlink SHO and no SHO in the uplink (labeled as `SHO$^{\downarrow}$,
+no SHO$^{\uparrow}$' in Table~\ref{tab:07-Optimization_result_analysis}).
+This condition, although it has not improved, does not expose the
+mobile network to malfunctioning, only to reduced throughput within
+these specific areas. However, the reduced throughput is relative,
+since there are many cells capable of serving HSDPA data access, as
+the downlink SHO condition confirms. For this reason, the serving
+cell should not only deliver HSDPA, but also take care of the user
+signaling and power control, received in the uplink. Clearly, this
+is only feasible in areas where uplink coverage is guaranteed.
 
 \begin{figure}
 \centering
@@ -699,23 +713,6 @@ aspects in the objective function.
 \caption{Spatial distribution of the SHO areas after the optimization.\label{fig:07-SHO_areas_final}}
 \end{figure}
 
-
-The second most important optimized aspect in the SHO-balancing problem
-is the proportion of areas with uplink SHO and no SHO in the downlink
-(labeled as `no SHO$^{\downarrow}$, SHO$^{\uparrow}$' in Table~\ref{tab:07-Optimization_result_analysis}).
-This particular condition has been improved by almost 17\% on average,
-greatly reducing the possibility of interference in neighboring cells
-when serving HSPA traffic. The last measured aspect takes into account
-areas with downlink SHO and no SHO in the uplink (labeled as `SHO$^{\downarrow}$,
-no SHO$^{\uparrow}$' in Table~\ref{tab:07-Optimization_result_analysis}).
-This condition, although it hasn't improved, does not expose the mobile
-network to malfunctioning, only to reduced throughput within these
-specific areas. However, the reduced throughput is relative, since
-there are many cells capable of serving HSDPA data access, as the
-downlink SHO condition confirms. For this reason, the serving cell
-should not only deliver HSDPA, but also take care of the user signaling
-and power control, received in the uplink. Clearly, this is only feasible
-in areas where uplink coverage is guaranteed.
 
 It is worth mentioning that the simulation results were obtained for
 a real radio network with actual configuration data. Moreover, the
@@ -741,17 +738,17 @@ also given. Particularly, tackling the SHO-balancing problem was possible
 due to the improved performance delivered by the evaluation framework
 PRATO (see Chapter~\ref{chap:04-Framework-design-and-implementation}).
 
-\noindent Using a extension of the radio-network model presented in
-Section~\ref{sec:06-Radio_network_model}, the penalty scores of
-the objective function were set according to the configuration and
-layout of a real mobile network, deployed in Slovenia by Telekom Slovenije,
-d.d. 
+\noindent Using an extension of the radio-network model presented
+in Section~\ref{sec:06-Radio_network_model}, the penalty scores
+of the objective function were set according to the configuration
+and layout of a real mobile network, deployed in Slovenia by Telekom
+Slovenije, d.d. 
 
 The balancing problem has been tackled by three optimization algorithms,
 namely DE, DASA and SA. All three algorithms were able to improve
-the given network configuration, being DE the most successful one.
-The presented results confirm that a great proportion of the SHO areas,
-that were not balanced before the optimization, were corrected, therefore
+the given network configuration, DE being the most successful one.
+The presented results confirm that a great proportion of the SHO areas
+that were not balanced before the optimization were corrected, therefore
 significantly reducing the possibility of HSPA-service failures. Additionally,
 radio coverage was improved, while all other essential network services
 were not altered.
@@ -773,5 +770,5 @@ the formal definition of the SHO-balancing problem as presented here
 has not yet appeared in the related literature. Also note that although
 some methods proposed in this chapter have been particularly designed
 for problems that emerge during the planning of 3G radio networks,
-they may be adapted to other standards, e.g., 2G and 4G, without lose
+they may be adapted to other standards, e.g., 2G and 4G, without loss
 of generality.

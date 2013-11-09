@@ -1,5 +1,5 @@
 
-\chapter{Framework verification \label{chap:08-Real-world_network_planning}}
+\chapter{Framework Verification \label{chap:08-Real-world_network_planning}}
 
 % First paragraph has no indentation.
 
@@ -14,7 +14,7 @@ framework is to verify its accuracy. This is especially important
 in real-world scenarios, where it is not feasible to improve the performance
 of radio-coverage predictions at the cost of precision loss. The scope
 of this chapter is therefore to establish that the accuracy of the
-radio-propagations predictions of PRATO, as described previously in
+radio-propagation predictions of PRATO, as described previously in
 Chapter~\ref{chap:04-Framework-design-and-implementation}, is adequate
 for real-world, radio-network planning purposes. To this end, and
 with the help of the radio engineers at Telekom Slovenije, d.d., some
@@ -38,8 +38,8 @@ Section~\ref{sec:08-Performance_analysis}.
 For a mobile operator, the utilization of a radio-network planning
 tool has clear economical and technical benefits. As it has been pointed
 out throughout the previous chapters, the usage of accurate planning
-tools minimizes the operator's costs and effort, and also accellerates
-particular processes. In this sense, the important role a radio-planning
+tools minimizes the operator's costs and effort, and also automates
+manual processes. In this sense, the important role that a radio-planning
 tool has during the optimization process of a network was also presented. 
 
 However, up to this stage, little has been said regarding the reliability
@@ -57,8 +57,11 @@ field measurements as a reference.
 
 The second objective of this chapter is related to the the high-performance
 characteristics of PRATO. To this end, an insight to the computational-time
-performance of PRATO, compared to the commercial radio-planning tool,
-is also given.
+performance of PRATO, compared to the commercial radio-planning tool%
+\footnote{Due to the currently applicable business-secrecy policy of Telekom
+Slovenije, d.d., the author is not able to reveal any details about
+the commercial tool that was used during experimentation.%
+}, is also given.
 
 
 \section{Radio-environment setup \label{sec:08-Radio_environment_setup}}
@@ -67,16 +70,17 @@ Field measurements are used as the reference for analyzing the accuracy
 of a set of coverage-prediction calculations. The reference measurements
 were conducted in three commercial networks of different sizes and
 technologies. Namely, Net$_{11}$ denotes a GSM network that contains
-835 BSs with 1246 cells, Net$_{12}$ is an UMTS network with 790 BSs
-and 2051 cells, and Net$_{13}$ is a LTE network featuring 120 BSs
-with 351 cells. The selected networks extend throughout diverse geographical
+830 BSs with 1240 cells, Net$_{12}$ is a UMTS network with 700 BSs
+and 2000 cells, and Net$_{13}$ is a LTE network featuring 120 BSs
+with 350 cells. The selected networks extend throughout diverse geographical
 regions, thus covering different terrains and representing various
 environmental characteristics, including urban, suburban and rural.
 
 Using a similar setup as presented in Section~\ref{sub:05-Field_measurements},
 the average-received power was measured on the field for each network.
-The measurement results were captured with the air-interface measurement
-tool for the corresponding network technology.
+The field measurements were captured with the air-interface measurement
+tool for the corresponding network technology. The captured measurements
+are lower-bounded by the receiver sensitivity of a given technology.
 
 In order to minimize the error impact in the measured signals, all
 field measurements were processed so that a single value, the median,
@@ -85,12 +89,10 @@ this step improves the data quality in terms of possible deviations
 due to external factors during the measurement gathering on the field.
 
 Regarding the radio-propagation models, the coverage predictions were
-calculated using the propietrary model of the commercial tool, and
+calculated using the proprietary model of the commercial tool, and
 the previously introduced model for PRATO (see Section~\ref{sub:04-Radio_propagation_model}).
-Both propagation models were tuned, using the gathered field measurements,
-in order to match the local environmental conditions of each tested
-network. Additionally, the coverage-prediction parameters were equally
-set in both tools (see Table~\ref{tab:08-Coverage_prediction_parameters}).
+Additionally, the coverage-prediction parameters were equally set
+in both tools (see Table~\ref{tab:08-Coverage_prediction_parameters}).
 
 \begin{table}
 \centering
@@ -105,7 +107,7 @@ on PRATO and the commercial tool.\label{tab:08-Coverage_prediction_parameters}}}
 \toprule 
 Parameter & Net$_{11}$ & Net$_{12}$ & Net$_{13}$\tabularnewline
 \midrule 
-frequency & {\small{900~Mhz}} & {\small{2140~Mhz}} & {\small{1800~Mhz}}\tabularnewline
+frequency & {\small{900~MHz}} & {\small{2140~MHz}} & {\small{1800~MHz}}\tabularnewline
 receiver height & {\small{1.5~m}} & {\small{1.5~m}} & {\small{1.5~m}}\tabularnewline
 calculation radius & {\small{35~km}} & {\small{25~km}} & {\small{25~km}}\tabularnewline
 \bottomrule
@@ -124,9 +126,17 @@ of which is focused on coverage examination. The accuracy of PRATO
 as a radio-coverage prediction tool was investigated by comparing
 the simulation results and the field measurements. Its performance
 was investigated for different network types (GSM, UMTS and LTE) and
-terrains (hilly, almost flat rural, urban, and suburban). In the following,
-the evaluation for different frequency bands is presented first, followed
-by an analysis for the different terrain types.
+terrains (hilly, almost flat rural, urban, and suburban).
+
+The accuracy of PRATO can be verified from Figures~\ref{fig:08-Received_signal_power-GSM},
+\ref{fig:08-Received_signal_power-UMTS} and~\ref{fig:08-Received_signal_power-LTE},
+the graphs of which present the simulation results of both tools for
+Net$_{11}$, Net$_{12}$ and Net$_{13}$, respectively. The graphs
+labeled as (a) show the analysis comparison between PRATO and the
+field measurements, whereas the ones labeled as (b) show the same
+analysis for the commercial tool. The field measurements used for
+this analysis are selected according to the spatial arrangement of
+the given coverage prediction.
 
 \begin{figure}[h]
 \centering
@@ -150,7 +160,7 @@ radio-planning tool.\label{fig:08-Received_signal_power-UMTS}}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 
 \includegraphics[width=0.47\textwidth]{08-real_network_planning/img/lte_prato_rcv_pwr}\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/lte_tcpu_rcv_pwr}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
@@ -161,18 +171,10 @@ radio-planning tool.\label{fig:08-Received_signal_power-LTE}}
 \end{figure}
 
 
-The accuracy of PRATO can be verified from Figures~\ref{fig:08-Received_signal_power-GSM},
-\ref{fig:08-Received_signal_power-UMTS} and~\ref{fig:08-Received_signal_power-LTE},
-the graphs of which present the simulation results from both tools
-for the Net$_{11}$, Net$_{12}$ and Net$_{13}$, respectively. The
-graphs labeled as (a) show the analysis comparison between PRATO and
-the field measurements, whereas the ones labeled as (b) show the same
-analysis for the commercial tool.
-
 Figure~\ref{fig:08-Received_signal_power-GSM}~(a), that depicts
 the received-power levels for Net$_{11}$ (GSM), shows that the prediction
-results match the field measurements significantly well. A similar
-result arragement can be observed in Figure~\ref{fig:08-Received_signal_power-UMTS}~(a)
+results match the field measurements rather well. A similar result
+arrangement can be observed in Figure~\ref{fig:08-Received_signal_power-UMTS}~(a)
 for Net$_{12}$ (UMTS), whereas the prediction results for Net$_{13}$
 (LTE) show a slightly increased deviation from the field measurements,
 as presented in Figure~\ref{fig:08-Received_signal_power-LTE}~(a).
@@ -180,37 +182,37 @@ as presented in Figure~\ref{fig:08-Received_signal_power-LTE}~(a).
 \begin{figure}[h]
 \centering
 
-\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/gsm_prato_diff}\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/gsm_tcpu_diff}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
+\includegraphics[width=0.6\textwidth]{08-real_network_planning/img/gsm_diff}
 
 \caption{Probability distribution function for Net$_{11}$ (GSM) of the difference
-between the field measurements and the simulation results of: (a)
-PRATO, and (b) the commercial tool. \label{fig:08-Prediction_difference-GSM}}
+between the field measurements and the simulation results of PRATO,
+and the commercial tool. \label{fig:08-Prediction_difference-GSM}}
 \end{figure}
 
 
 \begin{figure}[h]
 \centering
 
-\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/umts_prato_diff}\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/umts_tcpu_diff}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
+\includegraphics[width=0.6\textwidth]{08-real_network_planning/img/umts_diff}
 
 \caption{Probability distribution function for Net$_{12}$ (UMTS) of the difference
-between the field measurements and the simulation results of: (a)
-PRATO, and (b) the commercial tool.\label{fig:08-Prediction_difference-UMTS}}
+between the field measurements and the simulation results of PRATO,
+and the commercial tool.\label{fig:08-Prediction_difference-UMTS}}
 \end{figure}
 
 
 \begin{figure}[h]
 \centering
 
-\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/lte_prato_diff}\includegraphics[width=0.47\textwidth]{08-real_network_planning/img/lte_tcpu_diff}\\\hspace{0.4cm}(a)\hspace{6.7cm}(b)
+\includegraphics[width=0.6\textwidth]{08-real_network_planning/img/lte_diff}
 
 \caption{Probability distribution function for Net$_{13}$ (LTE) of the difference
-between the field measurements and the simulation results of: (a)
-PRATO, and (b) the commercial tool.\label{fig:08-Prediction_difference-LTE}}
+between the field measurements and the simulation results of PRATO,
+and the commercial tool.\label{fig:08-Prediction_difference-LTE}}
 \end{figure}
 
 
-Plots showing the probability distribution function (PDF\nomenclature[A]{PDF}{Probability deviation function.})
+Plots showing the probability distribution function (PDF\nomenclature[A]{PDF}{Probability distribution function})
 of the difference between the simulation results and the field measurements
 were also produced. In this case, Figures~\ref{fig:08-Prediction_difference-GSM},
 \ref{fig:08-Prediction_difference-UMTS}, and~\ref{fig:08-Prediction_difference-LTE}
@@ -220,7 +222,10 @@ respectively. Again, the graphs labeled as (a) show the analysis for
 PRATO, whereas the ones labeled as (b) show the same analysis for
 the commercial tool. Table~\ref{tab:08-PDF_properties} lists the
 mean and standard deviation of the PDFs for each network and tool
-tested, the values of which are expressed in dB.
+tested, the values of which are expressed in dB. It is important to
+note that the parameter set used for both tools intentionally generate
+pessimistic results in terms of coverage prediction. This is clearly
+observed from the mean-difference values of all three test cases.
 
 \begin{table}
 \centering
@@ -236,7 +241,7 @@ between simulation and measurement results.\textit{\emph{ }}\textit{\label{tab:0
  & PRATO & Commercial tool &  & PRATO & Commercial tool\tabularnewline\addlinespace
 \midrule
 Net$_{11}$ & 9.37 & 12.04 &  & 12.29 & 11.98\tabularnewline
-Net$_{12}$ & 9.31 & -0.61 &  & 11.94 & 11.87\tabularnewline
+Net$_{12}$ & 9.31 & 8.71 &  & 11.94 & 11.23\tabularnewline
 Net$_{13}$ & 3.84 & 3.63 &  & 12.20 & 11.06\tabularnewline
 \bottomrule
 \end{tabular}
@@ -251,37 +256,33 @@ predictions of which show a slightly greater deviation with respect
 to the measurements. Therefore, it can be concluded that the prediction
 results of PRATO are comparable with the results of the commercial
 tool for the three test networks. Moreover, the presented analysis
-also confirms that the result agreement is independent of the frequency
+also confirms that the calculated results are independent of the frequency
 band used, since each test network operates in a different frequency.
 
 Additionally, each of the test networks extended over different terrain
 types and environments, e.g., urban and suburban areas. Since the
 curves of the presented charts show similar profiles for the difference
 between the measurements and simulations for both tools, the applicability
-of PRATO for arbitrary terrain types can also be confirmed.
+of PRATO for arbitrary terrain types can also be expected.
 
 Notice also that PRATO generated similar results as the commercial
-tool in all three cases, irrespectively of the operational frequency
+tool in all three cases, irrespective of the operational frequency
 or chosen terrain type. The predicted values are also comparable for
 different distances between the BSs and UEs. Moreover, a slight improvement
-can be observed in the prediction values of PRATO, because they better
-resemble the profile depicted by the field measurements. This behavior
-can be attributed to the lack of parameter adaptation per cell in
-the commercial tool, whereas in PRATO this functionality is available
-and was used. These results further confirm the advantage of the parameter-tuning
-approach, which was presented in Chapter~\ref{chap:05-Framework_parameter_tuning}.
+can be observed in some of the prediction values of PRATO, because
+they better resemble the profile shown by the field measurements.
 
 
 \subsection*{Computational-time performance}
 
 In the following, the computational-time performance of both tools
-in analyzed. The analysis focused on the required processing times
+is analyzed. The analysis focused on the required processing times
 of both tools on the same system, the hardware of which consisted
-in a 4-core Intel i7 2.67~GHz CPU, 24~GB of RAM and a dual nVidia
+of a 4-core Intel i7 2.67~GHz CPU, 24~GB of RAM and a dual nVidia
 GeForce GTX 590 GPU. The simulations for PRATO were performed on a
 Linux operating system, using multiple processes on the CPU. The commercial
 tool required a Windows Server operating system, and provided single-process,
-multithreading support to use all the cores of the CPU.
+multi-threading support to use all the cores of the CPU.
 
 The simulations included the test networks presented above, all of
 which extend over a geographical region of 285~x~185~km$^{2}$,
@@ -295,8 +296,8 @@ Net$_{12}$ and Net$_{13}$, respectively.
 
 \includegraphics[width=0.7\textwidth]{08-real_network_planning/img/gsm_running_times}
 
-\caption{Simulation-processing times of Net$_{11}$ (GSM) for the commercial
-tool and two implementations of PRATO. \label{fig:08-Running_times-GSM}}
+\caption{Simulation-processing times and speedup factors of Net$_{11}$ (GSM)
+for the commercial tool and two implementations of PRATO. \label{fig:08-Running_times-GSM}}
 \end{figure}
 
 
@@ -305,8 +306,8 @@ tool and two implementations of PRATO. \label{fig:08-Running_times-GSM}}
 
 \includegraphics[width=0.7\textwidth]{08-real_network_planning/img/umts_running_times}
 
-\caption{Simulation-processing times of Net$_{12}$ (UMTS) for the commercial
-tool and two implementations of PRATO. \label{fig:08-Running_times-UMTS}}
+\caption{Simulation-processing times and speedup factors of Net$_{12}$ (UMTS)
+for the commercial tool and two implementations of PRATO. \label{fig:08-Running_times-UMTS}}
 \end{figure}
 
 
@@ -315,8 +316,8 @@ tool and two implementations of PRATO. \label{fig:08-Running_times-UMTS}}
 
 \includegraphics[width=0.7\textwidth]{08-real_network_planning/img/lte_running_times}
 
-\caption{Simulation-processing times of Net$_{13}$ (LTE) for the commercial
-tool and two implementations of PRATO. \label{fig:08-Running_times-LTE}}
+\caption{Simulation-processing times and speedup factors of Net$_{13}$ (LTE)
+for the commercial tool and two implementations of PRATO. \label{fig:08-Running_times-LTE}}
 \end{figure}
 
 
@@ -330,11 +331,11 @@ on one board, each of which featured 1.5~GB of DRAM.
 
 The benefits of the parallel implementation of PRATO is clear in all
 three cases. Moreover, the multi-GPU support increases the running-time
-performance even further, achieving speedup factors of 19, 22, and
-10, for Net$_{11}$, Net$_{12}$, and Net$_{13}$, respectively. These
-results confirm that the use PRATO as a radio-planning tool in a real-world
-environment is feasible and it outperforms the compared commercial
-tool in terms of computational-time performance.
+performance even further, achieving speedup factors of 18.96, 22.32,
+and 9.95, for Net$_{11}$, Net$_{12}$, and Net$_{13}$, respectively.
+These results confirm that the use PRATO as a radio-planning tool
+in a real-world environment is feasible and it outperforms the compared
+commercial tool in terms of computational-time performance.
 
 
 \section{Summary}

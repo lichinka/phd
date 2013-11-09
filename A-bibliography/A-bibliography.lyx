@@ -177,6 +177,22 @@ status open
 
 
 \backslash
+bibentry{Benedicic-Automatic_clutter_loss_optimization:2013}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 bibentry{Osterman-A_GPU_LOS_approach:2013}
 \end_layout
 

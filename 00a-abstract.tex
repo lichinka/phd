@@ -5,7 +5,7 @@
 \fancyhead{}
 \fancyfoot{}
 \fancyhead[RO]{\thepage}
-\fancyhead[LO]{}
+\fancyhead[LO]{\footnotesize Abstract}
 \fancyhead[LE]{\thepage}
 \fancyhead[RE]{\footnotesize Abstract}
 
@@ -47,25 +47,118 @@ shows considerable gains with respect to the size of problem instances
 it may handle, as well as regarding its speed performance and solution
 quality.
 
-Another way to take advantage of the achieved speedup at the simulation
-stage is to tackle problems of greater complexity. This thesis identifies
-a new optimization problem in 3G radio networks that deals with soft-handover
-balancing of downlink and uplink areas. Using a black-box approach,
-different metaheuristic algorithms are employed for solving the problem,
-the solutions of which show a substantial improvement of downlink
-and uplink balance.
+The proposed unified framework is tested on complex optimization problems,
+namely (i) the problem of soft-handover balancing in third-generation
+systems, and (ii) the parameter optimization of empirical radio-propagation
+models.
 
-From the practical point of view, the automation of time-consuming,
-radio-planning tasks is yet another way to exploit the benefits of
-faster and more precise simulations. One such task is the configuration
-of the control parameters of empirical radio-propagation models. Another
-one is identified with the environmental adaptation of the signal
-losses due to clutter. Both tasks are automated, using the parallel
-framework as a central component of the system.
+Most mobile operators are aware of the soft-handover balancing problem,
+but so far, and due to its complexity, it has not yet been tackled
+by any modern optimization approach. This thesis identifies and formally
+defines the mentioned problem. Using a black-box approach, different
+metaheuristic algorithms are employed for solving the problem, the
+solutions of which show a substantial improvement of downlink and
+uplink balance.
 
-The utility and performance of the developed methods is assessed against
-an enterprise, commercial tool for radio-network planning. The objective
-of such comparison is to determine the performance and usage properties
-of the parallel framework in everyday planning, using real-world scenarios.
+Another use case of the presented methods is to optimize the parameters
+of empirical radio-propagation models. Until now, only one parameter
+set was used to adapt a radio-propagation model to a complete radio
+network. Using the proposed design automation, the model parameters
+can be adjusted locally, e.g., for each cell or region in the network,
+and thus greatly improve the accuracy of the calculated predictions.
 
+On the one hand, the proposed approaches allow a more detailed analysis
+of radio networks within a reasonable time. On the other hand, the
+optimization of much larger radio networks is also possible.
+
+\pagebreak{}
+
+\selectlanguage{slovene}%
+\noindent \inputencoding{latin2}\textbf{\Large{\vspace{0.1cm}}}{\Large \par}
+
+\noindent \textbf{\Large{Povzetek}}{\Large \par}
+
+\noindent \textbf{\Large{\vspace{1.0cm}}}{\Large \par}
+
+\selectlanguage{english}%
+\noindent \inputencoding{latin9}\addcontentsline{toc}{chapter}{Povzetek}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\thepage}
+\fancyhead[LO]{\footnotesize Povzetek}
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{\footnotesize Povzetek}
+
+\selectlanguage{slovene}%
+\inputencoding{latin2}%
+\noindent Zahtevnost naèrtovanja radijskih omre¾ij se je poveèala
+z veèanjem ¹tevila celic v sodobnih celiènih standardih. Zato je vloga
+raèunalnika kot pomo¾no orodje za izvajanje hitrej¹ih in natanènih
+izraèunov vse bolj pomembna. Prièujoèa disertacija predstavlja nove
+metode za naèrtovanje in samodejno optimizacijo radijskih omre¾ij.
+
+Klasièni pristopi za optimizacijo in naèrtovanje sistemov v velikih
+sistemih odpovedo, zato sodobni pristopi pri optimizaciji velikih
+sistemov uporabljajo metahevristiène algoritme. Delovanje metahevristiènih
+algoritmov temelji na velikem ¹tevilu poizkusov in oceni kakovosti
+re¹itev ter usmerjanju raziskovanja algoritma v iskalnem prostoru.
+Poizkusi v radijskih omre¾jih se izvajajo z modeliranjem radijskih
+omre¾ij in simulacijami, vendar imajo veè pomanjkljivosti v zvezi
+s ponujeno fleksibilnostjo in s èasom izvajanja simulacije. Velikost
+omre¾ij, ki jih je mogoèe analizirati na izvedljivem èasu, je obièajno
+zelo omejena.
+
+Prièujoèa disertacija zato predstavlja nove pristope za poveèanje
+hitrosti optimizacije radijskih omre¾ij z metahevristiènimi algoritmi
+in njihovo uporabo v konkretnih optimizacijskih problemih radijskih
+omre¾ij.
+
+Prvi korak, ki ga predlaga disertacija, zajema pohitritev izvajanja
+poizkusov oz. simulacij z metodami vzporednega raèunanja. Disertacija
+podaja in primerja metode vzporednega raèunanja tako za izvajaje simulacij
+na veèjedrnih procesorjih kot na gruèi raèunalnikov z grafiènimi procesorji,
+ki so povezani preko lokalnega omre¾ja. Poveèana hitrost izvajanja
+omogoèa poveèano stopnjo podrobnosti simulacij, kar posledièno izbolj¹uje
+natanènost rezultatov.
+
+Poveèanje hitrosti izvajanja simulacij je le prvi korak k praktiènemu
+zmanj¹evanju raèunskega èasa, potrebnega za evaluacijo cenovne funkcije
+in posledièno optimizacijo radijskih omre¾ij. Poleg tega je potrebno
+tudi zmanj¹ati èas izvajanja optimizacijskih algoritmov, vendar ne
+na raèun kakovosti rezultatov. Doktorska disertacija v ta namen predstavlja
+optimizacijski algoritem, katerega delovanje je prilagojeno re¹evanju
+klasiènih optimizacijskih problemov v radijskih omre¾jih. Novi algoritem,
+ki temelji na tehnikah, uporabljenih v celiènih avtomatih ter metahevristiènih
+algoritmih, dose¾e bolj¹e rezultate z vidika velikosti preuèenih primerkov,
+kot tudi z vidika kakovosti re¹itev.
+
+Predlagani pristopi so preizku¹eni na kompleksnih optimizacijskih
+problemih, in sicer (i) problem optimizacije ravnovesja povezave navzdol-navzgor
+pri mehkem izroèanju v sistemih tretje generacije in (ii) optimizacija
+parametrov empiriènih modelov raz¹irjanja radijskega valovanja. 
+
+Problem optimizacije ravnovesja povezave navzdol-navzgor pri mehkem
+izroèanju v sistemih tretje generacije je problem, ki se ga zaveda
+veèina mobilnih operaterjev, vendar do sedaj zaradi svoje kompleksnosti
+¹e ni bil re¹en. Prièujoèa disertacija formalno opredeljuje ta optimizacijski
+problem ter prika¾e re¹itev problema po principu èrne ¹katle (angl.
+black box) z uporabo razliènih metahevristiènih algoritmov. Rezultati
+uporabe predlaganih metod poka¾ejo precej¹nje izbolj¹ane razporeditve
+podroèij mehkega izroèanja.
+
+Drugi primer uporabe metod je optimizacija parametrov empiriènih modelov
+raz¹irjanja radijskega valovanja. Do sedaj, so se parametri empiriènih
+modelov raz¹irjanja radijskega valovanja uporabljali za celo radijsko
+omre¾je. Z uporabo predlagane avtomatizacije naèrtovanja, pa lahko
+parametre empiriènega radijskega kanala lokalno prilagodimo, npr.
+za vsako celico ali regijo v omre¾ju, s tem pa moèno izbolj¹amo natanènost
+izraèunane predikcije.
+
+Predlagani pristopi na eni strani omogoèajo bolj podrobno analizo
+omre¾ij v sprejemljivem èasu, po drugi strani pa z njimi lahko optimiziramo
+veèja radijska omre¾ja.
+
+\newpage
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{}\selectlanguage{english}%
 

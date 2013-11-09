@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Framework automated tuning 
+Framework Automated Tuning 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:05-Framework_parameter_tuning"
@@ -275,8 +275,8 @@ onal effort.
 \end_layout
 
 \begin_layout Standard
-To address the afore-mentioned issues, the parameters of an empirical propagatio
-n model are adapted based on a set of field measurements.
+To address the aforementioned issues, the parameters of an empirical propagation
+ model are adapted based on a set of field measurements.
  The parameter tuning is analytically calculated per cell, in order to increase
  the accuracy of the calculated predictions.
  Moreover, by applying an optimization approach, the signal losses due to
@@ -814,8 +814,8 @@ name "sub:05-Field_measurements"
 \end_layout
 
 \begin_layout Standard
-In radio networks, an UE constantly performs cell selection/reselection
- procedures and handover (see Section
+In radio networks, a UE constantly performs cell selection/reselection procedure
+s and handover (see Section
 \begin_inset space ~
 \end_inset
 
@@ -835,7 +835,7 @@ reference "sub:02-Handover-and-soft-handover"
 LatexCommand nomenclature
 prefix "A"
 symbol "RSRP"
-description "Reference signal received power."
+description "Reference signal received power"
 
 \end_inset
 
@@ -844,7 +844,7 @@ description "Reference signal received power."
 LatexCommand nomenclature
 prefix "A"
 symbol "RSRQ"
-description "Reference signal received quality."
+description "Reference signal received quality"
 
 \end_inset
 
@@ -865,13 +865,13 @@ For a certain frequency bandwidth, RSRP measures the average received power
 The radio-propagation prediction involves calculating the network coverage
  over a certain region.
  Hence, in the first place, the focus is on accurately predicting the best
- connection an UE would select in idle mode and the RSRP measurements it
+ connection a UE would select in idle mode and the RSRP measurements it
  uses.
 \end_layout
 
 \begin_layout Standard
 Here, the field measurements representing the RSRP at a given location were
- collected using a small truck, that was equipped with a spectrum analyzer.
+ collected using a small truck that was equipped with a spectrum analyzer.
  The spectrum analyzer was connected to an external omni antenna mounted
  on the roof of the truck, at roughly 2
 \begin_inset space ~
@@ -1186,7 +1186,7 @@ m above ground level.
 
 km defines the coverage prediction area around each network transmitter,
  thus limiting the path-loss prediction to a distance where it is feasible
- for an UE to connect to a cell, with a RSRP greater or equal to -124
+ for a UE to connect to a cell, with a RSRP greater or equal to -124
 \begin_inset space ~
 \end_inset
 
@@ -1260,7 +1260,7 @@ Parameters of the test networks Net
 \begin_inset Formula $_{10}$
 \end_inset
 
-, that were used for the experimental simulations during the automated tuning
+ that were used for the experimental simulations during the automated tuning
  of the radio-propagation model.
 \begin_inset CommandInset label
 LatexCommand label
@@ -2584,12 +2584,19 @@ reference "fig:05-Error_distribution_for_Net8"
 \begin_inset space ~
 \end_inset
 
-dB or more is around 16%, whereas the proportion of points differing in
- less than 5
+dB or more is around 16
 \begin_inset space ~
 \end_inset
 
-dB is 10%.
+%, whereas the proportion of points differing in less than 5
+\begin_inset space ~
+\end_inset
+
+dB is 10
+\begin_inset space ~
+\end_inset
+
+%.
  These values correspond to the test network Net
 \begin_inset Formula $_{8}$
 \end_inset
@@ -2613,11 +2620,19 @@ reference "fig:05-Error_distribution_for_Net8"
 (b), the absolute-error distribution for the same test network is given,
  but with the model parameters fitted to the available field measurements.
  Notice how the proportions describing the biggest deviation have dropped
- to under 5% (35
+ to under 5
 \begin_inset space ~
 \end_inset
 
-dB and more), and to less than 6% (30
+% (35
+\begin_inset space ~
+\end_inset
+
+dB and more), and to less than 6
+\begin_inset space ~
+\end_inset
+
+% (30
 \begin_inset space ~
 \end_inset
 
@@ -7725,8 +7740,8 @@ name "fig:05-Statistical_analysis_boxplots"
 Because of the stochastic nature of the DASA, the results of 30 independent
  runs were collected in order to have enough data for them to be statistically
  relevant.
- In other words, the robustness of the solutions, that have been presented
- in the previous section, is analyzed here.
+ In other words, the robustness of the solutions that were presented in
+ the previous section is analyzed here.
 \end_layout
 
 \begin_layout Standard
@@ -7814,7 +7829,7 @@ This chapter illustrated the suitability of PRATO as a network-planning
 \end_layout
 
 \begin_layout Standard
-The combination of the afore-mentioned techniques with PRATO provides an
+The combination of the aforementioned techniques with PRATO provides an
  environment-adaptable framework for radio-network planning.
  This delivers a tool with a considerable improvement of the solution accuracy
  of the analyzed instances, especially if compared to traditional, i.e., manual
@@ -7830,7 +7845,7 @@ Additionally, the simulation results indicate that PRATO is applicable for
 me complexity, which is beyond reach for a serial implementation of an automated
  approach.
  Moreover, the parallelization capabilities provided by the framework create
- new problem-solving possibilities, together with the automation of tasks,
+ new problem-solving possibilities, together with the automation of tasks
  that have been traditionally done manually by the network engineers.
  Furthermore, even computational-intensive tasks such as objective-function
  evaluations for stochastic optimization are feasible if PRATO is used.

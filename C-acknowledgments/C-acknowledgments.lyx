@@ -161,10 +161,10 @@ v{z}
 \end_inset
 
  Javornik for their guidance, understanding, and professional assistance
- during the past years.
+ during these years.
  The insightful discussions and extensive explorations have been essential
  for this work, which I could not have carried out without their help.
- I'm sincerely thankful for their time spent in reviewing and editing my
+ I am sincerely thankful for their time spent in reviewing and editing my
  research work.
 \end_layout
 
@@ -210,7 +210,20 @@ v{s}
 
 \end_inset
 
-kova and Vida Vukasinovi
+kova and Vida Vuka
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{s}
+\end_layout
+
+\end_inset
+
+inovi
 \begin_inset ERT
 status open
 
@@ -271,54 +284,6 @@ Last but not least, I wish to thank my brother and my parents, for believing
 \begin_layout Standard
 All my research work, including this thesis, was co-financed by the European
  Union, through the European Social Fund.
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-\noindent
-The authors would like to especially thank the radio engineers at Telekom
- Slovenije, d.d., for cooperating and sharing their professional expertise
- throughout the creation of this work.
- This project was co-financed by the European Union, through the European
- Social Fund.
-\end_layout
-
-\begin_layout Plain Layout
-The contents presented in Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:04-Framework-design-and-implementation"
-
-\end_inset
-
- are the results of joint research work, conducted with the Nagasaki Advanced
- Computer Center (NACC) of the Nagasaki University.
- In this context, T.
- Hamada, head of NACC, acknowledges support from the Japan Society for the
- Promotion of Science (JSPS) through its Funding Program for World-leading
- Innovative R&D on Science and Technology (First Program).
-\end_layout
-
-\begin_layout Plain Layout
-The authors would like to especially thank the staff at the Nagasaki Advanced
- Computing Center (NACC) of the Nagasaki University for their support while
- making the computer cluster DEGIMA available for the experimental simulations.
- We are also grateful with the radio engineers at Telekom Slovenije, d.d.,
- for supplying the network data sets and sharing their professional expertise
- throughout the creation of this work.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_body

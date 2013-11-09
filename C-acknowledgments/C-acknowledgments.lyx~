@@ -161,10 +161,10 @@ v{z}
 \end_inset
 
  Javornik for their guidance, understanding, and professional assistance
- during the past years.
+ during these years.
  The insightful discussions and extensive explorations have been essential
  for this work, which I could not have carried out without their help.
- I'm sincerely thankful for their time spent in reviewing and editing my
+ I am sincerely thankful for their time spent in reviewing and editing my
  research work.
 \end_layout
 
@@ -210,7 +210,20 @@ v{s}
 
 \end_inset
 
-kova and Vida Vukasinovi
+kova and Vida Vuka
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+v{s}
+\end_layout
+
+\end_inset
+
+inovi
 \begin_inset ERT
 status open
 
@@ -265,7 +278,7 @@ reference "chap:04-Framework-design-and-implementation"
 
 \begin_layout Standard
 Last but not least, I wish to thank my brother and my parents, for believing
- in me and providing their unconditional support when I needed them.
+ in me and providing their unconditional support whenever I needed them.
 \end_layout
 
 \begin_layout Standard

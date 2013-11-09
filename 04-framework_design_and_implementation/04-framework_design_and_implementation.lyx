@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-A parallel framework for radio-network planning and optimization 
+A Parallel Framework for Radio-Network Planning and Optimization 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:04-Framework-design-and-implementation"
@@ -100,7 +100,7 @@ The framework is implemented as a module of a geographical information system,
 e data.
  Following a master-worker parallel paradigm over a message-passing communicatio
 n model proved to be a bottleneck for the performance of the parallel module.
- A new approach, that overcomes this performance constraint, is introduced
+ A new approach,that overcomes this performance constraint is introduced
  in this chapter.
  The efficiency improvement is based on overlapping process execution and
  communication.
@@ -112,7 +112,7 @@ n model proved to be a bottleneck for the performance of the parallel module.
 LatexCommand nomenclature
 prefix "A"
 symbol "DB"
-description "Database system."
+description "Database system"
 
 \end_inset
 
@@ -123,7 +123,7 @@ description "Database system."
 LatexCommand nomenclature
 prefix "A"
 symbol "PRATO"
-description "Parallel radio-prediction tool."
+description "Parallel radio-prediction tool"
 
 \end_inset
 
@@ -132,7 +132,7 @@ description "Parallel radio-prediction tool."
 LatexCommand nomenclature
 prefix "A"
 symbol "GRASS"
-description "Geographic resources analysis support system."
+description "Geographic resources analysis support system"
 
 \end_inset
 
@@ -448,7 +448,7 @@ key "Hata_Empirical_formula_for_propagation_loss_in_land_mobile_radio_services:1
 
 \end_inset
 
-, the description of which is latter presented in Section
+, the description of which is later presented in Section
 \begin_inset space ~
 \end_inset
 
@@ -474,7 +474,7 @@ key "Ozimek_Open.source.radio.coverage.prediction:2010"
 
 .
  To ensure that the presented implementation is completely compliant with
- this reference, a comparison test was designed, that consists of running
+ this reference, a comparison test was designed that consists of running
  both tools with the same set of input parameters.
  The test results from PRATO and the reference implementation were identical
  in all the tested cases.
@@ -590,7 +590,7 @@ key "Mehlfuhrer_The_Vienna_LTE_Simulators_enabling_reproducibility_in_wireless_c
 LatexCommand nomenclature
 prefix "A"
 symbol "AMC"
-description "Adaptive modulation and coding."
+description "Adaptive modulation and coding"
 
 \end_inset
 
@@ -599,7 +599,7 @@ description "Adaptive modulation and coding."
 LatexCommand nomenclature
 prefix "A"
 symbol "MIMO"
-description "Multiple input multiple output."
+description "Multiple input multiple output"
 
 \end_inset
 
@@ -669,7 +669,7 @@ key "Campos_Parallel_modelling_in_GIS:2012"
 LatexCommand nomenclature
 prefix "A"
 symbol "MPI"
-description "Message passing interface."
+description "Message passing interface"
 
 \end_inset
 
@@ -688,7 +688,7 @@ key "Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007"
 
 \end_inset
 
- presented MPI and Ninf-G implementation examples of a GRASS raster module,
+ presented MPI and Ninf-G implementation examples of a GRASS raster module
  that processes vegetation indexes from satellite images.
  The authors acknowledge a limitation in the performance of their MPI implementa
 tion for big processing jobs.
@@ -752,7 +752,7 @@ key "Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_
 LatexCommand nomenclature
 prefix "A"
 symbol "DEM"
-description "Digital elevation model."
+description "Digital elevation model"
 
 \end_inset
 
@@ -1081,7 +1081,7 @@ key "Ahmad:Studying_different_propagation_models_for_LTE_system:2012,Shabbir_Com
 LatexCommand nomenclature
 prefix "A"
 symbol "OA"
-description "Open area."
+description "Open area"
 
 \end_inset
 
@@ -1091,7 +1091,7 @@ description "Open area."
 LatexCommand nomenclature
 prefix "A"
 symbol "NLOS"
-description "Non line of sight."
+description "Non line of sight"
 
 \end_inset
 
@@ -1149,7 +1149,7 @@ reference "eq:04-Hata_OA"
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{L}_{\\mathrm{OA}}$"
-description "Path loss in an open-area environment."
+description "Path loss in an open-area environment"
 
 \end_inset
 
@@ -1158,7 +1158,7 @@ description "Path loss in an open-area environment."
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\vec{\\beta}$"
-description "Control-parameter vector of the path-loss model."
+description "Control-parameter vector of the path-loss model"
 
 \end_inset
 
@@ -1167,7 +1167,7 @@ description "Control-parameter vector of the path-loss model."
 LatexCommand nomenclature
 prefix "S"
 symbol "$d_{(x,y)}$"
-description "Distance from the cell to the topography point with coordinates $(x,y)$."
+description "Distance from the cell to the topography point with coordinates $(x,y)$"
 
 \end_inset
 
@@ -1176,7 +1176,7 @@ description "Distance from the cell to the topography point with coordinates $(x
 LatexCommand nomenclature
 prefix "S"
 symbol "$H_A$"
-description "Antenna height above the receiver."
+description "Antenna height above the receiver"
 
 \end_inset
 
@@ -1185,7 +1185,7 @@ description "Antenna height above the receiver."
 LatexCommand nomenclature
 prefix "S"
 symbol "$H_R$"
-description "Height of the receiver antenna above ground level."
+description "Height of the receiver antenna above ground level"
 
 \end_inset
 
@@ -1251,7 +1251,7 @@ reference "eq:04-Hata_NLOS"
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{L}_{\\mathrm{NLOS}}$"
-description "Path loss in non-line-of-sigth conditions."
+description "Path loss in non-line-of-sight conditions"
 
 \end_inset
 
@@ -1260,7 +1260,7 @@ description "Path loss in non-line-of-sigth conditions."
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\alpha$"
-description "Knife-edge diffraction control parameter."
+description "Knife-edge diffraction control parameter"
 
 \end_inset
 
@@ -1269,7 +1269,7 @@ description "Knife-edge diffraction control parameter."
 LatexCommand nomenclature
 prefix "S"
 symbol "$K(d_{(x,y)})$"
-description "Knife-edge diffraction loss."
+description "Knife-edge diffraction loss"
 
 \end_inset
 
@@ -1278,7 +1278,7 @@ description "Knife-edge diffraction loss."
 LatexCommand nomenclature
 prefix "S"
 symbol "$E(d_{(x,y)})$"
-description "Loss correction due to the Earth sphere."
+description "Loss correction due to the Earth sphere"
 
 \end_inset
 
@@ -1346,7 +1346,7 @@ key "Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension
 LatexCommand nomenclature
 prefix "A"
 symbol "LOS"
-description "Line of sight."
+description "Line of sight"
 
 \end_inset
 
@@ -1388,7 +1388,7 @@ key "Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_acc
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{L}(d_{(x,y)})$"
-description "Path loss at the topography point with coordinates $(x,y)$."
+description "Path loss at the topography point with coordinates $(x,y)$"
 
 \end_inset
 
@@ -1397,7 +1397,7 @@ description "Path loss at the topography point with coordinates $(x,y)$."
 LatexCommand nomenclature
 prefix "S"
 symbol "$\\mathrm{L}_{\\mathrm{CLUT}}$"
-description "Signal loss due to clutter."
+description "Signal loss due to clutter"
 
 \end_inset
 
@@ -1430,7 +1430,7 @@ name "sec:04-Design_and_implementation"
 \end_layout
 
 \begin_layout Subsection
-Geographic Resources Analysis Support System
+Geographic resources analysis support system
 \end_layout
 
 \begin_layout Standard
@@ -1451,7 +1451,7 @@ key "Neteler_Open_source_GIS_a_GRASS_GIS_approach"
 LatexCommand nomenclature
 prefix "A"
 symbol "GIS"
-description "Geographical information system."
+description "Geographical information system"
 
 \end_inset
 
@@ -1552,7 +1552,7 @@ reference "sub:04-GPU_worker_implementation"
 \begin_layout Standard
 In order to make the text clearer and to differentiate between the programming
  paradigms used from here on, a POSIX thread will be referred to simply
- as a `thread' and a MPI process as a `process'.
+ as a 'thread' and a MPI process as a 'process'.
 \end_layout
 
 \begin_layout Subsection
@@ -1579,7 +1579,7 @@ reference "fig:04-Flow_diagram_serial_version"
 LatexCommand nomenclature
 prefix "A"
 symbol "I/O"
-description "Input/output."
+description "Input/output"
 
 \end_inset
 
@@ -1652,7 +1652,7 @@ Since the module accepts a considerable amount of input parameters, they
 LatexCommand nomenclature
 prefix "A"
 symbol "INI"
-description "Initialization file."
+description "Initialization file"
 
 \end_inset
 
@@ -3257,7 +3257,7 @@ Processing loop
 
  step of the master process.
  In the processing loop, the master process starts by checking the available
- worker processes, that might calculate the radio-coverage prediction for
+ worker processes that might calculate the radio-coverage prediction for
  the next transmitter.
  It is worth pointing out that this step also serves as a stopping condition
  for the processing loop itself (see 
@@ -4142,7 +4142,7 @@ ge of a real radio network, the use of a computer cluster is recommended.
 LatexCommand nomenclature
 prefix "A"
 symbol "LAN"
-description "Local area network."
+description "Local area network"
 
 \end_inset
 
@@ -4151,7 +4151,7 @@ description "Local area network."
 LatexCommand nomenclature
 prefix "A"
 symbol "NFS"
-description "Network file system."
+description "Network file system"
 
 \end_inset
 
@@ -4179,7 +4179,7 @@ key "Hamada_Cluster_of_GPUs:2010"
 LatexCommand nomenclature
 prefix "A"
 symbol "NACC"
-description "Nagasaki advanced computing center."
+description "Nagasaki advanced computing center"
 
 \end_inset
 
@@ -4382,7 +4382,7 @@ The master-worker (MW
 LatexCommand nomenclature
 prefix "A"
 symbol "MW"
-description "Master-worker parallel paradigm."
+description "Master-worker parallel paradigm"
 
 \end_inset
 
@@ -4393,7 +4393,7 @@ description "Master-worker parallel paradigm."
 LatexCommand nomenclature
 prefix "A"
 symbol "MWD"
-description "Master-worker-database parallel paradigm."
+description "Master-worker-database parallel paradigm"
 
 \end_inset
 
@@ -5430,8 +5430,15 @@ saturated
 \begin_layout Standard
 The overhead of sending/receiving asynchronous messages in order to support
  heterogeneous systems was also measured.
- It was found that this overhead never exceeds 0.02% of the total running
- time for the MW experiments, and 0.01% for the MWD experimental set.
+ It was found that this overhead never exceeds 0.02
+\begin_inset space ~
+\end_inset
+
+% of the total running time for the MW experiments, and 0.01
+\begin_inset space ~
+\end_inset
+
+% for the MWD experimental set.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5836,7 +5843,7 @@ PRATO, a parallel radio-coverage prediction tool for radio networks, has
 \end_layout
 
 \begin_layout Standard
-The parallel implementaion of PRATO includes a novel parallel technique
+The parallel implementation of PRATO includes a novel parallel technique
  for master-worker configurations.
  The introduced MWD technique, which combines the use of a DB system with
  a work-pool approach, delivers improved performance when compared with

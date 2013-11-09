@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Chapter
-Framework verification 
+Framework Verification 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:08-Real-world_network_planning"
@@ -268,7 +268,7 @@ Field measurements are used as the reference for analyzing the accuracy
 \begin_inset Formula $_{12}$
 \end_inset
 
- is an UMTS network with 700 BSs and 2000 cells, and Net
+ is a UMTS network with 700 BSs and 2000 cells, and Net
 \begin_inset Formula $_{13}$
 \end_inset
 
@@ -318,7 +318,7 @@ reference "sub:05-Field_measurements"
 
 \begin_layout Standard
 Regarding the radio-propagation models, the coverage predictions were calculated
- using the propietrary model of the commercial tool, and the previously
+ using the proprietary model of the commercial tool, and the previously
  introduced model for PRATO (see Section
 \begin_inset space ~
 \end_inset
@@ -708,7 +708,7 @@ reference "fig:08-Received_signal_power-LTE"
  the field measurements, whereas the ones labeled as (b) show the same analysis
  for the commercial tool.
  The field measurements used for this analysis are selected according to
- the spatial arragement of the given coverage prediction.
+ the spatial arrangement of the given coverage prediction.
 \end_layout
 
 \begin_layout Standard
@@ -736,7 +736,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/gsm_prato_rcv_pwr.eps
+	filename img/gsm_prato_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -744,7 +744,7 @@ centering
 
 
 \begin_inset Graphics
-	filename img/gsm_tcpu_rcv_pwr.eps
+	filename img/gsm_tcpu_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -1006,7 +1006,7 @@ reference "fig:08-Received_signal_power-GSM"
 
  (GSM), shows that the prediction results match the field measurements rather
  well.
- A similar result arragement can be observed in Figure
+ A similar result arrangement can be observed in Figure
 \begin_inset space ~
 \end_inset
 
@@ -1244,7 +1244,7 @@ Plots showing the probability distribution function (PDF
 LatexCommand nomenclature
 prefix "A"
 symbol "PDF"
-description "Probability deviation function."
+description "Probability distribution function"
 
 \end_inset
 
@@ -1728,7 +1728,7 @@ Additionally, each of the test networks extended over different terrain
 
 \begin_layout Standard
 Notice also that PRATO generated similar results as the commercial tool
- in all three cases, irrespectively of the operational frequency or chosen
+ in all three cases, irrespective of the operational frequency or chosen
  terrain type.
  The predicted values are also comparable for different distances between
  the BSs and UEs.
@@ -1756,7 +1756,7 @@ GB of RAM and a dual nVidia GeForce GTX 590 GPU.
  The simulations for PRATO were performed on a Linux operating system, using
  multiple processes on the CPU.
  The commercial tool required a Windows Server operating system, and provided
- single-process, multithreading support to use all the cores of the CPU.
+ single-process, multi-threading support to use all the cores of the CPU.
 \end_layout
 
 \begin_layout Standard

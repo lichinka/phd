@@ -1,5 +1,5 @@
 
-\chapter{Framework automated tuning \label{chap:05-Framework_parameter_tuning}}
+\chapter{Framework Automated Tuning \label{chap:05-Framework_parameter_tuning}}
 
 % First paragraph has no indentation.
 
@@ -70,10 +70,10 @@ have to conform to a specific network or region within it, mainly
 because of the inaccuracies in input data and the environmental changes
 in the region, e.g., foliage of trees or snow. Consequently, a combination
 of different parameters is generally needed in order to reliably calculate
-radio-propagation predictions of lar networks that cover different
+radio-propagation predictions of large networks that cover different
 environments.
 
-To address the afore-mentioned issues, the parameters of an empirical
+To address the aforementioned issues, the parameters of an empirical
 propagation model are adapted based on a set of field measurements.
 The parameter tuning is analytically calculated per cell, in order
 to increase the accuracy of the calculated predictions. Moreover,
@@ -179,13 +179,14 @@ Clutter category & Description\tabularnewline
 
 \subsection{Field measurements \label{sub:05-Field_measurements}}
 
-In radio networks, an UE constantly performs cell selection/reselection
+In radio networks, a UE constantly performs cell selection/reselection
 procedures and handover (see Section~\ref{sub:02-Handover-and-soft-handover}),
 in order to keep the best possible connection to the network. Within
 this context, the best connection is selected by probing a QoS measure
 of the neighboring cells. In LTE networks, the UE measures two parameters
 from the reference signal of the network, namely the Reference Signal
-Received Power (RSRP) and the Reference Signal Received Quality (RSRQ).
+Received Power (RSRP\nomenclature[A]{RSRP}{Reference signal received power})
+and the Reference Signal Received Quality (RSRQ\nomenclature[A]{RSRQ}{Reference signal received quality}).
 
 For a certain frequency bandwidth, RSRP measures the average received
 power over the resource elements that carry cell-specific reference
@@ -196,17 +197,17 @@ RSRQ is only applicable when the UE is in connected mode.
 
 The radio-propagation prediction involves calculating the network
 coverage over a certain region. Hence, in the first place, the focus
-is on accurately predicting the best connection an UE would select
+is on accurately predicting the best connection a UE would select
 in idle mode and the RSRP measurements it uses.
 
 Here, the field measurements representing the RSRP at a given location
-were collected using a small truck, that was equipped with a spectrum
+were collected using a small truck that was equipped with a spectrum
 analyzer. The spectrum analyzer was connected to an external omni
 antenna mounted on the roof of the truck, at roughly 2~m above the
 ground, taking measurements at a rate of 2~Hz. To accurately establish
-the measurement-location points, a GPS unit was used. These GPS-informed
-locations have been tested to be compliant with the 60~m limit mentioned
-in~\cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004}.
+the measurement-location points, a Global-Positioning-System (GPS\nomenclature[A]{GPS}{Global positioning system})
+unit was used. These GPS-informed locations have been tested to be
+compliant with the 60~m limit mentioned in~\cite{Aarnaes-Tuning_of_empirical_radio_propagation_models_effect_of_location_accuracy:2004}.
 The measurements cover most of the streets within the target area,
 with over 300,000 individual points, collected for more than 140 network
 cells.
@@ -270,8 +271,8 @@ The path-loss predictions are calculated using PRATO, with a DEM and
 clutter map of 25~m$^{2}$ resolution, and a receiver height of 2~m
 above ground level. A transmission radius of 16~km defines the coverage
 prediction area around each network transmitter, thus limiting the
-path-loss prediction to a distance where it is feasible for an UE
-to connect to a cell, with a RSRP greater or equal to -124~dBm~\cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011}.
+path-loss prediction to a distance where it is feasible for a UE to
+connect to a cell, with a RSRP greater or equal to -124~dBm~\cite{Neuland_Influence_of_Different_Factors_on_X_Map_Estimation_in_LTE:2011}.
 At the same time, the selected transmission radius provides enough
 overlap among neighboring cells to calculate the network coverage
 over the whole region. Table~\ref{tab:05-Test_network_properties}
@@ -283,7 +284,7 @@ each test network.
 \begin{table}
 \centering
 
-\caption{Parameters of the test networks Net$_{8}$, Net$_{9}$ and Net$_{10}$,
+\caption{Parameters of the test networks Net$_{8}$, Net$_{9}$ and Net$_{10}$
 that were used for the experimental simulations during the automated
 tuning of the radio-propagation model.\label{tab:05-Test_network_properties}}
 
@@ -393,15 +394,15 @@ Each bar represents an open interval, expressed in dB, denoting the
 proportion of points that deviate from the prediction in the given
 number of dB. For example, in Figure~\ref{fig:05-Error_distribution_for_Net8}~(a),
 it can be observed that the proportion of predicted points differing
-from the field measurements in 35~dB or more is around 16\%, whereas
-the proportion of points differing in less than 5~dB is 10\%. These
+from the field measurements in 35~dB or more is around 16~\%, whereas
+the proportion of points differing in less than 5~dB is 10~\%. These
 values correspond to the test network Net$_{8}$, before applying
 the model-parameter fitting. For comparison, in Figure~\ref{fig:05-Error_distribution_for_Net8}~(b),
 the absolute-error distribution for the same test network is given,
 but with the model parameters fitted to the available field measurements.
 Notice how the proportions describing the biggest deviation have dropped
-to under 5\% (35~dB and more), and to less than 6\% (30~dB to 35~dB),
-respectively. Moreover, it is clear how all proportions improved,
+to under 5~\% (35~dB and more), and to less than 6~\% (30~dB to
+35~dB), respectively. Moreover, it is clear how all proportions improved,
 raising the bars towards the left-hand side of the chart and lowering
 them on the right-hand side.
 
@@ -511,23 +512,22 @@ general~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_ne
 and in this thesis in particular (see Chapters~\ref{chap:02-Optimization_of_radio_networks},
 \ref{chap:06-Experimental-evaluation-the-service-coverage-problem}
 and~\ref{chap:07-Experimental-evaluation-the-SHO-alignment-problem}).
-Second, in~\cite{Korosec-The_differential_ant_stigmergy_algorithm:2012},
-the authors validated the suitability of the algorithm for solving
-numerical-optimization problems.
+Second, in~\cite{korosec2010_DASA}, the authors validated the suitability
+of the algorithm for solving numerical-optimization problems.
 
 
 \subsection{Optimization objective \label{sub:Optimization-objective}}
 
 The optimization objective consists of adjusting the loss values of
 the different clutter categories, i.e., $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$
-from Equation~(\ref{eq:04-Hata_pathloss}), according to a set of
-field measurements of a given geographical region. The same three
-data sets used in Section~\ref{sub:05-Simulations} were used for
-the clutter-optimization problem: the first for Net$_{8}$, the second
-for Net$_{9}$, and the third for Net$_{10}$. Each region was independently
-optimized, so that the radio-propagation predictions of each set of
-network cells minimized the mean-squared error against the field measurements,
-i.e.:
+as used in Equation~(\ref{eq:04-Hata_pathloss}), according to a
+set of field measurements of a given geographical region. The same
+three data sets used in Section~\ref{sub:05-Simulations} were used
+for the clutter-optimization problem: the first for Net$_{8}$, the
+second for Net$_{9}$, and the third for Net$_{10}$. Each region
+was independently optimized, so that the radio-propagation predictions
+of each set of network cells minimized the mean-squared error against
+the field measurements, i.e.:
 
 \begin{equation}
 \min f_{\mathrm{clut}}=\sum_{i=1}^{m_{c}}\frac{(p_{c}-\mathrm{L}{}_{c}(i,\vec{\beta_{c}^{*}})-fm_{i})^{2}}{m_{C}}\;\forall c\in C,\label{eq:05-Mean-squared_error}
@@ -819,7 +819,7 @@ are depicted in Figure~\ref{fig:05-Statistical_analysis_boxplots}.
 
 
 {\scriptsize{}}%
-\begin{tabular}{ccccc>{\centering}p{0.75cm}cccc>{\centering}p{0.75cm}cccc>{\centering}p{0.75cm}}
+\begin{tabular}{>{\centering}p{0.2cm}cccc>{\centering}p{0.75cm}cccc>{\centering}p{0.75cm}cccc>{\centering}p{0.75cm}}
 \cline{3-16} 
  &  &  & \multicolumn{2}{c}{{\scriptsize{Net$_{8}$}}} &  &  &  & \multicolumn{2}{c}{{\scriptsize{Net$_{9}$}}} &  &  &  & \multicolumn{2}{c}{{\scriptsize{Net$_{10}$}}} & \tabularnewline
 \hline 
@@ -873,8 +873,8 @@ network: (a)~Net$_{8}$, (b)~Net$_{9}$, and (c)~Net$_{10}$.\label{fig:05-Statisti
 
 Because of the stochastic nature of the DASA, the results of 30 independent
 runs were collected in order to have enough data for them to be statistically
-relevant. In other words, the robustness of the solutions, that have
-been presented in the previous section, is analyzed here.
+relevant. In other words, the robustness of the solutions that were
+presented in the previous section is analyzed here.
 
 To this end, Table~\ref{tab:05-Statistical_analysis_of_solutions}
 shows the solutions reached by the DASA for each of three test networks.
@@ -892,7 +892,7 @@ there was a significantly lower density of field measurements nearby
 water trails, since none of the test networks lays by the sea. Regarding
 the categories 1 (suburban area), 7 and 8 (dry open land area) of
 Net$_{9}$, a lower proportion of field measurements over these areas
-was indentified, thus higher standard-deviation values appear.
+was identified, thus higher standard-deviation values appear.
 
 Based on these findings, the standard deviation of the optimized clutter
 losses can be considered an indicator of the field measurements required
@@ -909,12 +909,12 @@ over the newly deployed LTE network in Slovenia. The first one involved
 the parameter tuning of the empirical radio-propagation model using
 a snapshot of field measurements. The second one considered the optimization
 of the clutter losses over different regions of the country, therefore
-automaticallty adapting them to the local conditions of the geographical
+automatically adapting them to the local conditions of the geographical
 region of each network.
 
-The combination of the afore-mentioned techniques with PRATO provides
+The combination of the aforementioned techniques with PRATO provides
 an environment-adaptable framework for radio-network planning. This
-delivers a tool with a considerable improvent of the solution accuracy
+delivers a tool with a considerable improvement of the solution accuracy
 of the analyzed instances, especially if compared to traditional,
 i.e., manual or semi-automated, coverage-planning methods.
 
@@ -926,7 +926,7 @@ instances show a large computational-time complexity, which is beyond
 reach for a serial implementation of an automated approach. Moreover,
 the parallelization capabilities provided by the framework create
 new problem-solving possibilities, together with the automation of
-tasks, that have been traditionally done manually by the network engineers.
+tasks that have been traditionally done manually by the network engineers.
 Furthermore, even computational-intensive tasks such as objective-function
 evaluations for stochastic optimization are feasible if PRATO is used.
 

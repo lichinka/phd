@@ -344,7 +344,7 @@ Radio networks represent one of the most fast-growing technology markets
 LatexCommand nomenclature
 prefix "A"
 symbol "GSM"
-description "Global system for mobile communications."
+description "Global system for mobile communications"
 
 \end_inset
 
@@ -365,7 +365,7 @@ key "3GPP_TR_50.099"
 LatexCommand nomenclature
 prefix "A"
 symbol "2G"
-description "Second generation of mobile networks."
+description "Second generation of mobile networks"
 
 \end_inset
 
@@ -375,7 +375,7 @@ description "Second generation of mobile networks."
 LatexCommand nomenclature
 prefix "A"
 symbol "UMTS"
-description "Universal mobile telecommunications system."
+description "Universal mobile telecommunications system"
 
 \end_inset
 
@@ -396,7 +396,7 @@ key "3GPP_TR_23.101"
 LatexCommand nomenclature
 prefix "A"
 symbol "3G"
-description "Third generation of mobile networks."
+description "Third generation of mobile networks"
 
 \end_inset
 
@@ -407,7 +407,7 @@ description "Third generation of mobile networks."
 LatexCommand nomenclature
 prefix "A"
 symbol "LTE"
-description "Long term evolution."
+description "Long term evolution"
 
 \end_inset
 
@@ -416,7 +416,7 @@ description "Long term evolution."
 LatexCommand nomenclature
 prefix "A"
 symbol "4G"
-description "Fourth generation of mobile networks."
+description "Fourth generation of mobile networks"
 
 \end_inset
 
@@ -558,8 +558,8 @@ key "Amaldi-Radio_planning_and_coverage_optimization_of_3G_networks:2008,chen200
 \begin_layout Itemize
 Available commercial tools for radio-network evaluation present several
  drawbacks.
- In particular, regarding to the size of networks that can be considered
- and their computational-time complexity.
+ In particular, regarding the size of networks that can be considered and
+ their computational-time complexity.
  Yet, even if precise and fast methods were commercially available, they
  would lack the level of flexibility required by the scientific community.
  Consequently, an essential attribute of the framework is to be open source,
@@ -638,8 +638,8 @@ Using the parallel framework for the objective-function evaluation of different
 \begin_deeper
 \begin_layout Itemize
 On the one hand, a larger number of evaluations in the same amount of time
- translates in a better search of the search space by the optimization algorithm
- used.
+ translates into a better exploration of the search space by the optimization
+ algorithm used.
  On the other hand, more complex or exact models may be evaluated in the
  same amount of time, which implies more accurate solutions.
 \end_layout
@@ -670,7 +670,7 @@ The contributions of this thesis to the fields of telecommunications and
 \end_layout
 
 \begin_layout Enumerate
-Design and development of an unified framework for radio-network planning
+Design and development of a unified framework for radio-network planning
  and optimization that supports computer clusters and GPUs.
 \end_layout
 

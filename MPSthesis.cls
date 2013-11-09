@@ -1,3 +1,7 @@
+% MPSthesis v2.1
+% by Lucas Benedicic
+% Version 2.1 released 31/10/2013
+%-------------------------- identification ---------------------
 % MPSthesis v2.0
 % By Vedrana Vidulin <vedrana.vidulin@ijs.si> and Bostjan Kaluza <bostjan.kaluza@ijs.si>
 % Version 2.0 released 30/09/2011
@@ -235,9 +239,9 @@
 
 % page style for regular chapters
 \newcommand{\mychapterstyle}{
-	\fancyhead[RO]{\footnotesize \thepage}
-	\fancyhead[LO]{\footnotesize \rightmark}
-	\fancyhead[LE]{\footnotesize \thepage}
+    \fancyhead[RO]{\footnotesize \thepage}
+	\fancyhead[LO]{\footnotesize \leftmark}
+    \fancyhead[LE]{\footnotesize \thepage}
 	\fancyhead[RE]{\footnotesize \leftmark}
 }
 
@@ -352,19 +356,13 @@
 
 	%\setlength{\tabcolsep}{20pt}
 
-	\vspace{1.5cm}
-	\begin{tabular}{l}
-	\textbf{Supervisor:} \@supervisorlong\\
-	\textbf{Co-Supervisor:} \@cosupervisorlong\\
-	\end{tabular}
-
-	\vspace{1.5cm}
+	\vspace{3.0cm}
 
    \begin{tabular}{l}
-	\textbf{Evaluation Board:} \\
- 	\@evaluationBoardChairman, Chairman, \@evaluationBoardChairmanAffiliation \\
- 	\@evaluationBoardMember, Member, \@evaluationBoardMemberAffiliation \\
- 	\@evaluationBoardMembers, Member, \@evaluationBoardMemberAffiliations \\
+        \textbf{Evaluation Board:} \\
+        \emph{\@evaluationBoardChairman}, \emph{Chairman}, \emph{\@evaluationBoardChairmanAffiliation} \\
+        \emph{\@evaluationBoardMember}, \emph{Member}, \emph{\@evaluationBoardMemberAffiliation} \\
+        \emph{\@evaluationBoardMembers}, \emph{Member}, \@evaluationBoardMemberAffiliations \\
    \end{tabular}
 }
 \cleardoublepage
