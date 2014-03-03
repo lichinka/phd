@@ -552,7 +552,11 @@ thus adjusting the value of
 \begin_inset Formula $\alpha$
 \end_inset
 
- as it converges towards a point with zero slope 
+ as it converges towards a point with zero slope
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Luke-Essentials_of_metaheuristics:2009"
@@ -589,7 +593,11 @@ reference "fig:02-gradient_descent_saddle_point"
  Similarly, global optima are defined as the optima of the whole domain
  of a function.
  It follows that gradient methods, as gradient descent or Newton’s method,
- are local optimization algorithms 
+ are local optimization algorithms
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Luke-Essentials_of_metaheuristics:2009"
@@ -700,7 +708,7 @@ In a linear programming optimization problem, both the objective function
 
  and a given set of constraints are linear functions.
  The constraints impose restrictions over 
-\begin_inset Formula $\vec{x}$
+\begin_inset Formula $x$
 \end_inset
 
 , i.e., they must meet certain requirements as, for example, fulfill a limited
@@ -711,7 +719,7 @@ In a linear programming optimization problem, both the objective function
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\min f(\vec{x})=c\cdot\vec{x}\label{eq:02-linear_programming_objective_function}
+\min f(x)=c\cdot x\label{eq:02-linear_programming_objective_function}
 \end{equation}
 
 \end_inset
@@ -727,8 +735,8 @@ subject to
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray}
-A\cdot\vec{x} & \le & b\nonumber \\
-\vec{x} & \ge & \vec{0}.\label{eq:02-linear_programming_constraints}
+A\cdot x & \le & b\nonumber \\
+x & \ge & 0.\label{eq:02-linear_programming_constraints}
 \end{eqnarray}
 
 \end_inset
@@ -738,33 +746,49 @@ A\cdot\vec{x} & \le & b\nonumber \\
 
 \begin_layout Standard
 \noindent
-In the example above, the inequalities defined in 
+In the example above, the inequalities defined in Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:02-linear_programming_constraints"
 
 \end_inset
 
- are the constraints to the linear program defined in 
+) are the constraints to the linear program defined in Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:02-linear_programming_objective_function"
 
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Standard
 For solving continuous, linear-optimization problems, efficient exact algorithms
- exist, such as the simplex method 
+ exist, such as the simplex method
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Dantzig-Maximization_of_a_linear_function_of_variables_subject_to_linear_inequalities:1951"
 
 \end_inset
 
- or the interior-points method 
+ or the interior-points method
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984"
@@ -776,7 +800,11 @@ key "Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984"
  optimization problems, since the feasible region of the problem is a convex
  set and the objective function is a convex function.
  It follows that the global optimum is a node of the polytope representing
- the feasible region 
+ the feasible region
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Talbi_Metaheuristics:2009"
@@ -784,7 +812,11 @@ key "Talbi_Metaheuristics:2009"
 \end_inset
 
 .
- See Figure 
+ See Figure
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:02-linear_programming_example"
@@ -868,7 +900,11 @@ Non-linear programming models, on the other hand, consider problems where
 \begin_inset Formula $f$
 \end_inset
 
- and/or the constraints are non-linear 
+ and/or the constraints are non-linear
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bazaraa-Nonlinear_programming:2006"
@@ -878,8 +914,12 @@ key "Bazaraa-Nonlinear_programming:2006"
 .
  However, non-linear continuous problems are more difficult to solve.
  Despite several existing techniques to linearize such models, they often
- not only introduce extra variables and constraints, but also some degree
- of approximation 
+ introduce extra variables and constraints, and also some degree of approximatio
+n
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Glover-Improved_linear_programming_formulations_for_nonlinear_problems:1975"
@@ -903,7 +943,11 @@ Generally speaking, when dealing with real-world problems, the availability
  of analytical optimization models, such as those required by gradient methods
  or (non-)linear programming, is not guaranteed.
  Indeed, for some applications, only simulations or physical models are
- the available means for objective-function evaluation 
+ the available means for objective-function evaluation
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Fu-Optimization_for_simulation:2002"
@@ -1968,15 +2012,14 @@ reference "alg:07-SA_pseudocode"
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
+\begin_inset Float algorithm
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-
-
-\backslash
-begin{myalgorithm}
-\end_layout
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -1985,17 +2028,37 @@ begin{myalgorithm}
 centering
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Pseudo-code of the simulated-annealing metaheuristic.
+ Adapted from
+\begin_inset space ~
+\end_inset
 
 
-\backslash
-caption{Pseudo-code of the simulated-annealing metaheuristic.
- Adapted from~
-\backslash
-cite{Bianchi-A_survey_on_metaheuristics_for_stachastic_combinatorial_optimizatio
-n:2009}.
-\backslash
-label{alg:07-SA_pseudocode}}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bianchi-A_survey_on_metaheuristics_for_stachastic_combinatorial_optimization:2009"
+
+\end_inset
+
+.
+\shape italic
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:07-SA_pseudocode"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2003,7 +2066,7 @@ label{alg:07-SA_pseudocode}}
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset ERT
 status open
 
@@ -2125,17 +2188,6 @@ end{algorithmic}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{myalgorithm}
 \end_layout
 
 \end_inset
@@ -2603,7 +2655,7 @@ s, not only for providing them to the scientific community, but fundamentally
 \end_layout
 
 \begin_layout Chapter
-Principles of Mobile Radio Networks 
+Overview of Mobile Radio Networks 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Principles_of_mobile_radio_networks"
@@ -4404,11 +4456,15 @@ key "Coverage.optimization.with.cost.function:2002"
  to improve the aforementioned function.
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Discussion
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Regarding the optimization methods presented in the previous sections, three
  distinctive groups emerge: genetic algorithms, linear programming and other
  search methods.
@@ -4463,6 +4519,11 @@ methods Other search methods, e.g., local search, SA, tabu search or gradient
  Moreover, some of them are easily trapped in local minima.
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Summary
 \end_layout
@@ -4498,7 +4559,7 @@ Additionally, as noted for some of the cited works, hybrid methods, i.e.,
 \end_layout
 
 \begin_layout Chapter
-Principles of GPU Programming 
+Overview of GPU Programming 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:02-Principles_of_GPU_programming"

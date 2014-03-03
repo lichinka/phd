@@ -28,9 +28,9 @@ approaches.
 To the best of the author's knowledge, there is no reference in the
 literature of a simulation-based approach to find active downlink
 and uplink SHO areas. Additionally, there are no formal optimization
-methods known to the author that tackle the SHO balancing problem
-as described here. The approach described in this chapter extends
-the research work published by the author in \cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012}.
+methods known to the author that tackle the SHO-balancing problem
+as described here. This chapter extends the research work published
+by the author in~\cite{Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012}.
 
 The remainder of this chapter is organized as follows. Section~\ref{sec:07-Motivation}
 describes the motivation behind the SHO-balancing problem, whereas
@@ -40,9 +40,9 @@ model is presented in Section~\ref{sec:07-Radio_network_model},
 where all the elements of the mathematical model and the objective
 function are defined. In Section~\ref{sec:07-Problem_definition},
 the problem is formally defined, followed by a short description of
-the optimization algorithms used in Section~\ref{sec:07-Optimization_algorithms}.
+the optimization algorithms used, in Section~\ref{sec:07-Optimization_algorithms}.
 The simulations, including their environment, parameter setup and
-result analysis, are introduced in Section~\ref{sec:07-Simulations}.
+result analysis, are presented in Section~\ref{sec:07-Simulations}.
 
 
 \section{Motivation \label{sec:07-Motivation}}
@@ -62,9 +62,9 @@ SHO conditions.\label{fig:07-Problem_illustration}}
 
 Despite several built-in mechanisms that allow a radio network to
 overcome different problems due to the lack of SHO during a HSDPA
-connection, some abnormal cases do arise, especially in areas where
-there is SHO capability in the uplink, but none in the downlink. An
-example of such a case is depicted in Figure~\ref{fig:07-Problem_illustration},
+connection, some abnormal cases do arise. This is especially important
+in areas where there is SHO capability in the uplink, but none in
+the downlink. An example of such case is depicted in Figure~\ref{fig:07-Problem_illustration},
 which shows the interference behavior (denoted as UL RSSI) during
 a HSPA connection in: (a) normal SHO conditions, and (b) unbalanced
 SHO conditions. The plotted data are actual radio-network statistics
@@ -88,15 +88,15 @@ enough, this seems to be an exceptional case, as Holma and Toskala
 write in~\cite{holma2006hsdpa}, when describing the SHO in chapter
 5:
 
-``... There is no obvious reason why the serving E-DCH cell would
-not be the same as the serving HSDPA cell, and this is also required
-to be the case in the specifications.''
+\noindent ``... There is no obvious reason why the serving E-DCH cell
+would not be the same as the serving HSDPA cell, and this is also
+required to be the case in the specifications.''
 
 Given the described context, the challenge is to achieve the correct
-balance or distribution of downlink and uplink SHO areas within a
+balance and distribution of downlink and uplink SHO areas within a
 working UMTS network. Therefore, the network has to be fine-tuned
-to improve the SHO-area balancing, thus to avoid the exceptional appearance
-of problematic situations, as shown in Figure~\ref{fig:07-Problem_illustration}.
+to improve the SHO-area balancing, in order to avoid the exceptional
+appearance of problematic situations, as shown in Figure~\ref{fig:07-Problem_illustration}.
 This clearly implies that the mobile network configuration should
 not be excessively altered, since other aspects of the network are
 working well before starting the optimization process. Hence, the
@@ -104,7 +104,7 @@ objective of the optimization problem is to find a pilot-power configuration
 for all the cells in the target network, such that the balance of
 downlink and uplink SHO areas is improved and other network aspects
 are preserved. The optimization process takes into account different
-kinds of hardware, e.g., amplifiers, cables, and antennas, adjusting
+kinds of hardware, e.g., amplifiers, cables and antennas, while adjusting
 the pilot powers of the cells.
 
 \bigskip{}
@@ -119,7 +119,7 @@ of the SHO-balancing problem in UMTS networks is given. The mathematical
 model and the penalty scores of the objective function are set according
 to the configuration and layout of a real mobile network, deployed
 in Slovenia by Telekom Slovenije, d.d. The SHO settings are also taken
-from the actual network configuration, still they were adapted to
+from the actual network configuration. Still, they were adapted to
 closely model interference and other dynamic aspects of the network.
 
 
@@ -139,7 +139,7 @@ since the planning phase of the new installation has long been concluded.
 Moreover, the great majority of the BSs has already been deployed
 and their hardware also installed. Therefore, from the mobile operator's
 point of view, mainly parameter and software optimization are the
-only tools available, when it comes to QoS improvement (see Chapter~\ref{chap:02-Optimization_of_radio_networks})
+tools available, when it comes to QoS improvement (see Chapter~\ref{chap:02-Optimization_of_radio_networks})
 and network troubleshooting in the short term.
 
 Optimizing SHO by means of pilot-power adjustment is an established
@@ -161,9 +161,9 @@ to their frequency-reuse factor of one~\cite{WCDMAforUMTS_RadioAccessForThirdGen
 
 \section{Radio-network model \label{sec:07-Radio_network_model}}
 
-This section extends the representation of the radio-network model,
+This section extends the representation of the radio-network model
 previously introduced in Section~\ref{sec:06-Radio_network_model},
-in order to include the SHO functionality. In this context, the mathematical
+to include the SHO functionality. In this context, the mathematical
 model links the SHO settings with the pilot-power level of each cell,
 the best-server pattern, and the network coverage.
 
@@ -205,14 +205,14 @@ SHO_{m}^{\downarrow} & = & \left\{ c\,\vert\, l_{c^{*}m}^{\downarrow}p_{c^{*}}-l
 is the downlink attenuation factor of the best-serving cell, and $p_{c^{*}}$
 is its pilot power. Since the number of elements in $SHO_{m}^{\downarrow}$
 is at most $as^{\mathrm{max}}$, the weakest links are removed if
-there are several present. This method is well suited for configurations
+there are more present. This method is well suited for configurations
 with no hysteresis, since dynamic effects are ignored in static models~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006}. 
 
 Additionally, in the uplink, the set of cells to which a UE can potentially
 be in SHO is defined as:
 
 \begin{equation}
-SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
+SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}\mathrm{mW}\right\} ,
 \end{equation}
 
 
@@ -233,7 +233,7 @@ radio engineers of the Radio Network Department at Telekom Slovenije,
 d.d. The objective function is constructed as a weighted sum, containing
 different costs that penalize the occurrence of specific SHO conditions
 in downlink and uplink, which may potentially cause the aforementioned
-malfunctioning, introduced in Section \ref{sec:07-Motivation}.
+malfunctioning, which was introduced in Section~\ref{sec:07-Motivation}.
 
 A cost-based objective function is the most natural and straight-forward
 way of defining the optimization objective. Besides it is easily extendable
@@ -245,11 +245,11 @@ Hence, the definition of the objective function for the SHO-balancing
 problem is the minimization of the sum of penalty scores given as:
 
 \begin{equation}
-\min f_{\mathrm{sho}}=\sum_{c\in C}\sum_{m\in M}pf_{\mathrm{cov}}(1-\mathrm{cov}(c,m))+pf_{\mathrm{sho}}^{\uparrow}sho_{cm}^{\uparrow}(1-sho_{cm}^{\downarrow})+pf_{\mathrm{sho}}^{\downarrow}sho_{cm}^{\downarrow}(1-sho_{cm}^{\uparrow}),\label{eq:07-objective_function}
+f_{\mathrm{sho}}^{*}=\min\sum_{c\in C}\sum_{m\in M}pf_{\mathrm{cov}}(1-\mathrm{cov}(c,m))+pf_{\mathrm{sho}}^{\uparrow}sho_{cm}^{\uparrow}(1-sho_{cm}^{\downarrow})+pf_{\mathrm{sho}}^{\downarrow}sho_{cm}^{\downarrow}(1-sho_{cm}^{\uparrow}),\label{eq:07-objective_function}
 \end{equation}
 
 
-\nomenclature[S]{$f_{\mathrm{sho}}$}{Objective function of the SHO-balancing problem}
+\nomenclature[S]{$f^{*}_{\mathrm{sho}}$}{Objective function of the SHO-balancing problem}
 
 \noindent where 
 
@@ -323,7 +323,7 @@ different optimization algorithms, namely:
 of evolutionary algorithms;
 \item Differential ant-stigmergy algorithm (see Section~\ref{sub:02-DASA}),
 from the family of swarm-intelligence algorithms; and
-\item Simulated annealing (see Section~\ref{sub:02-SA}), from the group
+\item Simulated annealing (see Section~\ref{sub:02-SA}), from the family
 of classic metaheuristic algorithms.
 \end{itemize}
 Each of these algorithms shall minimize the objective function value
@@ -367,11 +367,11 @@ to calculate the crossover vector, and
 
 \subsection{Differential ant-stigmergy algorithm}
 
-The mapping between the balancing problem and DASA is similar to the
-one for DE:
+The mapping between the balancing problem and the DASA is similar
+to the one for DE:
 
 \begin{equation}
-X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:07-DASA_mapping}
+X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} .\label{eq:07-DASA_mapping}
 \end{equation}
 
 
@@ -388,9 +388,11 @@ From the SA perspective, the system under optimization is in a given
 \emph{state} at each time step during the process. The objective function
 maps a system state to a value known as the \emph{energy} of the system
 in that state. A \emph{move} in the search space represents a change
-in the state of the system. After making a move, the system may exhibit
-lower or higher energy, depending on the results of the objective
-function.
+in the state of the system. Whether a move is performed or not depends
+on the values of the objective function and the temperature parameter
+(see Section\ \ref{sub:02-SA}). After making a move, the system
+may exhibit lower or higher energy, depending on the current objective-function
+value.
 
 Algorithm~\ref{alg:07-SA_move} shows the pseudo-code of a move in
 the search space of possible pilot-power settings, resulting in a
@@ -439,9 +441,9 @@ search space is left to SA and its stochastic components.
 The simulations were performed over the target geographical area,
 for which DEM and clutter data were available. The mobile users were
 assumed to be uniformly distributed. The SHO conditions were determined
-by the relative received-signal quality from different cells, and
-the SHO window, which triggers the addition of a cell to a user's
-active set~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
+by the relative received-signal quality from different cells and the
+SHO window, which triggers the addition of a cell to a user's active
+set~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
 
 
 \subsection{Test network}
@@ -461,7 +463,7 @@ Number of cells & $25$\tabularnewline
 Coverage threshold & $-115$~dBm\tabularnewline
 SHO window ($\gamma^{\mathrm{sho}}$) & $2$~dB\tabularnewline
 User equipment ($p_{m}^{\uparrow}$) & $21$~dBm, power class 4\tabularnewline
-Pixel resolution & $25$~m$^{2}$\tabularnewline
+Pixel resolution & $25$~m\tabularnewline
 Population density & $398$/km$^{2}$\tabularnewline
 \hline 
 \end{tabular}
@@ -483,10 +485,10 @@ geographical area, $A_{\mathrm{total}}$, of test network Net$_{7}$.\label{fig:07
 a subset of the real UMTS network deployed in Slovenia by Telekom
 Slovenije, d.d. It represents a network extending over a hilly terrain,
 combining both rural and middle-dense suburban areas, which contains
-25 cells within an area of more than 150~km$^{2}$. Table~\ref{tab:07-Test_network_properties}
+25 cells covering a surface of more than 150~km$^{2}$. Table~\ref{tab:07-Test_network_properties}
 shows some characteristics of the test network used, and Figure~\ref{fig:07-Coverage_areas}
 shows the area under radio coverage, $A_{\mathrm{covered}}$, within
-$A_{\mathrm{total}}$.
+$A_{\mathrm{total}}$, before starting the optimization process.
 
 
 \subsection{Algorithm parameters}
@@ -504,22 +506,27 @@ algorithm to run;
 \item $CR=0.8$, the crossover constant; and
 \item $F=0.5$, the mutation-scaling factor.
 \end{itemize}
-As for DASA, the parameters were set to the following values:
+As for the DASA, the parameters were set to the following values:
 \begin{itemize}
 \item $m=10$, the number of ants;
 \item $b=10,$ the discrete base;
 \item $\rho=0.2$, the pheromone dispersion factor;
 \item $s_{+}=0.01$, the global scale-increasing factor;
 \item $s_{-}=0.01$, the global scale-decreasing factor; and 
-\item $\epsilon=1.0^{-2}$, the maximum parameter precision.
+\item $\epsilon=10{}^{-2}$, the maximum parameter precision.
 \end{itemize}
-There are only two parameters controlling SA, namely:
+The two parameters that control the behavior of SA are:
 \begin{itemize}
 \item $t_{\mathrm{initial}}=$125, the initial temperature; and
 \item $it=$100,000, the total number of iterations.
 \end{itemize}
 In this case, the exponential-lowering schema was chosen as the way
-the temperature was lowered during the SA searches.
+the temperature was lowered during the SA searches. Note that the
+probability of an increase/decrease of the pilot power and the change
+step, the values of which were set to 50~\% and 0.01~dB, respectively,
+can also be considered algorithm parameters. For this reason, the
+presented approach is a special case where the values of both parameters
+were set in advance.
 
 \bigskip{}
 
@@ -531,14 +538,14 @@ mostly used as \textquoteleft{}glue\textquoteright{} to hold the different
 implementation parts together, as well as for I/O operations. To lower
 the time needed to run one optimization round, the entire objective-function
 evaluation was implemented using OpenCL and executed on a nVidia GeForce
-GTX 260. This individual change exhibited more than 15-fold, execution-time
-speedup, when compared to the original CPU-only version.
+GTX~660~Ti. This individual change exhibited more than 15-fold,
+execution-time speedup, when compared to the original CPU-only version.
 
 \begin{table}
 \centering
 
-\caption{Solution-quality performance of the three algorithms, after 30 independent
-runs\textit{\emph{.}}\textit{\label{tab:07-Algorithm_performance}}}
+\caption{Solution-quality performance of the three algorithms, which were collected
+after 30 independent runs\textit{\emph{.}}\textit{\label{tab:07-Algorithm_performance}}}
 
 
 \begin{tabular}{ccccc}
@@ -556,38 +563,7 @@ SA  & 2,293,350.00 & 2,295,570.00 & 2,294,626.50 & 159.61\tabularnewline
 
 \subsection{Results \label{sub:07-Results}}
 
-\noindent In this section, the performance of the selected algorithms
-is presented. The analysis includes aspects related to solution quality
-and convergence speed. All experimental results were obtained after
-30 independent runs, each of them limited to a maximum of 100,000
-evaluations. The gathered results are shown in Table~\ref{tab:07-Algorithm_performance}.
-
-It may be observed that DE reached the lowest objective-function value,
-closely followed by DASA. Likewise, both algorithms arrived at very
-similar results for the worst, mean and standard-deviation values.
-SA, on the other hand, did not achieve comparable values, since its
-results are behind those of DE and DASA. Notice that even the best
-SA solution is no better than the worst solution of DASA. Moreover,
-the standard deviation exhibited by SA is one order of magnitude bigger
-than those of DASA and DE.
-
-The convergences of the best, mean and worst objective-function values
-are shown in Figures~\ref{fig:07-Algorithm_convergence-DE}, \ref{fig:07-Algorithm_convergence-DASA},
-and~\ref{fig:07-Algorithm_convergence-SA}, respectively. It is worth
-mentioning that every optimization run starts from a different solution,
-randomly constructed by picking a pilot-power setting, $p_{c}^{k}$,
-from every $P_{c}$, $1\le k\le|P_{c}|$, $\forall c\in C$. Notice
-how fast DE converged to a good solution. DASA also converged considerably
-fast, although not as fast as DE did. After a number of evaluations
-without improvement, DASA resets itself and continues searching from
-a new random point within the search space~\cite{korosec2010_DASA}.
-Despite this, and based on the flat profile the graph exhibits towards
-the end of the optimization run, it is clear that 100,000 evaluations
-is an adequate stopping criterion for all algorithms. The third algorithm,
-SA, slowly converged towards the best solution found, even though
-it was not as good as the solutions found by DE and DASA.
-
-\begin{figure}[H]
+\begin{figure}
 \centering
 
 \includegraphics[width=0.7\textwidth]{07-experimental_evaluation-sho_balancing/img/DE_convergence}
@@ -597,7 +573,7 @@ values in each evaluation of the SHO-balancing problem.\label{fig:07-Algorithm_c
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}
 \centering
 
 \includegraphics[width=0.7\textwidth]{07-experimental_evaluation-sho_balancing/img/DASA_convergence}
@@ -607,7 +583,7 @@ values in each evaluation of the SHO-balancing problem.\label{fig:07-Algorithm_c
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}
 \centering
 
 \includegraphics[width=0.7\textwidth]{07-experimental_evaluation-sho_balancing/img/SA_convergence}
@@ -617,8 +593,39 @@ values in each evaluation of the SHO-balancing problem.\label{fig:07-Algorithm_c
 \end{figure}
 
 
+\noindent In this section, the performance of the selected algorithms
+is presented. The analysis includes aspects related to solution quality
+and convergence speed. All experimental results were obtained after
+30 independent runs, each of them limited to a maximum of 100,000
+evaluations. The gathered results are shown in Table~\ref{tab:07-Algorithm_performance}.
+
+It may be observed that DE reached the lowest objective-function value,
+closely followed by the DASA. Likewise, both algorithms arrived at
+very similar results for the worst, mean and standard-deviation values.
+SA, on the other hand, did not achieve comparable values, since its
+results are behind those of the DE and DASA. Notice that even the
+best SA solution is no better than the worst solution of the DASA.
+Moreover, the standard deviation exhibited by SA is one order of magnitude
+bigger than those of the DASA and DE.
+
+The convergences of the best, mean and worst objective-function values
+are shown in Figures~\ref{fig:07-Algorithm_convergence-DE}, \ref{fig:07-Algorithm_convergence-DASA},
+and~\ref{fig:07-Algorithm_convergence-SA}, respectively. It is worth
+mentioning that every optimization run starts from a different solution,
+randomly constructed by picking a pilot-power setting, $p_{c}^{k}$,
+from every $P_{c}$, $1\le k\le|P_{c}|$, $\forall c\in C$. Notice
+how fast DE converged to a good solution. The DASA also converged
+considerably fast, although not as fast as DE did. After a number
+of evaluations without improvement, the DASA resets itself and continues
+searching from a new random point within the search space~\cite{korosec2010_DASA}.
+Despite this, and based on the flat profile the graph exhibits towards
+the end of the optimization run, it is clear that 100,000 evaluations
+is an adequate stopping criterion for all algorithms. The third algorithm,
+SA, slowly converged towards the best solution found, even though
+it was not as good as the solutions found by the DASA and DE.
+
 The three convergence profiles shown in Figures~\ref{fig:07-Algorithm_convergence-DE},
-\ref{fig:07-Algorithm_convergence-DASA}, and~\ref{fig:07-Algorithm_convergence-SA}
+\ref{fig:07-Algorithm_convergence-DASA} and~\ref{fig:07-Algorithm_convergence-SA},
 give a clearer notion about the way these algorithms explore the search
 space of the SHO-balancing problem, and the variations occurred during
 the optimization process.

@@ -36,8 +36,7 @@
 %\usepackage{eucal}
 %\usepackage[usenames, dvipsnames]{color}
 \usepackage[perpage]{footmisc} %defines style of footnotes
-%\usepackage[round, sort, numbers, authoryear]{natbib} %defines citation style
-\usepackage{natbib} %defines citation style
+\usepackage[numbers]{natbib} %defines citation style
 \usepackage[english]{babel} %defines language
 \usepackage{ifthen} %implements an \ifthenelse command
 

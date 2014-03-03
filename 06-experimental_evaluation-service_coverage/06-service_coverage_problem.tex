@@ -19,7 +19,7 @@ approach is introduced. The presented method, based on parallel autonomous
 agents, gives very good solutions to the problem in an acceptable
 amount of time. The parallel implementation takes full advantage of
 GPU hardware in order to achieve considerable speedup. The analysis
-of the experimental results, considering six real-world, radio networks
+of the experimental results, considering six real-world radio networks
 of different sizes, studies solution-quality and performance aspects.
 
 The content of this chapter extends the research work published by
@@ -27,8 +27,9 @@ the author in~\cite{Benedicic_Pilot.power.optimization:2010} and~\cite{Benedicic
 The rest of this chapter is organized as follows. Section~\ref{sec:06-Motivation}
 gives a description of the coverage problem and its motivation from
 the mobile operator's perspective. In Section~\ref{sec:06-Related-work},
-a short overview of related research works is given, before formally
-introducing the key elements of the service-coverage problem in Section~\ref{sec:06-Radio_network_model}.
+a short overview of related research works is given, before introducing
+the key elements of the service-coverage problem in Section~\ref{sec:06-Radio_network_model},
+and formally defining it in Section~\ref{sec:06-Problem-definition}.
 The parallel-agent approach, as well as the strategies used for result
 comparison, are presented in Section~\ref{sec:06-Optimization-approaches},
 followed by the simulations and their analyses in Section~\ref{sec:06-Simulations}.
@@ -54,9 +55,9 @@ Additionally, reducing the transmit-power usage is also related to
 issues regarding human exposure to the electromagnetic fields generated
 by BS antennas~\cite{Esposito_Genetic.optimization.for.optimum.3G.network.planning:2010}.
 During the past few years, public opinion has been extremely sensitive
-regarding this issue, and thus many countries have already imposed
-safety standards to limit the electromagnetic field levels produced
-by antennas in a given range.
+regarding this issue, and many countries have already imposed safety
+standards to limit the electromagnetic field levels produced by antennas
+in a given range.
 
 From the UMTS perspective, minimizing pilot-power usage leaves more
 power available for increased network capacity. This is especially
@@ -73,8 +74,8 @@ The idea of using autonomous agents for optimization is not new. It
 has proven to be a solid optimization approach for solving different
 types of problems, not only within the area of radio networks~\cite{Cheung_Realtime.video.using.agent.over.3G.networks:2005,Esposito_Genetic.optimization.for.optimum.3G.network.planning:2010},
 but also in other fields~\cite{Valcarce_Applying.FDTD.to.the.coverage.prediction.of.WiMAX:2009,Vasile_Hybrid.multiagent.approach.for.optimization:2009}.
-The increased computational-time complexity, when dealing with big
-problem instances, is tackled using a parallel, agent-based algorithm
+The increased computational-time complexity when dealing with big
+problem instances is tackled using a parallel, agent-based algorithm
 on GPU. This minimizes the overhead when deploying a larger number
 of agents working in parallel over the service area, only limited
 by the amount of memory available on the GPU.
@@ -117,8 +118,8 @@ to achieving full coverage of the target area, without coverage holes.
 \section{Radio-network model \label{sec:06-Radio_network_model}}
 
 Extending the representation of a radio-network model from~\cite{Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006},
-this section presents the definitions of all the elements included
-in the mathematical model used for the simulations.
+this section presents the definitions of the elements included in
+the mathematical model used for the simulations.
 
 The goal here is to analyze the state of the network in a given situation,
 i.e., a \textquoteleft{}snapshot\textquoteright{} at an arbitrary
@@ -126,7 +127,7 @@ instance. Radio-network planning tools, including the commercial ones,
 typically rely on static analysis~\cite{Niemela-Performance_of_static_WCDMA_simulator:2005}.
 
 A snapshot consists of a set of UEs having individual properties,
-such as location, and equipment type that provides an estimate of
+such as location and equipment type, that provides an estimate of
 the average network behavior. The static approach inherently ignores
 dynamic effects that influence the system, like fast power control,
 but the analysis relies on having multiple independent snapshots to
@@ -134,7 +135,7 @@ produce an average behavior.
 
 Another alternative is to consider using a dynamic tool for radio-network
 planning~\cite{Hamalainen-Advanced_WCDMA_radio_network_simulator:1999,Hoppe-Fast_planning_of_efficient_WCDMA_radio_networks:2001}.
-A dynamic simulation considers all Radio-Resource Management~(RRM\nomenclature[A]{RRM}{Radio-resource management})
+Dynamic simulation considers all Radio-Resource Management~(RRM\nomenclature[A]{RRM}{Radio-resource management})
 functionality, as well as user mobility. However, when compared to
 the static approach, a major disadvantage of the dynamic simulation
 is the large computational time it requires. This clearly excludes
@@ -224,7 +225,7 @@ coverage of the service area is maintained, due to the cell-breathing
 principle~\cite{WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications}.
 
 
-\section{Problem definition}
+\section{Problem definition \label{sec:06-Problem-definition}}
 
 In the problem of optimization of pilot powers for service coverage,
 the objective is to find a set of pilot-power settings for all cells
@@ -238,9 +239,11 @@ being considered, thus $b=\vert M\vert$. Consequently, the optimization
 objective is defined as follows:
 
 \begin{equation}
-P^{*}=\min\sum_{c\in C}p_{c},\, p_{c}\in P_{c}\label{eq:06-Objective_function}
+f_{\mathrm{cov}}^{*}=\min\sum_{c\in C}p_{c},\, p_{c}\in P_{c}\label{eq:06-Objective_function}
 \end{equation}
 
+
+\noindent \nomenclature[S]{$f_{\mathrm{cov}}^{*}$}{Objective function of the coverage problem }
 
 \noindent subject to
 
@@ -268,15 +271,12 @@ no references in the literature of other optimization techniques dealing
 with exactly the same data set. For this reason, two different strategies
 for setting the pilot power are being presented. They should provide
 a basis for the comparison of the experimental results. The first
-strategy is the attenuation-based pilot power, presented in~\cite{Siomina_Pilot.power.optimization:2004},
-in which a pixel of the service area is always covered by the cell
-with the maximum attenuation-factor value, i.e., the minimum path
-loss. The second strategy is the presented parallel-agent approach,
-based on ideas inspired by two-dimensional cellular automata~\cite{Sarkar_Cellular.automata.history:2000}
-and metaheuristics~\cite{Talbi_Metaheuristics:2009}. A detailed
-description is given in Section~\ref{sub:06-Parallel_agent_approach}.
-
-Similar criteria for result comparison have also been used in~\cite{Siomina_Pilot.power.optimization:2004,Siomina:Minimum.pilot.power.for.service.coverage}.
+strategy is the attenuation-based pilot power, which was used in~\cite{Siomina_Pilot.power.optimization:2004,Siomina:Minimum.pilot.power.for.service.coverage}
+for result-comparison criteria. In this strategy, a pixel of the service
+area is always covered by the cell with the maximum attenuation-factor
+value, i.e., the minimum path loss. The second strategy is the proposed
+parallel-agent approach, a detailed description of which is given
+in Section~\ref{sub:06-Parallel_agent_approach}.
 
 
 \subsection{Attenuation-based approach}
@@ -302,7 +302,7 @@ area is achieved. The solution exhibits a total pilot power defined
 as:
 
 \begin{equation}
-P^{\mathrm{att}}=\sum_{c\in C}\max p_{cm}^{\mathrm{att}}.
+f_{\mathrm{cov}}^{\mathrm{att}}=\sum_{c\in C}\max p_{cm}^{\mathrm{att}}.
 \end{equation}
 
 
@@ -366,7 +366,7 @@ the full coverage constraint.
 The evaluator also maintains a special part of the memory (see ``Coordinates
 of uncovered cells'' in Figure~\ref{fig:06-Architecture_of_the_system_on_GPU})
 that is intended for registering uncovered areas, i.e., $\overline{A_{\mathrm{covered}}}$.
-If Equation (\ref{eq:06-Coverage_constraint}) does not hold, the
+If Equation~(\ref{eq:06-Coverage_constraint}) does not hold, the
 ``special'' agents randomly select a location from this portion
 of memory so that a valid solution may be reached again.
 
@@ -487,12 +487,10 @@ The step set $SS_{1}$, the pseudo-code of which is listed in Algorithm~\ref{alg:
 is applied if the location of the agent is under the coverage of one
 or more cells, i.e., $\vert C_{m}\vert\ge1$. The first step randomly
 selects a cell from the set $C_{m}$, followed by a decrease of the
-pilot power of cell $c'$. This practice keeps the coverage constraint
-valid over $A_{\mathrm{total}}$, although it might potentially break
-it on other areas. Ideally, every pixel of the geographical area has
-to be covered by exactly one network cell, although this is just a
-representation of a perfect solution that is unreachable because of
-irregularities in the network topology and the terrain.
+pilot power of cell $c'$. Ideally, every pixel of the geographical
+area has to be covered by exactly one network cell, although this
+is just a representation of a perfect solution that is unreachable
+because of irregularities in the network topology and the terrain.
 
 In both step sets, $SS_{0}$ and $SS_{1}$, the agent makes sure that
 the new pilot power setting, $p_{c'}$, is an element of $P_{c'}$.
@@ -680,20 +678,21 @@ solutions were found in the first quarter of the experiment.
 
 All experiments were performed on a multi-core Intel i7 2.67~GHz
 desktop computer with 6~GB of RAM running a 64-bit Linux operating
-system. The GPU hardware used was an ATI HD5570 with 1~GB of DDR3
-RAM. The implementation language used was C, combined with OpenCL
-and OpenMPI extensions.
+system. The GPU hardware used was an nVidia GeForce GTX~660~Ti.
+The implementation language used was C, combined with OpenCL and OpenMPI
+extensions.
 
 
 \subsection{Results}
 
-The results achieved by the parallel-agent approach, listed in Table~\ref{tab:06-Optimization_results},
-improved the optimization objective significantly. They show that
-the pilot-power usage was reduced in all networks while the service
-area was kept under full coverage. Moreover, the parallel-agent solution
-for Net$_{1}$ improved the attenuation-based setting by more than
-300~\%. As for Net$_{2}$, the observed improvement is around 232~\%,
-while the improvement for Net$_{3}$ is more than 170~\%. 
+The results achieved by the parallel-agent approach, which are listed
+in Table~\ref{tab:06-Optimization_results}, improved the optimization
+objective significantly. They show that the pilot-power usage was
+reduced in all networks while the service area was kept under full
+coverage. Moreover, the parallel-agent solution for Net$_{1}$ improved
+the attenuation-based setting by more than 300~\%. As for Net$_{2}$,
+the observed improvement is around 232~\%, while the improvement
+for Net$_{3}$ is more than 170~\%. 
 
 The last test network, Net$_{6}$, is the same as N6 in~\cite{Siomina:Minimum.pilot.power.for.service.coverage}.
 When comparing these results to those of~\cite{Siomina:Minimum.pilot.power.for.service.coverage},

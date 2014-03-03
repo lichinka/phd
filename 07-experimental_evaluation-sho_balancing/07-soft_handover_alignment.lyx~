@@ -138,9 +138,12 @@ reference "sub:02-Handover-and-soft-handover"
 To the best of the author's knowledge, there is no reference in the literature
  of a simulation-based approach to find active downlink and uplink SHO areas.
  Additionally, there are no formal optimization methods known to the author
- that tackle the SHO balancing problem as described here.
- The approach described in this chapter extends the research work published
- by the author in 
+ that tackle the SHO-balancing problem as described here.
+ This chapter extends the research work published by the author in
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012"
@@ -201,7 +204,7 @@ reference "sec:07-Problem_definition"
 \end_inset
 
 , the problem is formally defined, followed by a short description of the
- optimization algorithms used in Section
+ optimization algorithms used, in Section
 \begin_inset space ~
 \end_inset
 
@@ -214,7 +217,7 @@ reference "sec:07-Optimization_algorithms"
 
 .
  The simulations, including their environment, parameter setup and result
- analysis, are introduced in Section
+ analysis, are presented in Section
 \begin_inset space ~
 \end_inset
 
@@ -349,9 +352,10 @@ name "fig:07-Problem_illustration"
 \begin_layout Standard
 Despite several built-in mechanisms that allow a radio network to overcome
  different problems due to the lack of SHO during a HSDPA connection, some
- abnormal cases do arise, especially in areas where there is SHO capability
- in the uplink, but none in the downlink.
- An example of such a case is depicted in Figure
+ abnormal cases do arise.
+ This is especially important in areas where there is SHO capability in
+ the uplink, but none in the downlink.
+ An example of such case is depicted in Figure
 \begin_inset space ~
 \end_inset
 
@@ -428,6 +432,7 @@ key "holma2006hsdpa"
 \end_layout
 
 \begin_layout Standard
+\noindent
 ``...
  There is no obvious reason why the serving E-DCH cell would not be the
  same as the serving HSDPA cell, and this is also required to be the case
@@ -440,11 +445,11 @@ key "holma2006hsdpa"
 
 \begin_layout Standard
 Given the described context, the challenge is to achieve the correct balance
- or distribution of downlink and uplink SHO areas within a working UMTS
+ and distribution of downlink and uplink SHO areas within a working UMTS
  network.
  Therefore, the network has to be fine-tuned to improve the SHO-area balancing,
- thus to avoid the exceptional appearance of problematic situations, as
- shown in Figure
+ in order to avoid the exceptional appearance of problematic situations,
+ as shown in Figure
 \begin_inset space ~
 \end_inset
 
@@ -464,8 +469,8 @@ reference "fig:07-Problem_illustration"
  of downlink and uplink SHO areas is improved and other network aspects
  are preserved.
  The optimization process takes into account different kinds of hardware,
- e.g., amplifiers, cables, and antennas, adjusting the pilot powers of the
- cells.
+ e.g., amplifiers, cables and antennas, while adjusting the pilot powers of
+ the cells.
 \end_layout
 
 \begin_layout Standard
@@ -505,8 +510,8 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
  The mathematical model and the penalty scores of the objective function
  are set according to the configuration and layout of a real mobile network,
  deployed in Slovenia by Telekom Slovenije, d.d.
- The SHO settings are also taken from the actual network configuration,
- still they were adapted to closely model interference and other dynamic
+ The SHO settings are also taken from the actual network configuration.
+ Still, they were adapted to closely model interference and other dynamic
  aspects of the network.
 \end_layout
 
@@ -570,8 +575,8 @@ key "Eisenblatter_OptimizationMethodsForUMTSRadioNetworkPlanning,ghosh2011_optim
  Moreover, the great majority of the BSs has already been deployed and their
  hardware also installed.
  Therefore, from the mobile operator's point of view, mainly parameter and
- software optimization are the only tools available, when it comes to QoS
- improvement (see Chapter
+ software optimization are the tools available, when it comes to QoS improvement
+ (see Chapter
 \begin_inset space ~
 \end_inset
 
@@ -676,7 +681,7 @@ name "sec:07-Radio_network_model"
 \end_layout
 
 \begin_layout Standard
-This section extends the representation of the radio-network model, previously
+This section extends the representation of the radio-network model previously
  introduced in Section
 \begin_inset space ~
 \end_inset
@@ -688,7 +693,7 @@ reference "sec:06-Radio_network_model"
 
 \end_inset
 
-, in order to include the SHO functionality.
+, to include the SHO functionality.
  In this context, the mathematical model links the SHO settings with the
  pilot-power level of each cell, the best-server pattern, and the network
  coverage.
@@ -843,7 +848,7 @@ where
 \begin_inset Formula $as^{\mathrm{max}}$
 \end_inset
 
-, the weakest links are removed if there are several present.
+, the weakest links are removed if there are more present.
  This method is well suited for configurations with no hysteresis, since
  dynamic effects are ignored in static models
 \begin_inset space ~
@@ -868,7 +873,7 @@ Additionally, in the uplink, the set of cells to which a UE can potentially
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}mW\right\} ,
+SHO_{m}^{\uparrow}=\left\{ c\,\vert\, l_{mc}^{\uparrow}p_{m}^{\uparrow}\ge3.16227766\cdot10^{-12}\mathrm{mW}\right\} ,
 \end{equation}
 
 \end_inset
@@ -962,7 +967,11 @@ reference "sec:07-Radio_network_model"
  The objective function is constructed as a weighted sum, containing different
  costs that penalize the occurrence of specific SHO conditions in downlink
  and uplink, which may potentially cause the aforementioned malfunctioning,
- introduced in Section 
+ which was introduced in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:07-Motivation"
@@ -988,7 +997,7 @@ Hence, the definition of the objective function for the SHO-balancing problem
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\min f_{\mathrm{sho}}=\sum_{c\in C}\sum_{m\in M}pf_{\mathrm{cov}}(1-\mathrm{cov}(c,m))+pf_{\mathrm{sho}}^{\uparrow}sho_{cm}^{\uparrow}(1-sho_{cm}^{\downarrow})+pf_{\mathrm{sho}}^{\downarrow}sho_{cm}^{\downarrow}(1-sho_{cm}^{\uparrow}),\label{eq:07-objective_function}
+f_{\mathrm{sho}}^{*}=\min\sum_{c\in C}\sum_{m\in M}pf_{\mathrm{cov}}(1-\mathrm{cov}(c,m))+pf_{\mathrm{sho}}^{\uparrow}sho_{cm}^{\uparrow}(1-sho_{cm}^{\downarrow})+pf_{\mathrm{sho}}^{\downarrow}sho_{cm}^{\downarrow}(1-sho_{cm}^{\uparrow}),\label{eq:07-objective_function}
 \end{equation}
 
 \end_inset
@@ -1000,7 +1009,7 @@ Hence, the definition of the objective function for the SHO-balancing problem
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "S"
-symbol "$f_{\\mathrm{sho}}$"
+symbol "$f^{*}_{\\mathrm{sho}}$"
 description "Objective function of the SHO-balancing problem"
 
 \end_inset
@@ -1267,7 +1276,7 @@ reference "sub:02-SA"
 
 \end_inset
 
-), from the group of classic metaheuristic algorithms.
+), from the family of classic metaheuristic algorithms.
 \end_layout
 
 \begin_layout Standard
@@ -1389,14 +1398,14 @@ Differential ant-stigmergy algorithm
 \end_layout
 
 \begin_layout Standard
-The mapping between the balancing problem and DASA is similar to the one
- for DE:
+The mapping between the balancing problem and the DASA is similar to the
+ one for DE:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} \label{eq:07-DASA_mapping}
+X_{a}=\left\{ x_{1},x_{2},\ldots x_{i},\ldots,x_{D}\right\} .\label{eq:07-DASA_mapping}
 \end{equation}
 
 \end_inset
@@ -1440,8 +1449,21 @@ energy
 move
 \emph default
  in the search space represents a change in the state of the system.
+ Whether a move is performed or not depends on the values of the objective
+ function and the temperature parameter (see Section
+\begin_inset space \space{}
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:02-SA"
+
+\end_inset
+
+).
  After making a move, the system may exhibit lower or higher energy, depending
- on the results of the objective function.
+ on the current objective-function value.
 \end_layout
 
 \begin_layout Standard
@@ -1722,7 +1744,7 @@ The simulations were performed over the target geographical area, for which
  DEM and clutter data were available.
  The mobile users were assumed to be uniformly distributed.
  The SHO conditions were determined by the relative received-signal quality
- from different cells, and the SHO window, which triggers the addition of
+ from different cells and the SHO window, which triggers the addition of
  a cell to a user's active set
 \begin_inset space ~
 \end_inset
@@ -1947,10 +1969,6 @@ Pixel resolution
 \end_inset
 
 m
-\begin_inset Formula $^{2}$
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -2077,8 +2095,8 @@ The test network used for the simulations, Net
 , is a subset of the real UMTS network deployed in Slovenia by Telekom Slovenije
 , d.d.
  It represents a network extending over a hilly terrain, combining both
- rural and middle-dense suburban areas, which contains 25 cells within an
- area of more than 150
+ rural and middle-dense suburban areas, which contains 25 cells covering
+ a surface of more than 150
 \begin_inset space ~
 \end_inset
 
@@ -2117,7 +2135,7 @@ reference "fig:07-Coverage_areas"
 \begin_inset Formula $A_{\mathrm{total}}$
 \end_inset
 
-.
+, before starting the optimization process.
 \end_layout
 
 \begin_layout Subsection
@@ -2165,7 +2183,7 @@ The parameters controlling the behavior of the DE algorithm were set as
 \end_layout
 
 \begin_layout Standard
-As for DASA, the parameters were set to the following values:
+As for the DASA, the parameters were set to the following values:
 \end_layout
 
 \begin_layout Itemize
@@ -2204,14 +2222,14 @@ As for DASA, the parameters were set to the following values:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $\epsilon=1.0^{-2}$
+\begin_inset Formula $\epsilon=10{}^{-2}$
 \end_inset
 
 , the maximum parameter precision.
 \end_layout
 
 \begin_layout Standard
-There are only two parameters controlling SA, namely:
+The two parameters that control the behavior of SA are:
 \end_layout
 
 \begin_layout Itemize
@@ -2231,6 +2249,18 @@ There are only two parameters controlling SA, namely:
 \begin_layout Standard
 In this case, the exponential-lowering schema was chosen as the way the
  temperature was lowered during the SA searches.
+ Note that the probability of an increase/decrease of the pilot power and
+ the change step, the values of which were set to 50
+\begin_inset space ~
+\end_inset
+
+% and 0.01
+\begin_inset space ~
+\end_inset
+
+dB, respectively, can also be considered algorithm parameters.
+ For this reason, the presented approach is a special case where the values
+ of both parameters were set in advance.
 \end_layout
 
 \begin_layout Standard
@@ -2255,7 +2285,15 @@ GB of RAM running a 64-bit Linux operating system.
  well as for I/O operations.
  To lower the time needed to run one optimization round, the entire objective-fu
 nction evaluation was implemented using OpenCL and executed on a nVidia
- GeForce GTX 260.
+ GeForce GTX
+\begin_inset space ~
+\end_inset
+
+660
+\begin_inset space ~
+\end_inset
+
+Ti.
  This individual change exhibited more than 15-fold, execution-time speedup,
  when compared to the original CPU-only version.
 \end_layout
@@ -2286,8 +2324,8 @@ centering
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Solution-quality performance of the three algorithms, after 30 independent
- runs
+Solution-quality performance of the three algorithms, which were collected
+ after 30 independent runs
 \shape italic
 \emph on
 .
@@ -2529,114 +2567,7 @@ name "sub:07-Results"
 \end_layout
 
 \begin_layout Standard
-\noindent
-In this section, the performance of the selected algorithms is presented.
- The analysis includes aspects related to solution quality and convergence
- speed.
- All experimental results were obtained after 30 independent runs, each
- of them limited to a maximum of 100,000 evaluations.
- The gathered results are shown in Table
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:07-Algorithm_performance"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-It may be observed that DE reached the lowest objective-function value,
- closely followed by DASA.
- Likewise, both algorithms arrived at very similar results for the worst,
- mean and standard-deviation values.
- SA, on the other hand, did not achieve comparable values, since its results
- are behind those of DE and DASA.
- Notice that even the best SA solution is no better than the worst solution
- of DASA.
- Moreover, the standard deviation exhibited by SA is one order of magnitude
- bigger than those of DASA and DE.
-\end_layout
-
-\begin_layout Standard
-The convergences of the best, mean and worst objective-function values are
- shown in Figures
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:07-Algorithm_convergence-DE"
-
-\end_inset
-
-, 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:07-Algorithm_convergence-DASA"
-
-\end_inset
-
-, and
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:07-Algorithm_convergence-SA"
-
-\end_inset
-
-, respectively.
- It is worth mentioning that every optimization run starts from a different
- solution, randomly constructed by picking a pilot-power setting, 
-\begin_inset Formula $p_{c}^{k}$
-\end_inset
-
-, from every 
-\begin_inset Formula $P_{c}$
-\end_inset
-
-, 
-\begin_inset Formula $1\le k\le|P_{c}|$
-\end_inset
-
-, 
-\begin_inset Formula $\forall c\in C$
-\end_inset
-
-.
- Notice how fast DE converged to a good solution.
- DASA also converged considerably fast, although not as fast as DE did.
- After a number of evaluations without improvement, DASA resets itself and
- continues searching from a new random point within the search space
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "korosec2010_DASA"
-
-\end_inset
-
-.
- Despite this, and based on the flat profile the graph exhibits towards
- the end of the optimization run, it is clear that 100,000 evaluations is
- an adequate stopping criterion for all algorithms.
- The third algorithm, SA, slowly converged towards the best solution found,
- even though it was not as good as the solutions found by DE and DASA.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -2695,7 +2626,6 @@ name "fig:07-Algorithm_convergence-DE"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
 wide false
 sideways false
 status open
@@ -2754,7 +2684,6 @@ name "fig:07-Algorithm_convergence-DASA"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
 wide false
 sideways false
 status open
@@ -2812,7 +2741,42 @@ name "fig:07-Algorithm_convergence-SA"
 \end_layout
 
 \begin_layout Standard
-The three convergence profiles shown in Figures
+\noindent
+In this section, the performance of the selected algorithms is presented.
+ The analysis includes aspects related to solution quality and convergence
+ speed.
+ All experimental results were obtained after 30 independent runs, each
+ of them limited to a maximum of 100,000 evaluations.
+ The gathered results are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:07-Algorithm_performance"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It may be observed that DE reached the lowest objective-function value,
+ closely followed by the DASA.
+ Likewise, both algorithms arrived at very similar results for the worst,
+ mean and standard-deviation values.
+ SA, on the other hand, did not achieve comparable values, since its results
+ are behind those of DE and DASA.
+ Notice that even the best SA solution is no better than the worst solution
+ of the DASA.
+ Moreover, the standard deviation exhibited by SA is one order of magnitude
+ bigger than those of the DASA and DE.
+\end_layout
+
+\begin_layout Standard
+The convergences of the best, mean and worst objective-function values are
+ shown in Figures
 \begin_inset space ~
 \end_inset
 
@@ -2841,7 +2805,78 @@ reference "fig:07-Algorithm_convergence-SA"
 
 \end_inset
 
- give a clearer notion about the way these algorithms explore the search
+, respectively.
+ It is worth mentioning that every optimization run starts from a different
+ solution, randomly constructed by picking a pilot-power setting, 
+\begin_inset Formula $p_{c}^{k}$
+\end_inset
+
+, from every 
+\begin_inset Formula $P_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $1\le k\le|P_{c}|$
+\end_inset
+
+, 
+\begin_inset Formula $\forall c\in C$
+\end_inset
+
+.
+ Notice how fast DE converged to a good solution.
+ The DASA also converged considerably fast, although not as fast as DE did.
+ After a number of evaluations without improvement, the DASA resets itself
+ and continues searching from a new random point within the search space
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "korosec2010_DASA"
+
+\end_inset
+
+.
+ Despite this, and based on the flat profile the graph exhibits towards
+ the end of the optimization run, it is clear that 100,000 evaluations is
+ an adequate stopping criterion for all algorithms.
+ The third algorithm, SA, slowly converged towards the best solution found,
+ even though it was not as good as the solutions found by the DASA and DE.
+\end_layout
+
+\begin_layout Standard
+The three convergence profiles shown in Figures
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-DE"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-DASA"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:07-Algorithm_convergence-SA"
+
+\end_inset
+
+, give a clearer notion about the way these algorithms explore the search
  space of the SHO-balancing problem, and the variations occurred during
  the optimization process.
 \end_layout
@@ -3745,120 +3780,6 @@ n of the different network aspects in the objective function.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/sho_areas_initial.png
-	lyxscale 30
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Spatial distribution of the SHO areas before the optimization.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:07-SHO_areas_initial"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/sho_areas_final.png
-	lyxscale 30
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Spatial distribution of the SHO areas after the optimization.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:07-SHO_areas_final"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The second most important optimized aspect in the SHO-balancing problem
  is the proportion of areas with uplink SHO and no SHO in the downlink (labeled
  as `
@@ -3964,6 +3885,120 @@ reference "tab:07-Optimization_result_analysis"
  For this reason, the serving cell should not only deliver HSDPA, but also
  take care of the user signaling and power control, received in the uplink.
  Clearly, this is only feasible in areas where uplink coverage is guaranteed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/sho_areas_initial.png
+	lyxscale 15
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Spatial distribution of the SHO areas before the optimization.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:07-SHO_areas_initial"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/sho_areas_final.png
+	lyxscale 15
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Spatial distribution of the SHO areas after the optimization.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:07-SHO_areas_final"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

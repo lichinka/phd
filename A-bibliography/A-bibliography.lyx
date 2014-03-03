@@ -87,14 +87,45 @@ status open
 
 
 \backslash
-addcontentsline{toc}{chapter}{Appendix A: Bibliography}
+fancyhead{}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-fancyhead[LO]{}
+fancyfoot{} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize {Appendix A: Bibliography}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+footnotesize 
+\backslash
+thepage}
 \end_layout
 
 \begin_layout Plain Layout
@@ -103,7 +134,14 @@ fancyhead[LO]{}
 \backslash
 fancyhead[RE]{
 \backslash
-footnotesize Appendix A: Bibliography}
+footnotesize {Appendix A: Bibliography}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Appendix A: Bibliography}
 \end_layout
 
 \end_inset
@@ -117,22 +155,6 @@ A.1 Publications related to this thesis
 
 \begin_layout Subsection*
 A.1.1 Journal articles
-\end_layout
-
-\begin_layout Itemize
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-bibentry{Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013}
-\end_layout
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Itemize
@@ -160,8 +182,27 @@ status open
 
 
 \backslash
-bibentry{Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_p
-lanning:2013}
+bibentry{Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibentry{Benedicic-A_metaheuristic_approach_for_propagation_model_tuning:2013}
 \end_layout
 
 \end_inset
@@ -201,24 +242,13 @@ bibentry{Osterman-A_GPU_LOS_approach:2013}
 .
 \end_layout
 
-\begin_layout Subsection*
-A.1.2 Conference papers
-\end_layout
-
-\begin_layout Itemize
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-bibentry{Benedicic_Pilot.power.optimization:2010}
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection*
+A.1.2 Conference papers
 \end_layout
 
 \begin_layout Itemize
@@ -235,11 +265,43 @@ s:2012}
 
 \end_inset
 
+.
+\end_layout
 
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibentry{Benedicic_Pilot.power.optimization:2010}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection*
 A.1.2 Workshop papers and posters
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibentry{Benedicic-AVN:2013}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -255,12 +317,16 @@ bibentry{Benedicic-AVN:2011}
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Section*
 B.1 Other publications
 \end_layout
+
+\begin_layout Subsection*
+\begin_inset Note Note
+status open
 
 \begin_layout Subsection*
 B.1.1 Journal articles
@@ -275,6 +341,11 @@ status open
 
 \backslash
 bibentry{Pesko-An_indirect_self_tuning_method_for_constructing:2013}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -299,7 +370,7 @@ bibentry{Benedicic-Reducing_costs:2010}
 
 \end_inset
 
-
+.
 \end_layout
 
 \end_body

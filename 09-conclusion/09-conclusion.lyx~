@@ -98,7 +98,7 @@ While providing detailed and accurate results for various applications in
  To this end, a parallel framework for radio-network planning was presented
  in this thesis.
  The framework is very flexible in terms of air-interface modeling, e.g.,
- different QoS schemes, and is of significantly higher computational-time
+ different QoS schemes, and is of significantly better computational-time
  performance compared with any currently available solution known to the
  author.
  Moreover, it incorporates multi-GPU support and the corresponding parallel-prog
@@ -121,7 +121,7 @@ key "Kale-The_Charm_Approach:2013"
 
 \end_inset
 
-, which provides a functionality for overlapping execution and communication,
+, which provides functionality for overlapping execution and communication,
  as well as fault tolerance.
 \end_layout
 
@@ -144,11 +144,11 @@ When applying automatic network optimization, a fast and accurate performance
  the radio-propagation predictions, compared to those obtained with the
  commercial tool.
  Additionally, the results demonstrated the performance advantage of the
- framework compared to the computational time of the enterprise software.
- It is important to note that these results also apply for an application
+ framework compared to the running time of the enterprise software.
+ It is important to note that these results apply for their application
  in everyday network planning.
- However, to validate the complete array of radio-planning activities the
- framework can handle further research is required.
+ However, in order to validate the complete array of radio-planning activities
+ the framework can handle, further research is required.
 \end_layout
 
 \begin_layout Standard
@@ -226,21 +226,21 @@ The work in this thesis has led to the following original contributions
 \end_layout
 
 \begin_layout Enumerate
-Design and development of an unified framework for radio-network planning
+Design and development of a unified framework for radio-network planning
  and optimization, incorporating the second and third contribution items,
  as well as experimentation on real-world radio networks.
  The experimentation includes a comparison with a commercial tool that is
  currently being used for real radio-network planning.
  Moreover, the parallel implementation of the framework exploits the computing
- resources of computer clusters and GPUs.
+ resources of computer clusters and graphic-processing units.
 \end_layout
 
 \begin_layout Enumerate
-Proposal of a new approach for parallel programming that combines a classic
- master-worker method with an external database.
- The proposed approach improves the scalability of the classic master-worker
- paradigm by preventing the master process to become the bottleneck of a
- parallel system.
+Proposal of a new approach for parallel programming that combines the well-known
+ master-worker scheme with an external database.
+ The proposed approach relieves the problem of congestion at the master
+ node, which is responsible for result collection and selection, thus improving
+ the scalability of a parallel system.
 \end_layout
 
 \begin_layout Enumerate
@@ -263,10 +263,11 @@ ng techniques.
 \end_layout
 
 \begin_layout Enumerate
-Identification and formalization of a new optimization problem in 3G radio
- networks that deals with SHO alignment of downlink and uplink areas.
+Identification and formalization of a new optimization problem in third-generati
+on radio networks that deals with soft-handover alignment of downlink and
+ uplink areas.
  By solving this problem, network malfunctioning is avoided in areas where
- there is SHO capability in the uplink, but none in the downlink.
+ there is soft-handover capability in the uplink, but none in the downlink.
  So far, this problem has not been formalized nor tackled by means of automatic
  optimization.
 \end_layout

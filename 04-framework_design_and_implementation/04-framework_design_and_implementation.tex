@@ -8,13 +8,13 @@ In this chapter, a parallel framework for radio-coverage simulation
 is presented. The objective of the framework is to provide an environment
 for the radio-coverage prediction of large radio networks. Due to
 its high performance, the framework also enables the evaluation of
-more complex optimization problems for radio networks. 
+complex optimization problems for radio networks. 
 
 The framework is implemented as a module of a geographical information
 system, since the prediction calculation employs digital elevation
 models and land-usage data. Following a master-worker parallel paradigm
 over a message-passing communication model proved to be a bottleneck
-for the performance of the parallel module. A new approach,that overcomes
+for the performance of the parallel module. A new approach to overcome
 this performance constraint is introduced in this chapter. The efficiency
 improvement is based on overlapping process execution and communication.
 This minimizes the idle time of the worker processes and thus improves
@@ -29,7 +29,7 @@ Based on these experiments, which were performed on a computer cluster,
 the new technique exhibits better scalability than the traditional
 master-worker approach. Some real-world data sets are presented, the
 coverage predictions of which are calculated in a shorter time while
-saturating the hardware utilization.
+saturating hardware utilization.
 
 The content of this chapter extends the research work published by
 the author in~\cite{Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013}.
@@ -78,7 +78,7 @@ at installation time, which may considerably increase the costs or
 even cause mobile-network operators to incur losses.
 
 Various researchers have successfully deployed HPC systems and techniques
-to solve different problems dealing with spatial data~\cite{Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_enabling_the_computability_of_dust_storm_forecasting:2012,Li_Parallel_cellular_automata_for_large_scale_urban_simulation_using_load_balancing_techniques:2010,Osterman_CUDA_on_GRASS:2012,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013,Tabik_Simultaneous_computation_of_total_viewshed_on_large_high_resolution_grids:2012,Widener_Developing_a_parallel_computational_implementation_of_AMOEBA:2012,Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012}.
+to solve different problems dealing with spatial data~\cite{Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang_Using_adaptively_coupled_models_and_high_performance_computing_for_enabling_the_computability_of_dust_storm_forecasting:2012,Li_Parallel_cellular_automata_for_large_scale_urban_simulation_using_load_balancing_techniques:2010,Osterman_CUDA_on_GRASS:2012,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013,Tabik_Simultaneous_computation_of_total_viewshed_on_large_high_resolution_grids:2012,Widener_Developing_a_parallel_computational_implementation_of_AMOEBA:2012,Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012}.
 Their work confirms that a parallel paradigm such as master-worker,
 and techniques like work pool (or task farming) and spatial-block
 partitioning are applicable when dealing with parallel implementations
@@ -158,9 +158,9 @@ in \cite{Piro_Simulating_LTE_cellular_systems_an_open_source_framework:2011},
 where the authors implemented a full-stack LTE system in C++. Although
 the tool has no graphical capabilities for displaying the simulation
 progress or outcome, they might be included, since the source code
-is available. In our opinion, the main drawback of this tool is the
-lack of documentation, which makes it very difficult to continue extending
-this work without the direct help of some of the original authors.
+is available. The main drawback of this tool is the lack of documentation,
+which makes it very difficult to continue extending this work without
+the direct help of some of the original authors.
 
 As an extension to the well-known NS-2 network simulator, Filiposka
 and Trajanov \cite{Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011}
@@ -180,7 +180,7 @@ concentrates on different ways of slicing raster maps to take advantage
 of a Message Passing Interface (MPI\nomenclature[A]{MPI}{Message passing interface})
 implementation.
 
-In the field of HPC, the authors in~\cite{Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007}
+In the field of HPC, the authors of~\cite{Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010}
 presented MPI and Ninf-G implementation examples of a GRASS raster
 module that processes vegetation indexes from satellite images. The
 authors acknowledge a limitation in the performance of their MPI implementation
@@ -225,12 +225,13 @@ a GPU, and a master-worker setup was used for process communication.
 In~\cite{Yin_A_framework_for_integrating_GIS_and_parallel_computing_for_spatial_control_problems_a_case_study_of_wildfire_dontrol:2012},
 the authors presented a parallel framework for GIS integration. Based
 on the principle of spatial dependency, they lowered the calculation-processing
-time using a knowledge database, delivering the heavy calculation
-load to the parallel back-end if a specific problem instance is not
-found in the database. There was an additional effort to achieve the
-presented goals, since the implementation of a fully functional GIS
-(or ``thick GIS'' as the authors call it) was required on both the
-desktop client and in the parallel environment.
+time using a knowledge DB, delivering the heavy calculation load to
+the parallel back-end if a specific problem instance was not found
+in the DB. It is worth pointing out that the role of the external
+DB as a support structure to store knowledge models is essentially
+different than the one used in this chapter. In this work, the intermediate
+calculation results are effectively stored into an external DB, as
+it will be described later in Section~\ref{sec:04-Design_and_implementation}.
 
 An agent-based approach for simulating spatial interactions was presented
 in~\cite{Gong_Parallel_agent_based_simulation_of_individual_level_spatial_interactions_within_a_multicore_computing_environment:2012}.
@@ -238,6 +239,15 @@ This technique decomposes the entire landscape into equally-sized
 regions, i.e., a spatial-block division as in \cite{Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011},
 which are in turn processed by a different core of a multi-core CPU.
 This work used multi-core CPUs instead of a computing cluster.
+
+Guan and Clarke~\cite{Guan-A_general_purpose_parallel_raster_processing_library:2010}
+introduced a parallel programming library. Providing generic support
+for raster processing, the library is based on a cellular automaton
+model, thus distributing the parallel processing over different neighborhood-based
+regions. Similar to this work, PRATO allows communication-computation
+overlap between the master and worker processes, but without the use
+of built-in, non-blocking operations, such as MPI\_ISend or MPI\_IRecv,
+as it will be explained later in Section~\ref{sec:04-Design_and_implementation}.
 
 Some years ago, grid computing received a lot of attention from the
 research community. It appeared to be a good alternative for accessing
@@ -247,6 +257,14 @@ However, several obstacles are still preventing this technology from
 being widely used. In particular, its adoption requires not only hardware
 and software compromises with respect to the involved parts, but also
 a behavioral change at the human level~\cite{Armstrong_Using_a_computational_grid_for_geographic_information_analysis:2005}.
+
+Parallel methods for radio-propagation predictions were presented
+by several authors~\cite{Athanaileas-Parallel_radio_wave_propagation_modeling:2010,Liu-Modeling_and_simulation_of_electromagnetic_environment:2012,Schroder-Efficient_implementation_of_parallel_radio_wave_propagation:2011}.
+Ray-tracing methods prevail among these works, since they exhibit
+a higher computational-time complexity. However, such methods are
+still inefficient in terms of the computational effort required to
+achieve satisfying results, particularly if applied to real-world
+networks containing thousands of transmitters.
 
 
 \section{Radio-coverage prediction for mobile networks \label{sec:04-Radio_coverage_prediction_for_mobile_networks}}
@@ -264,7 +282,7 @@ propagation is considered a fundamental aspect in radio-network planning
 Consequently, understanding the mathematical modeling of a frequency
 channel is necessary to accurately predict the system performance
 and to provide a mechanism to analyze the effects caused by signal
-propagation \cite{Parsons-The_mobile_radio_propagation_channel:2000}.
+propagation~\cite{Parsons-The_mobile_radio_propagation_channel:2000}.
 
 The coverage planning of radio networks is a key problem that all
 mobile operators have to deal with. Moreover, it has proven to be
@@ -321,7 +339,7 @@ is based on the Okumura-Hata model. When in an OA environment, the
 path loss is described as in Equation~(\ref{eq:04-Hata_OA}):
 
 \begin{eqnarray}
-\mathrm{L}{}_{\mathrm{OA}}(d_{(x,y)},\vec{\beta}) & = & \beta_{0}+\beta_{1}\log(d_{(x,y)})+\beta_{2}\log(H_{\mathrm{A}})+\beta_{3}\log(d_{(x,y)})\log(H_{\mathrm{A}})-\nonumber \\
+\mathrm{L}{}_{\mathrm{OA}}(x,y,\vec{\beta}) & = & \beta_{0}+\beta_{1}\log(d_{(x,y)})+\beta_{2}\log(H_{\mathrm{A}})+\beta_{3}\log(d_{(x,y)})\log(H_{\mathrm{A}})-\nonumber \\
  &  & 3.2\left[\log(11.75\cdot H_{\mathrm{R}})\right]^{2}+44.49\log(F)-4.78\left[\log(F)\right]^{2},\label{eq:04-Hata_OA}
 \end{eqnarray}
 
@@ -338,7 +356,7 @@ expressed in MHz. In NLOS conditions, the additional path loss is
 calculated as in Equation~(\ref{eq:04-Hata_NLOS}):
 
 \begin{equation}
-\mathrm{L}{}_{\mathrm{NLOS}}(d_{(x,y)})=\sqrt{\left[\alpha K(d_{(x,y)})\right]^{2}+E(d_{(x,y)})^{2}},\label{eq:04-Hata_NLOS}
+\mathrm{L}{}_{\mathrm{NLOS}}(x,y)=\sqrt{\left[\alpha K(x,y)\right]^{2}+E(x,y)^{2}},\label{eq:04-Hata_NLOS}
 \end{equation}
 
 
@@ -349,9 +367,9 @@ calculated as in Equation~(\ref{eq:04-Hata_NLOS}):
 radiation reaches a well-defined obstacle, such as a mountain or the
 edge of a building.%
 } control parameter, the value of which is calculated based on the
-level of obstruction of a Fresnel zone, $K(d_{(x,y)})$ is the knife-edge
-diffraction loss (in~dB), and $E(d_{(x,y)})$ is the correction due
-to the Earth sphere (in~dB). All three values depend on the characteristics
+level of obstruction of a Fresnel zone, $K(x,y)$ is the knife-edge
+diffraction loss (in~dB), and $E(x,y)$ is the correction due to
+the Earth sphere (in~dB). All three values depend on the characteristics
 of the topography point with coordinates $(x,y)$.
 
 In this work, as well as in~\cite{Filiposka_Terrain_aware_three_dimensional_radio_propagation_model_extension_for_NS2:2011},
@@ -366,14 +384,14 @@ Consequently, an extra term is introduced for signal loss due to clutter,
 thus defining the model-predicted path loss as:
 
 \begin{equation}
-\mathrm{L}(d_{(x,y)},\vec{\beta})=\mathrm{L}{}_{\mathrm{OA}}(d_{(x,y)},\vec{\beta})+\mathrm{L}_{\mathrm{NLOS}}(d_{(x,y)})+\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)}),\label{eq:04-Hata_pathloss}
+\mathrm{L}(x,y,\vec{\beta})=\mathrm{L}{}_{\mathrm{OA}}(x,y,\vec{\beta})+\mathrm{L}_{\mathrm{NLOS}}(x,y)+\mathrm{L}{}_{\mathrm{CLUT}}(x,y),\label{eq:04-Hata_pathloss}
 \end{equation}
 
 
 \noindent \nomenclature[S]{$\mathrm{L}(d_{(x,y)})$}{Path loss at the topography point with coordinates $(x,y)$}\nomenclature[S]{$\mathrm{L}_{\mathrm{CLUT}}$}{Signal loss due to clutter}
 
-\noindent where $\mathrm{L}{}_{\mathrm{CLUT}}(d_{(x,y)})$ represents
-a look-up function for the clutter loss at the topography point with
+\noindent where $\mathrm{L}{}_{\mathrm{CLUT}}(x,y)$ represents a
+look-up function for the clutter loss at the topography point with
 coordinates $(x,y)$, expressed in dB, which are given as input data.
 
 
@@ -444,13 +462,13 @@ where the parallelograms of the flow diagram represent the input/output
 The design follows a similar internal organization as the radio-planning
 tool presented in \cite{Ozimek_Open.source.radio.coverage.prediction:2010},
 but with some important differences. Specifically, the design presented
-here employs a direct connection to an external database server for
-intermediate result saving, instead of the slow, built-in GRASS database
-drivers. To explicitly avoid tight coupling with a specific database
-vendor, the generated output is formatted in plain text, which is
-then forwarded to the DB. Any further processing is achieved by issuing
-a query over the database tables that contain the path-loss results
-for each of the processed transmitters.
+here employs a direct connection to an external DB server for intermediate
+result saving, instead of the slow, built-in GRASS DB drivers. To
+explicitly avoid tight coupling with a specific DB vendor, the generated
+output is formatted in plain text, which is then forwarded to the
+DB. Any further processing is achieved by issuing a query over the
+DB tables that contain the path-loss results for each of the processed
+transmitters.
 
 
 \subsubsection{Input parameters}
@@ -542,11 +560,11 @@ point. \label{fig:04-Raster_antenna_example}}}}
 \subsubsection{Transmitter path-loss prediction \label{sub:04-Transmitter_path_loss_prediction}}
 
 In this step, the path-loss prediction of the transmitter is saved
-in its own database table (see ``Save transmitter path-loss to DB''
-in Figure~\ref{fig:04-Flow_diagram_serial_version}). This is accomplished
+in its own DB table (see ``Save transmitter path-loss to DB'' in
+Figure~\ref{fig:04-Flow_diagram_serial_version}). This is accomplished
 by connecting the standard output of the GRASS module with the standard
-input of a database client. Naturally, the generated plain text should
-be understood by the DB itself.
+input of a DB client. Naturally, the generated plain text should be
+understood by the DB itself.
 
 
 \subsubsection{Coverage prediction \label{sub:04-Coverage_prediction}}
@@ -569,13 +587,14 @@ the partial path-loss results of the involved transmitters, is created
 in this step (see ``Create final coverage prediction'' in Figure~\ref{fig:04-Flow_diagram_serial_version}).
 The received signal strength from each of the transmitters is calculated
 as the difference between its transmit power and the path loss for
-the receiver's corresponding position. This is done by executing an
-SQL query over the tables containing the path-loss predictions of
-each of the processed transmitters. Finally, the output is generated
-using the GRASS built-in modules $v.in.ascii$ and $v.to.rast$, which
-create a raster map using the query results as the input. The resulting
-raster map contains the maximum received signal strength for each
-individual point, as shown in Figure~\ref{fig:04-Raster_prediction_example}.
+the receiver's corresponding position. This is done by executing a
+Structured Query Language (SQL\nomenclature[A]{SQL}{Structured query language})
+query over the tables containing the path-loss predictions of each
+of the processed transmitters. Finally, the output is generated using
+the GRASS built-in modules $v.in.ascii$ and $v.to.rast$, which create
+a raster map using the query results as the input. The resulting raster
+map contains the maximum received signal strength for each individual
+point, as shown in Figure~\ref{fig:04-Raster_prediction_example}.
 In this case, the color scale is given in dBm, indicating the strongest
 received signal strength from the transmitters.
 
@@ -679,8 +698,7 @@ the authors achieved the GRASS abstraction by introducing a \emph{Point
 }structure with four \emph{double} attributes, where each pixel of
 the RSG is mapped to an instance of this structure. Another possibility
 is for one of the processes, e.g., the master, to read entire rows
-or columns of data before dispatching them for processing to the workers
-\cite{Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011}.
+or columns of data before dispatching them for processing to the workers~\cite{Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011}.
 In this case, an independence between row/column calculations is required,
 which is a problem-specific property. Here, abstraction from the GRASS
 is achieved by loading each spatial-data set into a separate 2D matrix
@@ -711,7 +729,7 @@ point to the origin of the map-projection system.\label{fig:04-Spatial_data_loca
 
 
 In the area of geographical-information science, the master-worker
-paradigm has been successfully applied by several authors~\cite{Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Campos_Parallel_modelling_in_GIS:2012,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013}.
+paradigm has been successfully applied by several authors~\cite{Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Campos_Parallel_modelling_in_GIS:2012,Guan_A_parallel_computing_approach_to_fast_geostatistical_areal_interpolation:2011,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011,Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013}.
 However, this technique presents certain issues that prevent the full
 exploitation of the available computing resources when deployed over
 several networked computers. Specifically, the problem refers to network
@@ -719,7 +737,7 @@ saturation and idle processes within the master-worker model. Generally
 speaking, a single communicating process, e.g., the master, is usually
 not able to saturate the network connection of a node. Using more
 than one MPI process per node might solve this problem, but possible
-rank-ordering problems may appear, thus restricting the full utilization
+rank-ordering issues may appear, thus restricting the full utilization
 of the network~\cite{Rabenseifner-Hybrid_MPI_OpenMP_parallel_programming_on_clusters_of_multicore_nodes:2009}.
 Additionally, the hardware-exploitation level is difficult to measure
 when the parallelization involves only one computing node~\cite{Tabik-High_performance_three_horizon_composition_algorithm_for_large_scale_terrains:2011,Tabik-Optimal_tilt_and_orientation_maps_a_multi_algorithm_approach_for_heterogeneous_multicore_GPU_systems:2013}
@@ -743,14 +761,14 @@ also fail to saturate the network~\cite{Rabenseifner-Hybrid_MPI_OpenMP_parallel_
 A possible solution to this problem is to improve the communication
 overlap among the processes. To this end, PRATO features non-blocking
 point-to-point MPI operations, and an independent thread in the worker
-process that saves the intermediate results into a DB. One such database
+process that saves the intermediate results into a DB. One such DB
 system per computer cluster is used, which also serves the input data
 to the GRASS, in order to aggregate the partial results of the path-loss
 predictions or to visualize them. It is important to note that any
 kind of DB may be used, e.g., relational, distributed~\cite{Ozsu_Principles_of_distributed_database_systems:2011}
 or even those of the NoSQL type~\cite{Stonebraker_SQL_databases_vs_NoSQL_databases:2010}.
-Nevertheless, a central, relational-database system is used here,
-since they are the most popular and widely available ones. Additionally,
+Nevertheless, a central, relational-DB system is used here, since
+they are the most popular and widely available ones. Additionally,
 the non-blocking message-passing technique used to distribute the
 work-load among the nodes provides support for heterogeneous environments.
 As a result, computing nodes featuring more capable hardware receive
@@ -838,8 +856,8 @@ from the individual path-loss results created by each of the worker
 processes during the ``Processing loop'' phase in Figure~\ref{fig:04-Master_process_flow_diagram},
 which provides the source data for the final raster map. The aggregation
 of the individual path-loss results is accomplished by issuing an
-SQL query over the database tables containing them, in a similar way
-as in the serial version.
+SQL query over the DB tables containing them, in a similar way as
+in the serial version.
 
 
 \subsubsection{Worker processes on CPU}
@@ -946,9 +964,9 @@ char}, since they express signal loss in dB. It follows that for the
 radio-propagation prediction of one transmitter, the following matrices
 should be allocated on the GPU:
 \begin{itemize}
-\item one 2D matrix containing DEM data for the target subregion, the elements
+\item one 2D matrix containing DEM data for the target sub-region, the elements
 of which are \emph{float} or \emph{double}; 
-\item one 2D matrix containing clutter data for the target subregion, the
+\item one 2D matrix containing clutter data for the target sub region, the
 elements of which are \emph{unsigned char}; and
 \item one 2D matrix containing the resulting path-loss prediction.
 \end{itemize}
@@ -978,7 +996,7 @@ focuses on taking full advantage of the hardware of each computing
 node, thus explicitly avoiding the bottlenecks introduced by the slowest
 computing node in the cluster. This problem appears when evenly distributing
 the data among the worker processes on disparate hardware, e.g., as
-in~\cite{Akhter_Porting_GRASS_raster_module_to_distributed_computing:2007,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011},
+in~\cite{Akhter-GRASS_GIS_on_high_performance_computing_with_MPI_OpenMP_and_Ninf-G:2010,Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011},
 being more noticeable with a larger number of computing nodes and
 processes. In other words, computing nodes that deliver better performance
 have more calculations assigned to them. Moreover, in real-world scenarios,
@@ -1036,16 +1054,16 @@ of the Nagasaki University in Japan. This system ranked in the TOP
 \footnote{http://www.green500.org%
 } as one of the most energy-efficient supercomputers in the world.
 
-This section presents the simulations, and an exhaustive analysis
-of the performance and scalability of the parallel implementation
-of PRATO. The most common usage case for PRATO is to perform a radio-coverage
+This section presents the simulations and an exhaustive analysis of
+the performance and scalability of the parallel implementation of
+PRATO. The most common use case for PRATO is to perform a radio-coverage
 prediction for multiple transmitters. Therefore, a straight-forward
 parallel decomposition is to divide a given problem instance by transmitter,
 for which each coverage prediction is calculated by a separate worker
 process.
 
 The following simulations were carried out on 34 computing nodes of
-the DEGIMA cluster. The computing nodes are connected by a LAN, over
+the DEGIMA cluster. The computing nodes were connected by a LAN, over
 a Gigabit Ethernet interconnect. As mentioned before, the reason for
 using a high-end computer cluster such as DEGIMA is to explore, by
 experimentation, the advantages and drawbacks of the considered methods.
@@ -1066,17 +1084,17 @@ also with 16 GB of RAM.
 \end{itemize}
 During the simulation runs, the nodes equipped with the Intel i5 CPU
 hosted the worker processes, whereas the master process and the PostgreSQL
-database server (version 9.1.4) each run on a different computing
-node, featuring an Intel i7 CPU. The DB server performed all its I/O
-operations on the local file system, which was mounted on an 8~GB
-RAM disk. During the simulations, the path-loss predictions of 5,120
-transmitters occupied less than 4~GB of this partition. No GPU hardware
-was used for the following simulation sets.
+DB server (version 9.1.4) run on different computing nodes, featuring
+an Intel i7 CPU. The DB server performed all its I/O operations on
+the local file system, which was mounted on an 8~GB RAM disk. During
+the simulations, the path-loss predictions of 5,120 transmitters occupied
+less than 4~GB of this partition. No GPU hardware was used for the
+following simulation sets.
 
-A 64-bit Linux operating system (Fedora distribution) was the operating
-system used. The message-passing implementation OpenMPI, version 1.6.1,
-was manually compiled with the distribution-supplied gcc compiler,
-version 4.4.4.
+A 64-bit Linux operating system (Fedora distribution) was used. The
+message-passing implementation OpenMPI, version 1.6.1, was manually
+compiled with the distribution-supplied \emph{gcc} compiler, version
+4.4.4.
 
 
 \subsection{Test networks}
@@ -1225,7 +1243,7 @@ the number of cores, e.g., aggregation of the intermediate results,
 although the total contribution of this overhead remains low for large
 problem sizes. Moreover, the communication overhead grows linearly
 with the number of cores used. Consequently, the findings of Huang
-et al. \cite{Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011}
+et al.~\cite{Huang-Explorations_of_the_implementation_of_a_parallel_IDW_algorithm_in_a_Linux_cluster:2011}
 can be confirmed, who concluded that the data-set size should be large
 enough for the communication overhead to be hidden by the calculation
 time. This ensures profitable parallelization in terms of running-time
@@ -1385,6 +1403,22 @@ exploiting the available hardware resources is accomplished when applying
 the presented MWD approach, thus improving the scalability and efficiency
 of PRATO when compared to a traditional MW technique.
 
+Nevertheless, some limitations still apply, e.g., DEM block partition
+and DB control. Regarding DEM division it is necessary for the partitioned
+blocks to fit into the memory of a worker node, or global memory of
+the GPU if used. If deploying several workers on one computing node,
+this restriction applies accordingly. When using the external DB in
+the MWD case, the SQL statements for the manipulation of the DB tables
+are included as part of the intermediate results. For this reason,
+the credentials used for accessing the DB should provide enough privileges
+for the successful completion of the SQL statements. Additionally,
+due to the multi-threaded implementation of the result-dumping task,
+it is very important to avoid oversubscribing a computing node, e.g.,
+deploying two worker processes on a dual-core CPU. In such case, the
+result-dumping threads have to interrupt the execution of the worker
+processes in order to access the computing resources of the node,
+thus having a negative impact on system performance.
+
 
 
 
@@ -1417,11 +1451,11 @@ results show that PRATO has a better scalability when using the MWD
 approach than the standard MW setup, since it is able to completely
 saturate the network infrastructure of the computer cluster. These
 promising results also show the great potential of the MWD approach
-for parallelizing different time-consuming tasks dealing with spatial
-data, where DBs form an intrinsic part of almost all GIS. Furthermore,
-the automatic optimization of radio networks, where a large number
-of radio-propagation predictions take part in the evaluation step
-of the optimization process, can also an benefit from the improved
+for the parallelization of different time-consuming tasks dealing
+with spatial data, where DBs form an intrinsic part of almost all
+GIS. Furthermore, the automatic optimization of radio networks, where
+a large number of radio-propagation predictions take part in the evaluation
+step of the optimization process, can also an benefit from the improved
 performance of PRATO. Indeed, this last point will be further discussed
 and validated in the following chapters.
 

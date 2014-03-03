@@ -13,14 +13,18 @@ if [ $# -gt 1 ]; then
         #sort -nr ${l} > /tmp/${i}
 
         grep score ${l} | tr -s ' ' | cut -d' ' -f4 | sort -nr > /tmp/${i}
+        echo -n "."
     done
 
+    echo
     rm -f /tmp/.conv
     touch /tmp/.conv
+
 
     for f in $( seq 1 ${i} ); do
         cat /tmp/${f} | paste - /tmp/.conv > /tmp/.foo
         cp /tmp/.foo /tmp/.conv
+        echo -n "."
     done
 
     CMD="$( cat <<EOF
@@ -47,6 +51,7 @@ set xtics font ",14";
 set xtics 20000;
 set xlabel 'Number of evaluations';
 set yrange [2280000.00:2460000.00];
+set log y;
 set format y "%.2e";
 set ytics 40000;
 set ytics font ",14";
@@ -56,6 +61,7 @@ plot '/tmp/.foo' using 1:2 with lines lw 2 title 'Best', \
      '/tmp/.foo' using 1:4 with lines lw 2 title 'Worst';
 EOF
 )"
+    echo "${CMD}"
     gnuplot -p -e "${CMD}"
 else
     echo "Usage: $0 [log files ...]"

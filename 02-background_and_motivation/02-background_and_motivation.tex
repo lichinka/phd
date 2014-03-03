@@ -137,7 +137,7 @@ x\leftarrow x-\alpha\frac{f'(x)}{f''(x)},
 
 
 \noindent thus adjusting the value of $\alpha$ as it converges towards
-a point with zero slope \cite{Luke-Essentials_of_metaheuristics:2009}.
+a point with zero slope~\cite{Luke-Essentials_of_metaheuristics:2009}.
 
 Another issue is how other points are handled. Beside maxima and minima
 points, some functions also contain saddle points (known as inflection
@@ -150,8 +150,7 @@ gradient methods get caught in local optima. Local optima of a function
 are defined as the optima (or minima in this case) of a local region.
 Similarly, global optima are defined as the optima of the whole domain
 of a function. It follows that gradient methods, as gradient descent
-or Newton\textquoteright{}s method, are local optimization algorithms
-\cite{Luke-Essentials_of_metaheuristics:2009}.
+or Newton\textquoteright{}s method, are local optimization algorithms~\cite{Luke-Essentials_of_metaheuristics:2009}.
 
 \begin{figure}
 \centering
@@ -185,36 +184,35 @@ second world war.
 
 In a linear programming optimization problem, both the objective function
 $f$ and a given set of constraints are linear functions. The constraints
-impose restrictions over $\vec{x}$, i.e., they must meet certain
-requirements as, for example, fulfill a limited availability of resources.
-A problem may be formulated as follows:
+impose restrictions over $x$, i.e., they must meet certain requirements
+as, for example, fulfill a limited availability of resources. A problem
+may be formulated as follows:
 
 \begin{equation}
-\min f(\vec{x})=c\cdot\vec{x}\label{eq:02-linear_programming_objective_function}
+\min f(x)=c\cdot x\label{eq:02-linear_programming_objective_function}
 \end{equation}
 
 
 \noindent subject to
 
 \begin{eqnarray}
-A\cdot\vec{x} & \le & b\nonumber \\
-\vec{x} & \ge & \vec{0}.\label{eq:02-linear_programming_constraints}
+A\cdot x & \le & b\nonumber \\
+x & \ge & 0.\label{eq:02-linear_programming_constraints}
 \end{eqnarray}
 
 
-\noindent In the example above, the inequalities defined in \ref{eq:02-linear_programming_constraints}
-are the constraints to the linear program defined in \ref{eq:02-linear_programming_objective_function}.
+\noindent In the example above, the inequalities defined in Equation~(\ref{eq:02-linear_programming_constraints})
+are the constraints to the linear program defined in Equation~(\ref{eq:02-linear_programming_objective_function}).
 
 For solving continuous, linear-optimization problems, efficient exact
-algorithms exist, such as the simplex method \cite{Dantzig-Maximization_of_a_linear_function_of_variables_subject_to_linear_inequalities:1951}
-or the interior-points method \cite{Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984}.
+algorithms exist, such as the simplex method~\cite{Dantzig-Maximization_of_a_linear_function_of_variables_subject_to_linear_inequalities:1951}
+or the interior-points method~\cite{Karmarkar-A_new_polynomial_time_algorithm_for_linear_programming:1984}.
 Indeed, linear programming is one of the most satisfactory models
 for solving optimization problems, since the feasible region of the
 problem is a convex set and the objective function is a convex function.
 It follows that the global optimum is a node of the polytope representing
-the feasible region \cite{Talbi_Metaheuristics:2009}. See Figure
-\ref{fig:02-linear_programming_example} for a linear-programming
-example with several constraints.
+the feasible region~\cite{Talbi_Metaheuristics:2009}. See Figure~\ref{fig:02-linear_programming_example}
+for a linear-programming example with several constraints.
 
 \begin{figure}
 \centering
@@ -228,11 +226,11 @@ representing the region of feasible solutions. \label{fig:02-linear_programming_
 
 
 Non-linear programming models, on the other hand, consider problems
-where the objective function $f$ and/or the constraints are non-linear
-\cite{Bazaraa-Nonlinear_programming:2006}. However, non-linear continuous
-problems are more difficult to solve. Despite several existing techniques
-to linearize such models, they often not only introduce extra variables
-and constraints, but also some degree of approximation \cite{Glover-Improved_linear_programming_formulations_for_nonlinear_problems:1975}.
+where the objective function $f$ and/or the constraints are non-linear~\cite{Bazaraa-Nonlinear_programming:2006}.
+However, non-linear continuous problems are more difficult to solve.
+Despite several existing techniques to linearize such models, they
+often introduce extra variables and constraints, and also some degree
+of approximation~\cite{Glover-Improved_linear_programming_formulations_for_nonlinear_problems:1975}.
 Moreover, some problem properties such as high dimensionality, parameter
 interaction, and multi-modality make these approaches ineffective.
 
@@ -243,7 +241,7 @@ Generally speaking, when dealing with real-world problems, the availability
 of analytical optimization models, such as those required by gradient
 methods or (non-)linear programming, is not guaranteed. Indeed, for
 some applications, only simulations or physical models are the available
-means for objective-function evaluation \cite{Fu-Optimization_for_simulation:2002}.
+means for objective-function evaluation~\cite{Fu-Optimization_for_simulation:2002}.
 Once again, metaheuristics appear as good candidates to solve different
 instance sizes of this class of problems. 
 
@@ -585,7 +583,7 @@ the objective function~\cite{Talbi_Metaheuristics:2009}. This is
 especially true when dealing with real-world problems of areas such
 as structural design~\cite{Barthelemy-Approximation_concepts_for_optimum_structural_design:1993},
 molecular docking~\cite{Tantar-A_parallel_hybrid_genetic_algorithm_for_protein_structure_prediction:2007}
-and, the field on which this thesis focuses, radio-network design~\cite{Benedicic_Pilot.power.optimization:2010,Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013,Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013,Benedicic-An_adaptable_parallel_simulation_framework_for_LTE_coverage_planning:2013}.
+and, the field on which this thesis focuses, radio-network design~\cite{Benedicic_Pilot.power.optimization:2010,Benedicic_Balancing_downlink_uplink_soft_handover_areas_in_UMTS_networks:2012,Benedicic-A_GPU_based_parallel_agent_optimization_approach:2013,Benedicic-A_GRASS_GIS_parallel_module_for_radio-propagation_predictions:2013}.
 A possible substitution for lengthy evaluations is to reduce their
 complexity by approximating the objective function, thus replacing
 it with an approximation during the optimization process. This approach
@@ -641,7 +639,7 @@ of an open-source tool. This is especially true when dealing with
 complex simulation frameworks, as the ones used for radio networks.
 
 
-\chapter{Principles of Mobile Radio Networks \label{chap:02-Principles_of_mobile_radio_networks}}
+\chapter{Overview of Mobile Radio Networks \label{chap:02-Principles_of_mobile_radio_networks}}
 
 A cellular mobile radio network is a collection of individual cells
 that are served by several transmitters, called Base Stations~(BSs\nomenclature[A]{BS}{Base station}).
@@ -1139,36 +1137,7 @@ pilot signal of the cells is periodically updated in order to improve
 the aforementioned function.
 
 
-\section{Discussion}
 
-Regarding the optimization methods presented in the previous sections,
-three distinctive groups emerge: genetic algorithms, linear programming
-and other search methods.
-\begin{description}
-\item [{Genetic~algorithms}] These algorithms work on a population of
-solutions, allowing a more comprehensive search for optimal solutions.
-As a direct consequence, an increase in running time is commonly observed.
-The implementation effort of genetic algorithms is to some degree
-higher than for simpler search methods, e.g., local search, but their
-inherent structure makes parallel implementations rather simple. Additionally,
-genetic algorithms are less likely to be trapped in local optima,
-since they are a population-based metaheuristic.
-\item [{Linear~programming}] Linear-integer or mixed-integer programming
-are widely used in different optimization areas and there are many
-good software packages to solve such problems. Consequently, if a
-problem can be modeled as a continuous linear problem, there is usually
-no difficulty in finding optimality. In the context of this survey,
-linear programming has proven useful for BS-location optimization
-in early network planning stages.
-\item [{Other~search~methods}] Other search methods, e.g., local search,
-SA, tabu search or gradient descent, usually represent a compromise
-between running time and quality of results. Their effectiveness relies
-on evaluating a great number of alternative solutions. The number
-of parameters taken into account, as well as the evaluation precision,
-directly influence their running time. These methods do not excel
-in full simulation scenarios. Moreover, some of them are easily trapped
-in local minima.
-\end{description}
 
 \section{Summary}
 
@@ -1196,7 +1165,7 @@ be useful to apply a local search method at the end to find better
 solutions in the proximity of a current one.
 
 
-\chapter{Principles of GPU Programming \label{chap:02-Principles_of_GPU_programming}}
+\chapter{Overview of GPU Programming \label{chap:02-Principles_of_GPU_programming}}
 
 During the past few years, the computing industry has been delivering
 extra processing power in the form of parallel computing, i.e., more

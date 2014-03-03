@@ -42,13 +42,13 @@
 \cosupervisor{Assist.\ Prof.\ Dr.\ Toma\v{z} Javornik}
 \cosupervisorlong{}
 
-\month{October}
-\year{2013}
+\month{January}
+\year{2014}
 
 \evaluationBoardChairman{Assist.\ Prof.\ Dr.\ Jurij \v{S}ilc}
 \evaluationBoardChairmanAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
-\evaluationBoardMember{Assist.\ Prof.\ Dr.\ Ale\v{s} \v{S}viglej}
+\evaluationBoardMember{Assist.\ Prof.\ Dr.\ Ale\v{s} \v{S}vigelj}
 \evaluationBoardMemberAffiliation{Jo\v{z}ef Stefan Institute, Ljubljana, Slovenia}
 
 \evaluationBoardMembers{Prof.\ Dr.\ Marian Vajter\v{s}ic}
@@ -65,8 +65,6 @@
 \usepackage{bibentry}
 \nobibliography*
 
-\addto\captionsslovene{\renewcommand{\algorithmname}{Algorithm}}
-
 \makeatother
 
 \usepackage{babel}
@@ -81,7 +79,23 @@
 
 \maketitle
 
-\renewcommand{\algorithmname}{Algorithm}
+\addto\captionsslovene{\renewcommand{\algorithmname}{Algorithm}}
+
+\cleardoublepage{}
+
+\thispagestyle{empty}
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+\begin{quotation}
+\begin{em}
+	\hfill Para B y Niki, la luz de mis ojos
+\end{em}
+\end{quotation}
 
 \cleardoublepage{}
 
@@ -89,7 +103,7 @@
 
 \cleardoublepage{}
 
-\noindent \renewcommand{\contentsname}{\vspace{-2.0cm} \Large{Index} \hfill \footnotesize \thepage \vspace{1.5cm}}
+\noindent \renewcommand{\contentsname}{\vspace{-2.0cm} \Large{Index} \hfill \footnotesize \textnormal{\thepage} \vspace{1.5cm}}
 \fancyhead[RO]{\thepage}
 \fancyhead[LO]{\footnotesize Index}
 \fancyhead[LE]{\thepage}
@@ -155,7 +169,7 @@
 
 \cleardoublepage{}
 
-\bibliographystyle{plain}
+\bibliographystyle{plainnat}
 \bibliography{01-introduction/01-introduction,02-background_and_motivation/02-background_and_motivation,04-framework_design_and_implementation/04-framework_design_and_implementation,06-experimental_evaluation-service_coverage/06-service_coverage_problem,07-experimental_evaluation-sho_balancing/07-soft_handover_alignment,05-framework_parameter_tuning/05-framework_parameter_tuning,A-bibliography/A-bibliography}
 
 
@@ -166,7 +180,8 @@
 \fancyhead[LE]{\footnotesize \thepage}
 \fancyhead[RE]{\footnotesize {Index of Figures}}
 \addcontentsline{toc}{chapter}{Index of Figures}
-\renewcommand\listfigurename{\vspace{-2.4cm} \Large Index of Figures \vspace{1.5cm}}
+\renewcommand\listfigurename{\vspace{-2.0cm} \Large{Index of Figures} \hfill \footnotesize \textnormal{\thepage} \vspace{1.5cm}}
+
 %
 % Increase spacing between figure numbers and caption in LOF
 %
@@ -175,7 +190,6 @@
 %\makeatother
 
 \listoffigures
-\newpage \thispagestyle{empty}
 
 \cleardoublepage{}
 
@@ -186,9 +200,8 @@
 \fancyhead[LE]{\footnotesize \thepage}
 \fancyhead[RE]{\footnotesize {Index of Tables}}
 \addcontentsline{toc}{chapter}{Index of Tables}
-\renewcommand\listtablename{\vspace{-2.4cm} \Large Index of Tables \vspace{1.5cm}}
+\renewcommand\listtablename{\vspace{-2.0cm} \Large{Index of Tables} \hfill \footnotesize \textnormal{\thepage} \vspace{1.5cm}}
 \listoftables
-\newpage \thispagestyle{empty}
 
 \cleardoublepage{} \fancyhead{}
 \fancyfoot{} 
@@ -197,13 +210,12 @@
 \fancyhead[LE]{\footnotesize \thepage}
 \fancyhead[RE]{\footnotesize {Index of Algorithms}}
 \addcontentsline{toc}{chapter}{Index of Algorithms}
-\renewcommand\listalgorithmname{\vspace{-2.4cm} \Large Index of Algorithms \vspace{1.5cm}}
+\renewcommand\listalgorithmname{\thispagestyle{empty} \vspace{-2.0cm} \Large{Index of Algorithms} \hfill \footnotesize \textnormal{\thepage} \vspace{1.5cm}}
 \begingroup 
 \let\oldnumberline\numberline
 \renewcommand{\numberline}{Algorithm~\oldnumberline}
 \listofalgorithms 
 \endgroup
-\newpage \thispagestyle{empty} 
 
 \cleardoublepage{}
 

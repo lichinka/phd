@@ -87,14 +87,45 @@ status open
 
 
 \backslash
-addcontentsline{toc}{chapter}{Appendix B: Biography}
+fancyhead{}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-fancyhead[LO]{}
+fancyfoot{} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize {Appendix B: Biography}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+footnotesize 
+\backslash
+thepage}
 \end_layout
 
 \begin_layout Plain Layout
@@ -103,22 +134,14 @@ fancyhead[LO]{}
 \backslash
 fancyhead[RE]{
 \backslash
-footnotesize Appendix B: Biography}
+footnotesize {Appendix B: Biography}}
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
-% First paragraph has no indentation.
+
+\backslash
+addcontentsline{toc}{chapter}{Appendix B: Biography}
 \end_layout
 
 \end_inset
@@ -135,9 +158,9 @@ Lucas Benedičič was born on December 12, 1977 in Buenos Aires, Argentina.
 \end_layout
 
 \begin_layout Standard
-After moving to Slovenia in 2002, he enrolled into the University of Ljubljana,
- Faculty of Computer and Information Science, where he graduated in 2007
- with the work titled 
+After moving to Slovenia in 2002, he enrolled in the University of Ljubljana,
+ Faculty of Computer and Information Science, from which he graduated in
+ 2007 with the work entitled 
 \begin_inset Quotes eld
 \end_inset
 
@@ -151,9 +174,8 @@ Application development using open-source technologies
 \begin_layout Standard
 In September 2007, he started his postgraduate studies at the University
  of Primorska, Faculty of Mathematics, Natural Sciences and Information
- Technologies, after enrolling into the Masters study programme of computer
- sciences.
- He graduated in 2009 with the work titled 
+ Technologies, after enrolling in the Masters study programme of computer
+ sciences, from which he graduated in 2009 with the thesis entitled 
 \begin_inset Quotes eld
 \end_inset
 
@@ -169,7 +191,7 @@ Towards the end of 2007, he was awarded a scholarship for continuing his
  postgraduate studies in Slovenia.
  The award was received after winning a problem-solving contest, organized
  by Halcom, d.d.
- In the fall of 2009, he enrolled in the PhD program entitled 
+ In the fall of 2009, he enrolled in the PhD 
 \begin_inset Quotes eld
 \end_inset
 
@@ -177,7 +199,7 @@ Information and Communication Technologies
 \begin_inset Quotes erd
 \end_inset
 
- under the supervision of Assoc.
+ program under the supervision of Assoc.
 \begin_inset space ~
 \end_inset
 
@@ -280,12 +302,12 @@ In early 2012, he received an invitation to work as a visiting researcher
 \begin_layout Standard
 Over the past few years, he has presented his research work at several internati
 onal conferences and workshops in the areas of evolutionary computation,
- optimization and parallel computing.
+ combinatorial optimization and parallel computing.
 \end_layout
 
 \begin_layout Standard
 His research interests include combinatorial and numerical optimization,
- parallel and GPU computing, and metaheuristic algorithms.
+ high-performance computing, and metaheuristic algorithms.
 \end_layout
 
 \end_body

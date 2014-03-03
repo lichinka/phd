@@ -98,8 +98,8 @@ reference "chap:05-Framework_parameter_tuning"
 
 \end_inset
 
- was to ease the execution of radio-network planning activities, the complexity
- of which is generally beyond the scope of a manual approach.
+ was to ease the realization of radio-network planning activities, the complexit
+y of which is generally beyond the scope of a manual approach.
  In this context, PRATO was presented as a tool that can help an engineer
  in realizing his or her everyday network-planning tasks.
 \end_layout
@@ -110,9 +110,9 @@ Another important factor to further validate the adoption of the presented
  This is especially important in real-world scenarios, where it is not feasible
  to improve the performance of radio-coverage predictions at the cost of
  precision loss.
- The scope of this chapter is therefore to establish that the accuracy of
- the radio-propagation predictions of PRATO, as described previously in
- Chapter
+ The objective of this chapter is therefore to establish that the accuracy
+ of the radio-propagation predictions of PRATO, as described previously
+ in Chapters
 \begin_inset space ~
 \end_inset
 
@@ -120,6 +120,13 @@ Another important factor to further validate the adoption of the presented
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:04-Framework-design-and-implementation"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:05-Framework_parameter_tuning"
 
 \end_inset
 
@@ -220,16 +227,16 @@ reference "sec:04-Motivation"
 , the accuracy of the coverage predictions has a fundamental impact on the
  performance accuracy of the framework.
  For this reason, one of the objectives of this chapter is to assess the
- precision of several coverage-propagation predictions of PRATO and an enterpris
-e radio-planning tool, the design of which is tailored to be used in industrial
- environments, using field measurements as a reference.
+ precision of several coverage-propagation predictions of PRATO when compared
+ to an enterprise radio-planning tool, the design of which was tailored
+ to be used in industrial environments, using field measurements as a reference.
 \end_layout
 
 \begin_layout Standard
 The second objective of this chapter is related to the the high-performance
  characteristics of PRATO.
  To this end, an insight to the computational-time performance of PRATO,
- compared to the commercial radio-planning tool
+ again compared to the commercial radio-planning tool
 \begin_inset Foot
 status open
 
@@ -827,7 +834,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/umts_prato_rcv_pwr.eps
+	filename img/umts_prato_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -835,7 +842,7 @@ centering
 
 
 \begin_inset Graphics
-	filename img/umts_tcpu_rcv_pwr.eps
+	filename img/umts_tcpu_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -918,7 +925,7 @@ centering
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename img/lte_prato_rcv_pwr.eps
+	filename img/lte_prato_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -926,7 +933,7 @@ centering
 
 
 \begin_inset Graphics
-	filename img/lte_tcpu_rcv_pwr.eps
+	filename img/lte_tcpu_rcv_pwr.pdf
 	lyxscale 70
 	width 47text%
 
@@ -1239,17 +1246,8 @@ name "fig:08-Prediction_difference-LTE"
 \end_layout
 
 \begin_layout Standard
-Plots showing the probability distribution function (PDF
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "A"
-symbol "PDF"
-description "Probability distribution function"
-
-\end_inset
-
-) of the difference between the simulation results and the field measurements
- were also produced.
+Plots showing the PDFs of the difference between the simulation results
+ and the field measurements were also produced.
  In this case, Figures
 \begin_inset space ~
 \end_inset
@@ -1293,8 +1291,7 @@ ns and measurements of Net
 \end_inset
 
 , respectively.
- Again, the graphs labeled as (a) show the analysis for PRATO, whereas the
- ones labeled as (b) show the same analysis for the commercial tool.
+ Here, the graphs compare the analysis for PRATO and the commercial tool.
  Table
 \begin_inset space ~
 \end_inset
@@ -1310,7 +1307,7 @@ reference "tab:08-PDF_properties"
  tool tested, the values of which are expressed in dB.
  It is important to note that the parameter set used for both tools intentionall
 y generate pessimistic results in terms of coverage prediction.
- This is clearly observed from the mean-difference values of all three test
+ This is clearly observed from the mean-difference values of the three test
  cases.
 \end_layout
 
@@ -1342,6 +1339,7 @@ centering
 \begin_layout Plain Layout
 Mean and standard-deviation values for the PDFs of the difference between
  simulation and measurement results.
+ All values are expressed in dB.
 
 \shape italic
 \emph on
@@ -1386,12 +1384,12 @@ name "tab:08-PDF_properties"
 \begin_inset Text
 
 \begin_layout Plain Layout
-Mean [dB]
+PRATO
 \end_layout
 
 \end_inset
 </cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1413,13 +1411,12 @@ Mean [dB]
 \begin_inset Text
 
 \begin_layout Plain Layout
-Std.
- deviation [dB]
+Commercial tool
 \end_layout
 
 \end_inset
 </cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1443,7 +1440,7 @@ Std.
 \begin_inset Text
 
 \begin_layout Plain Layout
-PRATO
+Mean
 \end_layout
 
 \end_inset
@@ -1452,7 +1449,8 @@ PRATO
 \begin_inset Text
 
 \begin_layout Plain Layout
-Commercial tool
+Std.
+ deviation
 \end_layout
 
 \end_inset
@@ -1470,7 +1468,7 @@ Commercial tool
 \begin_inset Text
 
 \begin_layout Plain Layout
-PRATO
+Mean
 \end_layout
 
 \end_inset
@@ -1479,7 +1477,8 @@ PRATO
 \begin_inset Text
 
 \begin_layout Plain Layout
-Commercial tool
+Std.
+ deviation
 \end_layout
 
 \end_inset
@@ -1512,25 +1511,25 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-12.04
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 12.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.04
 \end_layout
 
 \end_inset
@@ -1572,25 +1571,25 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-8.71
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 11.94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.71
 \end_layout
 
 \end_inset
@@ -1632,25 +1631,25 @@ Net
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.63
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 12.20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.63
 \end_layout
 
 \end_inset
@@ -1707,10 +1706,9 @@ reference "fig:08-Prediction_difference-LTE"
 
 \end_inset
 
-), it is clear that the difference between each pair of (a) and (b) diagrams
- is minor.
+), it is clear that the difference between each pair PDFs is minor.
  A small difference is present on the commercial tool, the predictions of
- which show a slightly greater deviation with respect to the measurements.
+ which show a slightly higher deviation with respect to the measurements.
  Therefore, it can be concluded that the prediction results of PRATO are
  comparable with the results of the commercial tool for the three test networks.
  Moreover, the presented analysis also confirms that the calculated results
@@ -1727,11 +1725,8 @@ Additionally, each of the test networks extended over different terrain
 \end_layout
 
 \begin_layout Standard
-Notice also that PRATO generated similar results as the commercial tool
- in all three cases, irrespective of the operational frequency or chosen
- terrain type.
- The predicted values are also comparable for different distances between
- the BSs and UEs.
+Notice also that PRATO generated comparable predicted values for different
+ distances between the BSs and UEs.
  Moreover, a slight improvement can be observed in some of the prediction
  values of PRATO, because they better resemble the profile shown by the
  field measurements.
@@ -2017,10 +2012,10 @@ name "fig:08-Running_times-LTE"
 
 \begin_layout Standard
 The plotted values represent the average simulation-processing time after
- performing 10 independent measurements.
+ performing 20 independent runs.
  The time-measurement gathering was performed during the simulations presented
  in the previous section.
- The PRATO-CPU deployed used six workers and one master process.
+ The PRATO-CPU setup used six workers and one master process.
  For the PRATO-GPU configuration, the same process deployment was used,
  and the worker processes operated on the dual GPU, i.e., two GPUs on one
  board, each of which featured 1.5
@@ -2034,8 +2029,8 @@ GB of DRAM.
 \begin_layout Standard
 The benefits of the parallel implementation of PRATO is clear in all three
  cases.
- Moreover, the multi-GPU support increases the running-time performance
- even further, achieving speedup factors of 18.96, 22.32, and 9.95, for Net
+ Moreover, the multi-GPU support improved the running-time performance even
+ further, achieving speedup factors of 18.96, 22.32, and 9.95, for Net
 \begin_inset Formula $_{11}$
 \end_inset
 

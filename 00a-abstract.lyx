@@ -359,7 +359,7 @@ footnotesize Povzetek}
 \lang slovene
 Zahtevnost načrtovanja radijskih omrežij se je povečala z večanjem števila
  celic v sodobnih celičnih standardih.
- Zato je vloga računalnika kot pomožno orodje za izvajanje hitrejših in
+ Zato je vloga računalnika kot pomožnega orodja za izvajanje hitrejših in
  natančnih izračunov vse bolj pomembna.
  Pričujoča disertacija predstavlja nove metode za načrtovanje in samodejno
  optimizacijo radijskih omrežij.
@@ -374,10 +374,10 @@ Klasični pristopi za optimizacijo in načrtovanje sistemov v velikih sistemih
  Delovanje metahevrističnih algoritmov temelji na velikem številu poizkusov
  in oceni kakovosti rešitev ter usmerjanju raziskovanja algoritma v iskalnem
  prostoru.
- Poizkusi v radijskih omrežjih se izvajajo z modeliranjem radijskih omrežij
- in simulacijami, vendar imajo več pomanjkljivosti v zvezi s ponujeno fleksibiln
-ostjo in s časom izvajanja simulacije.
- Velikost omrežij, ki jih je mogoče analizirati na izvedljivem času, je
+ Poizkusi v radijskih omrežjih se izvajajo z modeliranjem in simulacijami,
+ vendar imajo več pomanjkljivosti glede prilagodljivosti in časa izvajanja
+ simulacije.
+ Velikost omrežij, ki jih je mogoče analizirati v razpoložljivem času, je
  običajno zelo omejena.
 \end_layout
 
@@ -395,50 +395,50 @@ Pričujoča disertacija zato predstavlja nove pristope za povečanje hitrosti
 Prvi korak, ki ga predlaga disertacija, zajema pohitritev izvajanja poizkusov
  oz.
  simulacij z metodami vzporednega računanja.
- Disertacija podaja in primerja metode vzporednega računanja tako za izvajaje
+ Disertacija podaja in primerja metode vzporednega računanja tako za izvajanje
  simulacij na večjedrnih procesorjih kot na gruči računalnikov z grafičnimi
  procesorji, ki so povezani preko lokalnega omrežja.
- Povečana hitrost izvajanja omogoča povečano stopnjo podrobnosti simulacij,
+ Povečana hitrost izvajanja omogoča večjo stopnjo podrobnosti simulacij,
  kar posledično izboljšuje natančnost rezultatov.
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Povečanje hitrosti izvajanja simulacij je le prvi korak k praktičnemu zmanjševan
-ju računskega časa, potrebnega za evaluacijo cenovne funkcije in posledično
+Povečanje hitrosti izvajanja simulacij je le prvi korak k praktičnemu skrajševan
+ju računskega časa, potrebnega za vrednotenje cenovne funkcije in posledično
  optimizacijo radijskih omrežij.
- Poleg tega je potrebno tudi zmanjšati čas izvajanja optimizacijskih algoritmov,
+ Poleg tega je potrebno tudi skrajšati čas izvajanja optimizacijskih algoritmov,
  vendar ne na račun kakovosti rezultatov.
  Doktorska disertacija v ta namen predstavlja optimizacijski algoritem,
  katerega delovanje je prilagojeno reševanju klasičnih optimizacijskih problemov
  v radijskih omrežjih.
  Novi algoritem, ki temelji na tehnikah, uporabljenih v celičnih avtomatih
  ter metahevrističnih algoritmih, doseže boljše rezultate z vidika velikosti
- preučenih primerkov, kot tudi z vidika kakovosti rešitev.
+ preučenih primerkov kot tudi z vidika kakovosti rešitev.
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Predlagani pristopi so preizkušeni na kompleksnih optimizacijskih problemih,
- in sicer (i) problem optimizacije ravnovesja povezave navzdol-navzgor pri
- mehkem izročanju v sistemih tretje generacije in (ii) optimizacija parametrov
- empiričnih modelov razširjanja radijskega valovanja.
+Predlagani pristopi so preizkušeni na zahtevnih optimizacijskih problemih,
+ in sicer (i) problemu optimizacije ravnovesja povezave navzdol-navzgor
+ pri mehkem izročanju v sistemih tretje generacije in (ii) optimizaciji
+ parametrov empiričnih modelov razširjanja radijskega valovanja.
  
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Problem optimizacije ravnovesja povezave navzdol-navzgor pri mehkem izročanju
- v sistemih tretje generacije je problem, ki se ga zaveda večina mobilnih
- operaterjev, vendar do sedaj zaradi svoje kompleksnosti še ni bil rešen.
+Problema optimizacije ravnotežja povezave navzdol-navzgor pri mehkem izročanju
+ v sistemih tretje generacije se zaveda večina mobilnih operaterjev, vendar
+ zaradi svoje zahtevnosti še ni bil rešen.
  Pričujoča disertacija formalno opredeljuje ta optimizacijski problem ter
- prikaže rešitev problema po principu črne škatle (angl.
+ prikaže rešitev problema po načelu črne škatle (angl.
  black box) z uporabo različnih metahevrističnih algoritmov.
- Rezultati uporabe predlaganih metod pokažejo precejšnje izboljšane razporeditve
- področij mehkega izročanja.
+ Rezultati uporabe predlaganih metod pokažejo izboljšane razporeditve področij
+ mehkega izročanja.
 \end_layout
 
 \begin_layout Standard
@@ -446,18 +446,18 @@ Problem optimizacije ravnovesja povezave navzdol-navzgor pri mehkem izročanju
 \lang slovene
 Drugi primer uporabe metod je optimizacija parametrov empiričnih modelov
  razširjanja radijskega valovanja.
- Do sedaj, so se parametri empiričnih modelov razširjanja radijskega valovanja
+ Do sedaj so se parametri empiričnih modelov razširjanja radijskega valovanja
  uporabljali za celo radijsko omrežje.
- Z uporabo predlagane avtomatizacije načrtovanja, pa lahko parametre empiričnega
+ Z uporabo predlagane avtomatizacije načrtovanja pa lahko parametre empiričnega
  radijskega kanala lokalno prilagodimo, npr.
  za vsako celico ali regijo v omrežju, s tem pa močno izboljšamo natančnost
- izračunane predikcije.
+ izračunane napovedi pokrivanja omrežja.
 \end_layout
 
 \begin_layout Standard
 
 \lang slovene
-Predlagani pristopi na eni strani omogočajo bolj podrobno analizo omrežij
+Predlagani pristopi na eni strani omogočajo podrobnejšo analizo omrežij
  v sprejemljivem času, po drugi strani pa z njimi lahko optimiziramo večja
  radijska omrežja.
 \end_layout

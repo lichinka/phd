@@ -114,7 +114,7 @@ In this chapter, the challenge is to exploit PRATO for solving one of the
  solutions to the problem in an acceptable amount of time.
  The parallel implementation takes full advantage of GPU hardware in order
  to achieve considerable speedup.
- The analysis of the experimental results, considering six real-world, radio
+ The analysis of the experimental results, considering six real-world radio
  networks of different sizes, studies solution-quality and performance aspects.
 \end_layout
 
@@ -168,8 +168,8 @@ reference "sec:06-Related-work"
 
 \end_inset
 
-, a short overview of related research works is given, before formally introduci
-ng the key elements of the service-coverage problem in Section
+, a short overview of related research works is given, before introducing
+ the key elements of the service-coverage problem in Section
 \begin_inset space ~
 \end_inset
 
@@ -177,6 +177,17 @@ ng the key elements of the service-coverage problem in Section
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:06-Radio_network_model"
+
+\end_inset
+
+, and formally defining it in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:06-Problem-definition"
 
 \end_inset
 
@@ -264,9 +275,9 @@ key "Esposito_Genetic.optimization.for.optimum.3G.network.planning:2010"
 
 .
  During the past few years, public opinion has been extremely sensitive
- regarding this issue, and thus many countries have already imposed safety
- standards to limit the electromagnetic field levels produced by antennas
- in a given range.
+ regarding this issue, and many countries have already imposed safety standards
+ to limit the electromagnetic field levels produced by antennas in a given
+ range.
 \end_layout
 
 \begin_layout Standard
@@ -344,8 +355,8 @@ key "Valcarce_Applying.FDTD.to.the.coverage.prediction.of.WiMAX:2009,Vasile_Hybr
 \end_inset
 
 .
- The increased computational-time complexity, when dealing with big problem
- instances, is tackled using a parallel, agent-based algorithm on GPU.
+ The increased computational-time complexity when dealing with big problem
+ instances is tackled using a parallel, agent-based algorithm on GPU.
  This minimizes the overhead when deploying a larger number of agents working
  in parallel over the service area, only limited by the amount of memory
  available on the GPU.
@@ -481,8 +492,8 @@ key "Nawrocki-Understanding_UMTS_radio_network_modelling_and_optimisation:2006"
 
 \end_inset
 
-, this section presents the definitions of all the elements included in
- the mathematical model used for the simulations.
+, this section presents the definitions of the elements included in the
+ mathematical model used for the simulations.
 \end_layout
 
 \begin_layout Standard
@@ -505,7 +516,7 @@ key "Niemela-Performance_of_static_WCDMA_simulator:2005"
 
 \begin_layout Standard
 A snapshot consists of a set of UEs having individual properties, such as
- location, and equipment type that provides an estimate of the average network
+ location and equipment type, that provides an estimate of the average network
  behavior.
  The static approach inherently ignores dynamic effects that influence the
  system, like fast power control, but the analysis relies on having multiple
@@ -526,7 +537,7 @@ key "Hamalainen-Advanced_WCDMA_radio_network_simulator:1999,Hoppe-Fast_planning_
 \end_inset
 
 .
- A dynamic simulation considers all Radio-Resource Management
+ Dynamic simulation considers all Radio-Resource Management
 \begin_inset space ~
 \end_inset
 
@@ -978,7 +989,14 @@ key "WCDMAforUMTS_RadioAccessForThirdGenerationMobileCommunications"
 \end_layout
 
 \begin_layout Section
-Problem definition
+Problem definition 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:06-Problem-definition"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1011,8 +1029,21 @@ In the problem of optimization of pilot powers for service coverage, the
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-P^{*}=\min\sum_{c\in C}p_{c},\, p_{c}\in P_{c}\label{eq:06-Objective_function}
+f_{\mathrm{cov}}^{*}=\min\sum_{c\in C}p_{c},\, p_{c}\in P_{c}\label{eq:06-Objective_function}
 \end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "S"
+symbol "$f_{\\mathrm{cov}}^{*}$"
+description "Objective function of the coverage problem "
 
 \end_inset
 
@@ -1087,59 +1118,8 @@ Since some of the analyzed problem instances are part of a real mobile network
  For this reason, two different strategies for setting the pilot power are
  being presented.
  They should provide a basis for the comparison of the experimental results.
- The first strategy is the attenuation-based pilot power, presented in
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Siomina_Pilot.power.optimization:2004"
-
-\end_inset
-
-, in which a pixel of the service area is always covered by the cell with
- the maximum attenuation-factor value, i.e., the minimum path loss.
- The second strategy is the presented parallel-agent approach, based on
- ideas inspired by two-dimensional cellular automata
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Sarkar_Cellular.automata.history:2000"
-
-\end_inset
-
- and metaheuristics
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Talbi_Metaheuristics:2009"
-
-\end_inset
-
-.
- A detailed description is given in Section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:06-Parallel_agent_approach"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Similar criteria for result comparison have also been used in
+ The first strategy is the attenuation-based pilot power, which was used
+ in
 \begin_inset space ~
 \end_inset
 
@@ -1147,6 +1127,21 @@ Similar criteria for result comparison have also been used in
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Siomina_Pilot.power.optimization:2004,Siomina:Minimum.pilot.power.for.service.coverage"
+
+\end_inset
+
+ for result-comparison criteria.
+ In this strategy, a pixel of the service area is always covered by the
+ cell with the maximum attenuation-factor value, i.e., the minimum path loss.
+ The second strategy is the proposed parallel-agent approach, a detailed
+ description of which is given in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:06-Parallel_agent_approach"
 
 \end_inset
 
@@ -1223,7 +1218,7 @@ reference "eq:06-Attenuation_based-power"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-P^{\mathrm{att}}=\sum_{c\in C}\max p_{cm}^{\mathrm{att}}.
+f_{\mathrm{cov}}^{\mathrm{att}}=\sum_{c\in C}\max p_{cm}^{\mathrm{att}}.
 \end{equation}
 
 \end_inset
@@ -1427,7 +1422,11 @@ reference "fig:06-Architecture_of_the_system_on_GPU"
 \end_inset
 
 .
- If Equation (
+ If Equation
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:06-Coverage_constraint"
@@ -2130,11 +2129,6 @@ reference "alg:07-Agent_step_set_1"
 \end_inset
 
 .
- This practice keeps the coverage constraint valid over 
-\begin_inset Formula $A_{\mathrm{total}}$
-\end_inset
-
-, although it might potentially break it on other areas.
  Ideally, every pixel of the geographical area has to be covered by exactly
  one network cell, although this is just a representation of a perfect solution
  that is unreachable because of irregularities in the network topology and
@@ -3836,11 +3830,15 @@ GHz desktop computer with 6
 \end_inset
 
 GB of RAM running a 64-bit Linux operating system.
- The GPU hardware used was an ATI HD5570 with 1
+ The GPU hardware used was an nVidia GeForce GTX
 \begin_inset space ~
 \end_inset
 
-GB of DDR3 RAM.
+660
+\begin_inset space ~
+\end_inset
+
+Ti.
  The implementation language used was C, combined with OpenCL and OpenMPI
  extensions.
 \end_layout
@@ -3850,7 +3848,8 @@ Results
 \end_layout
 
 \begin_layout Standard
-The results achieved by the parallel-agent approach, listed in Table
+The results achieved by the parallel-agent approach, which are listed in
+ Table
 \begin_inset space ~
 \end_inset
 

@@ -87,14 +87,45 @@ status open
 
 
 \backslash
-addcontentsline{toc}{chapter}{Appendix C: Acknowledgments}
+fancyhead{}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-fancyhead[LO]{}
+fancyfoot{} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[RO]{
+\backslash
+footnotesize 
+\backslash
+thepage}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LO]{
+\backslash
+footnotesize {Appendix C: Acknowledgments}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[LE]{
+\backslash
+footnotesize 
+\backslash
+thepage}
 \end_layout
 
 \begin_layout Plain Layout
@@ -103,7 +134,14 @@ fancyhead[LO]{}
 \backslash
 fancyhead[RE]{
 \backslash
-footnotesize Appendix C: Acknowledgments}
+footnotesize {Appendix C: Acknowledgments}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Appendix C: Acknowledgments}
 \end_layout
 
 \end_inset
@@ -247,14 +285,15 @@ For their help, professional advice and countless testing data sets, I am
 \end_layout
 
 \begin_layout Standard
-I would like to express my deepest gratitude to Assoc.
+I would like to express my gratefulness to Assoc.
  Prof.
  Dr.
- Tsuyoshi Hamada for his thoughtful guidance, support, and making my research
- work at the Nagasaki University an unforgettable experience.
+ Tsuyoshi Hamada for his thoughtful guidance, encouragement, and making
+ my research work at the Nagasaki University an unforgettable experience.
  In particular, I would like to especially thank Dr.
- Felipe Cruz for his valuable comments, suggestions and debates during our
- joint research work, the results of which were presented in Chapter
+ Felipe A.
+ Cruz for his valuable comments, suggestions and debates during our joint
+ research work, the results of which were presented in Chapter
 \begin_inset space ~
 \end_inset
 
@@ -266,19 +305,36 @@ reference "chap:04-Framework-design-and-implementation"
 \end_inset
 
 .
- In this context, Prof.
- Hamada acknowledges support from the Japan Society for the Promotion of
- Science (JSPS) through its Funding Program for World-leading Innovative
+ In this context, Assoc.
+ Prof.
+ Dr.
+ Tsuyoshi Hamada acknowledges support from the Japan Society for the Promotion
+ of Science (JSPS) through its Funding Program for World-leading Innovative
  R&D on Science and Technology (First Program).
  I would also like to thank the staff at the Nagasaki Advanced Computing
- Center for their help and support during my stay, and while making the
+ Center for their help and assistance during my stay, and while making the
  computer cluster DEGIMA available for the experimental simulations, the
  results of which provide a substantial part of this thesis.
 \end_layout
 
 \begin_layout Standard
-Last but not least, I wish to thank my brother and my parents, for believing
- in me and providing their unconditional support whenever I needed them.
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Last but not least, I wish to express my deepest gratitude and love to my
+ brother and my parents, for believing in me and always providing their
+ unconditional support.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

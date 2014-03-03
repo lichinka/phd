@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="sho_example.eps">
+   sodipodi:docname="sho_example.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="265.8141"
-     inkscape:cy="876.89068"
+     inkscape:zoom="3.959798"
+     inkscape:cx="257.1408"
+     inkscape:cy="917.22336"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -43,7 +43,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -53,7 +53,7 @@
      id="layer1">
     <path
        sodipodi:type="arc"
-       style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:none"
+       style="opacity:1;fill:#808080;fill-opacity:1;stroke:none"
        id="path3823-6"
        sodipodi:cx="275.64539"
        sodipodi:cy="157.68269"
@@ -65,7 +65,7 @@
        transform="matrix(0,4.3649658,1.2867111,0,22.485058,-1031.0824)" />
     <path
        sodipodi:type="arc"
-       style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:none"
+       style="opacity:1;fill:#808080;fill-opacity:1;stroke:none"
        id="path3823"
        sodipodi:cx="275.64539"
        sodipodi:cy="157.68269"

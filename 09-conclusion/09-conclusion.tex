@@ -23,7 +23,7 @@ number of different configurations need to be compared in a shorter
 time-frame. To this end, a parallel framework for radio-network planning
 was presented in this thesis. The framework is very flexible in terms
 of air-interface modeling, e.g., different QoS schemes, and is of
-significantly higher computational-time performance compared with
+significantly better computational-time performance compared with
 any currently available solution known to the author. Moreover, it
 incorporates multi-GPU support and the corresponding parallel-programming
 techniques that are required to exploit the computational power of
@@ -33,7 +33,7 @@ methods. The achieved performance improvement excels in radio-network
 optimization environments. Further research in this field will include
 abstracting the introduced master-worker-database principle into a
 multi-purpose parallel framework such as Charm++~\cite{Kale-The_Charm_Approach:2013},
-which provides a functionality for overlapping execution and communication,
+which provides functionality for overlapping execution and communication,
 as well as fault tolerance.
 
 When applying automatic network optimization, a fast and accurate
@@ -51,11 +51,11 @@ was empirically verified with an industrial software tool for radio-network
 planning. The results clearly show a very good agreement in terms
 of accuracy of the radio-propagation predictions, compared to those
 obtained with the commercial tool. Additionally, the results demonstrated
-the performance advantage of the framework compared to the computational
+the performance advantage of the framework compared to the running
 time of the enterprise software. It is important to note that these
-results also apply for an application in everyday network planning.
-However, to validate the complete array of radio-planning activities
-the framework can handle further research is required.
+results apply for their application in everyday network planning.
+However, in order to validate the complete array of radio-planning
+activities the framework can handle, further research is required.
 
 Increasing the performance of the simulations involved during the
 objective-function evaluation is only the first step towards a practical
@@ -119,12 +119,12 @@ items, as well as experimentation on real-world radio networks. The
 experimentation includes a comparison with a commercial tool that
 is currently being used for real radio-network planning. Moreover,
 the parallel implementation of the framework exploits the computing
-resources of computer clusters and GPUs.
+resources of computer clusters and graphic-processing units.
 \item Proposal of a new approach for parallel programming that combines
-a classic master-worker method with an external database. The proposed
-approach improves the scalability of the classic master-worker paradigm
-by preventing the master process to become the bottleneck of a parallel
-system.
+the well-known master-worker scheme with an external database. The
+proposed approach relieves the problem of congestion at the master
+node, which is responsible for result collection and selection, thus
+improving the scalability of a parallel system.
 \item Quality improvement of radio-propagation predictions by applying metaheuristic
 optimization to the parameters of radio-propagation models. This technique
 enables the adaptation of radio-propagation models to the local environment
@@ -137,9 +137,10 @@ used as reference. It also reaches good quality of solutions if compared
 to classic network-planning techniques. The proposed approach is especially
 suitable for optimizing large radio networks.
 \item Identification and formalization of a new optimization problem in
-3G radio networks that deals with SHO alignment of downlink and uplink
-areas. By solving this problem, network malfunctioning is avoided
-in areas where there is SHO capability in the uplink, but none in
-the downlink. So far, this problem has not been formalized nor tackled
-by means of automatic optimization.\end{enumerate}
+third-generation radio networks that deals with soft-handover alignment
+of downlink and uplink areas. By solving this problem, the probability
+of network malfunctioning is significantly lower in areas where there
+is soft-handover capability in the uplink, but none in the downlink.
+So far, this problem has not been formalized nor tackled by means
+of automatic optimization.\end{enumerate}
 
